@@ -31,7 +31,7 @@ Now you should see the Shellminator library in the examples.
 
 __5.__
 
-![](arduino_install_putty_test.png)
+![](/Doc/images/arduino_install_putty_test.png)
 Now pick an Arduino board and upload the __Simple__ example to it. You will need a terminal emulator. In this example I will use [PuTTY](https://www.putty.org/).
 
 Congratulations you successfully installed the Shellminator library to your computer.
