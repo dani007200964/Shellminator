@@ -369,3 +369,13 @@ shell.setTerminalCharacterColor( Shellminator::BOLD, Shellminator::RED );
 Available styles: REGULAR, BOLD, LOW_INTENSITY, ITALIC, UNDERLINE, BLINKING, REVERSE, BACKGROUND, INVISIBLE
 
 Available colors: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+
+## License & copyright
+© Daniel Hajnal
+Licensed under the [MIT License](LICENSE).
