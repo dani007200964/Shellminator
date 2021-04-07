@@ -1,44 +1,7 @@
-# Shellminator
+@page usage_with_arduino Usage with Arduino
+@tableofcontents
 
-Shellminator is a simple to use library and helps to interface with VT100 compatible
-terminal emulators like [PuTTY](https://www.putty.org/), [Terraterm](https://ttssh2.osdn.jp/index.html.en) or [minicom](https://linux.die.net/man/1/minicom).
-With this library you can create user friendly command line interfaces for your embedded projects.
-Shellminator has history support, that means you can brows your prevoius commands with the arrow keys on the keyboard.
-The library is Arduino compatible out of the box, but if you want to use it with other platforms,
-you just have to implement an [Arduino compatible Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/).
-Configuring the library is just a few minutes, and this documentation shows how to do that correctly.
-
-# Arduino installation
-
-__1.__
-
-Download the .zip file from the Arduino folder from this repository.
-
-__2.__
-
-![](arduino_install_unzip.png)
-Open the downloaded .zip file and copy the Shellminator folder from the zip into your Arduino library folder.
-__The Arduino library folder usually located in '\Documents\Arduino\libraries\'.__
-
-__3.__
-
-If Arduino IDE is opened __save all your work,__ then restart Arduino IDE.
-
-__4.__
-
-![](arduino_install_check_library.png)
-Now you should see the Shellminator library in the examples.
-
-__5.__
-
-![](arduino_install_putty_test.png)
-Now pick an Arduino board and upload the __Simple__ example to it. You will need a terminal emulator. In this example I will use [PuTTY](https://www.putty.org/).
-
-Congratulations you successfully installed the Shellminator library to your computer.
-
-# Usage with Arduino
-
-## basic_example Basic example
+@section basic_example Basic example
 
 __1.__
 
@@ -164,7 +127,7 @@ void loop() {
 }
 ```
 
-##  Create costum logo
+@section create_costum_logo Create costum logo
 
 __1.__
 
@@ -246,7 +209,7 @@ void setup(){
 }
 ```
 
-## Add execution function
+@section  add_execution_function Add execution function
 
 In a real life application the execution function is the most important function in your shell subsystem.
 This functions job is to process the command that has been recived.
@@ -295,7 +258,7 @@ In the examples the Advanced.ino shows a basic implementation of a command parse
 It not very efficient but if you have a small amount of commands and a simple project, it will be enough.
 You can easily modify it to add your costum commands.
 
-## Configure the library
+@section  configure_the_library Configure the library
 
 There are some parameters that can be changed in the library.
 
@@ -351,7 +314,7 @@ For example:
 
 The modification above expands the history to 9 element.
 
-## Changing text style and color
+@section  changing_text_style_and_color Changing text style and color
 
 If you want to highlight something or just make your messages pretty this can be a useful function.
 
