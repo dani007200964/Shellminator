@@ -8,6 +8,11 @@ The library is Arduino compatible out of the box, but if you want to use it with
 you just have to implement an [Arduino compatible Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/).
 Configuring the library is just a few minutes, and this documentation shows how to do that correctly.
 
+# Doxygen documentation
+
+The project has a Doxygen generated documentation. It can be found in Doc/html/index.html.
+The theme that used with the documentation can be found [here](https://jothepro.github.io/doxygen-awesome-css/).
+
 # Arduino installation
 
 __1.__
