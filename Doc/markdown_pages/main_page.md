@@ -9,3 +9,17 @@ Shellminator has history support, that means you can brows your prevoius command
 The library is Arduino compatible out of the box, but if you want to use it with other platforms,
 you just have to implement an [Arduino compatible Serial library](https://www.arduino.cc/reference/en/language/functions/communication/serial/).
 Configuring the library is just a few minutes, and this documentation shows how to do that correctly.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## Donation
+If this project help you reduce time to develop, you can give me a cup of coffee :)
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS)
+
+## License & copyright
+© Daniel Hajnal
+Licensed under the MIT License
