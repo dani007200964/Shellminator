@@ -16,7 +16,7 @@ Download the .zip file from the Arduino folder from this repository.
 
 __2.__
 
-![](arduino_install_unzip.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/arduino_install_unzip.png)
 Open the downloaded .zip file and copy the Shellminator folder from the zip into your Arduino library folder.
 __The Arduino library folder usually located in '\Documents\Arduino\libraries\'.__
 
@@ -26,12 +26,12 @@ If Arduino IDE is opened __save all your work,__ then restart Arduino IDE.
 
 __4.__
 
-![](arduino_install_check_library.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/arduino_install_check_library.png)
 Now you should see the Shellminator library in the examples.
 
 __5.__
 
-![](Doc/images/arduino_install_putty_test.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/arduino_install_putty_test.png)
 Now pick an Arduino board and upload the __Simple__ example to it. You will need a terminal emulator. In this example I will use [PuTTY](https://www.putty.org/).
 
 Congratulations you successfully installed the Shellminator library to your computer.
@@ -176,7 +176,7 @@ After you have came up with the startup text, go to [this](https://patorjk.com/s
 
 __3.__
 
-![](create_costum_logo_ascii_art_generator.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/create_costum_logo_ascii_art_generator.png)
 In this webpage you can generate all sorts of ASCII art. Just follow the steps in the image abowe.
 
 __4.__
@@ -185,7 +185,7 @@ After you generated and copied the ASCII text art, go to [this](https://tomeko.n
 
 __5.__
 
-![](create_costum_logo_c_string_generator.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/create_costum_logo_c_string_generator.png)
 In this webpage you can generate a c/c++ like string from regular text. Just follow the steps in the image abowe.
 
 __6.__
@@ -290,7 +290,7 @@ This function can be used also when you have to change the execution function ru
 
 __Example__
 
-![](arduino_exec_func_test.png)
+![](https://github.com/dani007200964/Shellminator/blob/main/Doc/images/arduino_exec_func_test.png)
 In the examples the Advanced.ino shows a basic implementation of a command parser.
 It not very efficient but if you have a small amount of commands and a simple project, it will be enough.
 You can easily modify it to add your costum commands.
