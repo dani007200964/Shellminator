@@ -1,7 +1,5 @@
 @mainpage Shellminator library
 
-![](logo.png)
-
 Shellminator is a simple to use library and helps to interface with VT100 compatible
 terminal emulators like [PuTTY](https://www.putty.org/), [Terraterm](https://ttssh2.osdn.jp/index.html.en) or [minicom](https://linux.die.net/man/1/minicom).
 With this library you can create user friendly command line interfaces for your embedded projects.
