@@ -11,32 +11,42 @@
 #ifndef SHELLMINATOR_H_
 #define SHELLMINATOR_H_
 
+
 #include "Arduino.h"
 
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 
-///  +------  Costum configuration  ------+
-///  |                                    |
-///  |  This is where you have to config  |
-///  |           your defines!            |
-///  |                                    |
-///  +------------------------------------+
+//  +------  Costum configuration  ------+
+//  |                                    |
+//  |  This is where you have to config  |
+//  |           your defines!            |
+//  |                                    |
+//  +------------------------------------+
 
 
-/// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_
-/// #define SHELLMINATOR_BUFF_LEN               // default: 20
-/// #define SHELLMINATOR_BUFF_DIM               // default: 5
-/// #define SHELLMINATOR_BANNER_LEN             // default: 20
-/// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD
-/// #define SHELLMINATOR_LOGO_COLOR             // default: RED
+// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_
+// #define SHELLMINATOR_BUFF_LEN               // default: 20
+// #define SHELLMINATOR_BUFF_DIM               // default: 5
+// #define SHELLMINATOR_BANNER_LEN             // default: 20
+// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD
+// #define SHELLMINATOR_LOGO_COLOR             // default: RED
+// #define SHELLMINATOR_ENABLE_QR_SUPPORT
 
+#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
+
+#include "qrcodegen.h"
+
+#endif
+
+// If you use ESP8266 please uncomment the following line
+//#define SHELLMINATOR_FOR_ESP8266
 
 /// Definition of the current Serial object
 ///
-/// @warning This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a>
-/// you have to midify this definition! Stock Arduino should work fine.
+// @warning This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a>
+/// you have to modify this definition! Stock Arduino should work fine.
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be  Serial_.
 #ifndef SHELLMINATOR_SERIAL_CLASS
 #define SHELLMINATOR_SERIAL_CLASS Serial_
@@ -63,7 +73,7 @@
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "V0.1A"
+#define SHELLMINATOR_VERSION "V0.2A"
 
 /// Color and style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
@@ -73,6 +83,16 @@
 
 #ifndef SHELLMINATOR_LOGO_COLOR
 #define SHELLMINATOR_LOGO_COLOR RED
+#endif
+
+
+// Platform specific area.
+
+#ifdef SHELLMINATOR_FOR_ESP8266
+
+#undef SHELLMINATOR_SERIAL_CLASS
+#define SHELLMINATOR_SERIAL_CLASS HardwareSerial
+
 #endif
 
 /// Shellminator object
@@ -187,14 +207,56 @@ public:
 
   /// Draws the startup logo
   ///
-  /// Draws the startup logo in the terminal.
+  /// Draws the startup logo in the terminal
   void drawLogo();
 
-  /// This function sets the banner text
+  /// This function sets the banner text.
   ///
   /// It can be used when you want to change the banner text runtime.
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
+
+  // Configuration specific parts.
+  #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
+
+  /// This function generates a QR-code from text
+  ///
+  /// With this function you can create QR-codes from text data( links as well ) and
+  /// show the QR-code in the terminal. It can be handy with links or error codes.
+  /// @param text The text or link that you want to compress into a QR-code.
+  /// @note The error correction is Medium by default.
+  /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
+  void generateQRText( char* text );
+
+  /// This function generates a QR-code from text
+  ///
+  /// With this function you can create QR-codes from text data( links as well ) and
+  /// show the QR-code in the terminal. It can be handy with links or error codes.
+  /// @param text The text or link that you want to compress into a QR-code.
+  /// @note The error correction is Medium by default.
+  /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
+  void generateQRText( const char* text );
+
+  /// This function generates a QR-code from text
+  ///
+  /// With this function you can create QR-codes from text data( links as well ) and
+  /// show the QR-code in the terminal. It can be handy with links or error codes.
+  /// @param text The text or link that you want to compress into a QR-code.
+  /// @param ecc Error correction level.
+  /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
+  void generateQRText( char* text, enum qrcodegen_Ecc ecc );
+
+  /// This function generates a QR-code from text
+  ///
+  /// With this function you can create QR-codes from text data( links as well ) and
+  /// show the QR-code in the terminal. It can be handy with links or error codes.
+  /// @param text The text or link that you want to compress into a QR-code.
+  /// @param ecc Error correction level.
+  /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
+  void generateQRText( const char* text, enum qrcodegen_Ecc ecc );
+
+  #endif
+
 
 private:
 
@@ -216,7 +278,7 @@ private:
   /// the \ling SHELLMINATOR_BUFF_DIM \endlink definition.
   /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
   /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN ] = { 0 };
+  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN ] = { { 0 } };
 
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;
@@ -241,6 +303,17 @@ private:
 
   /// This function prints the banner text.
   void printBanner();
+
+  // Configuration specific parts.
+  #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
+
+  /// This variable is used by the QR-code generator.
+  uint8_t qr_data[ qrcodegen_BUFFER_LEN_MAX ];
+
+  /// This variable is used by the QR-code generator.
+  uint8_t qr_tempBuff[ qrcodegen_BUFFER_LEN_MAX ];
+
+  #endif
 
 };
 

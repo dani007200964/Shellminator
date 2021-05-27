@@ -48,7 +48,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
-   &#160;<span id="projectnumber">V0.1A</span>
+   &#160;<span id="projectnumber">V0.2A</span>
    </div>
    <div id="projectbrief">Shellminator is a simplified VT100 compatible iinterface for c++ projects</div>
   </td>
@@ -188,6 +188,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:add7e945a09b5b74a48d475e16832c1a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1">setBannerText</a> (char *banner_p)</td></tr>
 <tr class="memdesc:add7e945a09b5b74a48d475e16832c1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the banner text.  <a href="class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1">More...</a><br /></td></tr>
 <tr class="separator:add7e945a09b5b74a48d475e16832c1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a151f3987b48362142340e1a396b89a37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a151f3987b48362142340e1a396b89a37">generateQRText</a> (char *text)</td></tr>
+<tr class="memdesc:a151f3987b48362142340e1a396b89a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function generates a QR-code from text.  <a href="class_shellminator.html#a151f3987b48362142340e1a396b89a37">More...</a><br /></td></tr>
+<tr class="separator:a151f3987b48362142340e1a396b89a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395e9b61bfdba8562eb17f80b6ea6c42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a395e9b61bfdba8562eb17f80b6ea6c42">generateQRText</a> (const char *text)</td></tr>
+<tr class="memdesc:a395e9b61bfdba8562eb17f80b6ea6c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function generates a QR-code from text.  <a href="class_shellminator.html#a395e9b61bfdba8562eb17f80b6ea6c42">More...</a><br /></td></tr>
+<tr class="separator:a395e9b61bfdba8562eb17f80b6ea6c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08fffa8dc986f3cf61ee6935ba19aa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aa08fffa8dc986f3cf61ee6935ba19aa7">generateQRText</a> (char *text, enum qrcodegen_Ecc ecc)</td></tr>
+<tr class="memdesc:aa08fffa8dc986f3cf61ee6935ba19aa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function generates a QR-code from text.  <a href="class_shellminator.html#aa08fffa8dc986f3cf61ee6935ba19aa7">More...</a><br /></td></tr>
+<tr class="separator:aa08fffa8dc986f3cf61ee6935ba19aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04959c5c716600168dbc4b9e0ea5d844"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844">generateQRText</a> (const char *text, enum qrcodegen_Ecc ecc)</td></tr>
+<tr class="memdesc:a04959c5c716600168dbc4b9e0ea5d844"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function generates a QR-code from text.  <a href="class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844">More...</a><br /></td></tr>
+<tr class="separator:a04959c5c716600168dbc4b9e0ea5d844"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -462,8 +474,140 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Draws the startup logo. </p>
-<p>Draws the startup logo in the terminal. </p>
+<p>Draws the startup logo in the terminal </p>
 <p>Draws the startup logo to the terminal interface.</p>
+
+</div>
+</div>
+<a id="a151f3987b48362142340e1a396b89a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a151f3987b48362142340e1a396b89a37">&#9670;&nbsp;</a></span>generateQRText() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Shellminator::generateQRText </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function generates a QR-code from text. </p>
+<p>With this function you can create QR-codes from text data( links as well ) and show the QR-code in the terminal. It can be handy with links or error codes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>The text or link that you want to compress into a QR-code. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The error correction is Medium by default. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section. </dd></dl>
+
+</div>
+</div>
+<a id="aa08fffa8dc986f3cf61ee6935ba19aa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa08fffa8dc986f3cf61ee6935ba19aa7">&#9670;&nbsp;</a></span>generateQRText() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Shellminator::generateQRText </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum qrcodegen_Ecc&#160;</td>
+          <td class="paramname"><em>ecc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function generates a QR-code from text. </p>
+<p>With this function you can create QR-codes from text data( links as well ) and show the QR-code in the terminal. It can be handy with links or error codes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>The text or link that you want to compress into a QR-code. </td></tr>
+    <tr><td class="paramname">ecc</td><td>Error correction level. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section. </dd></dl>
+
+</div>
+</div>
+<a id="a395e9b61bfdba8562eb17f80b6ea6c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395e9b61bfdba8562eb17f80b6ea6c42">&#9670;&nbsp;</a></span>generateQRText() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Shellminator::generateQRText </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function generates a QR-code from text. </p>
+<p>With this function you can create QR-codes from text data( links as well ) and show the QR-code in the terminal. It can be handy with links or error codes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>The text or link that you want to compress into a QR-code. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The error correction is Medium by default. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section. </dd></dl>
+
+</div>
+</div>
+<a id="a04959c5c716600168dbc4b9e0ea5d844"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04959c5c716600168dbc4b9e0ea5d844">&#9670;&nbsp;</a></span>generateQRText() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Shellminator::generateQRText </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum qrcodegen_Ecc&#160;</td>
+          <td class="paramname"><em>ecc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function generates a QR-code from text. </p>
+<p>With this function you can create QR-codes from text data( links as well ) and show the QR-code in the terminal. It can be handy with links or error codes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>The text or link that you want to compress into a QR-code. </td></tr>
+    <tr><td class="paramname">ecc</td><td>Error correction level. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section. </dd></dl>
 
 </div>
 </div>

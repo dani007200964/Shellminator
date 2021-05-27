@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['sendbackspace_55',['sendBackspace',['../class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1',1,'Shellminator']]],
-  ['setbannertext_56',['setBannerText',['../class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1',1,'Shellminator']]],
-  ['setterminalcharactercolor_57',['setTerminalCharacterColor',['../class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9',1,'Shellminator']]],
-  ['shellminator_58',['Shellminator',['../class_shellminator.html#a0924aee3f07efca9a8c2664648eaaaa3',1,'Shellminator::Shellminator(SHELLMINATOR_SERIAL_CLASS *serialPort_p)'],['../class_shellminator.html#a54e283384b688acc6c7b53056d5c45c7',1,'Shellminator::Shellminator(SHELLMINATOR_SERIAL_CLASS *serialPort_p, void(*execution_fn_p)(char *))']]]
+  ['generateqrtext_58',['generateQRText',['../class_shellminator.html#a151f3987b48362142340e1a396b89a37',1,'Shellminator::generateQRText(char *text)'],['../class_shellminator.html#a395e9b61bfdba8562eb17f80b6ea6c42',1,'Shellminator::generateQRText(const char *text)'],['../class_shellminator.html#aa08fffa8dc986f3cf61ee6935ba19aa7',1,'Shellminator::generateQRText(char *text, enum qrcodegen_Ecc ecc)'],['../class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844',1,'Shellminator::generateQRText(const char *text, enum qrcodegen_Ecc ecc)']]]
 ];

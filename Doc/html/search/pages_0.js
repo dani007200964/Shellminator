@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['arduino_20installation_86',['Arduino installation',['../arduiono_installation.html',1,'']]]
+  ['arduino_20installation_92',['Arduino installation',['../arduiono_installation.html',1,'']]]
 ];
