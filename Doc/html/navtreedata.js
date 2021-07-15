@@ -27,6 +27,7 @@ var NAVTREE =
   [ "Shellminator", "index.html", [
     [ "Shellminator library", "index.html", null ],
     [ "Arduino installation", "arduiono_installation.html", null ],
+    [ "QR-code support", "qr_code_support.html", null ],
     [ "Usage with Arduino", "usage_with_arduino.html", [
       [ "Basic example", "usage_with_arduino.html#basic_example", null ],
       [ "Create costum logo", "usage_with_arduino.html#create_costum_logo", null ],

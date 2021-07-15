@@ -18,21 +18,21 @@
 #include <stdint.h>
 #include <string.h>
 
-//  +------  Costum configuration  ------+
-//  |                                    |
-//  |  This is where you have to config  |
-//  |           your defines!            |
-//  |                                    |
-//  +------------------------------------+
+///  +------  Costum configuration  ------+
+///  |                                    |
+///  |  This is where you have to config  |
+///  |           your defines!            |
+///  |                                    |
+///  +------------------------------------+
 
 
-// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_
-// #define SHELLMINATOR_BUFF_LEN               // default: 20
-// #define SHELLMINATOR_BUFF_DIM               // default: 5
-// #define SHELLMINATOR_BANNER_LEN             // default: 20
-// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD
-// #define SHELLMINATOR_LOGO_COLOR             // default: RED
-// #define SHELLMINATOR_ENABLE_QR_SUPPORT
+/// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_
+/// #define SHELLMINATOR_BUFF_LEN               // default: 20
+/// #define SHELLMINATOR_BUFF_DIM               // default: 5
+/// #define SHELLMINATOR_BANNER_LEN             // default: 20
+/// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD
+/// #define SHELLMINATOR_LOGO_COLOR             // default: RED
+/// #define SHELLMINATOR_ENABLE_QR_SUPPORT
 
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
@@ -41,12 +41,12 @@
 #endif
 
 // If you use ESP8266 please uncomment the following line
-//#define SHELLMINATOR_FOR_ESP8266
+// #define SHELLMINATOR_FOR_ESP8266
 
 /// Definition of the current Serial object
 ///
-// @warning This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a>
-/// you have to modify this definition! Stock Arduino should work fine.
+/// @warning This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a>
+/// you have to midify this definition! Stock Arduino should work fine.
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be  Serial_.
 #ifndef SHELLMINATOR_SERIAL_CLASS
 #define SHELLMINATOR_SERIAL_CLASS Serial_
@@ -73,7 +73,7 @@
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "V0.2A"
+#define SHELLMINATOR_VERSION "V0.1A"
 
 /// Color and style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
@@ -307,10 +307,7 @@ private:
   // Configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
-  /// This variable is used by the QR-code generator.
   uint8_t qr_data[ qrcodegen_BUFFER_LEN_MAX ];
-
-  /// This variable is used by the QR-code generator.
   uint8_t qr_tempBuff[ qrcodegen_BUFFER_LEN_MAX ];
 
   #endif

@@ -129,22 +129,10 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//  +------  Costum configuration  ------+</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//  |                                    |</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//  |  This is where you have to config  |</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//  |           your defines!            |</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//  |                                    |</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//  +------------------------------------+</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// #define SHELLMINATOR_BUFF_LEN               // default: 20</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// #define SHELLMINATOR_BUFF_DIM               // default: 5</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// #define SHELLMINATOR_BANNER_LEN             // default: 20</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// #define SHELLMINATOR_LOGO_COLOR             // default: RED</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c">   35</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_ENABLE_QR_SUPPORT         </span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c">   35</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_ENABLE_QR_SUPPORT</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;qrcodegen.h&quot;</span></div>
@@ -152,11 +140,10 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// If you use ESP8266 please uncomment the following line</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#adf5636f0fed5024707c7ced50f2d5390">   44</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_FOR_ESP8266</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// #define SHELLMINATOR_FOR_ESP8266</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// @warning This define is important. If you not use the original &lt;a href=&quot;https://www.arduino.cc/reference/en/language/functions/communication/serial/&quot;&gt;Arduino Serial library&lt;/a&gt;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span><span class="preprocessor">#ifndef SHELLMINATOR_SERIAL_CLASS</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#define SHELLMINATOR_SERIAL_CLASS Serial_</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_SERIAL_CLASS</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">   52</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_SERIAL_CLASS Serial_</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_BUFF_LEN</span></div>
@@ -171,7 +158,7 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">   72</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_BANNER_LEN 20</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">   76</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_VERSION &quot;V0.2A&quot;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">   76</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_VERSION &quot;V0.1A&quot;</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_LOGO_FONT_STYLE</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#ad68a8f3b92c8c43683e8f9d24279dbf8">   81</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_LOGO_FONT_STYLE BOLD</span></div>
@@ -187,7 +174,7 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#ifdef SHELLMINATOR_FOR_ESP8266</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#undef SHELLMINATOR_SERIAL_CLASS</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">   94</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_SERIAL_CLASS HardwareSerial</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#define SHELLMINATOR_SERIAL_CLASS HardwareSerial</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
@@ -317,7 +304,7 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:114</div></div>
 <div class="ttc" id="aclass_shellminator_html_acf76004a9ad56f7e62cf30640e1dee59"><div class="ttname"><a href="class_shellminator.html#acf76004a9ad56f7e62cf30640e1dee59">Shellminator::logo</a></div><div class="ttdeci">static const char * logo</div><div class="ttdoc">String that holds the startup logo.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:142</div></div>
 <div class="ttc" id="aclass_shellminator_html_a3f8933d5b0360a3f4b3bff32e12a77d1"><div class="ttname"><a href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">Shellminator::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:468</div></div>
-<div class="ttc" id="a_shellminator_8hpp_html_a688789e3e0de254cd66292a470a19c84"><div class="ttname"><a href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">SHELLMINATOR_SERIAL_CLASS</a></div><div class="ttdeci">#define SHELLMINATOR_SERIAL_CLASS</div><div class="ttdoc">Definition of the current Serial object.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:94</div></div>
+<div class="ttc" id="a_shellminator_8hpp_html_a688789e3e0de254cd66292a470a19c84"><div class="ttname"><a href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">SHELLMINATOR_SERIAL_CLASS</a></div><div class="ttdeci">#define SHELLMINATOR_SERIAL_CLASS</div><div class="ttdoc">Definition of the current Serial object.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:52</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a25296a5c448684556d23c18c8da1017c"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a></div><div class="ttdeci">@ BLINKING</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:131</div></div>
 <div class="ttc" id="aclass_shellminator_html_a151f3987b48362142340e1a396b89a37"><div class="ttname"><a href="class_shellminator.html#a151f3987b48362142340e1a396b89a37">Shellminator::generateQRText</a></div><div class="ttdeci">void generateQRText(char *text)</div><div class="ttdoc">This function generates a QR-code from text.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:656</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca335a4232137a196bf2f2aec2359ac6ed"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca335a4232137a196bf2f2aec2359ac6ed">Shellminator::BLACK</a></div><div class="ttdeci">@ BLACK</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:112</div></div>
