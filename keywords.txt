@@ -1,0 +1,34 @@
+#######################################
+# Colors for Commander-API
+#######################################
+# Class
+#######################################
+
+Shellminator	                  KEYWORD1
+
+#######################################
+# Methods and Functions
+#######################################
+
+apiElement          KEYWORD2
+attachTree          KEYWORD2
+attachTreeFunction  KEYWORD2
+init                KEYWORD2
+execute             KEYWORD2
+attachDebugChannel  KEYWORD2
+enableDebug         KEYWORD2
+disableDebug        KEYWORD2
+
+
+#######################################
+# Structures
+#######################################
+
+API_t               KEYWORD2
+
+#######################################
+# Constants
+#######################################
+
+COMMANDER_MAX_COMMAND_SIZE      LITERAL1
+COMMAND_PRINTF_BUFF_LEN         LITERAL1

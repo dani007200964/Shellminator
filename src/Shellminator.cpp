@@ -1,30 +1,46 @@
 /*
-* Created on Aug 10 2020
-*
-* Copyright (c) 2020 - Daniel Hajnal
-* hajnal.daniel96@gmail.com
-*
-* This file is part of the Shellminator project.
+ * Created on June 18 2020
+ *
+ * Copyright (c) 2020 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Commander-API project.
+ * Modified 2022.02.06
+*/
+
+/*
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 #include "Shellminator.hpp"
 
 const char *Shellminator::version = SHELLMINATOR_VERSION;
 
-const char *Shellminator::logo __attribute__((weak))=
-"   _____ __         ____          _             __            \r\n"
-"  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
-"  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
-" ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
-"/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-"                                                              \r\n"
-;
+#ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
+Shellminator::Shellminator( HardwareSerial *serialPort_p ) {
 
-
-Shellminator::Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p ) {
-
-  /// Passes the serial port object to the local variable.
-  serialPort = serialPort_p;
+  /// Initialise the arduinoSerialChannel as communication channel.
+  arduinoSerialChannel.select( serialPort_p );
+  channel = &arduinoSerialChannel;
 
   /// It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
@@ -42,10 +58,11 @@ Shellminator::Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p ) {
 
 }
 
-Shellminator::Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p, void( *execution_fn_p )( char* ) ) {
+Shellminator::Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) ) {
 
-  /// Passes the serial port object to the local variable.
-  serialPort = serialPort_p;
+  /// Initialise the arduinoSerialChannel as communication channel.
+  arduinoSerialChannel.select( serialPort_p );
+  channel = &arduinoSerialChannel;
 
   /// It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
@@ -61,6 +78,19 @@ Shellminator::Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p, void( *exec
   execution_fn = execution_fn_p;
 
 }
+#endif
+
+void Shellminator::attachLogo( char* logo_p ){
+
+  logo = logo_p;
+
+}
+
+void Shellminator::attachLogo( const char* logo_p ){
+
+  logo = (char*)logo_p;
+
+}
 
 void Shellminator::addExecFunc( void( *execution_fn_p )( char* ) ){
 
@@ -72,10 +102,10 @@ void Shellminator::addExecFunc( void( *execution_fn_p )( char* ) ){
 void Shellminator::clear() {
 
   /// explanation can be found here: http://braun-home.net/michael/info/misc/VT100_commands.htm
-  serialPort -> write( 27 );    // ESC character( decimal 27 )
-  serialPort -> print( "[H" );  // VT100 Home command
-  serialPort -> write( 27 );    // ESC character( decimal 27 )
-  serialPort -> print( "[J" );  // VT100 screen erase command
+  channel -> write( 27 );    // ESC character( decimal 27 )
+  channel -> print( (const char*)"[H" );  // VT100 Home command
+  channel -> write( 27 );    // ESC character( decimal 27 )
+  channel -> print( (const char*)"[J" );  // VT100 screen erase command
 
 }
 
@@ -87,14 +117,14 @@ void Shellminator::printBanner() {
   setTerminalCharacterColor( BOLD, GREEN );
 
   /// Print the banner text.
-  serialPort -> print( banner );
+  channel -> print( banner );
 
   /// Sets the terminal style to regular and the color to white.
   setTerminalCharacterColor( REGULAR, WHITE );
 
   /// Prints the end of the banner text. Why this?
   /// I don't know it looks a bit Linuxier this way.
-  serialPort -> print( ":~$ " );
+  channel -> print( (const char*)":~$ " );
 
 }
 
@@ -139,7 +169,7 @@ void Shellminator::begin( const char* banner_p ) {
 void Shellminator::sendBackspace() {
 
   /// Send a simple backspace combo to the serial port
-  serialPort -> print( "\b \b" );
+  channel -> print( (const char*)"\b \b" );
 
 }
 
@@ -191,7 +221,8 @@ void Shellminator::process( char new_char ) {
     cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
     /// We send a line break to the terminal to put the next data in new line
-    serialPort->println();
+    channel -> print( '\r' );
+    channel -> print( '\n' );
 
     /// If the arrived tata is not just a single enter we have to process the command.
     if ( cmd_buff_cntr > 0 ) {
@@ -206,8 +237,10 @@ void Shellminator::process( char new_char ) {
 
       /// If not, then just print it with Serial.
       else{
-        serialPort -> print( "cmd: " );
-        serialPort -> println( cmd_buff[ 0 ] );
+        channel -> print( (const char*)"cmd: " );
+        channel -> print( cmd_buff[ 0 ] );
+        channel -> print( '\r' );
+        channel -> print( '\n' );
       }
 
       /// After we processed the command we have to shift the history upwards.
@@ -322,7 +355,7 @@ void Shellminator::process( char new_char ) {
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
 
           /// We print the loaded command to the terminal interface.
-          serialPort -> print( cmd_buff[ 0 ] );
+          channel -> print( cmd_buff[ 0 ] );
 
           /// We have to increment the cmd_buff_dim variable, to track the history position.
           /// Greater number means older command!
@@ -366,7 +399,7 @@ void Shellminator::process( char new_char ) {
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
 
           /// We print the loaded command to the terminal interface.
-          serialPort -> print( cmd_buff[ 0 ] );
+          channel -> print( cmd_buff[ 0 ] );
 
         }
 
@@ -436,7 +469,7 @@ void Shellminator::process( char new_char ) {
     /// In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
-    /// We hace to increment the cmd_buff_cntr variable, to point to the next empty space in the buffer.
+    /// We have to increment the cmd_buff_cntr variable, to point to the next empty space in the buffer.
     cmd_buff_cntr++;
 
     /// We have to check that after the incrementation of cmd_buff_cntr, we are still in the boundaries of the buffer.
@@ -454,7 +487,7 @@ void Shellminator::process( char new_char ) {
     else {
 
       /// In this case we print the new character to make it visible on the terminal interface.
-      serialPort -> print( new_char );
+      channel -> print( new_char );
 
     }
 
@@ -467,14 +500,16 @@ void Shellminator::process( char new_char ) {
 
 void Shellminator::update() {
 
-  /// This variable will hold the character that was read from the Serial buffer.
+  /// This variable will hold the character that was read from the channel buffer.
   char c;
 
-  /// We have to check the Serial buffer. If it is not empty we can read as many characters as possible.
-  while ( serialPort -> available() ) {
+  // todo wifis eszközöknél kell neki majd még plusz cucc.
 
-    /// Read one character from Serial Buffer.
-    c = (char)serialPort -> read();
+  /// We have to check the channel buffer. If it is not empty we can read as many characters as possible.
+  while ( channel -> available() ) {
+
+    /// Read one character from channel Buffer.
+    c = (char)channel -> read();
 
     /// Process the new character.
     process( c );
@@ -486,12 +521,12 @@ void Shellminator::update() {
 void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
   /// The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  serialPort -> write( 27 );
-  serialPort -> print( "[" );
-  serialPort -> print( style );
-  serialPort -> print( ";" );
-  serialPort -> print( color );
-  serialPort -> print( "m" );
+  channel -> write( 27 );
+  channel -> print( (const char*)"[" );
+  channel -> print( style );
+  channel -> print( ';' );
+  channel -> print( color );
+  channel -> print( 'm' );
 
 }
 
@@ -499,7 +534,7 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 void Shellminator::drawLogo() {
 
   /// Draws the startup logo to the terminal interface.
-  serialPort -> print( logo );
+  channel -> print( logo );
 
 }
 
@@ -561,7 +596,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   for( y = 0; y < ( qr_size / 2 ); y++ ){
 
     // Print a new line at the begining of the horizontal drawing.
-    serialPort -> println();
+    channel -> println();
 
     // Draw all horizontal 'pixels'.
     for( x = 0; x < qr_size; x++ ){
@@ -577,7 +612,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
       // Both pixels are black.
       if( upper_pixel && lower_pixel ){
 
-        serialPort -> print( "\u2588" );
+        channel -> print( "\u2588" );
         continue;
 
       }
@@ -585,7 +620,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
       // Upper pixel is black.
       if( upper_pixel && ( !lower_pixel ) ){
 
-        serialPort -> print( "\u2580" );
+        channel -> print( "\u2580" );
         continue;
 
       }
@@ -593,14 +628,14 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
       // Lower pixel is black.
       if( ( !upper_pixel ) && lower_pixel ){
 
-        serialPort -> print( "\u2584" );
+        channel -> print( "\u2584" );
         continue;
 
       }
 
       // If we get here we have to draw an empty bar.
       // The space character will do the job.
-      serialPort -> print( " " );
+      channel -> print( " " );
 
     }
 
@@ -611,7 +646,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   if( ( qr_size % 2 ) != 0 ){
 
     // Print a new line at the begining of the horizontal drawing.
-    serialPort -> println();
+    channel -> println();
 
     // Draw all horizontal 'pixels'.
     for( x = 0; x < qr_size; x++ ){
@@ -623,21 +658,21 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
       // Check if we have to draw.
       if( upper_pixel ){
 
-        serialPort -> print( "\u2580" );
+        channel -> print( "\u2580" );
         continue;
 
       }
 
       // If we get here we have to draw an empty bar.
       // The space character will do the job.
-      serialPort -> print( " " );
+      channel -> print( " " );
 
     }
 
   }
 
   // Finally create a new line.
-  serialPort -> println();
+  channel -> println();
 
 }
 

@@ -1,18 +1,46 @@
 /*
-* Created on Aug 10 2020
-*
-* Copyright (c) 2020 - Daniel Hajnal
-* hajnal.daniel96@gmail.com
-*
-* This file is part of the Shellminator project.
+ * Created on June 18 2020
+ *
+ * Copyright (c) 2020 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Commander-API project.
+ * Modified 2022.02.06
+*/
+
+/*
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 
-#ifndef SHELLMINATOR_H_
-#define SHELLMINATOR_H_
+#ifndef SHELLMINATOR_HPP_
+#define SHELLMINATOR_HPP_
 
+#include "Shellminator-Settings.hpp"
+#include "Shellminator-IO.hpp"
 
+#ifdef ARDUINO
 #include "Arduino.h"
+#endif
 
 #include <stdio.h>
 #include <stdint.h>
@@ -40,22 +68,10 @@
 
 #endif
 
-// If you use ESP8266 please uncomment the following line
-// #define SHELLMINATOR_FOR_ESP8266
-
-/// Definition of the current Serial object
-///
-/// @warning This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a>
-/// you have to midify this definition! Stock Arduino should work fine.
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be  Serial_.
-#ifndef SHELLMINATOR_SERIAL_CLASS
-#define SHELLMINATOR_SERIAL_CLASS Serial_
-#endif
-
 /// Definition of the maximum length of each command
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
 #ifndef SHELLMINATOR_BUFF_LEN
-#define SHELLMINATOR_BUFF_LEN 20
+#define SHELLMINATOR_BUFF_LEN 10
 #endif
 
 /// Definition of the maximum length of the previous command memory
@@ -83,16 +99,6 @@
 
 #ifndef SHELLMINATOR_LOGO_COLOR
 #define SHELLMINATOR_LOGO_COLOR RED
-#endif
-
-
-// Platform specific area.
-
-#ifdef SHELLMINATOR_FOR_ESP8266
-
-#undef SHELLMINATOR_SERIAL_CLASS
-#define SHELLMINATOR_SERIAL_CLASS HardwareSerial
-
 #endif
 
 /// Shellminator object
@@ -134,28 +140,23 @@ public:
     INVISIBLE = 8
   };
 
-  /// String that holds the startup logo
-  ///
-  /// Simple text that holds the startup logo. You can create costum logos
-  /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
-  /// @warning Make sure that the generated string is c/c++ compatible!
-  static const char *logo;
-
   /// String that holds the version information
   static const char *version;
 
+#ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
   /// Shellminator Constructor
   ///
   /// Constructor for a Shellminator object.
   /// @param SHELLMINATOR_SERIAL_CLASS pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p );
+  Shellminator( HardwareSerial *serialPort_p );
 
   /// Shellminator Constructor
   ///
   /// Constructor for a Shellminator object with an execution function.
   /// @param SHELLMINATOR_SERIAL_CLASS pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
   /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( SHELLMINATOR_SERIAL_CLASS *serialPort_p, void( *execution_fn_p )( char* ) );
+  Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) );
+#endif
 
   /// Execution function adder function
   ///
@@ -216,6 +217,16 @@ public:
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
 
+  // todo
+  void attachLogo( char* logo_p );
+  void attachLogo( const char* logo_p );
+  void overrideUpArrow();
+  void overrideDownArrow();
+  void overrideLeftArrow();
+  void overrideRightArrow();
+  void attachAbortFunction();
+  void overrideEscapeKey();
+
   // Configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
@@ -260,12 +271,16 @@ public:
 
 private:
 
+  /// Pointer to a string that holds the startup logo
+  ///
+  /// Simple text that holds the startup logo. You can create costum logos
+  /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
+  /// @warning Make sure that the generated string is c/c++ compatible!
+  char *logo = (char*)'\0';
+
   /// This function-pointer stores the execution function pointer.
   /// This function will be called when a command recives.
   void( *execution_fn )( char* );
-
-  ///  This variable stores the reference for the Serial object
-  SHELLMINATOR_SERIAL_CLASS *serialPort = NULL;
 
   /// Text buffer
   ///
@@ -303,6 +318,18 @@ private:
 
   /// This function prints the banner text.
   void printBanner();
+
+  /// Default communication channel;
+  shellminatorChannel defaultChannel;
+
+  #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
+  /// Arduino Hardware Serial as communication channel.
+  shellminatorArduinoSerialChannel arduinoSerialChannel;
+  #endif
+
+  /// Pointer to the communication class. By default
+  /// it points to the default response handler.
+	shellminatorChannel *channel = &defaultChannel;
 
   // Configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
