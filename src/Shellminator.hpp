@@ -301,6 +301,8 @@ private:
   /// This variable tracks the location of the next character in the buffer.
   uint32_t cmd_buff_cntr = 0;
 
+  uint32_t cursor = 0;
+
   /// This variable tracks the state of the VT100 decoder state-machine.
   /// Currently only used to detect the arrow keys.
   uint32_t escape_state = 0;
@@ -318,6 +320,9 @@ private:
 
   /// This function prints the banner text.
   void printBanner();
+
+  /// This function insets a new character to the input buffer.
+  void redrawLine();
 
   /// Default communication channel;
   shellminatorChannel defaultChannel;

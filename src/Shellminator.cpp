@@ -173,13 +173,35 @@ void Shellminator::sendBackspace() {
 
 }
 
+void Shellminator::redrawLine(){
+
+  /// General counter variable
+  uint32_t i;
+
+  channel -> write( 27 );
+  channel -> print( "[2K\r" );
+
+  printBanner();
+
+  for( i = 0; i < cmd_buff_cntr; i++ ){
+    channel -> print( cmd_buff[ 0 ][ i ] );
+  }
+
+  for( i = cmd_buff_cntr; i > cursor; i-- ){
+      channel -> write( 27 );    // ESC character( decimal 27 )
+      channel -> print( '[' );  // VT100 Cursor command.
+      channel -> print( '1' );  // 1 character movement.
+      channel -> print( 'D' );  // Left.
+  }
+  
+}
+
 void Shellminator::process( char new_char ) {
 
   /// General counter variable
   uint32_t i;
 
-  /// Add the new character to the end of the 0th element in the buffer
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
+  Serial.println( new_char, DEC );
 
   /// Check if the new character is backspace character.
   /// '\b' or 127 are both meaning that the backspace kes is pressed
@@ -190,16 +212,21 @@ void Shellminator::process( char new_char ) {
 
     /// We have to check the number of the characters in the buffer.
     /// If the buffer is empty we must not do anything!
-    if ( cmd_buff_cntr > 0 ) {
+    if ( cursor > 0 ) {
+
+      for( i = (cursor - 1); i < ( cmd_buff_cntr - 1 ); i++ ){
+
+        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
+      }
 
       /// If there is at least 1 character in the buffer we jus simply
       /// decrement the cmd_buff_cntr. This will result that the new character
       /// will be stored in the previous characters place in the buffer.
       cmd_buff_cntr--;
+      cursor--;
 
-      /// We have to send a backspace combo to the terminal application
-      /// to actually remove the character from the terminal interfacel.
-      sendBackspace();
+      redrawLine();
 
       /// We have no more things to do, so return
       return;
@@ -259,6 +286,7 @@ void Shellminator::process( char new_char ) {
 
     /// To empty the incoming string we have to zero it's counter.
     cmd_buff_cntr = 0;
+    cursor = 0;
 
     /// We have no more things to do, so return
     return;
@@ -335,15 +363,6 @@ void Shellminator::process( char new_char ) {
 
           }
 
-          /// If it was not empty we have to clear the text that was in the terminal.
-          /// Only the command text has to be deleted!
-          for ( i = 0; i < cmd_buff_cntr; i++ ) {
-
-            /// The easyest way is to sand as many backspaces as many character was in the 0th element in the buffer.
-            sendBackspace();
-
-          }
-
           /// Now we have to copy the characters form the histoy to the 0th element in the buffer.
           /// Remember the 0th element is always reserved for the new data. If we brows the history the
           /// data in the history will overwrite the data in the 0th element so the historical data will be
@@ -353,9 +372,12 @@ void Shellminator::process( char new_char ) {
           /// We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
           /// It is important to track the end of the loaded string.
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+          cursor = cmd_buff_cntr;
 
           /// We print the loaded command to the terminal interface.
-          channel -> print( cmd_buff[ 0 ] );
+          //channel -> print( cmd_buff[ 0 ] );
+
+          redrawLine();
 
           /// We have to increment the cmd_buff_dim variable, to track the history position.
           /// Greater number means older command!
@@ -379,15 +401,6 @@ void Shellminator::process( char new_char ) {
           /// Lower number means newer command!
           cmd_buff_dim--;
 
-          /// We have to clear the text that was in the terminal.
-          /// Only the command text has to be deleted!
-          for ( i = 0; i < cmd_buff_cntr; i++ ) {
-
-            /// The easyest way is to sand as many backspaces as many character was in the 0th element in the buffer.
-            sendBackspace();
-
-          }
-
           /// Now we have to copy the characters form the histoy to the 0th element in the buffer.
           /// Remember the 0th element is always reserved for the new data. If we brows the history the
           /// data in the history will overwrite the data in the 0th element so the historical data will be
@@ -397,9 +410,11 @@ void Shellminator::process( char new_char ) {
           /// We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
           /// It is important to track the end of the loaded string.
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+          cursor = cmd_buff_cntr;
 
           /// We print the loaded command to the terminal interface.
-          channel -> print( cmd_buff[ 0 ] );
+          ///channel -> print( cmd_buff[ 0 ] );
+          redrawLine();
 
         }
 
@@ -418,6 +433,7 @@ void Shellminator::process( char new_char ) {
 
           /// To empty the incoming string we have to zero it's counter.
           cmd_buff_cntr = 0;
+          cursor = 0;
 
           /// We have to reset the cmd_buff_dim variable to the default value.
           cmd_buff_dim = 1;
@@ -431,15 +447,35 @@ void Shellminator::process( char new_char ) {
       /// Currently not used
       case 'C':
 
+        if( cursor < cmd_buff_cntr ){
+
+          channel -> write( 27 );    // ESC character( decimal 27 )
+          channel -> print( '[' );  // VT100 Cursor command.
+          channel -> print( '1' );  // 1 character movement.
+          channel -> print( 'C' );  // Left.
+          cursor++;
+
+        }
+        
         /// We just simply reset the state-machine.
         escape_state = 0;
 
         /// We have finished so we can break from the switch.
         break;
 
-        /// Right arrow pressed
+        /// Left arrow pressed
         /// Currently not used
       case 'D':
+
+        if( cursor > 0 ){
+
+          channel -> write( 27 );    // ESC character( decimal 27 )
+          channel -> print( '[' );  // VT100 Cursor command.
+          channel -> print( '1' );  // 1 character movement.
+          channel -> print( 'D' );  // Left.
+          cursor--;
+
+        }
 
         /// We just simply reset the state-machine.
         escape_state = 0;
@@ -463,33 +499,54 @@ void Shellminator::process( char new_char ) {
 
   }
 
+  // todo delet, end escape sequence parser.
+
+  // todo Commander command search.
+  else if( new_char == '\t' ){
+
+    channel -> print( "Tabulator!\r\n" );
+
+  }
+
+  // todo Abort handler.
+  else if( new_char == 0x03 ){
+
+    channel -> print( "Abort!\r\n" );
+
+  }
+
   /// Any other cases means that the new character is just a simple character that was pressed on the keyboard.
   else {
+
+    for( i = cmd_buff_cntr; i > cursor; i-- ){
+      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+    }
+
+    /// Add the new character to the end of the 0th element in the buffer
+    cmd_buff[ 0 ][ cursor ] = new_char;
 
     /// In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
-    /// We have to increment the cmd_buff_cntr variable, to point to the next empty space in the buffer.
+    // Increment counters.
     cmd_buff_cntr++;
+    cursor++;
 
-    /// We have to check that after the incrementation of cmd_buff_cntr, we are still in the boundaries of the buffer.
-    /// We also have to reserve space for the terminator character, this is why we have to subtract 1 from
-    /// the buffer size in the compersation.
-    if ( cmd_buff_cntr >= ( SHELLMINATOR_BUFF_LEN - 1 ) ) {
+    // Check if the counters overlowed.
+    if( cmd_buff_cntr >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
 
-      /// If the buffer is full we dont let cmd_buff_cntr variable to go further than the size of the buffer - 2.
-      /// In this case the new characters will be rejected by the module.
-      cmd_buff_cntr = SHELLMINATOR_BUFF_LEN - 2;
+      cmd_buff_cntr = ( SHELLMINATOR_BUFF_LEN - 1 );
 
     }
 
-    /// Other case means the buffer is luckily not full.
-    else {
+    if( cursor >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
 
-      /// In this case we print the new character to make it visible on the terminal interface.
-      channel -> print( new_char );
+      cursor = ( SHELLMINATOR_BUFF_LEN - 1 );
 
     }
+
+    // Redraw the command line.
+    redrawLine();
 
     /// We have finished so we can return.
     return;
