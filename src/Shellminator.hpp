@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on Aug 10 2020
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * This file is part of the Shellminator project.
+ * Modified 2022.05.03
 */
 
 /*
@@ -40,6 +40,14 @@ SOFTWARE.
 
 #ifdef ARDUINO
 #include "Arduino.h"
+#endif
+
+#if __has_include ("Commander-API.hpp")
+#include "Commander-API.hpp"
+#endif
+
+#ifdef COMMANDER_API_VERSION
+#include "Commander-API.hpp"
 #endif
 
 #include <stdio.h>
@@ -217,15 +225,105 @@ public:
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
 
-  // todo
+  /// This function attaches a logo to the terminal.
+  ///
+  /// The logo is just a character array.
+  /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
+  /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
+  /// Add '\r' to all line end.
+  /// @param logo_p Pointer to the logo's address.
   void attachLogo( char* logo_p );
+
+  /// This function attaches a logo to the terminal.
+  ///
+  /// The logo is just a character array.
+  /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
+  /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
+  /// Add '\r' to all line end.
+  /// @param logo_p Pointer to the logo's address.
   void attachLogo( const char* logo_p );
-  void overrideUpArrow();
-  void overrideDownArrow();
-  void overrideLeftArrow();
-  void overrideRightArrow();
-  void attachAbortFunction();
-  void overrideEscapeKey();
+
+  /// Override up arrow key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the up arrow key
+  /// is pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideUpArrow( void( *func )( void ) );
+
+  /// Override down arrow key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the down arrow key
+  /// is pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideDownArrow( void( *func )( void ) );
+
+  /// Override left arrow key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the left arrow key
+  /// is pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideLeftArrow( void( *func )( void ) );
+
+  /// Override right arrow key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the right arrow key
+  /// is pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideRightArrow( void( *func )( void ) );
+
+  /// Override abort key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the abort key is
+  /// pressed. The default abort key is usually a Ctrl + C
+  /// combo.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideAbortKey( void( *func )( void ) );
+
+  /// Reset up arrow key functionality to default.
+  ///
+  /// This function resets the up arrow functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeUpArrow();
+
+  /// Reset down arrow key functionality to default.
+  ///
+  /// This function resets the down arrow functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeDownArrow();
+
+  /// Reset left arrow key functionality to default.
+  ///
+  /// This function resets the left arrow functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeLeftArrow();
+
+  /// Reset right arrow key functionality to default.
+  ///
+  /// This function resets the right arrow functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeRightArrow();
+
+  /// Reset abort key functionality to default.
+  ///
+  /// This function resets the abort key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeAbortKey();
+
+  #ifdef COMMANDER_API_VERSION
+
+  void attachCommander( Commander* commander_p );
+
+  #endif
 
   // Configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
@@ -298,9 +396,10 @@ private:
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;
 
-  /// This variable tracks the location of the next character in the buffer.
+  /// This variable tracks the location of the end of the input message.
   uint32_t cmd_buff_cntr = 0;
 
+  /// This variable tracks the location of the next character.
   uint32_t cursor = 0;
 
   /// This variable tracks the state of the VT100 decoder state-machine.
@@ -309,6 +408,21 @@ private:
 
   /// This character array stores the banner text.
   char banner[ SHELLMINATOR_BANNER_LEN ] = { 0 };
+
+  /// Function pointer for up arrow behaviour override.
+  void( *upArrowOverrideFunc )( void )    = NULL;
+
+  /// Function pointer for down arrow behaviour override.
+  void( *downArrowOverrideFunc )( void )  = NULL;
+
+  /// Function pointer for left arrow behaviour override.
+  void( *leftArrowOverrideFunc )( void )  = NULL;
+
+  /// Function pointer for right arrow behaviour override.
+  void( *rightArrowOverrideFunc )( void ) = NULL;
+
+  /// Function pointer for abort key behaviour override.
+  void( *abortKeyFunc )( void )           = NULL;
 
   /// This function processes a new character
   ///
@@ -330,6 +444,12 @@ private:
   #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
   /// Arduino Hardware Serial as communication channel.
   shellminatorArduinoSerialChannel arduinoSerialChannel;
+  #endif
+
+  #ifdef COMMANDER_API_VERSION
+
+  Commander* commander = NULL;
+
   #endif
 
   /// Pointer to the communication class. By default

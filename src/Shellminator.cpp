@@ -1,10 +1,10 @@
 /*
- * Created on June 18 2020
+ * Created on Aug 10 2020
  *
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
- * This file is part of the Commander-API project.
- * Modified 2022.02.06
+ * This file is part of the Shellminator project.
+ * Modified 2022.05.03
 */
 
 /*
@@ -32,6 +32,10 @@ SOFTWARE.
 */
 
 #include "Shellminator.hpp"
+
+#if __has_include ("Commander-API.hpp")
+#include "Commander-API.hpp"
+#endif
 
 const char *Shellminator::version = SHELLMINATOR_VERSION;
 
@@ -201,8 +205,6 @@ void Shellminator::process( char new_char ) {
   /// General counter variable
   uint32_t i;
 
-  Serial.println( new_char, DEC );
-
   /// Check if the new character is backspace character.
   /// '\b' or 127 are both meaning that the backspace kes is pressed
   if ( ( new_char == '\b' ) || ( new_char == 127 ) ) {
@@ -349,6 +351,14 @@ void Shellminator::process( char new_char ) {
       /// Up arrow pressed
       case 'A':
 
+        // Check if the arrow function is overriden.
+        if( upArrowOverrideFunc ){
+
+          upArrowOverrideFunc();
+          break;
+
+        }
+
         /// Because we have finished the ecape sequence interpretation we reset the state-machine.
         escape_state = 0;
 
@@ -390,6 +400,14 @@ void Shellminator::process( char new_char ) {
 
       /// Down arrow pressed
       case 'B':
+
+        // Check if the arrow function is overriden.
+        if( downArrowOverrideFunc ){
+
+          downArrowOverrideFunc();
+          break;
+
+        }
 
         /// Because we have finished the ecape sequence interpretation we reset the state-machine.
         escape_state = 0;
@@ -447,6 +465,14 @@ void Shellminator::process( char new_char ) {
       /// Currently not used
       case 'C':
 
+        // Check if the arrow function is overriden.
+        if( rightArrowOverrideFunc ){
+
+          rightArrowOverrideFunc();
+          break;
+
+        }
+        
         if( cursor < cmd_buff_cntr ){
 
           channel -> write( 27 );    // ESC character( decimal 27 )
@@ -467,6 +493,14 @@ void Shellminator::process( char new_char ) {
         /// Currently not used
       case 'D':
 
+        // Check if the arrow function is overriden.
+        if( leftArrowOverrideFunc ){
+
+          leftArrowOverrideFunc();
+          break;
+
+        }
+        
         if( cursor > 0 ){
 
           channel -> write( 27 );    // ESC character( decimal 27 )
@@ -481,6 +515,11 @@ void Shellminator::process( char new_char ) {
         escape_state = 0;
 
         /// We have finished so we can break from the switch.
+        break;
+
+      // Check for Del key;
+      case '3':
+        escape_state = 3;
         break;
 
       /// Any other cases means that it was probably a VT100 command but not an arrow key.
@@ -499,19 +538,71 @@ void Shellminator::process( char new_char ) {
 
   }
 
-  // todo delet, end escape sequence parser.
+  // Detect del key termination.
+  else if ( escape_state == 3 ) {
+
+    if( new_char == '~' ){
+
+      // Del key detected.
+      /// If we press a delet key we have to reset cmd_buff_dim to default value
+      cmd_buff_dim = 1;
+
+      /// We have to check the number of the characters in the buffer.
+      /// If the buffer is full we must not do anything!
+      if ( cursor != cmd_buff_cntr ) {
+
+        for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
+
+          cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
+        }
+
+        /// If there is at least 1 character in the buffer we jus simply
+        /// decrement the cmd_buff_cntr. This will result that the new character
+        /// will be stored in the previous characters place in the buffer.
+        cmd_buff_cntr--;
+
+        redrawLine();
+
+      }
+
+    }
+
+    escape_state = 0;
+    return;
+
+  }
 
   // todo Commander command search.
   else if( new_char == '\t' ){
 
     channel -> print( "Tabulator!\r\n" );
+    return;
 
   }
 
-  // todo Abort handler.
+  // Abort key detection.
   else if( new_char == 0x03 ){
 
-    channel -> print( "Abort!\r\n" );
+    if( abortKeyFunc ){
+
+      abortKeyFunc();
+
+    }
+
+    /// If the abort key is pressed cmd_buff_dim has to be reset to the default value
+    cmd_buff_dim = 1;
+
+    /// We send a line break to the terminal to put the next data in new line
+    channel -> print( '\r' );
+    channel -> print( '\n' );
+
+    printBanner();
+
+    cursor = 0;
+    cmd_buff_cntr = 0;
+    
+    return;
 
   }
 
@@ -555,6 +646,66 @@ void Shellminator::process( char new_char ) {
 
 }
 
+void Shellminator::overrideUpArrow( void( *func )( void ) ){
+
+  upArrowOverrideFunc = func;
+
+}
+
+void Shellminator::overrideDownArrow( void( *func )( void ) ){
+
+  downArrowOverrideFunc = func;
+
+}
+
+void Shellminator::overrideLeftArrow( void( *func )( void ) ){
+
+  leftArrowOverrideFunc = func;
+
+}
+
+void Shellminator::overrideRightArrow( void( *func )( void ) ){
+
+  rightArrowOverrideFunc = func;
+
+}
+
+void Shellminator::overrideAbortKey( void( *func )( void ) ){
+
+  abortKeyFunc = func;
+
+}
+
+void Shellminator::freeUpArrow(){
+
+  upArrowOverrideFunc = NULL;
+
+}
+
+void Shellminator::freeDownArrow(){
+
+  downArrowOverrideFunc = NULL;
+
+}
+
+void Shellminator::freeLeftArrow(){
+
+  leftArrowOverrideFunc = NULL;
+
+}
+
+void Shellminator::freeRightArrow(){
+
+  rightArrowOverrideFunc = NULL;
+
+}
+
+void Shellminator::freeAbortKey(){
+
+  abortKeyFunc = NULL;
+
+}
+
 void Shellminator::update() {
 
   /// This variable will hold the character that was read from the channel buffer.
@@ -572,6 +723,19 @@ void Shellminator::update() {
     process( c );
 
   }
+
+  #ifdef COMMANDER_API_VERSION
+
+  // Todo command detection.
+  Commander::API_t *commandAddress;
+
+  if( commander ){
+
+    commandAddress = commander -> operator[]("tesztCmd");
+
+  }
+
+  #endif
 
 }
 
@@ -594,6 +758,16 @@ void Shellminator::drawLogo() {
   channel -> print( logo );
 
 }
+
+#ifdef COMMANDER_API_VERSION
+
+void Shellminator::attachCommander( Commander* commander_p ){
+
+  commander = commander_p;
+
+}
+
+#endif
 
 //----- QR-code generator part -----//
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
