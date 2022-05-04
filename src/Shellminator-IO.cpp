@@ -72,28 +72,37 @@ void shellminatorArduinoSerialChannel::flush(){
 
 size_t shellminatorArduinoSerialChannel::write( uint8_t b ){
 
+
 	if( serialPort ) return serialPort -> write( b );
+	return 0;
+
+}
+
+size_t shellminatorArduinoSerialChannel::print( uint8_t b ){
+
+
+	if( serialPort ) return serialPort -> print( b );
 	return 0;
 
 }
 
 size_t shellminatorArduinoSerialChannel::print( char c ){
 
-	if( serialPort ) return serialPort -> print( c );
+	if( serialPort ) return serialPort -> print( (char)c );
 	return 0;
 
 }
 
 size_t shellminatorArduinoSerialChannel::print( char *str ){
 
-	if( serialPort ) return serialPort -> print( str );
+	if( serialPort ) return serialPort -> print( (char*)str );
 	return 0;
 
 }
 
 size_t shellminatorArduinoSerialChannel::print( const char *str ){
 
-	if( serialPort ) return serialPort -> print( str );
+	if( serialPort ) return serialPort -> print( (char*)str );
 	return 0;
 
 }

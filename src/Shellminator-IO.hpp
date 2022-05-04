@@ -49,6 +49,7 @@ public:
   virtual void   flush()                                   	{ return;    }
   virtual size_t write( uint8_t b )                        	{ return 0;  }
   virtual size_t print( char c )                           	{ return 0;  }
+  virtual size_t print( uint8_t b )                         { return 0;  }
   virtual size_t print( char *str )                        	{ return 0;  }
   virtual size_t print( const char *str )                  	{ return 0;  }
 
@@ -67,6 +68,7 @@ public:
 	void   flush() override;
 	size_t write( uint8_t b ) override;
 	size_t print( char c ) override;
+  size_t print( uint8_t b );
 	size_t print( char *str ) override;
 	size_t print( const char *str ) override;
 

@@ -187,6 +187,22 @@ void Shellminator::redrawLine(){
 
   printBanner();
 
+  #ifdef COMMANDER_API_VERSION
+
+  if( commandFound ){
+
+    setTerminalCharacterColor( BOLD, GREEN );
+
+  }
+
+  else{
+
+    setTerminalCharacterColor( REGULAR, WHITE );
+
+  }
+
+  #endif
+
   for( i = 0; i < cmd_buff_cntr; i++ ){
     channel -> print( cmd_buff[ 0 ][ i ] );
   }
@@ -576,7 +592,13 @@ void Shellminator::process( char new_char ) {
   // todo Commander command search.
   else if( new_char == '\t' ){
 
-    channel -> print( "Tabulator!\r\n" );
+    //channel -> print( "Tabulator!\r\n" );
+
+    #ifdef COMMANDER_API_VERSION
+
+    #endif
+
+
     return;
 
   }
@@ -722,6 +744,11 @@ void Shellminator::update() {
     /// Process the new character.
     process( c );
 
+    #ifdef COMMANDER_API_VERSION
+    commandCheckTimerStart = millis();
+    commandChecked = false;
+    #endif
+
   }
 
   #ifdef COMMANDER_API_VERSION
@@ -729,9 +756,45 @@ void Shellminator::update() {
   // Todo command detection.
   Commander::API_t *commandAddress;
 
-  if( commander ){
+  if( commander && !commandChecked ){
 
-    commandAddress = commander -> operator[]("tesztCmd");
+    if( ( millis() - commandCheckTimerStart ) > 100 ){
+
+      uint32_t i = 0;
+      char charCopy;
+
+      for( i = 0; i <= cmd_buff_cntr; i++ ){
+
+        if( ( cmd_buff[ 0 ][ i ] == ' '  ) || ( i == cmd_buff_cntr ) ){
+
+          charCopy = cmd_buff[ 0 ][ i ];
+          cmd_buff[ 0 ][ i ] = '\0';
+          break;
+
+        }
+
+      }
+
+      commandAddress = commander -> operator[]( cmd_buff[0] );
+      if( commandAddress ){
+    
+        commandFound = true;
+
+      }
+
+      else{
+
+        commandFound = false;
+
+      }
+
+      cmd_buff[ 0 ][ i ] = charCopy;
+
+      //commandCheckTimerStart = millis();
+      commandChecked = true;
+      redrawLine();
+
+    }
 
   }
 
@@ -743,7 +806,7 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
   /// The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   channel -> write( 27 );
-  channel -> print( (const char*)"[" );
+  channel -> print( '[' );
   channel -> print( style );
   channel -> print( ';' );
   channel -> print( color );

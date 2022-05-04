@@ -449,6 +449,9 @@ private:
   #ifdef COMMANDER_API_VERSION
 
   Commander* commander = NULL;
+  uint32_t commandCheckTimerStart = 0;
+  bool commandChecked = false;
+  bool commandFound = false;
 
   #endif
 
