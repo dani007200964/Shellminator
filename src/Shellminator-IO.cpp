@@ -4,7 +4,7 @@
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.03
+ * Modified 2022.05.08
 */
 
 /*
@@ -106,5 +106,12 @@ size_t shellminatorArduinoSerialChannel::print( const char *str ){
 	return 0;
 
 }
+
+HardwareSerial* shellminatorArduinoSerialChannel::getSerialObject(){
+
+	return serialPort;
+
+}
+
 
 #endif

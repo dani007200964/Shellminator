@@ -4,7 +4,7 @@
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.03
+ * Modified 2022.05.08
 */
 
 /*
@@ -71,6 +71,8 @@ public:
   size_t print( uint8_t b );
 	size_t print( char *str ) override;
 	size_t print( const char *str ) override;
+
+  HardwareSerial* getSerialObject();
 
 private:
   HardwareSerial *serialPort = NULL;

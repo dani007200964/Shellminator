@@ -4,7 +4,7 @@
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.03
+ * Modified 2022.05.08
 */
 
 /*
@@ -42,8 +42,10 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
-#if __has_include ("Commander-API.hpp")
-#include "Commander-API.hpp"
+#ifdef __has_include
+  #if __has_include ("Commander-API.hpp")
+    #include "Commander-API.hpp"
+  #endif
 #endif
 
 #ifdef COMMANDER_API_VERSION
@@ -60,15 +62,6 @@ SOFTWARE.
 ///  |           your defines!            |
 ///  |                                    |
 ///  +------------------------------------+
-
-
-/// #define SHELLMINATOR_SERIAL_CLASS           // default: Serial_
-/// #define SHELLMINATOR_BUFF_LEN               // default: 20
-/// #define SHELLMINATOR_BUFF_DIM               // default: 5
-/// #define SHELLMINATOR_BANNER_LEN             // default: 20
-/// #define SHELLMINATOR_LOGO_FONT_STYLE        // default: BOLD
-/// #define SHELLMINATOR_LOGO_COLOR             // default: RED
-/// #define SHELLMINATOR_ENABLE_QR_SUPPORT
 
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
@@ -97,7 +90,7 @@ SOFTWARE.
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "V0.1A"
+#define SHELLMINATOR_VERSION "1.1.0"
 
 /// Color and style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
@@ -206,13 +199,23 @@ public:
   /// @warning If the calling of this function is not frequent enough it cann cause buffer overflow in the Serial driver!
   void update();
 
-  /// Bringing color into your code
+  /// Bring some color into your code.
   ///
   /// This function changes the color and style of the terminal application characters.
   /// @warning Please use the color and style enumeration table from this application as parameter.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   void setTerminalCharacterColor( uint8_t style, uint8_t color );
+
+  /// Bring some color into your code.
+  ///
+  /// This function changes the color and style of the terminal application characters.
+  /// This function can be used outside of a Shellminator object.
+  /// @warning Please use the color and style enumeration table from this application as parameter.
+  /// @param style Arduino Serial object to print the style code.
+  /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
+  /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
+  static void setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color );
 
   /// Draws the startup logo
   ///
@@ -325,7 +328,7 @@ public:
 
   #endif
 
-  // Configuration specific parts.
+  // Configuration for QR code specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
   /// This function generates a QR-code from text
@@ -374,7 +377,7 @@ private:
   /// Simple text that holds the startup logo. You can create costum logos
   /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
   /// @warning Make sure that the generated string is c/c++ compatible!
-  char *logo = (char*)'\0';
+  char *logo = NULL;
 
   /// This function-pointer stores the execution function pointer.
   /// This function will be called when a command recives.
@@ -396,18 +399,17 @@ private:
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;
 
-  /// This variable tracks the location of the end of the input message.
+  /// This variable tracks the end of the input message.
   uint32_t cmd_buff_cntr = 0;
 
   /// This variable tracks the location of the next character.
   uint32_t cursor = 0;
 
   /// This variable tracks the state of the VT100 decoder state-machine.
-  /// Currently only used to detect the arrow keys.
   uint32_t escape_state = 0;
 
   /// This character array stores the banner text.
-  char banner[ SHELLMINATOR_BANNER_LEN ] = { 0 };
+  char banner[ SHELLMINATOR_BANNER_LEN ] = { '\0' };
 
   /// Function pointer for up arrow behaviour override.
   void( *upArrowOverrideFunc )( void )    = NULL;
@@ -438,6 +440,8 @@ private:
   /// This function insets a new character to the input buffer.
   void redrawLine();
 
+  //---- Communication channels ----//
+
   /// Default communication channel;
   shellminatorChannel defaultChannel;
 
@@ -446,20 +450,29 @@ private:
   shellminatorArduinoSerialChannel arduinoSerialChannel;
   #endif
 
-  #ifdef COMMANDER_API_VERSION
-
-  Commander* commander = NULL;
-  uint32_t commandCheckTimerStart = 0;
-  bool commandChecked = false;
-  bool commandFound = false;
-
-  #endif
-
   /// Pointer to the communication class. By default
   /// it points to the default response handler.
 	shellminatorChannel *channel = &defaultChannel;
 
-  // Configuration specific parts.
+  //---- Commander-API support specific part ----//
+  #ifdef COMMANDER_API_VERSION
+
+  /// Pointer to a Commander object.
+  Commander* commander = NULL;
+
+  /// Last time in ms when the input command was checked.
+  uint32_t commandCheckTimerStart = 0;
+
+  /// Flag that stores if the command was checked.
+  bool commandChecked = false;
+
+  /// Flag that stores that the command was
+  /// found in Commander API-tree.
+  bool commandFound = false;
+
+  #endif
+
+  // QR-code configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
   uint8_t qr_data[ qrcodegen_BUFFER_LEN_MAX ];

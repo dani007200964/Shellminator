@@ -4,7 +4,7 @@
  * Copyright (c) 2020 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.03
+ * Modified 2022.05.08
 */
 
 /*
@@ -33,8 +33,10 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 
-#if __has_include ("Commander-API.hpp")
-#include "Commander-API.hpp"
+#ifdef __has_include
+  #if __has_include ("Commander-API.hpp")
+    #include "Commander-API.hpp"
+  #endif
 #endif
 
 const char *Shellminator::version = SHELLMINATOR_VERSION;
@@ -42,46 +44,47 @@ const char *Shellminator::version = SHELLMINATOR_VERSION;
 #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
 Shellminator::Shellminator( HardwareSerial *serialPort_p ) {
 
-  /// Initialise the arduinoSerialChannel as communication channel.
+  // Initialise the arduinoSerialChannel as communication channel.
   arduinoSerialChannel.select( serialPort_p );
   channel = &arduinoSerialChannel;
 
-  /// It has to be zero. We dont want to process any garbage.
+  // It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
 
-  /// This has to be 1 minimum, because the 0th element is used for the incoming data.
-  /// The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
   cmd_buff_dim = 1;
 
-  /// Just in case terminate the begining of the buffer
+  // Just in case terminate the begining of the buffer
   cmd_buff[ 0 ][ 0 ] = '\0';
 
-  /// Because we did not specified the execution function, we have to make it a NULL
-  /// pointer to make it detectable.
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
   execution_fn = NULL;
 
 }
 
 Shellminator::Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) ) {
 
-  /// Initialise the arduinoSerialChannel as communication channel.
+  // Initialise the arduinoSerialChannel as communication channel.
   arduinoSerialChannel.select( serialPort_p );
   channel = &arduinoSerialChannel;
 
-  /// It has to be zero. We dont want to process any garbage.
+  // It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
 
-  /// This has to be 1 minimum, because the 0th element is used for the incoming data.
-  /// The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
   cmd_buff_dim = 1;
 
-  /// Just in case terminate the begining of the buffer
+  // Just in case terminate the begining of the buffer
   cmd_buff[ 0 ][ 0 ] = '\0';
 
-  /// passing execution_fn_p to execution_fn
+  // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
 
 }
+
 #endif
 
 void Shellminator::attachLogo( char* logo_p ){
@@ -98,14 +101,14 @@ void Shellminator::attachLogo( const char* logo_p ){
 
 void Shellminator::addExecFunc( void( *execution_fn_p )( char* ) ){
 
-  /// passing execution_fn_p to execution_fn
+  // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
 
 }
 
 void Shellminator::clear() {
 
-  /// explanation can be found here: http://braun-home.net/michael/info/misc/VT100_commands.htm
+  // explanation can be found here: http://braun-home.net/michael/info/misc/VT100_commands.htm
   channel -> write( 27 );    // ESC character( decimal 27 )
   channel -> print( (const char*)"[H" );  // VT100 Home command
   channel -> write( 27 );    // ESC character( decimal 27 )
@@ -115,73 +118,74 @@ void Shellminator::clear() {
 
 void Shellminator::printBanner() {
 
-  /// Sets the terminal style to bold and the color to green.
-  /// You can change it if you like. In my opinion the most
-  /// useful is the invisible one :)
+  // Sets the terminal style to bold and the color to green.
+  // You can change it if you like. In my opinion the most
+  // useful is the invisible one :)
   setTerminalCharacterColor( BOLD, GREEN );
 
-  /// Print the banner text.
+  // Print the banner text.
   channel -> print( banner );
 
-  /// Sets the terminal style to regular and the color to white.
+  // Sets the terminal style to regular and the color to white.
   setTerminalCharacterColor( REGULAR, WHITE );
 
-  /// Prints the end of the banner text. Why this?
-  /// I don't know it looks a bit Linuxier this way.
+  // Prints the end of the banner text. Why this?
+  // I don't know it looks a bit Linuxier this way.
   channel -> print( (const char*)":~$ " );
 
 }
 
 void Shellminator::begin( char* banner_p ) {
 
-  /// Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
+  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
   strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
 
-  /// Just in case close the string
+  // Just in case close the string
   banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
-  /// Set the terminal color and style to the defined settings for the logo
+  // Set the terminal color and style to the defined settings for the logo
   setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
-  /// Draw the startup logo.
+  // Draw the startup logo.
   drawLogo();
 
-  /// Print the banner message.
+  // Print the banner message.
   printBanner();
 
 }
 
 void Shellminator::begin( const char* banner_p ) {
 
-  /// Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
+  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
   strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
 
-  /// Just in case close the string
+  // Just in case close the string
   banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
-  /// Set the terminal color and style to the defined settings for the logo
+  // Set the terminal color and style to the defined settings for the logo
   setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
-  /// Draw the startup logo.
+  // Draw the startup logo.
   drawLogo();
 
-  /// Print the banner message.
+  // Print the banner message.
   printBanner();
 
 }
 
 void Shellminator::sendBackspace() {
 
-  /// Send a simple backspace combo to the serial port
+  // Send a simple backspace combo to the serial port
   channel -> print( (const char*)"\b \b" );
 
 }
 
 void Shellminator::redrawLine(){
 
-  /// General counter variable
+  // General counter variable
   uint32_t i;
 
+  // Clear line and return to the beginning.
   channel -> write( 27 );
   channel -> print( "[2K\r" );
 
@@ -189,6 +193,8 @@ void Shellminator::redrawLine(){
 
   #ifdef COMMANDER_API_VERSION
 
+  // If the command is found in Commander's API-tree
+  // it will be highlighted.
   if( commandFound ){
 
     setTerminalCharacterColor( BOLD, GREEN );
@@ -203,33 +209,38 @@ void Shellminator::redrawLine(){
 
   #endif
 
+  // Print all characters.
   for( i = 0; i < cmd_buff_cntr; i++ ){
     channel -> print( cmd_buff[ 0 ][ i ] );
   }
 
+  // Step left with the terminal cursor to match the
+  // position in the cursor variable.
   for( i = cmd_buff_cntr; i > cursor; i-- ){
-      channel -> write( 27 );    // ESC character( decimal 27 )
-      channel -> print( '[' );  // VT100 Cursor command.
-      channel -> print( '1' );  // 1 character movement.
-      channel -> print( 'D' );  // Left.
+
+    channel -> write( 27 );    // ESC character( decimal 27 )
+    channel -> print( '[' );  // VT100 Cursor command.
+    channel -> print( '1' );  // 1 character movement.
+    channel -> print( 'D' );  // Left.
+
   }
   
 }
 
 void Shellminator::process( char new_char ) {
 
-  /// General counter variable
+  // General counter variable
   uint32_t i;
 
-  /// Check if the new character is backspace character.
-  /// '\b' or 127 are both meaning that the backspace kes is pressed
+  // Check if the new character is backspace character.
+  // '\b' or 127 are both meaning that the backspace kes is pressed
   if ( ( new_char == '\b' ) || ( new_char == 127 ) ) {
 
-    /// If we press a backspace we have to reset cmd_buff_dim to default value
+    // If we press a backspace we have to reset cmd_buff_dim to default value
     cmd_buff_dim = 1;
 
-    /// We have to check the number of the characters in the buffer.
-    /// If the buffer is empty we must not do anything!
+    // We have to check the number of the characters in the buffer.
+    // If the buffer is empty we must not do anything!
     if ( cursor > 0 ) {
 
       for( i = (cursor - 1); i < ( cmd_buff_cntr - 1 ); i++ ){
@@ -238,49 +249,68 @@ void Shellminator::process( char new_char ) {
 
       }
 
-      /// If there is at least 1 character in the buffer we jus simply
-      /// decrement the cmd_buff_cntr. This will result that the new character
-      /// will be stored in the previous characters place in the buffer.
+      // If there is at least 1 character in the buffer we jus simply
+      // decrement the cmd_buff_cntr. This will result that the new character
+      // will be stored in the previous characters place in the buffer.
       cmd_buff_cntr--;
       cursor--;
 
       redrawLine();
 
-      /// We have no more things to do, so return
+      // We have no more things to do, so return
       return;
 
     }
 
   }
 
-  /// If the enter key is pressed in the keyboard, the terminal application
-  /// will send a '\r' character.
+  // If the enter key is pressed in the keyboard, the terminal application
+  // will send a '\r' character.
   else if ( new_char == '\r' ) {
 
-    /// If the enter key is pressed cmd_buff_dim has to be reset to the default value
+    // If the enter key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
 
-    /// Because a command is sent we have to close it. Basically we replace the arrived
-    /// '\r' character with a '\0' string terminator character. Now we have our command
-    /// in a C/C++ like standard string format.
+    // Because a command is sent we have to close it. Basically we replace the arrived
+    // '\r' character with a '\0' string terminator character. Now we have our command
+    // in a C/C++ like standard string format.
     cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
-    /// We send a line break to the terminal to put the next data in new line
+    // We send a line break to the terminal to put the next data in new line
     channel -> print( '\r' );
     channel -> print( '\n' );
 
-    /// If the arrived tata is not just a single enter we have to process the command.
+    // If the arrived tata is not just a single enter we have to process the command.
     if ( cmd_buff_cntr > 0 ) {
 
-      /// We haveto check that execution_fn is not NULL.
+      // We haveto check that execution_fn is not NULL.
       if( execution_fn != NULL ){
 
-        /// If it is a valid, then call it's function.
+        // If it is a valid, then call it's function.
         execution_fn( cmd_buff[ 0 ] );
 
       }
 
-      /// If not, then just print it with Serial.
+      #ifdef COMMANDER_API_VERSION
+
+      // If a Commander object is added, it can be used
+      // to execute the command without an execution_fn.
+      else if( commander != NULL ){
+
+        // Check for the right response channel.
+        #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
+        if( channel == &arduinoSerialChannel ){
+
+          commander -> execute( cmd_buff[ 0 ], arduinoSerialChannel.getSerialObject() );
+
+        }
+        #endif
+
+      }
+
+      #endif
+
+      // If not, then just print it with Serial.
       else{
         channel -> print( (const char*)"cmd: " );
         channel -> print( cmd_buff[ 0 ] );
@@ -288,8 +318,8 @@ void Shellminator::process( char new_char ) {
         channel -> print( '\n' );
       }
 
-      /// After we processed the command we have to shift the history upwards.
-      /// To protect the copy against buffer overflow we use strncpy
+      // After we processed the command we have to shift the history upwards.
+      // To protect the copy against buffer overflow we use strncpy
       for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
 
         strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN );
@@ -298,73 +328,73 @@ void Shellminator::process( char new_char ) {
 
     }
 
-    /// After the command processing finished we print a new banner to the terminal.
-    /// This means that the device is finished and waits the new command.
+    // After the command processing finished we print a new banner to the terminal.
+    // This means that the device is finished and waits the new command.
     printBanner();
 
-    /// To empty the incoming string we have to zero it's counter.
+    // To empty the incoming string we have to zero it's counter.
     cmd_buff_cntr = 0;
     cursor = 0;
 
-    /// We have no more things to do, so return
+    // We have no more things to do, so return
     return;
 
   }
 
-  /// This part handles the arrow detection. Arrows are composed as a VT100 command.
-  /// These commands usually contains a pattern. This pattern usually starts with
-  /// an Escape character, that is deciman 27 in ASCII table.
-  /// The escape_state variable stores the state of the VT100 command interpreter
-  /// state-machine.
+  // This part handles the arrow detection. Arrows are composed as a VT100 command.
+  // These commands usually contains a pattern. This pattern usually starts with
+  // an Escape character, that is deciman 27 in ASCII table.
+  // The escape_state variable stores the state of the VT100 command interpreter
+  // state-machine.
   else if ( new_char == 27 ) {
 
-    /// If escape character recived we set escape_state variable to 1.
+    // If escape character recived we set escape_state variable to 1.
     escape_state = 1;
 
-    /// We have no more things to do, so return
+    // We have no more things to do, so return
     return;
   }
 
-  /// If the escape_state variable is 1 that means we expect that the new character will be
-  /// a '[' character.
+  // If the escape_state variable is 1 that means we expect that the new character will be
+  // a '[' character.
   else if ( escape_state == 1 ) {
 
-    /// Check that the new character is '['
+    // Check that the new character is '['
     if ( new_char == '[' ) {
 
-      /// If it is, we set escape_state variable to 2
+      // If it is, we set escape_state variable to 2
       escape_state = 2;
 
-      /// We have no more things to do, so return
+      // We have no more things to do, so return
       return;
 
     }
 
     else {
 
-      /// If the new character is not '[', that means it is not a VT100 command so we have to stop
-      /// the interpretation of the escape sequence.
+      // If the new character is not '[', that means it is not a VT100 command so we have to stop
+      // the interpretation of the escape sequence.
       escape_state = 0;
 
-      /// We have no more things to do, so return
+      // We have no more things to do, so return
       return;
 
     }
 
   }
 
-  /// If the escape_state variable is 2 that means we expect that the new character will be
-  /// an 'A', 'B', 'C' or 'D' character. These four characters are represent the four arrow keys.
-  /// A -> Up
-  /// B -> Down
-  /// C -> Right
-  /// D -> Left
+  // If the escape_state variable is 2 that means we expect that the new character will be
+  // an 'A', 'B', 'C' or 'D' character. These four characters are represent the four arrow keys.
+  // A -> Up
+  // B -> Down
+  // C -> Right
+  // D -> Left
   else if ( escape_state == 2 ) {
 
-    /// To chose between the four valid values the easyest way is a switch.
+    // To chose between the four valid values the easyest way is a switch.
     switch ( new_char ) {
 
-      /// Up arrow pressed
+      // Up arrow pressed
       case 'A':
 
         // Check if the arrow function is overriden.
@@ -375,46 +405,46 @@ void Shellminator::process( char new_char ) {
 
         }
 
-        /// Because we have finished the ecape sequence interpretation we reset the state-machine.
+        // Because we have finished the ecape sequence interpretation we reset the state-machine.
         escape_state = 0;
 
-        /// We have to check that we can go upper in history
+        // We have to check that we can go upper in history
         if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
 
-          /// If we can we have to check that the previous command was not empty.
+          // If we can we have to check that the previous command was not empty.
           if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
 
-            /// If it was empty we can't do much with an empty command so we return.
+            // If it was empty we can't do much with an empty command so we return.
             break;
 
           }
 
-          /// Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          /// Remember the 0th element is always reserved for the new data. If we brows the history the
-          /// data in the history will overwrite the data in the 0th element so the historical data will be
-          /// the new data. We use strncpy to prevent overflow.
+          // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+          // Remember the 0th element is always reserved for the new data. If we brows the history the
+          // data in the history will overwrite the data in the 0th element so the historical data will be
+          // the new data. We use strncpy to prevent overflow.
           strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN );
 
-          /// We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-          /// It is important to track the end of the loaded string.
+          // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+          // It is important to track the end of the loaded string.
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
           cursor = cmd_buff_cntr;
 
-          /// We print the loaded command to the terminal interface.
+          // We print the loaded command to the terminal interface.
           //channel -> print( cmd_buff[ 0 ] );
 
           redrawLine();
 
-          /// We have to increment the cmd_buff_dim variable, to track the history position.
-          /// Greater number means older command!
+          // We have to increment the cmd_buff_dim variable, to track the history position.
+          // Greater number means older command!
           cmd_buff_dim++;
 
         }
 
-        /// We have finished so we can break from the switch.
+        // We have finished so we can break from the switch.
         break;
 
-      /// Down arrow pressed
+      // Down arrow pressed
       case 'B':
 
         // Check if the arrow function is overriden.
@@ -425,60 +455,60 @@ void Shellminator::process( char new_char ) {
 
         }
 
-        /// Because we have finished the ecape sequence interpretation we reset the state-machine.
+        // Because we have finished the ecape sequence interpretation we reset the state-machine.
         escape_state = 0;
 
-        /// We have to check that we can go lover in history, and we are not in the first previous command.
+        // We have to check that we can go lover in history, and we are not in the first previous command.
         if ( cmd_buff_dim > 2 ) {
 
-          /// We have to decrement the cmd_buff_dim variable, to track the history position.
-          /// Lower number means newer command!
+          // We have to decrement the cmd_buff_dim variable, to track the history position.
+          // Lower number means newer command!
           cmd_buff_dim--;
 
-          /// Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          /// Remember the 0th element is always reserved for the new data. If we brows the history the
-          /// data in the history will overwrite the data in the 0th element so the historical data will be
-          /// the new data. We use strncpy to prevent overflow.
+          // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+          // Remember the 0th element is always reserved for the new data. If we brows the history the
+          // data in the history will overwrite the data in the 0th element so the historical data will be
+          // the new data. We use strncpy to prevent overflow.
           strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN );
 
-          /// We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-          /// It is important to track the end of the loaded string.
+          // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+          // It is important to track the end of the loaded string.
           cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
           cursor = cmd_buff_cntr;
 
-          /// We print the loaded command to the terminal interface.
-          ///channel -> print( cmd_buff[ 0 ] );
+          // We print the loaded command to the terminal interface.
+          //channel -> print( cmd_buff[ 0 ] );
           redrawLine();
 
         }
 
-        /// Check that if we are in the first previous command.
+        // Check that if we are in the first previous command.
         else if ( cmd_buff_dim == 2 ) {
 
-          /// If we are in the first previous command, and we press the down key,
-          /// that means we want to go to the 0th element in the terminal.
-          /// In this case we have to clear the 0th element.
+          // If we are in the first previous command, and we press the down key,
+          // that means we want to go to the 0th element in the terminal.
+          // In this case we have to clear the 0th element.
           for ( i = 0; i < cmd_buff_cntr; i++ ) {
 
-            /// The easyest way is to sand as many backspaces as many character was in the 0th element in the buffer.
+            // The easyest way is to sand as many backspaces as many character was in the 0th element in the buffer.
             sendBackspace();
 
           }
 
-          /// To empty the incoming string we have to zero it's counter.
+          // To empty the incoming string we have to zero it's counter.
           cmd_buff_cntr = 0;
           cursor = 0;
 
-          /// We have to reset the cmd_buff_dim variable to the default value.
+          // We have to reset the cmd_buff_dim variable to the default value.
           cmd_buff_dim = 1;
 
         }
 
-        /// We have finished so we can break from the switch.
+        // We have finished so we can break from the switch.
         break;
 
-      /// Right arrow pressed
-      /// Currently not used
+      // Right arrow pressed
+      // Currently not used
       case 'C':
 
         // Check if the arrow function is overriden.
@@ -489,24 +519,27 @@ void Shellminator::process( char new_char ) {
 
         }
         
+        // Check if we can move to right.
         if( cursor < cmd_buff_cntr ){
 
-          channel -> write( 27 );    // ESC character( decimal 27 )
+          channel -> write( 27 );   // ESC character( decimal 27 )
           channel -> print( '[' );  // VT100 Cursor command.
           channel -> print( '1' );  // 1 character movement.
           channel -> print( 'C' );  // Left.
+
+          // Increment the cursor variavble.
           cursor++;
 
         }
         
-        /// We just simply reset the state-machine.
+        // We just simply reset the state-machine.
         escape_state = 0;
 
-        /// We have finished so we can break from the switch.
+        // We have finished so we can break from the switch.
         break;
 
-        /// Left arrow pressed
-        /// Currently not used
+      // Left arrow pressed
+      // Currently not used
       case 'D':
 
         // Check if the arrow function is overriden.
@@ -517,20 +550,23 @@ void Shellminator::process( char new_char ) {
 
         }
         
+        // Check if we can move to left.
         if( cursor > 0 ){
 
-          channel -> write( 27 );    // ESC character( decimal 27 )
+          channel -> write( 27 );   // ESC character( decimal 27 )
           channel -> print( '[' );  // VT100 Cursor command.
           channel -> print( '1' );  // 1 character movement.
           channel -> print( 'D' );  // Left.
+
+          // Decrement the cursor variable.
           cursor--;
 
         }
 
-        /// We just simply reset the state-machine.
+        // We just simply reset the state-machine.
         escape_state = 0;
 
-        /// We have finished so we can break from the switch.
+        // We have finished so we can break from the switch.
         break;
 
       // Check for Del key;
@@ -538,18 +574,18 @@ void Shellminator::process( char new_char ) {
         escape_state = 3;
         break;
 
-      /// Any other cases means that it was probably a VT100 command but not an arrow key.
+      // Any other cases means that it was probably a VT100 command but not supported.
       default:
 
-        /// In this case we just simply reset the state-machine.
+        // In this case we just simply reset the state-machine.
         escape_state = 0;
 
-        /// We have finished so we can break from the switch.
+        // We have finished so we can break from the switch.
         break;
 
     }
 
-    /// We have finished so we can return.
+    // We have finished so we can return.
     return;
 
   }
@@ -560,11 +596,11 @@ void Shellminator::process( char new_char ) {
     if( new_char == '~' ){
 
       // Del key detected.
-      /// If we press a delet key we have to reset cmd_buff_dim to default value
+      // If we press a delet key we have to reset cmd_buff_dim to default value
       cmd_buff_dim = 1;
 
-      /// We have to check the number of the characters in the buffer.
-      /// If the buffer is full we must not do anything!
+      // We have to check the number of the characters in the buffer.
+      // If the buffer is full we must not do anything!
       if ( cursor != cmd_buff_cntr ) {
 
         for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
@@ -573,9 +609,9 @@ void Shellminator::process( char new_char ) {
 
         }
 
-        /// If there is at least 1 character in the buffer we jus simply
-        /// decrement the cmd_buff_cntr. This will result that the new character
-        /// will be stored in the previous characters place in the buffer.
+        // If there is at least 1 character in the buffer we jus simply
+        // decrement the cmd_buff_cntr. This will result that the new character
+        // will be stored in the previous characters place in the buffer.
         cmd_buff_cntr--;
 
         redrawLine();
@@ -592,9 +628,98 @@ void Shellminator::process( char new_char ) {
   // todo Commander command search.
   else if( new_char == '\t' ){
 
-    //channel -> print( "Tabulator!\r\n" );
-
+    // Auto complete section.
     #ifdef COMMANDER_API_VERSION
+
+    // Firstly, we have to set the cursor to the end of the input command.
+    // If the algorythm fills the missing characters, they have to placed
+    // at the end.
+    cursor = cmd_buff_cntr;
+
+    // Pointer to a Commander API-tree element.
+    Commander::API_t *commandAddress;
+
+    // The next auto filled character will be placed in this variable.
+    char nextChar;
+
+    // This flag holds an auto complete conflict event.
+    // Conflict event happens:
+    // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
+    // - if cmd_buff_cntr would overflow Commanders command tree.
+    // - if we found the end of the last command.
+    bool conflict = false;
+
+    // If there is no conflict event, we are trying
+    // to fill as many characters as possible.
+    while( !conflict ){
+
+      // Reset the counter to the first Commander API-tree element.
+      i = 0;
+
+      // Get the address of the element indexed by i.
+      // If the indexed elment does not exists, Commander
+      // will return NULL.
+      commandAddress = commander -> operator[]( (int)i );
+
+      // Set to default state.
+      nextChar = '\0';
+
+      // Go through all elements in Commanders API-tree.
+      while( commandAddress ){
+
+        // We have to check that the typed command is exists within an existing command.
+        if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
+
+          // If it does, we have to check for conflict.
+          if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
+
+            // If there is no conflict we can set the next character from the command that we found.
+            nextChar = commandAddress -> name[ cmd_buff_cntr ];
+
+          }
+
+          else{
+
+            // We have to check that the next character in the command
+            // tree is not the same as the value in nextChar.
+            if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
+
+              // Trigger conflict.
+              conflict = true;
+
+            }
+
+          }
+
+        }
+
+        // Increment i to get the next command's index.
+        i++;
+
+        // Get the address of the element indexed by i.
+        commandAddress = commander -> operator[]( (int)i );
+
+      }
+
+      // If nextChar does not changed since start, that means
+      // we did not found anything similar.
+      if( nextChar == '\0' ){
+
+        // We have to trigger conflict to abort the process.
+        conflict = true;
+
+      }
+
+      // If we does not had a conflict event, we have to process
+      // the foind character as a regular character.
+      if( !conflict ){
+
+        process( nextChar );
+
+      }
+
+    }
+
 
     #endif
 
@@ -612,10 +737,10 @@ void Shellminator::process( char new_char ) {
 
     }
 
-    /// If the abort key is pressed cmd_buff_dim has to be reset to the default value
+    // If the abort key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
 
-    /// We send a line break to the terminal to put the next data in new line
+    // We send a line break to the terminal to put the next data in new line
     channel -> print( '\r' );
     channel -> print( '\n' );
 
@@ -628,40 +753,73 @@ void Shellminator::process( char new_char ) {
 
   }
 
-  /// Any other cases means that the new character is just a simple character that was pressed on the keyboard.
+  // Any other cases means that the new character is just a simple character that was pressed on the keyboard.
   else {
 
-    for( i = cmd_buff_cntr; i > cursor; i-- ){
-      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+    // If the cursor is at the end of the command,
+    // we simply store the new character.
+    if( cursor == cmd_buff_cntr ){
+
+      cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
+
     }
 
-    /// Add the new character to the end of the 0th element in the buffer
-    cmd_buff[ 0 ][ cursor ] = new_char;
+    // If the cursor is somewhere in the middle, we have to shift the
+    // end of the command by one character end insert the new character
+    // to the cursor position.
+    else{
 
-    /// In this case we have to reset the cmd_buff_dim variable to the default value.
+      for( i = cmd_buff_cntr; i > cursor; i-- ){
+        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+      }
+
+      // Add the new character to the end of the 0th element in the buffer
+      cmd_buff[ 0 ][ cursor ] = new_char;
+
+    }
+
+    // In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
     // Increment counters.
     cmd_buff_cntr++;
     cursor++;
 
-    // Check if the counters overlowed.
+    // Check if the counters are overlowed.
     if( cmd_buff_cntr >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
 
-      cmd_buff_cntr = ( SHELLMINATOR_BUFF_LEN - 1 );
+      cmd_buff_cntr = ( SHELLMINATOR_BUFF_LEN - 2 );
 
     }
 
     if( cursor >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
 
-      cursor = ( SHELLMINATOR_BUFF_LEN - 1 );
+      cursor = ( SHELLMINATOR_BUFF_LEN - 2 );
 
     }
 
-    // Redraw the command line.
-    redrawLine();
+    // If the cursor was at the end we have to print the
+    // new character if the cmd_buff had free space at
+    // the end.
+    if( cursor == cmd_buff_cntr ){
 
-    /// We have finished so we can return.
+      if( cmd_buff_cntr < ( SHELLMINATOR_BUFF_LEN - 2 ) ){
+
+        channel -> print( new_char );
+
+      }
+
+    }
+
+    else{
+
+      // Redraw the command line.
+      redrawLine();
+
+    }
+
+
+    // We have finished so we can return.
     return;
 
   }
@@ -730,18 +888,18 @@ void Shellminator::freeAbortKey(){
 
 void Shellminator::update() {
 
-  /// This variable will hold the character that was read from the channel buffer.
+  // This variable will hold the character that was read from the channel buffer.
   char c;
 
-  // todo wifis eszközöknél kell neki majd még plusz cucc.
+  // todo ESP stuff.
 
-  /// We have to check the channel buffer. If it is not empty we can read as many characters as possible.
+  // We have to check the channel buffer. If it is not empty we can read as many characters as possible.
   while ( channel -> available() ) {
 
-    /// Read one character from channel Buffer.
+    // Read one character from channel Buffer.
     c = (char)channel -> read();
 
-    /// Process the new character.
+    // Process the new character.
     process( c );
 
     #ifdef COMMANDER_API_VERSION
@@ -753,16 +911,28 @@ void Shellminator::update() {
 
   #ifdef COMMANDER_API_VERSION
 
-  // Todo command detection.
+  // Command highlight section.
   Commander::API_t *commandAddress;
 
+  // If Commander is available and we did not checked the
+  // typed command, we are trying to find and highlight it.
   if( commander && !commandChecked ){
 
+    // We have to wait 100ms after the last keypress.
     if( ( millis() - commandCheckTimerStart ) > 100 ){
 
+      // Generic counter variable.
       uint32_t i = 0;
+
+      // Commander expects a null terminated string, so we
+      // have to terminate the string at the end, or at
+      // space character. But after the search we have to
+      // store bactk this character to it's original state.
       char charCopy;
 
+      // Find the end of theinput command, or the first space
+      // character in it, store it's value to charCopy, and
+      // replace it with null character.
       for( i = 0; i <= cmd_buff_cntr; i++ ){
 
         if( ( cmd_buff[ 0 ][ i ] == ' '  ) || ( i == cmd_buff_cntr ) ){
@@ -775,7 +945,11 @@ void Shellminator::update() {
 
       }
 
+      // Try to found the command in Commander's API-tree.
       commandAddress = commander -> operator[]( cmd_buff[0] );
+
+      // If Commander responds with a non-null pointer, it means
+      // that we have a mach.
       if( commandAddress ){
     
         commandFound = true;
@@ -788,9 +962,10 @@ void Shellminator::update() {
 
       }
 
+      // Restore the original state.
       cmd_buff[ 0 ][ i ] = charCopy;
 
-      //commandCheckTimerStart = millis();
+      // Set the flag.
       commandChecked = true;
       redrawLine();
 
@@ -804,7 +979,7 @@ void Shellminator::update() {
 
 void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
-  /// The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
+  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   channel -> write( 27 );
   channel -> print( '[' );
   channel -> print( style );
@@ -814,10 +989,21 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
 }
 
+void Shellminator::setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color ){
+
+  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
+  serialPort -> write( 27 );
+  serialPort -> print( '[' );
+  serialPort -> print( style );
+  serialPort -> print( ';' );
+  serialPort -> print( color );
+  serialPort -> print( 'm' );
+
+}
 
 void Shellminator::drawLogo() {
 
-  /// Draws the startup logo to the terminal interface.
+  // Draws the startup logo to the terminal interface.
   channel -> print( logo );
 
 }
