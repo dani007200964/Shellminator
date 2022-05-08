@@ -1,4 +1,4 @@
-Thank you for creating a pull request to contribute to Commander!
+Thank you for creating a pull request to contribute to Shellminator!
 Before you open the request please review the following guidelines
 to help it be more easily integrated:
 
