@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['qr_2dcode_20support_21',['QR-code support',['../qr_code_support.html',1,'']]],
-  ['qr_5fcode_5fsupport_2emd_22',['qr_code_support.md',['../qr__code__support_8md.html',1,'']]]
+  ['overrideabortkey_24',['overrideAbortKey',['../class_shellminator.html#abad556405bac943db348a5bbbb814c5b',1,'Shellminator']]],
+  ['overridedownarrow_25',['overrideDownArrow',['../class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10',1,'Shellminator']]],
+  ['overrideleftarrow_26',['overrideLeftArrow',['../class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc',1,'Shellminator']]],
+  ['overriderightarrow_27',['overrideRightArrow',['../class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b',1,'Shellminator']]],
+  ['overrideuparrow_28',['overrideUpArrow',['../class_shellminator.html#a2e054598bd72a647809a9b041af10631',1,'Shellminator']]]
 ];

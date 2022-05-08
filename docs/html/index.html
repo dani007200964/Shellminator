@@ -48,7 +48,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
-   &#160;<span id="projectnumber">V0.2A</span>
+   &#160;<span id="projectnumber">V1.1.0</span>
    </div>
    <div id="projectbrief">Shellminator is a simplified VT100 compatible iinterface for c++ projects</div>
   </td>
@@ -109,18 +109,31 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title"><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> is a simple to use library and helps to interface with VT100 compatible terminal emulators like <a href="https://www.putty.org/">PuTTY</a>, <a href="https://ttssh2.osdn.jp/index.html.en">Terraterm</a> or <a href="https://linux.die.net/man/1/minicom">minicom</a>. With this library you can create user friendly command line interfaces for your embedded projects. <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> has history support, that means you can brows your prevoius commands with the arrow keys on the keyboard. The library is Arduino compatible out of the box, but if you want to use it with other platforms, you just have to implement an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino compatible Serial library</a>. Configuring the library is just a few minutes, and this documentation shows how to do that correctly.</p>
+<div class="textblock"><p><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> is a simple to use terminal interface library. You can use it with any <b>VT-100</b> terminal emulator like <a href="https://www.putty.org/">PuTTY</a>, <a href="https://ttssh2.osdn.jp/index.html.en">Terraterm</a> or <a href="https://linux.die.net/man/1/minicom">minicom</a>. With this library you can create user friendly command line interfaces for your embedded projects. <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> has command history support, that means you can browse your previous commands with the arrow keys on the keyboard. The library is Arduino compatible out of the box, but if you want to use it with other platforms, you can do that in Shellminator-IO source files.</p>
+<p><b>Key changes in V1.1.X:</b></p><ul>
+<li>Full arrow key support.</li>
+<li>Delet key functionality.</li>
+<li>Abort key( ctrl+c ) functionality.</li>
+<li>Commander-API support:<ul>
+<li>Command complete with tab key.</li>
+<li>No need for execution function.</li>
+<li>Command highlight.</li>
+</ul>
+</li>
+</ul>
 <h2><a class="anchor" id="autotoc_md0"></a>
+Donation</h2>
+<p>If this project help you reduce time to develop, you can give me a cup of coffee &#x2615; &#x2615; &#x2615;</p>
+<p><a href="https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate" style="pointer-events: none;" class="inline"/></a></p>
+<h2><a class="anchor" id="autotoc_md1"></a>
 Contributing</h2>
 <p>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
 <p>Please make sure to update tests as appropriate.</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
-Donation</h2>
-<p>If this project help you reduce time to develop, you can give me a cup of coffee :)</p>
-<p><a href="https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate" style="pointer-events: none;" class="inline"/></a></p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 License &amp; copyright</h2>
-<p>© Daniel Hajnal Licensed under the MIT License </p>
+<p>© Daniel Hajnal</p>
+<p>&#x2709; <a href="#" onclick="location.href='mai'+'lto:'+'haj'+'na'+'l.d'+'an'+'iel'+'96'+'@gm'+'ai'+'l.c'+'om'; return false;">hajna<span style="display: none;">.nosp@m.</span>l.da<span style="display: none;">.nosp@m.</span>niel9<span style="display: none;">.nosp@m.</span>6@gm<span style="display: none;">.nosp@m.</span>ail.c<span style="display: none;">.nosp@m.</span>om</a></p>
+<p>Licensed under the <b>MIT</b> License. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

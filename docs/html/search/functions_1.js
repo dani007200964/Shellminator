@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['addexecfunc_56',['addExecFunc',['../class_shellminator.html#a403b9dd14b8f241c8ca97a6820b3da12',1,'Shellminator']]]
+  ['begin_69',['begin',['../class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d',1,'Shellminator::begin(char *banner_p)'],['../class_shellminator.html#a9321a7c84af143dc5c2540cfd3b02454',1,'Shellminator::begin(const char *banner_p)']]]
 ];

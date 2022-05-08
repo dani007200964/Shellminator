@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['red_23',['RED',['../class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e',1,'Shellminator']]],
-  ['regular_24',['REGULAR',['../class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67',1,'Shellminator']]],
-  ['reverse_25',['REVERSE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653abd42c47d8515509b138a757070d80a61',1,'Shellminator']]]
+  ['peek_29',['peek',['../classshellminator_channel.html#a983ab818f62533a75525a24d5433de99',1,'shellminatorChannel']]],
+  ['print_30',['print',['../classshellminator_channel.html#ac3066d521fe277f697f5d16ccffd0204',1,'shellminatorChannel::print(char c)'],['../classshellminator_channel.html#a04a5ed50c91a8f6f6af7bdbe4f9d7c74',1,'shellminatorChannel::print(uint8_t b)'],['../classshellminator_channel.html#a0defb66a6a39838e14b75847ff6273b6',1,'shellminatorChannel::print(char *str)'],['../classshellminator_channel.html#a547a19b29c4a80c74670a8049f9d04bb',1,'shellminatorChannel::print(const char *str)']]]
 ];

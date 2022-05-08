@@ -48,7 +48,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
-   &#160;<span id="projectnumber">V0.2A</span>
+   &#160;<span id="projectnumber">V1.1.0</span>
    </div>
    <div id="projectbrief">Shellminator is a simplified VT100 compatible iinterface for c++ projects</div>
   </td>
@@ -112,11 +112,11 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp.html',''); initResi
 <div class="title">Shellminator.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;Arduino.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_shellminator-_settings_8hpp_source.html">Shellminator-Settings.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_shellminator-_i_o_8hpp_source.html">Shellminator-IO.hpp</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;qrcodegen.h&quot;</code><br />
 </div>
 <p><a href="_shellminator_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -128,14 +128,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a62d4bb2d1cf132f3397352bffa8fe68c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c">SHELLMINATOR_ENABLE_QR_SUPPORT</a></td></tr>
-<tr class="memdesc:a62d4bb2d1cf132f3397352bffa8fe68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">+---&mdash; Costum configuration ---&mdash;+ | | | This is where you have to config | | your defines! | | | +---------------------------------&mdash;+  <a href="_shellminator_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c">More...</a><br /></td></tr>
-<tr class="separator:a62d4bb2d1cf132f3397352bffa8fe68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a688789e3e0de254cd66292a470a19c84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">SHELLMINATOR_SERIAL_CLASS</a>&#160;&#160;&#160;Serial_</td></tr>
-<tr class="memdesc:a688789e3e0de254cd66292a470a19c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the current Serial object.  <a href="_shellminator_8hpp.html#a688789e3e0de254cd66292a470a19c84">More...</a><br /></td></tr>
-<tr class="separator:a688789e3e0de254cd66292a470a19c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ddabc8c441626dba3679faf61863c5f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>&#160;&#160;&#160;20</td></tr>
-<tr class="memdesc:a3ddabc8c441626dba3679faf61863c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the maximum length of each command.  <a href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">More...</a><br /></td></tr>
+<tr class="memitem:a3ddabc8c441626dba3679faf61863c5f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:a3ddabc8c441626dba3679faf61863c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">+---&mdash; Costum configuration ---&mdash;+ | | | This is where you have to config | | your defines! | | | +---------------------------------&mdash;+  <a href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">More...</a><br /></td></tr>
 <tr class="separator:a3ddabc8c441626dba3679faf61863c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac999ba5b43c5bb3a64cdfea63b279561"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a>&#160;&#160;&#160;5</td></tr>
 <tr class="memdesc:ac999ba5b43c5bb3a64cdfea63b279561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the maximum length of the previous command memory.  <a href="_shellminator_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">More...</a><br /></td></tr>
@@ -143,7 +137,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a43e8d7753b97ae4dc5423d70e29ec750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a>&#160;&#160;&#160;20</td></tr>
 <tr class="memdesc:a43e8d7753b97ae4dc5423d70e29ec750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of the banner text.  <a href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">More...</a><br /></td></tr>
 <tr class="separator:a43e8d7753b97ae4dc5423d70e29ec750"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41bdbfb8b733755c31f674b077e6fe58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a>&#160;&#160;&#160;&quot;V0.1A&quot;</td></tr>
+<tr class="memitem:a41bdbfb8b733755c31f674b077e6fe58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a>&#160;&#160;&#160;&quot;1.1.0&quot;</td></tr>
 <tr class="memdesc:a41bdbfb8b733755c31f674b077e6fe58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version of the module.  <a href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">More...</a><br /></td></tr>
 <tr class="separator:a41bdbfb8b733755c31f674b077e6fe58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad68a8f3b92c8c43683e8f9d24279dbf8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#ad68a8f3b92c8c43683e8f9d24279dbf8">SHELLMINATOR_LOGO_FONT_STYLE</a>&#160;&#160;&#160;BOLD</td></tr>
@@ -197,30 +191,13 @@ This macro has to be defined befor importing the <a class="el" href="_shellminat
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SHELLMINATOR_BUFF_LEN&#160;&#160;&#160;20</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition of the maximum length of each command. </p>
-<dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be 20. </dd></dl>
-
-</div>
-</div>
-<a id="a62d4bb2d1cf132f3397352bffa8fe68c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62d4bb2d1cf132f3397352bffa8fe68c">&#9670;&nbsp;</a></span>SHELLMINATOR_ENABLE_QR_SUPPORT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SHELLMINATOR_ENABLE_QR_SUPPORT</td>
+          <td class="memname">#define SHELLMINATOR_BUFF_LEN&#160;&#160;&#160;10</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>+---&mdash; Costum configuration ---&mdash;+ | | | This is where you have to config | | your defines! | | | +---------------------------------&mdash;+ </p>
-<p>#define SHELLMINATOR_SERIAL_CLASS // default: Serial_ #define SHELLMINATOR_BUFF_LEN // default: 20 #define SHELLMINATOR_BUFF_DIM // default: 5 #define SHELLMINATOR_BANNER_LEN // default: 20 #define SHELLMINATOR_LOGO_FONT_STYLE // default: BOLD #define SHELLMINATOR_LOGO_COLOR // default: RED </p>
+<p>Definition of the maximum length of each command </p><dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be 20. </dd></dl>
 
 </div>
 </div>
@@ -255,24 +232,6 @@ This macro has to be defined befor importing the <a class="el" href="_shellminat
 
 </div>
 </div>
-<a id="a688789e3e0de254cd66292a470a19c84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a688789e3e0de254cd66292a470a19c84">&#9670;&nbsp;</a></span>SHELLMINATOR_SERIAL_CLASS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SHELLMINATOR_SERIAL_CLASS&#160;&#160;&#160;Serial_</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition of the current Serial object. </p>
-<dl class="section warning"><dt>Warning</dt><dd>This define is important. If you not use the original <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino Serial library</a> you have to midify this definition! Stock Arduino should work fine. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be Serial_. </dd></dl>
-
-</div>
-</div>
 <a id="a41bdbfb8b733755c31f674b077e6fe58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41bdbfb8b733755c31f674b077e6fe58">&#9670;&nbsp;</a></span>SHELLMINATOR_VERSION</h2>
 
@@ -280,7 +239,7 @@ This macro has to be defined befor importing the <a class="el" href="_shellminat
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SHELLMINATOR_VERSION&#160;&#160;&#160;&quot;V0.1A&quot;</td>
+          <td class="memname">#define SHELLMINATOR_VERSION&#160;&#160;&#160;&quot;1.1.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">

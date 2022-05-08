@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['shellminator_48',['Shellminator',['../class_shellminator.html',1,'']]]
+  ['shellminator_58',['Shellminator',['../class_shellminator.html',1,'']]],
+  ['shellminatorchannel_59',['shellminatorChannel',['../classshellminator_channel.html',1,'']]]
 ];
