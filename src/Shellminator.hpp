@@ -72,7 +72,7 @@ SOFTWARE.
 /// Definition of the maximum length of each command
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
 #ifndef SHELLMINATOR_BUFF_LEN
-#define SHELLMINATOR_BUFF_LEN 10
+#define SHELLMINATOR_BUFF_LEN 20
 #endif
 
 /// Definition of the maximum length of the previous command memory
