@@ -1,0 +1,48 @@
+#######################################
+# Colors for Commander-API
+#######################################
+# Class
+#######################################
+
+Shellminator	                    KEYWORD1
+shellminatorChannel               KEYWORD1
+shellminatorArduinoSerialChannel  KEYWORD1
+
+#######################################
+# Methods and Functions
+#######################################
+
+addExecFunc               KEYWORD2
+begin                     KEYWORD2
+sendBackspace             KEYWORD2
+clear                     KEYWORD2
+update                    KEYWORD2
+setTerminalCharacterColor KEYWORD2
+drawLogo                  KEYWORD2
+setBannerText             KEYWORD2
+attachLogo                KEYWORD2
+overrideUpArrow           KEYWORD2
+overrideDownArrow         KEYWORD2
+overrideLeftArrow         KEYWORD2
+overrideRightArrow        KEYWORD2
+overrideAbortKey          KEYWORD2
+freeUpArrow               KEYWORD2
+freeDownArrow             KEYWORD2
+freeLeftArrow             KEYWORD2
+freeRightArrow            KEYWORD2
+freeAbortKey              KEYWORD2
+attachCommander           KEYWORD2
+
+#######################################
+# Structures
+#######################################
+
+API_t               KEYWORD2
+
+#######################################
+# Constants
+#######################################
+
+COMMANDER_MAX_COMMAND_SIZE      LITERAL1
+COMMAND_PRINTF_BUFF_LEN         LITERAL1
+version                         LITERAL1

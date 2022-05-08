@@ -1,4 +1,4 @@
-# Shellminator
+@mainpage Shellminator library
 
 Shellminator is a simple to use terminal interface library. You can use it with any __VT-100__
 terminal emulator like [PuTTY](https://www.putty.org/), [Terraterm](https://ttssh2.osdn.jp/index.html.en) or [minicom](https://linux.die.net/man/1/minicom).
@@ -7,7 +7,7 @@ Shellminator has command history support, that means you can browse your previou
 The library is Arduino compatible out of the box, but if you want to use it with other platforms,
 you can do that in Shellminator-IO source files.
 
-__Key changes in V1.1:__
+__Key changes in V1.1.X:__
 * Full arrow key support.
 * Delet key functionality.
 * Abort key( ctrl+c ) functionality.
@@ -17,7 +17,7 @@ __Key changes in V1.1:__
     * Command highlight.
 
 ## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :coffee: :coffee: :coffee:
+If this project help you reduce time to develop, you can give me a cup of coffee \emoji :coffee: \emoji :coffee: \emoji :coffee:
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=YFGZD78H6K2CS)
 
@@ -29,6 +29,6 @@ Please make sure to update tests as appropriate.
 ## License & copyright
 © Daniel Hajnal
 
-:email: hajnal.daniel96@gmail.com
+\emoji :email: hajnal.daniel96@gmail.com
 
-Licensed under the [MIT License](LICENSE).
+Licensed under the __MIT__ License.
