@@ -211,7 +211,19 @@ void Shellminator::redrawLine(){
 
   // Print all characters.
   for( i = 0; i < cmd_buff_cntr; i++ ){
+
+    #ifdef COMMANDER_API_VERSION
+    // If a space character is found, we have to change
+    // back the color to white for the arguments.
+    if( cmd_buff[ 0 ][ i ] == ' ' ){
+
+      setTerminalCharacterColor( REGULAR, WHITE );
+
+    }
+    #endif
+
     channel -> print( cmd_buff[ 0 ][ i ] );
+
   }
 
   // Step left with the terminal cursor to match the
@@ -224,6 +236,12 @@ void Shellminator::redrawLine(){
     channel -> print( 'D' );  // Left.
 
   }
+
+  // At the end no matter what we have to change back
+  // the terminal font to white.
+  #ifdef COMMANDER_API_VERSION
+  setTerminalCharacterColor( REGULAR, WHITE );
+  #endif
   
 }
 
