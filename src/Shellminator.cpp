@@ -242,7 +242,7 @@ void Shellminator::redrawLine(){
   #ifdef COMMANDER_API_VERSION
   setTerminalCharacterColor( REGULAR, WHITE );
   #endif
-  
+
 }
 
 void Shellminator::process( char new_char ) {
@@ -536,7 +536,7 @@ void Shellminator::process( char new_char ) {
           break;
 
         }
-        
+
         // Check if we can move to right.
         if( cursor < cmd_buff_cntr ){
 
@@ -549,7 +549,7 @@ void Shellminator::process( char new_char ) {
           cursor++;
 
         }
-        
+
         // We just simply reset the state-machine.
         escape_state = 0;
 
@@ -567,7 +567,7 @@ void Shellminator::process( char new_char ) {
           break;
 
         }
-        
+
         // Check if we can move to left.
         if( cursor > 0 ){
 
@@ -766,7 +766,7 @@ void Shellminator::process( char new_char ) {
 
     cursor = 0;
     cmd_buff_cntr = 0;
-    
+
     return;
 
   }
@@ -969,7 +969,7 @@ void Shellminator::update() {
       // If Commander responds with a non-null pointer, it means
       // that we have a mach.
       if( commandAddress ){
-    
+
         commandFound = true;
 
       }
@@ -997,6 +997,12 @@ void Shellminator::update() {
 
 void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   channel -> write( 27 );
   channel -> print( '[' );
@@ -1008,6 +1014,12 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 }
 
 void Shellminator::setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color ){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
 
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   serialPort -> write( 27 );

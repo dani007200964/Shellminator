@@ -90,7 +90,7 @@ SOFTWARE.
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "1.1.0"
+#define SHELLMINATOR_VERSION "1.1.1"
 
 /// Color and style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
@@ -366,6 +366,11 @@ public:
   /// @param ecc Error correction level.
   /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
   void generateQRText( const char* text, enum qrcodegen_Ecc ecc );
+
+  /// This flag enables or disables character formatting.
+  /// It can be usefull when VT100 format parser is not
+  /// available on the host device.
+  bool enableFormatting = true;
 
   #endif
 

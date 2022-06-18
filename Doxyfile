@@ -38,7 +38,7 @@ PROJECT_NAME           = Shellminator
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = V0.2A
+PROJECT_NUMBER         = V1.1.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -51,14 +51,14 @@ PROJECT_BRIEF          = "Shellminator is a simplified VT100 compatible iinterfa
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = C:/Users/dani0/Documents/Programok/Shellminator/Doc/images/logo.PNG
+PROJECT_LOGO           = C:/Users/dani0/Documents/Programok/Shellminator/docs/images/logo.PNG
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = Doc
+OUTPUT_DIRECTORY       = docs
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -844,8 +844,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = C:\Users\dani0\Documents\Programok\Shellminator\src \
-                         Doc/markdown_pages
+INPUT                  = src \
+                         docs/markdown_pages
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -986,7 +986,7 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = Doc/images
+IMAGE_PATH             = docs/images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1230,7 +1230,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = Doc/Style/header.html
+HTML_HEADER            = docs/Style/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1265,9 +1265,9 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = Doc/Style/custom.css \
-                         Doc/Style/doxygen-awesome.css \
-                         Doc/Style/doxygen-awesome-sidebar-only.css
+HTML_EXTRA_STYLESHEET  = docs/Style/custom.css \
+                         docs/Style/doxygen-awesome.css \
+                         docs/Style/doxygen-awesome-sidebar-only.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note

@@ -48,7 +48,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
-   &#160;<span id="projectnumber">V1.1.0</span>
+   &#160;<span id="projectnumber">V1.1.1</span>
    </div>
    <div id="projectbrief">Shellminator is a simplified VT100 compatible iinterface for c++ projects</div>
   </td>
@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_BUFF_LEN</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">   75</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_BUFF_LEN 10</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">   75</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_BUFF_LEN 20</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_BUFF_DIM</span></div>
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">   89</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_BANNER_LEN 20</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">   93</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_VERSION &quot;1.1.0&quot;</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">   93</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_VERSION &quot;1.1.1&quot;</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifndef SHELLMINATOR_LOGO_FONT_STYLE</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="_shellminator_8hpp.html#ad68a8f3b92c8c43683e8f9d24279dbf8">   98</a></span>&#160;<span class="preprocessor">#define SHELLMINATOR_LOGO_FONT_STYLE BOLD</span></div>
@@ -292,77 +292,79 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <span class="keywordtype">void</span> generateQRText( <span class="keyword">const</span> <span class="keywordtype">char</span>* text, <span class="keyword">enum</span> qrcodegen_Ecc ecc );</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="keywordtype">bool</span> enableFormatting = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordtype">char</span> *logo = NULL;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  void( *execution_fn )( <span class="keywordtype">char</span>* );</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;  <span class="keywordtype">char</span> cmd_buff[ <a class="code" href="_shellminator_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a> ][ <a class="code" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ] = { { 0 } };</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  uint32_t cmd_buff_dim = 1;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  uint32_t cmd_buff_cntr = 0;</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  uint32_t cursor = 0;</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  uint32_t escape_state = 0;</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  <span class="keywordtype">char</span> banner[ <a class="code" href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a> ] = { <span class="charliteral">&#39;\0&#39;</span> };</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;  void( *upArrowOverrideFunc )( void )    = NULL;</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  void( *downArrowOverrideFunc )( void )  = NULL;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;  void( *leftArrowOverrideFunc )( void )  = NULL;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;  void( *rightArrowOverrideFunc )( void ) = NULL;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  void( *abortKeyFunc )( void )           = NULL;</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  <span class="keywordtype">void</span> process( <span class="keywordtype">char</span> new_char );</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  <span class="keywordtype">void</span> printBanner();</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;  <span class="keywordtype">void</span> redrawLine();</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  <span class="comment">//---- Communication channels ----//</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;  <span class="keywordtype">char</span> *logo = NULL;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  void( *execution_fn )( <span class="keywordtype">char</span>* );</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  <span class="keywordtype">char</span> cmd_buff[ <a class="code" href="_shellminator_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a> ][ <a class="code" href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ] = { { 0 } };</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;  uint32_t cmd_buff_dim = 1;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;  uint32_t cmd_buff_cntr = 0;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  uint32_t cursor = 0;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  uint32_t escape_state = 0;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  <span class="keywordtype">char</span> banner[ <a class="code" href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a> ] = { <span class="charliteral">&#39;\0&#39;</span> };</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  void( *upArrowOverrideFunc )( void )    = NULL;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  void( *downArrowOverrideFunc )( void )  = NULL;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;  void( *leftArrowOverrideFunc )( void )  = NULL;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  void( *rightArrowOverrideFunc )( void ) = NULL;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  void( *abortKeyFunc )( void )           = NULL;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;  <span class="keywordtype">void</span> process( <span class="keywordtype">char</span> new_char );</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  <span class="keywordtype">void</span> printBanner();</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  <a class="code" href="classshellminator_channel.html">shellminatorChannel</a> defaultChannel;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  <span class="keywordtype">void</span> redrawLine();</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="preprocessor">  #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;  shellminatorArduinoSerialChannel arduinoSerialChannel;</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  <span class="comment">//---- Communication channels ----//</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  <a class="code" href="classshellminator_channel.html">shellminatorChannel</a> defaultChannel;</div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    <a class="code" href="classshellminator_channel.html">shellminatorChannel</a> *channel = &amp;defaultChannel;</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;  <span class="comment">//---- Commander-API support specific part ----//</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="preprocessor">  #ifdef COMMANDER_API_VERSION</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;  Commander* commander = NULL;</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;  uint32_t commandCheckTimerStart = 0;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;  <span class="keywordtype">bool</span> commandChecked = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;  <span class="keywordtype">bool</span> commandFound = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;  <span class="comment">// QR-code configuration specific parts.</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="preprocessor">  #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;  shellminatorArduinoSerialChannel arduinoSerialChannel;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <a class="code" href="classshellminator_channel.html">shellminatorChannel</a> *channel = &amp;defaultChannel;</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;  <span class="comment">//---- Commander-API support specific part ----//</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="preprocessor">  #ifdef COMMANDER_API_VERSION</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;  Commander* commander = NULL;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;  uint32_t commandCheckTimerStart = 0;</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;  <span class="keywordtype">bool</span> commandChecked = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;  <span class="keywordtype">bool</span> commandFound = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;  uint8_t qr_data[ qrcodegen_BUFFER_LEN_MAX ];</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;  uint8_t qr_tempBuff[ qrcodegen_BUFFER_LEN_MAX ];</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; </div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;  <span class="comment">// QR-code configuration specific parts.</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT</span></div>
 <div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;};</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;  uint8_t qr_data[ qrcodegen_BUFFER_LEN_MAX ];</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;  uint8_t qr_tempBuff[ qrcodegen_BUFFER_LEN_MAX ];</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;};</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclassshellminator_channel_html"><div class="ttname"><a href="classshellminator_channel.html">shellminatorChannel</a></div><div class="ttdef"><b>Definition:</b> Shellminator-IO.hpp:43</div></div>
@@ -370,24 +372,24 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36">Shellminator::CYAN</a></div><div class="ttdeci">@ CYAN</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:125</div></div>
 <div class="ttc" id="a_shellminator_8hpp_html_a43e8d7753b97ae4dc5423d70e29ec750"><div class="ttname"><a href="_shellminator_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BANNER_LEN</div><div class="ttdoc">Maximum length of the banner text.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:89</div></div>
 <div class="ttc" id="aclass_shellminator_html_ae6331836254886ef6cd4293fc5572b3c"><div class="ttname"><a href="class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c">Shellminator::version</a></div><div class="ttdeci">static const char * version</div><div class="ttdoc">String that holds the version information.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:145</div></div>
-<div class="ttc" id="aclass_shellminator_html_a4b2f5c4c94e62ce7d833eac3cf1fd05a"><div class="ttname"><a href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">Shellminator::freeAbortKey</a></div><div class="ttdeci">void freeAbortKey()</div><div class="ttdoc">Reset abort key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:883</div></div>
+<div class="ttc" id="aclass_shellminator_html_a4b2f5c4c94e62ce7d833eac3cf1fd05a"><div class="ttname"><a href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">Shellminator::freeAbortKey</a></div><div class="ttdeci">void freeAbortKey()</div><div class="ttdoc">Reset abort key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:901</div></div>
 <div class="ttc" id="aclass_shellminator_html_a274ba9dece047e5d4b3c23cae6c91317"><div class="ttname"><a href="class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317">Shellminator::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clear screen.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:109</div></div>
 <div class="ttc" id="aclass_shellminator_html_add7e945a09b5b74a48d475e16832c1a1"><div class="ttname"><a href="class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1">Shellminator::setBannerText</a></div><div class="ttdeci">void setBannerText(char *banner_p)</div><div class="ttdoc">This function sets the banner text.</div></div>
-<div class="ttc" id="aclass_shellminator_html_ac1f32ea578a68060cea634480fb2b9bc"><div class="ttname"><a href="class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc">Shellminator::overrideLeftArrow</a></div><div class="ttdeci">void overrideLeftArrow(void(*func)(void))</div><div class="ttdoc">Override left arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:841</div></div>
+<div class="ttc" id="aclass_shellminator_html_ac1f32ea578a68060cea634480fb2b9bc"><div class="ttname"><a href="class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc">Shellminator::overrideLeftArrow</a></div><div class="ttdeci">void overrideLeftArrow(void(*func)(void))</div><div class="ttdoc">Override left arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:859</div></div>
 <div class="ttc" id="aclass_shellminator_html_a403b9dd14b8f241c8ca97a6820b3da12"><div class="ttname"><a href="class_shellminator.html#a403b9dd14b8f241c8ca97a6820b3da12">Shellminator::addExecFunc</a></div><div class="ttdeci">void addExecFunc(void(*execution_fn_p)(char *))</div><div class="ttdoc">Execution function adder function.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:102</div></div>
 <div class="ttc" id="aclass_shellminator_html_a5f76bb962817d2a5fbbe626036dfbda1"><div class="ttname"><a href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">Shellminator::sendBackspace</a></div><div class="ttdeci">void sendBackspace()</div><div class="ttdoc">Sends a backspace.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:176</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:122</div></div>
 <div class="ttc" id="a_shellminator_8hpp_html_a3ddabc8c441626dba3679faf61863c5f"><div class="ttname"><a href="_shellminator_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_LEN</div><div class="ttdoc">+---— Costum configuration ---—+ | | | This is where you have to config | | your defines!...</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:75</div></div>
 <div class="ttc" id="aclass_shellminator_html_ac02b3349caba171c2bbf7e518497bc55"><div class="ttname"><a href="class_shellminator.html#ac02b3349caba171c2bbf7e518497bc55">Shellminator::attachLogo</a></div><div class="ttdeci">void attachLogo(char *logo_p)</div><div class="ttdoc">This function attaches a logo to the terminal.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:90</div></div>
-<div class="ttc" id="aclass_shellminator_html_a4a40597483618a8a05e1b787d81bf50b"><div class="ttname"><a href="class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b">Shellminator::overrideRightArrow</a></div><div class="ttdeci">void overrideRightArrow(void(*func)(void))</div><div class="ttdoc">Override right arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:847</div></div>
+<div class="ttc" id="aclass_shellminator_html_a4a40597483618a8a05e1b787d81bf50b"><div class="ttname"><a href="class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b">Shellminator::overrideRightArrow</a></div><div class="ttdeci">void overrideRightArrow(void(*func)(void))</div><div class="ttdoc">Override right arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:865</div></div>
 <div class="ttc" id="a_shellminator-_settings_8hpp_html"><div class="ttname"><a href="_shellminator-_settings_8hpp.html">Shellminator-Settings.hpp</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a741832c6120f84a0f677fcde2cbb4929"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a741832c6120f84a0f677fcde2cbb4929">Shellminator::LOW_INTENSITY</a></div><div class="ttdeci">@ LOW_INTENSITY</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:135</div></div>
-<div class="ttc" id="aclass_shellminator_html_a2e054598bd72a647809a9b041af10631"><div class="ttname"><a href="class_shellminator.html#a2e054598bd72a647809a9b041af10631">Shellminator::overrideUpArrow</a></div><div class="ttdeci">void overrideUpArrow(void(*func)(void))</div><div class="ttdoc">Override up arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:829</div></div>
+<div class="ttc" id="aclass_shellminator_html_a2e054598bd72a647809a9b041af10631"><div class="ttname"><a href="class_shellminator.html#a2e054598bd72a647809a9b041af10631">Shellminator::overrideUpArrow</a></div><div class="ttdeci">void overrideUpArrow(void(*func)(void))</div><div class="ttdoc">Override up arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:847</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:134</div></div>
 <div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a7cfb4ffe2458ccd1d1363e09c1b05c10"><div class="ttname"><a href="class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10">Shellminator::overrideDownArrow</a></div><div class="ttdeci">void overrideDownArrow(void(*func)(void))</div><div class="ttdoc">Override down arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:835</div></div>
-<div class="ttc" id="aclass_shellminator_html_adab0caaef03f45fdba6dde0d5e0f9a6e"><div class="ttname"><a href="class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e">Shellminator::drawLogo</a></div><div class="ttdeci">void drawLogo()</div><div class="ttdoc">Draws the startup logo.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:1004</div></div>
-<div class="ttc" id="aclass_shellminator_html_acdbd56dfa0dfb9dd509420d25d9c5cd9"><div class="ttname"><a href="class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9">Shellminator::setTerminalCharacterColor</a></div><div class="ttdeci">void setTerminalCharacterColor(uint8_t style, uint8_t color)</div><div class="ttdoc">Bring some color into your code.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:980</div></div>
+<div class="ttc" id="aclass_shellminator_html_a7cfb4ffe2458ccd1d1363e09c1b05c10"><div class="ttname"><a href="class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10">Shellminator::overrideDownArrow</a></div><div class="ttdeci">void overrideDownArrow(void(*func)(void))</div><div class="ttdoc">Override down arrow key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:853</div></div>
+<div class="ttc" id="aclass_shellminator_html_adab0caaef03f45fdba6dde0d5e0f9a6e"><div class="ttname"><a href="class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e">Shellminator::drawLogo</a></div><div class="ttdeci">void drawLogo()</div><div class="ttdoc">Draws the startup logo.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:1034</div></div>
+<div class="ttc" id="aclass_shellminator_html_acdbd56dfa0dfb9dd509420d25d9c5cd9"><div class="ttname"><a href="class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9">Shellminator::setTerminalCharacterColor</a></div><div class="ttdeci">void setTerminalCharacterColor(uint8_t style, uint8_t color)</div><div class="ttdoc">Bring some color into your code.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:998</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653abd42c47d8515509b138a757070d80a61"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653abd42c47d8515509b138a757070d80a61">Shellminator::REVERSE</a></div><div class="ttdeci">@ REVERSE</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:139</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a55effcd5c733baa0218508d7148803f9"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a55effcd5c733baa0218508d7148803f9">Shellminator::BACKGROUND</a></div><div class="ttdeci">@ BACKGROUND</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:140</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:123</div></div>
@@ -395,20 +397,20 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp_source.html',''); i
 <div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:111</div></div>
 <div class="ttc" id="aclass_shellminator_html_a0262b7bdcb0f22a7f0d17f8ca76fc35d"><div class="ttname"><a href="class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d">Shellminator::begin</a></div><div class="ttdeci">void begin(char *banner_p)</div><div class="ttdoc">Shellminator initialization function.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:138</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9">Shellminator::INVISIBLE</a></div><div class="ttdeci">@ INVISIBLE</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:141</div></div>
-<div class="ttc" id="aclass_shellminator_html_ad50683035772f117ffd9f9f05563397c"><div class="ttname"><a href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">Shellminator::freeRightArrow</a></div><div class="ttdeci">void freeRightArrow()</div><div class="ttdoc">Reset right arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:877</div></div>
+<div class="ttc" id="aclass_shellminator_html_ad50683035772f117ffd9f9f05563397c"><div class="ttname"><a href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">Shellminator::freeRightArrow</a></div><div class="ttdeci">void freeRightArrow()</div><div class="ttdoc">Reset right arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:895</div></div>
 <div class="ttc" id="a_shellminator_8hpp_html_ac999ba5b43c5bb3a64cdfea63b279561"><div class="ttname"><a href="_shellminator_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_DIM</div><div class="ttdoc">Definition of the maximum length of the previous command memory.</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:83</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:121</div></div>
-<div class="ttc" id="aclass_shellminator_html_a3f8933d5b0360a3f4b3bff32e12a77d1"><div class="ttname"><a href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">Shellminator::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:889</div></div>
+<div class="ttc" id="aclass_shellminator_html_a3f8933d5b0360a3f4b3bff32e12a77d1"><div class="ttname"><a href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">Shellminator::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:907</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a25296a5c448684556d23c18c8da1017c"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a></div><div class="ttdeci">@ BLINKING</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:138</div></div>
-<div class="ttc" id="aclass_shellminator_html_abad556405bac943db348a5bbbb814c5b"><div class="ttname"><a href="class_shellminator.html#abad556405bac943db348a5bbbb814c5b">Shellminator::overrideAbortKey</a></div><div class="ttdeci">void overrideAbortKey(void(*func)(void))</div><div class="ttdoc">Override abort key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:853</div></div>
+<div class="ttc" id="aclass_shellminator_html_abad556405bac943db348a5bbbb814c5b"><div class="ttname"><a href="class_shellminator.html#abad556405bac943db348a5bbbb814c5b">Shellminator::overrideAbortKey</a></div><div class="ttdeci">void overrideAbortKey(void(*func)(void))</div><div class="ttdoc">Override abort key behaviour.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:871</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca335a4232137a196bf2f2aec2359ac6ed"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca335a4232137a196bf2f2aec2359ac6ed">Shellminator::BLACK</a></div><div class="ttdeci">@ BLACK</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:119</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator::MAGENTA</a></div><div class="ttdeci">@ MAGENTA</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:124</div></div>
 <div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a95d8941aa686aa5242ef94236aea8644"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a95d8941aa686aa5242ef94236aea8644">Shellminator::UNDERLINE</a></div><div class="ttdeci">@ UNDERLINE</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:137</div></div>
-<div class="ttc" id="aclass_shellminator_html_a7861294e2b29a3880a89566415fd2e18"><div class="ttname"><a href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">Shellminator::freeUpArrow</a></div><div class="ttdeci">void freeUpArrow()</div><div class="ttdoc">Reset up arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:859</div></div>
-<div class="ttc" id="aclass_shellminator_html_ae3d4f4df39fb1f5197e3f07f83eac6bd"><div class="ttname"><a href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">Shellminator::freeDownArrow</a></div><div class="ttdeci">void freeDownArrow()</div><div class="ttdoc">Reset down arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:865</div></div>
+<div class="ttc" id="aclass_shellminator_html_a7861294e2b29a3880a89566415fd2e18"><div class="ttname"><a href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">Shellminator::freeUpArrow</a></div><div class="ttdeci">void freeUpArrow()</div><div class="ttdoc">Reset up arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:877</div></div>
+<div class="ttc" id="aclass_shellminator_html_ae3d4f4df39fb1f5197e3f07f83eac6bd"><div class="ttname"><a href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">Shellminator::freeDownArrow</a></div><div class="ttdeci">void freeDownArrow()</div><div class="ttdoc">Reset down arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:883</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:120</div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> Shellminator.hpp:126</div></div>
-<div class="ttc" id="aclass_shellminator_html_a2ce305a096b98ecd88c2f8c82aa248ba"><div class="ttname"><a href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">Shellminator::freeLeftArrow</a></div><div class="ttdeci">void freeLeftArrow()</div><div class="ttdoc">Reset left arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:871</div></div>
+<div class="ttc" id="aclass_shellminator_html_a2ce305a096b98ecd88c2f8c82aa248ba"><div class="ttname"><a href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">Shellminator::freeLeftArrow</a></div><div class="ttdeci">void freeLeftArrow()</div><div class="ttdoc">Reset left arrow key functionality to default.</div><div class="ttdef"><b>Definition:</b> Shellminator.cpp:889</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
