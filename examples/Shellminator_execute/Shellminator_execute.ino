@@ -5,7 +5,7 @@
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
  * Modified 2022.05.08
- * 
+ *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example demonstrates how to create and use an execution function.
  * The executin function just prints out the command, but not execute it.
@@ -20,10 +20,10 @@
 // when you press the enter key.
 void executionFunction( char* command );
 
-// Create a Shellminator object, and initialise it to use Serial
+// Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial, executionFunction );
 
-const char logo[] = 
+const char logo[] =
 
 "   _____ __         ____          _             __            \r\n"
 "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
@@ -36,7 +36,7 @@ const char logo[] =
 
 void setup() {
 
-  // Initialise Serial with 115200 baudrate.
+  // Initialize Serial with 115200 baudrate.
   Serial.begin( 115200 );
 
   // Wait for connection.
@@ -51,13 +51,13 @@ void setup() {
   // Print start message
   Serial.println( "Program begin..." );
 
-  // Initialise shell object.
+  // initialize shell object.
   shell.begin( "arnold" );
 
 }
 
 void loop() {
-  
+
   shell.update();
 
 }
@@ -67,5 +67,5 @@ void executionFunction( char* command ){
   Serial.println( "Execution function called!" );
   Serial.print( "Received command: " );
   Serial.println( command );
-  
+
 }

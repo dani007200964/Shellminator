@@ -5,7 +5,7 @@
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
  * Modified 2022.05.08
- * 
+ *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup forShellminator. It will create an
  * interactive interface, but it does not execute any command.
@@ -15,11 +15,11 @@
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
 
-// Create a Shellminator object, and initialise it to use Serial
+// Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 
 
-const char logo[] = 
+const char logo[] =
 
 "   _____ __         ____          _             __            \r\n"
 "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
@@ -32,7 +32,7 @@ const char logo[] =
 
 void setup() {
 
-  // Initialise Serial with 115200 baudrate.
+  // Initialize Serial with 115200 baudrate.
   Serial.begin( 115200 );
 
   // Wait for connection.
@@ -47,13 +47,13 @@ void setup() {
   // Print start message
   Serial.println( "Program begin..." );
 
-  // Initialise shell object.
+  // initialize shell object.
   shell.begin( "arnold" );
 
 }
 
 void loop() {
-  
+
   shell.update();
 
 }

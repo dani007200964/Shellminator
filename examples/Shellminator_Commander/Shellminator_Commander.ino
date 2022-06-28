@@ -5,7 +5,7 @@
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
  * Modified 2022.05.08
- * 
+ *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example demonstrates how to attach a Commander-API based command
  * parser to a Shellminator object.
@@ -19,12 +19,12 @@
 #include "Commander-API.hpp"
 #include "Commander-IO.hpp"
 
-// Create a Shellminator object, and initialise it to use Serial
+// Create a Shellminator object, and initialize it to use Serial
 // If we use Commander, we don't need an execution function,
 // because Shellminator internally manages that.
 Shellminator shell( &Serial );
 
-const char logo[] = 
+const char logo[] =
 
 "   _____ __         ____          _             __            \r\n"
 "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
@@ -38,7 +38,7 @@ const char logo[] =
 // We have to create an object from Commander class.
 Commander commander;
 
-// We have to create the prototypes functions for our commands.
+// We have to create the prototype functions for our commands.
 // The arguments has to be the same for all command functions.
 void cat_func( char *args, commandResponse *response );
 void dog_func( char *args, commandResponse *response );
@@ -59,7 +59,7 @@ void setup() {
   pinMode( LED_BUILTIN, OUTPUT );
   digitalWrite( LED_BUILTIN, 0 );
 
-  // Initialise Serial with 115200 baudrate.
+  // initialize Serial with 115200 baudrate.
   Serial.begin( 115200 );
 
   // Wait for connection.
@@ -79,8 +79,8 @@ void setup() {
   // phase. In this example we will use Serial for this.
   commander.attachDebugChannel( &Serial );
 
-  // At start Commander des not know anything about our commands.
-  // We have to attach the API_tree array from the previus steps
+  // At start, Commander does not know anything about our commands.
+  // We have to attach the API_tree array from the previous steps
   // to Commander to work properly.
   commander.attachTree( API_tree );
 
@@ -89,13 +89,13 @@ void setup() {
 
   shell.attachCommander( &commander );
 
-  // Initialise shell object.
+  // Initialize shell object.
   shell.begin( "arnold" );
 
 }
 
 void loop() {
-  
+
   shell.update();
 
 }
@@ -142,7 +142,7 @@ void sum_func(char *args, commandResponse *response )
 
   argResult = sscanf( args, "%d %d", &a, &b );
 
-  // We have to check that we parsed succesfully the two
+  // We have to check that we parsed successfully  the two
   // numbers from the argument string.
   if( argResult != 2 ){
 
@@ -152,7 +152,7 @@ void sum_func(char *args, commandResponse *response )
 
     // Sadly we have to stop the command execution and return.
     return;
-    
+
   }
 
   // Calculate the sum.

@@ -168,7 +168,7 @@ public:
   /// Shellminator initialization function
   ///
   /// This function initializes the object and prints the startup logo.
-  /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters ar truncated!
+  /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
   /// @warning You have to call this function before all other member functions!
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   void begin( char* banner_p );
@@ -176,7 +176,7 @@ public:
   /// Shellminator initialization function
   ///
   /// This function initializes the object and prints the startup logo.
-  /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters ar truncated!
+  /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
   /// @warning You have to call this function before all other member functions!
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   void begin( const char* banner_p );
