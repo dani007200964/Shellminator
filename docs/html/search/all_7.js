@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['low_5fintensity_21',['LOW_INTENSITY',['../class_shellminator.html#aed71921772c5914597df4e0367edf653a741832c6120f84a0f677fcde2cbb4929',1,'Shellminator']]]
+  ['invisible_0',['INVISIBLE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9',1,'Shellminator']]],
+  ['italic_1',['ITALIC',['../class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258',1,'Shellminator']]]
 ];

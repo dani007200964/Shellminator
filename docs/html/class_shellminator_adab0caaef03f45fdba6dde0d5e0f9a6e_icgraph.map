@@ -1,0 +1,4 @@
+<map id="Shellminator::drawLogo" name="Shellminator::drawLogo">
+<area shape="rect" id="node1" title="Draws the startup logo." alt="" coords="187,5,344,31"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="5,5,139,31"/>
+</map>

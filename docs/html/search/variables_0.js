@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_91',['version',['../class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c',1,'Shellminator']]]
+  ['enableformatting_0',['enableFormatting',['../class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2',1,'Shellminator']]]
 ];

@@ -1,8 +1,7 @@
 var annotated_dup =
 [
-    [ "Donation", "index.html#autotoc_md0", null ],
-    [ "Contributing", "index.html#autotoc_md1", null ],
-    [ "License & copyright", "index.html#autotoc_md2", null ],
     [ "Shellminator", "class_shellminator.html", "class_shellminator" ],
-    [ "shellminatorChannel", "classshellminator_channel.html", "classshellminator_channel" ]
+    [ "shellminatorArduinoSerialChannel", "classshellminator_arduino_serial_channel.html", "classshellminator_arduino_serial_channel" ],
+    [ "shellminatorChannel", "classshellminator_channel.html", "classshellminator_channel" ],
+    [ "shellminatorWiFiClientChannel", "classshellminator_wi_fi_client_channel.html", "classshellminator_wi_fi_client_channel" ]
 ];

@@ -27,19 +27,23 @@ SOFTWARE.
 
  */
 
-:root {
+html {
     /* side nav width. MUST be = `TREEVIEW_WIDTH`.
-     * Make sure it is wide enought to contain the page title (logo + title + version)
+     * Make sure it is wide enough to contain the page title (logo + title + version)
      */
-    --side-nav-fixed-width: 350px;
+    --side-nav-fixed-width: 335px;
     --menu-display: none;
 
     --top-height: 120px;
 }
 
+#projectname {
+    white-space: nowrap;
+}
+
 
 @media screen and (min-width: 768px) {
-    :root {
+    html {
         --searchbar-background: var(--page-background-color);
     }
 
@@ -47,6 +51,7 @@ SOFTWARE.
         min-width: var(--side-nav-fixed-width);
         max-width: var(--side-nav-fixed-width);
         top: var(--top-height);
+        overflow: visible;
     }
 
     #nav-tree, #side-nav {
@@ -63,10 +68,12 @@ SOFTWARE.
         height: var(--top-height);
         margin-bottom: calc(0px - var(--top-height));
         max-width: var(--side-nav-fixed-width);
+        overflow: hidden;
         background: var(--side-nav-background);
     }
     #main-nav {
         float: left;
+        padding-right: 0;
     }
 
     .ui-resizable-handle {
@@ -104,5 +111,3 @@ SOFTWARE.
         right: auto;
     }
 }
-
-

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['magenta_22',['MAGENTA',['../class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630',1,'Shellminator']]],
-  ['main_5fpage_2emd_23',['main_page.md',['../main__page_8md.html',1,'']]]
+  ['low_5fintensity_0',['LOW_INTENSITY',['../class_shellminator.html#aed71921772c5914597df4e0367edf653a741832c6120f84a0f677fcde2cbb4929',1,'Shellminator']]]
 ];

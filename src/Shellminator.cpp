@@ -87,6 +87,53 @@ Shellminator::Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p 
 
 #endif
 
+#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+Shellminator::Shellminator( WiFiClient *resp ) {
+
+  // Initialise the wifiChannel as communication channel.
+  wifiChannel.select( resp );
+  channel = &wifiChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+
+}
+
+Shellminator::Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) ) {
+
+  // Initialise the wifiChannel as communication channel.
+  wifiChannel.select( resp );
+  channel = &wifiChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // passing execution_fn_p to execution_fn
+  execution_fn = execution_fn_p;
+
+}
+
+#endif
+
+
 void Shellminator::attachLogo( char* logo_p ){
 
   logo = logo_p;
@@ -320,6 +367,14 @@ void Shellminator::process( char new_char ) {
         if( channel == &arduinoSerialChannel ){
 
           commander -> execute( cmd_buff[ 0 ], arduinoSerialChannel.getSerialObject() );
+
+        }
+        #endif
+
+        #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+        if( channel == &wifiChannel ){
+
+          commander -> execute( cmd_buff[ 0 ], wifiChannel.getClientObject() );
 
         }
         #endif
@@ -1014,12 +1069,6 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 }
 
 void Shellminator::setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color ){
-
-  if( !enableFormatting ){
-
-    return;
-
-  }
 
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   serialPort -> write( 27 );

@@ -42,6 +42,16 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+	#ifdef ESP8266
+	#include <ESP8266WiFi.h>
+	#endif
+
+	#ifdef ESP32
+	#include <WiFi.h>
+	#endif
+#endif
+
 #ifdef __has_include
   #if __has_include ("Commander-API.hpp")
     #include "Commander-API.hpp"
@@ -148,15 +158,30 @@ public:
   /// Shellminator Constructor
   ///
   /// Constructor for a Shellminator object.
-  /// @param SHELLMINATOR_SERIAL_CLASS pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
+  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
   Shellminator( HardwareSerial *serialPort_p );
 
   /// Shellminator Constructor
   ///
   /// Constructor for a Shellminator object with an execution function.
-  /// @param SHELLMINATOR_SERIAL_CLASS pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
+  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
   /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
   Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) );
+#endif
+
+#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  /// Shellminator Constructor
+  ///
+  /// Constructor for a Shellminator object.
+  /// @param resp pointer to a WiFiClient object.
+  Shellminator( WiFiClient *resp );
+
+  /// Shellminator Constructor
+  ///
+  /// Constructor for a Shellminator object with an execution function.
+  /// @param resp pointer to a WiFiClient object.
+  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
+  Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) );
 #endif
 
   /// Execution function adder function
@@ -322,6 +347,11 @@ public:
   /// function for the key, you have to call this function.
   void freeAbortKey();
 
+  /// This flag enables or disables character formatting.
+  /// It can be usefull when VT100 format parser is not
+  /// available on the host device.
+  bool enableFormatting = true;
+
   #ifdef COMMANDER_API_VERSION
 
   void attachCommander( Commander* commander_p );
@@ -367,13 +397,7 @@ public:
   /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
   void generateQRText( const char* text, enum qrcodegen_Ecc ecc );
 
-  /// This flag enables or disables character formatting.
-  /// It can be usefull when VT100 format parser is not
-  /// available on the host device.
-  bool enableFormatting = true;
-
   #endif
-
 
 private:
 
@@ -453,6 +477,11 @@ private:
   #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
   /// Arduino Hardware Serial as communication channel.
   shellminatorArduinoSerialChannel arduinoSerialChannel;
+  #endif
+
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  /// WiFi Client as communication channel.
+  shellminatorWiFiClientChannel wifiChannel;
   #endif
 
   /// Pointer to the communication class. By default

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['invisible_19',['INVISIBLE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9',1,'Shellminator']]],
-  ['italic_20',['ITALIC',['../class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258',1,'Shellminator']]]
+  ['getclientobject_0',['getClientObject',['../classshellminator_wi_fi_client_channel.html#af858e5b7a9189dc65fc2653cb32508a0',1,'shellminatorWiFiClientChannel']]],
+  ['getserialobject_1',['getSerialObject',['../classshellminator_arduino_serial_channel.html#aca8ef767160f1b3047d233d56a06a78f',1,'shellminatorArduinoSerialChannel']]],
+  ['green_2',['GREEN',['../class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77',1,'Shellminator']]]
 ];

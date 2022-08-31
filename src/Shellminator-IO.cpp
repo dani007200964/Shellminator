@@ -115,3 +115,85 @@ HardwareSerial* shellminatorArduinoSerialChannel::getSerialObject(){
 
 
 #endif
+
+#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+//----- Response for WiFi Client Class -----//
+
+void shellminatorWiFiClientChannel::select( WiFiClient *client_p ){
+
+	client = client_p;
+
+}
+
+int shellminatorWiFiClientChannel::available(){
+
+	if( client ) return client -> available();
+	return 0;
+
+}
+
+int shellminatorWiFiClientChannel::read(){
+
+	if( client ) return client -> read();
+	return -1;
+
+}
+
+int shellminatorWiFiClientChannel::peek(){
+
+	if( client ) return client -> peek();
+	return -1;
+
+}
+
+void shellminatorWiFiClientChannel::flush(){
+
+	if( client ) return client -> flush();
+
+}
+
+size_t shellminatorWiFiClientChannel::write( uint8_t b ){
+
+	if( client ) return client -> write( b );
+	return 0;
+
+}
+
+//---- print section ----//
+
+size_t shellminatorWiFiClientChannel::print( char c ){
+
+	if( client ) return client -> print( c );
+	return 0;
+
+}
+
+size_t shellminatorWiFiClientChannel::print( uint8_t b ){
+
+	if( client ) return client -> print( b );
+	return 0;
+
+}
+
+size_t shellminatorWiFiClientChannel::print( char *str ){
+
+	if( client ) return client -> print( str );
+	return 0;
+
+}
+
+size_t shellminatorWiFiClientChannel::print( const char *str ){
+
+	if( client ) return client -> print( str );
+	return 0;
+
+}
+
+WiFiClient* shellminatorWiFiClientChannel::getClientObject(){
+
+	return client;
+
+}
+
+#endif

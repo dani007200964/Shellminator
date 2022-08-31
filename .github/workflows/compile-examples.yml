@@ -1,0 +1,21 @@
+on:
+  - push
+  - pull_request
+
+jobs:
+  compile-examples:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        fqbn:
+          - arduino:avr:nano
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.fqbn }}
+
+          sketch-paths: |
+            - examples/Shellminator_execute
