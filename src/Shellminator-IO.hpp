@@ -60,6 +60,7 @@ SOFTWARE.
 /// usefull. To make them work, every function in this class
 /// has to be overrided to every peripherial, where it has
 /// to be used.
+/// @todo Arduino Leonardo, Micro Serial Class has to be added to the channels.
 class shellminatorChannel{
 
 public:
@@ -182,6 +183,79 @@ public:
 
 private:
   HardwareSerial *serialPort = NULL;
+
+};
+
+#endif
+
+#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+
+/// Shellminator channel class for Arduino Serial objects.
+class shellminatorArduino32U4SerialChannel : public shellminatorChannel{
+
+public:
+
+  /// Select Serial Port.
+  ///
+  /// Select a serial port to communicate with.
+  /// @note This function has to be called before other memeber functions!
+  void select( Serial_ *serialPort_p );
+
+  /// Available bytes in the channel.
+  ///
+  /// @returns The available bytes in the channel.
+  int    available() override;
+
+  /// Read one byte form the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+	int    read() override;
+
+  /// Peek the firtst byte from the channel.
+  ///
+  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+	int    peek() override;
+
+  /// Flush the channel.
+	void   flush() override;
+
+  /// Write one byte to the channel.
+  ///
+  /// @param b The value that has to be written to the channel.
+  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
+	size_t write( uint8_t b ) override;
+
+  /// Print one character to the channel.
+  ///
+  /// @param c The character that has to be printed to the channel.
+  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
+	size_t print( char c ) override;
+
+  /// Print one byte to the channel.
+  ///
+  /// @param b The value that has to be printed to the channel.
+  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
+  size_t print( uint8_t b );
+
+  /// Print c-string to the channel.
+  ///
+  /// @param str The string that has to be printed to the channel.
+  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
+	size_t print( char *str ) override;
+
+  /// Print c-string to the channel.
+  ///
+  /// @param str The string that has to be printed to the channel.
+  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
+	size_t print( const char *str ) override;
+
+  /// Get the address of the chosen Serial Port.
+  ///
+  /// @returns The address of the previously chosen Serial Port object.
+  Serial_* getSerialObject();
+
+private:
+  Serial_ *serialPort = NULL;
 
 };
 

@@ -169,6 +169,21 @@ public:
   Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) );
 #endif
 
+#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+  /// Shellminator Constructor
+  ///
+  /// Constructor for a Shellminator object.
+  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
+  Shellminator( Serial_ *serialPort_p );
+
+  /// Shellminator Constructor
+  ///
+  /// Constructor for a Shellminator object with an execution function.
+  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
+  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
+  Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char* ) );
+#endif
+
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
   /// Shellminator Constructor
   ///
@@ -477,6 +492,11 @@ private:
   #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
   /// Arduino Hardware Serial as communication channel.
   shellminatorArduinoSerialChannel arduinoSerialChannel;
+  #endif
+
+  #ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+  /// Arduino Hardware Serial as communication channel.
+  shellminatorArduino32U4SerialChannel arduino32U4SerialChannel;
   #endif
 
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT

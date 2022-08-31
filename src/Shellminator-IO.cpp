@@ -116,6 +116,89 @@ HardwareSerial* shellminatorArduinoSerialChannel::getSerialObject(){
 
 #endif
 
+#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+
+//----- Response for Arduino Serial Class -----//
+
+void shellminatorArduino32U4SerialChannel::select( Serial_ *serialPort_p ){
+
+	serialPort = serialPort_p;
+
+}
+
+int shellminatorArduino32U4SerialChannel::available(){
+
+	if( serialPort ) return serialPort -> available();
+	return 0;
+
+}
+
+int shellminatorArduino32U4SerialChannel::read(){
+
+	if( serialPort ) return serialPort -> read();
+	return -1;
+
+}
+
+int shellminatorArduino32U4SerialChannel::peek(){
+
+	if( serialPort ) return serialPort -> peek();
+	return -1;
+
+}
+
+void shellminatorArduino32U4SerialChannel::flush(){
+
+	if( serialPort ) return serialPort -> flush();
+
+}
+
+size_t shellminatorArduino32U4SerialChannel::write( uint8_t b ){
+
+
+	if( serialPort ) return serialPort -> write( b );
+	return 0;
+
+}
+
+size_t shellminatorArduino32U4SerialChannel::print( uint8_t b ){
+
+
+	if( serialPort ) return serialPort -> print( b );
+	return 0;
+
+}
+
+size_t shellminatorArduino32U4SerialChannel::print( char c ){
+
+	if( serialPort ) return serialPort -> print( (char)c );
+	return 0;
+
+}
+
+size_t shellminatorArduino32U4SerialChannel::print( char *str ){
+
+	if( serialPort ) return serialPort -> print( (char*)str );
+	return 0;
+
+}
+
+size_t shellminatorArduino32U4SerialChannel::print( const char *str ){
+
+	if( serialPort ) return serialPort -> print( (char*)str );
+	return 0;
+
+}
+
+Serial_* shellminatorArduino32U4SerialChannel::getSerialObject(){
+
+	return serialPort;
+
+}
+
+
+#endif
+
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
 //----- Response for WiFi Client Class -----//
