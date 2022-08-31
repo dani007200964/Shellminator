@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="classshellminator_wi_fi_client_channel.html#a5867715c3a458112689b2823149ec741" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classshellminator_wi_fi_client_channel.html#a5867715c3a458112689b2823149ec741" target="_top" xlink:title="Select WiFi Client.">
 <polygon fill="white" stroke="#666666" points="316,-30 167,-30 167,0 316,0 316,-30"/>
 <text text-anchor="start" x="175" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">shellminatorWiFiClientChannel</text>
 <text text-anchor="middle" x="241.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">::select</text>

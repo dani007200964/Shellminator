@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Select WiFi Client.">
 <polygon fill="#999999" stroke="#666666" points="316,-30 167,-30 167,0 316,0 316,-30"/>
 <text text-anchor="start" x="175" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">shellminatorWiFiClientChannel</text>
 <text text-anchor="middle" x="241.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">::select</text>

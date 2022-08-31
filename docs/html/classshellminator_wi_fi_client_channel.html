@@ -54,7 +54,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
    &#160;<span id="projectnumber">V1.1.1</span>
@@ -144,6 +144,7 @@ Collaboration diagram for shellminatorWiFiClientChannel:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5867715c3a458112689b2823149ec741"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_wi_fi_client_channel.html#a5867715c3a458112689b2823149ec741">select</a> (WiFiClient *client_p)</td></tr>
+<tr class="memdesc:a5867715c3a458112689b2823149ec741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select WiFi Client.  <a href="classshellminator_wi_fi_client_channel.html#a5867715c3a458112689b2823149ec741">More...</a><br /></td></tr>
 <tr class="separator:a5867715c3a458112689b2823149ec741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d92ab92cd343d45df318b8225dcefb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_wi_fi_client_channel.html#a0d92ab92cd343d45df318b8225dcefb0">available</a> () override</td></tr>
 <tr class="memdesc:a0d92ab92cd343d45df318b8225dcefb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="classshellminator_wi_fi_client_channel.html#a0d92ab92cd343d45df318b8225dcefb0">More...</a><br /></td></tr>
@@ -173,6 +174,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a12b651c0ed9c37d29d26f3c7e5f8ce4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print c-string to the channel.  <a href="classshellminator_wi_fi_client_channel.html#a12b651c0ed9c37d29d26f3c7e5f8ce4a">More...</a><br /></td></tr>
 <tr class="separator:a12b651c0ed9c37d29d26f3c7e5f8ce4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af858e5b7a9189dc65fc2653cb32508a0"><td class="memItemLeft" align="right" valign="top">WiFiClient *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_wi_fi_client_channel.html#af858e5b7a9189dc65fc2653cb32508a0">getClientObject</a> ()</td></tr>
+<tr class="memdesc:af858e5b7a9189dc65fc2653cb32508a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the address of the chosen WiFi Client.  <a href="classshellminator_wi_fi_client_channel.html#af858e5b7a9189dc65fc2653cb32508a0">More...</a><br /></td></tr>
 <tr class="separator:af858e5b7a9189dc65fc2653cb32508a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e481e54f73c055d3f7697a5e4aa7399"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">available</a> ()</td></tr>
 <tr class="memdesc:a1e481e54f73c055d3f7697a5e4aa7399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">More...</a><br /></td></tr>
@@ -230,7 +232,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Available bytes in the channel. </p>
-<dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. Because it is the base class, it returns 0. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">shellminatorChannel</a>.</p>
 
@@ -304,6 +306,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Get the address of the chosen WiFi Client. </p>
+<dl class="section return"><dt>Returns</dt><dd>The address of the previously chosen WiFi Client object. </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00193">193</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
 
 </div>
@@ -332,7 +337,7 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Peek the firtst byte from the channel. </p>
-<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. Because it is the base class, it returns 0. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classshellminator_channel.html#a983ab818f62533a75525a24d5433de99">shellminatorChannel</a>.</p>
 
@@ -389,8 +394,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a6711202b4e8b7fa57c0e73a1cca27711_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a6711202b4e8b7fa57c0e73a1cca27711_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -434,14 +438,12 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a0af2850a2423fdc45b355a57937f5dae_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a0af2850a2423fdc45b355a57937f5dae_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a0af2850a2423fdc45b355a57937f5dae_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a0af2850a2423fdc45b355a57937f5dae_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -485,8 +487,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a12b651c0ed9c37d29d26f3c7e5f8ce4a_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a12b651c0ed9c37d29d26f3c7e5f8ce4a_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -530,8 +531,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_afa66de1d5085ab45d4a7729b3fe08bb3_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_afa66de1d5085ab45d4a7729b3fe08bb3_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -560,7 +560,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Read one byte form the channel. </p>
-<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. Because it is the base class, it returns -1. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classshellminator_channel.html#a567192d3e8180d1c071615d6abb944c2">shellminatorChannel</a>.</p>
 
@@ -594,11 +594,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Select WiFi Client. </p>
+<p >Select a WiFi Client to communicate with. </p><dl class="section note"><dt>Note</dt><dd>This function has to be called before other memeber functions! </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00123">123</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a5867715c3a458112689b2823149ec741_icgraph.svg" width="432" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_wi_fi_client_channel_a5867715c3a458112689b2823149ec741_icgraph.svg" width="432" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
