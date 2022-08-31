@@ -38,4 +38,4 @@ jobs:
             - examples/Shellminator_Commander
 
           libraries: |
-            - name: Shellminator
+            - name: Commander-API
