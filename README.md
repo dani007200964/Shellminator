@@ -16,6 +16,10 @@ __Key changes in V1.1:__
     * No need for execution function.
     * Command highlight.
 
+## Documentation
+
+The full documentation can be found [here](https://dani007200964.github.io/Shellminator/html/index.html).
+
 ## Donation
 If this project help you reduce time to develop, you can give me a cup of coffee :coffee: :coffee: :coffee:
 
