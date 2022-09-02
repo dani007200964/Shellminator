@@ -55,14 +55,11 @@ Commander::API_t API_tree[] = {
 
 void setup() {
 
-  // Set the LED pin to output, and turn it off.
-  pinMode( LED_BUILTIN, OUTPUT );
-  digitalWrite( LED_BUILTIN, 0 );
-
   // initialize Serial with 115200 baudrate.
   Serial.begin( 115200 );
 
-  // Wait for connection.
+  // If you using Atmega32U4, the code will wait, until
+  // you open the serial port.
   while( !Serial );
 
   // Clear the terminal
@@ -120,7 +117,9 @@ void dog_func(char *args, commandResponse *response )
 void led_func(char *args, commandResponse *response )
 {
 
-  digitalWrite( LED_BUILTIN, !digitalRead( LED_BUILTIN ) );
+  // Toggle your LED pin here, if you have on your board
+  // digitalWrite( LED_PIN, !digitalRead( LED_PIN ) );
+  response -> print("LED toggle!\r\n");
 
 }
 

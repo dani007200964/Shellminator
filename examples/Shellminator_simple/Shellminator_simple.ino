@@ -35,7 +35,8 @@ void setup() {
   // Initialize Serial with 115200 baudrate.
   Serial.begin( 115200 );
 
-  // Wait for connection.
+  // If you using Atmega32U4, the code will wait, until
+  // you open the serial port.
   while( !Serial );
 
   // Clear the terminal
