@@ -1,0 +1,690 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>Shellminator: shellminatorArduino32U4SerialChannel Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Shellminator
+   &#160;<span id="projectnumber">V1.1.1</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classshellminator_arduino32_u4_serial_channel.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classshellminator_arduino32_u4_serial_channel-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">shellminatorArduino32U4SerialChannel Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> channel class for Arduino Serial objects.  
+ <a href="classshellminator_arduino32_u4_serial_channel.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_shellminator-_i_o_8hpp_source.html">Shellminator-IO.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for shellminatorArduino32U4SerialChannel:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel__inherit__graph.svg" width="210" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for shellminatorArduino32U4SerialChannel:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel__coll__graph.svg" width="210" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a52591023fdd59cfe2729a6dae0b7128d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a52591023fdd59cfe2729a6dae0b7128d">select</a> (Serial_ *serialPort_p)</td></tr>
+<tr class="memdesc:a52591023fdd59cfe2729a6dae0b7128d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select Serial Port.  <a href="classshellminator_arduino32_u4_serial_channel.html#a52591023fdd59cfe2729a6dae0b7128d">More...</a><br /></td></tr>
+<tr class="separator:a52591023fdd59cfe2729a6dae0b7128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad60d410620d0e65374ff09a57d1d8682"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#ad60d410620d0e65374ff09a57d1d8682">available</a> () override</td></tr>
+<tr class="memdesc:ad60d410620d0e65374ff09a57d1d8682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#ad60d410620d0e65374ff09a57d1d8682">More...</a><br /></td></tr>
+<tr class="separator:ad60d410620d0e65374ff09a57d1d8682"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8490040c132210fc16d17682056a1a1c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a8490040c132210fc16d17682056a1a1c">read</a> () override</td></tr>
+<tr class="memdesc:a8490040c132210fc16d17682056a1a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one byte form the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#a8490040c132210fc16d17682056a1a1c">More...</a><br /></td></tr>
+<tr class="separator:a8490040c132210fc16d17682056a1a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ac962c60f7807a4fe3990ccd2710ec1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a8ac962c60f7807a4fe3990ccd2710ec1">peek</a> () override</td></tr>
+<tr class="memdesc:a8ac962c60f7807a4fe3990ccd2710ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek the firtst byte from the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#a8ac962c60f7807a4fe3990ccd2710ec1">More...</a><br /></td></tr>
+<tr class="separator:a8ac962c60f7807a4fe3990ccd2710ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23cb52a5166c8b0e1dd039f6b522490"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#ac23cb52a5166c8b0e1dd039f6b522490">flush</a> () override</td></tr>
+<tr class="memdesc:ac23cb52a5166c8b0e1dd039f6b522490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#ac23cb52a5166c8b0e1dd039f6b522490">More...</a><br /></td></tr>
+<tr class="separator:ac23cb52a5166c8b0e1dd039f6b522490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2552d06acd1e52faab16b01eea3aa5d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#ae2552d06acd1e52faab16b01eea3aa5d">write</a> (uint8_t b) override</td></tr>
+<tr class="memdesc:ae2552d06acd1e52faab16b01eea3aa5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte to the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#ae2552d06acd1e52faab16b01eea3aa5d">More...</a><br /></td></tr>
+<tr class="separator:ae2552d06acd1e52faab16b01eea3aa5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2041f4dfe674245389c8aaadad3fe97f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a2041f4dfe674245389c8aaadad3fe97f">print</a> (char c) override</td></tr>
+<tr class="memdesc:a2041f4dfe674245389c8aaadad3fe97f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print one character to the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#a2041f4dfe674245389c8aaadad3fe97f">More...</a><br /></td></tr>
+<tr class="separator:a2041f4dfe674245389c8aaadad3fe97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7d74cd0dd985b3fc166a0be0e978ad7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#ad7d74cd0dd985b3fc166a0be0e978ad7">print</a> (uint8_t b)</td></tr>
+<tr class="memdesc:ad7d74cd0dd985b3fc166a0be0e978ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print one byte to the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#ad7d74cd0dd985b3fc166a0be0e978ad7">More...</a><br /></td></tr>
+<tr class="separator:ad7d74cd0dd985b3fc166a0be0e978ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8188785b89bb2d3e10cfbc8185ff4cae"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a8188785b89bb2d3e10cfbc8185ff4cae">print</a> (char *str) override</td></tr>
+<tr class="memdesc:a8188785b89bb2d3e10cfbc8185ff4cae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print c-string to the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#a8188785b89bb2d3e10cfbc8185ff4cae">More...</a><br /></td></tr>
+<tr class="separator:a8188785b89bb2d3e10cfbc8185ff4cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecdc746e7b084112bed9147af3e9ccb8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#aecdc746e7b084112bed9147af3e9ccb8">print</a> (const char *str) override</td></tr>
+<tr class="memdesc:aecdc746e7b084112bed9147af3e9ccb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print c-string to the channel.  <a href="classshellminator_arduino32_u4_serial_channel.html#aecdc746e7b084112bed9147af3e9ccb8">More...</a><br /></td></tr>
+<tr class="separator:aecdc746e7b084112bed9147af3e9ccb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8ad08571f55a0f76a01b161ca3e94a"><td class="memItemLeft" align="right" valign="top">Serial_ *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a5f8ad08571f55a0f76a01b161ca3e94a">getSerialObject</a> ()</td></tr>
+<tr class="memdesc:a5f8ad08571f55a0f76a01b161ca3e94a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the address of the chosen Serial Port.  <a href="classshellminator_arduino32_u4_serial_channel.html#a5f8ad08571f55a0f76a01b161ca3e94a">More...</a><br /></td></tr>
+<tr class="separator:a5f8ad08571f55a0f76a01b161ca3e94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e481e54f73c055d3f7697a5e4aa7399"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">available</a> ()</td></tr>
+<tr class="memdesc:a1e481e54f73c055d3f7697a5e4aa7399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">More...</a><br /></td></tr>
+<tr class="separator:a1e481e54f73c055d3f7697a5e4aa7399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567192d3e8180d1c071615d6abb944c2"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a567192d3e8180d1c071615d6abb944c2">read</a> ()</td></tr>
+<tr class="memdesc:a567192d3e8180d1c071615d6abb944c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one byte form the channel.  <a href="classshellminator_channel.html#a567192d3e8180d1c071615d6abb944c2">More...</a><br /></td></tr>
+<tr class="separator:a567192d3e8180d1c071615d6abb944c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a983ab818f62533a75525a24d5433de99"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a983ab818f62533a75525a24d5433de99">peek</a> ()</td></tr>
+<tr class="memdesc:a983ab818f62533a75525a24d5433de99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek the firtst byte from the channel.  <a href="classshellminator_channel.html#a983ab818f62533a75525a24d5433de99">More...</a><br /></td></tr>
+<tr class="separator:a983ab818f62533a75525a24d5433de99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61d7a99f7ffe01ee6d3fae296d821ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#af61d7a99f7ffe01ee6d3fae296d821ae">flush</a> ()</td></tr>
+<tr class="memdesc:af61d7a99f7ffe01ee6d3fae296d821ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the channel.  <a href="classshellminator_channel.html#af61d7a99f7ffe01ee6d3fae296d821ae">More...</a><br /></td></tr>
+<tr class="separator:af61d7a99f7ffe01ee6d3fae296d821ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99992ef8d9103af1a8a5790e1e7cdc2d"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a99992ef8d9103af1a8a5790e1e7cdc2d">write</a> (uint8_t b)</td></tr>
+<tr class="memdesc:a99992ef8d9103af1a8a5790e1e7cdc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte to the channel.  <a href="classshellminator_channel.html#a99992ef8d9103af1a8a5790e1e7cdc2d">More...</a><br /></td></tr>
+<tr class="separator:a99992ef8d9103af1a8a5790e1e7cdc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3066d521fe277f697f5d16ccffd0204"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#ac3066d521fe277f697f5d16ccffd0204">print</a> (char c)</td></tr>
+<tr class="memdesc:ac3066d521fe277f697f5d16ccffd0204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print one character to the channel.  <a href="classshellminator_channel.html#ac3066d521fe277f697f5d16ccffd0204">More...</a><br /></td></tr>
+<tr class="separator:ac3066d521fe277f697f5d16ccffd0204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04a5ed50c91a8f6f6af7bdbe4f9d7c74"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a04a5ed50c91a8f6f6af7bdbe4f9d7c74">print</a> (uint8_t b)</td></tr>
+<tr class="memdesc:a04a5ed50c91a8f6f6af7bdbe4f9d7c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print one byte to the channel.  <a href="classshellminator_channel.html#a04a5ed50c91a8f6f6af7bdbe4f9d7c74">More...</a><br /></td></tr>
+<tr class="separator:a04a5ed50c91a8f6f6af7bdbe4f9d7c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0defb66a6a39838e14b75847ff6273b6"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a0defb66a6a39838e14b75847ff6273b6">print</a> (char *str)</td></tr>
+<tr class="memdesc:a0defb66a6a39838e14b75847ff6273b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print c-string to the channel.  <a href="classshellminator_channel.html#a0defb66a6a39838e14b75847ff6273b6">More...</a><br /></td></tr>
+<tr class="separator:a0defb66a6a39838e14b75847ff6273b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a547a19b29c4a80c74670a8049f9d04bb"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classshellminator_channel.html#a547a19b29c4a80c74670a8049f9d04bb">print</a> (const char *str)</td></tr>
+<tr class="memdesc:a547a19b29c4a80c74670a8049f9d04bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print c-string to the channel.  <a href="classshellminator_channel.html#a547a19b29c4a80c74670a8049f9d04bb">More...</a><br /></td></tr>
+<tr class="separator:a547a19b29c4a80c74670a8049f9d04bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p ><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> channel class for Arduino Serial objects. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8hpp_source.html#l00194">194</a> of file <a class="el" href="_shellminator-_i_o_8hpp_source.html">Shellminator-IO.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad60d410620d0e65374ff09a57d1d8682" name="ad60d410620d0e65374ff09a57d1d8682"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60d410620d0e65374ff09a57d1d8682">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int shellminatorArduino32U4SerialChannel::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Available bytes in the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a1e481e54f73c055d3f7697a5e4aa7399">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00129">129</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ad60d410620d0e65374ff09a57d1d8682_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ad60d410620d0e65374ff09a57d1d8682_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ac23cb52a5166c8b0e1dd039f6b522490" name="ac23cb52a5166c8b0e1dd039f6b522490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac23cb52a5166c8b0e1dd039f6b522490">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shellminatorArduino32U4SerialChannel::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flush the channel. </p>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#af61d7a99f7ffe01ee6d3fae296d821ae">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00150">150</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ac23cb52a5166c8b0e1dd039f6b522490_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ac23cb52a5166c8b0e1dd039f6b522490_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a5f8ad08571f55a0f76a01b161ca3e94a" name="a5f8ad08571f55a0f76a01b161ca3e94a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f8ad08571f55a0f76a01b161ca3e94a">&#9670;&#160;</a></span>getSerialObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Serial_ * shellminatorArduino32U4SerialChannel::getSerialObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the address of the chosen Serial Port. </p>
+<dl class="section return"><dt>Returns</dt><dd>The address of the previously chosen Serial Port object. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00193">193</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8ac962c60f7807a4fe3990ccd2710ec1" name="a8ac962c60f7807a4fe3990ccd2710ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ac962c60f7807a4fe3990ccd2710ec1">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int shellminatorArduino32U4SerialChannel::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Peek the firtst byte from the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a983ab818f62533a75525a24d5433de99">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00143">143</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a8ac962c60f7807a4fe3990ccd2710ec1_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a8ac962c60f7807a4fe3990ccd2710ec1_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a8188785b89bb2d3e10cfbc8185ff4cae" name="a8188785b89bb2d3e10cfbc8185ff4cae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8188785b89bb2d3e10cfbc8185ff4cae">&#9670;&#160;</a></span>print() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shellminatorArduino32U4SerialChannel::print </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print c-string to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>The string that has to be printed to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a0defb66a6a39838e14b75847ff6273b6">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00179">179</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a8188785b89bb2d3e10cfbc8185ff4cae_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a2041f4dfe674245389c8aaadad3fe97f" name="a2041f4dfe674245389c8aaadad3fe97f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2041f4dfe674245389c8aaadad3fe97f">&#9670;&#160;</a></span>print() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shellminatorArduino32U4SerialChannel::print </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print one character to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>The character that has to be printed to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#ac3066d521fe277f697f5d16ccffd0204">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00172">172</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a2041f4dfe674245389c8aaadad3fe97f_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a2041f4dfe674245389c8aaadad3fe97f_icgraph.svg" width="456" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aecdc746e7b084112bed9147af3e9ccb8" name="aecdc746e7b084112bed9147af3e9ccb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecdc746e7b084112bed9147af3e9ccb8">&#9670;&#160;</a></span>print() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shellminatorArduino32U4SerialChannel::print </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print c-string to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>The string that has to be printed to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a547a19b29c4a80c74670a8049f9d04bb">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00186">186</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_aecdc746e7b084112bed9147af3e9ccb8_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ad7d74cd0dd985b3fc166a0be0e978ad7" name="ad7d74cd0dd985b3fc166a0be0e978ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7d74cd0dd985b3fc166a0be0e978ad7">&#9670;&#160;</a></span>print() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shellminatorArduino32U4SerialChannel::print </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print one byte to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>The value that has to be printed to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a04a5ed50c91a8f6f6af7bdbe4f9d7c74">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00164">164</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ad7d74cd0dd985b3fc166a0be0e978ad7_cgraph.svg" width="456" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a8490040c132210fc16d17682056a1a1c" name="a8490040c132210fc16d17682056a1a1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8490040c132210fc16d17682056a1a1c">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int shellminatorArduino32U4SerialChannel::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read one byte form the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a567192d3e8180d1c071615d6abb944c2">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00136">136</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a8490040c132210fc16d17682056a1a1c_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a8490040c132210fc16d17682056a1a1c_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a52591023fdd59cfe2729a6dae0b7128d" name="a52591023fdd59cfe2729a6dae0b7128d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52591023fdd59cfe2729a6dae0b7128d">&#9670;&#160;</a></span>select()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shellminatorArduino32U4SerialChannel::select </td>
+          <td>(</td>
+          <td class="paramtype">Serial_ *&#160;</td>
+          <td class="paramname"><em>serialPort_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Select Serial Port. </p>
+<p >Select a serial port to communicate with. </p><dl class="section note"><dt>Note</dt><dd>This function has to be called before other memeber functions! </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00123">123</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_a52591023fdd59cfe2729a6dae0b7128d_icgraph.svg" width="432" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ae2552d06acd1e52faab16b01eea3aa5d" name="ae2552d06acd1e52faab16b01eea3aa5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2552d06acd1e52faab16b01eea3aa5d">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shellminatorArduino32U4SerialChannel::write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write one byte to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>The value that has to be written to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classshellminator_channel.html#a99992ef8d9103af1a8a5790e1e7cdc2d">shellminatorChannel</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_i_o_8cpp_source.html#l00156">156</a> of file <a class="el" href="_shellminator-_i_o_8cpp_source.html">Shellminator-IO.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ae2552d06acd1e52faab16b01eea3aa5d_cgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classshellminator_arduino32_u4_serial_channel_ae2552d06acd1e52faab16b01eea3aa5d_icgraph.svg" width="210" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classshellminator_arduino32_u4_serial_channel.html">shellminatorArduino32U4SerialChannel</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

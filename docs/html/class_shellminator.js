@@ -2,6 +2,8 @@ var class_shellminator =
 [
     [ "Shellminator", "class_shellminator.html#aa0e8ea50dda76d1cd9293b140daf4822", null ],
     [ "Shellminator", "class_shellminator.html#ac72889d51e84c9c82fbeea0a0903a59e", null ],
+    [ "Shellminator", "class_shellminator.html#a879e1d3881c2eb71cafe283260ba582f", null ],
+    [ "Shellminator", "class_shellminator.html#a44c406f35795346080d17a2a58692551", null ],
     [ "Shellminator", "class_shellminator.html#a94f94e5ef5e988a608b4770b4d5463ed", null ],
     [ "Shellminator", "class_shellminator.html#aa790d35a97be4c045a957490cd940eba", null ],
     [ "addExecFunc", "class_shellminator.html#a403b9dd14b8f241c8ca97a6820b3da12", null ],

@@ -1,0 +1,4 @@
+<map id="shellminatorArduino32U4SerialChannel::print" name="shellminatorArduino32U4SerialChannel::print">
+<area shape="rect" id="node1" title="Print one character to the channel." alt="" coords="252,5,451,45"/>
+<area shape="rect" id="node2" href="$classshellminator_arduino32_u4_serial_channel.html#ad7d74cd0dd985b3fc166a0be0e978ad7" title="Print one byte to the channel." alt="" coords="5,5,204,45"/>
+</map>

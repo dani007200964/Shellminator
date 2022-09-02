@@ -49,3 +49,26 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+
+  compile-examples-for-esp8266:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        fqbn:
+          - esp8266:esp8266:nodemcuv2
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.fqbn }}
+
+          platforms: |
+            - name: esp8266:ESP8266
+              source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+
+          sketch-paths: |
+            - examples/Shellminator_execute
+            - examples/Shellminator_simple

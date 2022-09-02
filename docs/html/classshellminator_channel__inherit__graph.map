@@ -1,5 +1,6 @@
 <map id="shellminatorChannel" name="shellminatorChannel">
-<area shape="rect" id="node1" title="Shellminator channel class." alt="" coords="125,5,263,31"/>
-<area shape="rect" id="node2" href="$classshellminator_arduino_serial_channel.html" title="Shellminator channel class for Arduino Serial objects." alt="" coords="5,79,175,119"/>
-<area shape="rect" id="node3" href="$classshellminator_wi_fi_client_channel.html" title=" " alt="" coords="199,86,397,111"/>
+<area shape="rect" id="node1" title="Shellminator channel class." alt="" coords="5,77,144,102"/>
+<area shape="rect" id="node2" href="$classshellminator_arduino32_u4_serial_channel.html" title="Shellminator channel class for Arduino Serial objects." alt="" coords="192,5,391,45"/>
+<area shape="rect" id="node3" href="$classshellminator_arduino_serial_channel.html" title="Shellminator channel class for Arduino Serial objects." alt="" coords="207,69,376,109"/>
+<area shape="rect" id="node4" href="$classshellminator_wi_fi_client_channel.html" title=" " alt="" coords="192,134,391,159"/>
 </map>

@@ -36,3 +36,5 @@ Please make sure to update tests as appropriate.
 :email: hajnal.daniel96@gmail.com
 
 Licensed under the [MIT License](LICENSE).
+
+![](/docs/images/footer_image.png)
