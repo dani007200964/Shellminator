@@ -60,7 +60,6 @@ SOFTWARE.
 /// usefull. To make them work, every function in this class
 /// has to be overrided to every peripherial, where it has
 /// to be used.
-/// @todo Arduino Leonardo, Micro Serial Class has to be added to the channels.
 class shellminatorChannel{
 
 public:
