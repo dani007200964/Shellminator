@@ -16,6 +16,10 @@ __Key changes in V1.1:__
     * No need for execution function.
     * Command highlight.
 
+## Video Tutorial
+
+[![Tutorial VIdeo](https://img.youtube.com/vi/O2su8kXg1X8/0.jpg)](https://www.youtube.com/watch?v=O2su8kXg1X8)
+
 ## Documentation
 
 The full documentation can be found [here](https://dani007200964.github.io/Shellminator/html/index.html).
