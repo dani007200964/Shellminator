@@ -49,6 +49,7 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_simple_ESP32_server
 
   compile-examples-for-esp8266:
     runs-on: ubuntu-latest
