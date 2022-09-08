@@ -100,7 +100,7 @@ SOFTWARE.
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "1.1.1"
+#define SHELLMINATOR_VERSION "1.1.2"
 
 /// Color and style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
@@ -197,6 +197,15 @@ public:
   /// @param resp pointer to a WiFiClient object.
   /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
   Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) );
+
+	Shellminator( WiFiServer *server );
+
+	Shellminator( WiFiServer *server, void( *execution_fn_p )( char* ) );
+
+	void beginServer();
+
+	void stopServer();
+
 #endif
 
   /// Execution function adder function
@@ -502,6 +511,11 @@ private:
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
   /// WiFi Client as communication channel.
   shellminatorWiFiClientChannel wifiChannel;
+
+	WiFiServer *server = NULL;
+  WiFiClient client;
+	bool clientConnected = false;
+
   #endif
 
   /// Pointer to the communication class. By default

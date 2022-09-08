@@ -177,6 +177,62 @@ Shellminator::Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) )
 
 }
 
+Shellminator::Shellminator( WiFiServer *server ){
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+
+}
+
+Shellminator::Shellminator( WiFiServer *server, void( *execution_fn_p )( char* ) ){
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // passing execution_fn_p to execution_fn
+  execution_fn = execution_fn_p;
+
+}
+
+void Shellminator::beginServer(){
+
+  if( server ){
+
+    server -> begin();
+    server -> setNoDelay( true );
+
+  }
+
+}
+
+void Shellminator::stopServer(){
+
+  if( server ){
+
+    server -> stop();
+
+  }
+
+}
+
 #endif
 
 
@@ -1018,7 +1074,60 @@ void Shellminator::update() {
   // This variable will hold the character that was read from the channel buffer.
   char c;
 
-  // todo ESP stuff.
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  // WiFi server stuff...
+  if( server ){
+
+    if( server -> hasClient() ){
+
+      // If we are alredy connected, we have to reject the new connection.
+      if( client.connected() ){
+
+        server -> available().stop();
+
+      }
+
+      else{
+
+        client = server -> available();
+        client.setNoDelay(true);
+        clientConnected = true;
+
+      }
+
+    }
+
+    // Check for disconnection
+    if( clientConnected && !client.connected() ){
+
+      // Disconnection event!
+      client.stop();
+      clientConnected = false;
+
+    }
+
+    // If connected, select the internal client as channel.
+    if( clientConnected && client.connected() ){
+
+      // Initialise the wifiChannel as communication channel.
+      wifiChannel.select( &client );
+      channel = &wifiChannel;
+
+    }
+
+    // Else set the default channel. The default channel's
+    // available function will return 0, so the next part of
+    // the update function won't do anything( as should ).
+    else{
+
+      channel = &defaultChannel;
+
+    }
+
+  }
+
+  #endif
 
   // We have to check the channel buffer. If it is not empty we can read as many characters as possible.
   while ( channel -> available() ) {
