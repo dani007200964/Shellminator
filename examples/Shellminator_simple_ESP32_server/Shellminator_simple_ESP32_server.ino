@@ -60,7 +60,7 @@ void setup() {
   Serial.println( "Program begin..." );
 
   // WiFi configuration section
-  Serial.printf( "[ %5d ] Connect to  WiFi: ", millis() );
+  Serial.print( "Connect to  WiFi: " );
   Serial.print( ssid );
 
   WiFi.mode( WIFI_STA );
