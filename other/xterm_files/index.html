@@ -1,0 +1,84 @@
+<!doctype html>
+<!--
+* Created on Aug 12 2022
+*
+* Copyright (c) 2022 - Daniel Hajnal
+* hajnal.daniel96@gmail.com
+* This file is part of the Shellminator project.
+* Modified 2022.009.12
+
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+  <html>
+    <head>
+      <link rel="stylesheet" href="xterm.css" />
+      <script src="xterm.js"></script>
+    </head>
+    <body>
+      <div id="terminal"></div>
+      <script>
+        var term = new Terminal({
+          cursorBlink: "block"
+        });
+        const ws = new WebSocket( "ws://localhost:3000" );
+
+        ws.onopen = function(e){
+          ws.send( "Socket open!" );
+        }
+
+        ws.onclose = function(e){
+
+          if( e.wasClean ){
+
+            console.log( "Websocket was closed cleanly!" );
+
+          }
+
+          else{
+
+            console.log( "Websocket connection died!" );
+
+          }
+
+        }
+
+        ws.onmessage = function(e){
+          term.write( e.data );
+        }
+
+
+
+        term.open(document.getElementById('terminal'));
+        term.write( "web shell $ " );
+
+        term.onKey( key => {
+          const char = key.domEvent.key;
+
+          ws.send( key.key );
+
+        } );
+
+      </script>
+    </body>
+  </html>
