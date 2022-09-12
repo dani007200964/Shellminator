@@ -19,6 +19,10 @@
 
 #define SERVER_PORT 23
 
+// WiFi credentials.
+const char* ssid     = "WIFI-SSID";
+const char* password = "WIFI-PASS";
+
 // Create an instance of the server.
 // It will be available on port 23.
 WiFiServer server( SERVER_PORT );
@@ -55,7 +59,29 @@ void setup() {
   // Print start message
   Serial.println( "Program begin..." );
 
+  // WiFi configuration section
+  Serial.printf( "[ %5d ] Connect to  WiFi: ", millis() );
+  Serial.print( ssid );
+
+  WiFi.mode( WIFI_STA );
+  WiFi.begin( ssid, password );
+
+  while( WiFi.status() != WL_CONNECTED ){
+
+    delay( 1000 );
+    Serial.print( "." );
+
+  }
+
   shell.beginServer();
+
+  Serial.println( " [ OK ]" );
+
+  Serial.println( "Connected!" );
+  Serial.print( "Device IP: " );
+  Serial.print( WiFi.localIP() );
+  Serial.print( " at port: " );
+  Serial.println( SERVER_PORT );
 
   // initialize shell object.
   shell.begin( "arnold" );

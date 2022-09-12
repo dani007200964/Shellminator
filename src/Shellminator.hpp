@@ -198,9 +198,9 @@ public:
   /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
   Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) );
 
-	Shellminator( WiFiServer *server );
+	Shellminator( WiFiServer *server_p );
 
-	Shellminator( WiFiServer *server, void( *execution_fn_p )( char* ) );
+	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) );
 
 	void beginServer();
 
@@ -515,6 +515,14 @@ private:
 	WiFiServer *server = NULL;
   WiFiClient client;
 	bool clientConnected = false;
+	uint8_t telnetNegotiationState = 0;
+
+	// https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
+	static const uint8_t TELNET_IAC_DONT_LINEMODE[ 3 ];
+	static const uint8_t TELNET_IAC_WILL_ECHO[ 3 ];
+	static const uint8_t TELNET_IAC_DONT_ECHO[ 3 ];
+	static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[ 3 ];
+	static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[ 3 ];
 
   #endif
 

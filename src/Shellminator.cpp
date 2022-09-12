@@ -134,6 +134,13 @@ Shellminator::Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char
 #endif
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+const uint8_t Shellminator::TELNET_IAC_DONT_LINEMODE[]          = { 255, 254, 34 };
+const uint8_t Shellminator::TELNET_IAC_WILL_ECHO[]              = { 255, 251, 1 };
+const uint8_t Shellminator::TELNET_IAC_DONT_ECHO[]              = { 255, 254, 1 };
+const uint8_t Shellminator::TELNET_IAC_WILL_SUPRESS_GO_AHEAD[]  = { 255, 251, 3 };
+const uint8_t Shellminator::TELNET_IAC_DO_SUPRESS_GO_AHEAD[]    = { 255, 253, 3 };
+
 Shellminator::Shellminator( WiFiClient *resp ) {
 
   // Initialise the wifiChannel as communication channel.
@@ -177,7 +184,9 @@ Shellminator::Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) )
 
 }
 
-Shellminator::Shellminator( WiFiServer *server ){
+Shellminator::Shellminator( WiFiServer *server_p ){
+
+  server = server_p;
 
   // It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
@@ -195,7 +204,9 @@ Shellminator::Shellminator( WiFiServer *server ){
 
 }
 
-Shellminator::Shellminator( WiFiServer *server, void( *execution_fn_p )( char* ) ){
+Shellminator::Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) ){
+
+  server = server_p;
 
   // It has to be zero. We dont want to process any garbage.
   cmd_buff_cntr = 0;
@@ -217,7 +228,7 @@ void Shellminator::beginServer(){
   if( server ){
 
     server -> begin();
-    server -> setNoDelay( true );
+    //server -> setNoDelay( true );
 
   }
 
@@ -428,6 +439,13 @@ void Shellminator::process( char new_char ) {
       return;
 
     }
+
+  }
+
+  // New line character has to do nothing.
+  else if( new_char == '\n' ){
+
+    // Nothing.
 
   }
 
@@ -1076,7 +1094,6 @@ void Shellminator::update() {
 
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
-  // WiFi server stuff...
   if( server ){
 
     if( server -> hasClient() ){
@@ -1084,15 +1101,35 @@ void Shellminator::update() {
       // If we are alredy connected, we have to reject the new connection.
       if( client.connected() ){
 
+        // Connection reject event!
         server -> available().stop();
 
       }
 
       else{
 
+        // New connection event!
         client = server -> available();
         client.setNoDelay(true);
         clientConnected = true;
+
+        client.write( TELNET_IAC_DONT_LINEMODE, 3 );
+        client.write( TELNET_IAC_WILL_ECHO, 3 );
+        client.write( TELNET_IAC_DONT_ECHO, 3 );
+        client.write( TELNET_IAC_WILL_SUPRESS_GO_AHEAD, 3 );
+        client.write( TELNET_IAC_DO_SUPRESS_GO_AHEAD, 3 );
+
+        // Initialise the wifiChannel as communication channel
+        // to draw the logo and the banner.
+        wifiChannel.select( &client );
+        channel = &wifiChannel;
+
+        // Set the terminal color and style to the defined settings for the logo
+        setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+
+        drawLogo();
+
+        printBanner();
 
       }
 
@@ -1101,18 +1138,95 @@ void Shellminator::update() {
     // Check for disconnection
     if( clientConnected && !client.connected() ){
 
-      // Disconnection event!
+      // Client distonnect event!
+
       client.stop();
       clientConnected = false;
 
     }
 
-    // If connected, select the internal client as channel.
+    // If connected, we have to process the Telnet commands.
     if( clientConnected && client.connected() ){
 
-      // Initialise the wifiChannel as communication channel.
-      wifiChannel.select( &client );
-      channel = &wifiChannel;
+      // Check for availabla data.
+      if( client.available() ){
+
+        // Telnet command state machine.
+        switch( telnetNegotiationState ){
+
+          // In case 0 we have to check the next element in the buffer.
+          // If it 0xFF, that means, we have an ongoing Telnet command,
+          // so we have to parse it in the next state( state 1 ). Any other
+          // situations we select the internal WiFiClient as channel to
+          // let Shellminator process the data.
+          case 0:
+
+            if( client.peek() == 0xFF ){
+
+              // Read the data to remove it from the buffer.
+              client.read();
+
+              // Switch to the next state.
+              telnetNegotiationState = 1;
+
+              // Set the communication channel to the default one,
+              // to not do anything in the next section.
+              channel = &defaultChannel;
+
+            }
+
+            else{
+
+              // Initialise the wifiChannel as communication channel.
+              wifiChannel.select( &client );
+              channel = &wifiChannel;
+
+            }
+
+            break;
+
+          case 1:
+
+            // This byte is the Telnet command.
+            // Right now we don't do anything
+            // with it, but we have to read it,
+            // to remove it from the buffer.
+            client.read();
+
+            // Switch to the next state.
+            telnetNegotiationState = 2;
+
+            // Set the communication channel to the default one,
+            // to not do anything in the next section.
+            channel = &defaultChannel;
+
+            break;
+
+          case 2:
+
+            // This byte is the Telnet option.
+            // Right now we don't do anything
+            // with it, but we have to read it,
+            // to remove it from the buffer.
+            client.read();
+
+            // Switch to the default state( state 0 ).
+            telnetNegotiationState = 0;
+            break;
+
+            // Set the communication channel to the default one,
+            // to not do anything in the next section.
+            channel = &defaultChannel;
+
+          default:
+            // Something went wrong, we should not be here.
+            // Switch to the default state( state 0 ).
+            telnetNegotiationState = 0;
+            break;
+
+        }
+
+      }
 
     }
 
@@ -1245,8 +1359,12 @@ void Shellminator::setTerminalCharacterColor( HardwareSerial *serialPort, uint8_
 
 void Shellminator::drawLogo() {
 
-  // Draws the startup logo to the terminal interface.
-  channel -> print( logo );
+  if( logo ){
+
+    // Draws the startup logo to the terminal interface.
+    channel -> print( logo );
+
+  }
 
 }
 
