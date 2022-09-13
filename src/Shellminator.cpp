@@ -407,8 +407,25 @@ void Shellminator::redrawLine(){
 
 void Shellminator::process( char new_char ) {
 
+  // Line endings
+  // NetCat: \n
+  // Screen: \r \0
+  // PuTTY: \r \n
+
   // General counter variable
   uint32_t i;
+
+  Serial.print( "Net data : " );
+  Serial.println( new_char, DEC );
+
+
+  if( new_char == '\0' ){
+    return;
+  }
+
+  if( new_char == '\n' ){
+    return;
+  }
 
   // Check if the new character is backspace character.
   // '\b' or 127 are both meaning that the backspace kes is pressed
@@ -439,13 +456,6 @@ void Shellminator::process( char new_char ) {
       return;
 
     }
-
-  }
-
-  // New line character has to do nothing.
-  else if( new_char == '\n' ){
-
-    // Nothing.
 
   }
 
