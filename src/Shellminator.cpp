@@ -836,6 +836,11 @@ void Shellminator::process( char new_char ) {
 
   }
 
+  else if( new_char == 0x04 ){ // ctrl-d (logout)
+    clientDisconnect();
+    return;
+  }
+
   // todo Commander command search.
   else if( new_char == '\t' ){
 
@@ -1095,6 +1100,13 @@ void Shellminator::freeAbortKey(){
 
   abortKeyFunc = NULL;
 
+}
+
+void Shellminator::clientDisconnect() {
+  if( clientConnected && client.connected() ){
+    client.println("Logout!");
+    client.stop();
+  }
 }
 
 void Shellminator::update() {

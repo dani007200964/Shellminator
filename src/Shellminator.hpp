@@ -371,6 +371,9 @@ public:
   /// function for the key, you have to call this function.
   void freeAbortKey();
 
+  /// Disconnect WiFiClient telnet client
+  void clientDisconnect();
+
   /// This flag enables or disables character formatting.
   /// It can be usefull when VT100 format parser is not
   /// available on the host device.
