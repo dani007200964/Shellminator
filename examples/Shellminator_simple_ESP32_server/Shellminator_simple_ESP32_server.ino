@@ -13,6 +13,7 @@
 */
 
 #include <WiFi.h>
+#include "esp_wifi.h"
 
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
@@ -64,6 +65,7 @@ void setup() {
   Serial.print( ssid );
 
   WiFi.mode( WIFI_STA );
+  WiFi.setSleep(WIFI_PS_NONE);
   WiFi.begin( ssid, password );
 
   while( WiFi.status() != WL_CONNECTED ){
