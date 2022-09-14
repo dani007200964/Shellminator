@@ -228,7 +228,7 @@ void Shellminator::beginServer(){
   if( server ){
 
     server -> begin();
-    //server -> setNoDelay( true );
+    server -> setNoDelay( true );
 
   }
 
@@ -278,20 +278,23 @@ void Shellminator::clear() {
 
 void Shellminator::printBanner() {
 
+  lastBannerSize = 0;
+
   // Sets the terminal style to bold and the color to green.
   // You can change it if you like. In my opinion the most
   // useful is the invisible one :)
   setTerminalCharacterColor( BOLD, GREEN );
 
-  // Print the banner text.
-  channel -> print( banner );
+  // Print the banner text and save it's size.
+  lastBannerSize += channel -> print( banner );
 
   // Sets the terminal style to regular and the color to white.
   setTerminalCharacterColor( REGULAR, WHITE );
 
   // Prints the end of the banner text. Why this?
-  // I don't know it looks a bit Linuxier this way.
-  channel -> print( (const char*)":~$ " );
+  // I don't know it looks a bit Linux-like this way.
+  // Also save it's size.
+  lastBannerSize += channel -> print( (const char*)":~$ " );
 
 }
 
@@ -344,11 +347,40 @@ void Shellminator::redrawLine(){
 
   // General counter variable
   uint32_t i;
+  int32_t j = -1;
+
+
+  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
+
+    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+
+  }
+
+  // Terminate the command at the cmd_buff_cntr
+  // to not print out the previous command's data.
+  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
+
+  // SHELLMINATOR_USE_WIFI_CLIENT
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  acceleratorBufferPtr = acceleratorBuffer;
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
+
+  #else
 
   // Return to the beginning of the line and print the banner
   // then the command buffer will be printed (with colors)
-  channel -> print( "\r" );
-  printBanner();
+  channel -> print( '\r' );
+
+  channel -> write( 27 );
+  channel -> print( '[' );
+  channel -> print( lastBannerSize );
+  channel -> print( 'C' );
+
+  channel -> write( 27 );
+  channel -> print( "[0K" );
+
+  #endif
 
   #ifdef COMMANDER_API_VERSION
 
@@ -356,55 +388,122 @@ void Shellminator::redrawLine(){
   // it will be highlighted.
   if( commandFound ){
 
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+    setTerminalCharacterColor( acceleratorBufferPtr, BOLD, GREEN );
+    acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+
+    #else
+
     setTerminalCharacterColor( BOLD, GREEN );
+
+    #endif
+
+    for( i = 0; i < cmd_buff_cntr; i++ ){
+
+      // If a space character is found, we have to change
+      // back the color to white for the arguments.
+      if( cmd_buff[ 0 ][ i ] == ' ' ){
+
+        j = i;
+        cmd_buff[ 0 ][ i ] = '\0';
+        break;
+
+      }
+
+    }
 
   }
 
   else{
 
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+    setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
+    acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+
+    #else
+
     setTerminalCharacterColor( REGULAR, WHITE );
+
+    #endif
 
   }
 
   #endif
 
-  // Print all characters from the cmd buffer.
-  for( i = 0; i < cmd_buff_cntr; i++ ){
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
-    #ifdef COMMANDER_API_VERSION
-    // If a space character is found, we have to change
-    // back the color to white for the arguments.
-    if( cmd_buff[ 0 ][ i ] == ' ' ){
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "%s", (char*) &cmd_buff[ 0 ] );
 
-      setTerminalCharacterColor( REGULAR, WHITE );
+  #else
 
-    }
+  channel -> print( (char*) &cmd_buff[ 0 ] );
+
+  #endif
+
+  if( ( j >= 0 ) ){
+
+    cmd_buff[ 0 ][ j ] = ' ';
+
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+    setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
+    acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "%s", (char*) &cmd_buff[ 0 ][ j + 1 ] );
+
+    #else
+
+    setTerminalCharacterColor( REGULAR, WHITE );
+    channel -> print( (char*) &cmd_buff[ 0 ][ j + 1 ] );
+
     #endif
-
-    channel -> print( cmd_buff[ 0 ][ i ] );
 
   }
 
   // After all the buffer is out, we can "kill" the rest of the line
   // (clear the line from cursor to the end)
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\033[0K" );
+
+  #else
+
   channel -> write( 27 );
   channel -> print( "[0K" );
 
-  // Step left with the terminal cursor to match the
-  // position in the cursor variable.
-  for( i = cmd_buff_cntr; i > cursor; i-- ){
+  #endif
+
+
+
+  if( cmd_buff_cntr > cursor ){
+
+
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\033[%dD", uint8_t( cmd_buff_cntr - cursor ) );
+
+    #else
 
     channel -> write( 27 );    // ESC character( decimal 27 )
     channel -> print( '[' );  // VT100 Cursor command.
-    channel -> print( '1' );  // 1 character movement.
+    channel -> print( uint8_t( cmd_buff_cntr - cursor ) );  // Step cursor
     channel -> print( 'D' );  // Left.
+
+    #endif
 
   }
 
-  // At the end no matter what we have to change back
-  // the terminal font to white.
-  #ifdef COMMANDER_API_VERSION
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
+  acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+  channel -> print( acceleratorBuffer );
+
+  #else
+
   setTerminalCharacterColor( REGULAR, WHITE );
+
   #endif
 
 }
@@ -444,21 +543,31 @@ void Shellminator::process( char new_char ) {
     // We have to check the number of the characters in the buffer.
     // If the buffer is empty we must not do anything!
     if ( cursor > 0 ) {
+
       // decrease the cmd buffer counter and the cursor position
       cmd_buff_cntr--;
       cursor--;
 
       // if we are at the end of the command buffer
-      if (cursor == cmd_buff_cntr) {
-        channel->print("\b \b"); // just delete the last character from the terminal
-        cmd_buff[0][cursor+1] = '\0'; // and from the cmd buffer
-      } else {
+      if ( cursor == cmd_buff_cntr ) {
+
+        channel -> print("\b \b"); // just delete the last character from the terminal
+        cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+
+      }
+
+      else {
+
         // if the cursor is somewhere in the middle of the cmd buffer
         // rework the buffer and redraw the whole line
         for( i = cursor; i < cmd_buff_cntr; i++ ) {
+
           cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
         }
+
         redrawLine();
+
       }
 
       // We have no more things to do, so return
@@ -484,7 +593,7 @@ void Shellminator::process( char new_char ) {
     channel -> print( '\r' );
     channel -> print( '\n' );
 
-    // If the arrived tata is not just a single enter we have to process the command.
+    // If the arrived data is not just a single enter we have to process the command.
     if ( cmd_buff_cntr > 0 ) {
 
       // We haveto check that execution_fn is not NULL.
@@ -894,7 +1003,12 @@ void Shellminator::process( char new_char ) {
   }
 
   else if( new_char == 0x04 ){ // ctrl-d (logout)
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
     clientDisconnect();
+
+    #endif
+
     return;
   }
 
@@ -1043,7 +1157,9 @@ void Shellminator::process( char new_char ) {
     else{
 
       for( i = cmd_buff_cntr; i > cursor; i-- ){
+
         cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+
       }
 
       // Add the new character after the cursor in the buffer
@@ -1054,36 +1170,46 @@ void Shellminator::process( char new_char ) {
     // In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
+    // If the cursor was at the end we have to print the
+    // new character if the cmd_buff had free space at
+    // the end.
+    if ( cursor == cmd_buff_cntr ) {
+
+      if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
+
+        channel -> print(new_char);
+
+      }
+
+    }
+
     // Increment counters.
     cmd_buff_cntr++;
     cursor++;
 
-    // If the cursor was at the end we have to print the
-    // new character if the cmd_buff had free space at
-    // the end.
-    if (cursor == cmd_buff_cntr) {
-      if (cmd_buff_cntr <= SHELLMINATOR_BUFF_LEN) {
-        channel -> print(new_char);
-      }
-    } else {
-      // cut the buffer at the maximum length
-      if(cmd_buff_cntr > SHELLMINATOR_BUFF_LEN) {
-        cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-      }
+    if ( cursor != cmd_buff_cntr ) {
+
       // Redraw the command line.
       redrawLine();
+
     }
+
 
     // Check if the counters are overloaded.
     // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
     // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
     if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
+
       cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+
     }
 
     if( cursor > SHELLMINATOR_BUFF_LEN ) {
+
       cursor = SHELLMINATOR_BUFF_LEN;
+
     }
+
 
     // We have finished so we can return.
     return;
@@ -1152,12 +1278,20 @@ void Shellminator::freeAbortKey(){
 
 }
 
-void Shellminator::clientDisconnect() {
+#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+void Shellminator::clientDisconnect(){
+
   if( clientConnected && client.connected() ){
-    client.println("Logout!");
+
+    client.println( "Logout!" );
     client.stop();
+
   }
+
 }
+
+#endif
 
 void Shellminator::update() {
 
@@ -1182,7 +1316,8 @@ void Shellminator::update() {
 
         // New connection event!
         client = server -> available();
-        client.setNoDelay(true);
+        client.setNoDelay(false);
+        client.setTimeout( 1 );
         clientConnected = true;
 
         client.write( TELNET_IAC_DONT_LINEMODE, 3 );
@@ -1414,6 +1549,24 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
   channel -> print( ';' );
   channel -> print( color );
   channel -> print( 'm' );
+
+}
+
+void Shellminator::setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color ){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
+  if( buff == NULL ){
+
+    return;
+
+  }
+
+  sprintf( buff, "\033[%d;%dm", style, color );
 
 }
 

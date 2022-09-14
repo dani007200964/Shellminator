@@ -248,13 +248,23 @@ public:
   /// @warning If the calling of this function is not frequent enough it cann cause buffer overflow in the Serial driver!
   void update();
 
-  /// Bring some color into your code.
+	/// Bring some color into your code.
   ///
   /// This function changes the color and style of the terminal application characters.
   /// @warning Please use the color and style enumeration table from this application as parameter.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   void setTerminalCharacterColor( uint8_t style, uint8_t color );
+
+	/// Bring some color into your code.
+  ///
+  /// This function changes the color and style of the terminal application characters.
+	/// The output goes to a buffer;
+  /// @warning Please use the color and style enumeration table from this application as parameter.
+	/// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
+  /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
+  /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
+  void setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color );
 
   /// Bring some color into your code.
   ///
@@ -371,8 +381,12 @@ public:
   /// function for the key, you have to call this function.
   void freeAbortKey();
 
+	#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
   /// Disconnect WiFiClient telnet client
   void clientDisconnect();
+
+	#endif
 
   /// This flag enables or disables character formatting.
   /// It can be usefull when VT100 format parser is not
@@ -450,7 +464,7 @@ private:
   /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
   /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
   /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 2 ] = { { 0 } };
+  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = { { 0 } };
 
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;
@@ -466,6 +480,10 @@ private:
 
   /// This character array stores the banner text.
   char banner[ SHELLMINATOR_BANNER_LEN ] = { '\0' };
+
+	/// Size of the last printed banner in characters.
+	/// It's used to accelerate the redrawing process.
+	uint8_t lastBannerSize = 0;
 
   /// Function pointer for up arrow behaviour override.
   void( *upArrowOverrideFunc )( void )    = NULL;
@@ -519,6 +537,11 @@ private:
   WiFiClient client;
 	bool clientConnected = false;
 	uint8_t telnetNegotiationState = 0;
+
+	// It is used for the ESP32 and ESP8266.
+	// They are very slow to send only one byte of data.
+	char acceleratorBuffer[ SHELLMINATOR_BUFF_LEN + 60 ];
+	char *acceleratorBufferPtr;
 
 	// https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
 	static const uint8_t TELNET_IAC_DONT_LINEMODE[ 3 ];
