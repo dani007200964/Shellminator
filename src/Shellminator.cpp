@@ -690,7 +690,7 @@ void Shellminator::process( char new_char ) {
           cmd_buff_dim--;
 
           // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          // Remember the 0th element is always reserved for the new data. If we brows the history the
+          // Remember the 0th element is always reserved for the new data. If we browse the history the
           // data in the history will overwrite the data in the 0th element so the historical data will be
           // the new data. We use strncpy to prevent overflow.
           strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN );
