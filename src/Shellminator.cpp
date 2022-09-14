@@ -346,7 +346,12 @@ void Shellminator::sendBackspace() {
 void Shellminator::redrawLine(){
 
   // General counter variable
+  #ifdef COMMANDER_API_VERSION
+
   uint32_t i;
+
+  #endif
+
   int32_t j = -1;
 
 
