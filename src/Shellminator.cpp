@@ -798,6 +798,16 @@ void Shellminator::process( char new_char ) {
         escape_state = 3;
         break;
 
+      // Check for End key;
+      case '4':
+        escape_state = 4;
+        break;
+
+      // Check for Home key;
+      case '1':
+        escape_state = 5;
+        break;
+
       // Any other cases means that it was probably a VT100 command but not supported.
       default:
 
@@ -847,6 +857,40 @@ void Shellminator::process( char new_char ) {
     escape_state = 0;
     return;
 
+  }
+
+  // Detect End key termination.
+  else if ( escape_state == 4 ) {
+    if( new_char == '~' ) {
+      // send the cursor to the end of the buffer
+      cursor = cmd_buff_cntr;
+      redrawLine();
+    }
+    escape_state = 0;
+    return;
+  }
+
+  // Detect Home key termination.
+  else if ( escape_state == 5 ) {
+    if( new_char == '~' ){
+      // send the cursor to the begining of the buffer
+      cursor = 0;
+      redrawLine();
+    }
+    escape_state = 0;
+    return;
+  }
+
+  else if( new_char == 0x01 ){ // ctrl-a (begining of the line)
+    cursor = 0;
+    redrawLine();
+    return;
+  }
+
+  else if( new_char == 0x05 ){ // ctrl-e (end of the line)
+    cursor = cmd_buff_cntr;
+    redrawLine();
+    return;
   }
 
   else if( new_char == 0x04 ){ // ctrl-d (logout)
