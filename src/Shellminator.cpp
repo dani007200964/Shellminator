@@ -345,10 +345,9 @@ void Shellminator::redrawLine(){
   // General counter variable
   uint32_t i;
 
-  // Clear line and return to the beginning.
-  channel -> write( 27 );
-  channel -> print( "[2K\r" );
-
+  // Return to the beginning of the line and print the banner
+  // then the command buffer will be printed (with colors)
+  channel -> print( "\r" );
   printBanner();
 
   #ifdef COMMANDER_API_VERSION
@@ -369,7 +368,7 @@ void Shellminator::redrawLine(){
 
   #endif
 
-  // Print all characters.
+  // Print all characters from the cmd buffer.
   for( i = 0; i < cmd_buff_cntr; i++ ){
 
     #ifdef COMMANDER_API_VERSION
@@ -385,6 +384,11 @@ void Shellminator::redrawLine(){
     channel -> print( cmd_buff[ 0 ][ i ] );
 
   }
+
+  // After all the buffer is out, we can "kill" the rest of the line
+  // (clear the line from cursor to the end)
+  channel -> write( 27 );
+  channel -> print( "[0K" );
 
   // Step left with the terminal cursor to match the
   // position in the cursor variable.
@@ -415,8 +419,11 @@ void Shellminator::process( char new_char ) {
   // General counter variable
   uint32_t i;
 
-  Serial.print( "Net data : " );
-  Serial.println( new_char, DEC );
+  // Serial.print( "Net data : '" );
+  // Serial.print(new_char);
+  // Serial.print("' [0x");
+  // Serial.print( new_char, HEX );
+  // Serial.println("]");
 
 
   if( new_char == '\0' ){
@@ -437,20 +444,22 @@ void Shellminator::process( char new_char ) {
     // We have to check the number of the characters in the buffer.
     // If the buffer is empty we must not do anything!
     if ( cursor > 0 ) {
-
-      for( i = (cursor - 1); i < ( cmd_buff_cntr - 1 ); i++ ){
-
-        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
-
-      }
-
-      // If there is at least 1 character in the buffer we jus simply
-      // decrement the cmd_buff_cntr. This will result that the new character
-      // will be stored in the previous characters place in the buffer.
+      // decrease the cmd buffer counter and the cursor position
       cmd_buff_cntr--;
       cursor--;
 
-      redrawLine();
+      // if we are at the end of the command buffer
+      if (cursor == cmd_buff_cntr) {
+        channel->print("\b \b"); // just delete the last character from the terminal
+        cmd_buff[0][cursor+1] = '\0'; // and from the cmd buffer
+      } else {
+        // if the cursor is somewhere in the middle of the cmd buffer
+        // rework the buffer and redraw the whole line
+        for( i = cursor; i < cmd_buff_cntr; i++ ) {
+          cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+        }
+        redrawLine();
+      }
 
       // We have no more things to do, so return
       return;
@@ -525,9 +534,13 @@ void Shellminator::process( char new_char ) {
       else{
         channel -> print( (const char*)"cmd: " );
         channel -> print( cmd_buff[ 0 ] );
-        channel -> print( '\r' );
-        channel -> print( '\n' );
       }
+
+      // Send a new line after command execution,
+      // so we will not overwrite the last line of the
+      // command output with the banner
+      channel -> print( '\r' );
+      channel -> print( '\n' );
 
       // After we processed the command we have to shift the history upwards.
       // To protect the copy against buffer overflow we use strncpy
@@ -631,7 +644,7 @@ void Shellminator::process( char new_char ) {
           }
 
           // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          // Remember the 0th element is always reserved for the new data. If we brows the history the
+          // Remember the 0th element is always reserved for the new data. If we browse the history the
           // data in the history will overwrite the data in the 0th element so the historical data will be
           // the new data. We use strncpy to prevent overflow.
           strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN );
@@ -989,7 +1002,7 @@ void Shellminator::process( char new_char ) {
         cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
       }
 
-      // Add the new character to the end of the 0th element in the buffer
+      // Add the new character after the cursor in the buffer
       cmd_buff[ 0 ][ cursor ] = new_char;
 
     }
@@ -1289,6 +1302,7 @@ void Shellminator::update() {
   // If Commander is available and we did not checked the
   // typed command, we are trying to find and highlight it.
   if( commander && !commandChecked ){
+    bool previousCommandFound = commandFound; // hold the previos flag
 
     // We have to wait 100ms after the last keypress.
     if( ( millis() - commandCheckTimerStart ) > 100 ){
@@ -1300,9 +1314,9 @@ void Shellminator::update() {
       // have to terminate the string at the end, or at
       // space character. But after the search we have to
       // store bactk this character to it's original state.
-      char charCopy;
+      char charCopy = 0; // initialize the variable
 
-      // Find the end of theinput command, or the first space
+      // Find the end of the input command, or the first space
       // character in it, store it's value to charCopy, and
       // replace it with null character.
       for( i = 0; i <= cmd_buff_cntr; i++ ){
@@ -1323,15 +1337,9 @@ void Shellminator::update() {
       // If Commander responds with a non-null pointer, it means
       // that we have a mach.
       if( commandAddress ){
-
         commandFound = true;
-
-      }
-
-      else{
-
+      } else {
         commandFound = false;
-
       }
 
       // Restore the original state.
@@ -1339,7 +1347,12 @@ void Shellminator::update() {
 
       // Set the flag.
       commandChecked = true;
-      redrawLine();
+
+      // if the commandFound flag has changed, redraw the line
+      // to get the colors right
+      if (previousCommandFound != commandFound) {
+        redrawLine();
+      }
 
     }
 
