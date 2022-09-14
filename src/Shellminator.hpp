@@ -447,10 +447,10 @@ private:
   /// shifts the elements towards the higher index, and removes the highest index element.
   /// To navigate between the previous commands you can use the UP and DOWN arrows
   /// on the keyboard. To specify the 'memory' of the interface you have to configure
-  /// the \ling SHELLMINATOR_BUFF_DIM \endlink definition.
+  /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
   /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
   /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN ] = { { 0 } };
+  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 2 ] = { { 0 } };
 
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;

@@ -1014,39 +1014,32 @@ void Shellminator::process( char new_char ) {
     cmd_buff_cntr++;
     cursor++;
 
-    // Check if the counters are overlowed.
-    if( cmd_buff_cntr >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
-
-      cmd_buff_cntr = ( SHELLMINATOR_BUFF_LEN - 2 );
-
-    }
-
-    if( cursor >= ( SHELLMINATOR_BUFF_LEN - 1 ) ){
-
-      cursor = ( SHELLMINATOR_BUFF_LEN - 2 );
-
-    }
-
     // If the cursor was at the end we have to print the
     // new character if the cmd_buff had free space at
     // the end.
-    if( cursor == cmd_buff_cntr ){
-
-      if( cmd_buff_cntr < ( SHELLMINATOR_BUFF_LEN - 2 ) ){
-
-        channel -> print( new_char );
-
+    if (cursor == cmd_buff_cntr) {
+      if (cmd_buff_cntr <= SHELLMINATOR_BUFF_LEN) {
+        channel -> print(new_char);
       }
-
-    }
-
-    else{
-
+    } else {
+      // cut the buffer at the maximum length
+      if(cmd_buff_cntr > SHELLMINATOR_BUFF_LEN) {
+        cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+      }
       // Redraw the command line.
       redrawLine();
-
     }
 
+    // Check if the counters are overloaded.
+    // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
+    // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
+    if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
+      cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+    }
+
+    if( cursor > SHELLMINATOR_BUFF_LEN ) {
+      cursor = SHELLMINATOR_BUFF_LEN;
+    }
 
     // We have finished so we can return.
     return;
