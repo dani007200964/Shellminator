@@ -388,10 +388,17 @@ public:
 
 	#endif
 
+	void historySearchBackward();
+	void historySearchForward();
+
+	void beep();
+
   /// This flag enables or disables character formatting.
   /// It can be usefull when VT100 format parser is not
   /// available on the host device.
   bool enableFormatting = true;
+
+	bool mute = false;
 
   #ifdef COMMANDER_API_VERSION
 

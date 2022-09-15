@@ -660,7 +660,7 @@ void Shellminator::process( char new_char ) {
       // To protect the copy against buffer overflow we use strncpy
       for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
 
-        strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN );
+        strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
 
       }
 
@@ -749,7 +749,7 @@ void Shellminator::process( char new_char ) {
         // We have to check that we can go upper in history
         if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
 
-          // If we can we have to check that the previous command was not empty.
+          // If we can, we have to check that the previous command was not empty.
           if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
 
             // If it was empty we can't do much with an empty command so we return.
@@ -761,7 +761,7 @@ void Shellminator::process( char new_char ) {
           // Remember the 0th element is always reserved for the new data. If we browse the history the
           // data in the history will overwrite the data in the 0th element so the historical data will be
           // the new data. We use strncpy to prevent overflow.
-          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN );
+          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
 
           // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
           // It is important to track the end of the loaded string.
@@ -807,7 +807,7 @@ void Shellminator::process( char new_char ) {
           // Remember the 0th element is always reserved for the new data. If we browse the history the
           // data in the history will overwrite the data in the 0th element so the historical data will be
           // the new data. We use strncpy to prevent overflow.
-          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN );
+          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN + 1 );
 
           // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
           // It is important to track the end of the loaded string.
@@ -823,6 +823,7 @@ void Shellminator::process( char new_char ) {
         // Check that if we are in the first previous command.
         else if ( cmd_buff_dim == 2 ) {
 
+          /*
           // If we are in the first previous command, and we press the down key,
           // that means we want to go to the 0th element in the terminal.
           // In this case we have to clear the 0th element.
@@ -832,6 +833,7 @@ void Shellminator::process( char new_char ) {
             sendBackspace();
 
           }
+          */
 
           // To empty the incoming string we have to zero it's counter.
           cmd_buff_cntr = 0;
@@ -839,6 +841,8 @@ void Shellminator::process( char new_char ) {
 
           // We have to reset the cmd_buff_dim variable to the default value.
           cmd_buff_dim = 1;
+
+          redrawLine();
 
         }
 
@@ -917,6 +921,16 @@ void Shellminator::process( char new_char ) {
         escape_state = 4;
         break;
 
+      // Check for PgUp key;
+      case '5':
+        escape_state = 6;
+        break;
+
+      // Check for PgUp key;
+      case '6':
+        escape_state = 7;
+        break;
+
       // Check for Home key;
       case '1':
         escape_state = 5;
@@ -993,6 +1007,32 @@ void Shellminator::process( char new_char ) {
     }
     escape_state = 0;
     return;
+  }
+
+  else if( escape_state == 6 ){
+
+    if( new_char == '~' ){
+
+      historySearchBackward();
+
+    }
+
+    escape_state = 0;
+    return;
+
+  }
+
+  else if( escape_state == 7 ){
+
+    if( new_char == '~' ){
+
+      historySearchForward();
+
+    }
+
+    escape_state = 0;
+    return;
+
   }
 
   else if( new_char == 0x01 ){ // ctrl-a (begining of the line)
@@ -1322,7 +1362,7 @@ void Shellminator::update() {
         // New connection event!
         client = server -> available();
         client.setNoDelay(false);
-        client.setTimeout( 1 );
+        client.setTimeout( 1000 );
         clientConnected = true;
 
         client.write( TELNET_IAC_DONT_LINEMODE, 3 );
@@ -1595,6 +1635,98 @@ void Shellminator::drawLogo() {
     channel -> print( logo );
 
   }
+
+}
+
+void Shellminator::beep(){
+
+  if( !mute ){
+
+    // Bell character.
+    channel -> print( '\a' );
+
+  }
+
+}
+
+void Shellminator::historySearchBackward(){
+
+  // Store a copy of the cmd_buff_dim variable.
+  // It is necessary, because it can be only changed
+  // when we find a command. Other case it has to be intact.
+  uint32_t cmd_buff_dim_save;
+
+  // Create a copy of cmd_buff_dim.
+  cmd_buff_dim_save = cmd_buff_dim;
+
+  // We search upward the history until the end of the history memory, or match.
+  while( cmd_buff_dim_save < ( SHELLMINATOR_BUFF_DIM ) ){
+
+    // Check for match.
+    if( strncmp( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim_save ], cursor ) == 0 ){
+
+      // If we found a command we have to save the actual position to cmd_buff_dim.
+      cmd_buff_dim = cmd_buff_dim_save;
+
+      // Copy the found data to the 0-th element.
+      strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
+
+      // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+      // It is important to track the end of the loaded string.
+      // In this case the cursor does not move!
+      cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+
+      // We print the loaded command to the terminal interface.
+      redrawLine();
+
+      // Increment the buffer before return.
+      // If we don't do this we can not search further.
+      cmd_buff_dim++;
+
+      // Return because we have found the command.
+      return;
+
+    }
+
+    // Incrememnt the position to test another command in history.
+    cmd_buff_dim_save++;
+
+  }
+
+  // We did not found a command in the history.
+  // Generate a beep to notify that.
+  beep();
+
+}
+
+void Shellminator::historySearchForward(){
+
+  uint32_t cmd_buff_dim_save;
+
+  cmd_buff_dim_save = cmd_buff_dim;
+
+  while( cmd_buff_dim_save > 2 ){
+
+    cmd_buff_dim_save--;
+
+    if( strncmp( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim_save ], cursor ) == 0 ){
+
+      cmd_buff_dim = cmd_buff_dim_save;
+
+      strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
+
+      cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+
+      // We print the loaded command to the terminal interface.
+      redrawLine();
+
+      return;
+
+    }
+
+  }
+
+  beep();
 
 }
 
