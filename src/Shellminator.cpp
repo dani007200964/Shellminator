@@ -246,6 +246,25 @@ void Shellminator::stopServer(){
 
 #endif
 
+void Shellminator::setBannerText( char* banner_p ){
+
+  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
+  strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
+
+  // Just in case close the string
+  banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
+
+}
+
+void Shellminator::setBannerPathText( char* bannerPath_p ){
+
+  // Copy the content from bannerPath_p to bannerPath. Because strncpy we can be sure that it wont overflow.
+  strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
+
+  // Just in case close the string
+  banner[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
+
+}
 
 void Shellminator::attachLogo( char* logo_p ){
 
@@ -289,12 +308,17 @@ void Shellminator::printBanner() {
   lastBannerSize += channel -> print( banner );
 
   // Sets the terminal style to regular and the color to white.
+  setTerminalCharacterColor( BOLD, WHITE );
+
+  lastBannerSize += channel -> print( ':' );
+
+  setTerminalCharacterColor( BOLD, BLUE );
+
+  lastBannerSize += channel -> print( bannerPath );
+
   setTerminalCharacterColor( REGULAR, WHITE );
 
-  // Prints the end of the banner text. Why this?
-  // I don't know it looks a bit Linux-like this way.
-  // Also save it's size.
-  lastBannerSize += channel -> print( (const char*)":~$ " );
+  lastBannerSize += channel -> print( ' ' );
 
 }
 
@@ -354,6 +378,13 @@ void Shellminator::redrawLine(){
 
   int32_t j = -1;
 
+  if( inSearch ){
+
+    redrawHistorySearch();
+    return;
+
+  }
+
 
   if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
 
@@ -369,7 +400,8 @@ void Shellminator::redrawLine(){
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
   acceleratorBufferPtr = acceleratorBuffer;
-  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
+  // acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[1;32m%s\033[1;37m:\033[1;34m%s\033[0;37m \033[0K", banner, bannerPath );
 
   #else
 
@@ -377,10 +409,14 @@ void Shellminator::redrawLine(){
   // then the command buffer will be printed (with colors)
   channel -> print( '\r' );
 
+  /*
   channel -> write( 27 );
   channel -> print( '[' );
   channel -> print( lastBannerSize );
   channel -> print( 'C' );
+  */
+
+  printBanner();
 
   channel -> write( 27 );
   channel -> print( "[0K" );
@@ -523,12 +559,11 @@ void Shellminator::process( char new_char ) {
   // General counter variable
   uint32_t i;
 
-  // Serial.print( "Net data : '" );
-  // Serial.print(new_char);
-  // Serial.print("' [0x");
-  // Serial.print( new_char, HEX );
-  // Serial.println("]");
-
+  Serial.print( "Net data : '" );
+  Serial.print(new_char);
+  Serial.print("' [0x");
+  Serial.print( new_char, HEX );
+  Serial.println("]");
 
   if( new_char == '\0' ){
     return;
@@ -556,8 +591,24 @@ void Shellminator::process( char new_char ) {
       // if we are at the end of the command buffer
       if ( cursor == cmd_buff_cntr ) {
 
+        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+        if( inSearch ){
+
+          cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+          redrawLine();
+
+        }
+
+        else{
+        #endif
+
         channel -> print("\b \b"); // just delete the last character from the terminal
         cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+
+        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+        }
+        #endif
+
 
       }
 
@@ -597,6 +648,10 @@ void Shellminator::process( char new_char ) {
     // We send a line break to the terminal to put the next data in new line
     channel -> print( '\r' );
     channel -> print( '\n' );
+
+    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+    inSearch = false;
+    #endif
 
     // If the arrived data is not just a single enter we have to process the command.
     if ( cmd_buff_cntr > 0 ) {
@@ -735,6 +790,9 @@ void Shellminator::process( char new_char ) {
       // Up arrow pressed
       case 'A':
 
+        // Because we have finished the ecape sequence interpretation we reset the state-machine.
+        escape_state = 0;
+
         // Check if the arrow function is overriden.
         if( upArrowOverrideFunc ){
 
@@ -742,9 +800,6 @@ void Shellminator::process( char new_char ) {
           break;
 
         }
-
-        // Because we have finished the ecape sequence interpretation we reset the state-machine.
-        escape_state = 0;
 
         // We have to check that we can go upper in history
         if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
@@ -785,6 +840,9 @@ void Shellminator::process( char new_char ) {
       // Down arrow pressed
       case 'B':
 
+        // Because we have finished the ecape sequence interpretation we reset the state-machine.
+        escape_state = 0;
+
         // Check if the arrow function is overriden.
         if( downArrowOverrideFunc ){
 
@@ -793,8 +851,6 @@ void Shellminator::process( char new_char ) {
 
         }
 
-        // Because we have finished the ecape sequence interpretation we reset the state-machine.
-        escape_state = 0;
 
         // We have to check that we can go lover in history, and we are not in the first previous command.
         if ( cmd_buff_dim > 2 ) {
@@ -823,18 +879,6 @@ void Shellminator::process( char new_char ) {
         // Check that if we are in the first previous command.
         else if ( cmd_buff_dim == 2 ) {
 
-          /*
-          // If we are in the first previous command, and we press the down key,
-          // that means we want to go to the 0th element in the terminal.
-          // In this case we have to clear the 0th element.
-          for ( i = 0; i < cmd_buff_cntr; i++ ) {
-
-            // The easyest way is to sand as many backspaces as many character was in the 0th element in the buffer.
-            sendBackspace();
-
-          }
-          */
-
           // To empty the incoming string we have to zero it's counter.
           cmd_buff_cntr = 0;
           cursor = 0;
@@ -852,6 +896,9 @@ void Shellminator::process( char new_char ) {
       // Right arrow pressed
       // Currently not used
       case 'C':
+
+        // We just simply reset the state-machine.
+        escape_state = 0;
 
         // Check if the arrow function is overriden.
         if( rightArrowOverrideFunc ){
@@ -874,15 +921,15 @@ void Shellminator::process( char new_char ) {
 
         }
 
-        // We just simply reset the state-machine.
-        escape_state = 0;
-
         // We have finished so we can break from the switch.
         break;
 
       // Left arrow pressed
       // Currently not used
       case 'D':
+
+        // We just simply reset the state-machine.
+        escape_state = 0;
 
         // Check if the arrow function is overriden.
         if( leftArrowOverrideFunc ){
@@ -904,9 +951,6 @@ void Shellminator::process( char new_char ) {
           cursor--;
 
         }
-
-        // We just simply reset the state-machine.
-        escape_state = 0;
 
         // We have finished so we can break from the switch.
         break;
@@ -1013,7 +1057,11 @@ void Shellminator::process( char new_char ) {
 
     if( new_char == '~' ){
 
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
       historySearchBackward();
+
+      #endif
 
     }
 
@@ -1026,7 +1074,11 @@ void Shellminator::process( char new_char ) {
 
     if( new_char == '~' ){
 
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
       historySearchForward();
+
+      #endif
 
     }
 
@@ -1055,6 +1107,19 @@ void Shellminator::process( char new_char ) {
     #endif
 
     return;
+  }
+
+  else if( new_char == 0x12 ){  // ctrl-r (search)
+
+    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+    inSearch = !inSearch;
+    redrawLine();
+
+    #endif
+
+    return;
+
   }
 
   // todo Commander command search.
@@ -1169,6 +1234,10 @@ void Shellminator::process( char new_char ) {
 
     }
 
+    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+    inSearch = false;
+    #endif
+
     // If the abort key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
 
@@ -1222,7 +1291,29 @@ void Shellminator::process( char new_char ) {
 
       if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
+        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+        if( inSearch ){
+
+          // Increment counters.
+          cmd_buff_cntr++;
+          cursor++;
+
+          redrawLine();
+
+          // Increment counters.
+          cmd_buff_cntr--;
+          cursor--;
+
+        }
+
+        else{
+        #endif
+
         channel -> print(new_char);
+
+        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+        }
+        #endif
 
       }
 
@@ -1649,6 +1740,8 @@ void Shellminator::beep(){
 
 }
 
+#ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
 void Shellminator::historySearchBackward(){
 
   // Store a copy of the cmd_buff_dim variable.
@@ -1729,6 +1822,112 @@ void Shellminator::historySearchForward(){
   beep();
 
 }
+
+void Shellminator::redrawHistorySearch(){
+
+  uint32_t i;
+  uint32_t j;
+  bool highlighted = false;
+  int32_t searchResult;
+
+  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
+
+    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+
+  }
+
+  // Terminate the command at the cmd_buff_cntr
+  // to not print out the previous command's data.
+  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
+
+  channel -> print( '\r' );
+  channel -> print( "(reverse-i-search)'" );
+  channel -> print( cmd_buff[ 0 ] );
+  channel -> print( "': \033[0K" );
+
+  if( cmd_buff_cntr == 0 ){
+
+    return;
+
+  }
+
+  for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
+
+    searchResult = substring( cmd_buff[ 0 ], cmd_buff[ i ] );
+    if( searchResult >= 0 ){
+
+      Serial.print( "found: " );
+      Serial.print( i );
+      Serial.print( ' ' );
+      Serial.print( cmd_buff[ i ] );
+      Serial.print( ' ' );
+      Serial.println( searchResult );
+
+      for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
+
+        if( !highlighted && j == searchResult ){
+          setTerminalCharacterColor( REVERSE, WHITE );
+          highlighted = true;
+        }
+
+        if( highlighted && j == searchResult + strlen( cmd_buff[ 0 ] ) ){
+          setTerminalCharacterColor( REGULAR, WHITE );
+          highlighted = false;
+        }
+
+        channel -> print( cmd_buff[ i ][ j ] );
+
+      }
+
+      if( highlighted ){
+
+        setTerminalCharacterColor( REGULAR, WHITE );
+
+      }
+
+      //channel -> print( cmd_buff[ i ] );
+
+      return;
+
+    }
+
+  }
+
+}
+
+int Shellminator::substring( char* str1, char* str2 ){
+
+  // https://www.geeksforgeeks.org/check-string-substring-another/
+
+  int i;
+  int j;
+
+  int m = strlen( str1 );
+  int n = strlen( str2 );
+
+  for( i = 0; i <= ( n - m ); i++ ){
+
+    for( j = 0; j < m; j++ ){
+
+      if( str2[ i + j ] != str1[ j ] ){
+        break;
+      }
+
+    }
+
+    if( j == m ){
+
+      return i;
+
+    }
+
+  }
+
+  return -1;
+
+}
+
+#endif
 
 #ifdef COMMANDER_API_VERSION
 

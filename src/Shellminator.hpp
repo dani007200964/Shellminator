@@ -99,6 +99,10 @@ SOFTWARE.
 #define SHELLMINATOR_BANNER_LEN 20
 #endif
 
+#ifndef SHELLMINATOR_BANNER_PATH_LEN
+#define SHELLMINATOR_BANNER_PATH_LEN 20
+#endif
+
 /// Version of the module
 #define SHELLMINATOR_VERSION "1.1.2"
 
@@ -287,6 +291,8 @@ public:
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
 
+	void setBannerPathText( char* bannerPath_p );
+
   /// This function attaches a logo to the terminal.
   ///
   /// The logo is just a character array.
@@ -388,9 +394,6 @@ public:
 
 	#endif
 
-	void historySearchBackward();
-	void historySearchForward();
-
 	void beep();
 
   /// This flag enables or disables character formatting.
@@ -488,6 +491,8 @@ private:
   /// This character array stores the banner text.
   char banner[ SHELLMINATOR_BANNER_LEN ] = { '\0' };
 
+	char bannerPath[ SHELLMINATOR_BANNER_PATH_LEN ] = "$";
+
 	/// Size of the last printed banner in characters.
 	/// It's used to accelerate the redrawing process.
 	uint8_t lastBannerSize = 0;
@@ -580,6 +585,17 @@ private:
   bool commandFound = false;
 
   #endif
+
+	#ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+	void historySearchBackward();
+	void historySearchForward();
+	void redrawHistorySearch();
+	int substring( char* str1, char* str2 );
+
+	bool inSearch = false;
+
+	#endif
 
   // QR-code configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
