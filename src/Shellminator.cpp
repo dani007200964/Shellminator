@@ -640,6 +640,23 @@ void Shellminator::process( char new_char ) {
     // If the enter key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
 
+    if( inSearch  ){
+
+      if( searchMatch > 0 ){
+
+        inSearch = false;
+        strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
+        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+        redrawLine();
+
+      }
+
+      else{
+        cmd_buff_cntr = 0;
+      }
+
+    }
+
     // Because a command is sent we have to close it. Basically we replace the arrived
     // '\r' character with a '\0' string terminator character. Now we have our command
     // in a C/C++ like standard string format.
@@ -1830,6 +1847,8 @@ void Shellminator::redrawHistorySearch(){
   bool highlighted = false;
   int32_t searchResult;
 
+  searchMatch = -1;
+
   if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
 
     cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
@@ -1841,8 +1860,10 @@ void Shellminator::redrawHistorySearch(){
   cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
   channel -> print( '\r' );
-  channel -> print( "(reverse-i-search)'" );
+  channel -> print( "(reverse-i-search)'" );  // 19 character
+  setTerminalCharacterColor( BOLD, YELLOW );
   channel -> print( cmd_buff[ 0 ] );
+  setTerminalCharacterColor( REGULAR, WHITE );
   channel -> print( "': \033[0K" );
 
   if( cmd_buff_cntr == 0 ){
@@ -1856,12 +1877,16 @@ void Shellminator::redrawHistorySearch(){
     searchResult = substring( cmd_buff[ 0 ], cmd_buff[ i ] );
     if( searchResult >= 0 ){
 
+      /*
       Serial.print( "found: " );
       Serial.print( i );
       Serial.print( ' ' );
       Serial.print( cmd_buff[ i ] );
       Serial.print( ' ' );
       Serial.println( searchResult );
+      */
+
+      searchMatch = i;
 
       for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
 
@@ -1885,13 +1910,25 @@ void Shellminator::redrawHistorySearch(){
 
       }
 
-      //channel -> print( cmd_buff[ i ] );
+      channel -> print( '\r' );
+
+      channel -> write( 27 );
+      channel -> print( '[' );
+      channel -> print( uint8_t( 19 + cursor ) );
+      channel -> print( 'C' );
 
       return;
 
     }
 
   }
+
+  channel -> print( '\r' );
+
+  channel -> write( 27 );
+  channel -> print( '[' );
+  channel -> print( uint8_t( 19 + cursor ) );
+  channel -> print( 'C' );
 
 }
 

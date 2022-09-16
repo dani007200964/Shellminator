@@ -594,6 +594,7 @@ private:
 	int substring( char* str1, char* str2 );
 
 	bool inSearch = false;
+	int32_t searchMatch;
 
 	#endif
 
