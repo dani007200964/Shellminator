@@ -396,8 +396,7 @@ void Shellminator::redrawLine(){
   // to not print out the previous command's data.
   cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
-  // SHELLMINATOR_USE_WIFI_CLIENT
-  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   acceleratorBufferPtr = acceleratorBuffer;
   // acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
@@ -429,7 +428,7 @@ void Shellminator::redrawLine(){
   // it will be highlighted.
   if( commandFound ){
 
-    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
     setTerminalCharacterColor( acceleratorBufferPtr, BOLD, GREEN );
     acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
@@ -458,7 +457,7 @@ void Shellminator::redrawLine(){
 
   else{
 
-    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
     setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
     acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
@@ -473,7 +472,7 @@ void Shellminator::redrawLine(){
 
   #endif
 
-  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "%s", (char*) &cmd_buff[ 0 ] );
 
@@ -487,7 +486,7 @@ void Shellminator::redrawLine(){
 
     cmd_buff[ 0 ][ j ] = ' ';
 
-    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
     setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
     acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
@@ -504,7 +503,7 @@ void Shellminator::redrawLine(){
 
   // After all the buffer is out, we can "kill" the rest of the line
   // (clear the line from cursor to the end)
-  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\033[0K" );
 
@@ -520,7 +519,7 @@ void Shellminator::redrawLine(){
   if( cmd_buff_cntr > cursor ){
 
 
-    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
     acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\033[%dD", uint8_t( cmd_buff_cntr - cursor ) );
 
@@ -535,7 +534,7 @@ void Shellminator::redrawLine(){
 
   }
 
-  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
   acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
@@ -551,7 +550,7 @@ void Shellminator::redrawLine(){
 
 void Shellminator::process( char new_char ) {
 
-  // Line endings
+  // Line endings:
   // NetCat: \n
   // Screen: \r \0
   // PuTTY: \r \n
@@ -1859,14 +1858,31 @@ void Shellminator::redrawHistorySearch(){
   // to not print out the previous command's data.
   cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  acceleratorBufferPtr = acceleratorBuffer;
+  // acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[0;37m(reverse-i-search)'\033[1;33m%s\033[0;37m': \033[0K", cmd_buff[ 0 ] );
+
+  #else
+
   channel -> print( '\r' );
+  setTerminalCharacterColor( REGULAR, WHITE );
   channel -> print( "(reverse-i-search)'" );  // 19 character
   setTerminalCharacterColor( BOLD, YELLOW );
   channel -> print( cmd_buff[ 0 ] );
   setTerminalCharacterColor( REGULAR, WHITE );
   channel -> print( "': \033[0K" );
 
+  #endif
+
   if( cmd_buff_cntr == 0 ){
+
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+    channel -> print(acceleratorBuffer);
+
+    #endif
 
     return;
 
@@ -1890,25 +1906,74 @@ void Shellminator::redrawHistorySearch(){
 
       for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
 
-        if( !highlighted && j == searchResult ){
+        if( !highlighted && ( j == searchResult ) ){
+
+          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+          setTerminalCharacterColor( acceleratorBufferPtr, REVERSE, WHITE );
+          acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+
+          #else
+
           setTerminalCharacterColor( REVERSE, WHITE );
+
+          #endif
+
           highlighted = true;
+
         }
 
-        if( highlighted && j == searchResult + strlen( cmd_buff[ 0 ] ) ){
+        if( highlighted && ( j == ( searchResult + strlen( cmd_buff[ 0 ] ) ) ) ){
+
+          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+          setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
+          acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+
+          #else
+
           setTerminalCharacterColor( REGULAR, WHITE );
+
+          #endif
+
           highlighted = false;
+
         }
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        *acceleratorBufferPtr = cmd_buff[ i ][ j ];
+        acceleratorBufferPtr++;
+
+        #else
 
         channel -> print( cmd_buff[ i ][ j ] );
+
+        #endif
 
       }
 
       if( highlighted ){
 
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
+        acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
+
+        #else
+
         setTerminalCharacterColor( REGULAR, WHITE );
 
+        #endif
+
       }
+
+      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+      acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC", uint8_t( 19 + cursor ) );
+      channel -> print( acceleratorBuffer );
+
+      #else
 
       channel -> print( '\r' );
 
@@ -1917,11 +1982,20 @@ void Shellminator::redrawHistorySearch(){
       channel -> print( uint8_t( 19 + cursor ) );
       channel -> print( 'C' );
 
+      #endif
+
       return;
 
     }
 
   }
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC", uint8_t( 19 + cursor ) );
+  channel -> print( acceleratorBuffer );
+
+  #else
 
   channel -> print( '\r' );
 
@@ -1929,6 +2003,8 @@ void Shellminator::redrawHistorySearch(){
   channel -> print( '[' );
   channel -> print( uint8_t( 19 + cursor ) );
   channel -> print( 'C' );
+
+  #endif
 
 }
 

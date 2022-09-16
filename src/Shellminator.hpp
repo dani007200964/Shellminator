@@ -79,42 +79,8 @@ SOFTWARE.
 
 #endif
 
-/// Definition of the maximum length of each command
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
-#ifndef SHELLMINATOR_BUFF_LEN
-#define SHELLMINATOR_BUFF_LEN 20
-#endif
-
-/// Definition of the maximum length of the previous command memory
-/// @warning Be careful with the The value of this definition. If it is to high your RAM will be eaten!
-/// @note The total amount of RAM consumed by the object in bytes can be calculated as: \link SHELLMINATOR_BUFF_LEN \endlink * \link SHELLMINATOR_BUFF_DIM \endlink
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 5.
-#ifndef SHELLMINATOR_BUFF_DIM
-#define SHELLMINATOR_BUFF_DIM 5
-#endif
-
-/// Maximum length of the banner text
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
-#ifndef SHELLMINATOR_BANNER_LEN
-#define SHELLMINATOR_BANNER_LEN 20
-#endif
-
-#ifndef SHELLMINATOR_BANNER_PATH_LEN
-#define SHELLMINATOR_BANNER_PATH_LEN 20
-#endif
-
 /// Version of the module
 #define SHELLMINATOR_VERSION "1.1.2"
-
-/// Color and style of the startup logo
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
-#ifndef SHELLMINATOR_LOGO_FONT_STYLE
-#define SHELLMINATOR_LOGO_FONT_STYLE BOLD
-#endif
-
-#ifndef SHELLMINATOR_LOGO_COLOR
-#define SHELLMINATOR_LOGO_COLOR RED
-#endif
 
 /// Shellminator object
 ///
@@ -541,6 +507,13 @@ private:
   shellminatorArduino32U4SerialChannel arduino32U4SerialChannel;
   #endif
 
+	#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+	// It is used for the ESP32 and ESP8266.
+	// They are very slow to send only one byte of data.
+	char acceleratorBuffer[ SHELLMINATOR_ACCELERATOR_BUFFER_LEN ];
+	char *acceleratorBufferPtr;
+	#endif
+
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
   /// WiFi Client as communication channel.
   shellminatorWiFiClientChannel wifiChannel;
@@ -549,11 +522,6 @@ private:
   WiFiClient client;
 	bool clientConnected = false;
 	uint8_t telnetNegotiationState = 0;
-
-	// It is used for the ESP32 and ESP8266.
-	// They are very slow to send only one byte of data.
-	char acceleratorBuffer[ SHELLMINATOR_BUFF_LEN + 60 ];
-	char *acceleratorBufferPtr;
 
 	// https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
 	static const uint8_t TELNET_IAC_DONT_LINEMODE[ 3 ];
