@@ -378,12 +378,16 @@ void Shellminator::redrawLine(){
 
   int32_t j = -1;
 
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
   if( inSearch ){
 
     redrawHistorySearch();
     return;
 
   }
+
+  #endif
 
 
   if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
@@ -639,6 +643,8 @@ void Shellminator::process( char new_char ) {
     // If the enter key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
 
+    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
     if( inSearch  ){
 
       if( searchMatch > 0 ){
@@ -656,6 +662,8 @@ void Shellminator::process( char new_char ) {
 
     }
 
+    #endif
+
     // Because a command is sent we have to close it. Basically we replace the arrived
     // '\r' character with a '\0' string terminator character. Now we have our command
     // in a C/C++ like standard string format.
@@ -666,7 +674,9 @@ void Shellminator::process( char new_char ) {
     channel -> print( '\n' );
 
     #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
     inSearch = false;
+
     #endif
 
     // If the arrived data is not just a single enter we have to process the command.
@@ -1049,29 +1059,64 @@ void Shellminator::process( char new_char ) {
 
   // Detect End key termination.
   else if ( escape_state == 4 ) {
+
+    escape_state = 0;
+
     if( new_char == '~' ) {
+
+      if( endKeyFunc ){
+
+        endKeyFunc();
+        return;
+
+      }
+
       // send the cursor to the end of the buffer
       cursor = cmd_buff_cntr;
       redrawLine();
+
     }
-    escape_state = 0;
+
     return;
+
   }
 
   // Detect Home key termination.
   else if ( escape_state == 5 ) {
+
+    escape_state = 0;
+
     if( new_char == '~' ){
+
+      if( homeKeyFunc ){
+
+        homeKeyFunc();
+        return;
+
+      }
+
       // send the cursor to the begining of the buffer
       cursor = 0;
       redrawLine();
+
     }
-    escape_state = 0;
+
     return;
+
   }
 
   else if( escape_state == 6 ){
 
+    escape_state = 0;
+
     if( new_char == '~' ){
+
+      if( pageUpKeyFunc ){
+
+        pageUpKeyFunc();
+        return;
+
+      }
 
       #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
 
@@ -1081,14 +1126,22 @@ void Shellminator::process( char new_char ) {
 
     }
 
-    escape_state = 0;
     return;
 
   }
 
   else if( escape_state == 7 ){
 
+    escape_state = 0;
+
     if( new_char == '~' ){
+
+      if( pageDownKeyFunc ){
+
+        pageDownKeyFunc();
+        return;
+
+      }
 
       #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
 
@@ -1098,7 +1151,6 @@ void Shellminator::process( char new_char ) {
 
     }
 
-    escape_state = 0;
     return;
 
   }
@@ -1116,6 +1168,14 @@ void Shellminator::process( char new_char ) {
   }
 
   else if( new_char == 0x04 ){ // ctrl-d (logout)
+
+    if( logoutKeyFunc ){
+
+      logoutKeyFunc();
+      return;
+
+    }
+
     #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
     clientDisconnect();
@@ -1126,6 +1186,13 @@ void Shellminator::process( char new_char ) {
   }
 
   else if( new_char == 0x12 ){  // ctrl-r (search)
+
+    if( searchKeyFunc ){
+
+      searchKeyFunc();
+      return;
+
+    }
 
     #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
 
@@ -1251,7 +1318,9 @@ void Shellminator::process( char new_char ) {
     }
 
     #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
     inSearch = false;
+
     #endif
 
     // If the abort key is pressed cmd_buff_dim has to be reset to the default value
@@ -1308,6 +1377,7 @@ void Shellminator::process( char new_char ) {
       if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
         #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
         if( inSearch ){
 
           // Increment counters.
@@ -1328,7 +1398,9 @@ void Shellminator::process( char new_char ) {
         channel -> print(new_char);
 
         #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
         }
+
         #endif
 
       }
@@ -1400,6 +1472,42 @@ void Shellminator::overrideAbortKey( void( *func )( void ) ){
 
 }
 
+void Shellminator::overridePageUpKey( void( *func )( void ) ){
+
+  pageUpKeyFunc = func;
+
+}
+
+void Shellminator::overridePageDownKey( void( *func )( void ) ){
+
+  pageDownKeyFunc = func;
+
+}
+
+void Shellminator::overrideHomeKey( void( *func )( void ) ){
+
+  homeKeyFunc = func;
+
+}
+
+void Shellminator::overrideEndKey( void( *func )( void ) ){
+
+  endKeyFunc = func;
+
+}
+
+void Shellminator::overrideLogoutKey( void( *func )( void ) ){
+
+  logoutKeyFunc = func;
+
+}
+
+void Shellminator::overrideSearchKey( void( *func )( void ) ){
+
+  logoutKeyFunc = func;
+
+}
+
 void Shellminator::freeUpArrow(){
 
   upArrowOverrideFunc = NULL;
@@ -1427,6 +1535,42 @@ void Shellminator::freeRightArrow(){
 void Shellminator::freeAbortKey(){
 
   abortKeyFunc = NULL;
+
+}
+
+void Shellminator::freePageUpKey(){
+
+  pageUpKeyFunc = NULL;
+
+}
+
+void Shellminator::freePageDownKey(){
+
+  pageDownKeyFunc = NULL;
+
+}
+
+void Shellminator::freeHomeKey(){
+
+  homeKeyFunc = NULL;
+
+}
+
+void Shellminator::freeEndKey(){
+
+  endKeyFunc = NULL;
+
+}
+
+void Shellminator::freeLogoutKey(){
+
+  logoutKeyFunc = NULL;
+
+}
+
+void Shellminator::freeSearchKey(){
+
+  searchKeyFunc = NULL;
 
 }
 

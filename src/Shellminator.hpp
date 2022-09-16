@@ -318,6 +318,56 @@ public:
   /// @param func Pointer to the function that will be called on keypress.
   void overrideAbortKey( void( *func )( void ) );
 
+	/// Override Page-Up key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Page-Up key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overridePageUpKey( void( *func )( void ) );
+
+	/// Override Page-Down key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Page-Down key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overridePageDownKey( void( *func )( void ) );
+
+	/// Override Home key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Home key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideHomeKey( void( *func )( void ) );
+
+	/// Override End key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the End key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideEndKey( void( *func )( void ) );
+
+	/// Override Logout key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Logout key is
+  /// pressed. The default Logout key is usually a Ctrl + D
+  /// combo.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideLogoutKey( void( *func )( void ) );
+
+	/// Override Search key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Logout key is
+  /// pressed. The default Search key is usually a Ctrl + R
+  /// combo.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideSearchKey( void( *func )( void ) );
+
   /// Reset up arrow key functionality to default.
   ///
   /// This function resets the up arrow functionality
@@ -346,12 +396,54 @@ public:
   /// function for the key, you have to call this function.
   void freeRightArrow();
 
-  /// Reset abort key functionality to default.
+	/// Reset abort key functionality to default.
   ///
   /// This function resets the abort key functionality
   /// to default. If you want to detach the override
   /// function for the key, you have to call this function.
   void freeAbortKey();
+
+	/// Reset Page-Up key functionality to default.
+  ///
+  /// This function resets the Page-Up key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freePageUpKey();
+
+	/// Reset Page-Down key functionality to default.
+  ///
+  /// This function resets the Page-Down key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freePageDownKey();
+
+	/// Reset Home key functionality to default.
+  ///
+  /// This function resets the Home key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeHomeKey();
+
+	/// Reset End key functionality to default.
+  ///
+  /// This function resets the End key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeEndKey();
+
+	/// Reset Logout key functionality to default.
+  ///
+  /// This function resets the Logout key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeLogoutKey();
+
+	/// Reset Search key functionality to default.
+  ///
+  /// This function resets the Search key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeSearchKey();
 
 	#ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
@@ -477,6 +569,24 @@ private:
 
   /// Function pointer for abort key behaviour override.
   void( *abortKeyFunc )( void )           = NULL;
+
+	/// Function pointer for Page-Up key behaviour override.
+  void( *pageUpKeyFunc )( void )          = NULL;
+
+	/// Function pointer for Page-Down key behaviour override.
+  void( *pageDownKeyFunc )( void )        = NULL;
+
+	/// Function pointer for Home key behaviour override.
+  void( *homeKeyFunc )( void )           	= NULL;
+
+	/// Function pointer for End key behaviour override.
+  void( *endKeyFunc )( void )           	= NULL;
+
+	/// Function pointer for Logout key behaviour override.
+  void( *logoutKeyFunc )( void )          = NULL;
+
+	/// Function pointer for Search key behaviour override.
+  void( *searchKeyFunc )( void )          = NULL;
 
   /// This function processes a new character
   ///
