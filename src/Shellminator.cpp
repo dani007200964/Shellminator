@@ -244,6 +244,12 @@ void Shellminator::stopServer(){
 
 }
 
+void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
+
+  clientTimeout = clientTimeout_p;
+
+}
+
 #endif
 
 void Shellminator::setBannerText( char* banner_p ){

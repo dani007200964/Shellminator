@@ -176,6 +176,8 @@ public:
 
 	void stopServer();
 
+	void setClientTimeout( uint16_t clientTimeout_p );
+
 #endif
 
   /// Execution function adder function
@@ -632,6 +634,7 @@ private:
   WiFiClient client;
 	bool clientConnected = false;
 	uint8_t telnetNegotiationState = 0;
+	uint16_t clientTimeout = 1000;
 
 	// https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
 	static const uint8_t TELNET_IAC_DONT_LINEMODE[ 3 ];
