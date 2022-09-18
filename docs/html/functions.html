@@ -54,7 +54,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Shellminator
    &#160;<span id="projectnumber">V1.1.1</span>
@@ -133,7 +133,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_b" name="index_b"></a>- b -</h3><ul>
 <li>BACKGROUND&#160;:&#160;<a class="el" href="class_shellminator.html#aed71921772c5914597df4e0367edf653a55effcd5c733baa0218508d7148803f9">Shellminator</a></li>
+<li>beep()&#160;:&#160;<a class="el" href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">Shellminator</a></li>
 <li>begin()&#160;:&#160;<a class="el" href="class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d">Shellminator</a></li>
+<li>beginServer()&#160;:&#160;<a class="el" href="class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f">Shellminator</a></li>
 <li>BLACK&#160;:&#160;<a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dca335a4232137a196bf2f2aec2359ac6ed">Shellminator</a></li>
 <li>BLINKING&#160;:&#160;<a class="el" href="class_shellminator.html#aed71921772c5914597df4e0367edf653a25296a5c448684556d23c18c8da1017c">Shellminator</a></li>
 <li>BLUE&#160;:&#160;<a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator</a></li>
@@ -143,6 +145,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
 <li>clear()&#160;:&#160;<a class="el" href="class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317">Shellminator</a></li>
+<li>clientDisconnect()&#160;:&#160;<a class="el" href="class_shellminator.html#a501a9207ab6e968ba081477d6c41651a">Shellminator</a></li>
 <li>CYAN&#160;:&#160;<a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36">Shellminator</a></li>
 </ul>
 
@@ -161,8 +164,14 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>flush()&#160;:&#160;<a class="el" href="classshellminator_arduino32_u4_serial_channel.html#ac23cb52a5166c8b0e1dd039f6b522490">shellminatorArduino32U4SerialChannel</a>, <a class="el" href="classshellminator_arduino_serial_channel.html#ae0e8c7cd433a8b6b97ea8c283dda5df8">shellminatorArduinoSerialChannel</a>, <a class="el" href="classshellminator_channel.html#af61d7a99f7ffe01ee6d3fae296d821ae">shellminatorChannel</a>, <a class="el" href="classshellminator_wi_fi_client_channel.html#a0eb0b20b1ad7bcc062141761e099ca00">shellminatorWiFiClientChannel</a></li>
 <li>freeAbortKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">Shellminator</a></li>
 <li>freeDownArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">Shellminator</a></li>
+<li>freeEndKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a56313495a30f28e95b303097e7d182c6">Shellminator</a></li>
+<li>freeHomeKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a80626856ef833b0b77cb25c26e5b931f">Shellminator</a></li>
 <li>freeLeftArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">Shellminator</a></li>
+<li>freeLogoutKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a55bbe4187c59a4dea529e668c7b8f956">Shellminator</a></li>
+<li>freePageDownKey()&#160;:&#160;<a class="el" href="class_shellminator.html#ae67011c2743ea955d9254b4127ec17f4">Shellminator</a></li>
+<li>freePageUpKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a4c99af6abdb140e9597e06c83ad3ba5f">Shellminator</a></li>
 <li>freeRightArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">Shellminator</a></li>
+<li>freeSearchKey()&#160;:&#160;<a class="el" href="class_shellminator.html#ae156fe5bcfa0c6961b37eb2d39719d04">Shellminator</a></li>
 <li>freeUpArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">Shellminator</a></li>
 </ul>
 
@@ -187,14 +196,21 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_m" name="index_m"></a>- m -</h3><ul>
 <li>MAGENTA&#160;:&#160;<a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator</a></li>
+<li>mute&#160;:&#160;<a class="el" href="class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d">Shellminator</a></li>
 </ul>
 
 
 <h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
 <li>overrideAbortKey()&#160;:&#160;<a class="el" href="class_shellminator.html#abad556405bac943db348a5bbbb814c5b">Shellminator</a></li>
 <li>overrideDownArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10">Shellminator</a></li>
+<li>overrideEndKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a60bc3f9f41155799e76ab1a9c9438533">Shellminator</a></li>
+<li>overrideHomeKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a144ead7ad06045fee92f77cd1bd5ec18">Shellminator</a></li>
 <li>overrideLeftArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc">Shellminator</a></li>
+<li>overrideLogoutKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a155412a88e1dff3640703ec8149bec3f">Shellminator</a></li>
+<li>overridePageDownKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a9d9d97cd8cf48214c50bf53c1388b5d2">Shellminator</a></li>
+<li>overridePageUpKey()&#160;:&#160;<a class="el" href="class_shellminator.html#aa0f424c5fce99eb783db9efe72dabb2d">Shellminator</a></li>
 <li>overrideRightArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b">Shellminator</a></li>
+<li>overrideSearchKey()&#160;:&#160;<a class="el" href="class_shellminator.html#ab9c22b28f6c6174b9ae4fe1ad92c188d">Shellminator</a></li>
 <li>overrideUpArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a2e054598bd72a647809a9b041af10631">Shellminator</a></li>
 </ul>
 
@@ -216,9 +232,12 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>select()&#160;:&#160;<a class="el" href="classshellminator_arduino32_u4_serial_channel.html#a52591023fdd59cfe2729a6dae0b7128d">shellminatorArduino32U4SerialChannel</a>, <a class="el" href="classshellminator_arduino_serial_channel.html#a60bf4ab5b7ff4b83c213ad7aaa9b7757">shellminatorArduinoSerialChannel</a>, <a class="el" href="classshellminator_wi_fi_client_channel.html#a5867715c3a458112689b2823149ec741">shellminatorWiFiClientChannel</a></li>
 <li>sendBackspace()&#160;:&#160;<a class="el" href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">Shellminator</a></li>
+<li>setBannerPathText()&#160;:&#160;<a class="el" href="class_shellminator.html#a9fa53611dd2665ba501e349d3697345d">Shellminator</a></li>
 <li>setBannerText()&#160;:&#160;<a class="el" href="class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1">Shellminator</a></li>
+<li>setClientTimeout()&#160;:&#160;<a class="el" href="class_shellminator.html#adf34b1655abffcffce76603917f756a8">Shellminator</a></li>
 <li>setTerminalCharacterColor()&#160;:&#160;<a class="el" href="class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9">Shellminator</a></li>
 <li>Shellminator()&#160;:&#160;<a class="el" href="class_shellminator.html#aa0e8ea50dda76d1cd9293b140daf4822">Shellminator</a></li>
+<li>stopServer()&#160;:&#160;<a class="el" href="class_shellminator.html#a893fa5b32fc230746af031d95f19123d">Shellminator</a></li>
 </ul>
 
 
@@ -244,10 +263,43 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Shellminator V1.1.1</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Sun Sep 18 2022
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2022 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Shellminator V1.1.1</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Sun Sep 18 2022
+      </small></address>
+    </li>
   </ul>
 </div>
 </body>

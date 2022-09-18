@@ -32,5 +32,3 @@ Please make sure to update tests as appropriate.
 \emoji :email: hajnal.daniel96@gmail.com
 
 Licensed under the __MIT__ License.
-
-![](footer_image.png)
