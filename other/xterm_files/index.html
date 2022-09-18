@@ -41,7 +41,7 @@ SOFTWARE.
         var term = new Terminal({
           cursorBlink: "block"
         });
-        const ws = new WebSocket( "ws://localhost:3000" );
+        const ws = new WebSocket( "ws://192.168.100.17:81" );
 
         ws.onopen = function(e){
           ws.send( "Socket open!" );
