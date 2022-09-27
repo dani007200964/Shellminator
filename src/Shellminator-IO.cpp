@@ -280,3 +280,175 @@ WiFiClient* shellminatorWiFiClientChannel::getClientObject(){
 }
 
 #endif
+
+
+
+
+
+
+
+
+
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+//----- Response for WebSocket Server class -----//
+
+void shellminatorWebSocketChannel::select( WebSocketsServer *server_p, int8_t clientID_p ){
+
+	server = server_p;
+	clientID = clientID_p;
+
+}
+
+void shellminatorWebSocketChannel::push( uint8_t data ){
+
+	buffer[ writePointer ] = data;
+	writePointer++;
+	if( writePointer >= SHELLMINATOR_WEBSOCKET_BUFFER_LEN ){
+		writePointer = 0;
+	}
+
+}
+
+void shellminatorWebSocketChannel::push( uint8_t* data, size_t size ){
+
+	uint32_t i;
+
+	for( i = 0; i < size; i++ ){
+
+		push( data[ i ] );
+
+	}
+
+}
+
+int shellminatorWebSocketChannel::available(){
+
+	if( writePointer == readPointer ){
+		return 0;
+	}
+
+	else if( writePointer > readPointer ){
+		return writePointer - readPointer;
+	}
+
+	else{
+
+		return SHELLMINATOR_WEBSOCKET_BUFFER_LEN - readPointer + writePointer;
+
+	}
+
+}
+
+int shellminatorWebSocketChannel::read(){
+
+	int ret;
+
+	if( writePointer == readPointer ){
+
+		return -1;
+
+	}
+
+	else{
+
+		ret = (uint8_t)buffer[ readPointer ];
+		readPointer++;
+
+		if( readPointer >= SHELLMINATOR_WEBSOCKET_BUFFER_LEN ){
+			readPointer = 0;
+		}
+
+	}
+
+	return ret;
+
+}
+
+int shellminatorWebSocketChannel::peek(){
+
+	if( writePointer == readPointer ){
+
+		return -1;
+
+	}
+
+	else{
+
+		return (uint8_t)buffer[ readPointer ];
+
+	}
+
+}
+
+void shellminatorWebSocketChannel::flush(){
+
+	// Todo Maybe clear the input buffer?
+
+}
+
+size_t shellminatorWebSocketChannel::write( uint8_t b ){
+
+	if( server ) return server -> sendTXT( clientID, &b, 1 );
+	return 0;
+
+}
+
+//---- print section ----//
+
+size_t shellminatorWebSocketChannel::print( char c ){
+
+	if( server ) return server -> sendTXT( clientID, (uint8_t*)&c, 1 );
+	return 0;
+
+}
+
+size_t shellminatorWebSocketChannel::print( uint8_t b ){
+
+	char outBuff[10];
+	uint32_t dataSize;
+
+	snprintf( outBuff, 10, "%u", (int)b );
+
+	dataSize = strlen( outBuff );
+
+	if( server ) return server -> sendTXT( clientID, (uint8_t*)outBuff, dataSize );
+	return 0;
+
+}
+
+size_t shellminatorWebSocketChannel::print( char *str ){
+
+	uint32_t dataSize;
+
+	dataSize = strlen( str );
+
+	if( server ) return server -> sendTXT( clientID, (uint8_t*)str, dataSize );
+	return 0;
+
+}
+
+size_t shellminatorWebSocketChannel::print( const char *str ){
+
+	uint32_t dataSize;
+
+	dataSize = strlen( str );
+
+	if( server ) return server -> sendTXT( clientID, (uint8_t*)str, dataSize );
+	return 0;
+
+}
+
+WebSocketsServer* shellminatorWebSocketChannel::getServerObject(){
+
+	return server;
+
+}
+
+int8_t shellminatorWebSocketChannel::getClientID(){
+
+	return clientID;
+
+}
+
+#endif

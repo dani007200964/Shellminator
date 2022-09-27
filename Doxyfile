@@ -61,7 +61,7 @@ PROJECT_BRIEF          = "Simple Terminal"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = docs/images/logo.png
+PROJECT_LOGO           = docs/images/logo.svg
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -1332,7 +1332,7 @@ HTML_HEADER            = docs/Style/doxygen-custom/header.html
 # that doxygen normally uses.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_FOOTER            =
+HTML_FOOTER            = docs/Style/doxygen-custom/footer.html
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading style
 # sheet that is used by each HTML page. It can be used to fine-tune the look of
@@ -1374,7 +1374,10 @@ HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-custom/custom.css \
 HTML_EXTRA_FILES       = docs/Style/doxygen-awesome-darkmode-toggle.js \
                          docs/Style/doxygen-awesome-fragment-copy-button.js \
                          docs/Style/doxygen-awesome-paragraph-link.js \
-                         docs/Style/doxygen-custom/toggle-alternative-theme.js
+                         docs/Style/doxygen-custom/toggle-alternative-theme.js \
+                         docs/images/logo_footer.png \
+                         docs/images/arduino_logo.png \
+                         docs/images/platformio_logo.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

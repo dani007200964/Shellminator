@@ -39,6 +39,10 @@ SOFTWARE.
   #endif
 #endif
 
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+#include <WebSocketsServer.h>
+#endif
+
 const char *Shellminator::version = SHELLMINATOR_VERSION;
 
 #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
@@ -248,6 +252,59 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
   clientTimeout = clientTimeout_p;
 
+}
+
+#endif
+
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+Shellminator::Shellminator(	WebSocketsServer *wsServer, uint8_t serverID ){
+
+  webSocketChannel.select( wsServer, serverID );
+  channel = &webSocketChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+
+}
+
+Shellminator::Shellminator(	WebSocketsServer *wsServer, uint8_t serverID, void( *execution_fn_p )( char* ) ){
+
+  webSocketChannel.select( wsServer, serverID );
+  channel = &webSocketChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // passing execution_fn_p to execution_fn
+  execution_fn = execution_fn_p;
+
+}
+
+void Shellminator::webSocketPush( uint8_t data ){
+  webSocketChannel.push( data );
+}
+
+void Shellminator::webSocketPush( uint8_t* data, size_t size ){
+  webSocketChannel.push( data, size );
 }
 
 #endif

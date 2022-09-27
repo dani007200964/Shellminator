@@ -36,29 +36,29 @@ SOFTWARE.
 
 #ifdef ARDUINO
 
-#ifndef SHELLMINATOR_USE_ARDUINO_SERIAL
-
   #ifndef SHELLMINATOR_USE_ARDUINO_SERIAL
-  #define SHELLMINATOR_USE_ARDUINO_SERIAL
+
+    #ifndef SHELLMINATOR_USE_ARDUINO_SERIAL
+    #define SHELLMINATOR_USE_ARDUINO_SERIAL
+    #endif
+
   #endif
 
-#endif
+  #if defined(ARDUINO_AVR_LEONARDO)
 
-#if defined(ARDUINO_AVR_LEONARDO)
+    #ifndef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+    #define SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+    #endif
 
-  #ifndef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  #define SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
   #endif
 
-#endif
+  #if defined(ARDUINO_AVR_MICRO)
 
-#if defined(ARDUINO_AVR_MICRO)
+    #ifndef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+    #define SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
+    #endif
 
-  #ifndef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  #define SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
   #endif
-
-#endif
 
 #endif
 
@@ -92,6 +92,14 @@ SOFTWARE.
   #define SHELLMINATOR_BANNER_PATH_LEN 20
   #endif
 
+  #ifdef __has_include
+    #if __has_include (<WebSocketsServer.h>)
+  		#ifndef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+      	#define SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+  		#endif
+    #endif
+  #endif
+
 #endif
 
 #ifdef ESP8266
@@ -122,6 +130,14 @@ SOFTWARE.
 
   #ifndef SHELLMINATOR_BANNER_PATH_LEN
   #define SHELLMINATOR_BANNER_PATH_LEN 20
+  #endif
+
+  #ifdef __has_include
+    #if __has_include (<WebSocketsServer.h>)
+  		#ifndef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+      	#define SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+  		#endif
+    #endif
   #endif
 
 #endif
@@ -159,6 +175,10 @@ SOFTWARE.
 
 #ifndef SHELLMINATOR_LOGO_COLOR
 #define SHELLMINATOR_LOGO_COLOR RED
+#endif
+
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+#define SHELLMINATOR_WEBSOCKET_BUFFER_LEN 50
 #endif
 
 #endif

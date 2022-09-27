@@ -44,7 +44,7 @@ SOFTWARE.
         const ws = new WebSocket( "ws://192.168.100.17:81" );
 
         ws.onopen = function(e){
-          ws.send( "Socket open!" );
+          console.log( "Websocket opened!" );
         }
 
         ws.onclose = function(e){
@@ -70,7 +70,6 @@ SOFTWARE.
 
 
         term.open(document.getElementById('terminal'));
-        term.write( "web shell $ " );
 
         term.onKey( key => {
           const char = key.domEvent.key;

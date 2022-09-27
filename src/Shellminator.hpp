@@ -50,6 +50,11 @@ SOFTWARE.
 	#ifdef ESP32
 	#include <WiFi.h>
 	#endif
+
+	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+	#include <WebSocketsServer.h>
+	#endif
+
 #endif
 
 #ifdef __has_include
@@ -177,6 +182,18 @@ public:
 	void stopServer();
 
 	void setClientTimeout( uint16_t clientTimeout_p );
+
+#endif
+
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+	Shellminator( WebSocketsServer *wsServer, uint8_t serverID );
+
+	Shellminator(	WebSocketsServer *wsServer, uint8_t serverID, void( *execution_fn_p )( char* ) );
+
+	void webSocketPush( uint8_t data );
+
+	void webSocketPush( uint8_t* data, size_t size );
 
 #endif
 
@@ -644,6 +661,12 @@ private:
 	static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[ 3 ];
 
   #endif
+
+	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+	shellminatorWebSocketChannel webSocketChannel;
+
+	#endif
 
   /// Pointer to the communication class. By default
   /// it points to the default response handler.
