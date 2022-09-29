@@ -39,8 +39,12 @@ SOFTWARE.
       <div id="terminal"></div>
       <script>
         var term = new Terminal({
-          cursorBlink: "block"
+          cursorBliknk: "true",
+          cursorStyle: "bar",
+          //allowTransparency: "true"
         });
+
+        term.write( "Hello \x1B[6;37mBello!" );
         const ws = new WebSocket( "ws://192.168.100.17:81" );
 
         ws.onopen = function(e){
@@ -66,8 +70,6 @@ SOFTWARE.
         ws.onmessage = function(e){
           term.write( e.data );
         }
-
-
 
         term.open(document.getElementById('terminal'));
 

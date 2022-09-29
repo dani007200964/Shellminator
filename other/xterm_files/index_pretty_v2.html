@@ -1,0 +1,400 @@
+<!doctype html>
+<!--
+* Created on Aug 12 2022
+*
+* Copyright (c) 2022 - Daniel Hajnal
+* hajnal.daniel96@gmail.com
+* This file is part of the Shellminator project.
+* Modified 2022.009.12
+
+MIT License
+
+Copyright (c) 2020 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Terminal</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="xterm.css" />
+<script src="xterm.js"></script>
+
+<style>
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height:100%;
+  background-color: #212F3C;
+}
+
+html {
+  height: 100%;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #34495E;
+  padding: 10px 10px;
+}
+
+.header-right {
+  float: right;
+}
+
+.button {
+  overflow: hidden;
+  background-color: #EBF5FB;
+  float: left;
+  color: #0B5345;
+  text-align: center;
+  padding: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 20px;
+  border-radius: 5px;
+  border-color: #EBF5FB;
+}
+
+.button:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #34495E;
+  color: white;
+  text-align: center;
+  padding: 8px 8px;
+}
+
+.footer p {
+  font-size: 12px;
+  display: inline;
+}
+
+.footer a {
+  font-size: 12px;
+  text-decoration: none;
+  color: red;
+}
+
+.footer a.copyright {
+  font-size: 12px;
+  color:white;
+}
+
+.speech-bubble {
+  background: #FFFFFF;
+  color: #34495E;
+  padding: 0.7em 1em;
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  border-radius: 0 1em 1em 1em;
+  box-shadow: 5px 5px 10px #34495E;
+  z-index: 3000;
+
+}
+
+.boubble-button {
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 0px 0px;
+  transition: 0.1s;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.boubble-button:hover {
+  transform: rotate(90deg);
+  transition: 0.1s;
+}
+
+.logo-button {
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 400px;
+  height: 30px;
+  padding: 0px 0px;
+}
+
+.shortcut-window {
+  background: rgba(52, 73, 94, 0.5);
+  color: #fff;
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin:-250px 0 0 -300px;
+  width:600px;
+  height:500px;
+  border: solid;
+  border-radius: 1em 1em 1em 1em;
+  box-shadow: 0px 0px 10px #34495E;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  font-size: 30px;
+  z-index: 4000;
+}
+
+.shortcut-window b {
+  color: red;
+}
+
+ul {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  display: inline-block;
+	text-align: left;
+  list-style-position: outside;
+}
+
+.terminal-container {
+  overflow: hidden;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+  box-shadow: 0px 0px 20px #34495E;
+}
+
+.xterm .xterm-viewport {
+    width: initial !important;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header" id="header">
+  <button class="logo-button" id="logoButton">
+    <img src="logo.svg">
+  </button>
+  <div class="header-right">
+    <button class="button" type="button" id="shortcutButton">Shortcuts</button>
+  </div>
+
+  <div class="speech-bubble" id="bubbleDiv">
+    <p id="bubbleText">Hello</p>
+    <button class="boubble-button" type="button" id="boubbleCloseButton">
+      <img src="close.svg" height="20px" width="20px">
+    </button>
+  </div>
+
+</div>
+
+<div class="shortcut-window" id="shortcutWindow">
+  <p>Shortcut Keyes</p>
+
+  <ul>
+    <li><b>Arrow Up:</b> steps backward in the command history.</li>
+    <li><b>Arrow Down:</b> steps forward in the command history.</li>
+    <li><b>Page-Up:</b> history search and auto-complete backward.</li>
+    <li><b>Page-Down:</b> history search and auto-complete forward.</li>
+    <li><b>Ctrl-C:</b> Abort key or clear line.</li>
+    <li><b>Ctrl-A:</b> Jump cursor to line beginning.</li>
+  </ul>
+
+</div>
+
+
+<div class="terminal-container" id="terminal">
+
+</div>
+
+<div class="footer" id="footer">
+  <p>Powered by</p>
+  <a href="https://github.com/dani007200964/Shellminator">Shellminator</a>
+  <a class="copyright" title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com">&nbsp;|&nbsp; &copy; 2020-<script>document.write(new Date().getFullYear())</script> Daniel Hajnal </a>
+</div>
+
+</body>
+</html>
+
+<script>
+const bubbleText = document.getElementById("bubbleText");
+const bubbleDiv = document.getElementById("bubbleDiv");
+const shortcutWindow = document.getElementById("shortcutWindow");
+
+const boubbleCloseButton = document.getElementById("boubbleCloseButton");
+const logoButton = document.getElementById("logoButton");
+const shortcutButton = document.getElementById("shortcutButton");
+
+var showShortcuts = false;
+var showBoubble = false;
+
+const famousQuotes = [
+  "Hasta la vista, baby!",
+  "Come with me if you want to live",
+  "I like this car",
+  "I don’t know how much longer I can hold this",
+  "I need your clothes, your boots, and your motorcycle",
+  "I’ll be back"
+];
+
+var prevQuoteID = -1;
+
+bubbleDiv.style.display = "none";
+shortcutWindow.style.display = "none";
+
+logoButton.addEventListener( "click", () => {
+
+  //var quoteID = famousQuotes[ Math.floor( Math.random() * famousQuotes.length ) ];
+  var quoteID = Math.floor( Math.random() * famousQuotes.length );
+
+  if( prevQuoteID >= 0 ){
+
+    while( quoteID == prevQuoteID ){
+      quoteID = Math.floor( Math.random() * famousQuotes.length );
+    }
+
+  }
+  prevQuoteID = quoteID;
+  bubbleText.innerHTML = famousQuotes[ quoteID ];
+
+  if( showBoubble == false ){
+    bubbleDiv.style.display = "block";
+    showBoubble = true;
+  }
+
+});
+
+boubbleCloseButton.addEventListener( "click", () => {
+
+  if( showBoubble == true ){
+    bubbleDiv.style.display = "none";
+    showBoubble = false;
+  }
+
+
+});
+
+shortcutButton.addEventListener( "click", () => {
+
+  if( showShortcuts == true ){
+    shortcutWindow.style.display = "none";
+    showShortcuts = false;
+  }
+
+  else{
+    shortcutWindow.style.display = "block";
+    showShortcuts = true;
+  }
+
+
+});
+
+const term = new Terminal({
+  cursorBliknk: "true",
+  cursorStyle: "bar",
+});
+
+var terminalFontSize = 20;
+
+term.setOption( "fontSize", terminalFontSize );
+
+term.open(document.getElementById('terminal'));
+
+term.write( "Hello Bello! 123456789 1234asdasd" );
+
+function resizeTerminal(){
+  var docHeight = document.body.clientHeight;
+  var headerHeight = document.getElementById('header').getBoundingClientRect().height;
+  var footerHeight = document.getElementById('footer').getBoundingClientRect().height
+  var terminalHeight = Math.floor( docHeight - headerHeight - footerHeight );
+  term.setOption( "fontSize", terminalFontSize );
+  var newWidth = Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) * 1.5 );
+  var newHeight = Math.floor( terminalHeight / term.getOption( "fontSize" ) / 1.3 )
+
+  while( ( newWidth < 62 ) && ( term.getOption( "fontSize" ) > 8 ) ){
+    term.setOption( "fontSize", term.getOption( "fontSize" ) - 1 );
+    newWidth = Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) * 1.5 );
+    newHeight = Math.floor( terminalHeight / term.getOption( "fontSize" ) / 1.3 )
+  }
+
+  term.resize( newWidth, newHeight );
+  console.log( Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) ) );
+  console.log(  );
+}
+
+resizeTerminal();
+
+window.onresize = function () {
+  resizeTerminal();
+};
+
+const ws = new WebSocket( "ws://192.168.100.17:81" );
+
+ws.onopen = function(e){
+  console.log( "Websocket opened!" );
+}
+
+ws.onclose = function(e){
+
+  if( e.wasClean ){
+
+    console.log( "Websocket was closed cleanly!" );
+
+  }
+
+  else{
+
+    console.log( "Websocket connection died!" );
+
+  }
+
+}
+
+ws.onmessage = function(e){
+  term.write( e.data );
+}
+
+term.onKey( key => {
+  const char = key.domEvent.key;
+  ws.send( key.key );
+} );
+
+
+</script>
