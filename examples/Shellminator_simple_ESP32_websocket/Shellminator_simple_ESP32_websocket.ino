@@ -1,15 +1,12 @@
 /*
- * Created on Aug 10 2020
+ * Created on Sept 10 2022
  *
- * Copyright (c) 2020 - Daniel Hajnal
+ * Copyright (c) 2022 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.08
+ * Modified 2022.09.30
  *
- * To test this example, you need a terminal emulator like PuTTY or Minicom.
- * This example shows a simple setup forShellminator. It will create an
- * interactive interface, but it does not execute any command.
- * See Shellminator_execute example for further information.
+ * This example shows how to use the websocket implemenation of Shellminator.
 */
 
 #include <WebSocketsServer.h> // <- https://github.com/Links2004/arduinoWebSockets
@@ -87,37 +84,46 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 
   // This implementation only works woth one websocket based terminal client.
   // Every websocket client get an identifier from 0 - 255. The num argument
-  // is this identifier.
+  // is this identifier. We have to close every other client, than 0.
   if( num > 0 ){
 
+    // Send the problem to the client, than close it.
     webSocket.sendTXT( num, "\r\nNo more connections allowed!\r\n" );
     webSocket.disconnect( num );
     return;
 
   }
 
-  switch(type) {
-  case WStype_DISCONNECTED:
+  // Depending on the event, we have to decide the next action.
+  switch( type ){
 
-    Serial.printf("[%u] Disconnected!\n", num);
-    break;
+    // The client disconnected.
+    case WStype_DISCONNECTED:
 
-  case WStype_CONNECTED:
+      // Currently, just print out the event.
+      Serial.printf("[%u] Disconnected!\n", num);
+      break;
 
-    /*
-    IPAddress ip = webSocket.remoteIP(num);
-    Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
-    */
+    // New connection.
+    case WStype_CONNECTED:
 
-    shell.clear();
-    shell.begin( "arnold" );
-    break;
+      // Clear the screen and print the logo with the banner.
+      shell.clear();
+      shell.begin( "arnold" );
+      break;
 
-  case WStype_TEXT:
+    // Text data incoming
+    case WStype_TEXT:
 
-    Serial.printf("[%u] get Text: %s\n", num, payload);
-    shell.webSocketPush( payload, length );
-    break;
+      // Print to serial, just for debug.
+      Serial.printf("[%u] get Text: %s\n", num, payload);
+
+      // In the Shellminator-IO files, the websocket channel
+      // is implemented as a circular buffer. The incoming data
+      // from the clients has to be pushed to this circular buffer
+      // in the websocket event.
+      shell.webSocketPush( payload, length );
+      break;
 
   }
 
@@ -156,8 +162,6 @@ void setup() {
 
   }
 
-  //shell.beginServer();
-
   Serial.println( " [ OK ]" );
 
   Serial.println( "Connected!" );
@@ -169,13 +173,25 @@ void setup() {
   // initialize shell object.
   shell.begin( "arnold" );
 
+  // Index page handler.
   server.on("/", handleIndex);
+
+  // xterm.js handler.
   server.on("/xterm.js", handleXtermJs);
+
+  // xterm.css handler.
   server.on("/xterm.css", handleXtermCss);
+
+  // Not found handler.
   server.onNotFound(handleNotFound);
+
+  // Start webserver.
   server.begin();
 
+  // Start websocket server.
   webSocket.begin();
+
+  // Attach the webSocketEvent function to the websocket server.
   webSocket.onEvent(webSocketEvent);
 
 }
