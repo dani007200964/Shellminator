@@ -258,8 +258,10 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
-Shellminator::Shellminator(	WebSocketsServer *wsServer, uint8_t serverID ){
+Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
 
+  wsServer = wsServer_p;
+  serverID = serverID_p;
   webSocketChannel.select( wsServer, serverID );
   channel = &webSocketChannel;
 
@@ -305,6 +307,14 @@ void Shellminator::webSocketPush( uint8_t data ){
 
 void Shellminator::webSocketPush( uint8_t* data, size_t size ){
   webSocketChannel.push( data, size );
+}
+
+void Shellminator::websocketDisconnect(){
+
+  if( wsServer ){
+    wsServer -> disconnect( serverID );
+  }
+
 }
 
 #endif
@@ -1044,6 +1054,40 @@ void Shellminator::process( char new_char ) {
         // We have finished so we can break from the switch.
         break;
 
+        // Home key pressed in xTerm.
+        case 'H':
+          escape_state = 0;
+
+          if( homeKeyFunc ){
+
+            homeKeyFunc();
+            break;
+
+          }
+
+          // send the cursor to the begining of the buffer
+          cursor = 0;
+          redrawLine();
+
+          break;
+
+        // End key pressed in xTerm.
+        case 'F':
+          escape_state = 0;
+
+          if( endKeyFunc ){
+
+            endKeyFunc();
+            break;
+
+          }
+
+          // send the cursor to the end of the buffer
+          cursor = cmd_buff_cntr;
+          redrawLine();
+
+          break;
+
       // Check for Del key;
       case '3':
         escape_state = 3;
@@ -1242,6 +1286,12 @@ void Shellminator::process( char new_char ) {
     #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
     clientDisconnect();
+
+    #endif
+
+    #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+    websocketDisconnect();
 
     #endif
 
@@ -2025,7 +2075,9 @@ void Shellminator::historySearchForward(){
 
     cmd_buff_dim_save--;
 
-    if( strncmp( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim_save ], cursor ) == 0 ){
+    if( strncmp( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim_save - 1 ], cursor ) == 0 ){
+
+      Serial.printf( "match at cmd_buff_dim_save: %d",  cmd_buff_dim_save);
 
       cmd_buff_dim = cmd_buff_dim_save;
 
@@ -2117,12 +2169,12 @@ void Shellminator::redrawHistorySearch(){
 
           #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-          setTerminalCharacterColor( acceleratorBufferPtr, REVERSE, WHITE );
+          setTerminalCharacterColor( acceleratorBufferPtr, BOLD, YELLOW );
           acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
 
           #else
 
-          setTerminalCharacterColor( REVERSE, WHITE );
+          setTerminalCharacterColor( BOLD, YELLOW );
 
           #endif
 

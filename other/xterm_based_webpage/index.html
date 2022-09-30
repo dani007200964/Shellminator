@@ -1,11 +1,11 @@
 <!doctype html>
 <!--
-* Created on Aug 12 2022
+* Created on Sept 17 2022
 *
 * Copyright (c) 2022 - Daniel Hajnal
 * hajnal.daniel96@gmail.com
 * This file is part of the Shellminator project.
-* Modified 2022.009.12
+* Modified 2022.09.30
 
 MIT License
 
@@ -36,7 +36,7 @@ SOFTWARE.
 
 <title>Terminal</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <link rel="stylesheet" href="xterm.css" />
 <script src="xterm.js"></script>
 
@@ -180,6 +180,38 @@ html {
   color: red;
 }
 
+.reconnect-button {
+  background: rgba(52, 73, 94, 0.5);
+  color: #fff;
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin:-150px 0 0 -150px;
+  width:300px;
+  height:300px;
+  border: solid;
+  border-radius: 50%;
+  box-shadow: 0px 0px 20px #34495E;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  font-size: 30px;
+  z-index: 3000;
+
+}
+
+.reconnect-button:hover {
+  color: red;
+  box-shadow: 0px 0px 20px red;
+}
+
+.reconnect-button p {
+  position: relative;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+}
+
 ul {
   font-size: 20px;
   position: absolute;
@@ -201,7 +233,7 @@ ul {
 }
 
 .xterm .xterm-viewport {
-    width: initial !important;
+  width: initial !important;
 }
 
 </style>
@@ -233,12 +265,18 @@ ul {
     <li><b>Arrow Down:</b> steps forward in the command history.</li>
     <li><b>Page-Up:</b> history search and auto-complete backward.</li>
     <li><b>Page-Down:</b> history search and auto-complete forward.</li>
+    <li><b>Ctrl-A:</b> Jump cursor to the beginning of the line.</li>
     <li><b>Ctrl-C:</b> Abort key or clear line.</li>
-    <li><b>Ctrl-A:</b> Jump cursor to line beginning.</li>
+    <li><b>Ctrl-D:</b> Close session.</li>
+    <li><b>Ctrl-E:</b> Jump cursor to the end of the line.</li>
+    <li><b>Ctrl-R:</b> Reverse-i search.</li>
+    <li><b>Home:</b> Jump cursor to the beginning of the line.</li>
+    <li><b>End:</b> Jump cursor to the end of the line.</li>
   </ul>
 
 </div>
 
+<button class="reconnect-button" type="button" id="reconnectButton">&#127760; Reconnect &#128279;</button>
 
 <div class="terminal-container" id="terminal">
 
@@ -254,65 +292,83 @@ ul {
 </html>
 
 <script>
+
+/* Text related objects */
 const bubbleText = document.getElementById("bubbleText");
 const bubbleDiv = document.getElementById("bubbleDiv");
 const shortcutWindow = document.getElementById("shortcutWindow");
 
+/* Buttons */
 const boubbleCloseButton = document.getElementById("boubbleCloseButton");
 const logoButton = document.getElementById("logoButton");
 const shortcutButton = document.getElementById("shortcutButton");
+const reconnectButton = document.getElementById("reconnectButton");
 
+/* Show - hide states */
 var showShortcuts = false;
 var showBoubble = false;
 
+/* Arnold's best lines */
 const famousQuotes = [
   "Hasta la vista, baby!",
   "Come with me if you want to live",
   "I like this car",
-  "I don’t know how much longer I can hold this",
+  "I don't know how much longer I can hold this",
   "I need your clothes, your boots, and your motorcycle",
-  "I’ll be back"
+  "I'll be back"
 ];
 
+/* Stores the previously generated quote index */
 var prevQuoteID = -1;
 
+/* At startup we have to hide the popups */
 bubbleDiv.style.display = "none";
 shortcutWindow.style.display = "none";
+reconnectButton.style.display = "none";
 
+/* Logo click event */
 logoButton.addEventListener( "click", () => {
 
-  //var quoteID = famousQuotes[ Math.floor( Math.random() * famousQuotes.length ) ];
+  /* Calculate random index for famousQuotes */
   var quoteID = Math.floor( Math.random() * famousQuotes.length );
 
+  /* If prevQuoteID is greater than zero, that means an ID was generated since the page is loaded */
   if( prevQuoteID >= 0 ){
 
+    /* This setion doesn't allow a quote to be appear twice in a row */
     while( quoteID == prevQuoteID ){
       quoteID = Math.floor( Math.random() * famousQuotes.length );
     }
 
   }
+
+  /* Save the new ID and set it to the textbox */
   prevQuoteID = quoteID;
   bubbleText.innerHTML = famousQuotes[ quoteID ];
 
+  /* If the textbox was hidden, make it visible */
   if( showBoubble == false ){
+
     bubbleDiv.style.display = "block";
     showBoubble = true;
+
   }
 
 });
 
+/* Quote box close click event */
 boubbleCloseButton.addEventListener( "click", () => {
 
-  if( showBoubble == true ){
-    bubbleDiv.style.display = "none";
-    showBoubble = false;
-  }
-
+  /* Hide the quote text box */
+  bubbleDiv.style.display = "none";
+  showBoubble = false;
 
 });
 
+/* Shortcut button click event */
 shortcutButton.addEventListener( "click", () => {
 
+  /* Toggle the shortcut window visibility */
   if( showShortcuts == true ){
     shortcutWindow.style.display = "none";
     showShortcuts = false;
@@ -326,74 +382,170 @@ shortcutButton.addEventListener( "click", () => {
 
 });
 
+/* Reconnect button click event */
+reconnectButton.addEventListener( "click", () => {
+
+  console.log( "Reconnect Button!" );
+  connectToWebSocket();
+
+});
+
+/* Create a new xTerm object */
 const term = new Terminal({
   cursorBliknk: "true",
   cursorStyle: "bar",
 });
 
+/* Set the font size of the terminal */
 var terminalFontSize = 20;
 
+/* Apply the font size and the scrollback memory depth */
 term.setOption( "fontSize", terminalFontSize );
+term.setOption('scrollback', 1000);
 
+/* Open terminal object */
 term.open(document.getElementById('terminal'));
 
-term.write( "Hello Bello! 123456789 1234asdasd" );
-
+/* This function has to be called every time when the page has been resized */
 function resizeTerminal(){
+
+  /* Height of the html document */
   var docHeight = document.body.clientHeight;
+
+  /* Height of the header bar */
   var headerHeight = document.getElementById('header').getBoundingClientRect().height;
+
+  /* Height of the footer bar */
   var footerHeight = document.getElementById('footer').getBoundingClientRect().height
+
+  /* Height of the terminal area( middle of the screan ) */
   var terminalHeight = Math.floor( docHeight - headerHeight - footerHeight );
+
+  /* Set the default font size */
   term.setOption( "fontSize", terminalFontSize );
+
+  /* Calculate the width and height of the new terminal window */
   var newWidth = Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) * 1.5 );
   var newHeight = Math.floor( terminalHeight / term.getOption( "fontSize" ) / 1.3 )
 
+  /* If it's too wide, we try to make the font size smaller to make it fit in the page */
   while( ( newWidth < 62 ) && ( term.getOption( "fontSize" ) > 8 ) ){
+
     term.setOption( "fontSize", term.getOption( "fontSize" ) - 1 );
     newWidth = Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) * 1.5 );
     newHeight = Math.floor( terminalHeight / term.getOption( "fontSize" ) / 1.3 )
+
   }
 
+  /* Resize the terminal window with the calculated values */
   term.resize( newWidth, newHeight );
-  console.log( Math.floor( document.body.clientWidth / term.getOption( "fontSize" ) ) );
-  console.log(  );
+
 }
 
+/* At startup resize the terminal window */
 resizeTerminal();
 
+/* Every time when the page size changes, resize the terminal window */
 window.onresize = function () {
   resizeTerminal();
 };
 
-const ws = new WebSocket( "ws://192.168.100.17:81" );
+/* Get the websocket host */
+const wsHost = "ws://" + window.location.hostname + ":81";
+/* For testing -> const wsHost = "ws://" + "192.168.100.17" + ":81"; */
 
-ws.onopen = function(e){
+/* Object for time data */
+var time = new Date();
+
+/* Websocket open event */
+function webSocketOpenEvent( e ){
+
+  /* Print the event to the terminal with a timestamp */
+  var eventTime = "[ \x1B[1;32m" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "\x1B[0;37m ] ";
   console.log( "Websocket opened!" );
+  term.write( eventTime + " Websocket opened!\r\n" );
+
+  /* Hide the reconnect popup, save flag */
+  reconnectButton.style.display = "none";
+  connected = true;
+
 }
 
-ws.onclose = function(e){
+/* Websocket close event */
+function webSocketCloseEvent( e ){
 
+  /* Print the event to the terminal with a timestamp */
+  var eventTime = "";
+
+  /* If it's the first message related to connection status, start it with new line for formatting */
+  if( connected == true ){
+    eventTime += "\r\n";
+  }
+
+  /* Save flag */
+  connected = false;
+
+  eventTime += "[ \x1B[1;31m" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "\x1B[0;37m ] ";
+
+  /* Detect if it was a clean close event */
   if( e.wasClean ){
 
-    console.log( "Websocket was closed cleanly!" );
+    console.log( "Websocket was closed by the server!" );
+    term.write( eventTime + " Websocket was closed cleanly!\r\n" );
+
+    /* Show the reconnect button, to make it nice */
+    reconnectButton.style.display = "block";
 
   }
 
+  /* Detect if it was a bad( timeout, ... ) close event */
   else{
 
+    /* This case we try to reconnect automatically */
     console.log( "Websocket connection died!" );
+    term.write( eventTime + " Websocket connection died!\r\n" );
+    connectToWebSocket();
 
   }
 
 }
 
-ws.onmessage = function(e){
+/* Websocket message event */
+function webSocketOnMessageEvent( e ){
+
+  /* Just push the data to the terminal screen */
   term.write( e.data );
+
 }
 
-term.onKey( key => {
-  const char = key.domEvent.key;
-  ws.send( key.key );
+/* Websocket object and connection flag */
+var ws;
+var connected = false;
+
+/* This function has to be called, when we want to connect to the websocket */
+function connectToWebSocket(){
+
+  /* Create a new websocket object and attach callbacks to it */
+  ws = new WebSocket( wsHost );
+  ws.onopen = webSocketOpenEvent;
+  ws.onclose = webSocketCloseEvent;
+  ws.onmessage= webSocketOnMessageEvent;
+  var eventTime = "[ \x1B[1;33m" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "\x1B[0;37m ] ";
+  term.write( eventTime + " Trying to connect to terminal server!\r\n" );
+
+}
+
+/* Try to connect by default */
+connectToWebSocket();
+
+/* Every time when a key is pressed in the terminal this callback will be called */
+term.onData( data => {
+
+  /* If connected, send the data to the websocket */
+  if( connected ){
+    ws.send( data );
+  }
+
 } );
 
 

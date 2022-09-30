@@ -12,28 +12,35 @@
  * See Shellminator_execute example for further information.
 */
 
-// Todo home, end not work with xterm
-
-#include <WebSocketsServer.h>
+#include <WebSocketsServer.h> // <- https://github.com/Links2004/arduinoWebSockets
 #include <WiFi.h>
+#include <WebServer.h>
+#include <WiFiClient.h>
 #include "esp_wifi.h"
 
 #include "Shellminator.hpp"
+#include "Shellminator-Browser-Response.hpp" // <- It contains the webpage data
 
+// Websocket port for Shellminator.
+#define WEBSOCKET_PORT 81
 
-#define SERVER_PORT 81
+// Webserver port for webpage and contents.
+#define WEBSERVER_PORT 80
 
 // WiFi credentials.
-const char* ssid     = "DIGI-b4vC";
-const char* password = "vyFJ6mU8";
+const char* ssid     = "WIFI-SSID";
+const char* password = "WIFI-PASS";
 
+// Create websocket object.
+WebSocketsServer webSocket = WebSocketsServer( WEBSOCKET_PORT );
 
-
-WebSocketsServer webSocket = WebSocketsServer(81);
+// Create webserver object.
+WebServer server(80);
 
 // Create a Shellminator object, and initialize it to use WiFiServer
 Shellminator shell( &webSocket, 0 );
 
+// Shellminator logo.
 const char logo[] =
 
 "   _____ __         ____          _             __            \r\n"
@@ -44,39 +51,75 @@ const char logo[] =
 "                                                              \r\n"
 ;
 
+// This function generates a response for the index page.
+void handleIndex(){
+  server.send_P(200, "text/html", shellminator_html_response, shellminator_html_response_len );
+}
 
+// This function generates a response for /xterm.js
+void handleXtermJs(){
+  server.send_P(200, "application/javascript", shellminator_xterm_js_response, shellminator_xterm_js_response_len );
+}
+
+// This function generates a response for /xterm.css
+void handleXtermCss(){
+  server.send_P(200, "text/css", shellminator_xterm_css_response, shellminator_xterm_css_response_len );
+}
+
+// This function generates a response for everything else.
+void handleNotFound() {
+  String message = "File Not Found\n\n";
+  message += "URI: ";
+  message += server.uri();
+  message += "\nMethod: ";
+  message += (server.method() == HTTP_GET) ? "GET" : "POST";
+  message += "\nArguments: ";
+  message += server.args();
+  message += "\n";
+  for (uint8_t i = 0; i < server.args(); i++) {
+    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+  }
+  server.send(404, "text/plain", message);
+}
+
+// This function will be called on websocket event.
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 
-    switch(type) {
-        case WStype_DISCONNECTED:
-            Serial.printf("[%u] Disconnected!\n", num);
-            break;
-        case WStype_CONNECTED:
-            {
-                IPAddress ip = webSocket.remoteIP(num);
-                Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
+  // This implementation only works woth one websocket based terminal client.
+  // Every websocket client get an identifier from 0 - 255. The num argument
+  // is this identifier.
+  if( num > 0 ){
 
-                shell.clear();
-                shell.begin( "arnold" );
-            }
-            break;
-        case WStype_TEXT:
-            Serial.printf("[%u] get Text: %s\n", num, payload);
-            shell.webSocketPush( payload, length );
+    webSocket.sendTXT( num, "\r\nNo more connections allowed!\r\n" );
+    webSocket.disconnect( num );
+    return;
 
-            // send message to client
-            // webSocket.sendTXT(num, "message here");
+  }
 
-            // send data to all connected clients
-            // webSocket.broadcastTXT("message here");
-            break;
-      case WStype_ERROR:      
-      case WStype_FRAGMENT_TEXT_START:
-      case WStype_FRAGMENT_BIN_START:
-      case WStype_FRAGMENT:
-      case WStype_FRAGMENT_FIN:
-      break;
-    }
+  switch(type) {
+  case WStype_DISCONNECTED:
+
+    Serial.printf("[%u] Disconnected!\n", num);
+    break;
+
+  case WStype_CONNECTED:
+
+    /*
+    IPAddress ip = webSocket.remoteIP(num);
+    Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
+    */
+
+    shell.clear();
+    shell.begin( "arnold" );
+    break;
+
+  case WStype_TEXT:
+
+    Serial.printf("[%u] get Text: %s\n", num, payload);
+    shell.webSocketPush( payload, length );
+    break;
+
+  }
 
 }
 
@@ -121,10 +164,16 @@ void setup() {
   Serial.print( "Device IP: " );
   Serial.print( WiFi.localIP() );
   Serial.print( " at port: " );
-  Serial.println( SERVER_PORT );
+  Serial.println( WEBSOCKET_PORT );
 
   // initialize shell object.
   shell.begin( "arnold" );
+
+  server.on("/", handleIndex);
+  server.on("/xterm.js", handleXtermJs);
+  server.on("/xterm.css", handleXtermCss);
+  server.onNotFound(handleNotFound);
+  server.begin();
 
   webSocket.begin();
   webSocket.onEvent(webSocketEvent);
@@ -134,6 +183,8 @@ void setup() {
 void loop() {
 
   shell.update();
+  server.handleClient();
   webSocket.loop();
+  delay( 2 );
 
 }

@@ -187,13 +187,15 @@ public:
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
-	Shellminator( WebSocketsServer *wsServer, uint8_t serverID );
+	Shellminator( WebSocketsServer *wsServer_p, uint8_t serverID_p );
 
-	Shellminator(	WebSocketsServer *wsServer, uint8_t serverID, void( *execution_fn_p )( char* ) );
+	Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) );
 
 	void webSocketPush( uint8_t data );
 
 	void webSocketPush( uint8_t* data, size_t size );
+
+	void websocketDisconnect();
 
 #endif
 
@@ -664,6 +666,8 @@ private:
 
 	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
+	WebSocketsServer *wsServer = NULL;
+	uint8_t serverID;
 	shellminatorWebSocketChannel webSocketChannel;
 
 	#endif
