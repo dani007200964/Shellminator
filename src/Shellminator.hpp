@@ -80,7 +80,7 @@ SOFTWARE.
 
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
-#include "qrcodegen.h"
+#include "external/nayuki-qrcodegen/qrcodegen.h"
 
 #endif
 
@@ -187,6 +187,8 @@ public:
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
+	Shellminator( WebSocketsServer *wsServer_p );
+
 	Shellminator( WebSocketsServer *wsServer_p, uint8_t serverID_p );
 
 	Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) );
@@ -272,13 +274,23 @@ public:
   /// Draws the startup logo in the terminal
   void drawLogo();
 
-  /// This function sets the banner text.
+	/// This function prints the banner text.
+	void printBanner();
+
+	/// This function sets the banner text.
   ///
   /// It can be used when you want to change the banner text runtime.
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
 
+	/// This function sets the banner text.
+  ///
+  /// It can be used when you want to change the banner text runtime.
+  /// @param banner_p String that contains the new banner text.
+  void setBannerText( const char* banner_p );
+
 	void setBannerPathText( char* bannerPath_p );
+	void setBannerPathText( const char* bannerPath_p );
 
   /// This function attaches a logo to the terminal.
   ///
@@ -616,9 +628,6 @@ private:
   /// has some unprocessed characters.
   /// @param new_char This is the nex character that has to be processed.
   void process( char new_char );
-
-  /// This function prints the banner text.
-  void printBanner();
 
   /// This function insets a new character to the input buffer.
   void redrawLine();

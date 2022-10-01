@@ -281,8 +281,33 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
 
 }
 
-Shellminator::Shellminator(	WebSocketsServer *wsServer, uint8_t serverID, void( *execution_fn_p )( char* ) ){
+Shellminator::Shellminator(	WebSocketsServer *wsServer_p ){
 
+  wsServer = wsServer_p;
+  serverID = 0;
+  webSocketChannel.select( wsServer, serverID );
+  channel = &webSocketChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+
+}
+
+Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) ){
+
+  wsServer = wsServer_p;
+  serverID = serverID_p;
   webSocketChannel.select( wsServer, serverID );
   channel = &webSocketChannel;
 
@@ -329,7 +354,27 @@ void Shellminator::setBannerText( char* banner_p ){
 
 }
 
+void Shellminator::setBannerText( const char* banner_p ){
+
+  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
+  strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
+
+  // Just in case close the string
+  banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
+
+}
+
 void Shellminator::setBannerPathText( char* bannerPath_p ){
+
+  // Copy the content from bannerPath_p to bannerPath. Because strncpy we can be sure that it wont overflow.
+  strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
+
+  // Just in case close the string
+  banner[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
+
+}
+
+void Shellminator::setBannerPathText( const char* bannerPath_p ){
 
   // Copy the content from bannerPath_p to bannerPath. Because strncpy we can be sure that it wont overflow.
   strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
@@ -402,9 +447,6 @@ void Shellminator::begin( char* banner_p ) {
 
   // Just in case close the string
   banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
-
-  // Set the terminal color and style to the defined settings for the logo
-  setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
   // Draw the startup logo.
   drawLogo();
@@ -1318,7 +1360,14 @@ void Shellminator::process( char new_char ) {
 
   }
 
-  // todo Commander command search.
+  else if( new_char == 0x0C ){  // ctrl-l ( clear screen )
+
+    clear();
+    redrawLine();
+
+  }
+
+  // Commander command search.
   else if( new_char == '\t' ){
 
     // Auto complete section.
@@ -1995,8 +2044,14 @@ void Shellminator::drawLogo() {
 
   if( logo ){
 
+    // Set the terminal color and style to the defined settings for the logo
+    setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+
     // Draws the startup logo to the terminal interface.
     channel -> print( logo );
+
+    // Set the terminal style to normal.
+    setTerminalCharacterColor( REGULAR, WHITE );
 
   }
 
@@ -2369,7 +2424,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   for( y = 0; y < ( qr_size / 2 ); y++ ){
 
     // Print a new line at the begining of the horizontal drawing.
-    channel -> println();
+    channel -> print( "\r\n" );
 
     // Draw all horizontal 'pixels'.
     for( x = 0; x < qr_size; x++ ){
@@ -2419,7 +2474,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   if( ( qr_size % 2 ) != 0 ){
 
     // Print a new line at the begining of the horizontal drawing.
-    channel -> println();
+    channel -> print( "\r\n" );
 
     // Draw all horizontal 'pixels'.
     for( x = 0; x < qr_size; x++ ){
@@ -2445,7 +2500,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   }
 
   // Finally create a new line.
-  channel -> println();
+  channel -> print( "\r\n" );
 
 }
 

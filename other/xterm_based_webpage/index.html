@@ -39,6 +39,7 @@ SOFTWARE.
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <link rel="stylesheet" href="xterm.css" />
 <script src="xterm.js"></script>
+<script src="xterm-addon-web-links.js"></script>
 
 <style>
 * {box-sizing: border-box;}
@@ -396,6 +397,8 @@ const term = new Terminal({
   cursorStyle: "bar",
 });
 
+term.loadAddon( new WebLinksAddon.WebLinksAddon() );
+
 /* Set the font size of the terminal */
 var terminalFontSize = 20;
 
@@ -452,7 +455,7 @@ window.onresize = function () {
 
 /* Get the websocket host */
 const wsHost = "ws://" + window.location.hostname + ":81";
-/* For testing -> const wsHost = "ws://" + "192.168.100.17" + ":81"; */
+/* const wsHost = "ws://" + "192.168.100.17" + ":81"; */
 
 /* Object for time data */
 var time = new Date();

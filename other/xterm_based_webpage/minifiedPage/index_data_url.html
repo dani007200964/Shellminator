@@ -39,6 +39,7 @@ SOFTWARE.
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 <link rel="stylesheet" href="xterm.css" />
 <script src="xterm.js"></script>
+<script src="xterm-addon-web-links.js"></script>
 
 <style>
 * {box-sizing: border-box;}
@@ -395,6 +396,8 @@ const term = new Terminal({
   cursorBliknk: "true",
   cursorStyle: "bar",
 });
+
+term.loadAddon( new WebLinksAddon.WebLinksAddon() );
 
 /* Set the font size of the terminal */
 var terminalFontSize = 20;
