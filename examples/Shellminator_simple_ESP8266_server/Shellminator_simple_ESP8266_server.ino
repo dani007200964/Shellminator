@@ -1,10 +1,10 @@
 /*
- * Created on Aug 10 2020
+ * Created on Sept 10 2022
  *
- * Copyright (c) 2020 - Daniel Hajnal
+ * Copyright (c) 2022 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.08
+ * Modified 2022.09.30
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup forShellminator. It will create an
@@ -12,12 +12,23 @@
  * See Shellminator_execute example for further information.
 */
 
+#include <ESP8266WiFi.h>
+
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
 
-// Create a Shellminator object, and initialize it to use Serial
-Shellminator shell( &Serial );
+#define SERVER_PORT 23
 
+// WiFi credentials.
+const char* ssid     = "DIGI-b4vC";
+const char* password = "vyFJ6mU8";
+
+// Create an instance of the server.
+// It will be available on port 23.
+WiFiServer server( SERVER_PORT );
+
+// Create a Shellminator object, and initialize it to use WiFiServer
+Shellminator shell( &server );
 
 const char logo[] =
 
@@ -49,6 +60,31 @@ void setup() {
 
   // Print start message
   Serial.println( "Program begin..." );
+
+  // WiFi configuration section
+  Serial.print( "Connect to  WiFi: " );
+  Serial.print( ssid );
+
+
+  WiFi.mode( WIFI_STA );
+  WiFi.begin( ssid, password );
+
+  while( WiFi.status() != WL_CONNECTED ){
+
+    delay( 1000 );
+    Serial.print( "." );
+
+  }
+
+  shell.beginServer();
+
+  Serial.println( " [ OK ]" );
+
+  Serial.println( "Connected!" );
+  Serial.print( "Device IP: " );
+  Serial.print( WiFi.localIP() );
+  Serial.print( " at port: " );
+  Serial.println( SERVER_PORT );
 
   // initialize shell object.
   shell.begin( "arnold" );

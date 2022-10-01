@@ -139,6 +139,14 @@ Shellminator::Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
+#ifdef ESP32
+  #define CLIENT_STATE client.connected()
+#endif
+
+#ifdef ESP8266
+  #define CLIENT_STATE ( client.status() == ESTABLISHED )
+#endif
+
 const uint8_t Shellminator::TELNET_IAC_DONT_LINEMODE[]          = { 255, 254, 34 };
 const uint8_t Shellminator::TELNET_IAC_WILL_ECHO[]              = { 255, 251, 1 };
 const uint8_t Shellminator::TELNET_IAC_DONT_ECHO[]              = { 255, 254, 1 };
@@ -677,7 +685,7 @@ void Shellminator::process( char new_char ) {
   // General counter variable
   uint32_t i;
 
-  Serial.print( "Net data : '" );
+  Serial.print( "New data : '" );
   Serial.print(new_char);
   Serial.print("' [0x");
   Serial.print( new_char, HEX );
@@ -1763,7 +1771,7 @@ void Shellminator::update() {
     if( server -> hasClient() ){
 
       // If we are alredy connected, we have to reject the new connection.
-      if( client.connected() ){
+      if( CLIENT_STATE ){
 
         // Connection reject event!
         server -> available().stop();
@@ -1773,6 +1781,7 @@ void Shellminator::update() {
       else{
 
         // New connection event!
+        Serial.println( "New Connection!" );
         client = server -> available();
         client.setNoDelay(false);
         client.setTimeout( 1000 );
@@ -1801,9 +1810,18 @@ void Shellminator::update() {
     }
 
     // Check for disconnection
-    if( clientConnected && !client.connected() ){
+    if( clientConnected && !CLIENT_STATE ){
 
       // Client distonnect event!
+
+      // The TX and RX buffers has to be cleared.
+      // I did not noticed it on the ESP32 but it was
+      // visible with ESP8266 at new connection.
+      client.flush();
+      delay( 100 );
+      while( client.available() ){
+        client.read();
+      }
 
       client.stop();
       clientConnected = false;
@@ -1811,7 +1829,7 @@ void Shellminator::update() {
     }
 
     // If connected, we have to process the Telnet commands.
-    if( clientConnected && client.connected() ){
+    if( clientConnected && CLIENT_STATE ){
 
       // Check for availabla data.
       if( client.available() ){
@@ -1828,6 +1846,7 @@ void Shellminator::update() {
 
             if( client.peek() == 0xFF ){
 
+              Serial.println( "Telnet command!" );
               // Read the data to remove it from the buffer.
               client.read();
 

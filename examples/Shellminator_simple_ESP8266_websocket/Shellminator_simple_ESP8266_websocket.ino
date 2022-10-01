@@ -6,15 +6,13 @@
  * This file is part of the Shellminator project.
  * Modified 2022.09.30
  *
- * This example shows how to use the websocket implemenation of Shellminator
- * with multiple clients.
+ * This example shows how to use the websocket implemenation of Shellminator.
 */
 
 #include <WebSocketsServer.h> // <- https://github.com/Links2004/arduinoWebSockets
-#include <WiFi.h>
-#include <WebServer.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 #include <WiFiClient.h>
-#include "esp_wifi.h"
 
 #include "Shellminator.hpp"
 #include "Shellminator-Browser-Response.hpp" // <- It contains the webpage data
@@ -26,22 +24,17 @@
 #define WEBSERVER_PORT 80
 
 // WiFi credentials.
-const char* ssid     = "WIFI-SSID";
-const char* password = "WIFI-PASS";
+const char* ssid     = "DIGI-b4vC";
+const char* password = "vyFJ6mU8";
 
 // Create websocket object.
 WebSocketsServer webSocket = WebSocketsServer( WEBSOCKET_PORT );
 
 // Create webserver object.
-WebServer server( WEBSERVER_PORT );
+ESP8266WebServer server(80);
 
-// Create an array of Shellminator objects, and initialize them to
-// use WebSocketsServer. Each have a different ID starting from 0.
-Shellminator shell[ 3 ] = {
-  Shellminator( &webSocket, 0 ),
-  Shellminator( &webSocket, 1 ),
-  Shellminator( &webSocket, 2 )
-};
+// Create a Shellminator object, and initialize it to use WebSocketsServer
+Shellminator shell( &webSocket );
 
 // Shellminator logo.
 const char logo[] =
@@ -95,12 +88,12 @@ void handleNotFound() {
 // This function will be called on websocket event.
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 
-  // This implementation works with multiple clients. You have to check if you
-  // are in the available range of cliens.
-  if( num > 2 ){
+  // This implementation only works woth one websocket based terminal client.
+  // Every websocket client get an identifier from 0 - 255. The num argument
+  // is this identifier. We have to close every other client, than 0.
+  if( num > 0 ){
 
-    // If we ran out of available clients, send
-    // the problem to the client, than close it.
+    // Send the problem to the client, than close it.
     webSocket.sendTXT( num, "\r\nNo more connections allowed!\r\n" );
     webSocket.disconnect( num );
     return;
@@ -121,9 +114,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
     case WStype_CONNECTED:
 
       // Clear the screen and print the logo with the banner.
-      shell[ num ].clear();
-      shell[ num ].drawLogo();
-      shell[ num ].printBanner();
+      shell.clear();
+      shell.begin( "arnold" );
       break;
 
     // Text data incoming
@@ -152,10 +144,11 @@ void setup() {
   // you open the serial port.
   while( !Serial );
 
+  // Clear the terminal
+  shell.clear();
+
   // Attach the logo.
-  shell[ 0 ].attachLogo( logo );
-  shell[ 1 ].attachLogo( logo );
-  shell[ 2 ].attachLogo( logo );
+  shell.attachLogo( logo );
 
   // Print start message
   Serial.println( "Program begin..." );
@@ -165,7 +158,6 @@ void setup() {
   Serial.print( ssid );
 
   WiFi.mode( WIFI_STA );
-  WiFi.setSleep(WIFI_PS_NONE);
   WiFi.begin( ssid, password );
 
   while( WiFi.status() != WL_CONNECTED ){
@@ -179,24 +171,25 @@ void setup() {
 
   Serial.println( "Connected!" );
   Serial.print( "Device IP: " );
-  Serial.println( WiFi.localIP() );
+  Serial.print( WiFi.localIP() );
+  Serial.print( " at port: " );
+  Serial.println( WEBSOCKET_PORT );
 
-  // Give each shell object an identifier.
-  // It is only for visual purpose.
-  shell[ 0 ].setBannerPathText( "ws-0 $" );
-  shell[ 1 ].setBannerPathText( "ws-1 $" );
-  shell[ 2 ].setBannerPathText( "ws-2 $" );
+  // initialize shell object.
+  shell.begin( "arnold" );
 
-  // initialize shell objects.
-  shell[0].begin( "arnold" );
-  shell[1].begin( "arnold" );
-  shell[2].begin( "arnold" );
-
-  // Attach page handlers.
+  // Index page handler.
   server.on("/", handleIndex);
+
+  // xterm.js handler.
   server.on("/xterm.js", handleXtermJs);
+
+  // xterm.css handler.
   server.on("/xterm.css", handleXtermCss);
+
   server.on("/xterm-addon-web-links.js", handleXtermAddonWebLinks);
+
+  // Not found handler.
   server.onNotFound(handleNotFound);
 
   // Start webserver.
@@ -212,14 +205,8 @@ void setup() {
 
 void loop() {
 
-  // Process everything.
-  shell[ 0 ].update();
-  shell[ 1 ].update();
-  shell[ 2 ].update();
+  shell.update();
   server.handleClient();
   webSocket.loop();
-
-  // Give some time to the other tasks.
-  delay( 2 );
 
 }

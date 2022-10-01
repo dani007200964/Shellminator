@@ -1,10 +1,10 @@
 /*
- * Created on Aug 10 2020
+ * Created on Sept 10 2022
  *
- * Copyright (c) 2020 - Daniel Hajnal
+ * Copyright (c) 2022 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified 2022.05.08
+ * Modified 2022.09.30
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup forShellminator. It will create an
@@ -38,7 +38,9 @@ const char logo[] =
 "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
 " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
 "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-"                                                              \r\n"
+"\r\n\033[0;37m"
+"Visit on GitHub:\033[1;32m https://github.com/dani007200964/Shellminator\r\n\r\n"
+
 ;
 
 

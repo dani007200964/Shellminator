@@ -32,7 +32,7 @@ const char* password = "WIFI-PASS";
 WebSocketsServer webSocket = WebSocketsServer( WEBSOCKET_PORT );
 
 // Create webserver object.
-WebServer server(80);
+WebServer server( WEBSERVER_PORT );
 
 // Create a Shellminator object, and initialize it to use WebSocketsServer
 Shellminator shell( &webSocket );
@@ -45,7 +45,9 @@ const char logo[] =
 "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
 " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
 "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-"                                                              \r\n"
+"\r\n\033[0;37m"
+"Visit on GitHub:\033[1;32m https://github.com/dani007200964/Shellminator\r\n\r\n"
+
 ;
 
 // This function generates a response for the index page.
@@ -61,6 +63,11 @@ void handleXtermJs(){
 // This function generates a response for /xterm.css
 void handleXtermCss(){
   server.send_P(200, "text/css", shellminator_xterm_css_response, shellminator_xterm_css_response_len );
+}
+
+// This function generates a response for xterm-addon-web-links.js
+void handleXtermAddonWebLinks(){
+  server.send_P(200, "application/javascript", shellminator_xterm_addon_web_links_js_response, shellminator_xterm_addon_web_links_js_response_len );
 }
 
 // This function generates a response for everything else.
@@ -109,7 +116,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 
       // Clear the screen and print the logo with the banner.
       shell.clear();
-      shell.begin( "arnold" );
+      shell.drawLogo();
+      shell.printBanner();
       break;
 
     // Text data incoming
@@ -166,23 +174,16 @@ void setup() {
 
   Serial.println( "Connected!" );
   Serial.print( "Device IP: " );
-  Serial.print( WiFi.localIP() );
-  Serial.print( " at port: " );
-  Serial.println( WEBSOCKET_PORT );
+  Serial.println( WiFi.localIP() );
 
   // initialize shell object.
   shell.begin( "arnold" );
 
-  // Index page handler.
+  // Attach page handlers.
   server.on("/", handleIndex);
-
-  // xterm.js handler.
   server.on("/xterm.js", handleXtermJs);
-
-  // xterm.css handler.
   server.on("/xterm.css", handleXtermCss);
-
-  // Not found handler.
+  server.on("/xterm-addon-web-links.js", handleXtermAddonWebLinks);
   server.onNotFound(handleNotFound);
 
   // Start webserver.
@@ -198,9 +199,12 @@ void setup() {
 
 void loop() {
 
+  // Process everything.
   shell.update();
   server.handleClient();
   webSocket.loop();
+
+  // Give some time to the other tasks.
   delay( 2 );
 
 }
