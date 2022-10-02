@@ -42,6 +42,8 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#include "Stream.h"
+
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 	#ifdef ESP8266
 	#include <ESP8266WiFi.h>
@@ -129,49 +131,7 @@ public:
   /// String that holds the version information
   static const char *version;
 
-#ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  Shellminator( HardwareSerial *serialPort_p );
-
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) );
-#endif
-
-#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  Shellminator( Serial_ *serialPort_p );
-
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char* ) );
-#endif
-
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param resp pointer to a WiFiClient object.
-  Shellminator( WiFiClient *resp );
-
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param resp pointer to a WiFiClient object.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) );
 
 	Shellminator( WiFiServer *server_p );
 
@@ -200,6 +160,9 @@ public:
 	void websocketDisconnect();
 
 #endif
+
+  Shellminator( Stream *stream_p );
+	Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) );
 
   /// Execution function adder function
   ///
@@ -267,7 +230,7 @@ public:
   /// @param style Arduino Serial object to print the style code.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-  static void setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color );
+  static void setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color );
 
   /// Draws the startup logo
   ///
@@ -634,19 +597,6 @@ private:
 
   //---- Communication channels ----//
 
-  /// Default communication channel;
-  shellminatorChannel defaultChannel;
-
-  #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-  /// Arduino Hardware Serial as communication channel.
-  shellminatorArduinoSerialChannel arduinoSerialChannel;
-  #endif
-
-  #ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  /// Arduino Hardware Serial as communication channel.
-  shellminatorArduino32U4SerialChannel arduino32U4SerialChannel;
-  #endif
-
 	#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 	// It is used for the ESP32 and ESP8266.
 	// They are very slow to send only one byte of data.
@@ -655,8 +605,6 @@ private:
 	#endif
 
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-  /// WiFi Client as communication channel.
-  shellminatorWiFiClientChannel wifiChannel;
 
 	WiFiServer *server = NULL;
   WiFiClient client;
@@ -681,9 +629,14 @@ private:
 
 	#endif
 
+	/// Default communication channel;
+	shellminatorDefaultChannel defaultChannel;
+
   /// Pointer to the communication class. By default
   /// it points to the default response handler.
-	shellminatorChannel *channel = &defaultChannel;
+	//shellminatorChannel *channel = &defaultChannel;
+
+	Stream *channel = &defaultChannel;
 
   //---- Commander-API support specific part ----//
   #ifdef COMMANDER_API_VERSION

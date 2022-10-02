@@ -45,98 +45,6 @@ SOFTWARE.
 
 const char *Shellminator::version = SHELLMINATOR_VERSION;
 
-#ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-Shellminator::Shellminator( HardwareSerial *serialPort_p ) {
-
-  // Initialise the arduinoSerialChannel as communication channel.
-  arduinoSerialChannel.select( serialPort_p );
-  channel = &arduinoSerialChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-
-}
-
-Shellminator::Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) ) {
-
-  // Initialise the arduinoSerialChannel as communication channel.
-  arduinoSerialChannel.select( serialPort_p );
-  channel = &arduinoSerialChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // passing execution_fn_p to execution_fn
-  execution_fn = execution_fn_p;
-
-}
-
-#endif
-
-#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-Shellminator::Shellminator( Serial_ *serialPort_p ) {
-
-  // Initialise the arduinoSerialChannel as communication channel.
-  arduino32U4SerialChannel.select( serialPort_p );
-  channel = &arduino32U4SerialChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-
-}
-
-Shellminator::Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char* ) ) {
-
-  // Initialise the arduinoSerialChannel as communication channel.
-  arduino32U4SerialChannel.select( serialPort_p );
-  channel = &arduino32U4SerialChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // passing execution_fn_p to execution_fn
-  execution_fn = execution_fn_p;
-
-}
-
-#endif
-
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
 #ifdef ESP32
@@ -152,49 +60,6 @@ const uint8_t Shellminator::TELNET_IAC_WILL_ECHO[]              = { 255, 251, 1 
 const uint8_t Shellminator::TELNET_IAC_DONT_ECHO[]              = { 255, 254, 1 };
 const uint8_t Shellminator::TELNET_IAC_WILL_SUPRESS_GO_AHEAD[]  = { 255, 251, 3 };
 const uint8_t Shellminator::TELNET_IAC_DO_SUPRESS_GO_AHEAD[]    = { 255, 253, 3 };
-
-Shellminator::Shellminator( WiFiClient *resp ) {
-
-  // Initialise the wifiChannel as communication channel.
-  wifiChannel.select( resp );
-  channel = &wifiChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-
-}
-
-Shellminator::Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) ) {
-
-  // Initialise the wifiChannel as communication channel.
-  wifiChannel.select( resp );
-  channel = &wifiChannel;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // passing execution_fn_p to execution_fn
-  execution_fn = execution_fn_p;
-
-}
 
 Shellminator::Shellminator( WiFiServer *server_p ){
 
@@ -271,6 +136,7 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
   wsServer = wsServer_p;
   serverID = serverID_p;
   webSocketChannel.select( wsServer, serverID );
+  webSocketChannel.setTimeout( 10 );
   channel = &webSocketChannel;
 
   // It has to be zero. We dont want to process any garbage.
@@ -294,6 +160,7 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p ){
   wsServer = wsServer_p;
   serverID = 0;
   webSocketChannel.select( wsServer, serverID );
+  webSocketChannel.setTimeout( 10 );
   channel = &webSocketChannel;
 
   // It has to be zero. We dont want to process any garbage.
@@ -351,6 +218,46 @@ void Shellminator::websocketDisconnect(){
 }
 
 #endif
+
+Shellminator::Shellminator( Stream *stream_p ){
+
+  channel = stream_p;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+
+}
+
+Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) ){
+
+  channel = stream_p;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = execution_fn_p;
+
+}
 
 void Shellminator::setBannerText( char* banner_p ){
 
@@ -550,6 +457,7 @@ void Shellminator::redrawLine(){
   #endif
 
   #ifdef COMMANDER_API_VERSION
+  //#ifdef FALSE
 
   // If the command is found in Commander's API-tree
   // it will be highlighted.
@@ -617,12 +525,12 @@ void Shellminator::redrawLine(){
 
     setTerminalCharacterColor( acceleratorBufferPtr, REGULAR, WHITE );
     acceleratorBufferPtr = acceleratorBuffer + strlen( acceleratorBuffer );
-    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "%s", (char*) &cmd_buff[ 0 ][ j + 1 ] );
+    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "%s", (char*) &cmd_buff[ 0 ][ j ] );
 
     #else
 
     setTerminalCharacterColor( REGULAR, WHITE );
-    channel -> print( (char*) &cmd_buff[ 0 ][ j + 1 ] );
+    channel -> print( (char*) &cmd_buff[ 0 ][ j ] );
 
     #endif
 
@@ -685,11 +593,13 @@ void Shellminator::process( char new_char ) {
   // General counter variable
   uint32_t i;
 
+  /*
   Serial.print( "New data : '" );
   Serial.print(new_char);
   Serial.print("' [0x");
   Serial.print( new_char, HEX );
   Serial.println("]");
+  */
 
   if( new_char == '\0' ){
     return;
@@ -819,30 +729,7 @@ void Shellminator::process( char new_char ) {
       // to execute the command without an execution_fn.
       else if( commander != NULL ){
 
-        // Check for the right response channel.
-        #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-        if( channel == &arduinoSerialChannel ){
-
-          commander -> execute( cmd_buff[ 0 ], arduinoSerialChannel.getSerialObject() );
-
-        }
-        #endif
-
-        #ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-        if( channel == &arduino32U4SerialChannel ){
-
-          commander -> execute( cmd_buff[ 0 ], arduino32U4SerialChannel.getSerialObject() );
-
-        }
-        #endif
-
-        #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-        if( channel == &wifiChannel ){
-
-          commander -> execute( cmd_buff[ 0 ], wifiChannel.getClientObject() );
-
-        }
-        #endif
+        commander -> execute( cmd_buff[ 0 ], channel );
 
       }
 
@@ -1781,7 +1668,6 @@ void Shellminator::update() {
       else{
 
         // New connection event!
-        Serial.println( "New Connection!" );
         client = server -> available();
         client.setNoDelay(false);
         client.setTimeout( 1000 );
@@ -1795,8 +1681,7 @@ void Shellminator::update() {
 
         // Initialise the wifiChannel as communication channel
         // to draw the logo and the banner.
-        wifiChannel.select( &client );
-        channel = &wifiChannel;
+        channel = &client;
 
         // Set the terminal color and style to the defined settings for the logo
         setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
@@ -1846,7 +1731,6 @@ void Shellminator::update() {
 
             if( client.peek() == 0xFF ){
 
-              Serial.println( "Telnet command!" );
               // Read the data to remove it from the buffer.
               client.read();
 
@@ -1861,9 +1745,8 @@ void Shellminator::update() {
 
             else{
 
-              // Initialise the wifiChannel as communication channel.
-              wifiChannel.select( &client );
-              channel = &wifiChannel;
+              // Initialise the client as communication channel.
+              channel = &client;
 
             }
 
@@ -1980,7 +1863,7 @@ void Shellminator::update() {
 
       }
 
-      // Try to found the command in Commander's API-tree.
+      // Try to find the command in Commander's API-tree.
       commandAddress = commander -> operator[]( cmd_buff[0] );
 
       // If Commander responds with a non-null pointer, it means
@@ -2047,15 +1930,15 @@ void Shellminator::setTerminalCharacterColor( char* buff, uint8_t style, uint8_t
 
 }
 
-void Shellminator::setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color ){
+void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color ){
 
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  serialPort -> write( 27 );
-  serialPort -> print( '[' );
-  serialPort -> print( style );
-  serialPort -> print( ';' );
-  serialPort -> print( color );
-  serialPort -> print( 'm' );
+  stream_p -> write( 27 );
+  stream_p -> print( '[' );
+  stream_p -> print( style );
+  stream_p -> print( ';' );
+  stream_p -> print( color );
+  stream_p -> print( 'm' );
 
 }
 
@@ -2150,8 +2033,6 @@ void Shellminator::historySearchForward(){
     cmd_buff_dim_save--;
 
     if( strncmp( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim_save - 1 ], cursor ) == 0 ){
-
-      Serial.printf( "match at cmd_buff_dim_save: %d",  cmd_buff_dim_save);
 
       cmd_buff_dim = cmd_buff_dim_save;
 
