@@ -240,6 +240,10 @@ public:
 	/// This function prints the banner text.
 	void printBanner();
 
+	void printHistory();
+
+	void printHelp();
+
 	/// This function sets the banner text.
   ///
   /// It can be used when you want to change the banner text runtime.
@@ -620,6 +624,8 @@ private:
 	static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[ 3 ];
 
   #endif
+
+	static const char helpText[];
 
 	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 

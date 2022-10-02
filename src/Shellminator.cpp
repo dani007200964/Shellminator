@@ -129,6 +129,15 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
 #endif
 
+// Todo PROGMEM version as well.
+const char Shellminator::helpText[] = {
+  "\r\n"
+  "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
+  "\r\n"
+  "I have to finish it...\r\n"
+  "\r\n"
+};
+
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
@@ -352,6 +361,95 @@ void Shellminator::printBanner() {
   setTerminalCharacterColor( REGULAR, WHITE );
 
   lastBannerSize += channel -> print( ' ' );
+
+}
+
+void Shellminator::printHistory(){
+
+  uint32_t i;
+  uint32_t firstBuffDim = 1;
+  uint32_t index;
+
+  // Check the first valid command in the buffer
+  for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
+
+    // If it's found, store it's index to firstBuffDim
+    if( cmd_buff[ i ][ 0 ] == '\0' ){
+      firstBuffDim = i - 1;
+      break;
+    }
+
+  }
+
+  // If the history is empty, we can return.
+  if( firstBuffDim == 0 ){
+    return;
+  }
+
+  // If the history is full, we have to protect
+  // firstBuffDim variable.
+  if( i >= SHELLMINATOR_BUFF_DIM ){
+    firstBuffDim = SHELLMINATOR_BUFF_DIM - 1;
+  }
+
+  // Print the history.
+  for( i = firstBuffDim; i > 0; i-- ){
+
+    index = firstBuffDim - i + 1;
+
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+    sprintf( acceleratorBuffer, "  \033[1;35m%3d  \033[0;37m%s\r\n", index, cmd_buff[ i ] );
+    channel -> print( acceleratorBuffer );
+
+    #else
+
+
+    channel -> print( ' ' );
+    channel -> print( ' ' );
+
+    // It is used to ident digits.
+    if( index < 10 ){
+
+      channel -> print( ' ' );
+      channel -> print( ' ' );
+
+    }
+
+    // It is used to ident digits.
+    else if( index < 100 ){
+
+      channel -> print( ' ' );
+
+    }
+
+    // Print the index and the command.
+    setTerminalCharacterColor( BOLD, MAGENTA );
+    channel -> print( index );
+    setTerminalCharacterColor( REGULAR, WHITE );
+    channel -> print( ' ' );
+    channel -> print( ' ' );
+    channel -> println( cmd_buff[ i ] );
+
+    #endif
+
+  }
+
+}
+
+void Shellminator::printHelp(){
+
+  channel -> print( helpText );
+
+  #ifdef COMMANDER_API_VERSION
+
+  if( commander != NULL ){
+
+    commander -> printHelp( channel );
+
+  }
+
+  #endif
 
 }
 
@@ -715,8 +813,20 @@ void Shellminator::process( char new_char ) {
     // If the arrived data is not just a single enter we have to process the command.
     if ( cmd_buff_cntr > 0 ) {
 
+      if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
+
+        printHelp();
+
+      }
+
+      else if( strcmp( cmd_buff[ 0 ], "history" ) == 0 ){
+
+        printHistory();
+
+      }
+
       // We haveto check that execution_fn is not NULL.
-      if( execution_fn != NULL ){
+      else if( execution_fn != NULL ){
 
         // If it is a valid, then call it's function.
         execution_fn( cmd_buff[ 0 ] );
