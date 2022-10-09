@@ -314,6 +314,14 @@ void Shellminator::attachLogo( char* logo_p ){
 
 }
 
+#ifdef __AVR__
+void Shellminator::attachLogo( __FlashStringHelper * progmemLogo_p ){
+
+  progmemLogo = progmemLogo_p;
+
+}
+#endif
+
 void Shellminator::attachLogo( const char* logo_p ){
 
   logo = (char*)logo_p;
@@ -1396,6 +1404,11 @@ void Shellminator::process( char new_char ) {
     // - if we found the end of the last command.
     bool conflict = false;
 
+    // PROGMEM based tree is not supported for auto complete yet.
+    if( commander -> memoryType != Commander::MEMORY_REGULAR ){
+      return;
+    }
+
     // If there is no conflict event, we are trying
     // to fill as many characters as possible.
     while( !conflict ){
@@ -2061,6 +2074,19 @@ void Shellminator::drawLogo() {
 
     // Draws the startup logo to the terminal interface.
     channel -> print( logo );
+
+    // Set the terminal style to normal.
+    setTerminalCharacterColor( REGULAR, WHITE );
+
+  }
+
+  else if( progmemLogo ){
+
+    // Set the terminal color and style to the defined settings for the logo
+    setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+
+    // Draws the startup logo to the terminal interface.
+    channel -> print( progmemLogo );
 
     // Set the terminal style to normal.
     setTerminalCharacterColor( REGULAR, WHITE );

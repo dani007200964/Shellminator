@@ -277,6 +277,17 @@ public:
   /// @param logo_p Pointer to the logo's address.
   void attachLogo( const char* logo_p );
 
+	#ifdef __AVR__
+	/// This function attaches a logo to the terminal.
+  ///
+  /// The logo is just a character array.
+  /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
+  /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
+  /// Add '\r' to all line end.
+  /// @param logo_p Pointer to the logo's address.
+  void attachLogo( __FlashStringHelper * progmemLogo_p );
+	#endif
+
   /// Override up arrow key behaviour.
   ///
   /// With this function you can attach a function that
@@ -516,6 +527,10 @@ private:
   /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
   /// @warning Make sure that the generated string is c/c++ compatible!
   char *logo = NULL;
+
+	#ifdef __AVR__
+	__FlashStringHelper *progmemLogo = NULL;
+	#endif
 
   /// This function-pointer stores the execution function pointer.
   /// This function will be called when a command recives.
