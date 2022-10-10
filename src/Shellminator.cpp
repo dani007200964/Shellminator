@@ -2080,6 +2080,8 @@ void Shellminator::drawLogo() {
 
   }
 
+  #ifdef __AVR__
+
   else if( progmemLogo ){
 
     // Set the terminal color and style to the defined settings for the logo
@@ -2092,6 +2094,8 @@ void Shellminator::drawLogo() {
     setTerminalCharacterColor( REGULAR, WHITE );
 
   }
+
+  #endif
 
 }
 
