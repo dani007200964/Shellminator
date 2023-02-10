@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['read_0',['read',['../classshellminator_channel.html#a567192d3e8180d1c071615d6abb944c2',1,'shellminatorChannel::read()'],['../classshellminator_arduino_serial_channel.html#a47d8237ba9d104f467c3e8c8170daf9c',1,'shellminatorArduinoSerialChannel::read()'],['../classshellminator_arduino32_u4_serial_channel.html#a8490040c132210fc16d17682056a1a1c',1,'shellminatorArduino32U4SerialChannel::read()'],['../classshellminator_wi_fi_client_channel.html#ae098143383db7b173c12bb75cd7a445b',1,'shellminatorWiFiClientChannel::read()']]],
-  ['red_1',['RED',['../class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e',1,'Shellminator']]],
-  ['regular_2',['REGULAR',['../class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67',1,'Shellminator']]],
-  ['reverse_3',['REVERSE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653abd42c47d8515509b138a757070d80a61',1,'Shellminator']]]
+  ['peek_0',['peek',['../classshellminator_default_channel.html#a705d6613c6241e59557f5d1e64c85d98',1,'shellminatorDefaultChannel']]],
+  ['print_1',['print',['../classshellminator_default_channel.html#ab55311182c60a29b8460a281c7f40224',1,'shellminatorDefaultChannel::print(char c)'],['../classshellminator_default_channel.html#a556c3f1b6c510e55e46db80230f1164d',1,'shellminatorDefaultChannel::print(uint8_t b)'],['../classshellminator_default_channel.html#a3051d9acf32646ee8e0ff553d17d2388',1,'shellminatorDefaultChannel::print(char *str)'],['../classshellminator_default_channel.html#a44debe1399e88b604f0852085e79636e',1,'shellminatorDefaultChannel::print(const char *str)']]],
+  ['printbanner_2',['printBanner',['../class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7',1,'Shellminator']]],
+  ['printhelp_3',['printHelp',['../class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c',1,'Shellminator']]],
+  ['printhistory_4',['printHistory',['../class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682',1,'Shellminator']]],
+  ['progmem_5',['PROGMEM',['../_shellminator_8cpp.html#affc6da66534c2d0ee3ee78eba401664a',1,'Shellminator.cpp']]]
 ];

@@ -25,6 +25,8 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_key_override
+            - examples/Shellminator_PROGMEM_Logo
 
   compile-examples-for-esp32:
     runs-on: ubuntu-latest
@@ -45,10 +47,12 @@ jobs:
           platforms: |
             - name: esp32:ESP32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-
+          
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_simple_ESP32_server
+            
 
   compile-examples-for-esp8266:
     runs-on: ubuntu-latest
@@ -72,3 +76,4 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_simple_ESP8266_server

@@ -1,4 +1,5 @@
 <map id="shellminatorWiFiClientChannel::select" name="shellminatorWiFiClientChannel::select">
-<area shape="rect" id="node1" title="Select WiFi Client." alt="" coords="228,5,427,45"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a94f94e5ef5e988a608b4770b4d5463ed" title="Shellminator Constructor." alt="" coords="5,13,180,38"/>
+<area shape="rect" id="node1" title="Select WiFi Client." alt="" coords="228,23,427,63"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a94f94e5ef5e988a608b4770b4d5463ed" title="Shellminator Constructor." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="22,55,163,80"/>
 </map>

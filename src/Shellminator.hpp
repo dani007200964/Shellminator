@@ -42,6 +42,14 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#ifdef __AVR__
+
+  #include <avr/pgmspace.h>
+  
+#endif
+
+#include "Stream.h"
+
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 	#ifdef ESP8266
 	#include <ESP8266WiFi.h>
@@ -50,6 +58,17 @@ SOFTWARE.
 	#ifdef ESP32
 	#include <WiFi.h>
 	#endif
+
+	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+	#include <WebSocketsServer.h>
+	#endif
+
+#endif
+
+#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  #include "external/sha256/terminal_sha256.h"
+
 #endif
 
 #ifdef __has_include
@@ -66,7 +85,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 
-///  +------  Costum configuration  ------+
+///  +------  Custom configuration  ------+
 ///  |                                    |
 ///  |  This is where you have to config  |
 ///  |           your defines!            |
@@ -75,42 +94,12 @@ SOFTWARE.
 
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
-#include "qrcodegen.h"
+#include "external/nayuki-qrcodegen/qrcodegen.h"
 
-#endif
-
-/// Definition of the maximum length of each command
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
-#ifndef SHELLMINATOR_BUFF_LEN
-#define SHELLMINATOR_BUFF_LEN 20
-#endif
-
-/// Definition of the maximum length of the previous command memory
-/// @warning Be careful with the The value of this definition. If it is to high your RAM will be eaten!
-/// @note The total amount of RAM consumed by the object in bytes can be calculated as: \link SHELLMINATOR_BUFF_LEN \endlink * \link SHELLMINATOR_BUFF_DIM \endlink
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 5.
-#ifndef SHELLMINATOR_BUFF_DIM
-#define SHELLMINATOR_BUFF_DIM 5
-#endif
-
-/// Maximum length of the banner text
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be 20.
-#ifndef SHELLMINATOR_BANNER_LEN
-#define SHELLMINATOR_BANNER_LEN 20
 #endif
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "1.1.1"
-
-/// Color and style of the startup logo
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
-#ifndef SHELLMINATOR_LOGO_FONT_STYLE
-#define SHELLMINATOR_LOGO_FONT_STYLE BOLD
-#endif
-
-#ifndef SHELLMINATOR_LOGO_COLOR
-#define SHELLMINATOR_LOGO_COLOR RED
-#endif
+#define SHELLMINATOR_VERSION "1.1.2"
 
 /// Shellminator object
 ///
@@ -154,50 +143,38 @@ public:
   /// String that holds the version information
   static const char *version;
 
-#ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  Shellminator( HardwareSerial *serialPort_p );
-
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( HardwareSerial *serialPort_p, void( *execution_fn_p )( char* ) );
-#endif
-
-#ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  Shellminator( Serial_ *serialPort_p );
-
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param serialPort_p pointer to an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( Serial_ *serialPort_p, void( *execution_fn_p )( char* ) );
-#endif
-
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object.
-  /// @param resp pointer to a WiFiClient object.
-  Shellminator( WiFiClient *resp );
 
-  /// Shellminator Constructor
-  ///
-  /// Constructor for a Shellminator object with an execution function.
-  /// @param resp pointer to a WiFiClient object.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-  Shellminator( WiFiClient *resp, void( *execution_fn_p )( char* ) );
+	Shellminator( WiFiServer *server_p );
+
+	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) );
+
+	void beginServer();
+
+	void stopServer();
+
+	void setClientTimeout( uint16_t clientTimeout_p );
+
 #endif
+
+#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+	Shellminator( WebSocketsServer *wsServer_p );
+
+	Shellminator( WebSocketsServer *wsServer_p, uint8_t serverID_p );
+
+	Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) );
+
+	void webSocketPush( uint8_t data );
+
+	void webSocketPush( uint8_t* data, size_t size );
+
+	void websocketDisconnect();
+
+#endif
+
+  Shellminator( Stream *stream_p );
+	Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) );
 
   /// Execution function adder function
   ///
@@ -239,13 +216,23 @@ public:
   /// @warning If the calling of this function is not frequent enough it cann cause buffer overflow in the Serial driver!
   void update();
 
-  /// Bring some color into your code.
+	/// Bring some color into your code.
   ///
   /// This function changes the color and style of the terminal application characters.
   /// @warning Please use the color and style enumeration table from this application as parameter.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   void setTerminalCharacterColor( uint8_t style, uint8_t color );
+
+	/// Bring some color into your code.
+  ///
+  /// This function changes the color and style of the terminal application characters.
+	/// The output goes to a buffer;
+  /// @warning Please use the color and style enumeration table from this application as parameter.
+	/// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
+  /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
+  /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
+  void setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color );
 
   /// Bring some color into your code.
   ///
@@ -255,18 +242,34 @@ public:
   /// @param style Arduino Serial object to print the style code.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-  static void setTerminalCharacterColor( HardwareSerial *serialPort, uint8_t style, uint8_t color );
+  static void setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color );
 
   /// Draws the startup logo
   ///
   /// Draws the startup logo in the terminal
   void drawLogo();
 
-  /// This function sets the banner text.
+	/// This function prints the banner text.
+	void printBanner();
+
+	void printHistory();
+
+	void printHelp();
+
+	/// This function sets the banner text.
   ///
   /// It can be used when you want to change the banner text runtime.
   /// @param banner_p String that contains the new banner text.
   void setBannerText( char* banner_p );
+
+	/// This function sets the banner text.
+  ///
+  /// It can be used when you want to change the banner text runtime.
+  /// @param banner_p String that contains the new banner text.
+  void setBannerText( const char* banner_p );
+
+	void setBannerPathText( char* bannerPath_p );
+	void setBannerPathText( const char* bannerPath_p );
 
   /// This function attaches a logo to the terminal.
   ///
@@ -285,6 +288,17 @@ public:
   /// Add '\r' to all line end.
   /// @param logo_p Pointer to the logo's address.
   void attachLogo( const char* logo_p );
+
+	#ifdef __AVR__
+	/// This function attaches a logo to the terminal.
+  ///
+  /// The logo is just a character array.
+  /// To create custom startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
+  /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
+  /// Add '\r' to all line end.
+  /// @param logo_p Pointer to the logo's address.
+  void attachLogo( __FlashStringHelper * progmemLogo_p );
+	#endif
 
   /// Override up arrow key behaviour.
   ///
@@ -327,6 +341,56 @@ public:
   /// @param func Pointer to the function that will be called on keypress.
   void overrideAbortKey( void( *func )( void ) );
 
+	/// Override Page-Up key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Page-Up key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overridePageUpKey( void( *func )( void ) );
+
+	/// Override Page-Down key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Page-Down key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overridePageDownKey( void( *func )( void ) );
+
+	/// Override Home key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Home key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideHomeKey( void( *func )( void ) );
+
+	/// Override End key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the End key is
+  /// pressed.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideEndKey( void( *func )( void ) );
+
+	/// Override Logout key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Logout key is
+  /// pressed. The default Logout key is usually a Ctrl + D
+  /// combo.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideLogoutKey( void( *func )( void ) );
+
+	/// Override Search key behaviour.
+  ///
+  /// With this function you can attach a function that
+  /// will be called every time when the Logout key is
+  /// pressed. The default Search key is usually a Ctrl + R
+  /// combo.
+  /// @param func Pointer to the function that will be called on keypress.
+  void overrideSearchKey( void( *func )( void ) );
+
   /// Reset up arrow key functionality to default.
   ///
   /// This function resets the up arrow functionality
@@ -355,17 +419,85 @@ public:
   /// function for the key, you have to call this function.
   void freeRightArrow();
 
-  /// Reset abort key functionality to default.
+	/// Reset abort key functionality to default.
   ///
   /// This function resets the abort key functionality
   /// to default. If you want to detach the override
   /// function for the key, you have to call this function.
   void freeAbortKey();
 
+	/// Reset Page-Up key functionality to default.
+  ///
+  /// This function resets the Page-Up key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freePageUpKey();
+
+	/// Reset Page-Down key functionality to default.
+  ///
+  /// This function resets the Page-Down key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freePageDownKey();
+
+	/// Reset Home key functionality to default.
+  ///
+  /// This function resets the Home key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeHomeKey();
+
+	/// Reset End key functionality to default.
+  ///
+  /// This function resets the End key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeEndKey();
+
+	/// Reset Logout key functionality to default.
+  ///
+  /// This function resets the Logout key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeLogoutKey();
+
+	/// Reset Search key functionality to default.
+  ///
+  /// This function resets the Search key functionality
+  /// to default. If you want to detach the override
+  /// function for the key, you have to call this function.
+  void freeSearchKey();
+
+	#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  /// Disconnect WiFiClient telnet client
+  void clientDisconnect();
+
+	#endif
+
+  #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  void enablePasswordProtection( uint8_t* passwordHashAddress_p );
+  void enablePasswordProtection( const uint8_t* passwordHashAddress_p );
+  void enablePasswordProtection( char* passwordHashAddress_p );
+  void enablePasswordProtection( const char* passwordHashAddress_p );
+  void disablePasswordProtection();
+  bool checkPassword( uint8_t* pwStr );
+  bool checkPassword( const uint8_t* pwStr );
+  bool checkPassword( char* pwStr );
+  bool checkPassword( const char* pwStr );
+
+  #endif
+
+	/// Generate a beep sound on the terminal device.
+	void beep();
+
   /// This flag enables or disables character formatting.
-  /// It can be usefull when VT100 format parser is not
+  /// It can be useful when VT100 format parser is not
   /// available on the host device.
   bool enableFormatting = true;
+
+	bool mute = false;
 
   #ifdef COMMANDER_API_VERSION
 
@@ -418,10 +550,14 @@ private:
 
   /// Pointer to a string that holds the startup logo
   ///
-  /// Simple text that holds the startup logo. You can create costum logos
+  /// Simple text that holds the startup logo. You can create custom logos
   /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
   /// @warning Make sure that the generated string is c/c++ compatible!
   char *logo = NULL;
+
+	#ifdef __AVR__
+	__FlashStringHelper *progmemLogo = NULL;
+	#endif
 
   /// This function-pointer stores the execution function pointer.
   /// This function will be called when a command recives.
@@ -435,10 +571,10 @@ private:
   /// shifts the elements towards the higher index, and removes the highest index element.
   /// To navigate between the previous commands you can use the UP and DOWN arrows
   /// on the keyboard. To specify the 'memory' of the interface you have to configure
-  /// the \ling SHELLMINATOR_BUFF_DIM \endlink definition.
+  /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
   /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
   /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN ] = { { 0 } };
+  char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = { { 0 } };
 
   /// This variable tracks the index of the previous command while you browsing the command history
   uint32_t cmd_buff_dim = 1;
@@ -455,6 +591,12 @@ private:
   /// This character array stores the banner text.
   char banner[ SHELLMINATOR_BANNER_LEN ] = { '\0' };
 
+	char bannerPath[ SHELLMINATOR_BANNER_PATH_LEN ] = "$";
+
+	/// Size of the last printed banner in characters.
+	/// It's used to accelerate the redrawing process.
+	uint8_t lastBannerSize = 0;
+
   /// Function pointer for up arrow behaviour override.
   void( *upArrowOverrideFunc )( void )    = NULL;
 
@@ -470,6 +612,24 @@ private:
   /// Function pointer for abort key behaviour override.
   void( *abortKeyFunc )( void )           = NULL;
 
+	/// Function pointer for Page-Up key behaviour override.
+  void( *pageUpKeyFunc )( void )          = NULL;
+
+	/// Function pointer for Page-Down key behaviour override.
+  void( *pageDownKeyFunc )( void )        = NULL;
+
+	/// Function pointer for Home key behaviour override.
+  void( *homeKeyFunc )( void )           	= NULL;
+
+	/// Function pointer for End key behaviour override.
+  void( *endKeyFunc )( void )           	= NULL;
+
+	/// Function pointer for Logout key behaviour override.
+  void( *logoutKeyFunc )( void )          = NULL;
+
+	/// Function pointer for Search key behaviour override.
+  void( *searchKeyFunc )( void )          = NULL;
+
   /// This function processes a new character
   ///
   /// This function handles every character that arrives from the terminal software.
@@ -478,35 +638,53 @@ private:
   /// @param new_char This is the nex character that has to be processed.
   void process( char new_char );
 
-  /// This function prints the banner text.
-  void printBanner();
-
   /// This function insets a new character to the input buffer.
   void redrawLine();
 
   //---- Communication channels ----//
 
-  /// Default communication channel;
-  shellminatorChannel defaultChannel;
-
-  #ifdef SHELLMINATOR_USE_ARDUINO_SERIAL
-  /// Arduino Hardware Serial as communication channel.
-  shellminatorArduinoSerialChannel arduinoSerialChannel;
-  #endif
-
-  #ifdef SHELLMINATOR_USE_ARDUINO_32U4_SERIAL
-  /// Arduino Hardware Serial as communication channel.
-  shellminatorArduino32U4SerialChannel arduino32U4SerialChannel;
-  #endif
+	#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+	// It is used for the ESP32 and ESP8266.
+	// They are very slow to send only one byte of data.
+	char acceleratorBuffer[ SHELLMINATOR_ACCELERATOR_BUFFER_LEN ];
+	char *acceleratorBufferPtr;
+	#endif
 
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-  /// WiFi Client as communication channel.
-  shellminatorWiFiClientChannel wifiChannel;
+
+	WiFiServer *server = NULL;
+  WiFiClient client;
+	bool clientConnected = false;
+	uint8_t telnetNegotiationState = 0;
+	uint16_t clientTimeout = 1000;
+
+	// https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
+	static const uint8_t TELNET_IAC_DONT_LINEMODE[ 3 ];
+	static const uint8_t TELNET_IAC_WILL_ECHO[ 3 ];
+	static const uint8_t TELNET_IAC_DONT_ECHO[ 3 ];
+	static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[ 3 ];
+	static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[ 3 ];
+
   #endif
+
+	static const char helpText[];
+
+	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+	WebSocketsServer *wsServer = NULL;
+	uint8_t serverID;
+	shellminatorWebSocketChannel webSocketChannel;
+
+	#endif
+
+	/// Default communication channel;
+	shellminatorDefaultChannel defaultChannel;
 
   /// Pointer to the communication class. By default
   /// it points to the default response handler.
-	shellminatorChannel *channel = &defaultChannel;
+	//shellminatorChannel *channel = &defaultChannel;
+
+	Stream *channel = &defaultChannel;
 
   //---- Commander-API support specific part ----//
   #ifdef COMMANDER_API_VERSION
@@ -523,6 +701,28 @@ private:
   /// Flag that stores that the command was
   /// found in Commander API-tree.
   bool commandFound = false;
+
+  #endif
+
+	#ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+	void historySearchBackward();
+	void historySearchForward();
+	void redrawHistorySearch();
+	int substring( char* str1, char* str2 );
+
+	bool inSearch = false;
+	int32_t searchMatch;
+
+	#endif
+
+  #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  
+
+  SHA256_CTX passwordHashCtx;
+  uint8_t passwordHashBuffer[ SHA256_BLOCK_SIZE ];
+  uint8_t* passwordHashAddress = NULL;
 
   #endif
 

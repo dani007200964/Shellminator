@@ -1,0 +1,1519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>Shellminator: src/external/nayuki-qrcodegen/qrcodegen.c File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Shellminator
+   &#160;<span id="projectnumber">V1.2.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('qrcodegen_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">qrcodegen.c File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="qrcodegen_8h_source.html">qrcodegen.h</a>&quot;</code><br />
+</div>
+<p><a href="qrcodegen_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:af133be2ddbf0cfabb0bb6b0d5f6c00b9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a>&#160;&#160;&#160;static</td></tr>
+<tr class="separator:af133be2ddbf0cfabb0bb6b0d5f6c00b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4493a6fd7027601e073129a5f10717c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#ac4493a6fd7027601e073129a5f10717c">qrcodegen_REED_SOLOMON_DEGREE_MAX</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:ac4493a6fd7027601e073129a5f10717c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a1770960166ba425470648e0bb2c4d147"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a1770960166ba425470648e0bb2c4d147">appendBitsToBuffer</a> (unsigned int val, int numBits, uint8_t buffer[], int *bitLen)</td></tr>
+<tr class="separator:a1770960166ba425470648e0bb2c4d147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26abd9af78a1ebc168486c698e29e539"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a26abd9af78a1ebc168486c698e29e539">addEccAndInterleave</a> (uint8_t data[], int version, enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl, uint8_t result[])</td></tr>
+<tr class="separator:a26abd9af78a1ebc168486c698e29e539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3402527eaf904babc6f218acd6195af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#ae3402527eaf904babc6f218acd6195af">getNumDataCodewords</a> (int version, enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl)</td></tr>
+<tr class="separator:ae3402527eaf904babc6f218acd6195af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8725e511e96e40dda99377e2f89bcda5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a8725e511e96e40dda99377e2f89bcda5">getNumRawDataModules</a> (int ver)</td></tr>
+<tr class="separator:a8725e511e96e40dda99377e2f89bcda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac74eae03dc0c0462a79eee356ff40443"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#ac74eae03dc0c0462a79eee356ff40443">reedSolomonComputeDivisor</a> (int degree, uint8_t result[])</td></tr>
+<tr class="separator:ac74eae03dc0c0462a79eee356ff40443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a859a4a9e045e79ca631ea58807c07713"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a859a4a9e045e79ca631ea58807c07713">reedSolomonComputeRemainder</a> (const uint8_t data[], int dataLen, const uint8_t generator[], int degree, uint8_t result[])</td></tr>
+<tr class="separator:a859a4a9e045e79ca631ea58807c07713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3eccd8d887a881d203a8bad18b81902"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#af3eccd8d887a881d203a8bad18b81902">reedSolomonMultiply</a> (uint8_t x, uint8_t y)</td></tr>
+<tr class="separator:af3eccd8d887a881d203a8bad18b81902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687c2ba705ea43d61e3cb6bd79cb0f41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a687c2ba705ea43d61e3cb6bd79cb0f41">initializeFunctionModules</a> (int version, uint8_t qrcode[])</td></tr>
+<tr class="separator:a687c2ba705ea43d61e3cb6bd79cb0f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a7938db5bdc0a2abae8ff2ec0ad1fee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a7a7938db5bdc0a2abae8ff2ec0ad1fee">getAlignmentPatternPositions</a> (int version, uint8_t result[7])</td></tr>
+<tr class="separator:a7a7938db5bdc0a2abae8ff2ec0ad1fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2895c5f283edfc88cbffe8b555032aa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a2895c5f283edfc88cbffe8b555032aa1">getModuleBounded</a> (const uint8_t qrcode[], int x, int y)</td></tr>
+<tr class="separator:a2895c5f283edfc88cbffe8b555032aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c31cc3974d3162b6804fc4a1f6c14a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a15c31cc3974d3162b6804fc4a1f6c14a">setModuleBounded</a> (uint8_t qrcode[], int x, int y, bool isDark)</td></tr>
+<tr class="separator:a15c31cc3974d3162b6804fc4a1f6c14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b2fcd2ff740612ce23157eaacb7fb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#ae0b2fcd2ff740612ce23157eaacb7fb1">setModuleUnbounded</a> (uint8_t qrcode[], int x, int y, bool isDark)</td></tr>
+<tr class="separator:ae0b2fcd2ff740612ce23157eaacb7fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae34ade648f24fea23665ebe784556a62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#ae34ade648f24fea23665ebe784556a62">calcSegmentBitLength</a> (enum <a class="el" href="qrcodegen_8h.html#abc07959354ad4ea91d2a97be2cce097b">qrcodegen_Mode</a> mode, size_t numChars)</td></tr>
+<tr class="separator:ae34ade648f24fea23665ebe784556a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6584906b509f7a7833d20473de86e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a2a6584906b509f7a7833d20473de86e9">getTotalBits</a> (const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> segs[], size_t len, int version)</td></tr>
+<tr class="separator:a2a6584906b509f7a7833d20473de86e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb79247b6f8bed92514c1815fe0079c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a2eb79247b6f8bed92514c1815fe0079c">qrcodegen_encodeText</a> (const char *text, uint8_t tempBuffer[], uint8_t qrcode[], enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl, int minVersion, int maxVersion, enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a> mask, bool boostEcl)</td></tr>
+<tr class="separator:a2eb79247b6f8bed92514c1815fe0079c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc45de66046354d5aad2ee1cc6b2581"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a1cc45de66046354d5aad2ee1cc6b2581">qrcodegen_encodeBinary</a> (uint8_t dataAndTemp[], size_t dataLen, uint8_t qrcode[], enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl, int minVersion, int maxVersion, enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a> mask, bool boostEcl)</td></tr>
+<tr class="separator:a1cc45de66046354d5aad2ee1cc6b2581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41164e2a41efb324b919395ffde14fa7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a41164e2a41efb324b919395ffde14fa7">qrcodegen_encodeSegments</a> (const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> segs[], size_t len, enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl, uint8_t tempBuffer[], uint8_t qrcode[])</td></tr>
+<tr class="separator:a41164e2a41efb324b919395ffde14fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ed012ca4082c41fe7f8c161d4cc7d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a34ed012ca4082c41fe7f8c161d4cc7d9">qrcodegen_encodeSegmentsAdvanced</a> (const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> segs[], size_t len, enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecl, int minVersion, int maxVersion, enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a> mask, bool boostEcl, uint8_t tempBuffer[], uint8_t qrcode[])</td></tr>
+<tr class="separator:a34ed012ca4082c41fe7f8c161d4cc7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe30b8ff2b6218f37a2945871e6f11b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#afe30b8ff2b6218f37a2945871e6f11b8">qrcodegen_getSize</a> (const uint8_t qrcode[])</td></tr>
+<tr class="separator:afe30b8ff2b6218f37a2945871e6f11b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a495cb24d97c9b90a9c1e8a62903debf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a495cb24d97c9b90a9c1e8a62903debf5">qrcodegen_getModule</a> (const uint8_t qrcode[], int x, int y)</td></tr>
+<tr class="separator:a495cb24d97c9b90a9c1e8a62903debf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa873e0a91056118719064ea4f2a15013"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#aa873e0a91056118719064ea4f2a15013">qrcodegen_isNumeric</a> (const char *text)</td></tr>
+<tr class="separator:aa873e0a91056118719064ea4f2a15013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25856a1d9c76851f8b83640ba3c6a3fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a25856a1d9c76851f8b83640ba3c6a3fc">qrcodegen_isAlphanumeric</a> (const char *text)</td></tr>
+<tr class="separator:a25856a1d9c76851f8b83640ba3c6a3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e9a13d5e49596089d6506558f6e506"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a15e9a13d5e49596089d6506558f6e506">qrcodegen_calcSegmentBufferSize</a> (enum <a class="el" href="qrcodegen_8h.html#abc07959354ad4ea91d2a97be2cce097b">qrcodegen_Mode</a> mode, size_t numChars)</td></tr>
+<tr class="separator:a15e9a13d5e49596089d6506558f6e506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b28f0f89765839d8f4c8a803edc4ad4"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a5b28f0f89765839d8f4c8a803edc4ad4">qrcodegen_makeBytes</a> (const uint8_t data[], size_t len, uint8_t buf[])</td></tr>
+<tr class="separator:a5b28f0f89765839d8f4c8a803edc4ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c8b8a85f121c8cd1be89ddab684d43"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#aa1c8b8a85f121c8cd1be89ddab684d43">qrcodegen_makeNumeric</a> (const char *digits, uint8_t buf[])</td></tr>
+<tr class="separator:aa1c8b8a85f121c8cd1be89ddab684d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed32d45f095ce02e6718c8a48f4393d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#aaed32d45f095ce02e6718c8a48f4393d">qrcodegen_makeAlphanumeric</a> (const char *text, uint8_t buf[])</td></tr>
+<tr class="separator:aaed32d45f095ce02e6718c8a48f4393d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c3b3d01e91f9532689adbb01c1ff2c"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a27c3b3d01e91f9532689adbb01c1ff2c">qrcodegen_makeEci</a> (long assignVal, uint8_t buf[])</td></tr>
+<tr class="separator:a27c3b3d01e91f9532689adbb01c1ff2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa317616612730b289013844a2b040f26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> const int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#aa317616612730b289013844a2b040f26">ECC_CODEWORDS_PER_BLOCK</a> [4][41]</td></tr>
+<tr class="separator:aa317616612730b289013844a2b040f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7deaf66d3af6d18ec53e2f1e7a1913c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> const int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qrcodegen_8c.html#a7deaf66d3af6d18ec53e2f1e7a1913c9">NUM_ERROR_CORRECTION_BLOCKS</a> [4][41]</td></tr>
+<tr class="separator:a7deaf66d3af6d18ec53e2f1e7a1913c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ac4493a6fd7027601e073129a5f10717c" name="ac4493a6fd7027601e073129a5f10717c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4493a6fd7027601e073129a5f10717c">&#9670;&#160;</a></span>qrcodegen_REED_SOLOMON_DEGREE_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define qrcodegen_REED_SOLOMON_DEGREE_MAX&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00106">106</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+
+</div>
+</div>
+<a id="af133be2ddbf0cfabb0bb6b0d5f6c00b9" name="af133be2ddbf0cfabb0bb6b0d5f6c00b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af133be2ddbf0cfabb0bb6b0d5f6c00b9">&#9670;&#160;</a></span>testable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define testable&#160;&#160;&#160;static</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00031">31</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a26abd9af78a1ebc168486c698e29e539" name="a26abd9af78a1ebc168486c698e29e539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26abd9af78a1ebc168486c698e29e539">&#9670;&#160;</a></span>addEccAndInterleave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void addEccAndInterleave </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>version</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>result</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00294">294</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a26abd9af78a1ebc168486c698e29e539_cgraph.svg" width="630" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a26abd9af78a1ebc168486c698e29e539_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1770960166ba425470648e0bb2c4d147" name="a1770960166ba425470648e0bb2c4d147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1770960166ba425470648e0bb2c4d147">&#9670;&#160;</a></span>appendBitsToBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void appendBitsToBuffer </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numBits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>buffer</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>bitLen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00185">185</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a1770960166ba425470648e0bb2c4d147_icgraph.svg" width="100%" height="478"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ae34ade648f24fea23665ebe784556a62" name="ae34ade648f24fea23665ebe784556a62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae34ade648f24fea23665ebe784556a62">&#9670;&#160;</a></span>calcSegmentBitLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int calcSegmentBitLength </td>
+          <td>(</td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#abc07959354ad4ea91d2a97be2cce097b">qrcodegen_Mode</a>&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>numChars</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00849">849</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ae34ade648f24fea23665ebe784556a62_icgraph.svg" width="100%" height="514"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a7a7938db5bdc0a2abae8ff2ec0ad1fee" name="a7a7938db5bdc0a2abae8ff2ec0ad1fee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a7938db5bdc0a2abae8ff2ec0ad1fee">&#9670;&#160;</a></span>getAlignmentPatternPositions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int getAlignmentPatternPositions </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>version</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>result</em>[7]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00550">550</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a7a7938db5bdc0a2abae8ff2ec0ad1fee_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2895c5f283edfc88cbffe8b555032aa1" name="a2895c5f283edfc88cbffe8b555032aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2895c5f283edfc88cbffe8b555032aa1">&#9670;&#160;</a></span>getModuleBounded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> bool getModuleBounded </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00770">770</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a2895c5f283edfc88cbffe8b555032aa1_icgraph.svg" width="586" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ae3402527eaf904babc6f218acd6195af" name="ae3402527eaf904babc6f218acd6195af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3402527eaf904babc6f218acd6195af">&#9670;&#160;</a></span>getNumDataCodewords()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int getNumDataCodewords </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>version</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00327">327</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ae3402527eaf904babc6f218acd6195af_cgraph.svg" width="386" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ae3402527eaf904babc6f218acd6195af_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a8725e511e96e40dda99377e2f89bcda5" name="a8725e511e96e40dda99377e2f89bcda5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8725e511e96e40dda99377e2f89bcda5">&#9670;&#160;</a></span>getNumRawDataModules()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int getNumRawDataModules </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00339">339</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a8725e511e96e40dda99377e2f89bcda5_icgraph.svg" width="100%" height="402"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2a6584906b509f7a7833d20473de86e9" name="a2a6584906b509f7a7833d20473de86e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6584906b509f7a7833d20473de86e9">&#9670;&#160;</a></span>getTotalBits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> int getTotalBits </td>
+          <td>(</td>
+          <td class="paramtype">const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td>
+          <td class="paramname"><em>segs</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00988">988</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a2a6584906b509f7a7833d20473de86e9_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a687c2ba705ea43d61e3cb6bd79cb0f41" name="a687c2ba705ea43d61e3cb6bd79cb0f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a687c2ba705ea43d61e3cb6bd79cb0f41">&#9670;&#160;</a></span>initializeFunctionModules()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void initializeFunctionModules </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>version</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00418">418</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a687c2ba705ea43d61e3cb6bd79cb0f41_cgraph.svg" width="422" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a687c2ba705ea43d61e3cb6bd79cb0f41_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a15e9a13d5e49596089d6506558f6e506" name="a15e9a13d5e49596089d6506558f6e506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e9a13d5e49596089d6506558f6e506">&#9670;&#160;</a></span>qrcodegen_calcSegmentBufferSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t qrcodegen_calcSegmentBufferSize </td>
+          <td>(</td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#abc07959354ad4ea91d2a97be2cce097b">qrcodegen_Mode</a>&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>numChars</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00832">832</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a15e9a13d5e49596089d6506558f6e506_cgraph.svg" width="436" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a15e9a13d5e49596089d6506558f6e506_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1cc45de66046354d5aad2ee1cc6b2581" name="a1cc45de66046354d5aad2ee1cc6b2581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cc45de66046354d5aad2ee1cc6b2581">&#9670;&#160;</a></span>qrcodegen_encodeBinary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_encodeBinary </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>dataAndTemp</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>dataLen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a>&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>boostEcl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00167">167</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a1cc45de66046354d5aad2ee1cc6b2581_cgraph.svg" width="100%" height="505"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a41164e2a41efb324b919395ffde14fa7" name="a41164e2a41efb324b919395ffde14fa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41164e2a41efb324b919395ffde14fa7">&#9670;&#160;</a></span>qrcodegen_encodeSegments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_encodeSegments </td>
+          <td>(</td>
+          <td class="paramtype">const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td>
+          <td class="paramname"><em>segs</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>tempBuffer</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00196">196</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a41164e2a41efb324b919395ffde14fa7_cgraph.svg" width="100%" height="500"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a34ed012ca4082c41fe7f8c161d4cc7d9" name="a34ed012ca4082c41fe7f8c161d4cc7d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ed012ca4082c41fe7f8c161d4cc7d9">&#9670;&#160;</a></span>qrcodegen_encodeSegmentsAdvanced()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_encodeSegmentsAdvanced </td>
+          <td>(</td>
+          <td class="paramtype">const struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a>&#160;</td>
+          <td class="paramname"><em>segs</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a>&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>boostEcl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>tempBuffer</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00204">204</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a34ed012ca4082c41fe7f8c161d4cc7d9_cgraph.svg" width="100%" height="500"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a34ed012ca4082c41fe7f8c161d4cc7d9_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2eb79247b6f8bed92514c1815fe0079c" name="a2eb79247b6f8bed92514c1815fe0079c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb79247b6f8bed92514c1815fe0079c">&#9670;&#160;</a></span>qrcodegen_encodeText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_encodeText </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>tempBuffer</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a>&#160;</td>
+          <td class="paramname"><em>ecl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxVersion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="qrcodegen_8h.html#ab76629ca36a731ee5fdd02ab06f6952e">qrcodegen_Mask</a>&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>boostEcl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00129">129</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a2eb79247b6f8bed92514c1815fe0079c_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a2eb79247b6f8bed92514c1815fe0079c_icgraph.svg" width="411" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a495cb24d97c9b90a9c1e8a62903debf5" name="a495cb24d97c9b90a9c1e8a62903debf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a495cb24d97c9b90a9c1e8a62903debf5">&#9670;&#160;</a></span>qrcodegen_getModule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_getModule </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00762">762</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a495cb24d97c9b90a9c1e8a62903debf5_cgraph.svg" width="342" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a495cb24d97c9b90a9c1e8a62903debf5_icgraph.svg" width="404" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="afe30b8ff2b6218f37a2945871e6f11b8" name="afe30b8ff2b6218f37a2945871e6f11b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe30b8ff2b6218f37a2945871e6f11b8">&#9670;&#160;</a></span>qrcodegen_getSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen_getSize </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00752">752</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_afe30b8ff2b6218f37a2945871e6f11b8_icgraph.svg" width="388" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a25856a1d9c76851f8b83640ba3c6a3fc" name="a25856a1d9c76851f8b83640ba3c6a3fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25856a1d9c76851f8b83640ba3c6a3fc">&#9670;&#160;</a></span>qrcodegen_isAlphanumeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_isAlphanumeric </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00821">821</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a25856a1d9c76851f8b83640ba3c6a3fc_icgraph.svg" width="638" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa873e0a91056118719064ea4f2a15013" name="aa873e0a91056118719064ea4f2a15013"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa873e0a91056118719064ea4f2a15013">&#9670;&#160;</a></span>qrcodegen_isNumeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen_isNumeric </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00810">810</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_aa873e0a91056118719064ea4f2a15013_icgraph.svg" width="606" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aaed32d45f095ce02e6718c8a48f4393d" name="aaed32d45f095ce02e6718c8a48f4393d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaed32d45f095ce02e6718c8a48f4393d">&#9670;&#160;</a></span>qrcodegen_makeAlphanumeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> qrcodegen_makeAlphanumeric </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00925">925</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_aaed32d45f095ce02e6718c8a48f4393d_cgraph.svg" width="412" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_aaed32d45f095ce02e6718c8a48f4393d_icgraph.svg" width="659" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a5b28f0f89765839d8f4c8a803edc4ad4" name="a5b28f0f89765839d8f4c8a803edc4ad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b28f0f89765839d8f4c8a803edc4ad4">&#9670;&#160;</a></span>qrcodegen_makeBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> qrcodegen_makeBytes </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00876">876</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a5b28f0f89765839d8f4c8a803edc4ad4_cgraph.svg" width="367" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a27c3b3d01e91f9532689adbb01c1ff2c" name="a27c3b3d01e91f9532689adbb01c1ff2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27c3b3d01e91f9532689adbb01c1ff2c">&#9670;&#160;</a></span>qrcodegen_makeEci()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> qrcodegen_makeEci </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>assignVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00959">959</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a27c3b3d01e91f9532689adbb01c1ff2c_cgraph.svg" width="334" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa1c8b8a85f121c8cd1be89ddab684d43" name="aa1c8b8a85f121c8cd1be89ddab684d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c8b8a85f121c8cd1be89ddab684d43">&#9670;&#160;</a></span>qrcodegen_makeNumeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structqrcodegen___segment.html">qrcodegen_Segment</a> qrcodegen_makeNumeric </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>digits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>buf</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00891">891</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_aa1c8b8a85f121c8cd1be89ddab684d43_cgraph.svg" width="382" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_aa1c8b8a85f121c8cd1be89ddab684d43_icgraph.svg" width="628" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac74eae03dc0c0462a79eee356ff40443" name="ac74eae03dc0c0462a79eee356ff40443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac74eae03dc0c0462a79eee356ff40443">&#9670;&#160;</a></span>reedSolomonComputeDivisor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void reedSolomonComputeDivisor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>degree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>result</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00358">358</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ac74eae03dc0c0462a79eee356ff40443_cgraph.svg" width="390" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ac74eae03dc0c0462a79eee356ff40443_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a859a4a9e045e79ca631ea58807c07713" name="a859a4a9e045e79ca631ea58807c07713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a859a4a9e045e79ca631ea58807c07713">&#9670;&#160;</a></span>reedSolomonComputeRemainder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void reedSolomonComputeRemainder </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dataLen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>generator</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>degree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>result</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00384">384</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a859a4a9e045e79ca631ea58807c07713_cgraph.svg" width="414" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a859a4a9e045e79ca631ea58807c07713_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="af3eccd8d887a881d203a8bad18b81902" name="af3eccd8d887a881d203a8bad18b81902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3eccd8d887a881d203a8bad18b81902">&#9670;&#160;</a></span>reedSolomonMultiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> uint8_t reedSolomonMultiply </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00402">402</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_af3eccd8d887a881d203a8bad18b81902_icgraph.svg" width="100%" height="401"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a15c31cc3974d3162b6804fc4a1f6c14a" name="a15c31cc3974d3162b6804fc4a1f6c14a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c31cc3974d3162b6804fc4a1f6c14a">&#9670;&#160;</a></span>setModuleBounded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void setModuleBounded </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isDark</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00779">779</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_a15c31cc3974d3162b6804fc4a1f6c14a_icgraph.svg" width="339" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ae0b2fcd2ff740612ce23157eaacb7fb1" name="ae0b2fcd2ff740612ce23157eaacb7fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b2fcd2ff740612ce23157eaacb7fb1">&#9670;&#160;</a></span>setModuleUnbounded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> void setModuleUnbounded </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>qrcode</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isDark</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00793">793</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="qrcodegen_8c_ae0b2fcd2ff740612ce23157eaacb7fb1_cgraph.svg" width="339" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aa317616612730b289013844a2b040f26" name="aa317616612730b289013844a2b040f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa317616612730b289013844a2b040f26">&#9670;&#160;</a></span>ECC_CODEWORDS_PER_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> const int8_t ECC_CODEWORDS_PER_BLOCK[4][41]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    {-1,  7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28, 28, 28, 30, 30, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},  </div>
+<div class="line">    {-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28},  </div>
+<div class="line">    {-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30, 28, 30, 30, 30, 30, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},  </div>
+<div class="line">    {-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28, 30, 24, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},  </div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00097">97</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+
+</div>
+</div>
+<a id="a7deaf66d3af6d18ec53e2f1e7a1913c9" name="a7deaf66d3af6d18ec53e2f1e7a1913c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7deaf66d3af6d18ec53e2f1e7a1913c9">&#9670;&#160;</a></span>NUM_ERROR_CORRECTION_BLOCKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="qrcodegen_8c.html#af133be2ddbf0cfabb0bb6b0d5f6c00b9">testable</a> const int8_t NUM_ERROR_CORRECTION_BLOCKS[4][41]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    {-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4,  4,  4,  4,  4,  6,  6,  6,  6,  7,  8,  8,  9,  9, 10, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 24, 25},  </div>
+<div class="line">    {-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5,  5,  8,  9,  9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49},  </div>
+<div class="line">    {-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8,  8, 10, 12, 16, 12, 17, 16, 18, 21, 20, 23, 23, 25, 27, 29, 34, 34, 35, 38, 40, 43, 45, 48, 51, 53, 56, 59, 62, 65, 68},  </div>
+<div class="line">    {-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25, 25, 34, 30, 32, 35, 37, 40, 42, 45, 48, 51, 54, 57, 60, 63, 66, 70, 74, 77, 81},  </div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="qrcodegen_8c_source.html#l00109">109</a> of file <a class="el" href="qrcodegen_8c_source.html">qrcodegen.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_805a0af995e93a362739e98abd740eb2.html">external</a></li><li class="navelem"><a class="el" href="dir_c10d7877dc2fce661f73d13dda2e12ac.html">nayuki-qrcodegen</a></li><li class="navelem"><a class="el" href="qrcodegen_8c.html">qrcodegen.c</a></li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Fri Feb 10 2023
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Fri Feb 10 2023
+      </small></address>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

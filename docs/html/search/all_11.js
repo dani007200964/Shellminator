@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['yellow_0',['YELLOW',['../class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731',1,'Shellminator']]]
+  ['underline_0',['UNDERLINE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653a95d8941aa686aa5242ef94236aea8644',1,'Shellminator']]],
+  ['update_1',['update',['../class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1',1,'Shellminator']]]
 ];

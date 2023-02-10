@@ -31,7 +31,8 @@ const char logo[] =
 "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
 " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
 "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-"                                                              \r\n"
+"\r\n\033[0;37m"
+"Visit on GitHub:\033[1;32m https://github.com/dani007200964/Shellminator\r\n\r\n"
 
 ;
 
@@ -40,10 +41,10 @@ Commander commander;
 
 // We have to create the prototype functions for our commands.
 // The arguments has to be the same for all command functions.
-void cat_func( char *args, commandResponse *response );
-void dog_func( char *args, commandResponse *response );
-void sum_func( char *args, commandResponse *response );
-void led_func( char *args, commandResponse *response );
+void cat_func( char *args, Stream *response );
+void dog_func( char *args, Stream *response );
+void sum_func( char *args, Stream *response );
+void led_func( char *args, Stream *response );
 
 // Commander API-tree
 Commander::API_t API_tree[] = {
@@ -98,7 +99,7 @@ void loop() {
 }
 
 /// This is an example function for the cat command
-void cat_func(char *args, commandResponse *response )
+void cat_func(char *args, Stream *response )
 {
 
   response -> print("Hello from cat function!\r\n");
@@ -106,7 +107,7 @@ void cat_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the dog command
-void dog_func(char *args, commandResponse *response )
+void dog_func(char *args, Stream *response )
 {
 
   response -> print("Hello from dog function!\r\n");
@@ -114,7 +115,7 @@ void dog_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the led command
-void led_func(char *args, commandResponse *response )
+void led_func(char *args, Stream *response )
 {
 
   // Toggle your LED pin here, if you have on your board
@@ -124,7 +125,7 @@ void led_func(char *args, commandResponse *response )
 }
 
 /// This is an example function for the sum command
-void sum_func(char *args, commandResponse *response )
+void sum_func(char *args, Stream *response )
 {
 
   // These variables will hold the value of the
@@ -158,6 +159,10 @@ void sum_func(char *args, commandResponse *response )
   sum = a + b;
 
   // Print out the result.
-  response -> printf( "%d + %d = %d\r\n", a, b, sum );
+  response -> print( a );
+  response -> print( " + " );
+  response -> print( b );
+  response -> print( " = " );
+  response -> println( sum );
 
 }
