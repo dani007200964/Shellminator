@@ -48,16 +48,10 @@ jobs:
             - name: esp32:ESP32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
           
-          libraries: |
-            - name: WebSockets
-
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
             - examples/Shellminator_simple_ESP32_server
-            - examples/Shellminator_multiple_ESP32_websocket
-            - examples/Shellminator_simple_ESP32_websocket
-            - examples/Shellminator_simple_ESP32_websocket
             
 
   compile-examples-for-esp8266:
@@ -83,4 +77,3 @@ jobs:
             - examples/Shellminator_execute
             - examples/Shellminator_simple
             - examples/Shellminator_simple_ESP8266_server
-            - examples/Shellminator_simple_ESP8266_websocket
