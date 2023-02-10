@@ -25,6 +25,10 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_Commander
+            - examples/Shellminator_key_override
+            - examples/Shellminator_PROGMEM_Logo
+            - examples/Shellminator_PROGMEM_Logo
 
   compile-examples-for-esp32:
     runs-on: ubuntu-latest
@@ -50,6 +54,10 @@ jobs:
             - examples/Shellminator_execute
             - examples/Shellminator_simple
             - examples/Shellminator_simple_ESP32_server
+            - examples/Shellminator_multiple_ESP32_websocket
+            - examples/Shellminator_simple_ESP32_websocket
+            - examples/Shellminator_simple_ESP32_websocket
+            
 
   compile-examples-for-esp8266:
     runs-on: ubuntu-latest
@@ -73,3 +81,5 @@ jobs:
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
+            - examples/Shellminator_simple_ESP8266_server
+            - examples/Shellminator_simple_ESP8266_websocket
