@@ -20,8 +20,8 @@
 #define SERVER_PORT 23
 
 // WiFi credentials.
-const char* ssid     = "DIGI-b4vC";
-const char* password = "vyFJ6mU8";
+const char* ssid     = "your-wifi-ssid";
+const char* password = "your-wifi-pass";
 
 // Create an instance of the server.
 // It will be available on port 23.

@@ -24,8 +24,8 @@
 #define WEBSERVER_PORT 80
 
 // WiFi credentials.
-const char* ssid     = "DIGI-b4vC";
-const char* password = "vyFJ6mU8";
+const char* ssid     = "your-wifi-ssid";
+const char* password = "your-wifi-pass";
 
 // Create websocket object.
 WebSocketsServer webSocket = WebSocketsServer( WEBSOCKET_PORT );
