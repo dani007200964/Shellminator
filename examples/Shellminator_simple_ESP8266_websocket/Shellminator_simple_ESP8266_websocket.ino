@@ -88,7 +88,7 @@ void handleNotFound() {
 // This function will be called on websocket event.
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 
-  // This implementation only works woth one websocket based terminal client.
+  // This implementation only works with one websocket based terminal client.
   // Every websocket client get an identifier from 0 - 255. The num argument
   // is this identifier. We have to close every other client, than 0.
   if( num > 0 ){

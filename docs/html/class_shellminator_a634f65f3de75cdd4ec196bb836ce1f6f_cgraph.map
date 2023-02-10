@@ -1,6 +1,7 @@
 <map id="Shellminator::beginServer" name="Shellminator::beginServer">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,175,60"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="223,35,356,60"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="410,5,567,31"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9" title="Bring some color into your code." alt="" coords="404,55,573,95"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,175,56"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="223,31,356,56"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="409,5,567,31"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="404,55,572,80"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9" title="Bring some color into your code." alt="" coords="620,23,789,63"/>
 </map>

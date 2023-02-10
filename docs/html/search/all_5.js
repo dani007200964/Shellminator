@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['flush_0',['flush',['../classshellminator_channel.html#af61d7a99f7ffe01ee6d3fae296d821ae',1,'shellminatorChannel::flush()'],['../classshellminator_arduino_serial_channel.html#ae0e8c7cd433a8b6b97ea8c283dda5df8',1,'shellminatorArduinoSerialChannel::flush()'],['../classshellminator_arduino32_u4_serial_channel.html#ac23cb52a5166c8b0e1dd039f6b522490',1,'shellminatorArduino32U4SerialChannel::flush()'],['../classshellminator_wi_fi_client_channel.html#a0eb0b20b1ad7bcc062141761e099ca00',1,'shellminatorWiFiClientChannel::flush()']]],
+  ['flush_0',['flush',['../classshellminator_default_channel.html#a9b152b43e4ef5d9ef4bcefdef69f64b0',1,'shellminatorDefaultChannel']]],
   ['freeabortkey_1',['freeAbortKey',['../class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a',1,'Shellminator']]],
   ['freedownarrow_2',['freeDownArrow',['../class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd',1,'Shellminator']]],
   ['freeendkey_3',['freeEndKey',['../class_shellminator.html#a56313495a30f28e95b303097e7d182c6',1,'Shellminator']]],

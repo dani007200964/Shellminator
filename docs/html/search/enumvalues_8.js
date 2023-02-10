@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white_0',['WHITE',['../class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33',1,'Shellminator']]]
+  ['underline_0',['UNDERLINE',['../class_shellminator.html#aed71921772c5914597df4e0367edf653a95d8941aa686aa5242ef94236aea8644',1,'Shellminator']]]
 ];

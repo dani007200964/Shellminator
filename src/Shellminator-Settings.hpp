@@ -52,6 +52,12 @@ SOFTWARE.
   #define SHELLMINATOR_ENABLE_QR_SUPPORT
   #endif
 
+  /* NOT WORKING YET!
+  #ifndef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+  #define SHELLMINATOR_ENABLE_PASSWORD_MODULE
+  #endif
+  */
+  
   #ifndef SHELLMINATOR_BUFF_LEN
   #define SHELLMINATOR_BUFF_LEN 50
   #endif
@@ -96,6 +102,12 @@ SOFTWARE.
   #define SHELLMINATOR_ENABLE_QR_SUPPORT
   #endif
 
+  /* NOT WORKING YET!
+  #ifndef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+  #define SHELLMINATOR_ENABLE_PASSWORD_MODULE
+  #endif
+  */
+
   #ifndef SHELLMINATOR_BUFF_LEN
   #define SHELLMINATOR_BUFF_LEN 50
   #endif
@@ -122,6 +134,11 @@ SOFTWARE.
 
 #endif
 
+/// If defined, enables high memory mode.
+///
+/// If your microcontroller has relativley high amount of RAM memory,
+/// I highly recommend to use it.
+/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
 #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 #define SHELLMINATOR_ACCELERATOR_BUFFER_LEN SHELLMINATOR_BANNER_LEN + SHELLMINATOR_BANNER_PATH_LEN + SHELLMINATOR_BUFF_LEN * 2 + 30
 #endif
@@ -147,16 +164,20 @@ SOFTWARE.
 #define SHELLMINATOR_BANNER_PATH_LEN 10
 #endif
 
-/// Color and style of the startup logo
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD and RED.
+/// Color of the startup logo
+/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be RED.
 #ifndef SHELLMINATOR_LOGO_FONT_STYLE
 #define SHELLMINATOR_LOGO_FONT_STYLE BOLD
 #endif
 
+/// Style of the startup logo
+/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
 #ifndef SHELLMINATOR_LOGO_COLOR
 #define SHELLMINATOR_LOGO_COLOR RED
 #endif
 
+/// If defined, enables the WebSocket Module.
+/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 #define SHELLMINATOR_WEBSOCKET_BUFFER_LEN 50
 #endif

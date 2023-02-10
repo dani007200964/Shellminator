@@ -42,6 +42,12 @@ SOFTWARE.
 #include "Arduino.h"
 #endif
 
+#ifdef __AVR__
+
+  #include <avr/pgmspace.h>
+  
+#endif
+
 #include "Stream.h"
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
@@ -59,6 +65,12 @@ SOFTWARE.
 
 #endif
 
+#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  #include "external/sha256/terminal_sha256.h"
+
+#endif
+
 #ifdef __has_include
   #if __has_include ("Commander-API.hpp")
     #include "Commander-API.hpp"
@@ -73,7 +85,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 
-///  +------  Costum configuration  ------+
+///  +------  Custom configuration  ------+
 ///  |                                    |
 ///  |  This is where you have to config  |
 ///  |           your defines!            |
@@ -281,7 +293,7 @@ public:
 	/// This function attaches a logo to the terminal.
   ///
   /// The logo is just a character array.
-  /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
+  /// To create custom startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
   /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
   /// Add '\r' to all line end.
   /// @param logo_p Pointer to the logo's address.
@@ -463,10 +475,25 @@ public:
 
 	#endif
 
+  #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  void enablePasswordProtection( uint8_t* passwordHashAddress_p );
+  void enablePasswordProtection( const uint8_t* passwordHashAddress_p );
+  void enablePasswordProtection( char* passwordHashAddress_p );
+  void enablePasswordProtection( const char* passwordHashAddress_p );
+  void disablePasswordProtection();
+  bool checkPassword( uint8_t* pwStr );
+  bool checkPassword( const uint8_t* pwStr );
+  bool checkPassword( char* pwStr );
+  bool checkPassword( const char* pwStr );
+
+  #endif
+
+	/// Generate a beep sound on the terminal device.
 	void beep();
 
   /// This flag enables or disables character formatting.
-  /// It can be usefull when VT100 format parser is not
+  /// It can be useful when VT100 format parser is not
   /// available on the host device.
   bool enableFormatting = true;
 
@@ -523,7 +550,7 @@ private:
 
   /// Pointer to a string that holds the startup logo
   ///
-  /// Simple text that holds the startup logo. You can create costum logos
+  /// Simple text that holds the startup logo. You can create custom logos
   /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
   /// @warning Make sure that the generated string is c/c++ compatible!
   char *logo = NULL;
@@ -688,6 +715,16 @@ private:
 	int32_t searchMatch;
 
 	#endif
+
+  #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+  
+
+  SHA256_CTX passwordHashCtx;
+  uint8_t passwordHashBuffer[ SHA256_BLOCK_SIZE ];
+  uint8_t* passwordHashAddress = NULL;
+
+  #endif
 
   // QR-code configuration specific parts.
   #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT

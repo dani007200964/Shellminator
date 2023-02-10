@@ -96,7 +96,7 @@ void handleNotFound() {
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 
   // This implementation works with multiple clients. You have to check if you
-  // are in the available range of cliens.
+  // are in the available range of clients.
   if( num > 2 ){
 
     // If we ran out of available clients, send

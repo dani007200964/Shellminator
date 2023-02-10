@@ -129,14 +129,41 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
 #endif
 
-// Todo PROGMEM version as well.
+#ifdef __AVR__
+
+const char Shellminator::helpText[] PROGMEM = {
+  "\r\n"
+  "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
+  "\r\n"
+  "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
+  "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"
+  "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"
+  "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"
+  "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"
+  "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"
+  "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"
+  "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
+  "\r\n"
+};
+
+#else
+
 const char Shellminator::helpText[] = {
   "\r\n"
   "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
   "\r\n"
-  "I have to finish it...\r\n"
+  "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
+  "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"
+  "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"
+  "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"
+  "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"
+  "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"
+  "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"
+  "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
   "\r\n"
 };
+
+#endif
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
@@ -447,7 +474,22 @@ void Shellminator::printHistory(){
 
 void Shellminator::printHelp(){
 
+  #ifdef __AVR__
+
+  uint32_t i;
+
+  for( i = 0; i < strlen_P( helpText ); i++ ){
+
+    char c = pgm_read_byte_near( helpText + i );
+    channel -> print( c );  
+
+  }
+
+  #else
+
   channel -> print( helpText );
+
+  #endif
 
   #ifdef COMMANDER_API_VERSION
 
@@ -1317,7 +1359,7 @@ void Shellminator::process( char new_char ) {
 
   }
 
-  else if( new_char == 0x01 ){ // ctrl-a (begining of the line)
+  else if( new_char == 0x01 ){ // ctrl-a (beginning of the line)
     cursor = 0;
     redrawLine();
     return;
@@ -2406,6 +2448,69 @@ void Shellminator::attachCommander( Commander* commander_p ){
 
 #endif
 
+#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+
+void Shellminator::enablePasswordProtection( uint8_t* passwordHashAddress_p ){
+
+  passwordHashAddress = passwordHashAddress_p;
+
+}
+
+void Shellminator::enablePasswordProtection( const uint8_t* passwordHashAddress_p ){
+
+  passwordHashAddress = (uint8_t*)passwordHashAddress_p;
+
+}
+
+void Shellminator::enablePasswordProtection( char* passwordHashAddress_p ){
+
+  passwordHashAddress = (uint8_t*)passwordHashAddress_p;
+
+}
+
+void Shellminator::enablePasswordProtection( const char* passwordHashAddress_p ){
+
+  passwordHashAddress = (uint8_t*)passwordHashAddress_p;
+
+}
+
+void Shellminator::disablePasswordProtection(){
+
+  passwordHashAddress = NULL;
+
+}
+
+bool Shellminator::checkPassword( uint8_t* pwStr ){
+
+  terminal_sha256_init( &passwordHashCtx );
+  terminal_sha256_update( &passwordHashCtx, pwStr, strlen( (const char*)pwStr ) );
+  terminal_sha256_final( &passwordHashCtx, passwordHashBuffer );
+
+  return memcmp( passwordHashAddress, passwordHashBuffer, SHA256_BLOCK_SIZE );
+
+}
+
+bool Shellminator::checkPassword( const uint8_t* pwStr ){
+
+  checkPassword( (uint8_t*)pwStr );
+
+}
+
+bool Shellminator::checkPassword( char* pwStr ){
+
+  checkPassword( (uint8_t*)pwStr );
+
+}
+
+bool Shellminator::checkPassword( const char* pwStr ){
+
+  checkPassword( (uint8_t*)pwStr );
+
+}
+
+#endif
+
+
 //----- QR-code generator part -----//
 #ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
 
@@ -2458,7 +2563,7 @@ void Shellminator::generateQRText( char* text, enum qrcodegen_Ecc ecc ){
   //  -Full bar:      https://www.fileformat.info/info/unicode/char/2588/index.htm
   //  -Upper square:  https://www.fileformat.info/info/unicode/char/2580/index.htm
   //  -lower square:  https://www.fileformat.info/info/unicode/char/2584/index.htm
-  // To draw a QR-code with a terminal emulator the easyest way to combine these
+  // To draw a QR-code with a terminal emulator the easiest way to combine these
   // unicode characters. Because it is two 'pixels' high, we have to step the y
   // variable by two lines.
   for( y = 0; y < ( qr_size / 2 ); y++ ){

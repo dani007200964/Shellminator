@@ -41,6 +41,12 @@ SOFTWARE.
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
+/// xterm.js file converted to C/C++ header.
+///
+/// This is a cop of xterm.js. It is converted to C/C++ header. This way
+/// it does not require a file system to send it as a response.
+/// @note If you need to use the original file, because you have a file system,
+/// you can find it in the other\xterm_based_webpage folder.
 const char shellminator_xterm_js_response[] PROGMEM = {
   0x21, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x28, 0x65, 0x2c,
   0x74, 0x29, 0x7b, 0x69, 0x66, 0x28, 0x22, 0x6f, 0x62, 0x6a, 0x65, 0x63,
@@ -32358,8 +32364,16 @@ const char shellminator_xterm_js_response[] PROGMEM = {
   0x3d, 0x78, 0x74, 0x65, 0x72, 0x6d, 0x2e, 0x6a, 0x73, 0x2e, 0x6d, 0x61,
   0x70
 };
+
+/// Size of the shellminator_xterm_js_response response in bytes.
 const uint32_t shellminator_xterm_js_response_len = 387769;
 
+/// xterm.css file converted to C/C++ header.
+///
+/// This is a cop of xterm.css. It is converted to C/C++ header. This way
+/// it does not require a file system to send it as a response.
+/// @note If you need to use the original file, because you have a file system,
+/// you can find it in the other\xterm_based_webpage folder.
 const char shellminator_xterm_css_response[] PROGMEM = {
   0x2f, 0x2a, 0x2a, 0x0a, 0x20, 0x2a, 0x20, 0x43, 0x6f, 0x70, 0x79, 0x72,
   0x69, 0x67, 0x68, 0x74, 0x20, 0x28, 0x63, 0x29, 0x20, 0x32, 0x30, 0x31,
@@ -32729,8 +32743,16 @@ const char shellminator_xterm_css_response[] PROGMEM = {
   0x20, 0x20, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x3a, 0x20,
   0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76, 0x65, 0x3b, 0x0a, 0x7d, 0x0a
 };
+
+/// Size of the shellminator_xterm_css_response response in bytes.
 const uint32_t shellminator_xterm_css_response_len = 4404;
 
+/// Terminal page file converted to C/C++ header.
+///
+/// This is a cop of Terminal page. It is converted to C/C++ header. This way
+/// it does not require a file system to send it as a response.
+/// @note If you need to use the original file, because you have a file system,
+/// you can find it in the other\xterm_based_webpage folder( index.html ).
 const char shellminator_html_response[] PROGMEM = {
   0x3c, 0x21, 0x64, 0x6f, 0x63, 0x74, 0x79, 0x70, 0x65, 0x20, 0x68, 0x74,
   0x6d, 0x6c, 0x3e, 0x0d, 0x0a, 0x3c, 0x21, 0x2d, 0x2d, 0x0d, 0x0a, 0x2a,
@@ -38096,6 +38118,8 @@ const char shellminator_xterm_addon_web_links_js_response[] = {
   0x62, 0x2d, 0x6c, 0x69, 0x6e, 0x6b, 0x73, 0x2e, 0x6a, 0x73, 0x2e, 0x6d,
   0x61, 0x70
 };
+
+/// Size of the shellminator_html_response response in bytes.
 const uint32_t shellminator_xterm_addon_web_links_js_response_len = 2714;
 
 
