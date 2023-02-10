@@ -47,6 +47,9 @@ jobs:
           platforms: |
             - name: esp32:ESP32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+          
+          libraries:
+            - name: WebSockets
 
           sketch-paths: |
             - examples/Shellminator_execute
