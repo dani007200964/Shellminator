@@ -546,7 +546,41 @@ public:
 
   #endif
 
+  friend class ShellminatorState;
+
 private:
+
+  // State-machine functions.
+  /// @todo Finish the documentation for state-machine part.
+  void ShellminatorDefaultState( char new_char );
+  void ShellminatorEnterKeyState();
+  void ShellminatorBackspaceState();
+  void ShellminatorBeginningOfLineState();
+  void ShellminatorEndOfLineState();
+  void ShellminatorLogoutState();
+  void ShellminatorReverseSearchState();
+  void ShellminatorClearScreenState();
+  void ShellminatorAutoCompleteState();
+  void ShellminatorAbortState();
+  void ShellminatorEscapeCharacterState( char new_char );
+  void ShellminatorEscapeBracketState( char new_char );
+  void ShellminatorUpArrowKeyState();
+  void ShellminatorDownArrowKeyState();
+  void ShellminatorLeftArrowKeyState();
+  void ShellminatorRightArrowKeyState();
+  void ShellminatorHomeKeyState();
+  void ShellminatorHomeKeyState( char new_char );
+  void ShellminatorEndKeyState();
+  void ShellminatorEndKeyState( char new_char );
+  void ShellminatorDelKeyState();
+  void ShellminatorDelKeyState( char new_char );
+  void ShellminatorPageUpKeyState();
+  void ShellminatorPageUpKeyState( char new_char );
+  void ShellminatorPageDownKeyState();
+  void ShellminatorPageDownKeyState( char new_char );
+  void ShellminatorProcessRegularCharacter( char new_char );
+
+  void ( Shellminator::*currentState )( char )= &ShellminatorDefaultState;
 
   /// Pointer to a string that holds the startup logo
   ///

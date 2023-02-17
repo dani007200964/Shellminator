@@ -733,934 +733,7 @@ void Shellminator::redrawLine(){
 
 void Shellminator::process( char new_char ) {
 
-  // Line endings:
-  // NetCat: \n
-  // Screen: \r \0
-  // PuTTY: \r \n
-
-  // General counter variable
-  uint32_t i;
-
-  /*
-  Serial.print( "New data : '" );
-  Serial.print(new_char);
-  Serial.print("' [0x");
-  Serial.print( new_char, HEX );
-  Serial.println("]");
-  */
-
-  if( new_char == '\0' ){
-    return;
-  }
-
-  if( new_char == '\n' ){
-    return;
-  }
-
-  // Check if the new character is backspace character.
-  // '\b' or 127 are both meaning that the backspace kes is pressed
-  if ( ( new_char == '\b' ) || ( new_char == 127 ) ) {
-
-    // If we press a backspace we have to reset cmd_buff_dim to default value
-    cmd_buff_dim = 1;
-
-    // We have to check the number of the characters in the buffer.
-    // If the buffer is empty we must not do anything!
-    if ( cursor > 0 ) {
-
-      // decrease the cmd buffer counter and the cursor position
-      cmd_buff_cntr--;
-      cursor--;
-
-      // if we are at the end of the command buffer
-      if ( cursor == cmd_buff_cntr ) {
-
-        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-        if( inSearch ){
-
-          cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
-          redrawLine();
-
-        }
-
-        else{
-        #endif
-
-        channel -> print("\b \b"); // just delete the last character from the terminal
-        cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
-
-        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-        }
-        #endif
-
-
-      }
-
-      else {
-
-        // if the cursor is somewhere in the middle of the cmd buffer
-        // rework the buffer and redraw the whole line
-        for( i = cursor; i < cmd_buff_cntr; i++ ) {
-
-          cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
-
-        }
-
-        redrawLine();
-
-      }
-
-      // We have no more things to do, so return
-      return;
-
-    }
-
-  }
-
-  // If the enter key is pressed in the keyboard, the terminal application
-  // will send a '\r' character.
-  else if ( new_char == '\r' ) {
-
-    // If the enter key is pressed cmd_buff_dim has to be reset to the default value
-    cmd_buff_dim = 1;
-
-    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-    if( inSearch  ){
-
-      if( searchMatch > 0 ){
-
-        inSearch = false;
-        strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
-        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-        redrawLine();
-
-      }
-
-      else{
-        cmd_buff_cntr = 0;
-      }
-
-    }
-
-    #endif
-
-    // Because a command is sent we have to close it. Basically we replace the arrived
-    // '\r' character with a '\0' string terminator character. Now we have our command
-    // in a C/C++ like standard string format.
-    cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
-
-    // We send a line break to the terminal to put the next data in new line
-    channel -> print( '\r' );
-    channel -> print( '\n' );
-
-    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-    inSearch = false;
-
-    #endif
-
-    // If the arrived data is not just a single enter we have to process the command.
-    if ( cmd_buff_cntr > 0 ) {
-
-      if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
-
-        printHelp();
-
-      }
-
-      else if( strcmp( cmd_buff[ 0 ], "history" ) == 0 ){
-
-        printHistory();
-
-      }
-
-      // We haveto check that execution_fn is not NULL.
-      else if( execution_fn != NULL ){
-
-        // If it is a valid, then call it's function.
-        execution_fn( cmd_buff[ 0 ] );
-
-      }
-
-      #ifdef COMMANDER_API_VERSION
-
-      // If a Commander object is added, it can be used
-      // to execute the command without an execution_fn.
-      else if( commander != NULL ){
-
-        commander -> execute( cmd_buff[ 0 ], channel );
-
-      }
-
-      #endif
-
-      // If not, then just print it with Serial.
-      else{
-        channel -> print( (const char*)"cmd: " );
-        channel -> print( cmd_buff[ 0 ] );
-      }
-
-      // Send a new line after command execution,
-      // so we will not overwrite the last line of the
-      // command output with the banner
-      channel -> print( '\r' );
-      channel -> print( '\n' );
-
-      // After we processed the command we have to shift the history upwards.
-      // To protect the copy against buffer overflow we use strncpy
-      for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
-
-        strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
-
-      }
-
-    }
-
-    // After the command processing finished we print a new banner to the terminal.
-    // This means that the device is finished and waits the new command.
-    printBanner();
-
-    // To empty the incoming string we have to zero it's counter.
-    cmd_buff_cntr = 0;
-    cursor = 0;
-
-    // We have no more things to do, so return
-    return;
-
-  }
-
-  // This part handles the arrow detection. Arrows are composed as a VT100 command.
-  // These commands usually contains a pattern. This pattern usually starts with
-  // an Escape character, that is deciman 27 in ASCII table.
-  // The escape_state variable stores the state of the VT100 command interpreter
-  // state-machine.
-  else if ( new_char == 27 ) {
-
-    // If escape character recived we set escape_state variable to 1.
-    escape_state = 1;
-
-    // We have no more things to do, so return
-    return;
-  }
-
-  // If the escape_state variable is 1 that means we expect that the new character will be
-  // a '[' character.
-  else if ( escape_state == 1 ) {
-
-    // Check that the new character is '['
-    if ( new_char == '[' ) {
-
-      // If it is, we set escape_state variable to 2
-      escape_state = 2;
-
-      // We have no more things to do, so return
-      return;
-
-    }
-
-    else {
-
-      // If the new character is not '[', that means it is not a VT100 command so we have to stop
-      // the interpretation of the escape sequence.
-      escape_state = 0;
-
-      // We have no more things to do, so return
-      return;
-
-    }
-
-  }
-
-  // If the escape_state variable is 2 that means we expect that the new character will be
-  // an 'A', 'B', 'C' or 'D' character. These four characters are represent the four arrow keys.
-  // A -> Up
-  // B -> Down
-  // C -> Right
-  // D -> Left
-  else if ( escape_state == 2 ) {
-
-    // To chose between the four valid values the easyest way is a switch.
-    switch ( new_char ) {
-
-      // Up arrow pressed
-      case 'A':
-
-        // Because we have finished the ecape sequence interpretation we reset the state-machine.
-        escape_state = 0;
-
-        // Check if the arrow function is overriden.
-        if( upArrowOverrideFunc ){
-
-          upArrowOverrideFunc();
-          break;
-
-        }
-
-        // We have to check that we can go upper in history
-        if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
-
-          // If we can, we have to check that the previous command was not empty.
-          if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
-
-            // If it was empty we can't do much with an empty command so we return.
-            break;
-
-          }
-
-          // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          // Remember the 0th element is always reserved for the new data. If we browse the history the
-          // data in the history will overwrite the data in the 0th element so the historical data will be
-          // the new data. We use strncpy to prevent overflow.
-          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
-
-          // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-          // It is important to track the end of the loaded string.
-          cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-          cursor = cmd_buff_cntr;
-
-          // We print the loaded command to the terminal interface.
-          //channel -> print( cmd_buff[ 0 ] );
-
-          redrawLine();
-
-          // We have to increment the cmd_buff_dim variable, to track the history position.
-          // Greater number means older command!
-          cmd_buff_dim++;
-
-        }
-
-        // We have finished so we can break from the switch.
-        break;
-
-      // Down arrow pressed
-      case 'B':
-
-        // Because we have finished the ecape sequence interpretation we reset the state-machine.
-        escape_state = 0;
-
-        // Check if the arrow function is overriden.
-        if( downArrowOverrideFunc ){
-
-          downArrowOverrideFunc();
-          break;
-
-        }
-
-
-        // We have to check that we can go lover in history, and we are not in the first previous command.
-        if ( cmd_buff_dim > 2 ) {
-
-          // We have to decrement the cmd_buff_dim variable, to track the history position.
-          // Lower number means newer command!
-          cmd_buff_dim--;
-
-          // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-          // Remember the 0th element is always reserved for the new data. If we browse the history the
-          // data in the history will overwrite the data in the 0th element so the historical data will be
-          // the new data. We use strncpy to prevent overflow.
-          strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN + 1 );
-
-          // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-          // It is important to track the end of the loaded string.
-          cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-          cursor = cmd_buff_cntr;
-
-          // We print the loaded command to the terminal interface.
-          //channel -> print( cmd_buff[ 0 ] );
-          redrawLine();
-
-        }
-
-        // Check that if we are in the first previous command.
-        else if ( cmd_buff_dim == 2 ) {
-
-          // To empty the incoming string we have to zero it's counter.
-          cmd_buff_cntr = 0;
-          cursor = 0;
-
-          // We have to reset the cmd_buff_dim variable to the default value.
-          cmd_buff_dim = 1;
-
-          redrawLine();
-
-        }
-
-        // We have finished so we can break from the switch.
-        break;
-
-      // Right arrow pressed
-      // Currently not used
-      case 'C':
-
-        // We just simply reset the state-machine.
-        escape_state = 0;
-
-        // Check if the arrow function is overriden.
-        if( rightArrowOverrideFunc ){
-
-          rightArrowOverrideFunc();
-          break;
-
-        }
-
-        // Check if we can move to right.
-        if( cursor < cmd_buff_cntr ){
-
-          channel -> write( 27 );   // ESC character( decimal 27 )
-          channel -> print( '[' );  // VT100 Cursor command.
-          channel -> print( '1' );  // 1 character movement.
-          channel -> print( 'C' );  // Left.
-
-          // Increment the cursor variavble.
-          cursor++;
-
-        }
-
-        // We have finished so we can break from the switch.
-        break;
-
-      // Left arrow pressed
-      // Currently not used
-      case 'D':
-
-        // We just simply reset the state-machine.
-        escape_state = 0;
-
-        // Check if the arrow function is overriden.
-        if( leftArrowOverrideFunc ){
-
-          leftArrowOverrideFunc();
-          break;
-
-        }
-
-        // Check if we can move to left.
-        if( cursor > 0 ){
-
-          channel -> write( 27 );   // ESC character( decimal 27 )
-          channel -> print( '[' );  // VT100 Cursor command.
-          channel -> print( '1' );  // 1 character movement.
-          channel -> print( 'D' );  // Left.
-
-          // Decrement the cursor variable.
-          cursor--;
-
-        }
-
-        // We have finished so we can break from the switch.
-        break;
-
-        // Home key pressed in xTerm.
-        case 'H':
-          escape_state = 0;
-
-          if( homeKeyFunc ){
-
-            homeKeyFunc();
-            break;
-
-          }
-
-          // send the cursor to the begining of the buffer
-          cursor = 0;
-          redrawLine();
-
-          break;
-
-        // End key pressed in xTerm.
-        case 'F':
-          escape_state = 0;
-
-          if( endKeyFunc ){
-
-            endKeyFunc();
-            break;
-
-          }
-
-          // send the cursor to the end of the buffer
-          cursor = cmd_buff_cntr;
-          redrawLine();
-
-          break;
-
-      // Check for Del key;
-      case '3':
-        escape_state = 3;
-        break;
-
-      // Check for End key;
-      case '4':
-        escape_state = 4;
-        break;
-
-      // Check for PgUp key;
-      case '5':
-        escape_state = 6;
-        break;
-
-      // Check for PgUp key;
-      case '6':
-        escape_state = 7;
-        break;
-
-      // Check for Home key;
-      case '1':
-        escape_state = 5;
-        break;
-
-      // Any other cases means that it was probably a VT100 command but not supported.
-      default:
-
-        // In this case we just simply reset the state-machine.
-        escape_state = 0;
-
-        // We have finished so we can break from the switch.
-        break;
-
-    }
-
-    // We have finished so we can return.
-    return;
-
-  }
-
-  // Detect del key termination.
-  else if ( escape_state == 3 ) {
-
-    if( new_char == '~' ){
-
-      // Del key detected.
-      // If we press a delet key we have to reset cmd_buff_dim to default value
-      cmd_buff_dim = 1;
-
-      // We have to check the number of the characters in the buffer.
-      // If the buffer is full we must not do anything!
-      if ( cursor != cmd_buff_cntr ) {
-
-        for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
-
-          cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
-
-        }
-
-        // If there is at least 1 character in the buffer we jus simply
-        // decrement the cmd_buff_cntr. This will result that the new character
-        // will be stored in the previous characters place in the buffer.
-        cmd_buff_cntr--;
-
-        redrawLine();
-
-      }
-
-    }
-
-    escape_state = 0;
-    return;
-
-  }
-
-  // Detect End key termination.
-  else if ( escape_state == 4 ) {
-
-    escape_state = 0;
-
-    if( new_char == '~' ) {
-
-      if( endKeyFunc ){
-
-        endKeyFunc();
-        return;
-
-      }
-
-      // send the cursor to the end of the buffer
-      cursor = cmd_buff_cntr;
-      redrawLine();
-
-    }
-
-    return;
-
-  }
-
-  // Detect Home key termination.
-  else if ( escape_state == 5 ) {
-
-    escape_state = 0;
-
-    if( new_char == '~' ){
-
-      if( homeKeyFunc ){
-
-        homeKeyFunc();
-        return;
-
-      }
-
-      // send the cursor to the begining of the buffer
-      cursor = 0;
-      redrawLine();
-
-    }
-
-    return;
-
-  }
-
-  else if( escape_state == 6 ){
-
-    escape_state = 0;
-
-    if( new_char == '~' ){
-
-      if( pageUpKeyFunc ){
-
-        pageUpKeyFunc();
-        return;
-
-      }
-
-      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-      historySearchBackward();
-
-      #endif
-
-    }
-
-    return;
-
-  }
-
-  else if( escape_state == 7 ){
-
-    escape_state = 0;
-
-    if( new_char == '~' ){
-
-      if( pageDownKeyFunc ){
-
-        pageDownKeyFunc();
-        return;
-
-      }
-
-      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-      historySearchForward();
-
-      #endif
-
-    }
-
-    return;
-
-  }
-
-  else if( new_char == 0x01 ){ // ctrl-a (beginning of the line)
-    cursor = 0;
-    redrawLine();
-    return;
-  }
-
-  else if( new_char == 0x05 ){ // ctrl-e (end of the line)
-    cursor = cmd_buff_cntr;
-    redrawLine();
-    return;
-  }
-
-  else if( new_char == 0x04 ){ // ctrl-d (logout)
-
-    if( logoutKeyFunc ){
-
-      logoutKeyFunc();
-      return;
-
-    }
-
-    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    clientDisconnect();
-
-    #endif
-
-    #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    websocketDisconnect();
-
-    #endif
-
-    return;
-  }
-
-  else if( new_char == 0x12 ){  // ctrl-r (search)
-
-    if( searchKeyFunc ){
-
-      searchKeyFunc();
-      return;
-
-    }
-
-    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-    inSearch = !inSearch;
-    redrawLine();
-
-    #endif
-
-    return;
-
-  }
-
-  else if( new_char == 0x0C ){  // ctrl-l ( clear screen )
-
-    clear();
-    redrawLine();
-
-  }
-
-  // Commander command search.
-  else if( new_char == '\t' ){
-
-    // Auto complete section.
-    #ifdef COMMANDER_API_VERSION
-
-    // Firstly, we have to set the cursor to the end of the input command.
-    // If the algorythm fills the missing characters, they have to placed
-    // at the end.
-    cursor = cmd_buff_cntr;
-
-    // Pointer to a Commander API-tree element.
-    Commander::API_t *commandAddress;
-
-    // The next auto filled character will be placed in this variable.
-    char nextChar;
-
-    // This flag holds an auto complete conflict event.
-    // Conflict event happens:
-    // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
-    // - if cmd_buff_cntr would overflow Commanders command tree.
-    // - if we found the end of the last command.
-    bool conflict = false;
-
-    // PROGMEM based tree is not supported for auto complete yet.
-    if( commander -> memoryType != Commander::MEMORY_REGULAR ){
-      return;
-    }
-
-    // If there is no conflict event, we are trying
-    // to fill as many characters as possible.
-    while( !conflict ){
-
-      // Reset the counter to the first Commander API-tree element.
-      i = 0;
-
-      // Get the address of the element indexed by i.
-      // If the indexed elment does not exists, Commander
-      // will return NULL.
-      commandAddress = commander -> operator[]( (int)i );
-
-      // Set to default state.
-      nextChar = '\0';
-
-      // Go through all elements in Commanders API-tree.
-      while( commandAddress ){
-
-        // We have to check that the typed command is exists within an existing command.
-        if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
-
-          // If it does, we have to check for conflict.
-          if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
-
-            // If there is no conflict we can set the next character from the command that we found.
-            nextChar = commandAddress -> name[ cmd_buff_cntr ];
-
-          }
-
-          else{
-
-            // We have to check that the next character in the command
-            // tree is not the same as the value in nextChar.
-            if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
-
-              // Trigger conflict.
-              conflict = true;
-
-            }
-
-          }
-
-        }
-
-        // Increment i to get the next command's index.
-        i++;
-
-        // Get the address of the element indexed by i.
-        commandAddress = commander -> operator[]( (int)i );
-
-      }
-
-      // If nextChar does not changed since start, that means
-      // we did not found anything similar.
-      if( nextChar == '\0' ){
-
-        // We have to trigger conflict to abort the process.
-        conflict = true;
-
-      }
-
-      // If we does not had a conflict event, we have to process
-      // the foind character as a regular character.
-      if( !conflict ){
-
-        process( nextChar );
-
-      }
-
-    }
-
-
-    #endif
-
-
-    return;
-
-  }
-
-  // Abort key detection.
-  else if( new_char == 0x03 ){
-
-    if( abortKeyFunc ){
-
-      abortKeyFunc();
-
-    }
-
-    #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-    inSearch = false;
-
-    #endif
-
-    // If the abort key is pressed cmd_buff_dim has to be reset to the default value
-    cmd_buff_dim = 1;
-
-    // We send a line break to the terminal to put the next data in new line
-    channel -> print( '\r' );
-    channel -> print( '\n' );
-
-    printBanner();
-
-    cursor = 0;
-    cmd_buff_cntr = 0;
-
-    return;
-
-  }
-
-  // Any other cases means that the new character is just a simple character that was pressed on the keyboard.
-  else {
-
-    // If the cursor is at the end of the command,
-    // we simply store the new character.
-    if( cursor == cmd_buff_cntr ){
-
-      cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
-
-    }
-
-    // If the cursor is somewhere in the middle, we have to shift the
-    // end of the command by one character end insert the new character
-    // to the cursor position.
-    else{
-
-      for( i = cmd_buff_cntr; i > cursor; i-- ){
-
-        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
-
-      }
-
-      // Add the new character after the cursor in the buffer
-      cmd_buff[ 0 ][ cursor ] = new_char;
-
-    }
-
-    // In this case we have to reset the cmd_buff_dim variable to the default value.
-    cmd_buff_dim = 1;
-
-    // If the cursor was at the end we have to print the
-    // new character if the cmd_buff had free space at
-    // the end.
-    if ( cursor == cmd_buff_cntr ) {
-
-      if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
-
-        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-        if( inSearch ){
-
-          // Increment counters.
-          cmd_buff_cntr++;
-          cursor++;
-
-          redrawLine();
-
-          // Increment counters.
-          cmd_buff_cntr--;
-          cursor--;
-
-        }
-
-        else{
-        #endif
-
-        channel -> print(new_char);
-
-        #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-        }
-
-        #endif
-
-      }
-
-    }
-
-    // Increment counters.
-    cmd_buff_cntr++;
-    cursor++;
-
-    if ( cursor != cmd_buff_cntr ) {
-
-      // Redraw the command line.
-      redrawLine();
-
-    }
-
-
-    // Check if the counters are overloaded.
-    // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
-    // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
-    if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
-
-      cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-    }
-
-    if( cursor > SHELLMINATOR_BUFF_LEN ) {
-
-      cursor = SHELLMINATOR_BUFF_LEN;
-
-    }
-
-
-    // We have finished so we can return.
-    return;
-
-  }
+  ((*this).*currentState)(new_char);
 
 }
 
@@ -2668,3 +1741,945 @@ void Shellminator::generateQRText( char* text ){
 }
 
 #endif
+
+void Shellminator::ShellminatorDefaultState( char new_char ){
+
+  switch( new_char ){
+
+    case '\0':
+      break;
+
+    case '\n':
+      break;
+
+    case '\b':
+      ShellminatorBackspaceState();
+      break;
+
+    case 127:
+      ShellminatorBackspaceState();
+      break;
+
+    case '\r':
+      ShellminatorEnterKeyState();
+      break;
+
+    case 0x01:
+      ShellminatorBeginningOfLineState();
+      break;
+
+    case 0x05:
+      ShellminatorEndOfLineState();
+      break;
+
+    case 0x04:
+      ShellminatorLogoutState();
+      break;
+
+    case 0x12:
+      ShellminatorReverseSearchState();
+      break;
+
+    case 0x0C:
+      ShellminatorClearScreenState();
+      break;
+
+    case '\t':
+      ShellminatorAutoCompleteState();
+      break;
+
+    case 0x03:
+      ShellminatorAbortState();
+      break;
+
+    case 27:
+      currentState = &ShellminatorEscapeCharacterState;
+      break;
+
+    default:
+      ShellminatorProcessRegularCharacter( new_char );
+      currentState = &ShellminatorDefaultState;
+      break;
+
+  }
+
+}
+
+void Shellminator::ShellminatorBackspaceState(){
+
+  // General counter variable
+  uint32_t i;
+
+  // If we press a backspace we have to reset cmd_buff_dim to default value
+  cmd_buff_dim = 1;
+
+  // We have to check the number of the characters in the buffer.
+  // If the buffer is empty we must not do anything!
+  if ( cursor > 0 ) {
+
+    // decrease the cmd buffer counter and the cursor position
+    cmd_buff_cntr--;
+    cursor--;
+
+    // if we are at the end of the command buffer
+    if ( cursor == cmd_buff_cntr ) {
+
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+      if( inSearch ){
+
+        cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+        redrawLine();
+
+      }
+
+      else{
+      #endif
+
+      channel -> print("\b \b"); // just delete the last character from the terminal
+      cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+      }
+      #endif
+
+
+    }
+
+    else {
+
+      // if the cursor is somewhere in the middle of the cmd buffer
+      // rework the buffer and redraw the whole line
+      for( i = cursor; i < cmd_buff_cntr; i++ ) {
+
+        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
+      }
+
+      redrawLine();
+
+    }
+
+  }
+
+}
+
+void Shellminator::ShellminatorEnterKeyState(){
+
+  // If the enter key is pressed cmd_buff_dim has to be reset to the default value
+  cmd_buff_dim = 1;
+
+  // General counter variable
+  uint32_t i;
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  if( inSearch  ){
+
+    if( searchMatch > 0 ){
+
+      inSearch = false;
+      strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
+      cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+      redrawLine();
+
+    }
+
+    else{
+      cmd_buff_cntr = 0;
+    }
+
+  }
+
+  #endif
+
+  // Because a command is sent we have to close it. Basically we replace the arrived
+  // '\r' character with a '\0' string terminator character. Now we have our command
+  // in a C/C++ like standard string format.
+  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
+
+  // We send a line break to the terminal to put the next data in new line
+  channel -> print( '\r' );
+  channel -> print( '\n' );
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  inSearch = false;
+
+  #endif
+
+  // If the arrived data is not just a single enter we have to process the command.
+  if ( cmd_buff_cntr > 0 ) {
+
+    if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
+
+      printHelp();
+
+    }
+
+    else if( strcmp( cmd_buff[ 0 ], "history" ) == 0 ){
+
+      printHistory();
+
+    }
+
+    // We haveto check that execution_fn is not NULL.
+    else if( execution_fn != NULL ){
+
+      // If it is a valid, then call it's function.
+      execution_fn( cmd_buff[ 0 ] );
+
+    }
+
+    #ifdef COMMANDER_API_VERSION
+
+    // If a Commander object is added, it can be used
+    // to execute the command without an execution_fn.
+    else if( commander != NULL ){
+
+      commander -> execute( cmd_buff[ 0 ], channel );
+
+    }
+
+    #endif
+
+    // If not, then just print it with Serial.
+    else{
+      channel -> print( (const char*)"cmd: " );
+      channel -> print( cmd_buff[ 0 ] );
+    }
+
+    // Send a new line after command execution,
+    // so we will not overwrite the last line of the
+    // command output with the banner
+    channel -> print( '\r' );
+    channel -> print( '\n' );
+
+    // After we processed the command we have to shift the history upwards.
+    // To protect the copy against buffer overflow we use strncpy
+    for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
+
+      strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
+
+    }
+
+  }
+
+  // After the command processing finished we print a new banner to the terminal.
+  // This means that the device is finished and waits the new command.
+  printBanner();
+
+  // To empty the incoming string we have to zero it's counter.
+  cmd_buff_cntr = 0;
+  cursor = 0;
+
+}
+
+void Shellminator::ShellminatorBeginningOfLineState(){
+
+  cursor = 0;
+  redrawLine();
+
+}
+
+void Shellminator::ShellminatorEndOfLineState(){
+
+  cursor = cmd_buff_cntr;
+  redrawLine();
+
+}
+
+void Shellminator::ShellminatorLogoutState(){
+
+  if( logoutKeyFunc ){
+
+    logoutKeyFunc();
+    return;
+
+  }
+
+  #ifdef SHELLMINATOR_USE_WIFI_CLIENT
+
+  clientDisconnect();
+
+  #endif
+
+  #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+
+  websocketDisconnect();
+
+  #endif
+
+}
+
+void Shellminator::ShellminatorReverseSearchState(){
+
+  if( searchKeyFunc ){
+
+    searchKeyFunc();
+    return;
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  inSearch = !inSearch;
+  redrawLine();
+
+  #endif
+
+}
+
+void Shellminator::ShellminatorClearScreenState(){
+
+  clear();
+  redrawLine();
+
+}
+
+void Shellminator::ShellminatorAutoCompleteState(){
+
+  // General counter variable
+  uint32_t i;
+
+  // Auto complete section.
+  #ifdef COMMANDER_API_VERSION
+
+  // Firstly, we have to set the cursor to the end of the input command.
+  // If the algorythm fills the missing characters, they have to placed
+  // at the end.
+  cursor = cmd_buff_cntr;
+
+  // Pointer to a Commander API-tree element.
+  Commander::API_t *commandAddress;
+
+  // The next auto filled character will be placed in this variable.
+  char nextChar;
+
+  // This flag holds an auto complete conflict event.
+  // Conflict event happens:
+  // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
+  // - if cmd_buff_cntr would overflow Commanders command tree.
+  // - if we found the end of the last command.
+  bool conflict = false;
+
+  // PROGMEM based tree is not supported for auto complete yet.
+  if( commander -> memoryType != Commander::MEMORY_REGULAR ){
+    return;
+  }
+
+  // If there is no conflict event, we are trying
+  // to fill as many characters as possible.
+  while( !conflict ){
+
+    // Reset the counter to the first Commander API-tree element.
+    i = 0;
+
+    // Get the address of the element indexed by i.
+    // If the indexed elment does not exists, Commander
+    // will return NULL.
+    commandAddress = commander -> operator[]( (int)i );
+
+    // Set to default state.
+    nextChar = '\0';
+
+    // Go through all elements in Commanders API-tree.
+    while( commandAddress ){
+
+      // We have to check that the typed command is exists within an existing command.
+      if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
+
+        // If it does, we have to check for conflict.
+        if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
+
+          // If there is no conflict we can set the next character from the command that we found.
+          nextChar = commandAddress -> name[ cmd_buff_cntr ];
+
+        }
+
+        else{
+
+          // We have to check that the next character in the command
+          // tree is not the same as the value in nextChar.
+          if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
+
+            // Trigger conflict.
+            conflict = true;
+
+          }
+
+        }
+
+      }
+
+      // Increment i to get the next command's index.
+      i++;
+
+      // Get the address of the element indexed by i.
+      commandAddress = commander -> operator[]( (int)i );
+
+    }
+
+    // If nextChar does not changed since start, that means
+    // we did not found anything similar.
+    if( nextChar == '\0' ){
+
+      // We have to trigger conflict to abort the process.
+      conflict = true;
+
+    }
+
+    // If we does not had a conflict event, we have to process
+    // the foind character as a regular character.
+    if( !conflict ){
+
+      process( nextChar );
+
+    }
+
+  }
+
+  #endif
+
+}
+
+void Shellminator::ShellminatorAbortState(){
+
+  if( abortKeyFunc ){
+
+    abortKeyFunc();
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  inSearch = false;
+
+  #endif
+
+  // If the abort key is pressed cmd_buff_dim has to be reset to the default value
+  cmd_buff_dim = 1;
+
+  // We send a line break to the terminal to put the next data in new line
+  channel -> print( '\r' );
+  channel -> print( '\n' );
+
+  printBanner();
+
+  cursor = 0;
+  cmd_buff_cntr = 0;
+
+}
+
+void Shellminator::ShellminatorEscapeCharacterState( char new_char ){
+
+  if( new_char == '[' ){
+
+    currentState = &ShellminatorEscapeBracketState;
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorEscapeBracketState( char new_char ){
+
+  switch( new_char ){
+
+    case 'A':
+      ShellminatorUpArrowKeyState();
+      break;
+
+    case 'B':
+      ShellminatorDownArrowKeyState();
+      break;
+
+    case 'D':
+      ShellminatorLeftArrowKeyState();
+      break;
+
+    case 'C':
+      ShellminatorRightArrowKeyState();
+      break;
+
+    case 'H':
+      ShellminatorHomeKeyState();
+      break;
+
+    case '1':
+      currentState = &Shellminator::ShellminatorHomeKeyState;
+      break;
+
+    case 'F':
+      ShellminatorEndKeyState();
+      break;
+
+    case '4':
+      currentState = &Shellminator::ShellminatorEndKeyState;
+      break;
+
+    case '3':
+      currentState = &Shellminator::ShellminatorDelKeyState;
+      break;
+
+    case '5':
+      currentState = &Shellminator::ShellminatorPageUpKeyState;
+      break;
+
+    case '6':
+      currentState = &Shellminator::ShellminatorPageDownKeyState;
+      break;
+
+    default:
+      currentState = &ShellminatorDefaultState;
+      break;
+
+  }
+
+}
+
+void Shellminator::ShellminatorUpArrowKeyState(){
+
+  // Because we have finished the escape sequence interpretation we reset the state-machine.
+  currentState = &ShellminatorDefaultState;
+
+  // Check if the arrow function is overriden.
+  if( upArrowOverrideFunc ){
+
+    upArrowOverrideFunc();
+    return;
+
+  }
+
+  // We have to check that we can go upper in history
+  if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
+
+    // If we can, we have to check that the previous command was not empty.
+    if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
+
+      // If it was empty we can't do much with an empty command so we return.
+      return;
+
+    }
+
+    // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+    // Remember the 0th element is always reserved for the new data. If we browse the history the
+    // data in the history will overwrite the data in the 0th element so the historical data will be
+    // the new data. We use strncpy to prevent overflow.
+    strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
+
+    // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+    // It is important to track the end of the loaded string.
+    cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+    cursor = cmd_buff_cntr;
+
+    // We print the loaded command to the terminal interface.
+    //channel -> print( cmd_buff[ 0 ] );
+
+    redrawLine();
+
+    // We have to increment the cmd_buff_dim variable, to track the history position.
+    // Greater number means older command!
+    cmd_buff_dim++;
+
+  }
+
+}
+
+void Shellminator::ShellminatorDownArrowKeyState(){
+
+  // Because we have finished the escape sequence interpretation we reset the state-machine.
+  currentState = &ShellminatorDefaultState;
+
+  // Check if the arrow function is overriden.
+  if( downArrowOverrideFunc ){
+
+    downArrowOverrideFunc();
+    return;
+
+  }
+
+
+  // We have to check that we can go lover in history, and we are not in the first previous command.
+  if ( cmd_buff_dim > 2 ) {
+
+    // We have to decrement the cmd_buff_dim variable, to track the history position.
+    // Lower number means newer command!
+    cmd_buff_dim--;
+
+    // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+    // Remember the 0th element is always reserved for the new data. If we browse the history the
+    // data in the history will overwrite the data in the 0th element so the historical data will be
+    // the new data. We use strncpy to prevent overflow.
+    strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN + 1 );
+
+    // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+    // It is important to track the end of the loaded string.
+    cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+    cursor = cmd_buff_cntr;
+
+    // We print the loaded command to the terminal interface.
+    //channel -> print( cmd_buff[ 0 ] );
+    redrawLine();
+
+  }
+
+  // Check that if we are in the first previous command.
+  else if ( cmd_buff_dim == 2 ) {
+
+    // To empty the incoming string we have to zero it's counter.
+    cmd_buff_cntr = 0;
+    cursor = 0;
+
+    // We have to reset the cmd_buff_dim variable to the default value.
+    cmd_buff_dim = 1;
+
+    redrawLine();
+
+  }
+
+  // We have finished so we can break from the switch.
+
+}
+
+void Shellminator::ShellminatorLeftArrowKeyState(){
+
+  // We just simply reset the state-machine.
+  currentState = &ShellminatorDefaultState;
+
+  // Check if the arrow function is overriden.
+  if( leftArrowOverrideFunc ){
+
+    leftArrowOverrideFunc();
+    return;
+
+  }
+
+  // Check if we can move to left.
+  if( cursor > 0 ){
+
+    channel -> write( 27 );   // ESC character( decimal 27 )
+    channel -> print( '[' );  // VT100 Cursor command.
+    channel -> print( '1' );  // 1 character movement.
+    channel -> print( 'D' );  // Left.
+
+    // Decrement the cursor variable.
+    cursor--;
+
+  }
+
+}
+
+void Shellminator::ShellminatorRightArrowKeyState(){
+
+  // We just simply reset the state-machine.
+  currentState = &ShellminatorDefaultState;
+
+  // Check if the arrow function is overriden.
+  if( rightArrowOverrideFunc ){
+
+    rightArrowOverrideFunc();
+    return;
+
+  }
+
+  // Check if we can move to right.
+  if( cursor < cmd_buff_cntr ){
+
+    channel -> write( 27 );   // ESC character( decimal 27 )
+    channel -> print( '[' );  // VT100 Cursor command.
+    channel -> print( '1' );  // 1 character movement.
+    channel -> print( 'C' );  // Left.
+
+    // Increment the cursor variavble.
+    cursor++;
+
+  }
+
+}
+
+void Shellminator::ShellminatorHomeKeyState(){
+
+  currentState = &ShellminatorDefaultState;
+
+  if( homeKeyFunc ){
+
+    homeKeyFunc();
+    return;
+
+  }
+
+  // send the cursor to the begining of the buffer
+  cursor = 0;
+  redrawLine();
+
+}
+
+void Shellminator::ShellminatorHomeKeyState( char new_char ){
+
+  if( new_char == '~' ){
+
+    ShellminatorHomeKeyState();
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorEndKeyState(){
+
+  currentState = &ShellminatorDefaultState;
+
+  if( endKeyFunc ){
+
+    endKeyFunc();
+    return;
+
+  }
+
+  // send the cursor to the end of the buffer
+  cursor = cmd_buff_cntr;
+  redrawLine();
+
+}
+
+void Shellminator::ShellminatorEndKeyState( char new_char ){
+
+  if( new_char == '~' ){
+
+    ShellminatorEndKeyState();
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorDelKeyState(){
+
+  // Del key detected.
+  // If we press a delet key we have to reset cmd_buff_dim to default value
+  cmd_buff_dim = 1;
+
+  // General counter variable
+  uint32_t i;
+
+  currentState = &ShellminatorDefaultState;
+
+  // We have to check the number of the characters in the buffer.
+  // If the buffer is full we must not do anything!
+  if ( cursor != cmd_buff_cntr ) {
+
+    for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
+
+      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
+    }
+
+    // If there is at least 1 character in the buffer we jus simply
+    // decrement the cmd_buff_cntr. This will result that the new character
+    // will be stored in the previous characters place in the buffer.
+    cmd_buff_cntr--;
+
+    redrawLine();
+
+  }
+
+}
+
+void Shellminator::ShellminatorDelKeyState( char new_char ){
+
+  if( new_char == '~' ){
+
+    ShellminatorDelKeyState();
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorPageUpKeyState(){
+
+  currentState = &ShellminatorDefaultState;
+
+  if( pageUpKeyFunc ){
+
+    pageUpKeyFunc();
+    return;
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  historySearchBackward();
+
+  #endif
+
+}
+
+void Shellminator::ShellminatorPageUpKeyState( char new_char ){
+
+  if( new_char == '~' ){
+
+    ShellminatorPageUpKeyState();
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorPageDownKeyState(){
+
+  currentState = &ShellminatorDefaultState;
+
+  if( pageDownKeyFunc ){
+
+    pageDownKeyFunc();
+    return;
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+  historySearchForward();
+
+  #endif
+
+}
+
+void Shellminator::ShellminatorPageDownKeyState( char new_char ){
+
+  if( new_char == '~' ){
+
+    ShellminatorPageDownKeyState();
+
+  }
+
+  else{
+
+    currentState = &ShellminatorDefaultState;
+
+  }
+
+}
+
+void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
+
+  // General counter variable
+  uint32_t i;
+
+  // If the cursor is at the end of the command,
+  // we simply store the new character.
+  if( cursor == cmd_buff_cntr ){
+
+    cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
+
+  }
+
+  // If the cursor is somewhere in the middle, we have to shift the
+  // end of the command by one character end insert the new character
+  // to the cursor position.
+  else{
+
+    for( i = cmd_buff_cntr; i > cursor; i-- ){
+
+      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+
+    }
+
+    // Add the new character after the cursor in the buffer
+    cmd_buff[ 0 ][ cursor ] = new_char;
+
+  }
+
+  // In this case we have to reset the cmd_buff_dim variable to the default value.
+  cmd_buff_dim = 1;
+
+  // If the cursor was at the end we have to print the
+  // new character if the cmd_buff had free space at
+  // the end.
+  if ( cursor == cmd_buff_cntr ) {
+
+    if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
+
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+      if( inSearch ){
+
+        // Increment counters.
+        cmd_buff_cntr++;
+        cursor++;
+
+        redrawLine();
+
+        // Increment counters.
+        cmd_buff_cntr--;
+        cursor--;
+
+      }
+
+      else{
+      #endif
+
+      channel -> print(new_char);
+
+      #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
+
+      }
+
+      #endif
+
+    }
+
+  }
+
+  // Increment counters.
+  cmd_buff_cntr++;
+  cursor++;
+
+  if ( cursor != cmd_buff_cntr ) {
+
+    // Redraw the command line.
+    redrawLine();
+
+  }
+
+  // Check if the counters are overloaded.
+  // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
+  // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
+  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
+
+    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+
+  }
+
+  if( cursor > SHELLMINATOR_BUFF_LEN ) {
+
+    cursor = SHELLMINATOR_BUFF_LEN;
+
+  }
+
+}
