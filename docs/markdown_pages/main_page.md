@@ -24,6 +24,23 @@ __Breaking changes in V1.2:__
   This way it is more flexible and you doesn't have to
   create a class for every peripheral.
 
+
+## Installing
+
+Shellminator is available as library for both PlatformIO and Arduino IDE.
+
+For more advanced cases such as custom commands you should add CommanderAPI, also available from the libraries or at this location: https://github.com/dani007200964/Commander-API
+
+
+## Running
+
+The examples folder contains example instructions for learning how to run and use Shellminator.
+Support for WiFi and Serial is included. For more advanced command examples look at https://github.com/dani007200964/Commander-API/tree/master/examples
+
+Those advanced examples include commands for changing/reading the pins and scanning WiFi networks that are available.
+
+
+
 \htmlonly
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/O2su8kXg1X8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
