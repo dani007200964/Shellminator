@@ -47,12 +47,13 @@ jobs:
           platforms: |
             - name: esp32:ESP32
               source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-          
+
           sketch-paths: |
             - examples/Shellminator_execute
             - examples/Shellminator_simple
             - examples/Shellminator_simple_ESP32_server
-            
+            - examples/Shellminator_ESP32_server_with_Commander_prompt
+
 
   compile-examples-for-esp8266:
     runs-on: ubuntu-latest

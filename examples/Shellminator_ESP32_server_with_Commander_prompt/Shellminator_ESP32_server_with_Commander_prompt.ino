@@ -134,7 +134,7 @@ void loop() {
 
 }
 
-/// This is an example function for the cat command
+/// This is an example function for the name command
 void name_func(char *args, Stream *response )
 {
 
@@ -156,7 +156,7 @@ void name_func(char *args, Stream *response )
 
 }
 
-/// This is an example function for the dog command
+/// This is an example function for the reboot command
 void reboot_func(char *args, Stream *response )
 {
 
@@ -177,7 +177,7 @@ void reboot_func(char *args, Stream *response )
 
 }
 
-/// This is an example function for the led command
+/// This is an example function for the sudo command
 void sudo_func(char *args, Stream *response )
 {
 
