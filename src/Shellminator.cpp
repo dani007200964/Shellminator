@@ -1793,12 +1793,12 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
       break;
 
     case 27:
-      currentState = &ShellminatorEscapeCharacterState;
+      currentState = &Shellminator::ShellminatorEscapeCharacterState;
       break;
 
     default:
       ShellminatorProcessRegularCharacter( new_char );
-      currentState = &ShellminatorDefaultState;
+      currentState = &Shellminator::ShellminatorDefaultState;
       break;
 
   }
@@ -1909,6 +1909,14 @@ void Shellminator::ShellminatorEnterKeyState(){
 
   // If the arrived data is not just a single enter we have to process the command.
   if ( cmd_buff_cntr > 0 ) {
+
+    // Flush out everyting before command execution.
+    // It is required for the prompts, because sometimes garbage
+    // can be found in the channel stream. It has to be removed before
+    // prompt reading.
+    while( channel -> available() ){
+      channel -> read();
+    }
 
     if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
 
@@ -2174,13 +2182,13 @@ void Shellminator::ShellminatorEscapeCharacterState( char new_char ){
 
   if( new_char == '[' ){
 
-    currentState = &ShellminatorEscapeBracketState;
+    currentState = &Shellminator::ShellminatorEscapeBracketState;
 
   }
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2235,7 +2243,7 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
       break;
 
     default:
-      currentState = &ShellminatorDefaultState;
+      currentState = &Shellminator::ShellminatorDefaultState;
       break;
 
   }
@@ -2245,7 +2253,7 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
 void Shellminator::ShellminatorUpArrowKeyState(){
 
   // Because we have finished the escape sequence interpretation we reset the state-machine.
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   // Check if the arrow function is overriden.
   if( upArrowOverrideFunc ){
@@ -2293,7 +2301,7 @@ void Shellminator::ShellminatorUpArrowKeyState(){
 void Shellminator::ShellminatorDownArrowKeyState(){
 
   // Because we have finished the escape sequence interpretation we reset the state-machine.
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   // Check if the arrow function is overriden.
   if( downArrowOverrideFunc ){
@@ -2349,7 +2357,7 @@ void Shellminator::ShellminatorDownArrowKeyState(){
 void Shellminator::ShellminatorLeftArrowKeyState(){
 
   // We just simply reset the state-machine.
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   // Check if the arrow function is overriden.
   if( leftArrowOverrideFunc ){
@@ -2377,7 +2385,7 @@ void Shellminator::ShellminatorLeftArrowKeyState(){
 void Shellminator::ShellminatorRightArrowKeyState(){
 
   // We just simply reset the state-machine.
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   // Check if the arrow function is overriden.
   if( rightArrowOverrideFunc ){
@@ -2404,7 +2412,7 @@ void Shellminator::ShellminatorRightArrowKeyState(){
 
 void Shellminator::ShellminatorHomeKeyState(){
 
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   if( homeKeyFunc ){
 
@@ -2429,7 +2437,7 @@ void Shellminator::ShellminatorHomeKeyState( char new_char ){
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2437,7 +2445,7 @@ void Shellminator::ShellminatorHomeKeyState( char new_char ){
 
 void Shellminator::ShellminatorEndKeyState(){
 
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   if( endKeyFunc ){
 
@@ -2462,7 +2470,7 @@ void Shellminator::ShellminatorEndKeyState( char new_char ){
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2477,7 +2485,7 @@ void Shellminator::ShellminatorDelKeyState(){
   // General counter variable
   uint32_t i;
 
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   // We have to check the number of the characters in the buffer.
   // If the buffer is full we must not do anything!
@@ -2510,7 +2518,7 @@ void Shellminator::ShellminatorDelKeyState( char new_char ){
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2518,7 +2526,7 @@ void Shellminator::ShellminatorDelKeyState( char new_char ){
 
 void Shellminator::ShellminatorPageUpKeyState(){
 
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   if( pageUpKeyFunc ){
 
@@ -2545,7 +2553,7 @@ void Shellminator::ShellminatorPageUpKeyState( char new_char ){
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2553,7 +2561,7 @@ void Shellminator::ShellminatorPageUpKeyState( char new_char ){
 
 void Shellminator::ShellminatorPageDownKeyState(){
 
-  currentState = &ShellminatorDefaultState;
+  currentState = &Shellminator::ShellminatorDefaultState;
 
   if( pageDownKeyFunc ){
 
@@ -2580,7 +2588,7 @@ void Shellminator::ShellminatorPageDownKeyState( char new_char ){
 
   else{
 
-    currentState = &ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
   }
 
@@ -2681,5 +2689,188 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
     cursor = SHELLMINATOR_BUFF_LEN;
 
   }
+
+}
+
+bool Shellminator::waitForKey( Stream* source, char key, uint32_t timeout ){
+
+  // Save system time
+  unsigned long timerStart = millis();
+
+  while( source -> available() < 1 ){
+    // Wait for key input.
+
+    // Check if timeout is specified.
+    if( timeout == 0 ){
+      continue;
+    }
+
+    // Timeout detection.
+    if( ( millis() - timerStart ) > timeout ){
+
+      return false;
+
+    }
+
+  }
+
+  // Read the pressed key
+  char c = source -> read();
+
+  // Compare with the expected key
+  if( c == key ){
+
+    return true;
+
+  }
+
+  return false;
+
+}
+
+bool Shellminator::waitForKey( Stream* source, char* keys, uint32_t timeout ){
+
+  // Generic counter variable.
+  uint32_t i;
+
+  // Save system time.
+  unsigned long timerStart = millis();
+
+  while( source -> available() < 1 ){
+    // Wait for key input.
+
+    // Check if timeout is specified.
+    if( timeout == 0 ){
+      continue;
+    }
+
+    // Timeout detection.
+    if( ( millis() - timerStart ) > timeout ){
+
+      return false;
+
+    }
+
+  }
+
+  // Read the pressed key
+  char c = source -> read();
+
+  // Check all characters in keys array.
+  for( i = 0; i < strlen( keys ); i++ ){
+
+    // If there is a match, return with true.
+    if( keys[ i ] == c ){
+
+      return true;
+
+    }
+
+  }
+
+  // No match, return false;
+  return false;
+
+}
+
+int Shellminator::input( Stream* source, int bufferSize, char* buffer, char* lineText, uint32_t timeout, bool secret ){
+
+  // Return value.
+  int retVal = 0;
+
+  // Tracks the index of the next free slot in the buffer.
+  uint32_t bufferCounter = 0;
+
+  // Save system time.
+  unsigned long timerStart = millis();
+
+  // It will hold the new character.
+  char c;
+
+  // Print the prompt text.
+  source -> print( lineText );
+
+  // If no timeout event, or no timeout specified, check for new data.
+  while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
+
+    // Check for new data.
+    if( source -> available() ){
+
+      // Read new data.
+      c = source -> read();
+
+      // Check for return key.
+      if( ( c == '\n' ) || ( c == '\r' ) || ( c == '\0' ) ){
+
+        // Terminate the buffer.
+        buffer[ bufferCounter ] = '\0';
+
+        // print new line.
+        source -> println();
+
+        // Empty the input stream.
+        while( source -> available() ){
+          source -> read();
+        }
+
+        // Return how many characters have been read.
+        return retVal;
+
+      }
+
+      // Check backspace.
+      else if( ( c == '\b' ) || ( c == 127 ) ){
+
+        // Check if the buffer is not empty.
+        if( bufferCounter > 0 ){
+
+          // Set back the cursor.
+          bufferCounter--;
+          retVal--;
+          source -> print( "\b \b" );
+
+        }
+
+      }
+
+      else{
+
+        // Check if there is empty space in the buffer.
+        if( bufferCounter < ( bufferSize - 1 ) ){
+
+          // Save the new character to the end of the buffer.
+          buffer[ bufferCounter ] = c;
+
+          // Increment the counters.
+          retVal++;
+          bufferCounter++;
+
+          // Check if the echo has to be hidden.
+          if( secret ){
+            source -> print( '*' );
+          }
+          else{
+            source -> print( c );
+          }
+
+        }
+      }
+
+    }
+
+  }
+
+  // Terminate the buffer.
+  buffer[ bufferCounter ] = '\0';
+
+  source -> println();
+
+  // Empty the input stream.
+  while( source -> available() ){
+    source -> read();
+  }
+
+  // Return with error code. It caused by timeout event.
+  return -1;
 
 }

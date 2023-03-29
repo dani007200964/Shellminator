@@ -84,6 +84,8 @@ SOFTWARE.
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdarg.h>
+
 
 ///  +------  Custom configuration  ------+
 ///  |                                    |
@@ -489,6 +491,39 @@ public:
 
   #endif
 
+  /// Wait for specific keypress
+  /// 
+  /// It can be useful with a simple prompt like waiting for Y or N characters.
+  /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
+  /// @param key Expected key. For example in a Yes/No prompt you expect 'Y' or 'y' to arrive.
+  /// @param timeout Timeout in ms. If it is 0, that means no timeout. [ optional, 0 by default ]
+  /// @returns True if the expected key is arrived.
+  static bool waitForKey( Stream* source, char key, uint32_t timeout = 0 );
+
+  /// Wait for specific keypress
+  /// 
+  /// It can be useful with a simple prompt like waiting for Y or N characters.
+  /// It can be useful, for multiple key detection. For example upper and lower case detection as well.
+  /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
+  /// @param keys Character array. Array of characters for match detection.
+  /// @param timeout Timeout in ms. If it is 0, that means no timeout. [ optional, 0 by default ]
+  /// @returns True if any of the expected keys match.
+  static bool waitForKey( Stream* source, char* keys, uint32_t timeout = 0 );
+
+  /// Input prompt.
+  ///
+  /// It is a simple prompt for user input. It can handle backspace events.
+  /// @note Cursor manipulation is not implemented yet.
+  /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
+  /// @param bufferSize The size of the output buffer. If it is 20 characters lont, 19 character fits in it,
+  /// because of the termination '\0' character.
+  /// @param buffer Pointer to the output buffer.
+  /// @param lineText Character array. You can specify the prompt instructions here.
+  /// @param timeout Timeout in ms. If it is 0, that means no timeout.
+  /// @param secret If the prompt is used for a password( or something confidential ) it can be set to true.
+  /// in this case the echoed characters will be replaced with '*' characters. [ optional, false by default ]
+  static int input( Stream* source, int bufferSize, char* buffer, char* lineText, uint32_t timeout, bool secret = false );
+
 	/// Generate a beep sound on the terminal device.
 	void beep();
 
@@ -497,6 +532,7 @@ public:
   /// available on the host device.
   bool enableFormatting = true;
 
+	/// If set, the buzzer will be silent.
 	bool mute = false;
 
   #ifdef COMMANDER_API_VERSION
@@ -546,8 +582,6 @@ public:
 
   #endif
 
-  friend class ShellminatorState;
-
 private:
 
   // State-machine functions.
@@ -580,7 +614,7 @@ private:
   void ShellminatorPageDownKeyState( char new_char );
   void ShellminatorProcessRegularCharacter( char new_char );
 
-  void ( Shellminator::*currentState )( char )= &ShellminatorDefaultState;
+  void ( Shellminator::*currentState )( char )= &Shellminator::ShellminatorDefaultState;
 
   /// Pointer to a string that holds the startup logo
   ///
