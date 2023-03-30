@@ -481,7 +481,7 @@ void Shellminator::printHelp(){
   for( i = 0; i < strlen_P( helpText ); i++ ){
 
     char c = pgm_read_byte_near( helpText + i );
-    channel -> print( c );  
+    channel -> print( c );
 
   }
 
@@ -2046,11 +2046,11 @@ void Shellminator::ShellminatorClearScreenState(){
 
 void Shellminator::ShellminatorAutoCompleteState(){
 
-  // General counter variable
-  uint32_t i;
-
   // Auto complete section.
   #ifdef COMMANDER_API_VERSION
+
+  // General counter variable
+  uint32_t i;
 
   // Firstly, we have to set the cursor to the end of the input command.
   // If the algorythm fills the missing characters, they have to placed
