@@ -1017,11 +1017,12 @@ void Shellminator::update() {
 
             // Switch to the default state( state 0 ).
             telnetNegotiationState = 0;
-            break;
 
             // Set the communication channel to the default one,
             // to not do anything in the next section.
             channel = &defaultChannel;
+
+            break;
 
           default:
             // Something went wrong, we should not be here.
