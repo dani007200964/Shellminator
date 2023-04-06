@@ -40,6 +40,8 @@ SOFTWARE.
 
 #ifdef ARDUINO
 #include "Arduino.h"
+#else
+#include "System.h"
 #endif
 
 #ifdef __AVR__

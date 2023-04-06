@@ -38,6 +38,7 @@ SOFTWARE.
 
 #ifdef ARDUINO
 #include "Arduino.h"
+
 #endif
 
 // This library needs an abstract class called Stream, to communicate with the
@@ -45,6 +46,7 @@ SOFTWARE.
 // If you are make your own implementation, please check Arduino Stream class.
 // It can help a lot to implement your own.
 #include "Stream.h"
+
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 	#ifdef ESP8266
@@ -58,6 +60,12 @@ SOFTWARE.
 
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 #include <WebSocketsServer.h>
+#endif
+
+#ifndef ARDUINO
+
+
+
 #endif
 
 /// Shellminator channel class
