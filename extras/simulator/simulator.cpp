@@ -29,7 +29,5 @@ void foo()
 int main(){
     printf( "Simulator! Juhuuu!\r\n" );
     // The parameters to the function are put after the comma
-    thread thread_obj(foo);
-    thread_obj.join();
     return 0;
 }
