@@ -10,7 +10,11 @@
 class stdioStream : public Stream{
 
 private:
-    char buffer[ STDIO_STREAM_BUFFER_SIZE ];
+
+  void push( uint8_t data );
+  void push( uint8_t* data, size_t size );
+
+  char buffer[ STDIO_STREAM_BUFFER_SIZE ];
 	uint32_t readPointer = 0;
 	uint32_t writePointer = 0;
 

@@ -1,6 +1,6 @@
 #include "stdioStream.hpp"
 
-/*
+
 void stdioStream::push( uint8_t data ){
 
 	buffer[ writePointer ] = data;
@@ -19,14 +19,71 @@ void stdioStream::push( uint8_t* data, size_t size ){
 
 		buffer[ writePointer ] = data[ i ];
 		writePointer++;
-		if( writePointer >= SHELLMINATOR_WEBSOCKET_BUFFER_LEN ){
+		if( writePointer >= STDIO_STREAM_BUFFER_SIZE ){
 			writePointer = 0;
 		}
 
 	}
 
 }
-*/
+
+void stdioStream::update(){
+
+    int key;
+
+    while( kbhit() ){
+
+        key = getch();
+
+        // According to Microsoft documentation it have to be checked for special commands.
+        // https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/getch-getwch?view=msvc-140
+        if( ( key == 0x00 ) || ( key == 0xE0 ) ){
+
+            key = getch();
+
+            switch( key ){
+                
+                // Left Arrow
+                case 75:
+                    push( (uint8_t*)"\033[D", 3 );
+                break;
+
+                // Right Arrow
+                case 77:
+                    push( (uint8_t*)"\033[C", 3 );
+                break;
+                
+                // Up Arrow
+                case 72:
+                    push( (uint8_t*)"\033[A", 3 );
+                break;
+                
+                // Down Arrow
+                case 80:
+                    push( (uint8_t*)"\033[B", 3 );
+                break;
+                
+                // Del
+                case 83:
+                    push( (uint8_t*)"\033[3~", 4 );
+                break;
+                
+            }
+
+            // printf( "Special character: %d\r\n", key );
+
+        }
+
+        // Otherwise, it is a regular character
+        else{
+
+            push( key );
+
+        }
+
+    }
+
+}
 
 int stdioStream::available(){
 

@@ -36,6 +36,13 @@ int main(){
 
   shell.begin( "arnold" );
 
+  while( 1 ){
+
+    stdioChannel.update();
+    shell.update();
+
+  }
+
   // The parameters to the function are put after the comma
   return 0;
 }
