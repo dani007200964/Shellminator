@@ -1,3 +1,8 @@
+# Created on April 08 2023
+# Copyright (c) 2020 - Daniel Hajnal
+# hajnal.daniel96@gmail.com
+# This file is part of the Shellminator project.
+
 cmake_minimum_required( VERSION 3.24 )
 project( Shellminator VERSION 1.1.3 )
 
@@ -27,5 +32,10 @@ set( SOURCES
 )
 
 add_compile_options( -std=gnu++11 )
+
+# Shellminator settings
+add_compile_definitions(
+    SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+)
 
 add_executable( ${PROJECT_NAME} ${SOURCES} )

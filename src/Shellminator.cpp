@@ -133,6 +133,22 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
 const char Shellminator::helpText[] PROGMEM = {
   "\r\n"
+  "---- Shortcut Keys ----\r\n"
+  "\r\n"
+  "Ctrl-A : Jumps the cursor to the beginning of the line.\r\n"
+  "Ctrl-E : Jumps the cursor to the end of the line.\r\n"
+  "Ctrl-D : Log Out.\r\n"
+  "Ctrl-R : Reverse-i-search.\r\n"
+  "Pg-Up  : History search backwards and auto completion.\r\n"
+  "Pg-Down: History search forward and auto completion.\r\n"
+  "Home   : Jumps the cursor to the beginning of the line.\r\n"
+  "End    : Jumps the cursor to the end of the line.\r\n"
+  "\r\n"
+};
+
+#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+const char Shellminator::helpTextFormatted[] PROGMEM = {
+  "\r\n"
   "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
   "\r\n"
   "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
@@ -145,11 +161,28 @@ const char Shellminator::helpText[] PROGMEM = {
   "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
   "\r\n"
 };
+#endif
 
 #else
 
 const char Shellminator::helpText[] = {
   "\r\n"
+  "---- Shortcut Keys ----\r\n"
+  "\r\n"
+  "Ctrl-A : Jumps the cursor to the beginning of the line.\r\n"
+  "Ctrl-E : Jumps the cursor to the end of the line.\r\n"
+  "Ctrl-D : Log Out.\r\n"
+  "Ctrl-R : Reverse-i-search.\r\n"
+  "Pg-Up  : History search backwards and auto completion.\r\n"
+  "Pg-Down: History search forward and auto completion.\r\n"
+  "Home   : Jumps the cursor to the beginning of the line.\r\n"
+  "End    : Jumps the cursor to the end of the line.\r\n"
+  "\r\n"
+};
+
+#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+const char Shellminator::helpTextFormatted[] = {
+  "\r\n"
   "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
   "\r\n"
   "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
@@ -162,6 +195,7 @@ const char Shellminator::helpText[] = {
   "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
   "\r\n"
 };
+#endif
 
 #endif
 
@@ -478,16 +512,50 @@ void Shellminator::printHelp(){
 
   uint32_t i;
 
-  for( i = 0; i < strlen_P( helpText ); i++ ){
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+  if( enableFormatting ){
 
-    char c = pgm_read_byte_near( helpText + i );
-    channel -> print( c );
+    for( i = 0; i < strlen_P( helpTextFormatted ); i++ ){
+
+      char c = pgm_read_byte_near( helpTextFormatted + i );
+      channel -> print( c );
+
+    }
 
   }
 
+  else{
+
+  #endif
+
+    for( i = 0; i < strlen_P( helpText ); i++ ){
+
+      char c = pgm_read_byte_near( helpText + i );
+      channel -> print( c );
+
+    }
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+  }
+  #endif
+
   #else
 
-  channel -> print( helpText );
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+  if( enableFormatting ){
+
+    channel -> print( helpTextFormatted );
+  
+  }
+
+  else{
+  #endif
+
+    channel -> print( helpText );
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+  }
+  #endif
 
   #endif
 

@@ -739,6 +739,10 @@ private:
 
 	static const char helpText[];
 
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+	static const char helpTextFormatted[];
+  #endif
+
 	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
 	WebSocketsServer *wsServer = NULL;
