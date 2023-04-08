@@ -15,6 +15,7 @@ set( SOURCES
     extras/simulator/Stream.cpp
     extras/simulator/Stream.h
     extras/simulator/System.h
+    extras/simulator/System.cpp
     extras/simulator/stdioStream.hpp
     extras/simulator/stdioStream.cpp
     src/Shellminator-Browser-Response.hpp

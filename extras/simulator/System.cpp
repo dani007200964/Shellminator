@@ -31,12 +31,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef System_h
-#define System_h
+#include "System.h"
 
-#include <ctime>
-#include <stdio.h>
+unsigned long millis(){
 
-unsigned long millis();
+    double value = std::clock() / (double)(CLOCKS_PER_SEC / 1000);
 
-#endif
+    return (unsigned long) value;
+
+}
