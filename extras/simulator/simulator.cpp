@@ -4,8 +4,12 @@
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
 
+#include "stdioStream.hpp"
+
+stdioStream stdioChannel;
+
 // Create a Shellminator object, and initialize it to use Serial
-Shellminator shell();
+Shellminator shell( &stdioChannel );
 
 
 const char logo[] =
@@ -20,14 +24,18 @@ const char logo[] =
 
 ;
 
-void foo()
-{
-  printf( "Hello from thread!" );
-}
-
 
 int main(){
-    printf( "Simulator! Juhuuu!\r\n" );
-    // The parameters to the function are put after the comma
-    return 0;
+  printf( "Simulator! Juhuuu!\r\n" );
+
+  // Clear the terminal
+  shell.clear();
+
+  // Attach the logo.
+  shell.attachLogo( logo );
+
+  shell.begin( "arnold" );
+
+  // The parameters to the function are put after the comma
+  return 0;
 }

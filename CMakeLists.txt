@@ -15,6 +15,8 @@ set( SOURCES
     extras/simulator/Stream.cpp
     extras/simulator/Stream.h
     extras/simulator/System.h
+    extras/simulator/stdioStream.hpp
+    extras/simulator/stdioStream.cpp
     src/Shellminator-Browser-Response.hpp
     src/Shellminator-IO.cpp
     src/Shellminator-IO.hpp
@@ -22,5 +24,7 @@ set( SOURCES
     src/Shellminator.hpp
     src/Shellminator.cpp
 )
+
+add_compile_options( -std=gnu++11 )
 
 add_executable( ${PROJECT_NAME} ${SOURCES} )
