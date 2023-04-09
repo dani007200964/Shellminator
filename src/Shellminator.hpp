@@ -153,6 +153,8 @@ public:
 
 	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) );
 
+	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char*, Shellminator* ) );
+
 	void beginServer();
 
 	void stopServer();
@@ -169,6 +171,8 @@ public:
 
 	Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) );
 
+	Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char*, Shellminator* ) );
+
 	void webSocketPush( uint8_t data );
 
 	void webSocketPush( uint8_t* data, size_t size );
@@ -179,12 +183,15 @@ public:
 
   Shellminator( Stream *stream_p );
 	Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) );
+	Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) );
 
   /// Execution function adder function
   ///
   /// This function allows you to add or replace the execution function after the constructor.
   /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
   void addExecFunc( void( *execution_fn_p )( char* ) );
+
+  void addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) );
 
   /// Shellminator initialization function
   ///
@@ -537,6 +544,13 @@ public:
 	/// If set, the buzzer will be silent.
 	bool mute = false;
 
+  /// Default communication channel;
+	shellminatorDefaultChannel defaultChannel;
+
+  /// Pointer to the communication class. By default
+  /// it points to the default response handler.
+	Stream *channel = &defaultChannel;
+
   #ifdef COMMANDER_API_VERSION
 
   void attachCommander( Commander* commander_p );
@@ -632,6 +646,8 @@ private:
   /// This function-pointer stores the execution function pointer.
   /// This function will be called when a command recives.
   void( *execution_fn )( char* );
+
+  void( *execution_fn_with_parrent )( char*, Shellminator* );
 
   /// Text buffer
   ///
@@ -750,15 +766,6 @@ private:
 	shellminatorWebSocketChannel webSocketChannel;
 
 	#endif
-
-	/// Default communication channel;
-	shellminatorDefaultChannel defaultChannel;
-
-  /// Pointer to the communication class. By default
-  /// it points to the default response handler.
-	//shellminatorChannel *channel = &defaultChannel;
-
-	Stream *channel = &defaultChannel;
 
   //---- Commander-API support specific part ----//
   #ifdef COMMANDER_API_VERSION

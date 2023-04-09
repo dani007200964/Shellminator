@@ -50,6 +50,7 @@ stdioStream stdioChannel;
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &stdioChannel );
 
+void terminalCallback( char* command, Shellminator* shell );
 
 const char logo[] =
 
@@ -74,6 +75,8 @@ int main(){
   // Attach the logo.
   shell.attachLogo( logo );
 
+  shell.addExecFunc( terminalCallback );
+
   // Begin the terminal.
   shell.begin( "arnold" );
 
@@ -86,5 +89,12 @@ int main(){
 
   // The parameters to the function are put after the comma
   return 0;
+
+}
+
+void terminalCallback( char* command, Shellminator* shell ){
+
+  shell->channel->print( "cmd: " );
+  shell->channel->println( command );
 
 }

@@ -78,6 +78,7 @@ Shellminator::Shellminator( WiFiServer *server_p ){
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = NULL;
+  execution_fn_with_parrent = NULL;
 
 }
 
@@ -97,6 +98,27 @@ Shellminator::Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char*
 
   // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
+  execution_fn_with_parrent = NULL;
+
+}
+
+Shellminator::Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char*, Shellminator* ) ){
+
+  server = server_p;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // passing execution_fn_p to execution_fn_with_parrent
+  execution_fn = NULL;
+  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -222,6 +244,7 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = NULL;
+  execution_fn_with_parrent = NULL;
 
 }
 
@@ -246,6 +269,7 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p ){
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = NULL;
+  execution_fn_with_parrent = NULL;
 
 }
 
@@ -268,6 +292,30 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, vo
 
   // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
+  execution_fn_with_parrent = NULL;
+
+}
+
+Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char*, Shellminator* ) ){
+
+  wsServer = wsServer_p;
+  serverID = serverID_p;
+  webSocketChannel.select( wsServer, serverID );
+  channel = &webSocketChannel;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // passing execution_fn_p to execution_fn_with_parrent
+  execution_fn = NULL;
+  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -306,6 +354,7 @@ Shellminator::Shellminator( Stream *stream_p ){
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = NULL;
+  execution_fn_with_parrent = NULL;
 
 }
 
@@ -326,6 +375,28 @@ Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) )
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = execution_fn_p;
+  execution_fn_with_parrent = NULL;
+
+}
+
+Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) ){
+
+  channel = stream_p;
+
+  // It has to be zero. We dont want to process any garbage.
+  cmd_buff_cntr = 0;
+
+  // This has to be 1 minimum, because the 0th element is used for the incoming data.
+  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+  cmd_buff_dim = 1;
+
+  // Just in case terminate the begining of the buffer
+  cmd_buff[ 0 ][ 0 ] = '\0';
+
+  // Because we did not specified the execution function, we have to make it a NULL
+  // pointer to make it detectable.
+  execution_fn = NULL;
+  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -393,6 +464,15 @@ void Shellminator::addExecFunc( void( *execution_fn_p )( char* ) ){
 
   // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
+  execution_fn_with_parrent = NULL;
+
+}
+
+void Shellminator::addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) ){
+
+  // passing execution_fn_p to execution_fn_with_parrent
+  execution_fn = NULL;
+  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -1999,6 +2079,14 @@ void Shellminator::ShellminatorEnterKeyState(){
 
     }
 
+    // We haveto check that execution_fn_with_parrent is not NULL.
+    else if( execution_fn_with_parrent != NULL ){
+
+      // If it is a valid, then call it's function.
+      execution_fn_with_parrent( cmd_buff[ 0 ], this );
+
+    }
+
     // We haveto check that execution_fn is not NULL.
     else if( execution_fn != NULL ){
 
@@ -2028,8 +2116,9 @@ void Shellminator::ShellminatorEnterKeyState(){
     // Send a new line after command execution,
     // so we will not overwrite the last line of the
     // command output with the banner
-    channel -> print( '\r' );
-    channel -> print( '\n' );
+    // --- It maybe not necessary ---
+    //channel -> print( '\r' );
+    //channel -> print( '\n' );
 
     // After we processed the command we have to shift the history upwards.
     // To protect the copy against buffer overflow we use strncpy
