@@ -9,9 +9,16 @@ project( Shellminator VERSION 1.1.3 )
 include_directories( 
     src
     extras/simulator
- )
+    extras/simulator/Commander-API
+)
 
 set( SOURCES
+    src/Shellminator-Browser-Response.hpp
+    src/Shellminator-IO.cpp
+    src/Shellminator-IO.hpp
+    src/Shellminator-Settings.hpp
+    src/Shellminator.hpp
+    src/Shellminator.cpp
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
     extras/simulator/Print.h
@@ -23,12 +30,13 @@ set( SOURCES
     extras/simulator/System.cpp
     extras/simulator/stdioStream.hpp
     extras/simulator/stdioStream.cpp
-    src/Shellminator-Browser-Response.hpp
-    src/Shellminator-IO.cpp
-    src/Shellminator-IO.hpp
-    src/Shellminator-Settings.hpp
-    src/Shellminator.hpp
-    src/Shellminator.cpp
+    #extras/simulator/Commander-API/Commander-API-Commands.cpp
+    #extras/simulator/Commander-API/Commander-API-Commands.hpp
+    extras/simulator/Commander-API/Commander-API.cpp
+    extras/simulator/Commander-API/Commander-API.hpp
+    extras/simulator/Commander-API/Commander-IO.cpp
+    extras/simulator/Commander-API/Commander-IO.hpp
+    extras/simulator/Commander-API/Commander-Settings.hpp
 )
 
 add_compile_options( -std=gnu++11 )

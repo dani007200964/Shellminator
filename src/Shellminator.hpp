@@ -255,6 +255,8 @@ public:
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   static void setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color );
 
+  static Shellminator* castVoidToShellminator( void* ptr );
+
   /// Draws the startup logo
   ///
   /// Draws the startup logo in the terminal

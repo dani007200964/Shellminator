@@ -548,7 +548,18 @@ void Shellminator::printHistory(){
 
     #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-    sprintf( acceleratorBuffer, "  \033[1;35m%3d  \033[0;37m%s\r\n", index, cmd_buff[ i ] );
+    if( enableFormatting ){
+
+      sprintf( acceleratorBuffer, "  \033[1;35m%3d  \033[0;37m%s\r\n", index, cmd_buff[ i ] );
+
+    }
+
+    else{
+
+      sprintf( acceleratorBuffer, "  %3d  %s\r\n", index, cmd_buff[ i ] );
+
+    }
+
     channel -> print( acceleratorBuffer );
 
     #else
@@ -643,7 +654,7 @@ void Shellminator::printHelp(){
 
   if( commander != NULL ){
 
-    commander -> printHelp( channel );
+    commander -> printHelp( channel, enableFormatting );
 
   }
 
@@ -695,6 +706,11 @@ void Shellminator::sendBackspace() {
 
 void Shellminator::redrawLine(){
 
+  // -- Note --
+  //
+  // Even if formatting is disabled, this function requires VT100 commands.
+  // Please not use it if you dont't want any formatting.
+
   // General counter variable
   #ifdef COMMANDER_API_VERSION
 
@@ -729,7 +745,6 @@ void Shellminator::redrawLine(){
   #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   acceleratorBufferPtr = acceleratorBuffer;
-  // acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[%dC\033[0K", lastBannerSize );
   acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[1;32m%s\033[1;37m:\033[1;34m%s\033[0;37m \033[0K", banner, bannerPath );
 
   #else
@@ -766,7 +781,9 @@ void Shellminator::redrawLine(){
 
     #else
 
+
     setTerminalCharacterColor( BOLD, GREEN );
+
 
     #endif
 
@@ -1269,7 +1286,8 @@ void Shellminator::update() {
 
       // if the commandFound flag has changed, redraw the line
       // to get the colors right
-      if (previousCommandFound != commandFound) {
+      // If formatting disabled, we must not redraw the line.
+      if( ( previousCommandFound != commandFound ) && enableFormatting) {
         redrawLine();
       }
 
@@ -2101,7 +2119,7 @@ void Shellminator::ShellminatorEnterKeyState(){
     // to execute the command without an execution_fn.
     else if( commander != NULL ){
 
-      commander -> execute( cmd_buff[ 0 ], channel );
+      commander -> execute( cmd_buff[ 0 ], channel, this );
 
     }
 
@@ -2197,8 +2215,13 @@ void Shellminator::ShellminatorReverseSearchState(){
 
 void Shellminator::ShellminatorClearScreenState(){
 
-  clear();
-  redrawLine();
+  // Only works, if the terminal interface can handle formatting.
+  if( enableFormatting ){
+
+    clear();
+    redrawLine();
+
+  }
 
 }
 
@@ -3030,5 +3053,11 @@ int Shellminator::input( Stream* source, int bufferSize, char* buffer, char* lin
 
   // Return with error code. It caused by timeout event.
   return -1;
+
+}
+
+Shellminator* Shellminator::castVoidToShellminator( void* ptr ){
+
+  return (Shellminator*)ptr;
 
 }
