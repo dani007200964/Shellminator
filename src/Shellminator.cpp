@@ -3064,22 +3064,19 @@ Shellminator* Shellminator::castVoidToShellminator( void* ptr ){
 
 #ifdef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
 
-void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* text ){
+void Shellminator::drawProgressBar( Stream* stream_p, float percentage, char* text, char done, char todo ){
 
   float ratio;
   uint32_t i;
 
-  char done[ SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE ] = "#";
-  char todo[ SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE ] = "-";
-
   #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-  char printBuffer[ SHELLMINATOR_PROGRESS_BAR_SIZE * SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE + SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE + 15 ];
+  char printBuffer[ SHELLMINATOR_PROGRESS_BAR_SIZE + SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE + 20 ];
   char* printBufferPtr;
 
   #else
 
-  char numberBuff[ 10 ];
+  char numberBuff[ 15 ];
 
   #endif
 
@@ -3093,11 +3090,24 @@ void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* t
   #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   printBufferPtr = printBuffer;
-  printBufferPtr += snprintf( printBufferPtr, 10, "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+
+  if( enableFormatting ){
+    printBufferPtr += snprintf( printBufferPtr, 15, "\r\033[0K%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  }
+
+  else{
+    printBufferPtr += snprintf( printBufferPtr, 15, "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  }
 
   #else
 
-  snprintf( numberBuff, sizeof( numberBuff ), "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  if( enableFormatting ){
+    snprintf( numberBuff, sizeof( numberBuff ), "\r\033[0K%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  }
+
+  else{
+    snprintf( numberBuff, sizeof( numberBuff ), "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  }
   stream_p -> print( numberBuff );
 
   #endif
@@ -3108,8 +3118,8 @@ void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* t
 
       #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-      strncpy( printBufferPtr, done, SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE );
-      printBufferPtr += strlen( done );
+      *printBufferPtr = done;
+      printBufferPtr++;
 
       #else
 
@@ -3123,8 +3133,8 @@ void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* t
 
       #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-      strncpy( printBufferPtr, todo, SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE );
-      printBufferPtr += strlen( todo );
+      *printBufferPtr = todo;
+      printBufferPtr++;
 
       #else
 
@@ -3156,9 +3166,21 @@ void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* t
 
 }
 
+void Shellminator::drawProgressBar( Stream* stream_p, float percentage, char* text ){
+
+  drawProgressBar( channel, percentage, text, '#', '-' );
+
+}
+
+void Shellminator::drawProgressBar( float percentage, char* text, char done_p, char todo_p ){
+
+  drawProgressBar( channel, percentage, text, done_p, todo_p );
+
+}
+
 void Shellminator::drawProgressBar( float percentage, char* text ){
 
-  drawProgressBar( channel, percentage, text );
+  drawProgressBar( channel, percentage, text, '#', '-' );
 
 }
 

@@ -61,14 +61,14 @@ Commander commander;
 void format_func( char *args, Stream *response, void* parent );
 void cls_func( char *args, Stream *response, void* parent );
 void beep_func( char *args, Stream *response, void* parent );
-void led_func( char *args, Stream *response, void* parent );
+void count_func( char *args, Stream *response, void* parent );
 
 // Commander API-tree
 Commander::API_t API_tree[] = {
     apiElement( "format", "Enable or disable terminal formatting.\r\n\tExample: format [ enable ]\r\n\t\t[ enable ] - 0 disabled, other enabled", format_func ),
     apiElement( "cls", "Clear the terminal screen.", cls_func ),
     apiElement( "beep", "Play a beep sound.", beep_func ),
-    apiElement( "led", "This function sums two number from the argument list.", led_func )
+    apiElement( "count", "This function shows a progress bar.", count_func )
 };
 
 const char logo[] =
@@ -192,8 +192,7 @@ void beep_func(char *args, Stream *response, void* parent )
 
 }
 
-/// This is an example function for the led command
-void led_func(char *args, Stream *response, void* parent )
+void count_func(char *args, Stream *response, void* parent )
 {
 
   // Pointer to shell object if possible.
@@ -205,12 +204,14 @@ void led_func(char *args, Stream *response, void* parent )
 
     shell = Shellminator::castVoidToShellminator( parent );
 
-    for( i = 0; i <= 10; i++ ){
+    for( i = 0; i < 10; i++ ){
 
-      shell -> drawProgressBar( i * 10.0, (char*)"Counting..." );
+      shell -> drawProgressBar( i * 10.0, (char*)"Counting...", 'O', 'o' );
       delay( 200 );
 
     }
+
+    shell -> drawProgressBar( 100.0, (char*)"Finished counting!", 'O', 'o' );
 
     response -> println();
 

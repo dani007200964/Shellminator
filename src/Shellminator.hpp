@@ -602,7 +602,11 @@ public:
 
   #ifdef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
 
+  void drawProgressBar( Stream* stream_p, float percentage, char* text, char done, char todo );
+
   void drawProgressBar( Stream* stream_p, float percentage, char* text );
+
+  void drawProgressBar( float percentage, char* text, char done_p, char todo_p );
 
   void drawProgressBar( float percentage, char* text );
 
