@@ -89,13 +89,15 @@ int main(){
 
   printf( "Simulator start...\r\n" );
 
+  // Try to identify the terminal emulator.
+  shell.autoDetectTerminal();
+
   // Clear the terminal
   shell.clear();
 
-  shell.enableFormatting = false;
-
   // Attach the logo.
   shell.attachLogo( logo );
+
 
   // There is an option to attach a debug channel to Commander.
   // It can be handy to find any problems during the initialization

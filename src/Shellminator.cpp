@@ -3185,3 +3185,23 @@ void Shellminator::drawProgressBar( float percentage, char* text ){
 }
 
 #endif
+
+void Shellminator::autoDetectTerminal(){
+
+  char buff[ 20 ] = "";
+  char magic[] = { 5, 0 };
+  Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
+
+  if( strcmp( buff, "PuTTY" ) == 0 ){
+
+  }
+
+  else{
+
+    enableFormatting = false;
+    channel -> println( "unknown terminal..." );
+    
+  }
+
+}
+

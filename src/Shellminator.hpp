@@ -612,6 +612,8 @@ public:
 
   #endif
 
+  void autoDetectTerminal();
+
 
 private:
 
