@@ -44,6 +44,7 @@ add_compile_options( -std=gnu++11 )
 # Shellminator settings
 add_compile_definitions(
     SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
 )
 
 add_executable( ${PROJECT_NAME} ${SOURCES} )

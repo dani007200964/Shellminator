@@ -36,7 +36,11 @@ SOFTWARE.
 
 #include <ctime>
 #include <stdio.h>
+#include <stdint.h>
+
+#include <Windows.h>
 
 unsigned long millis();
+void delay( uint32_t x );
 
 #endif

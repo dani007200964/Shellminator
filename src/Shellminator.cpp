@@ -3061,3 +3061,105 @@ Shellminator* Shellminator::castVoidToShellminator( void* ptr ){
   return (Shellminator*)ptr;
 
 }
+
+#ifdef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+
+void Shellminator::drawProgressBar( Stream* stream_p , float percentage, char* text ){
+
+  float ratio;
+  uint32_t i;
+
+  char done[ SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE ] = "#";
+  char todo[ SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE ] = "-";
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  char printBuffer[ SHELLMINATOR_PROGRESS_BAR_SIZE * SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE + SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE + 15 ];
+  char* printBufferPtr;
+
+  #else
+
+  char numberBuff[ 10 ];
+
+  #endif
+
+  if( percentage > 100.0f ){
+    percentage = 100.0f;
+  }
+
+  ratio = percentage / 100.0;
+
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  printBufferPtr = printBuffer;
+  printBufferPtr += snprintf( printBufferPtr, 10, "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+
+  #else
+
+  snprintf( numberBuff, sizeof( numberBuff ), "\r%3d.%d%% ", (int)percentage, (int)( (float)percentage * 10.0 ) % 10 );
+  stream_p -> print( numberBuff );
+
+  #endif
+
+  for( i = 0; i < SHELLMINATOR_PROGRESS_BAR_SIZE; i++ ){
+
+    if( ( (float)i / SHELLMINATOR_PROGRESS_BAR_SIZE ) < ratio ){
+
+      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+      strncpy( printBufferPtr, done, SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE );
+      printBufferPtr += strlen( done );
+
+      #else
+
+      stream_p -> print( done );
+
+      #endif
+
+    }
+
+    else{
+
+      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+      strncpy( printBufferPtr, todo, SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE );
+      printBufferPtr += strlen( todo );
+
+      #else
+
+      stream_p -> print( todo );
+
+      #endif
+
+    }
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  strncpy( printBufferPtr, " | ", 3 );
+  printBufferPtr += 3;
+
+  strncpy( printBufferPtr, text, SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE );
+  printBufferPtr += strlen( text );
+
+  stream_p -> print( printBuffer );
+
+  #else
+
+  stream_p -> print( " | " );
+  stream_p -> print( text );
+
+  #endif
+
+
+}
+
+void Shellminator::drawProgressBar( float percentage, char* text ){
+
+  drawProgressBar( channel, percentage, text );
+
+}
+
+#endif

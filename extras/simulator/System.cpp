@@ -40,3 +40,7 @@ unsigned long millis(){
     return (unsigned long) value;
 
 }
+
+void delay( uint32_t x ){
+    Sleep( x );
+}

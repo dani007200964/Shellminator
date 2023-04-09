@@ -600,6 +600,15 @@ public:
 
   #endif
 
+  #ifdef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+
+  void drawProgressBar( Stream* stream_p, float percentage, char* text );
+
+  void drawProgressBar( float percentage, char* text );
+
+  #endif
+
+
 private:
 
   // State-machine functions.
@@ -800,8 +809,6 @@ private:
 	#endif
 
   #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
-
-  
 
   SHA256_CTX passwordHashCtx;
   uint8_t passwordHashBuffer[ SHA256_BLOCK_SIZE ];

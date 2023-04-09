@@ -196,51 +196,24 @@ void beep_func(char *args, Stream *response, void* parent )
 void led_func(char *args, Stream *response, void* parent )
 {
 
-  // Toggle your LED pin here, if you have on your board
-  // digitalWrite( LED_PIN, !digitalRead( LED_PIN ) );
-  response -> print("LED toggle!\r\n");
+  // Pointer to shell object if possible.
+  Shellminator* shell;
 
-}
+  uint32_t i;
 
-/// This is an example function for the sum command
-void led_func(char *args, Stream *response, void* parent )
-{
+  if( parent ){
 
-  // These variables will hold the value of the
-  // two numbers, that has to be summed.
-  int a = 0;
-  int b = 0;
+    shell = Shellminator::castVoidToShellminator( parent );
 
-  // This variable will hold the result of the
-  // argument parser.
-  int argResult;
+    for( i = 0; i <= 10; i++ ){
 
-  // This variable will hold the sum result.
-  int sum = 0;
+      shell -> drawProgressBar( i * 10.0, (char*)"Counting..." );
+      delay( 200 );
 
-  argResult = sscanf( args, "%d %d", &a, &b );
+    }
 
-  // We have to check that we parsed successfully  the two
-  // numbers from the argument string.
-  if( argResult != 2 ){
-
-    // If we could not parse two numbers, we have an argument problem.
-    // We print out the problem to the response channel.
-    response -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
-
-    // Sadly we have to stop the command execution and return.
-    return;
+    response -> println();
 
   }
-
-  // Calculate the sum.
-  sum = a + b;
-
-  // Print out the result.
-  response -> print( a );
-  response -> print( " + " );
-  response -> print( b );
-  response -> print( " = " );
-  response -> println( sum );
 
 }
