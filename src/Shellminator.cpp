@@ -426,7 +426,7 @@ void Shellminator::setBannerPathText( char* bannerPath_p ){
   strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
 
   // Just in case close the string
-  banner[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
+  bannerPath[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
 
 }
 
@@ -436,7 +436,7 @@ void Shellminator::setBannerPathText( const char* bannerPath_p ){
   strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
 
   // Just in case close the string
-  banner[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
+  bannerPath[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
 
 }
 

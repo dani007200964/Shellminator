@@ -10,6 +10,7 @@ include_directories(
     src
     extras/simulator
     extras/simulator/Commander-API
+    extras/Unity/src
 )
 
 set( SOURCES
@@ -23,7 +24,7 @@ set( SOURCES
     extras/simulator/Print.cpp
     extras/simulator/Print.h
     extras/simulator/Printable.h
-    extras/simulator/simulator.cpp
+    #extras/simulator/simulator.cpp
     extras/simulator/Stream.cpp
     extras/simulator/Stream.h
     extras/simulator/System.h
@@ -39,12 +40,26 @@ set( SOURCES
     extras/simulator/Commander-API/Commander-Settings.hpp
 )
 
+set( UNIT_TESTING
+    extras/Unity/src/unity_internals.h
+    extras/Unity/src/unity.c
+    extras/Unity/src/unity.h
+    extras/tests/testStream.cpp
+    extras/tests/testStream.hpp
+    extras/tests/unitTest.cpp
+)
+
 add_compile_options( -std=gnu++11 )
 
 # Shellminator settings
 add_compile_definitions(
     SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
     SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+    #UNITY_OUTPUT_COLOR
 )
 
-add_executable( ${PROJECT_NAME} ${SOURCES} )
+# Build the simulator
+add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+
+# Unit testing
+add_executable( UnitTest ${SOURCES} ${UNIT_TESTING} )
