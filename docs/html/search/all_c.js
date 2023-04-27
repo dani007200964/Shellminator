@@ -1,9 +1,14 @@
 var searchData=
 [
-  ['peek_0',['peek',['../classshellminator_default_channel.html#a705d6613c6241e59557f5d1e64c85d98',1,'shellminatorDefaultChannel']]],
-  ['print_1',['print',['../classshellminator_default_channel.html#ab55311182c60a29b8460a281c7f40224',1,'shellminatorDefaultChannel::print(char c)'],['../classshellminator_default_channel.html#a556c3f1b6c510e55e46db80230f1164d',1,'shellminatorDefaultChannel::print(uint8_t b)'],['../classshellminator_default_channel.html#a3051d9acf32646ee8e0ff553d17d2388',1,'shellminatorDefaultChannel::print(char *str)'],['../classshellminator_default_channel.html#a44debe1399e88b604f0852085e79636e',1,'shellminatorDefaultChannel::print(const char *str)']]],
-  ['printbanner_2',['printBanner',['../class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7',1,'Shellminator']]],
-  ['printhelp_3',['printHelp',['../class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c',1,'Shellminator']]],
-  ['printhistory_4',['printHistory',['../class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682',1,'Shellminator']]],
-  ['progmem_5',['PROGMEM',['../_shellminator_8cpp.html#affc6da66534c2d0ee3ee78eba401664a',1,'Shellminator.cpp']]]
+  ['overrideabortkey_0',['overrideAbortKey',['../class_shellminator.html#abad556405bac943db348a5bbbb814c5b',1,'Shellminator']]],
+  ['overridedownarrow_1',['overrideDownArrow',['../class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10',1,'Shellminator']]],
+  ['overrideendkey_2',['overrideEndKey',['../class_shellminator.html#a60bc3f9f41155799e76ab1a9c9438533',1,'Shellminator']]],
+  ['overridehomekey_3',['overrideHomeKey',['../class_shellminator.html#a144ead7ad06045fee92f77cd1bd5ec18',1,'Shellminator']]],
+  ['overrideleftarrow_4',['overrideLeftArrow',['../class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc',1,'Shellminator']]],
+  ['overridelogoutkey_5',['overrideLogoutKey',['../class_shellminator.html#a155412a88e1dff3640703ec8149bec3f',1,'Shellminator']]],
+  ['overridepagedownkey_6',['overridePageDownKey',['../class_shellminator.html#a9d9d97cd8cf48214c50bf53c1388b5d2',1,'Shellminator']]],
+  ['overridepageupkey_7',['overridePageUpKey',['../class_shellminator.html#aa0f424c5fce99eb783db9efe72dabb2d',1,'Shellminator']]],
+  ['overriderightarrow_8',['overrideRightArrow',['../class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b',1,'Shellminator']]],
+  ['overridesearchkey_9',['overrideSearchKey',['../class_shellminator.html#ab9c22b28f6c6174b9ae4fe1ad92c188d',1,'Shellminator']]],
+  ['overrideuparrow_10',['overrideUpArrow',['../class_shellminator.html#a2e054598bd72a647809a9b041af10631',1,'Shellminator']]]
 ];

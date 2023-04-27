@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['progmem_0',['PROGMEM',['../_shellminator_8cpp.html#affc6da66534c2d0ee3ee78eba401664a',1,'Shellminator.cpp']]]
+  ['num_5ferror_5fcorrection_5fblocks_0',['NUM_ERROR_CORRECTION_BLOCKS',['../qrcodegen_8c.html#a7deaf66d3af6d18ec53e2f1e7a1913c9',1,'qrcodegen.c']]],
+  ['numchars_1',['numChars',['../structqrcodegen___segment.html#a36a92341f466a3a13acc56449943634c',1,'qrcodegen_Segment']]]
 ];

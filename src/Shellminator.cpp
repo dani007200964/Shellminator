@@ -745,7 +745,19 @@ void Shellminator::redrawLine(){
   #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
   acceleratorBufferPtr = acceleratorBuffer;
-  acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[1;32m%s\033[1;37m:\033[1;34m%s\033[0;37m \033[0K", banner, bannerPath );
+
+  if( enableFormatting ){
+
+    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r\033[1;32m%s\033[1;37m:\033[1;34m%s\033[0;37m \033[0K", banner, bannerPath );
+
+  }
+
+  else{
+
+    acceleratorBufferPtr += sprintf( acceleratorBufferPtr, "\r%s:%s \033[0K", banner, bannerPath );
+
+  }
+
 
   #else
 
@@ -768,7 +780,6 @@ void Shellminator::redrawLine(){
   #endif
 
   #ifdef COMMANDER_API_VERSION
-  //#ifdef FALSE
 
   // If the command is found in Commander's API-tree
   // it will be highlighted.
@@ -1344,6 +1355,66 @@ void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, u
   stream_p -> print( ';' );
   stream_p -> print( color );
   stream_p -> print( 'm' );
+
+}
+
+void Shellminator::hideCursor(){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
+  channel -> print( (const char*)"\033[?25l" );
+
+}
+
+void Shellminator::hideCursor( char* buff ){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
+  sprintf( buff, "\033[?25l" );
+
+}
+
+void Shellminator::hideCursor( Stream *stream_p ){
+
+  stream_p -> print( (const char*)"\033[?25l" );
+
+}
+
+void Shellminator::showCursor(){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
+  channel -> print( (const char*)"\033[?25h" );
+
+}
+
+void Shellminator::showCursor( char* buff ){
+
+  if( !enableFormatting ){
+
+    return;
+
+  }
+
+  sprintf( buff, "\033[?25h" );
+
+}
+
+void Shellminator::showCursor( Stream *stream_p ){
+
+  stream_p -> print( (const char*)"\033[?25h" );
 
 }
 
@@ -3052,6 +3123,281 @@ int Shellminator::input( Stream* source, int bufferSize, char* buffer, char* lin
   }
 
   // Return with error code. It caused by timeout event.
+  return -1;
+
+}
+
+int Shellminator::selectList( Stream* source, char* lineText, int numberOfElements, char* list[], uint32_t timeout, bool* selection ){
+
+  // Generic counter variable
+  int i;
+
+  // Print the prompt text.
+  source -> println( lineText );
+  Shellminator::hideCursor( source );
+
+  // It is used to track the index of the selected element.
+  int selectedIndex = 0;
+
+  // It is used for the UP / DOWN arrow key parser state machine.
+  uint8_t keyState = 0;
+
+  // It is true, whem multiple selection mode is active.
+  bool selectMultiple = false;
+
+  // The next available key data will be stored here.
+  char c;
+
+  // Save system time.
+  unsigned long timerStart = millis();
+
+  // Check if multiple selection mode is required.
+  if( selection != NULL ){
+
+    // Set the flag multiple selection mode.
+    selectMultiple = true;
+
+    // Reset all elements to zero in the selection array.
+    for( i = 0; i < numberOfElements; i++ ){
+
+      selection[ i ] = false;
+
+    }
+
+  }
+
+  // Infinite loop. The timeout protection is handled inside.
+  while( 1 ){
+
+    // Print the list.
+    for( i = 0; i < numberOfElements; i++ ){
+
+      // Single and multiple element mode has to be printed differently.
+      if( selectMultiple ){
+
+        if( selectedIndex == i ){
+
+          source -> print( '>' );
+
+        }
+
+        else{
+
+          source -> print( ' ' );
+
+        }
+
+        if( selection[ i ] ){
+
+          source -> print( "[X] " );
+
+        }
+
+        else{
+
+          source -> print( "[ ] " );
+
+        }
+
+      }
+
+      else{
+
+        if( selectedIndex == i ){
+
+          source -> print( "[X] " );
+
+        }
+
+        else{
+
+          source -> print( "[ ] " );
+
+        }
+
+      }
+
+      // Print the data from the list for the current element.
+      source -> print( list[ i ] );
+
+      // If it is not the last element, print a new line.
+      if( i < ( numberOfElements - 1 ) ){
+
+        source -> println();
+
+      }
+
+    }
+
+    // Wait for the next keypress. If no timeout event, or the timeout
+    // handling is disabled, just wait for the next key.
+    while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
+
+      // If key is available, stop waiting.
+      if( source -> available() > 0 ){
+
+        break;
+
+      }
+
+    }
+
+    // Check for timeout! If the previous while is finished, but key is
+    // not available, that means timeout occured!
+    if( source -> available() <= 0 ){
+
+      // This case turn on the cursor and return with error code.
+      Shellminator::showCursor( source );
+      source -> println();
+      return -1;
+
+    }
+
+    // Process key data.
+    while( source -> available() > 0 ){
+
+      // Read next key.
+      c = source -> read();
+
+      // Check for enter key.
+      if( ( c == '\r' ) || ( c == '\n' ) || ( c == '\0' ) ){
+
+        // If multiple select mode is active, we have to return the number of selected elements.
+        if( selectMultiple ){
+
+          // Calculate the number of selected elements.
+          selectedIndex = 0;
+
+          for( i = 0; i < numberOfElements; i++ ){
+
+            if( selection[ i ] ){
+
+              selectedIndex++;
+
+            }
+
+          }
+
+        }
+
+        // Turn on the cursor and return the right value.
+        Shellminator::showCursor( source );
+        source -> println();
+        return selectedIndex;
+
+      }
+
+      // Check for abort key or backspace.
+      else if( ( c == 0x03 ) || ( c == 127 ) || ( c == '\b' ) ){
+
+        // Turn on cursor and return with error code.
+        Shellminator::showCursor( source );
+        source -> println();
+        return -1;
+
+      }
+
+      // In multiple selection mode, we can select or deselect an element
+      // with the space key.
+      else if( ( c == ' ' ) && selectMultiple ){
+
+        selection[ selectedIndex ] = !selection[ selectedIndex ];
+
+      }
+
+      // Arrow key logic.
+      switch( keyState ){
+
+        // Default state
+        case 0:
+
+          // If ESC character received, go to the next state
+          if( c == 27 ){
+
+            keyState = 1;
+
+          }
+
+          break;
+        
+        // ESC char received
+        case 1:
+
+          // If [ character received, go to the next state
+          if( c == '[' ){
+
+            keyState = 2;
+
+          }
+
+          // Otherwise go to default state
+          else{
+
+            keyState = 0;
+
+          }
+
+          break;
+
+        // [ char received
+        case 2:
+
+          // Up arrow
+          if( c == 'A' ){
+
+            // Move the cursor and detect underflow.
+            selectedIndex--;
+            if( selectedIndex < 0 ){
+
+              selectedIndex = 0;
+
+            }
+
+          }
+
+          // Down arrow
+          else if( c == 'B' ){
+
+            // Move the cursor and detect overflow.
+            selectedIndex++;
+            if( selectedIndex >= numberOfElements ){
+
+              selectedIndex = numberOfElements - 1;
+
+            }
+
+          }
+
+          // Go to default state
+          keyState = 0;
+          break;
+
+        default:
+          keyState = 0;
+          break;
+
+      }
+
+    }
+
+    // If a keypress happened, we have to refresh the list.
+    // We have to delete the previously printed content.
+    for( i = 0; i < numberOfElements; i++ ){
+
+      source -> print( "\033[2K\033[A" );
+
+    }
+
+    source -> println();
+
+    
+
+  }
+
+  // Normally, we should not be here. In case of any problem,
+  // turn on the cursor, and return with error code.
+  Shellminator::showCursor( source );
+  source -> println();
   return -1;
 
 }

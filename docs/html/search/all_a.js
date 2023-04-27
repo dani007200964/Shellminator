@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['num_5ferror_5fcorrection_5fblocks_0',['NUM_ERROR_CORRECTION_BLOCKS',['../qrcodegen_8c.html#a7deaf66d3af6d18ec53e2f1e7a1913c9',1,'qrcodegen.c']]],
-  ['numchars_1',['numChars',['../structqrcodegen___segment.html#a36a92341f466a3a13acc56449943634c',1,'qrcodegen_Segment']]]
+  ['magenta_0',['MAGENTA',['../class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630',1,'Shellminator']]],
+  ['main_5fpage_2emd_1',['main_page.md',['../main__page_8md.html',1,'']]],
+  ['mode_2',['mode',['../structqrcodegen___segment.html#aec23b42bfdb2a0468bfffca96343b513',1,'qrcodegen_Segment']]],
+  ['mute_3',['mute',['../class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d',1,'Shellminator']]]
 ];

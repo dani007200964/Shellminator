@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ecc_5fcodewords_5fper_5fblock_0',['ECC_CODEWORDS_PER_BLOCK',['../qrcodegen_8c.html#aa317616612730b289013844a2b040f26',1,'qrcodegen.c']]],
-  ['enableformatting_1',['enableFormatting',['../class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2',1,'Shellminator']]]
+  ['data_0',['data',['../structqrcodegen___segment.html#a0e9cd1915812ada8e06cfd49be30f8b9',1,'qrcodegen_Segment']]],
+  ['defaultchannel_1',['defaultChannel',['../class_shellminator.html#ad6c67c816043b4aa64ed6cbbd1101bae',1,'Shellminator']]]
 ];

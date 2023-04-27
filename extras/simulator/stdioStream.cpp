@@ -186,7 +186,7 @@ void stdioStream::flush(){
 
 size_t stdioStream::write( uint8_t b ){
 
-    printf( "%c", (char)b );
+    wprintf( L"%c", (char)b );
 	return 1;
 
 }
@@ -196,7 +196,7 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
     uint32_t i;
     for( i = 0; i < size; i++ ){
 
-        printf( "%c", (char)buff[ i ] );
+        wprintf( L"%c", (char)buff[ i ] );
 
     }
 	return 1;
@@ -207,14 +207,14 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
 
 size_t stdioStream::print( char c ){
 
-    printf( "%c", (char)c );
+    wprintf( L"%c", (char)c );
 	return 1;
 
 }
 
 size_t stdioStream::print( uint8_t b ){
 
-	printf( "%u", (int)b );
+	wprintf( L"%u", (int)b );
 	return 1;
 
 }
@@ -224,7 +224,7 @@ size_t stdioStream::print( char *str ){
 	uint32_t dataSize;
 
 	dataSize = strlen( (const char*)str );
-    printf( "%s", (const char*)str );
+    wprintf( L"%s", (const char*)str );
 
 	return dataSize;
 
@@ -235,7 +235,7 @@ size_t stdioStream::print( const char *str ){
 	uint32_t dataSize;
 
 	dataSize = strlen( str );
-    printf( "%s", str );
+    wprintf( L"%s", str );
 
 	return dataSize;
 

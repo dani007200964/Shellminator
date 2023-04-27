@@ -187,6 +187,7 @@ void test_begin_path_overload( void ){
     shell.begin( "arnold" );
 
     TEST_ASSERT_EQUAL_STRING ( "Shellminator Unit Test\r\narnold:123456789 ", testChannel.txBuffer );
+    shell.setBannerPathText( "$" );
 
 }
 
@@ -211,6 +212,7 @@ void test_clear(){
 void execFuncTest( char* args ){
 
     TEST_ASSERT_EQUAL_STRING( "This is a command\r\n", testChannel.txBuffer );
+    TEST_ASSERT_EQUAL_STRING( "This is a command", args );
 
 }
 
@@ -226,6 +228,85 @@ void test_executionFunction(){
     testChannel.pushRx( (uint8_t*)testCommand, strlen( testCommand ) );
     shell.update();
 
+}
+
+void execFunc_up_down_arrow( char* args ){
+
+
+}
+
+//--- Testing history functions ---//
+void test_up_down_arrow(){
+
+    const char* testCommand_1 = "command 1\r";
+    const char* testCommand_2 = "command 2\r";
+    const char* testCommand_3 = "command 3\r";
+
+    const char* upArrowCommand = "\033[A";
+    const char* downArrowCommand = "\033[B";
+
+    shell.addExecFunc( execFunc_up_down_arrow );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)testCommand_1, strlen( testCommand_1 ) );
+    shell.update();
+
+    testChannel.pushRx( (uint8_t*)testCommand_2, strlen( testCommand_2 ) );
+    shell.update();
+
+    testChannel.pushRx( (uint8_t*)testCommand_3, strlen( testCommand_3 ) );
+    shell.update();
+
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)upArrowCommand, strlen( upArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0Kcommand 3\x1B[0K", testChannel.txBuffer );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)upArrowCommand, strlen( upArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0Kcommand 2\x1B[0K", testChannel.txBuffer );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)upArrowCommand, strlen( upArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0Kcommand 1\x1B[0K", testChannel.txBuffer );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)downArrowCommand, strlen( downArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0Kcommand 2\x1B[0K", testChannel.txBuffer );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)downArrowCommand, strlen( downArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0Kcommand 3\x1B[0K", testChannel.txBuffer );
+
+    testChannel.clearTx();
+    testChannel.clearRx();
+
+    testChannel.pushRx( (uint8_t*)downArrowCommand, strlen( downArrowCommand ) );
+    shell.update();
+
+    TEST_ASSERT_EQUAL_STRING( "\rarnold:$ \x1B[0K\x1B[0K", testChannel.txBuffer );
 }
 
 
@@ -246,6 +327,7 @@ int main(){
     RUN_TEST( test_sendBackspace );
     RUN_TEST( test_clear );
     RUN_TEST( test_executionFunction );
+    RUN_TEST( test_up_down_arrow );
 
     return UNITY_END();
 

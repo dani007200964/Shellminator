@@ -39,6 +39,9 @@ Please note that, some functions are not working here.
 
 #include <stdio.h>
 
+#include <fcntl.h>
+#include <io.h>
+
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
 
@@ -62,13 +65,17 @@ void format_func( char *args, Stream *response, void* parent );
 void cls_func( char *args, Stream *response, void* parent );
 void beep_func( char *args, Stream *response, void* parent );
 void count_func( char *args, Stream *response, void* parent );
+void select_func( char *args, Stream *response, void* parent );
+void fruit_func( char *args, Stream *response, void* parent );
 
 // Commander API-tree
 Commander::API_t API_tree[] = {
     apiElement( "format", "Enable or disable terminal formatting.\r\n\tExample: format [ enable ]\r\n\t\t[ enable ] - 0 disabled, other enabled", format_func ),
     apiElement( "cls", "Clear the terminal screen.", cls_func ),
     apiElement( "beep", "Play a beep sound.", beep_func ),
-    apiElement( "count", "This function shows a progress bar.", count_func )
+    apiElement( "count", "This function shows a progress bar.", count_func ),
+    apiElement( "select", "This function shows a select list", select_func ),
+    apiElement( "fruit", "This function shows how to select multiple elements from a list", fruit_func )
 };
 
 const char logo[] =
@@ -87,7 +94,9 @@ const char logo[] =
 
 int main(){
 
-  printf( "Simulator start...\r\n" );
+  _setmode( _fileno( stdout ), 0x00020000 ); // _O_U16TEXT is 0x00020000
+
+  wprintf( L"Simulator start...\r\n" );
 
   // Try to identify the terminal emulator.
   shell.autoDetectTerminal();
@@ -194,8 +203,7 @@ void beep_func(char *args, Stream *response, void* parent )
 
 }
 
-void count_func(char *args, Stream *response, void* parent )
-{
+void count_func(char *args, Stream *response, void* parent ){
 
   // Pointer to shell object if possible.
   Shellminator* shell;
@@ -216,6 +224,105 @@ void count_func(char *args, Stream *response, void* parent )
     shell -> drawProgressBar( 100.0, (char*)"Finished counting!", 'O', 'o' );
 
     response -> println();
+
+  }
+
+}
+
+void select_func(char *args, Stream *response, void* parent ){
+
+  // List of options.
+  char *options[] = {
+    (char*) "Yes",
+    (char*) "No",
+    (char*) "Noooooo"
+  };
+
+  // It will store the index of the selected element.
+  int selected;
+
+  // Calculate the number of elements in the options array.
+  int optionsSize = sizeof( options ) / sizeof( options[ 0 ] );
+
+  // Create a list prompt with single selection mode.
+  selected = Shellminator::selectList( response, (char*)"Select answer:", optionsSize, options, 5000 );
+
+  // Check for the result. If it is greater or
+  // equal with 0, that means the result is valid.
+  if( selected >= 0 ){
+
+    // Print the selected object.
+    response -> print( "Selected option: " );
+    response -> println( options[ selected ] );
+
+  }
+
+  else{
+
+    // We have an error. Print it.
+    response -> println( "Abort, or timeout!" );
+
+  }
+
+}
+
+void fruit_func(char *args, Stream *response, void* parent ){
+
+  // List of options.
+  char *options[ 5 ] = {
+    (char*) "Mango",
+    (char*) "Apple",
+    (char*) "Lime",
+    (char*) "Banana",
+    (char*) "Raspberry"
+  };
+
+  // The result will be generated here.
+  bool resultList[ 5 ];
+
+  // It will hold the status of the prompt.
+  int status;
+
+  // Generic counter.
+  int i;
+
+  // Calculate the number of elements in the options array.
+  int optionsSize = sizeof( options ) / sizeof( options[ 0 ] );
+
+  // Create a list prompt with multiple selection mode.
+  status = Shellminator::selectList( response, (char*)"Select answer:", optionsSize, options, 60000, resultList );
+
+  // Check the status. If it is greater, than 0,
+  // that means we have at least one element selected.
+  if( status > 0 ){
+
+    // Print the selected elements.
+    response -> println( "The following selected in the list:" );
+
+    for( i = 0; i < optionsSize; i++ ){
+
+      if( resultList[ i ] ){
+
+        response -> print( "\t-" );
+        response -> println( options[ i ] );
+
+      }
+
+    }
+
+  }
+
+  // If the status is 0, that means we do not have an error, but nothing has been selected.
+  else if( status == 0 ){
+
+    response -> println( "Nothing selected!" );
+
+  }
+
+  // If the result is less than 0, that means, we have an error.
+  else{
+
+    response -> println( "Abort, or timeout!" );
 
   }
 

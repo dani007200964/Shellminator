@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_0',['data',['../structqrcodegen___segment.html#a0e9cd1915812ada8e06cfd49be30f8b9',1,'qrcodegen_Segment']]]
+  ['channel_0',['channel',['../class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88',1,'Shellminator']]]
 ];

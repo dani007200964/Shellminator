@@ -38,6 +38,9 @@ SOFTWARE.
 #include <conio.h>
 #include <stdint.h>
 
+#include <fcntl.h>
+#include <io.h>
+
 #define STDIO_STREAM_BUFFER_SIZE 1024
 
 class stdioStream : public Stream{

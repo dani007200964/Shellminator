@@ -255,6 +255,21 @@ public:
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   static void setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color );
 
+  void hideCursor();
+  void hideCursor( char* buff );
+  static void hideCursor( Stream *stream_p );
+
+  void showCursor();
+  void showCursor( char* buff );
+  static void showCursor( Stream *stream_p );
+
+  /// This is a helper function for pointer casting.
+  ///
+  /// It is designed to be used with Commander-API, when you have to cast
+  /// a void* to Shellminator*.
+  /// @param ptr Pointer to a Shellminator object in void*.
+  /// @warning The address stored in ptr has to be a valid addres for a Shellminator object.
+  /// @returns Casted pointer.
   static Shellminator* castVoidToShellminator( void* ptr );
 
   /// Draws the startup logo
@@ -534,6 +549,34 @@ public:
   /// @param secret If the prompt is used for a password( or something confidential ) it can be set to true.
   /// in this case the echoed characters will be replaced with '*' characters. [ optional, false by default ]
   static int input( Stream* source, int bufferSize, char* buffer, char* lineText, uint32_t timeout, bool secret = false );
+
+  /// Select list.
+  ///
+  /// It is a simple input prompt to select elements from a list. There are two working modes:
+  /// * __Single element selection__ - In this mode you can navigate with the __UP / DOWN arrow keys__.
+  ///                              If you selected the right option, just press __enter__ to finish.
+  /// * __Multiple element selection__ - In this mode you can navigate with the __UP / DOWN arrow keys__,
+  ///                                and you can select each element in the list with the __space key__.
+  ///                                If you finished, just press the __enter key__.
+  ///
+  /// To abort this prompt the following keys can be used:
+  /// * __Ctrl-C__
+  /// * __Backspace__
+  ///
+  /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
+  /// @param lineText Character array. You can specify the prompt instructions here.
+  /// @param numberOfElements The number of elements in the list.
+  /// @param list The list of the options( string array )
+  /// @param timeout Timeout in ms. If it is 0, that means no timeout.
+  /// @param selection bool array to store the status of the selected elements. The size of this array should
+  ///                  be equal to the size of the list. If an element is selected, the corresponding element
+  ///                  in this array will be true.
+  ///                  __To enable multiple element selection mode, this pointer has to point to a valid array!__
+  ///                  [ optional, NULL by default( single element mode ) ]
+  /// @returns In single element mode, it will return the index of the selected element. In multiple element
+  ///          mode, it will return the number of selected elements from the list. If timeout or abort event
+  ///          occurs, it will return -1.
+  static int selectList( Stream* source, char* lineText, int numberOfElements, char* list[], uint32_t timeout, bool* selection = NULL );
 
 	/// Generate a beep sound on the terminal device.
 	void beep();
