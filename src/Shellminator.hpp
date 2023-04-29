@@ -892,6 +892,9 @@ public:
 
 private:
 
+  float lerp( float v0, float v1, float t );
+  float mapFloat( float x, float inStart, float inStop, float outStart, float outStop );
+
   Shellminator* shell = NULL;
 
   float* yDataF = NULL;

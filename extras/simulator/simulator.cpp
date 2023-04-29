@@ -138,8 +138,8 @@ int main(){
   // Begin the terminal.
   shell.begin( "arnold" );
 
-  float data[] = { 1, 2, 3, 4 };
-  ShellminatorPlot plot( &shell, data, 4 );
+  float data[] = { 1, 2, 8, 3, 1, 10 };
+  ShellminatorPlot plot( &shell, data, sizeof( data ) / sizeof( data[ 0 ] ) );
   plot.draw();
 
   while( 1 ){

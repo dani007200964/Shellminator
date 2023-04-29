@@ -3732,10 +3732,204 @@ void ShellminatorPlot::draw(){
   int xStepSize = 1;
   float avgStep;
 
+  float min;
+  float max;
+
+  float prevPointX;
+  float prevPointY;
+
+  float pointY;
+  float pointX;
+
+  float tmp;
+
+  int yTextSize;
+  char yTextBuffer[ 15 ];
+
   if( shell -> getTerminalSize( &terminalSizeX, &terminalSizeY ) == false ){
     terminalSizeX = 30;
     terminalSizeY = 30;
   }
+
+  // Hide the cursor
+  Shellminator::hideCursor( shell -> channel );
+
+  terminalSizeY -= 1;
+
+  // Clearing the screen area
+  for( i = 0; i < terminalSizeY; i++ ){
+    shell -> channel -> print( "\033[2K" );
+    shell -> channel -> println();
+  }
+
+  // Calculating min and max values for scale.
+  if( yDataF != NULL ){
+
+    min = yDataF[ 0 ];
+    max = yDataF[ 0 ];
+
+    for( i = 1; i < yDataSize; i++ ){
+
+      if( min > yDataF[ i ] ){
+
+        min = yDataF[ i ];
+
+      }
+
+      if( max < yDataF[ i ] ){
+
+        max = yDataF[ i ];
+
+      }
+
+    }
+
+  }
+
+  else{
+
+    min = yDataI[ 0 ];
+    max = yDataI[ 0 ];
+
+    for( i = 1; i < yDataSize; i++ ){
+
+      if( min > yDataI[ i ] ){
+
+        min = yDataI[ i ];
+
+      }
+
+      if( max < yDataI[ i ] ){
+
+        max = yDataI[ i ];
+
+      }
+
+    }
+
+  }
+
+  // To round down
+  min = (int)min;
+
+  // To round up
+  max = ( (int)max ) + 1;
+
+  // Draw the numbers between min and max
+  yTextSize = 0;
+  for( i = 0; i < terminalSizeY; i++ ){
+
+    tmp = lerp( max, min, (float)i / (float)( terminalSizeY -1 ) );
+    snprintf( yTextBuffer, sizeof( yTextBuffer ), "%3d.%d", (int)tmp, (int)( (int)( tmp * 10.0 ) ) % 10 );
+    j = strlen( yTextBuffer );
+    if( j > yTextSize ){
+      yTextSize = j;
+    }
+
+    shell -> setCursorPosition( 1, i + 1 );
+    shell -> channel -> print( yTextBuffer );
+
+  }
+
+  // Draw vertical scaling grid
+  for( i = 0; i < terminalSizeY; i++ ){
+
+    shell -> setCursorPosition( yTextSize + 2, i + 1 );
+    shell -> channel -> print( "\u2524" );
+
+  }
+
+  //shell -> setCursorPosition( yTextSize + 3, 1 );
+  //shell -> channel -> print( "a" );
+
+  // Printing data
+
+  terminalSizeX -= ( yTextSize + 2 );
+
+  avgFactor = yDataSize / terminalSizeX;
+
+  // We have less data points than 'pixels' in the terminal
+  if( avgFactor == 0 ){
+
+    xStepSize = terminalSizeX / yDataSize;
+
+    for( i = 1; i < yDataSize; i++ ){
+
+      prevPointY = mapFloat( yDataF[ i - 1 ], min, max, terminalSizeY, 1 );
+      prevPointX = mapFloat( i - 1, 0, ( yDataSize - 1 ), 0, terminalSizeX );
+
+      pointY = mapFloat( yDataF[ i ], min, max, terminalSizeY, 1 );
+      pointX = mapFloat( i, 0, ( yDataSize - 1 ), 0, terminalSizeX );
+
+      shell -> setCursorPosition( yTextSize + 3 + prevPointX, prevPointY );
+
+      // Print the horizontal line
+      for( j = 0; j < ( (int)pointX - (int)prevPointX ); j++ ){
+
+        shell -> channel -> print( "\u2500" );
+
+      }
+
+    }
+
+    for( i = 1; i < yDataSize; i++ ){
+
+      prevPointY = mapFloat( yDataF[ i - 1 ], min, max, terminalSizeY, 1 );
+      prevPointX = mapFloat( i - 1, 0, ( yDataSize - 1 ), 0, terminalSizeX );
+
+      pointY = mapFloat( yDataF[ i ], min, max, terminalSizeY, 1 );
+      pointX = mapFloat( i, 0, ( yDataSize - 1 ), 0, terminalSizeX );
+
+      shell -> setCursorPosition( yTextSize + 3 + pointX, pointY );
+
+      // Print the vertical line.
+      // Prev point is smaller than the current.
+      if( (int)pointY < (int)prevPointY ){
+
+        shell -> setCursorPosition( yTextSize + 3 + pointX, pointY );
+        shell -> channel -> print( "\u256D" );
+
+        for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
+
+          shell -> setCursorPosition( yTextSize + 3 + pointX, pointY + j + 1 );
+          shell -> channel -> print( "\u2502" );
+
+        }
+
+        shell -> setCursorPosition( yTextSize + 3 + pointX, pointY + j + 1 );
+        shell -> channel -> print( "\u256F" );
+
+      }
+
+      // Prev point is larger than the current.
+      if( (int)pointY > (int)prevPointY ){
+
+        shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY );
+        shell -> channel -> print( "\u256E" );
+
+        for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
+
+          shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
+          shell -> channel -> print( "\u2502" );
+
+        }
+
+        shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
+        shell -> channel -> print( "\u2570" );
+
+      }
+
+    }
+
+  }
+
+
+  //shell -> setCursorPosition( yTextSize + 3, 1 );
+  //for( i = 0; i < terminalSizeX - ( yTextSize + 2 ); i++ );
+
+
+
+  /*
 
   // Calculata the average factor. it means how many samples has to be
   // averaged for each point.
@@ -3747,18 +3941,35 @@ void ShellminatorPlot::draw(){
 
   }
 
+  Shellminator::hideCursor( shell -> channel );
+
+  shell -> channel -> println();
+
   for( i = 0; i < terminalSizeY - 1; i++ ){
 
-    shell -> channel -> println("\u2524");
+    //shell -> channel -> println("\u2524");
 
   }
 
   for( i = 0; i < terminalSizeX; i+=xStepSize ){
 
-    shell -> setCursorPosition( i, 0);
-    shell -> channel -> print( 'X' );
+    //shell -> setCursorPosition( i, 0);
+    //shell -> channel -> print( 'X' );
 
   }
+
+  */
+
+}
+
+// https://en.wikipedia.org/wiki/Linear_interpolation
+float ShellminatorPlot::lerp( float v0, float v1, float t ){
+  return( 1.0 - t ) * v0 + t * v1;
+}
+
+float ShellminatorPlot::mapFloat( float x, float inStart, float inStop, float outStart, float outStop ){
+
+  return outStart + ( outStop - outStart ) * ( ( x - inStart ) / ( inStop - inStart ) );
 
 }
 
