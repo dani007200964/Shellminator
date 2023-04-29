@@ -41,6 +41,9 @@ Please note that, some functions are not working here.
 
 #include <fcntl.h>
 #include <io.h>
+#include <wchar.h>
+#include <stdlib.h>
+#include <locale.h>
 
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
@@ -67,6 +70,8 @@ void beep_func( char *args, Stream *response, void* parent );
 void count_func( char *args, Stream *response, void* parent );
 void select_func( char *args, Stream *response, void* parent );
 void fruit_func( char *args, Stream *response, void* parent );
+void getCursor_func( char *args, Stream *response, void* parent );
+void setCursor_func( char *args, Stream *response, void* parent );
 
 // Commander API-tree
 Commander::API_t API_tree[] = {
@@ -75,7 +80,9 @@ Commander::API_t API_tree[] = {
     apiElement( "beep", "Play a beep sound.", beep_func ),
     apiElement( "count", "This function shows a progress bar.", count_func ),
     apiElement( "select", "This function shows a select list", select_func ),
-    apiElement( "fruit", "This function shows how to select multiple elements from a list", fruit_func )
+    apiElement( "fruit", "This function shows how to select multiple elements from a list.", fruit_func ),
+    apiElement( "getCursor", "This function returns the cursor position in the terminal.", getCursor_func ),
+    apiElement( "setCursor", "This function set the cursor position in the terminal.", setCursor_func )
 };
 
 const char logo[] =
@@ -94,7 +101,12 @@ const char logo[] =
 
 int main(){
 
-  _setmode( _fileno( stdout ), 0x00020000 ); // _O_U16TEXT is 0x00020000
+  //_setmode( _fileno( stdout ), 0x00020000 ); // _O_U16TEXT is 0x00020000
+  if( setlocale(LC_ALL, NULL) == NULL ){
+
+    wprintf( L"Error setting locale!\r\n" );
+
+  }
 
   wprintf( L"Simulator start...\r\n" );
 
@@ -102,7 +114,7 @@ int main(){
   shell.autoDetectTerminal();
 
   // Clear the terminal
-  shell.clear();
+  //shell.clear();
 
   // Attach the logo.
   shell.attachLogo( logo );
@@ -126,10 +138,15 @@ int main(){
   // Begin the terminal.
   shell.begin( "arnold" );
 
+  float data[] = { 1, 2, 3, 4 };
+  ShellminatorPlot plot( &shell, data, 4 );
+  plot.draw();
+
   while( 1 ){
 
     // Process the terminal.
     shell.update();
+
 
   }
 
@@ -327,3 +344,51 @@ void fruit_func(char *args, Stream *response, void* parent ){
   }
 
 }
+
+void getCursor_func(char *args, Stream *response, void* parent )
+{
+
+  int x;
+  int y;
+
+  // Pointer to shell object if possible.
+  Shellminator* shell;
+
+  if( parent ){
+
+    shell = Shellminator::castVoidToShellminator( parent );
+    if( shell -> getCursorPosition( &x, &y ) ){
+      response -> println( x );
+      response -> println( y );
+    }
+
+    else{
+
+      response -> println( "Error!" );
+
+    }
+
+  }
+
+
+
+}
+
+void setCursor_func(char *args, Stream *response, void* parent )
+{
+
+  // Pointer to shell object if possible.
+  Shellminator* shell;
+
+  if( parent ){
+
+    shell = Shellminator::castVoidToShellminator( parent );
+    shell -> setCursorPosition( 999, 999 );
+
+  }
+
+
+
+}
+
+

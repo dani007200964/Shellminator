@@ -64,6 +64,8 @@ class Stream : public Print
 
 // parsing methods
 
+  
+
   void setTimeout(unsigned long timeout);  // sets maximum milliseconds to wait for stream data, default is 1 second
   unsigned long getTimeout(void) { return _timeout; }
   

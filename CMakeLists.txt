@@ -6,6 +6,9 @@
 cmake_minimum_required( VERSION 3.24 )
 project( Shellminator VERSION 1.1.3 )
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+
 include_directories( 
     src
     extras/simulator
@@ -49,13 +52,16 @@ set( UNIT_TESTING
     extras/tests/unitTest.cpp
 )
 
-add_compile_options( -std=gnu++11 )
+#add_compile_options( -std=gnu++11 )
 
 # Shellminator settings
 add_compile_definitions(
     SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
     SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+    SHELLMINATOR_ENABLE_PLOT_MODULE
+
     #UNITY_OUTPUT_COLOR
+
 )
 
 # Build the simulator

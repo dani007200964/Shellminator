@@ -84,29 +84,8 @@ public:
 
   size_t write( const uint8_t *buff, size_t size ) override;
 
-  /// Print one character to the channel.
-  ///
-  /// @param c The character that has to be printed to the channel.
-  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( char c );
+  size_t write( const char *str ) override;
 
-  /// Print one byte to the channel.
-  ///
-  /// @param b The value that has to be printed to the channel.
-  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( uint8_t b );
-
-  /// Print c-string to the channel.
-  ///
-  /// @param str The string that has to be printed to the channel.
-  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( char *str );
-
-  /// Print c-string to the channel.
-  ///
-  /// @param str The string that has to be printed to the channel.
-  /// @returns The number of bytes that has been sucessfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( const char *str );
 
 };
 

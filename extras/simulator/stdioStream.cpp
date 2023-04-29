@@ -196,47 +196,19 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
     uint32_t i;
     for( i = 0; i < size; i++ ){
 
-        wprintf( L"%c", (char)buff[ i ] );
+        wprintf( L"%c", buff[ i ] );
 
     }
-	return 1;
+	return size;
 
 }
 
-//---- print section ----//
+size_t stdioStream::write( const char *str ){
 
-size_t stdioStream::print( char c ){
+  	wchar_t vOut[ 1024 ];
+  	mbstowcs( vOut, str, 1024 );
 
-    wprintf( L"%c", (char)c );
-	return 1;
-
-}
-
-size_t stdioStream::print( uint8_t b ){
-
-	wprintf( L"%u", (int)b );
-	return 1;
-
-}
-
-size_t stdioStream::print( char *str ){
-
-	uint32_t dataSize;
-
-	dataSize = strlen( (const char*)str );
-    wprintf( L"%s", (const char*)str );
-
-	return dataSize;
-
-}
-
-size_t stdioStream::print( const char *str ){
-
-	uint32_t dataSize;
-
-	dataSize = strlen( str );
-    wprintf( L"%s", str );
-
-	return dataSize;
+  	wprintf( L"%s", vOut );
+	return strlen( str );
 
 }

@@ -263,6 +263,11 @@ public:
   void showCursor( char* buff );
   static void showCursor( Stream *stream_p );
 
+  bool getCursorPosition( int* x, int* y, uint32_t timeout = 100 );
+  void setCursorPosition( int x, int y );
+
+  bool getTerminalSize( int* width, int* height );
+
   /// This is a helper function for pointer casting.
   ///
   /// It is designed to be used with Commander-API, when you have to cast
@@ -874,5 +879,30 @@ private:
   #endif
 
 };
+
+#ifdef SHELLMINATOR_ENABLE_PLOT_MODULE
+
+class ShellminatorPlot{
+
+public:
+
+  ShellminatorPlot( Shellminator* shell_p, float* y, int y_size );
+
+  void draw();
+
+private:
+
+  Shellminator* shell = NULL;
+
+  float* yDataF = NULL;
+  int* yDataI = NULL;
+
+  int yDataSize = 0;
+
+  char plotName[ SHELLMINATOR_PLOT_NAME_SIZE ] = "Plot";
+
+};
+
+#endif
 
 #endif

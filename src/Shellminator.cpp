@@ -1418,6 +1418,164 @@ void Shellminator::showCursor( Stream *stream_p ){
 
 }
 
+bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
+
+  char c;
+  uint8_t charState = 0;
+
+  char xBuff[ 4 ];
+  uint8_t xBuffCntr = 0;
+
+  char yBuff[ 4 ];
+  uint8_t yBuffCntr = 0;
+
+  // Save system time
+  unsigned long timerStart = millis();
+
+  // Flush the input buffer.
+  while( channel -> available() ){
+    channel -> read();
+  }
+
+  // Send the request.
+  channel -> print( (const char*)"\033[6n" );
+
+  // If no timeout event, or no timeout specified, check for new data.
+  while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
+
+    // Process all data if available.
+    while( channel -> available() ){
+
+      // Read character
+      c = channel -> read();
+
+      switch( charState ){
+
+        // Inital state. We expect ESC character.
+        case 0:
+
+          // If ESC character is received, go to the next state.
+          if( c == 27 ){
+            charState = 1;
+          }
+          
+          // Otherwise, something wrong.
+          else{
+            return false;
+          }
+
+          break;
+
+        // Second character state. We expect '[' character.
+        case 1:
+
+          // If '[' character is received, go to the next state.
+          if( c == '[' ){
+            charState = 2;
+          }
+          
+          // Otherwise, something wrong.
+          else{
+            return false;
+          }
+          
+          break;
+
+        // We wait for ';' character. Until this character we put the data in
+        // the yBuff;
+        case 2:
+
+          // If ';' character is received, go to the next state.
+          if( c == ';' ){
+            charState = 3;
+            yBuff[ yBuffCntr ] = '\0';
+          }
+
+          else{
+
+            yBuff[ yBuffCntr ] = c;
+            yBuffCntr++;
+
+            // Protection against buffer overflow.
+            if( yBuffCntr >= 4 ){
+              return false;
+            }
+
+          }
+          
+          break;
+
+        // We wait for 'R' character. Until this character we put the data in
+        // the yBuff;
+        case 3:
+
+          // If 'R' character is received, we finished with data collecting.
+          if( c == 'R' ){
+            xBuff[ xBuffCntr ] = '\0';
+
+            // We have to parse the numbers.
+            charState  = sscanf( (const char*)xBuff, "%d", x );
+            charState += sscanf( (const char*)yBuff, "%d", y );
+
+            // Check if all data is number.
+            if( charState == 2 ){
+              return true;
+            }
+
+            // Conversion went wront.
+            else{
+              return false;
+            }
+
+          }
+
+          else{
+
+            xBuff[ xBuffCntr ] = c;
+            xBuffCntr++;
+
+            // Protection against buffer overflow.
+            if( xBuffCntr >= 4 ){
+              return false;
+            }
+
+          }
+          
+          break;
+
+      }
+
+    }
+
+  }
+
+  // We should not be here.
+  return false;
+
+}
+
+void Shellminator::setCursorPosition( int x, int y ){
+
+  channel -> print( "\033[" );
+  channel -> print( y );
+  channel -> print( ';' );
+  channel -> print( x );
+  channel -> print( 'H' );
+
+}
+
+bool Shellminator::getTerminalSize( int* width, int* height ){
+
+  // This is a tricky solution.
+  // Firstly, we send the cursor to a very large bottom right coordinate.
+  // The terminal emulator will push the cursor as far as it can.
+  // Than, we read the actual position. This will be equal with the terminal size.
+  setCursorPosition( 999, 999 );
+
+  return getCursorPosition( width, height );
+
+}
+
 void Shellminator::drawLogo() {
 
   if( logo ){
@@ -3550,4 +3708,59 @@ void Shellminator::autoDetectTerminal(){
   }
 
 }
+
+#ifdef SHELLMINATOR_ENABLE_PLOT_MODULE
+
+ShellminatorPlot::ShellminatorPlot( Shellminator* shell_p, float* y, int y_size ){
+
+  shell = shell_p;
+  yDataF = y;
+  yDataSize = y_size;
+
+
+}
+
+void ShellminatorPlot::draw(){
+
+  int terminalSizeX;
+  int terminalSizeY;
+
+  int i;
+  int j;
+
+  int avgFactor;
+  int xStepSize = 1;
+  float avgStep;
+
+  if( shell -> getTerminalSize( &terminalSizeX, &terminalSizeY ) == false ){
+    terminalSizeX = 30;
+    terminalSizeY = 30;
+  }
+
+  // Calculata the average factor. it means how many samples has to be
+  // averaged for each point.
+  avgFactor = yDataSize / terminalSizeX;
+
+  if( avgFactor == 0 ){
+
+    xStepSize = terminalSizeX / yDataSize;
+
+  }
+
+  for( i = 0; i < terminalSizeY - 1; i++ ){
+
+    shell -> channel -> println("\u2524");
+
+  }
+
+  for( i = 0; i < terminalSizeX; i+=xStepSize ){
+
+    shell -> setCursorPosition( i, 0);
+    shell -> channel -> print( 'X' );
+
+  }
+
+}
+
+#endif
 
