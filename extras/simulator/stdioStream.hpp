@@ -86,6 +86,10 @@ public:
 
   size_t write( const char *str ) override;
 
+private:
+  wchar_t vOut[ 10000 ];
+
+
 
 };
 

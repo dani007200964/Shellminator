@@ -37,6 +37,7 @@ your code. It is faster and easier, than working with an embedded device first.
 Please note that, some functions are not working here.
 */
 
+#include <math.h>
 #include <stdio.h>
 
 #include <fcntl.h>
@@ -113,6 +114,8 @@ int main(){
   // Try to identify the terminal emulator.
   shell.autoDetectTerminal();
 
+  shell.enableFormatting = true;
+
   // Clear the terminal
   //shell.clear();
 
@@ -138,14 +141,45 @@ int main(){
   // Begin the terminal.
   shell.begin( "arnold" );
 
-  float data[] = { 1, 2, 8, 3, 1, 10 };
-  ShellminatorPlot plot( &shell, data, sizeof( data ) / sizeof( data[ 0 ] ) );
+  float data1[100];
+  float data2[100];
+  float data3[100];
+  ShellminatorPlot plot( &shell, data1, sizeof( data1 ) / sizeof( data1[ 0 ] ) );
+  plot.addPlot( data2, sizeof( data2 ) / sizeof( data2[ 0 ] ) );
+  plot.addPlot( data3, sizeof( data3 ) / sizeof( data3[ 0 ] ) );
+
+  for( int i = 0; i < 100; i++ ){
+
+    data1[i] = sin( 3.14159265358979323846 * 3.0 * (double)i / 100.0  ) * 3.0;
+    //data2[i] = i;
+    data2[i] = sin( 3.14159265358979323846 * 4.0 * (double)i / 100.0  ) * 10.0;
+    data3[i] = sin( 3.14159265358979323846 * 2.0 * (double)i / 100.0  ) * 4.0;
+
+  }
+
+  shell.hideCursor();
+
   plot.draw();
 
   while( 1 ){
 
+    uint32_t timerStart = millis();
+
+    while( ( millis() - timerStart ) < 100 ){
+
+    }
+
+    for( int i = 0; i < 100; i++ ){
+
+      data1[i] = sin( 3.14159265358979323846 * 3.0 * (double)i / 100.0 + millis() / 1000.0  ) * 3.0;;
+      //data2[i] = i;
+      data2[i] = sin( 3.14159265358979323846 * 4.0 * (double)i / 100.0 + millis() / 1000.0  ) * 10.0 + millis()/10000.0;
+
+    }
+
+    plot.draw( true );
     // Process the terminal.
-    shell.update();
+    //shell.update();
 
 
   }

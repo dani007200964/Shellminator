@@ -105,6 +105,42 @@ SOFTWARE.
 /// Version of the module
 #define SHELLMINATOR_VERSION "1.1.2"
 
+
+#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+
+/// @todo Move it to a separate file.
+class ShellminatorBufferedPrinter{
+
+public:
+
+  ShellminatorBufferedPrinter();
+  ShellminatorBufferedPrinter( int bufferSize_p );
+  ShellminatorBufferedPrinter( Stream* channel_p, int bufferSize_p );
+  ~ShellminatorBufferedPrinter();
+
+  void setChannel( Stream* channel_p );
+  void printf( const char *fmt, ... );
+  void flush();
+
+private:
+
+  void clearBuffer();
+
+  int bufferSize = -1;
+
+  char *acceleratorBuffer;
+  char *acceleratorBufferPointer;
+  uint32_t availableCharacters;
+
+  Stream* channel = NULL;
+
+};
+
+#endif
+
+
+
 /// Shellminator object
 ///
 /// It can be used to interface with a <a href="https://en.wikipedia.org/wiki/VT100">VT100</a> compatible terminal like
@@ -886,21 +922,55 @@ class ShellminatorPlot{
 
 public:
 
-  ShellminatorPlot( Shellminator* shell_p, float* y, int y_size );
+  ShellminatorPlot( Shellminator* shell_p, float* y, int y_size, int color = Shellminator::GREEN );
 
-  void draw();
+  bool addPlot( float* y, int y_size, int color = 0 );
+
+  void draw( bool redraw = false );
+
 
 private:
+
+  uint8_t colorTable[ 6 ]{
+    Shellminator::GREEN,
+    Shellminator::RED,
+    Shellminator::BLUE,
+    Shellminator::YELLOW,
+    Shellminator::MAGENTA,
+    Shellminator::CYAN    
+  };
+
+  void drawScale();
+  void drawPlot( uint8_t index );
 
   float lerp( float v0, float v1, float t );
   float mapFloat( float x, float inStart, float inStop, float outStart, float outStop );
 
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  ShellminatorBufferedPrinter bufferedPrinter;
+
+  #endif
+
+
+  int terminalSizeX;
+  int terminalSizeY;
+
+  float min;
+  float max;
+
+  int yTextSize;
+
   Shellminator* shell = NULL;
 
-  float* yDataF = NULL;
-  int* yDataI = NULL;
+  float* yDataF[ SHELLMINATOR_NUMBER_OF_PLOTS ];
+  int* yDataI[ SHELLMINATOR_NUMBER_OF_PLOTS ];
 
-  int yDataSize = 0;
+  int plotColor[ SHELLMINATOR_NUMBER_OF_PLOTS ];
+
+  int yDataSize;
+
+  uint8_t numberOfPlots = 0;
 
   char plotName[ SHELLMINATOR_PLOT_NAME_SIZE ] = "Plot";
 

@@ -205,8 +205,7 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
 
 size_t stdioStream::write( const char *str ){
 
-  	wchar_t vOut[ 1024 ];
-  	mbstowcs( vOut, str, 1024 );
+  	mbstowcs( vOut, str, 10000 );
 
   	wprintf( L"%s", vOut );
 	return strlen( str );

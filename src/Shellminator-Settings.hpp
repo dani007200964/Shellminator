@@ -142,15 +142,6 @@ SOFTWARE.
 
 #endif
 
-/// If defined, enables high memory mode.
-///
-/// If your microcontroller has relativley high amount of RAM memory,
-/// I highly recommend to use it.
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
-#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-#define SHELLMINATOR_ACCELERATOR_BUFFER_LEN SHELLMINATOR_BANNER_LEN + SHELLMINATOR_BANNER_PATH_LEN + SHELLMINATOR_BUFF_LEN * 2 + 30
-#endif
-
 /// Definition of the maximum length of each command
 #ifndef SHELLMINATOR_BUFF_LEN
 #define SHELLMINATOR_BUFF_LEN 20
@@ -208,7 +199,21 @@ SOFTWARE.
 #define SHELLMINATOR_ENABLE_PLOT_MODULE
 #endif
 
-#define SHELLMINATOR_PLOT_NAME_SIZE 20
+#ifndef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+#define SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+#endif
 
+
+/// If defined, enables high memory mode.
+///
+/// If your microcontroller has relativley high amount of RAM memory,
+/// I highly recommend to use it.
+/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
+#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+#define SHELLMINATOR_ACCELERATOR_BUFFER_LEN SHELLMINATOR_BANNER_LEN + SHELLMINATOR_BANNER_PATH_LEN + SHELLMINATOR_BUFF_LEN * 2 + 30
+#define SHELLMINATOR_PLOT_NAME_SIZE 20
+#define SHELLMINATOR_NUMBER_OF_PLOTS 3
+#define SHELLMINATOR_PLOT_BUFF_SIZE 300
+#endif
 
 #endif
