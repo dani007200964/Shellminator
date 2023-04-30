@@ -3885,7 +3885,7 @@ void ShellminatorPlot::draw( bool redraw ){
   }
 
   // To round down
-  min = (int)min;
+  min = ( (int)min ) - 1;
 
   // To round up
   max = ( (int)max ) + 1;
@@ -4036,7 +4036,7 @@ void ShellminatorPlot::drawScale(){
     #else
 
     // Erase to the end of line.
-    shell -> print( "\033[K" );
+    shell -> channel -> print( "\033[K" );
     shell -> setTerminalCharacterColor( Shellminator::REGULAR, plotColor[ i ] );
     shell -> setCursorPosition( terminalSizeX - resultTextSize, j );
     shell -> channel -> print( yTextBuffer );
@@ -4080,13 +4080,15 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
 
   int i;
   int j;
-  int avgFactor;
   int terminalWidth;
 
-  int xStepSize = 1;
+  int avgStartIndex;
+  int avgEndIndex;
 
   float prevPointX;
   float prevPointY;
+
+  float avg;
 
   float pointY;
   float pointX;
@@ -4104,12 +4106,8 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
 
   terminalWidth = terminalSizeX - ( yTextSize + 2 ) - ( resultTextSize + 3 );
 
-  avgFactor = yDataSize / terminalWidth;
-
   // We have less data points than 'pixels' in the terminal
-  if( avgFactor == 0 ){
-
-    xStepSize = terminalWidth / yDataSize;
+  if( ( yDataSize / terminalWidth ) == 0 ){
 
     for( i = 1; i < yDataSize; i++ ){
 
@@ -4221,7 +4219,7 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
           #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
           //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-          bufferedPrinter.printf( "\033[B\033[D\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
+          bufferedPrinter.printf( "\033[B\033[D\u2502" );
 
           #else
 
@@ -4236,7 +4234,7 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
         #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
         //bufferedPrinter.printf( "\033[%d;%dH\u2570", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-        bufferedPrinter.printf( "\033[B\033[D\u2570", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
+        bufferedPrinter.printf( "\033[B\033[D\u2570" );
 
         #else
 
@@ -4259,6 +4257,173 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
     // A ponthoz megkeressük a közvetlen környezetében lévő mintákhoz tartozó indexeket.
     // pédául a 3. pontot akarom kirajzolni, akkor annak a közvetlen környezete a 2. ponthoz tartozó
     // minta után és a 4. pointhoz tartó mintáig tart. Ezeknek veszem az átlagát és azt rajzolom ki.
+
+    for( i = 1; i < terminalWidth; i++ ){
+
+      // Finding the indexes for the laft and right boundaries
+      avgStartIndex = mapFloat( i - 1, 0, terminalWidth, 0, yDataSize );
+      avgEndIndex = mapFloat( i + 1, 0, terminalWidth, 0, yDataSize );
+
+      // Check for buffer overflow
+      if( avgStartIndex < 0 ){
+        avgStartIndex = 0;
+      }
+
+      if( avgEndIndex >= yDataSize ){
+        avgEndIndex = yDataSize - 1;
+      }
+
+      // Averaging the numbers in the specified range
+      avg = 0.0;
+      for( j = avgStartIndex; j < avgEndIndex; j++ ){
+        avg += yDataF[ index ][ j ];
+      }
+
+      if( ( avgEndIndex - avgStartIndex ) != 0 ){
+        avg /= (float)( avgEndIndex - avgStartIndex );
+      }
+
+      pointY = mapFloat( avg, min, max, terminalSizeY, 1 );
+      pointX = i;
+
+      // Do the same for the previous point
+      // Finding the indexes for the laft and right boundaries
+      avgStartIndex = mapFloat( i - 2, 0, terminalWidth, 0, yDataSize );
+      avgEndIndex = mapFloat( i, 0, terminalWidth, 0, yDataSize );
+
+      // Check for buffer overflow
+      if( avgStartIndex < 0 ){
+        avgStartIndex = 0;
+      }
+
+      if( avgEndIndex >= yDataSize ){
+        avgEndIndex = yDataSize - 1;
+      }
+
+      // Averaging the numbers in the specified range
+      avg = 0.0;
+      for( j = avgStartIndex; j < avgEndIndex; j++ ){
+        avg += yDataF[ index ][ j ];
+      }
+
+      if( ( avgEndIndex - avgStartIndex ) != 0 ){
+        avg /= (float)( avgEndIndex - avgStartIndex );
+      }
+
+      prevPointY = mapFloat( avg, min, max, terminalSizeY, 1 );
+      //prevPointX = i - 1;
+
+
+      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+      bufferedPrinter.printf( "\033[%d;%dH", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
+
+      #else
+
+      shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
+
+      #endif
+
+      if( (int)prevPointY == (int)pointY ){
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        bufferedPrinter.printf( "\u2500" );
+
+        #else
+
+        shell -> channel -> print( "\u2500" );
+
+        #endif
+
+      }
+
+      else if( (int)pointY < (int)prevPointY  ){
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        bufferedPrinter.printf( "\033[%d;%dH\u256F", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
+
+        #else
+
+        shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
+        shell -> channel -> print( "\u256F" );
+
+        #endif
+
+        for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
+
+          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
+          bufferedPrinter.printf( "\033[A\033[D\u2502" );
+
+          #else
+
+          //shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
+          //shell -> channel -> print( "\u2502" );
+          shell -> channel -> print( "\033[A\033[D\u2502" );
+
+          #endif
+
+        }
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        bufferedPrinter.printf( "\033[A\033[D\u256D" );
+
+        #else
+
+        shell -> channel -> print( "\033[A\033[D\u256D" );
+
+        #endif
+
+      }
+
+      else{
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        bufferedPrinter.printf( "\033[%d;%dH\u256E", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
+
+        #else
+
+        shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
+        shell -> channel -> print( "\u256E" );
+
+        #endif
+
+        for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
+
+          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
+          bufferedPrinter.printf( "\033[B\033[D\u2502" );
+
+          #else
+
+          shell -> channel -> print( "\033[B\033[D\u2502" );
+
+          #endif
+
+        }
+
+        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+        bufferedPrinter.printf( "\033[B\033[D\u2570" );
+
+        #else
+
+        shell -> channel -> print( "\033[B\033[D\u2570" );
+
+        #endif
+
+      }
+
+
+    }
+
+
 
   }
   
