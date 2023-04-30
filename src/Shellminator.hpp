@@ -960,6 +960,7 @@ private:
   float max;
 
   int yTextSize;
+  int resultTextSize;
 
   Shellminator* shell = NULL;
 

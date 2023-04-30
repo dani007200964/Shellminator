@@ -3719,7 +3719,11 @@ ShellminatorPlot::ShellminatorPlot( Shellminator* shell_p, float* y, int y_size,
   yDataSize = y_size;
   numberOfPlots = 1;
 
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
   bufferedPrinter = ShellminatorBufferedPrinter( shell -> channel, SHELLMINATOR_PLOT_BUFF_SIZE );
+
+  #endif
 
 }
 
@@ -3990,6 +3994,86 @@ void ShellminatorPlot::drawScale(){
 
   }
 
+  // Draw result values
+  resultTextSize = 0;
+
+  // Calculate the widht of the largest value in characters.
+  for( i = 0; i < numberOfPlots; i++ ){
+
+    snprintf( yTextBuffer, sizeof( yTextBuffer ), "%3d", (int)yDataF[i][ yDataSize - 1 ] );
+    
+    j = strlen( yTextBuffer );
+    if( j > resultTextSize ){
+      resultTextSize = j;
+    }
+
+  }
+
+  // Required for decimal places.
+  resultTextSize += 2;
+
+  // Plot the values.
+  for( i = 0; i < numberOfPlots; i++ ){
+
+    // calculate the position of the last element on the y axis.
+    tmp = mapFloat( yDataF[i][ yDataSize - 1 ], max, min, 1, terminalSizeY );
+    j = tmp;
+
+    // Save the actual value of the last element to tmp.
+    tmp = yDataF[i][ yDataSize - 1 ];
+    tmpPos = tmp;
+    if( tmpPos < 0.0 ){
+      tmpPos *= -1.0;
+    }
+
+    snprintf( yTextBuffer, sizeof( yTextBuffer ), "%3d.%d", (int)tmp, (int)( (int)( tmpPos * 10.0 ) ) % 10 );
+
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+    bufferedPrinter.printf( "\033[K\033[%d;%dm\033[%d;%dH", (int)Shellminator::REGULAR, plotColor[ i ], j, terminalSizeX - resultTextSize );
+    bufferedPrinter.printf( "%s", yTextBuffer );
+
+    #else
+
+    // Erase to the end of line.
+    shell -> print( "\033[K" );
+    shell -> setTerminalCharacterColor( Shellminator::REGULAR, plotColor[ i ] );
+    shell -> setCursorPosition( terminalSizeX - resultTextSize, j );
+    shell -> channel -> print( yTextBuffer );
+
+    #endif
+
+  }
+
+  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+  bufferedPrinter.printf( "\033[%d;%dH\033[%d;%dm", 1, terminalSizeX - resultTextSize - 1, (int)Shellminator::REGULAR, (int)Shellminator::WHITE );
+
+  #else
+
+  shell -> setCursorPosition( terminalSizeX - resultTextSize - 1, 1 );
+  shell -> setTerminalCharacterColor( Shellminator::REGULAR, Shellminator::WHITE );
+
+  #endif
+
+  for( i = 0; i < terminalSizeY; i++ ){
+
+    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+
+    bufferedPrinter.printf( "\u251C%s", ( i < ( terminalSizeY - 1 ) ) ? "\033[B\033[D" : "" );
+
+    #else
+
+    shell -> channel -> print( "\u251C" );
+    
+    if( i < ( terminalSizeY - 1 ) ){
+      shell -> channel -> print( "\033[B\033[D" );
+    }
+
+    #endif
+
+  }
+
 }
 
 void ShellminatorPlot::drawPlot( uint8_t index ){
@@ -4018,7 +4102,7 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
 
   #endif
 
-  terminalWidth = terminalSizeX - ( yTextSize + 2 );
+  terminalWidth = terminalSizeX - ( yTextSize + 2 ) - ( resultTextSize + 3 );
 
   avgFactor = yDataSize / terminalWidth;
 
@@ -4165,6 +4249,16 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
       }
 
     }
+
+  }
+
+  // We have more points than 'pixels'.
+  else{
+
+    // Az elérhető szélességgel számolva minden pontot úgy rajzolunk ki, hogy
+    // A ponthoz megkeressük a közvetlen környezetében lévő mintákhoz tartozó indexeket.
+    // pédául a 3. pontot akarom kirajzolni, akkor annak a közvetlen környezete a 2. ponthoz tartozó
+    // minta után és a 4. pointhoz tartó mintáig tart. Ezeknek veszem az átlagát és azt rajzolom ki.
 
   }
   
