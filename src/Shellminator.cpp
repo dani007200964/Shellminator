@@ -4313,7 +4313,6 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
       prevPointY = mapFloat( avg, min, max, terminalSizeY, 1 );
       //prevPointX = i - 1;
 
-
       #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
       bufferedPrinter.printf( "\033[%d;%dH", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
@@ -4360,8 +4359,6 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
 
           #else
 
-          //shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
-          //shell -> channel -> print( "\u2502" );
           shell -> channel -> print( "\033[A\033[D\u2502" );
 
           #endif
@@ -4397,7 +4394,6 @@ void ShellminatorPlot::drawPlot( uint8_t index ){
 
           #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
           bufferedPrinter.printf( "\033[B\033[D\u2502" );
 
           #else

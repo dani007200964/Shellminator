@@ -9,6 +9,18 @@ project( Shellminator VERSION 1.1.3 )
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+option(RUN_TESTS "Enable tests" OFF)
+
+if (RUN_TESTS)
+
+    add_compile_options( -fprofile-arcs )
+    add_compile_options( -ftest-coverage )
+    add_compile_options( -O0 )
+    add_link_options("--coverage")
+    set( CMAKE_EXE_LINKER_FLAGS "-lgcov -fprofile-arcs -ftest-coverage" )
+
+endif()
+
 include_directories( 
     src
     extras/simulator
@@ -43,14 +55,21 @@ set( SOURCES
     extras/simulator/Commander-API/Commander-Settings.hpp
 )
 
-set( UNIT_TESTING
-    extras/Unity/src/unity_internals.h
-    extras/Unity/src/unity.c
-    extras/Unity/src/unity.h
-    extras/tests/testStream.cpp
-    extras/tests/testStream.hpp
-    extras/tests/unitTest.cpp
-)
+if (RUN_TESTS)
+
+    #include(coverage.cmake)
+
+    set( UNIT_TESTING
+        extras/Unity/src/unity_internals.h
+        extras/Unity/src/unity.c
+        extras/Unity/src/unity.h
+        extras/tests/testStream.cpp
+        extras/tests/testStream.hpp
+        #extras/tests/unitTest.cpp
+        #extras/tests/testCases/test_channels.cpp
+    )
+
+endif()
 
 #add_compile_options( -std=gnu++11 )
 
@@ -65,7 +84,11 @@ add_compile_definitions(
 )
 
 # Build the simulator
-add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+# add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
 
-# Unit testing
-add_executable( UnitTest ${SOURCES} ${UNIT_TESTING} )
+if (RUN_TESTS)
+
+    # Unit testing
+    add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
+
+endif()
