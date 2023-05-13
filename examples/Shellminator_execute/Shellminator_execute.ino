@@ -8,7 +8,7 @@
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example demonstrates how to create and use an execution function.
- * The executin function just prints out the command, but not execute it.
+ * The execution function just prints out the command, but not execute it.
  * To execute the commands, you need a command parser. You can create your
  * own or use Commander as shown in Shellminator_Commander example.
 */

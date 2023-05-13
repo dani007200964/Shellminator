@@ -114,6 +114,28 @@ if os.path.isdir( buildDirectoryName ):
 
         print( 'Cleaning done!' )
 
+# ---- Install Python Modules Section ----
+
+# Check if we have to install the python packages.
+if install:
+
+    print()
+    print( '---- Install Python Modules ----' )
+    print()
+
+    # Install Python modules.
+    command = 'pip install -r pythonRequirements.txt'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "pip command failed!" )
+        print( "You probably need to install the necessary Python modules manually. You can find them in the pythonRequirements.txt file. It is located in the root folder." )
+        sys.exit( 5 )
+
+    quit()
+
+
 # We have to change directory to the build directory to make CMake happy.
 os.chdir( rootDirectory + "/" + buildDirectoryName )
 
@@ -219,7 +241,7 @@ if ( 'test' in target ) or ( 'all' in target ):
         print( "Probably you doesn't installed gcovr properly. You need to install gcovr with pip. You need version 6.0 of gcovr. Also it have to be added to PATH." )
         sys.exit( 4 )
 
-    print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "report/report.html" ) )
+    print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/report/report.html" ) )
 
 
 print()

@@ -1,0 +1,32 @@
+BOARD=Desktop
+CHANNEL=stdioChannel
+ENVIRONMENT=Desktop
+
+{{ HEADER }}
+
+{{ INCLUDES }}
+
+{{ GLOBAL_VARIABLES }}
+
+{{ FUNCTION_PROTOTYPES }}
+
+// Main program.
+int main(){
+    // System init section.
+
+{% filter indent( width = 4 ) %}
+{{ SETUP }}
+{% endfilter %}
+
+    // Infinite loop.
+    while( 1 ){
+
+{% filter indent( width = 8 ) %}
+{{ LOOP }}
+{% endfilter %}
+
+    }
+
+}
+
+{{ FUNCTION_IMPLEMENTATIONS }}

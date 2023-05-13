@@ -3,6 +3,8 @@
         "stddef.h": "c",
         "initializer_list": "cpp",
         "type_traits": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.example": "cpp",
+        "*.template": "cpp"
     }
 }
