@@ -153,9 +153,9 @@ int main(){
     //data2[i] = i;
   }
 
-  shell.hideCursor();
+  //shell.hideCursor();
 
-  plot.draw();
+  //plot.draw();
 
   while( 1 ){
 
@@ -176,9 +176,9 @@ int main(){
     }
     
 
-    plot.draw( true );
+    //plot.draw( true );
     // Process the terminal.
-    //shell.update();
+    shell.update();
 
 
   }

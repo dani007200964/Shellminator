@@ -207,7 +207,7 @@ size_t stdioStream::write( const char *str ){
 
   	mbstowcs( vOut, str, 10000 );
 
-  	wprintf( L"%s", vOut );
+  	wprintf( L"%ls", vOut );
 	return strlen( str );
 
 }

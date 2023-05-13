@@ -9,7 +9,8 @@ project( Shellminator VERSION 1.1.3 )
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-option(RUN_TESTS "Enable tests" OFF)
+option(RUN_TESTS "Enable Tests" OFF)
+option(BUILD_SIMULATOR "Build Simulator" OFF)
 
 if (RUN_TESTS)
 
@@ -57,7 +58,6 @@ set( SOURCES
 
 if (RUN_TESTS)
 
-    #include(coverage.cmake)
 
     set( UNIT_TESTING
         extras/Unity/src/unity_internals.h
@@ -71,8 +71,6 @@ if (RUN_TESTS)
 
 endif()
 
-#add_compile_options( -std=gnu++11 )
-
 # Shellminator settings
 add_compile_definitions(
     # SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
@@ -83,10 +81,14 @@ add_compile_definitions(
 
 )
 
-# Build the simulator
-# add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+if( BUILD_SIMULATOR )
 
-if (RUN_TESTS)
+    # Build the simulator
+    add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+
+endif()
+
+if(RUN_TESTS)
 
     # Unit testing
     add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
