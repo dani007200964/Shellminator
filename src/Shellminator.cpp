@@ -695,7 +695,7 @@ void Shellminator::begin( const char* banner_p ) {
   // Print the banner message.
   printBanner();
 
-}
+} /// @example "Basic.cpp"
 
 void Shellminator::sendBackspace() {
 

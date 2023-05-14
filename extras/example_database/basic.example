@@ -43,6 +43,8 @@ const char logo[] =
 
 ++--SETUP--++
 
+//! [Basic Setup]
+
 // Clear the terminal
 shell.clear();
 
@@ -51,6 +53,8 @@ shell.attachLogo( logo );
 
 // Initialize shell object.
 shell.begin( "arnold" );
+
+//! [Basic Setup]
 
 ++--LOOP--++
 

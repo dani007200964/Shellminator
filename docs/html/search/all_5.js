@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['flush_0',['flush',['../classshellminator_default_channel.html#a9b152b43e4ef5d9ef4bcefdef69f64b0',1,'shellminatorDefaultChannel']]],
+  ['flush_0',['flush',['../classshellminator_default_channel.html#a9b152b43e4ef5d9ef4bcefdef69f64b0',1,'shellminatorDefaultChannel::flush()'],['../class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4',1,'ShellminatorBufferedPrinter::flush()']]],
   ['freeabortkey_1',['freeAbortKey',['../class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a',1,'Shellminator']]],
   ['freedownarrow_2',['freeDownArrow',['../class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd',1,'Shellminator']]],
   ['freeendkey_3',['freeEndKey',['../class_shellminator.html#a56313495a30f28e95b303097e7d182c6',1,'Shellminator']]],

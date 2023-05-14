@@ -243,6 +243,9 @@ public:
   /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
   /// @warning You have to call this function before all other member functions!
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
+  ///
+  /// Example: @ref Basic.cpp
+  /// @snippet{lineno} "Basic/Basic.cpp" Basic Setup
   void begin( const char* banner_p );
 
   /// Sends a backspace

@@ -28,6 +28,7 @@ var NAVTREE =
     [ "Shellminator library", "index.html", null ],
     [ "Shortcut Keys", "md_docs_markdown_pages_shortcut_keys.html", null ],
     [ "Supported Platforms", "md_docs_markdown_pages_supported_platforms.html", null ],
+    [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -49,13 +50,14 @@ var NAVTREE =
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_shellminator-_browser-_response_8hpp.html"
+"_basic_8cpp-example.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
