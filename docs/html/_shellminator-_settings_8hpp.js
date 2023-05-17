@@ -6,7 +6,6 @@ var _shellminator__settings_8hpp =
     [ "SHELLMINATOR_BUFF_DIM", "_shellminator-_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561", null ],
     [ "SHELLMINATOR_BUFF_LEN", "_shellminator-_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f", null ],
     [ "SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE", "_shellminator-_settings_8hpp.html#a88ffc695541fda6718349d53bbe3093e", null ],
-    [ "SHELLMINATOR_ENABLE_PLOT_MODULE", "_shellminator-_settings_8hpp.html#a5f6985ccfe1efb5b87dd7919cd85315d", null ],
     [ "SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT", "_shellminator-_settings_8hpp.html#a6a754334f0c5892c55a214ffb4a2e308", null ],
     [ "SHELLMINATOR_ENABLE_QR_SUPPORT", "_shellminator-_settings_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c", null ],
     [ "SHELLMINATOR_ENABLE_SEARCH_MODULE", "_shellminator-_settings_8hpp.html#a6708dca5d5c666e2d3dfe37123438527", null ],

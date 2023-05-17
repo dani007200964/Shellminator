@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(RUN_TESTS "Enable Tests" OFF)
 option(BUILD_SIMULATOR "Build Simulator" OFF)
+option(BUILD_EXAMPLES "Build Examples" OFF)
 
 if (RUN_TESTS)
 
@@ -33,9 +34,16 @@ set( SOURCES
     src/Shellminator-Browser-Response.hpp
     src/Shellminator-IO.cpp
     src/Shellminator-IO.hpp
+    src/Shellminator-BufferedPrinter.cpp
+    src/Shellminator-BufferedPrinter.hpp
+    src/Shellminator-PlotModule.cpp
+    src/Shellminator-PlotModule.hpp
     src/Shellminator-Settings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
+    src/Shellminator-ArrowKeys.cpp
+    src/Shellminator-Styles.cpp
+
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
     extras/simulator/Print.h
@@ -84,13 +92,29 @@ add_compile_definitions(
 if( BUILD_SIMULATOR )
 
     # Build the simulator
-    add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+    # add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
 
 endif()
+
+##add_subdirectory( extras )
+#add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
 
 if(RUN_TESTS)
 
     # Unit testing
     add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
+    add_executable( test_shellminator_begin ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_shellminator_begin.cpp )
 
+endif()
+
+if( BUILD_EXAMPLES )
+
+# Do not edit this comment and do not write anything after it!
+# It will be generated with the exampleGenerator.py script.
+#---- Examples Section ----#
+
+add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
+add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
+add_executable( Runningplot ${SOURCES} extras/examples_desktop/Desktop/Runningplot/Runningplot.cpp )
+add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )
 endif()

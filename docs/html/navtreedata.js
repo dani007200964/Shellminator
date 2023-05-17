@@ -26,9 +26,9 @@ var NAVTREE =
 [
   [ "Shellminator", "index.html", [
     [ "Shellminator library", "index.html", null ],
+    [ "Coverage", "md_docs_markdown_pages_coverage.html", null ],
     [ "Shortcut Keys", "md_docs_markdown_pages_shortcut_keys.html", null ],
     [ "Supported Platforms", "md_docs_markdown_pages_supported_platforms.html", null ],
-    [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

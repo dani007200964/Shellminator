@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['license_2etxt_0',['license.txt',['../license_8txt.html',1,'']]]
+  ['coverage_2emd_0',['coverage.md',['../coverage_8md.html',1,'']]]
 ];

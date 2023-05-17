@@ -4,7 +4,22 @@ ENVIRONMENT=Desktop
 
 {{ HEADER }}
 
+#include <stdio.h>
+
+#include <fcntl.h>
+#include <io.h>
+#include <wchar.h>
+#include <stdlib.h>
+#include <locale.h>
+
+#include "System.h"
+
+#include "stdioStream.hpp"
+
 {{ INCLUDES }}
+
+// Use stdio as Channel.
+stdioStream stdioChannel;
 
 {{ GLOBAL_VARIABLES }}
 
@@ -12,7 +27,13 @@ ENVIRONMENT=Desktop
 
 // Main program.
 int main(){
+
     // System init section.
+    if( setlocale(LC_ALL, NULL) == NULL ){
+
+        wprintf( L"Error setting locale!\r\n" );
+
+    }
 
 {% filter indent( width = 4 ) %}
 {{ SETUP }}

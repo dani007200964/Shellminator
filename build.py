@@ -176,6 +176,43 @@ if ( 'simulator' in target ) or ( 'all' in target ):
     print( 'Simulator building finished! You can find the executable here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "report/Simulator.exe" ) )
 
 
+# ---- Examples Build Section ----
+
+# Check if we have to build the examples.
+if ( 'examples' in target ) or ( 'all' in target ):
+
+    print()
+    print( '---- Generate CMake files for Examples ----' )
+    print()
+
+    # Create CMake structure
+    command = 'cmake .. -G "MinGW Makefiles" -DBUILD_EXAMPLES=ON'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "CMake command failed!" )
+        print( "Probably, you have to clean the project and it will work next time :)" )
+        sys.exit( 1 )
+
+    print()
+    print( '---- Build all examples ----' )
+    print()
+
+    # Build the project
+    command = 'cmake --build .'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "CMake build command failed!" )
+        print( "Probably, you have to clean the project and it will work next time :)" )
+        sys.exit( 2 )
+
+    print()
+    print( 'Examples are built. You can find the executables here: {:s}'.format( rootDirectory + "/" + buildDirectoryName ) )
+
+
 # ---- Unit Test Section ----
 
 # Check if we have to build for unit test.
@@ -210,18 +247,26 @@ if ( 'test' in target ) or ( 'all' in target ):
         sys.exit( 2 )
 
     print()
-    print( '---- Run Unit Test ----' )
+    print( '---- Run Unit Tests ----' )
     print()
 
-    # Run unit test code
-    command = '.\\test_channels.exe'
-    terminalProcess = subprocess.Popen( command, shell=True )
-    terminalProcess.wait()
+    # List all the template files.
+    executableTests = os.listdir( rootDirectory + '/build' )
+    print( "Files in build folder:" )
+    print( executableTests )
 
-    if( terminalProcess.returncode !=0 ):
-        print( "Unit Test run failed!" )
-        print( "There is something wrong with the unit test binary. It have to run all the tests without error code." )
-        sys.exit( 3 )
+    for file in executableTests:
+        if file.startswith( "test_" ) and file.endswith( ".exe" ):
+        
+            # Run unit test code
+            command = '.\\' + file
+            terminalProcess = subprocess.Popen( command, shell=True )
+            terminalProcess.wait()
+
+            if( terminalProcess.returncode !=0 ):
+                print( "Unit Test run failed!" )
+                print( "There is something wrong with the unit test binary. It have to run all the tests without error code." )
+                sys.exit( 3 )
 
     # Check if the report directory not exists. In this case create a report folder.
     if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
@@ -231,8 +276,10 @@ if ( 'test' in target ) or ( 'all' in target ):
     print( '---- Generate Coverage Report ----' )
     print()
 
+    shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
+
     # Run gcovr to evaluate coverage
-    command = 'gcovr -r .. --html-details -o report/report.html'
+    command = 'gcovr -r .. --html-details --html-css style.css -o report/report.html'
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 
@@ -242,6 +289,12 @@ if ( 'test' in target ) or ( 'all' in target ):
         sys.exit( 4 )
 
     print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/report/report.html" ) )
+
+    # Copy report data to Doxygen source folder
+    reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
+    for reportFile in reportFiles:
+        shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
+        #print( "copy {:s} to {:s}".format( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html" + reportFile ) )
 
 
 print()

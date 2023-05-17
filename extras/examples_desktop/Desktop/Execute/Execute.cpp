@@ -15,9 +15,24 @@
 */
 
 
+#include <stdio.h>
+
+#include <fcntl.h>
+#include <io.h>
+#include <wchar.h>
+#include <stdlib.h>
+#include <locale.h>
+
+#include "System.h"
+
+#include "stdioStream.hpp"
+
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
 
+
+// Use stdio as Channel.
+stdioStream stdioChannel;
 
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
@@ -43,7 +58,13 @@ void executionFunction( char* command, Shellminator* shell );
 
 // Main program.
 int main(){
+
     // System init section.
+    if( setlocale(LC_ALL, NULL) == NULL ){
+
+        wprintf( L"Error setting locale!\r\n" );
+
+    }
 
 
     // Clear the terminal

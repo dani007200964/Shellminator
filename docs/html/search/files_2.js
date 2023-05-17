@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['qrcodegen_2ec_0',['qrcodegen.c',['../qrcodegen_8c.html',1,'']]],
-  ['qrcodegen_2eh_1',['qrcodegen.h',['../qrcodegen_8h.html',1,'']]]
+  ['main_5fpage_2emd_0',['main_page.md',['../main__page_8md.html',1,'']]]
 ];

@@ -76,6 +76,16 @@ if os.path.isdir(  rootDirectory + desktopExampleFolder ):
 os.mkdir( rootDirectory + arduinoExampleFolder )
 os.mkdir( rootDirectory + desktopExampleFolder )
 
+# Load the content of the project CMakeLists file.
+with open( rootDirectory + "/CMakeLists.txt" ) as file:
+  CMakeContent = file.readlines()
+
+# Find the end of the CMakeLists file.
+indexOfCMakeContentEnd = findLine( CMakeContent, "#---- Examples Section ----#\n" )
+
+# Remove the content from the end of CMakeLists file.
+CMakeContent = CMakeContent[ 0:( indexOfCMakeContentEnd + 1 ) ]
+CMakeContent.append( "\n" )
 
 # List all the template files.
 templateFiles = os.listdir( rootDirectory + '/extras/example_templates' )
@@ -192,6 +202,15 @@ for template in templateFiles:
             outputFile.write( secondRunData )
             outputFile.close()
 
+            CMakeContent.append( "add_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+
 
         #print( secondRunData )
+
+# We have to close an if statement at the end.
+CMakeContent.append( "endif()" )
+
+CMakeFile = open( rootDirectory + "/CMakeLists.txt", "w" )
+CMakeFile.write( listToString( CMakeContent ) )
+#print( CMakeContent )
 
