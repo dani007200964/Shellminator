@@ -1,5 +1,9 @@
 @mainpage Shellminator library
 
+\htmlonly
+<image src="coverage_badge.svg" alt="Coverage"></image>
+\endhtmlonly
+
 Shellminator is a simple-to-use terminal interface library. You can use it with any __VT-100__
 terminal emulator like [PuTTY](https://www.putty.org/), [Terraterm](https://ttssh2.osdn.jp/index.html.en) or [minicom](https://linux.die.net/man/1/minicom).
 With this library, you can create user-friendly command line interfaces for your embedded projects.

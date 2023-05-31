@@ -73,11 +73,7 @@ SOFTWARE.
 
 #endif
 
-#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-  #include "Shellminator-BufferedPrinter.hpp"
-
-#endif
+#include "Shellminator-BufferedPrinter.hpp"
 
 
 #ifdef __has_include
@@ -154,6 +150,8 @@ public:
   /// String that holds the version information
   static const char *version;
 
+  static const char helpText[];
+
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
 	Shellminator( WiFiServer *server_p );
@@ -192,6 +190,8 @@ public:
 	Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) );
 	Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) );
 
+  bool enableBuffering( int bufferSize = 32 );
+
   /// Execution function adder function
   ///
   /// This function allows you to add or replace the execution function after the constructor.
@@ -206,6 +206,8 @@ public:
   /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
   /// @warning You have to call this function before all other member functions!
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
+  ///
+  /// Tested in: __test_shellminator_begin.cpp__
   void begin( char* banner_p );
 
   /// Shellminator initialization function
@@ -215,6 +217,8 @@ public:
   /// @warning You have to call this function before all other member functions!
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   ///
+  /// Tested in: __test_shellminator_begin.cpp__
+  ///
   /// Example: @ref Basic.cpp
   /// @snippet{lineno} "Basic/Basic.cpp" Basic Setup
   void begin( const char* banner_p );
@@ -223,18 +227,24 @@ public:
   ///
   /// This function makes a backspace in the terminal application. Basically it deletes the last character
   /// in the terminal screen.
+  ///
+  /// Tested in: __test_format_commands.cpp__
   void sendBackspace();
 
   /// Clear screen
   ///
   /// This function clears the terminal screen.
+  ///
+  /// Tested in: __test_format_commands.cpp__
   void clear();
 
   /// Update function
   ///
   /// This function handles all of the communication related stuff between the code and the terminal application.
   /// @warning This function has to be called periodically.
-  /// @warning If the calling of this function is not frequent enough it cann cause buffer overflow in the Serial driver!
+  /// @warning If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
+  ///
+  /// Tested in: __test_update.cpp__
   void update();
 
 	/// Bring some color into your code.
@@ -253,6 +263,17 @@ public:
 	/// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
   /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
+  static void setTerminalCharacterColor( char* buff, uint8_t buffSize, uint8_t style, uint8_t color );
+
+	/// Bring some color into your code.
+  ///
+  /// This function changes the color and style of the terminal application characters.
+	/// The output goes to a buffer;
+  /// @warning Please use the color and style enumeration table from this application as parameter.
+	/// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
+  /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
+  /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
+  /// @warning It is legacy code! The buffer is not protected against overflow! Please use protected version( it has 4 arguments ).
   void setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color );
 
   /// Bring some color into your code.
@@ -265,12 +286,15 @@ public:
   /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
   static void setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color );
 
+  /// @note ShellminatorBufferedPrinter object requires a flush() after this command.
+  static void setTerminalCharacterColor( ShellminatorBufferedPrinter *printer_p, uint8_t style, uint8_t color );
+
   void hideCursor();
-  void hideCursor( char* buff );
+  static void hideCursor( char* buff, uint8_t bufferSize );
   static void hideCursor( Stream *stream_p );
 
   void showCursor();
-  void showCursor( char* buff );
+  static void showCursor( char* buff, uint8_t buffSize );
   static void showCursor( Stream *stream_p );
 
   bool getCursorPosition( int* x, int* y, uint32_t timeout = 100 );
@@ -675,6 +699,25 @@ public:
 
 private:
 
+  // It can be used to accelerate the data sending process.
+  // With this, the output will be rendered onec without flickering.
+  ShellminatorBufferedPrinter bufferedPrinter;
+
+  // If memory allocation is failed for the buffer, this flag will be false.
+  bool bufferMemoryAllocated = false;
+
+  // Wrapper for the redrawLine without buffering.
+  void redrawLineSimple();
+
+  // Wrapper for the redrawLine with buffering.
+  void redrawLineBuffered();
+
+  // Wrapper for the redrawHistorySearch without buffering.
+  void redrawHistorySearchSimple();
+
+  // Wrapper for the redrawHistorySearch with buffering.
+  void redrawHistorySearchBuffered();
+
   // State-machine functions.
   /// @todo Finish the documentation for state-machine part.
   void ShellminatorDefaultState( char new_char );
@@ -804,13 +847,6 @@ private:
 
   //---- Communication channels ----//
 
-	#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-	// It is used for the ESP32 and ESP8266.
-	// They are very slow to send only one byte of data.
-	char acceleratorBuffer[ SHELLMINATOR_ACCELERATOR_BUFFER_LEN ];
-	char *acceleratorBufferPtr;
-	#endif
-
   #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
 	WiFiServer *server = NULL;
@@ -828,11 +864,6 @@ private:
 
   #endif
 
-	static const char helpText[];
-
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-	static const char helpTextFormatted[];
-  #endif
 
 	#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 

@@ -37,12 +37,16 @@ import os
 import shutil
 import sys
 import getopt
+import json
+
+# Badge generator
+import anybadge
 
 # Collect input arguments
 argv = sys.argv[ 1: ]
 
 helpText =  """Arguments:
--t or --target   : Can be: clean, all, simulator, test, examples
+-t or --target   : Can be: clean, all, simulator, test, doc, examples
 -r or --rebuild  : Clear everything and start the build process from the beginning.
 -i or --install  : Installs the necessary libraries for the build system.
 -h or --help     : Help message.
@@ -268,18 +272,51 @@ if ( 'test' in target ) or ( 'all' in target ):
                 print( "There is something wrong with the unit test binary. It have to run all the tests without error code." )
                 sys.exit( 3 )
 
-    # Check if the report directory not exists. In this case create a report folder.
-    if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
-        os.mkdir( rootDirectory + "/" + buildDirectoryName + "/report" )
-
     print()
     print( '---- Generate Coverage Report ----' )
     print()
 
+    # Run gcovr to evaluate coverage
+    command = 'gcovr -r .. --json-summary-pretty -o coverage_report.json'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "gcovr failed!" )
+        print( "Probably you doesn't installed gcovr properly. You need to install gcovr with pip. You need version 6.0 of gcovr. Also it have to be added to PATH." )
+        sys.exit( 4 )
+
+    print( 'Coverage report text generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/coverage_report.json" ) )
+
+
+
+# ---- Documentation Section ----
+
+# We have to change directory to the root directory to make gcovr happy.
+#os.chdir( rootDirectory )
+
+# Check if we have to build the documentation.
+if ( 'doc' in target ) or ( 'all' in target ):
+
+    print()
+    print( '---- Generate HTML Coverage Report ----' )
+    print()
+
+    # Check if the report directory not exists. In this case create a report folder.
+    if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
+        os.mkdir( rootDirectory + "/" + buildDirectoryName + "/report" )
+
     shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
 
     # Run gcovr to evaluate coverage
-    command = 'gcovr -r .. --html-details --html-css style.css -o report/report.html'
+    command = "gcovr -r .. --html-details --html-css style.css -o report/report.html"
+
+    # Excluded stuff. Everything that is not part of the Shellminator library must be excluded.
+    command += " --exclude .*/Unity/"
+    command += " --exclude .*/test"
+    command += " --exclude .*/Print"
+    command += " --exclude .*/Stream"
+    command += " --exclude .*/Commander"
     terminalProcess = subprocess.Popen( command, shell=True )
     terminalProcess.wait()
 
@@ -294,7 +331,34 @@ if ( 'test' in target ) or ( 'all' in target ):
     reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
     for reportFile in reportFiles:
         shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
-        #print( "copy {:s} to {:s}".format( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html" + reportFile ) )
+
+    print()
+    print( '---- Generate Coverage Badge ----' )
+    print()
+
+    coverageSummaryFile = open( 'coverage_report.json' )
+    coverageSummary = json.load( coverageSummaryFile )
+    coverageSummaryFile.close()
+
+    linePercentage = coverageSummary[ 'line_percent' ]
+
+    badgeColor = 'crimson'
+
+    if linePercentage >= 75:
+        badgeColor = 'darkorange'
+
+    if linePercentage >= 90:
+        badgeColor = 'darkgreen'
+
+    badgeValue = "{:.1f}%".format( linePercentage )
+
+    coverageBadge = anybadge.Badge( label="Coverage", value=badgeValue, default_color=badgeColor )
+
+    if os.path.exists( rootDirectory + "/docs/images/coverage_badge.svg" ):
+        os.remove( rootDirectory + "/docs/images/coverage_badge.svg" )
+
+    coverageBadge.write_badge( rootDirectory + "/docs/images/coverage_badge.svg" )
+
 
 
 print()

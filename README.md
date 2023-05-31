@@ -1,4 +1,5 @@
 # Shellminator ![Build Status](https://github.com/dani007200964/Shellminator/actions/workflows/compile-examples.yml/badge.svg?branch=main)
+![Coverage](/docs/images/coverage_badge.svg)
 
 Shellminator is a simple-to-use terminal interface library. You can use it with any __VT-100__
 terminal emulator like [PuTTY](https://www.putty.org/), [Terraterm](https://ttssh2.osdn.jp/index.html.en) or [minicom](https://linux.die.net/man/1/minicom).

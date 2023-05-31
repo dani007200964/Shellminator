@@ -72,7 +72,7 @@ void tearDown(void) {
 
 }
 
-void test_begin_simple( void ){
+void test_begin_simple_const( void ){
 
     testChannel.clearTx();
     shell.enableFormatting = false;
@@ -82,10 +82,22 @@ void test_begin_simple( void ){
 
 }
 
+void test_begin_simple( void ){
+
+    char nameBuff[] = "arnold";
+
+    testChannel.clearTx();
+    shell.enableFormatting = false;
+    shell.begin( nameBuff );
+
+    TEST_ASSERT_EQUAL_STRING ( "Shellminator Unit Test\r\narnold:$ ", testChannel.txBuffer );
+
+}
 int main(){
 
     UNITY_BEGIN();
     RUN_TEST( test_begin_simple );
+    RUN_TEST( test_begin_simple_const );
     return UNITY_END();
 
 }

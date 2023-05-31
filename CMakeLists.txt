@@ -104,6 +104,8 @@ if(RUN_TESTS)
     # Unit testing
     add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
     add_executable( test_shellminator_begin ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_shellminator_begin.cpp )
+    add_executable( test_format_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_format_commands.cpp )
+    add_executable( test_update ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_update.cpp )
 
 endif()
 
@@ -114,6 +116,7 @@ if( BUILD_EXAMPLES )
 #---- Examples Section ----#
 
 add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
+add_executable( Buffered ${SOURCES} extras/examples_desktop/Desktop/Buffered/Buffered.cpp )
 add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
 add_executable( Runningplot ${SOURCES} extras/examples_desktop/Desktop/Runningplot/Runningplot.cpp )
 add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )

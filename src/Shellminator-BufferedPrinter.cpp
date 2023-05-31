@@ -36,29 +36,7 @@ SOFTWARE.
 ShellminatorBufferedPrinter::ShellminatorBufferedPrinter(){
 
   channel = NULL;
-
-}
-
-ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( int bufferSize_p ){
-
-  // We need at least 30 characters to work properly.
-  if( bufferSize_p < 30 ){
-    bufferSize = -1;
-    return;
-  }
-
-  channel = NULL;
-  bufferSize = bufferSize_p;
-  availableCharacters = bufferSize;
-  acceleratorBuffer = (char*) malloc( bufferSize * sizeof( char ) );
-  acceleratorBufferPointer = acceleratorBuffer;
-
-  if( acceleratorBuffer == NULL ){
-    // Memory allocation failed!
-    bufferSize = -1;
-  }
-
-  clearBuffer();
+  acceleratorBuffer = NULL;
 
 }
 
@@ -73,8 +51,8 @@ ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, int
   channel = channel_p;
   bufferSize = bufferSize_p;
   availableCharacters = bufferSize;
-  acceleratorBuffer = (char*) malloc( bufferSize * sizeof( char ) );
-  acceleratorBufferPointer = acceleratorBuffer;
+  acceleratorBuffer = (char*)malloc( bufferSize * sizeof( char ) );
+  acceleratorBufferPointer = (char*)acceleratorBuffer;
 
   if( acceleratorBuffer == NULL ){
     // Memory allocation failed!
@@ -85,15 +63,17 @@ ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, int
 
 }
 
+/*
 ShellminatorBufferedPrinter::~ShellminatorBufferedPrinter(){
 
-  if( bufferSize >= 0 ){
+  if( acceleratorBuffer != NULL ){
 
-    free( acceleratorBuffer );
+    //free( acceleratorBuffer );
 
   }
 
 }
+*/
 
 void ShellminatorBufferedPrinter::setChannel( Stream* channel_p ){
 
@@ -101,7 +81,7 @@ void ShellminatorBufferedPrinter::setChannel( Stream* channel_p ){
 
 }
 
-void ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
+int ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
 
   va_list args;
 
@@ -120,9 +100,9 @@ void ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
   // If memory allocation failed with the constructor.
   if( ( bufferSize < 0 ) || ( channel == NULL ) ){
 
-    // Close the variadic list and teturn.
+    // Close the variadic list and return.
     va_end( args );
-    return;
+    return 0;
 
   }
 
@@ -151,7 +131,7 @@ void ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
       availableCharacters = bufferSize;
 
       va_end( args );
-      return;
+      return 0;
 
     }
 
@@ -162,6 +142,8 @@ void ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
 
 
   va_end( args );
+
+  return status;
 
 }
 
@@ -193,7 +175,7 @@ void ShellminatorBufferedPrinter::clearBuffer(){
   int i;
 
   // If memory allocation failed with the constructor.
-  if( ( bufferSize < 0 ) || ( channel == NULL ) ){
+  if( ( acceleratorBuffer != NULL ) || ( channel == NULL ) ){
 
     return;
 

@@ -49,19 +49,21 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
-
+#include <cstdlib>
+#include <malloc.h>
 
 class ShellminatorBufferedPrinter{
 
 public:
 
   ShellminatorBufferedPrinter();
-  ShellminatorBufferedPrinter( int bufferSize_p );
   ShellminatorBufferedPrinter( Stream* channel_p, int bufferSize_p );
-  ~ShellminatorBufferedPrinter();
+  
+  // I don't know why, but it crashes on windows
+  // ~ShellminatorBufferedPrinter();
 
   void setChannel( Stream* channel_p );
-  void printf( const char *fmt, ... );
+  int printf( const char *fmt, ... );
   void flush();
 
   int getBufferSize();
@@ -72,7 +74,7 @@ private:
 
   int bufferSize = -1;
 
-  char *acceleratorBuffer;
+  char *acceleratorBuffer = NULL;
   char *acceleratorBufferPointer;
   uint32_t availableCharacters;
 

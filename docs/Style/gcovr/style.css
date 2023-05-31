@@ -8,7 +8,7 @@
     --low_color: #ad2617;
     --medium_color: #8a6800;
     --high_color: #1a6640;
-    --covered_color: #1a6640;
+    --covered_color: #234534;
     --uncovered_color: #6f241c;
     --excluded_color: #53BFFD;
     --warning_color: orangered;
@@ -530,7 +530,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .o { color: #666666 } /* Operator */
 .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
 .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
-.cp { color: #9C6500 } /* Comment.Preproc */
+.cp { color: #65cabe } /* Comment.Preproc */
 .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
 .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
 .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
@@ -549,7 +549,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
 .kp { color: #008000 } /* Keyword.Pseudo */
 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.kt { color: #B00040 } /* Keyword.Type */
+.kt { color: #cc99cd } /* Keyword.Type */
 .m { color: #666666 } /* Literal.Number */
 .s { color: #BA2121 } /* Literal.String */
 .na { color: #687822 } /* Name.Attribute */
@@ -559,12 +559,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .nd { color: #AA22FF } /* Name.Decorator */
 .ni { color: #717171; font-weight: bold } /* Name.Entity */
 .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
-.nf { color: #0000FF } /* Name.Function */
+.nf { color: #98c0e3 } /* Name.Function */
 .nl { color: #767600 } /* Name.Label */
 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
 .nt { color: #008000; font-weight: bold } /* Name.Tag */
 .nv { color: #19177C } /* Name.Variable */
-.ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.ow { color: #cc99cd; font-weight: bold } /* Operator.Word */
 .w { color: #bbbbbb } /* Text.Whitespace */
 .mb { color: #666666 } /* Literal.Number.Bin */
 .mf { color: #666666 } /* Literal.Number.Float */
