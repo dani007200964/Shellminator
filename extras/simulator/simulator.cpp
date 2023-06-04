@@ -99,6 +99,9 @@ const char logo[] =
 
 ;
 
+//ShellminatorBufferedPrinter printer;
+ShellminatorBufferedPrinter printer( &stdioChannel );
+int printerBufferSize = 30;
 
 int main(){
 
@@ -138,45 +141,22 @@ int main(){
 
   shell.attachCommander( &commander );
 
+  shell.enableBuffering();
+
+  /*
+  printer.allocate( 30 );
+  printer.printf( "Test!\r\n" );
+  printer.flush();
+  printer.~ShellminatorBufferedPrinter();
+  */
+  
+
   // Begin the terminal.
   shell.begin( "arnold" );
 
-  float data1[1000];
-  float data2[1000];
-  ShellminatorPlot plot( &shell, data1, sizeof( data1 ) / sizeof( data1[ 0 ] ) );
-  plot.addPlot( data2, sizeof( data1 ) / sizeof( data1[ 0 ] ) );
-
-  for( int i = 0; i < 1000; i++ ){
-
-    data1[i] = sin( 3.14159265358979323846 * 2.0 * (double)i / 1000.0  ) * 3.0;
-    data2[i] = sin( 3.14159265358979323846 * 3.0 * (double)i / 1000.0  ) * 10.0;
-    //data2[i] = i;
-  }
-
-  //shell.hideCursor();
-
-  //plot.draw();
-
   while( 1 ){
 
-    uint32_t timerStart = millis();
 
-    while( ( millis() - timerStart ) < 100 ){
-
-    }
-
-    
-    for( int i = 0; i < 1000; i++ ){
-
-      data1[i] = sin( 3.14159265358979323846 * 3.0 * (double)i / 1000.0 + millis() / 20000.0  ) * 3.5;;
-      data2[i] = sin( 3.14159265358979323846 * 3.0 * (double)i / 1000.0 + millis() / 10000.0  ) * 10.5;
-      //data2[i] = i;
-      //data2[i] = sin( 3.14159265358979323846 * 4.0 * (double)i / 100.0 + millis() / 1000.0  ) * 10.0 + millis()/10000.0;
-
-    }
-    
-
-    //plot.draw( true );
     // Process the terminal.
     shell.update();
 

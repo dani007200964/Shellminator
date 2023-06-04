@@ -5,6 +5,10 @@
         "type_traits": "cpp",
         "xutility": "cpp",
         "*.example": "cpp",
-        "*.template": "cpp"
+        "*.template": "cpp",
+        "array": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xmemory": "cpp"
     }
 }

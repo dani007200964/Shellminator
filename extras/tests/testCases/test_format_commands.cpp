@@ -801,7 +801,8 @@ void test_setTerminalCharacterColor_bufferedPrinter(void) {
 
     char expected[ 20 ];
 
-    printer = ShellminatorBufferedPrinter( &testChannel, printerBufferSize );
+    printer = ShellminatorBufferedPrinter( &testChannel );
+    printer.allocate( printerBufferSize );
     TEST_ASSERT_EQUAL_INT_MESSAGE( printerBufferSize, printer.getBufferSize(), "Memory Allocation Failed!" );
 
 

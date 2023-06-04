@@ -62,9 +62,6 @@ const char logo[] = "Shellminator Unit Test\r\n";
 // Put any init code here that needs to run before testing.
 void setUp(void) {
 
-    // Attach logo to test it as well.
-    shell.attachLogo( logo );
-
 }
 
 // Put any init code here that needs to run after testing.
@@ -94,6 +91,9 @@ void test_begin_simple( void ){
 
 }
 int main(){
+
+    // Attach logo to test it as well.
+    shell.attachLogo( logo );
 
     UNITY_BEGIN();
     RUN_TEST( test_begin_simple );

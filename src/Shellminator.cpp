@@ -385,8 +385,9 @@ Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Sh
 
 bool Shellminator::enableBuffering( int bufferSize ){
 
-  bufferedPrinter = ShellminatorBufferedPrinter( channel, SHELLMINATOR_PLOT_BUFF_SIZE );
-  bufferMemoryAllocated = true;
+  bufferedPrinter = ShellminatorBufferedPrinter( channel );
+  
+  bufferMemoryAllocated = bufferedPrinter.allocate( SHELLMINATOR_PLOT_BUFF_SIZE );
 
   if( bufferedPrinter.getBufferSize() != SHELLMINATOR_PLOT_BUFF_SIZE ){
 

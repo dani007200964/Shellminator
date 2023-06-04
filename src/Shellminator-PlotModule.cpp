@@ -37,7 +37,7 @@ bool ShellminatorPlot::begin(){
 
   #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
 
-  bufferedPrinter = ShellminatorBufferedPrinter( shell -> channel, SHELLMINATOR_PLOT_BUFF_SIZE );
+  bufferedPrinter.allocate( SHELLMINATOR_PLOT_BUFF_SIZE );
   if( bufferedPrinter.getBufferSize() != SHELLMINATOR_PLOT_BUFF_SIZE ){
 
     return false;
@@ -57,6 +57,7 @@ ShellminatorPlot::ShellminatorPlot( Shellminator* shell_p, float* y, int y_size,
   plotColor[ 0 ] = color;
   yDataSize = y_size;
   numberOfPlots = 1;
+  bufferedPrinter = ShellminatorBufferedPrinter( shell -> channel );
 
 }
 

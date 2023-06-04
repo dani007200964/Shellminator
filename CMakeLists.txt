@@ -92,7 +92,7 @@ add_compile_definitions(
 if( BUILD_SIMULATOR )
 
     # Build the simulator
-    # add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
+    add_executable( Simulator ${SOURCES} extras/simulator/simulator.cpp )
 
 endif()
 
@@ -102,6 +102,7 @@ endif()
 if(RUN_TESTS)
 
     # Unit testing
+    add_executable( test_buffered_printer ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_buffered_printer.cpp )
     add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
     add_executable( test_shellminator_begin ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_shellminator_begin.cpp )
     add_executable( test_format_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_format_commands.cpp )

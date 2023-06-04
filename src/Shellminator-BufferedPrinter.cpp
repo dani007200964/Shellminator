@@ -37,47 +37,84 @@ ShellminatorBufferedPrinter::ShellminatorBufferedPrinter(){
 
   channel = NULL;
   acceleratorBuffer = NULL;
+  bufferSize = -1;
 
 }
 
-ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, int bufferSize_p ){
+ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p ){
+
+  channel = channel_p;
+  acceleratorBuffer = NULL;
+  bufferSize = -1;
+
+}
+
+bool ShellminatorBufferedPrinter::allocate( int bufferSize_p ){
 
   // We need at least 30 characters to work properly.
   if( bufferSize_p < 30 ){
     bufferSize = -1;
-    return;
+    return false;
   }
 
-  channel = channel_p;
   bufferSize = bufferSize_p;
+
   availableCharacters = bufferSize;
   acceleratorBuffer = (char*)malloc( bufferSize * sizeof( char ) );
   acceleratorBufferPointer = (char*)acceleratorBuffer;
 
+  /*
+  char buff[ 200 ];
+  snprintf( buff, sizeof( buff ), "allocated address: %p\r\n", acceleratorBuffer );
+  channel -> print( buff );
+  */
+
   if( acceleratorBuffer == NULL ){
     // Memory allocation failed!
     bufferSize = -1;
+    return false;
   }
 
   clearBuffer();
+  return true;
 
 }
 
-/*
-ShellminatorBufferedPrinter::~ShellminatorBufferedPrinter(){
+void ShellminatorBufferedPrinter::deallocate(){
 
   if( acceleratorBuffer != NULL ){
 
-    //free( acceleratorBuffer );
+    free( (void*)acceleratorBuffer );
+
+    /*
+    char buff[ 200 ];
+    snprintf( buff, sizeof( buff ), "free address: %p\r\n", acceleratorBuffer );
+    channel -> print( buff );
+    */
+
+    acceleratorBuffer = NULL;
+    bufferSize = -1;
 
   }
 
 }
-*/
+
+ShellminatorBufferedPrinter::~ShellminatorBufferedPrinter(){
+
+  deallocate();
+
+}
+
 
 void ShellminatorBufferedPrinter::setChannel( Stream* channel_p ){
 
   channel = channel_p;
+
+}
+
+Stream* ShellminatorBufferedPrinter::getChannel(){
+
+  return channel;
 
 }
 
@@ -175,7 +212,7 @@ void ShellminatorBufferedPrinter::clearBuffer(){
   int i;
 
   // If memory allocation failed with the constructor.
-  if( ( acceleratorBuffer != NULL ) || ( channel == NULL ) ){
+  if( ( bufferSize < 0 ) || ( channel == NULL ) ){
 
     return;
 
