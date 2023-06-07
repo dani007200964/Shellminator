@@ -34,7 +34,7 @@ SOFTWARE.
 #ifndef SHELLMINATOR_BUFFERED_PRINTER_HPP_
 #define SHELLMINATOR_BUFFERED_PRINTER_HPP_
 
-#include "Shellminator-Settings.hpp"
+#include "Shellminator-DefaultSettings.hpp"
 #include "Shellminator-IO.hpp"
 
 #ifdef ARDUINO
@@ -49,8 +49,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
-#include <cstdlib>
-#include <malloc.h>
+#include <stdlib.h>
 
 /// ShellminatorBufferedPrinter object
 ///

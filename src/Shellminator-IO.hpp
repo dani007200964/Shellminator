@@ -34,7 +34,7 @@ SOFTWARE.
 #ifndef SHELLMINATOR_IO_HPP_
 #define SHELLMINATOR_IO_HPP_
 
-#include "Shellminator-Settings.hpp"
+#include "Shellminator-DefaultSettings.hpp"
 
 #ifdef ARDUINO
 #include "Arduino.h"

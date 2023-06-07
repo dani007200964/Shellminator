@@ -31,29 +31,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SHELLMINATOR_SETTINGS_HPP_
-#define SHELLMINATOR_SETTINGS_HPP_
+#ifndef SHELLMINATOR_DEFAULT_SETTINGS_HPP_
+#define SHELLMINATOR_DEFAULT_SETTINGS_HPP_
+
+#ifdef __has_include
+  #if __has_include ("Shellminator-Settings.hpp")
+    #include "Shellminator-DefaultSettings.hpp"
+  #endif
+#endif
 
 #ifdef ESP32
 
   #ifndef SHELLMINATOR_USE_WIFI_CLIENT
-  #define SHELLMINATOR_USE_WIFI_CLIENT
-  #endif
-
-  #ifndef SHELLMINATOR_ENABLE_SEARCH_MODULE
-  #define SHELLMINATOR_ENABLE_SEARCH_MODULE
-  #endif
-
-  #ifndef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-  #define SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    #define SHELLMINATOR_USE_WIFI_CLIENT
   #endif
 
   #ifndef SHELLMINATOR_ENABLE_QR_SUPPORT
-  #define SHELLMINATOR_ENABLE_QR_SUPPORT
+    #define SHELLMINATOR_ENABLE_QR_SUPPORT
   #endif
 
   #ifndef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
-  #define SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+    #define SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
   #endif
 
   /* NOT WORKING YET!
@@ -63,19 +61,19 @@ SOFTWARE.
   */
   
   #ifndef SHELLMINATOR_BUFF_LEN
-  #define SHELLMINATOR_BUFF_LEN 50
+    #define SHELLMINATOR_BUFF_LEN 50
   #endif
 
   #ifndef SHELLMINATOR_BUFF_DIM
-  #define SHELLMINATOR_BUFF_DIM 20
+    #define SHELLMINATOR_BUFF_DIM 20
   #endif
 
   #ifndef SHELLMINATOR_BANNER_LEN
-  #define SHELLMINATOR_BANNER_LEN 20
+    #define SHELLMINATOR_BANNER_LEN 20
   #endif
 
   #ifndef SHELLMINATOR_BANNER_PATH_LEN
-  #define SHELLMINATOR_BANNER_PATH_LEN 20
+    #define SHELLMINATOR_BANNER_PATH_LEN 20
   #endif
 
   #ifdef __has_include
@@ -91,23 +89,15 @@ SOFTWARE.
 #ifdef ESP8266
 
   #ifndef SHELLMINATOR_USE_WIFI_CLIENT
-  #define SHELLMINATOR_USE_WIFI_CLIENT
-  #endif
-
-  #ifndef SHELLMINATOR_ENABLE_SEARCH_MODULE
-  #define SHELLMINATOR_ENABLE_SEARCH_MODULE
-  #endif
-
-  #ifndef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-  #define SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    #define SHELLMINATOR_USE_WIFI_CLIENT
   #endif
 
   #ifndef SHELLMINATOR_ENABLE_QR_SUPPORT
-  #define SHELLMINATOR_ENABLE_QR_SUPPORT
+    #define SHELLMINATOR_ENABLE_QR_SUPPORT
   #endif
 
   #ifndef SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
-  #define SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
+    #define SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT
   #endif
 
   /* NOT WORKING YET!
@@ -117,19 +107,19 @@ SOFTWARE.
   */
 
   #ifndef SHELLMINATOR_BUFF_LEN
-  #define SHELLMINATOR_BUFF_LEN 50
+    #define SHELLMINATOR_BUFF_LEN 50
   #endif
 
   #ifndef SHELLMINATOR_BUFF_DIM
-  #define SHELLMINATOR_BUFF_DIM 20
+    #define SHELLMINATOR_BUFF_DIM 20
   #endif
 
   #ifndef SHELLMINATOR_BANNER_LEN
-  #define SHELLMINATOR_BANNER_LEN 20
+    #define SHELLMINATOR_BANNER_LEN 20
   #endif
 
   #ifndef SHELLMINATOR_BANNER_PATH_LEN
-  #define SHELLMINATOR_BANNER_PATH_LEN 20
+    #define SHELLMINATOR_BANNER_PATH_LEN 20
   #endif
 
   #ifdef __has_include
@@ -144,74 +134,72 @@ SOFTWARE.
 
 /// Definition of the maximum length of each command
 #ifndef SHELLMINATOR_BUFF_LEN
-#define SHELLMINATOR_BUFF_LEN 20
+  #define SHELLMINATOR_BUFF_LEN 20
 #endif
 
 /// Definition of the maximum length of the previous command memory
 /// @warning Be careful with the The value of this definition. If it is to high your RAM will be eaten!
 /// @note The total amount of RAM consumed by the object in bytes can be calculated as: \link SHELLMINATOR_BUFF_LEN \endlink * \link SHELLMINATOR_BUFF_DIM \endlink
 #ifndef SHELLMINATOR_BUFF_DIM
-#define SHELLMINATOR_BUFF_DIM 5
+  #define SHELLMINATOR_BUFF_DIM 5
 #endif
 
-/// Maximum length of the banner text
+/// -- Maximum length of the banner text --
 #ifndef SHELLMINATOR_BANNER_LEN
-#define SHELLMINATOR_BANNER_LEN 10
+  #define SHELLMINATOR_BANNER_LEN 10
 #endif
 
+/// -- Maximum length of the banner path text --
 #ifndef SHELLMINATOR_BANNER_PATH_LEN
-#define SHELLMINATOR_BANNER_PATH_LEN 10
+  #define SHELLMINATOR_BANNER_PATH_LEN 10
 #endif
 
 // -- Progress bar stuff --
 #ifndef SHELLMINATOR_PROGRESS_BAR_SIZE
-#define SHELLMINATOR_PROGRESS_BAR_SIZE 40
+  #define SHELLMINATOR_PROGRESS_BAR_SIZE 40
 #endif
 
 #ifndef SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE
-#define SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE 40
+  #define SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE 40
 #endif
 
 #ifndef SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE
-#define SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE 10
+  #define SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE 10
 #endif
 
 
 /// Color of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be RED.
 #ifndef SHELLMINATOR_LOGO_FONT_STYLE
-#define SHELLMINATOR_LOGO_FONT_STYLE BOLD
+  #define SHELLMINATOR_LOGO_FONT_STYLE BOLD
 #endif
 
 /// Style of the startup logo
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
 #ifndef SHELLMINATOR_LOGO_COLOR
-#define SHELLMINATOR_LOGO_COLOR RED
+  #define SHELLMINATOR_LOGO_COLOR RED
 #endif
 
 /// If defined, enables the WebSocket Module.
 /// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-#define SHELLMINATOR_WEBSOCKET_BUFFER_LEN 50
+  #ifndef SHELLMINATOR_WEBSOCKET_BUFFER_LEN
+    #define SHELLMINATOR_WEBSOCKET_BUFFER_LEN 50
+  #endif
 #endif
 
-#ifndef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-#define SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+// -- Plot module bar stuff --
+
+#ifndef SHELLMINATOR_PLOT_NAME_SIZE
+  #define SHELLMINATOR_PLOT_NAME_SIZE 20
 #endif
 
-
-/// If defined, enables high memory mode.
-///
-/// If your microcontroller has relativley high amount of RAM memory,
-/// I highly recommend to use it.
-/// @note This macro has to be defined befor importing the Shellminator.hpp. If not then the default value will be BOLD.
-#ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-#define SHELLMINATOR_ACCELERATOR_BUFFER_LEN SHELLMINATOR_BANNER_LEN + SHELLMINATOR_BANNER_PATH_LEN + SHELLMINATOR_BUFF_LEN * 2 + 30
+#ifndef SHELLMINATOR_NUMBER_OF_PLOTS
+  #define SHELLMINATOR_NUMBER_OF_PLOTS 3
 #endif
 
-#define SHELLMINATOR_PLOT_NAME_SIZE 20
-#define SHELLMINATOR_NUMBER_OF_PLOTS 3
-#define SHELLMINATOR_PLOT_BUFF_SIZE 300
-#define SHELLMINATOR_ENABLE_SEARCH_MODULE
+#ifndef SHELLMINATOR_PLOT_BUFF_SIZE
+  #define SHELLMINATOR_PLOT_BUFF_SIZE 300
+#endif
 
 #endif

@@ -41,8 +41,9 @@ set( SOURCES
     src/Shellminator-Settings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
-    src/Shellminator-ArrowKeys.cpp
+    src/Shellminator-SpecialKeys.cpp
     src/Shellminator-Styles.cpp
+    src/Shellminator-SearchModule.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -103,6 +104,7 @@ if(RUN_TESTS)
 
     # Unit testing
     add_executable( test_buffered_printer ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_buffered_printer.cpp )
+    add_executable( test_special_keys ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_special_keys.cpp )
     add_executable( test_channels ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_channels.cpp )
     add_executable( test_shellminator_begin ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_shellminator_begin.cpp )
     add_executable( test_format_commands ${SOURCES} ${UNIT_TESTING} extras/tests/testCases/test_format_commands.cpp )

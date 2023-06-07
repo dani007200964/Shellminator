@@ -53,6 +53,19 @@ public:
   void clearTx();
   void clearRx();
 
+  void emulateAbortKey();
+  void emulateLogoutKey();
+  void emulateSearchKey();
+  void emulateUpArrowKey();
+  void emulateDownArrowKey();
+  void emulateLeftArrowKey();
+  void emulateRightArrowKey();
+  void emulateHomeKey( char key = 'H' );
+  void emulateEndKey( char key = 'F' );
+  void emulateDelKey( bool simulateError = false );
+  void emulatePgUpKey( bool simulateError = false );
+  void emulatePgDownKey( bool simulateError = false );
+
   char rxBuffer[ TEST_STREAM_BUFFER_SIZE ];
 	uint32_t rxReadPointer = 0;
 	uint32_t rxWritePointer = 0;

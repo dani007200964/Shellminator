@@ -35,7 +35,7 @@ SOFTWARE.
 #ifndef SHELLMINATOR_HPP_
 #define SHELLMINATOR_HPP_
 
-#include "Shellminator-Settings.hpp"
+#include "Shellminator-DefaultSettings.hpp"
 #include "Shellminator-IO.hpp"
 
 #ifdef ARDUINO
@@ -147,21 +147,49 @@ public:
     INVISIBLE = 8
   };
 
-  /// String that holds the version information
+  /// String, that holds the version information
   static const char *version;
 
+  /// String, that holds the help text data.
+  ///
+  /// @note on AVR it is stored in PROGMEM.
   static const char helpText[];
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
+  /// Constructor for WiFi Server
+  ///
+  /// This constructor only works on ESP32, and ESP8266.
+  /// It is used to create a telnet based terminal.
+  /// @param server_p Pointer to a WiFiServer object.
 	Shellminator( WiFiServer *server_p );
 
+  /// Constructor for WiFi Server with execution function.
+  ///
+  /// This constructor only works on ESP32, and ESP8266.
+  /// It is used to create a telnet based terminal.
+  /// @param server_p Pointer to a WiFiServer object.
+  /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
 	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) );
 
+  /// Constructor for WiFi Server with execution function.
+  ///
+  /// This constructor only works on ESP32, and ESP8266.
+  /// It is used to create a telnet based terminal.
+  /// @param server_p Pointer to a WiFiServer object.
+  /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
+  /// 1. argument: is a char* type
+  /// 2. argument: is a Shellminator* type
 	Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char*, Shellminator* ) );
 
+	/// Start WiFi Server
+  ///
+  /// Use this function to start the WiFiServer object.
 	void beginServer();
 
+	/// Stop WiFi Server
+  ///
+  /// Use this function to stop the WiFiServer object.
 	void stopServer();
 
 	void setClientTimeout( uint16_t clientTimeout_p );
@@ -192,12 +220,17 @@ public:
 
   bool enableBuffering( int bufferSize = 32 );
 
-  /// Execution function adder function
+  /// Execution function attacher function
   ///
   /// This function allows you to add or replace the execution function after the constructor.
-  /// @param execution_fn_p function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
+  /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
   void addExecFunc( void( *execution_fn_p )( char* ) );
 
+  /// Execution function attacher function
+  ///
+  /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
+  /// 1. argument: is a char* type
+  /// 2. argument: is a Shellminator* type
   void addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) );
 
   /// Shellminator initialization function
@@ -891,8 +924,6 @@ private:
 
   #endif
 
-	#ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
 	void historySearchBackward();
 	void historySearchForward();
 	void redrawHistorySearch();
@@ -900,8 +931,6 @@ private:
 
 	bool inSearch = false;
 	int32_t searchMatch;
-
-	#endif
 
   #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
 

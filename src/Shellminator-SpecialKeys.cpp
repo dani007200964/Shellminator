@@ -95,7 +95,7 @@ void Shellminator::overrideLogoutKey( void( *func )( void ) ){
 
 void Shellminator::overrideSearchKey( void( *func )( void ) ){
 
-  logoutKeyFunc = func;
+  searchKeyFunc = func;
 
 }
 

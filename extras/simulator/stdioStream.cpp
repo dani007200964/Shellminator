@@ -100,6 +100,16 @@ void stdioStream::update(){
                     push( (uint8_t*)"\033[3~", 4 );
                 break;
                 
+                // Page Up
+                case 73:
+                    push( (uint8_t*)"\033[5~", 4 );
+                break;
+
+                // Page Down
+                case 81:
+                    push( (uint8_t*)"\033[6~", 4 );
+                break;
+
             }
 
             // printf( "Special character: %d\r\n", key );

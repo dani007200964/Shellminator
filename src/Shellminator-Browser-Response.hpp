@@ -33,7 +33,7 @@ SOFTWARE.
 #ifndef SHELLMINATOR_BROWSER_RESPONSE
 #define SHELLMINATOR_BROWSER_RESPONSE
 
-#include "Shellminator-Settings.hpp"
+#include "Shellminator-DefaultSettings.hpp"
 
 #ifdef ARDUINO
 #include "Arduino.h"

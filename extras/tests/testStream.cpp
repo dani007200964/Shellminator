@@ -235,3 +235,144 @@ size_t testStream::print( const char *str ){
 	return dataSize;
 
 }
+
+//--- Special Key Emulation ---
+
+void testStream::emulateUpArrowKey(){
+	
+	pushRx( (uint8_t*)"\033[A", 3 );
+	
+}
+
+void testStream::emulateDownArrowKey(){
+	
+	pushRx( (uint8_t*)"\033[B", 3 );
+	
+}
+
+void testStream::emulateLeftArrowKey(){
+	
+	pushRx( (uint8_t*)"\033[D", 3 );
+	
+}
+
+void testStream::emulateRightArrowKey(){
+	
+	pushRx( (uint8_t*)"\033[C", 3 );
+	
+}
+
+void testStream::emulateHomeKey( char key ){
+	
+	if( ( key == 'H' ) || ( key == 'h' ) ){
+
+		pushRx( (uint8_t*)"\033[H", 3 );
+
+	}
+
+	else if( key == '1' ){
+
+		pushRx( (uint8_t*)"\033[1~", 4 );
+
+	}
+
+	// To cover invalid state.
+	else{
+
+		pushRx( (uint8_t*)"\033[1-", 4 );
+
+	}
+	
+}
+
+void testStream::emulateEndKey( char key ){
+	
+	if( ( key == 'F' ) || ( key == 'f' ) ){
+
+		pushRx( (uint8_t*)"\033[F", 3 );
+
+	}
+
+	else if( key == '4' ){
+
+		pushRx( (uint8_t*)"\033[4~", 4 );
+
+	}
+
+	// To cover invalid state.
+	else{
+
+		pushRx( (uint8_t*)"\033[4-", 4 );
+
+	}
+	
+}
+
+void testStream::emulateDelKey( bool simulateError ){
+
+	// To cover invalid state.
+	if( simulateError ){
+
+		pushRx( (uint8_t*)"\033[3-", 4 );
+
+	}
+
+	else{
+
+		pushRx( (uint8_t*)"\033[3~", 4 );
+
+	}
+	
+}
+
+void testStream::emulatePgUpKey( bool simulateError ){
+
+	// To cover invalid state.
+	if( simulateError ){
+
+		pushRx( (uint8_t*)"\033[5-", 4 );
+
+	}
+
+	else{
+
+		pushRx( (uint8_t*)"\033[5~", 4 );
+
+	}
+	
+}
+
+void testStream::emulatePgDownKey( bool simulateError ){
+
+	// To cover invalid state.
+	if( simulateError ){
+
+		pushRx( (uint8_t*)"\033[6-", 4 );
+
+	}
+
+	else{
+
+		pushRx( (uint8_t*)"\033[6~", 4 );
+
+	}
+	
+}
+
+void testStream::emulateAbortKey(){
+
+	pushRx( 0x03 );
+	
+}
+
+void testStream::emulateLogoutKey(){
+
+	pushRx( 0x04 );
+	
+}
+
+void testStream::emulateSearchKey(){
+
+	pushRx( 0x12 );
+	
+}
