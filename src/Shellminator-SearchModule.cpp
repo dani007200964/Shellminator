@@ -295,6 +295,7 @@ void Shellminator::redrawHistorySearchBuffered(){
   bufferedPrinter.flush();
 
 }
+
 int Shellminator::substring( char* str1, char* str2 ){
 
   // https://www.geeksforgeeks.org/check-string-substring-another/

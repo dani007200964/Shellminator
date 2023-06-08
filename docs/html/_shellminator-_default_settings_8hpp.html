@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>Shellminator: src/Shellminator-DefaultSettings.hpp File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Shellminator
+   &#160;<span id="projectnumber">V1.2.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_default_settings_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle"><div class="title">Shellminator-DefaultSettings.hpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="_shellminator-_default_settings_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a2344c5fec68a46654b08f21c6706026f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a2344c5fec68a46654b08f21c6706026f">SHELLMINATOR_USE_WIFI_CLIENT</a></td></tr>
+<tr class="separator:a2344c5fec68a46654b08f21c6706026f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62d4bb2d1cf132f3397352bffa8fe68c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a62d4bb2d1cf132f3397352bffa8fe68c">SHELLMINATOR_ENABLE_QR_SUPPORT</a></td></tr>
+<tr class="separator:a62d4bb2d1cf132f3397352bffa8fe68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a754334f0c5892c55a214ffb4a2e308"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a6a754334f0c5892c55a214ffb4a2e308">SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT</a></td></tr>
+<tr class="separator:a6a754334f0c5892c55a214ffb4a2e308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ddabc8c441626dba3679faf61863c5f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a3ddabc8c441626dba3679faf61863c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac999ba5b43c5bb3a64cdfea63b279561"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:ac999ba5b43c5bb3a64cdfea63b279561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e8d7753b97ae4dc5423d70e29ec750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a43e8d7753b97ae4dc5423d70e29ec750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a9c2ccd245f809ea628d5a6a447f40d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a0a9c2ccd245f809ea628d5a6a447f40d">SHELLMINATOR_BANNER_PATH_LEN</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a0a9c2ccd245f809ea628d5a6a447f40d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bc6b008d0f56f242aa00f98a31a2ee8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a6bc6b008d0f56f242aa00f98a31a2ee8">SHELLMINATOR_PROGRESS_BAR_SIZE</a>&#160;&#160;&#160;40</td></tr>
+<tr class="memdesc:a6bc6b008d0f56f242aa00f98a31a2ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of the maximum length of each command.  <a href="_shellminator-_default_settings_8hpp.html#a6bc6b008d0f56f242aa00f98a31a2ee8">More...</a><br /></td></tr>
+<tr class="separator:a6bc6b008d0f56f242aa00f98a31a2ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4d7fb7d3a470e7f2e92f1bae65f149"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#ade4d7fb7d3a470e7f2e92f1bae65f149">SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE</a>&#160;&#160;&#160;40</td></tr>
+<tr class="separator:ade4d7fb7d3a470e7f2e92f1bae65f149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5503026ec3fea0f9bd3143a63d0ee0c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a5503026ec3fea0f9bd3143a63d0ee0c8">SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:a5503026ec3fea0f9bd3143a63d0ee0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad68a8f3b92c8c43683e8f9d24279dbf8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#ad68a8f3b92c8c43683e8f9d24279dbf8">SHELLMINATOR_LOGO_FONT_STYLE</a>&#160;&#160;&#160;BOLD</td></tr>
+<tr class="memdesc:ad68a8f3b92c8c43683e8f9d24279dbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Color of the startup logo.  <a href="_shellminator-_default_settings_8hpp.html#ad68a8f3b92c8c43683e8f9d24279dbf8">More...</a><br /></td></tr>
+<tr class="separator:ad68a8f3b92c8c43683e8f9d24279dbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab34e60dc163f63cdea8ed7309486c5a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#ab34e60dc163f63cdea8ed7309486c5a3">SHELLMINATOR_LOGO_COLOR</a>&#160;&#160;&#160;RED</td></tr>
+<tr class="memdesc:ab34e60dc163f63cdea8ed7309486c5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Style of the startup logo.  <a href="_shellminator-_default_settings_8hpp.html#ab34e60dc163f63cdea8ed7309486c5a3">More...</a><br /></td></tr>
+<tr class="separator:ab34e60dc163f63cdea8ed7309486c5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92582910f9430fc5f911d36fe74b315"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#ab92582910f9430fc5f911d36fe74b315">SHELLMINATOR_PLOT_NAME_SIZE</a>&#160;&#160;&#160;20</td></tr>
+<tr class="memdesc:ab92582910f9430fc5f911d36fe74b315"><td class="mdescLeft">&#160;</td><td class="mdescRight">If defined, enables the WebSocket Module.  <a href="_shellminator-_default_settings_8hpp.html#ab92582910f9430fc5f911d36fe74b315">More...</a><br /></td></tr>
+<tr class="separator:ab92582910f9430fc5f911d36fe74b315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87349dac4a33edc701db5f592344d9a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a87349dac4a33edc701db5f592344d9a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d343889042c465f6bf895180c27f497"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_default_settings_8hpp.html#a7d343889042c465f6bf895180c27f497">SHELLMINATOR_PLOT_BUFF_SIZE</a>&#160;&#160;&#160;300</td></tr>
+<tr class="separator:a7d343889042c465f6bf895180c27f497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a43e8d7753b97ae4dc5423d70e29ec750" name="a43e8d7753b97ae4dc5423d70e29ec750"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e8d7753b97ae4dc5423d70e29ec750">&#9670;&#160;</a></span>SHELLMINATOR_BANNER_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_BANNER_LEN&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00072">72</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0a9c2ccd245f809ea628d5a6a447f40d" name="a0a9c2ccd245f809ea628d5a6a447f40d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a9c2ccd245f809ea628d5a6a447f40d">&#9670;&#160;</a></span>SHELLMINATOR_BANNER_PATH_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_BANNER_PATH_LEN&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00076">76</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac999ba5b43c5bb3a64cdfea63b279561" name="ac999ba5b43c5bb3a64cdfea63b279561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac999ba5b43c5bb3a64cdfea63b279561">&#9670;&#160;</a></span>SHELLMINATOR_BUFF_DIM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_BUFF_DIM&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00068">68</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3ddabc8c441626dba3679faf61863c5f" name="a3ddabc8c441626dba3679faf61863c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ddabc8c441626dba3679faf61863c5f">&#9670;&#160;</a></span>SHELLMINATOR_BUFF_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_BUFF_LEN&#160;&#160;&#160;50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00064">64</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6a754334f0c5892c55a214ffb4a2e308" name="a6a754334f0c5892c55a214ffb4a2e308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a754334f0c5892c55a214ffb4a2e308">&#9670;&#160;</a></span>SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_ENABLE_PROGRESS_BAR_SUPPORT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00054">54</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a62d4bb2d1cf132f3397352bffa8fe68c" name="a62d4bb2d1cf132f3397352bffa8fe68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62d4bb2d1cf132f3397352bffa8fe68c">&#9670;&#160;</a></span>SHELLMINATOR_ENABLE_QR_SUPPORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_ENABLE_QR_SUPPORT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00050">50</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab34e60dc163f63cdea8ed7309486c5a3" name="ab34e60dc163f63cdea8ed7309486c5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab34e60dc163f63cdea8ed7309486c5a3">&#9670;&#160;</a></span>SHELLMINATOR_LOGO_COLOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_LOGO_COLOR&#160;&#160;&#160;RED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Style of the startup logo. </p>
+<dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be BOLD. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00180">180</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad68a8f3b92c8c43683e8f9d24279dbf8" name="ad68a8f3b92c8c43683e8f9d24279dbf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad68a8f3b92c8c43683e8f9d24279dbf8">&#9670;&#160;</a></span>SHELLMINATOR_LOGO_FONT_STYLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_LOGO_FONT_STYLE&#160;&#160;&#160;BOLD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Color of the startup logo. </p>
+<dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be RED. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00174">174</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a87349dac4a33edc701db5f592344d9a3" name="a87349dac4a33edc701db5f592344d9a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87349dac4a33edc701db5f592344d9a3">&#9670;&#160;</a></span>SHELLMINATOR_NUMBER_OF_PLOTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_NUMBER_OF_PLOTS&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00198">198</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7d343889042c465f6bf895180c27f497" name="a7d343889042c465f6bf895180c27f497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d343889042c465f6bf895180c27f497">&#9670;&#160;</a></span>SHELLMINATOR_PLOT_BUFF_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_PLOT_BUFF_SIZE&#160;&#160;&#160;300</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00202">202</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab92582910f9430fc5f911d36fe74b315" name="ab92582910f9430fc5f911d36fe74b315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92582910f9430fc5f911d36fe74b315">&#9670;&#160;</a></span>SHELLMINATOR_PLOT_NAME_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_PLOT_NAME_SIZE&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If defined, enables the WebSocket Module. </p>
+<dl class="section note"><dt>Note</dt><dd>This macro has to be defined befor importing the <a class="el" href="_shellminator_8hpp.html">Shellminator.hpp</a>. If not then the default value will be BOLD. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00194">194</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5503026ec3fea0f9bd3143a63d0ee0c8" name="a5503026ec3fea0f9bd3143a63d0ee0c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5503026ec3fea0f9bd3143a63d0ee0c8">&#9670;&#160;</a></span>SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_PROGRESS_BAR_CHARACTER_SIZE&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00167">167</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6bc6b008d0f56f242aa00f98a31a2ee8" name="a6bc6b008d0f56f242aa00f98a31a2ee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc6b008d0f56f242aa00f98a31a2ee8">&#9670;&#160;</a></span>SHELLMINATOR_PROGRESS_BAR_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_PROGRESS_BAR_SIZE&#160;&#160;&#160;40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition of the maximum length of each command. </p>
+<p >Definition of the maximum length of the previous command memory </p><dl class="section warning"><dt>Warning</dt><dd>Be careful with the The value of this definition. If it is to high your RAM will be eaten! </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The total amount of RAM consumed by the object in bytes can be calculated as: <a class="el" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> * <a class="el" href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a> &ndash; Maximum length of the banner text &ndash; &ndash; Maximum length of the banner path text &ndash; </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00159">159</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ade4d7fb7d3a470e7f2e92f1bae65f149" name="ade4d7fb7d3a470e7f2e92f1bae65f149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4d7fb7d3a470e7f2e92f1bae65f149">&#9670;&#160;</a></span>SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_PROGRESS_BAR_TEXT_SIZE&#160;&#160;&#160;40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00163">163</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2344c5fec68a46654b08f21c6706026f" name="a2344c5fec68a46654b08f21c6706026f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2344c5fec68a46654b08f21c6706026f">&#9670;&#160;</a></span>SHELLMINATOR_USE_WIFI_CLIENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHELLMINATOR_USE_WIFI_CLIENT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_default_settings_8hpp_source.html#l00046">46</a> of file <a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+
+<!-- HTML footer for doxygen 1.9.2-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a></li>
+    <li class="footer">
+      <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+        <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+        <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+        <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+      </a> &nbsp;|&nbsp;
+      <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+      <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
+      <a href="http://www.doxygen.org/index.html">
+        <img class="footer" src="doxygen.svg" alt="doxygen"/>
+      </a> on Wed Jun 7 2023
+      <hr class="footer"/><address class="footer"><small>
+        <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
+          <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Arduino" href="https://www.arduino.cc/reference/en/libraries/shellminator/">
+          <img class="footer" src="arduino_logo.png" alt="Arduino" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Shellminator" href="https://github.com/dani007200964/Shellminator">
+          <img class="footer" src="logo.svg" alt="Shellminator" style="height:20px;width:auto;"/>
+        </a> &nbsp;|&nbsp;
+        <a title="Daniel Hajnal" href="mailto: hajnal.daniel96@gmail.com"> &copy; 2020-2023 Daniel Hajnal </a> &nbsp;|&nbsp;
+        <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
+        <a href="http://www.doxygen.org/index.html">
+          <img class="footer" src="doxygen.svg" alt="doxygen"/>
+        </a> on Wed Jun 7 2023
+      </small></address>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

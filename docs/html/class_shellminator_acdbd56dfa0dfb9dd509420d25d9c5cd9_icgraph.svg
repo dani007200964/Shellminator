@@ -48,7 +48,7 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 602;
 var viewHeight = 214;
-var sectionId = 'dynsection-28';
+var sectionId = 'dynsection-29';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
@@ -178,7 +178,7 @@ var sectionId = 'dynsection-28';
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f" target="_top" xlink:title="Start WiFi Server.">
 <polygon fill="white" stroke="#666666" points="127,-132 0,-132 0,-113 127,-113 127,-132"/>
 <text text-anchor="middle" x="63.5" y="-120" font-family="Helvetica,sans-Serif" font-size="10.00">Shellminator::beginServer</text>
 </a>

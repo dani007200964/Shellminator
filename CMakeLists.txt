@@ -38,7 +38,7 @@ set( SOURCES
     src/Shellminator-BufferedPrinter.hpp
     src/Shellminator-PlotModule.cpp
     src/Shellminator-PlotModule.hpp
-    src/Shellminator-Settings.hpp
+    src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
     src/Shellminator-SpecialKeys.cpp

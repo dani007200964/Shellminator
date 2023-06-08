@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['generateqrtext_0',['generateQRText',['../class_shellminator.html#a151f3987b48362142340e1a396b89a37',1,'Shellminator::generateQRText(char *text)'],['../class_shellminator.html#a395e9b61bfdba8562eb17f80b6ea6c42',1,'Shellminator::generateQRText(const char *text)'],['../class_shellminator.html#aa08fffa8dc986f3cf61ee6935ba19aa7',1,'Shellminator::generateQRText(char *text, enum qrcodegen_Ecc ecc)'],['../class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844',1,'Shellminator::generateQRText(const char *text, enum qrcodegen_Ecc ecc)']]],
-  ['getalignmentpatternpositions_1',['getAlignmentPatternPositions',['../qrcodegen_8c.html#a7a7938db5bdc0a2abae8ff2ec0ad1fee',1,'qrcodegen.c']]],
-  ['getbuffersize_2',['getBufferSize',['../class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de',1,'ShellminatorBufferedPrinter']]],
-  ['getcursorposition_3',['getCursorPosition',['../class_shellminator.html#a3cf2cd097eb741beddcaf5340f42a404',1,'Shellminator']]],
-  ['getmodulebounded_4',['getModuleBounded',['../qrcodegen_8c.html#a2895c5f283edfc88cbffe8b555032aa1',1,'qrcodegen.c']]],
-  ['getnumdatacodewords_5',['getNumDataCodewords',['../qrcodegen_8c.html#ae3402527eaf904babc6f218acd6195af',1,'qrcodegen.c']]],
-  ['getnumrawdatamodules_6',['getNumRawDataModules',['../qrcodegen_8c.html#a8725e511e96e40dda99377e2f89bcda5',1,'qrcodegen.c']]],
-  ['getterminalsize_7',['getTerminalSize',['../class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e',1,'Shellminator']]],
-  ['gettotalbits_8',['getTotalBits',['../qrcodegen_8c.html#a2a6584906b509f7a7833d20473de86e9',1,'qrcodegen.c']]]
+  ['flush_0',['flush',['../class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4',1,'ShellminatorBufferedPrinter::flush()'],['../classshellminator_default_channel.html#a9b152b43e4ef5d9ef4bcefdef69f64b0',1,'shellminatorDefaultChannel::flush()']]],
+  ['freeabortkey_1',['freeAbortKey',['../class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a',1,'Shellminator']]],
+  ['freedownarrow_2',['freeDownArrow',['../class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd',1,'Shellminator']]],
+  ['freeendkey_3',['freeEndKey',['../class_shellminator.html#a56313495a30f28e95b303097e7d182c6',1,'Shellminator']]],
+  ['freehomekey_4',['freeHomeKey',['../class_shellminator.html#a80626856ef833b0b77cb25c26e5b931f',1,'Shellminator']]],
+  ['freeleftarrow_5',['freeLeftArrow',['../class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba',1,'Shellminator']]],
+  ['freelogoutkey_6',['freeLogoutKey',['../class_shellminator.html#a55bbe4187c59a4dea529e668c7b8f956',1,'Shellminator']]],
+  ['freepagedownkey_7',['freePageDownKey',['../class_shellminator.html#ae67011c2743ea955d9254b4127ec17f4',1,'Shellminator']]],
+  ['freepageupkey_8',['freePageUpKey',['../class_shellminator.html#a4c99af6abdb140e9597e06c83ad3ba5f',1,'Shellminator']]],
+  ['freerightarrow_9',['freeRightArrow',['../class_shellminator.html#ad50683035772f117ffd9f9f05563397c',1,'Shellminator']]],
+  ['freesearchkey_10',['freeSearchKey',['../class_shellminator.html#ae156fe5bcfa0c6961b37eb2d39719d04',1,'Shellminator']]],
+  ['freeuparrow_11',['freeUpArrow',['../class_shellminator.html#a7861294e2b29a3880a89566415fd2e18',1,'Shellminator']]]
 ];

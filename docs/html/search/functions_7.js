@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['initializefunctionmodules_0',['initializeFunctionModules',['../qrcodegen_8c.html#a687c2ba705ea43d61e3cb6bd79cb0f41',1,'qrcodegen.c']]],
-  ['input_1',['input',['../class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70',1,'Shellminator']]]
+  ['hidecursor_0',['hideCursor',['../class_shellminator.html#a403ea48c3312851979108855989e71ce',1,'Shellminator::hideCursor()'],['../class_shellminator.html#a000ca72a83b0d27acfe2b82ba4b093f4',1,'Shellminator::hideCursor(char *buff, uint8_t bufferSize)'],['../class_shellminator.html#a1dcc734097cac062eed070da1ab27c9b',1,'Shellminator::hideCursor(Stream *stream_p)']]]
 ];
