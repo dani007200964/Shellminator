@@ -64,6 +64,7 @@ rootDirectory = os.getcwd()
 
 arduinoExampleFolder = "/examples"
 desktopExampleFolder = "/extras/examples_desktop"
+doxygenExampleFolder = "/extras/examples_doxygen"
 
 # Clear the examples folders.
 if os.path.isdir(  rootDirectory + arduinoExampleFolder ):
@@ -72,9 +73,13 @@ if os.path.isdir(  rootDirectory + arduinoExampleFolder ):
 if os.path.isdir(  rootDirectory + desktopExampleFolder ):
     shutil.rmtree( rootDirectory + desktopExampleFolder )
 
+if os.path.isdir(  rootDirectory + doxygenExampleFolder ):
+    shutil.rmtree( rootDirectory + doxygenExampleFolder )
+
 # Generate the example folders.
 os.mkdir( rootDirectory + arduinoExampleFolder )
 os.mkdir( rootDirectory + desktopExampleFolder )
+os.mkdir( rootDirectory + doxygenExampleFolder )
 
 # Load the content of the project CMakeLists file.
 with open( rootDirectory + "/CMakeLists.txt" ) as file:
@@ -125,6 +130,7 @@ for template in templateFiles:
     # Generate folder for the template.
     if environmentInfo == 'Arduino':
         os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo )
+        os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo )
 
     if environmentInfo == 'Desktop':
         os.mkdir( rootDirectory + desktopExampleFolder + "/" + boardInfo )
@@ -191,8 +197,16 @@ for template in templateFiles:
 
         # Generate folder for the example and write the output.
         if environmentInfo == 'Arduino':
+            
+            # File for Arduino IDE
             os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
             outputFile = open( rootDirectory + arduinoExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".ino", "w" )
+            outputFile.write( secondRunData )
+            outputFile.close()
+
+            # File for documentation. Doxygen only generates syntax highlight for c or cpp files, not for ino.
+            os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
+            outputFile = open( rootDirectory + doxygenExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp", "w" )
             outputFile.write( secondRunData )
             outputFile.close()
 

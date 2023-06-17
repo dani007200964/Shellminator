@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['example_5f1_2emd_0',['example_1.md',['../example__1_8md.html',1,'']]],
-  ['examples_2emd_1',['examples.md',['../examples_8md.html',1,'']]]
+  ['example_5fbasic_2emd_0',['example_basic.md',['../example__basic_8md.html',1,'']]],
+  ['example_5fbuffered_2emd_1',['example_buffered.md',['../example__buffered_8md.html',1,'']]],
+  ['example_5fcodes_2emd_2',['example_codes.md',['../example__codes_8md.html',1,'']]]
 ];

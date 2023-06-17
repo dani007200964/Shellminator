@@ -1,0 +1,21 @@
+<navindex>
+    <tab type="mainpage" visible="yes" title="Home"/>
+    <tab type="usergroup" visible="yes" url="@ref example_codes" title="Examples">
+      <tab type="usergroup" visible="yes" url="@ref example_basic" title="Basic" intro=""/>
+      <tab type="usergroup" visible="yes" url="@ref example_buffered" title="Buffered" intro=""/>
+    </tab>
+    <tab type="modules" visible="yes" title="" intro=""/>
+    <tab type="namespaces" visible="yes" title="">
+      <tab type="namespacelist" visible="yes" title="" intro=""/>
+      <tab type="namespacemembers" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="usergroup" visible="yes" url="@ref api" title="API">
+        <tab type="classes" visible="yes" title="">
+        <tab type="classlist" visible="yes" title="" intro=""/>
+        <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/> 
+        <tab type="hierarchy" visible="yes" title="" intro=""/>
+        <tab type="classmembers" visible="yes" title="" intro=""/>
+        </tab>
+    </tab>
+    <tab type="usergroup" visible="yes" url="@ref coverage" title="Coverage" intro=""/>
+</navindex>

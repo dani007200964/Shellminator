@@ -26,41 +26,30 @@ var NAVTREE =
 [
   [ "Shellminator", "index.html", [
     [ "Shellminator library", "index.html", null ],
-    [ "Coverage", "md_docs_markdown_pages_coverage.html", null ],
-    [ "Example 1", "md_docs_markdown_pages_example_1.html", null ],
-    [ "Examples", "md_docs_markdown_pages_examples.html", null ],
-    [ "Shortcut Keys", "md_docs_markdown_pages_shortcut_keys.html", null ],
-    [ "Supported Platforms", "md_docs_markdown_pages_supported_platforms.html", null ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
-        [ "Enumerator", "functions_eval.html", null ]
+    [ "Examples", "md_docs_markdown_pages_example_codes.html#example_codes", [
+      [ "Basic", "md_docs_markdown_pages_examples_example_basic.html#example_basic", null ],
+      [ "Buffered", "md_docs_markdown_pages_examples_example_buffered.html#example_buffered", null ]
+    ] ],
+    [ "API", "@ref api", [
+      [ "Class List", "annotated.html", [
+        [ "Class List", "annotated.html", "annotated_dup" ],
+        [ "Class Index", "classes.html", null ],
+        [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+        [ "Class Members", "functions.html", [
+          [ "All", "functions.html", null ],
+          [ "Functions", "functions_func.html", null ],
+          [ "Variables", "functions_vars.html", null ],
+          [ "Enumerator", "functions_eval.html", null ]
+        ] ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
-      ] ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+    [ "Coverage", "md_docs_markdown_pages_coverage.html#coverage", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_basic_8cpp-example.html",
-"structqrcodegen___segment.html#aec23b42bfdb2a0468bfffca96343b513"
+"@ref api"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -251,9 +251,6 @@ public:
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   ///
   /// Tested in: __test_shellminator_begin.cpp__
-  ///
-  /// Example: @ref Basic.cpp
-  /// @snippet{lineno} "Basic/Basic.cpp" Basic Setup
   void begin( const char* banner_p );
 
   /// Sends a backspace

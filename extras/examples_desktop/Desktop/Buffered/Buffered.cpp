@@ -66,8 +66,11 @@ int main(){
     // Clear the terminal
     shell.clear();
 
+    // Try to allocate memory for 100 characters.
     if( !shell.enableBuffering( 100 ) ){
 
+        // If it fails, print the problem.
+        // The error is handled internally, and it will still work, but without buffering.
         stdioChannel.println( "Can not allocate memory for buffering!" );
 
     }
