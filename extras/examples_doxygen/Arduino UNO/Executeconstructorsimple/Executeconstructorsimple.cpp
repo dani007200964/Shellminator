@@ -72,7 +72,7 @@ void loop(){
 void executionFunction( char* command ){
 
   Serial.println( "Execution function called!" );
-  Serial.channel -> print( "Received command: " );
-  Serial.channel -> println( command );
+  Serial.print( "Received command: " );
+  Serial.println( command );
 
 }

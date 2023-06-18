@@ -164,8 +164,8 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  bufferedPrinter.allocate( <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a7d343889042c465f6bf895180c27f497">SHELLMINATOR_PLOT_BUFF_SIZE</a> );</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">if</span>( bufferedPrinter.getBufferSize() != <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a7d343889042c465f6bf895180c27f497">SHELLMINATOR_PLOT_BUFF_SIZE</a> ){</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6">allocate</a>( <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a7d343889042c465f6bf895180c27f497">SHELLMINATOR_PLOT_BUFF_SIZE</a> );</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">if</span>( bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">getBufferSize</a>() != <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a7d343889042c465f6bf895180c27f497">SHELLMINATOR_PLOT_BUFF_SIZE</a> ){</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
@@ -248,11 +248,11 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;\033[2K&quot;</span> );</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[2K&quot;</span> );</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">for</span>( i = 0; i &lt; terminalSizeY; i++ ){</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      bufferedPrinter.printf( <span class="stringliteral">&quot;\r\n&quot;</span> );</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\r\n&quot;</span> );</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
@@ -275,7 +275,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\033[J&quot;</span>, 1, 1 );</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\033[J&quot;</span>, 1, 1 );</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
@@ -363,8 +363,8 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dm\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>, terminalSizeY + 1, 1 );</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  bufferedPrinter.flush();</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dm\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>, terminalSizeY + 1, 1 );</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">flush</a>();</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="preprocessor">  #else</span></div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
@@ -386,7 +386,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, 1, 1 );</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, 1, 1 );</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="preprocessor">  #else</span></div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
@@ -411,7 +411,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;%s%s&quot;</span>, yTextBuffer, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\r\n&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;%s%s&quot;</span>, yTextBuffer, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\r\n&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
@@ -429,7 +429,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, 1, yTextSize + 2 );</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, 1, yTextSize + 2 );</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="preprocessor">  #else</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
@@ -441,7 +441,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;\u2524%s&quot;</span>, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\033[B\033[D&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\u2524%s&quot;</span>, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\033[B\033[D&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
@@ -491,8 +491,8 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;\033[K\033[%d;%dm\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, plotColor[ i ], j, terminalSizeX - resultTextSize );</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;%s&quot;</span>, yTextBuffer );</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[K\033[%d;%dm\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, plotColor[ i ], j, terminalSizeX - resultTextSize );</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;%s&quot;</span>, yTextBuffer );</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
@@ -508,7 +508,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\033[%d;%dm&quot;</span>, 1, terminalSizeX - resultTextSize - 1, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a> );</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\033[%d;%dm&quot;</span>, 1, terminalSizeX - resultTextSize - 1, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a> );</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span><span class="preprocessor">  #else</span></div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
@@ -521,7 +521,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="preprocessor">    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    bufferedPrinter.printf( <span class="stringliteral">&quot;\u251C%s&quot;</span>, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\033[B\033[D&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\u251C%s&quot;</span>, ( i &lt; ( terminalSizeY - 1 ) ) ? <span class="stringliteral">&quot;\033[B\033[D&quot;</span> : <span class="stringliteral">&quot;&quot;</span> );</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
 <div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="preprocessor">    #else</span></div>
 <div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
@@ -556,8 +556,8 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>  bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dm&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, plotColor[ index ] );</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  bufferedPrinter.flush();</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dm&quot;</span>, (<span class="keywordtype">int</span>)<a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, plotColor[ index ] );</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">flush</a>();</div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
 <div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span><span class="preprocessor">  #else</span></div>
 <div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
@@ -580,7 +580,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span> </div>
 <div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span><span class="preprocessor">      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>      bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + prevPointX ) );</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>      bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + prevPointX ) );</div>
 <div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span><span class="preprocessor">      #else</span></div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span> </div>
@@ -593,7 +593,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span> </div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span> </div>
-<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\u2500&quot;</span> );</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\u2500&quot;</span> );</div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span> </div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span> </div>
@@ -620,7 +620,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span> </div>
-<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\u256D&quot;</span>, (<span class="keywordtype">int</span>)pointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\u256D&quot;</span>, (<span class="keywordtype">int</span>)pointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
 <div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span> </div>
 <div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span> </div>
@@ -634,7 +634,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span><span class="preprocessor">          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span> </div>
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>          <span class="comment">//bufferedPrinter.printf( &quot;\033[%d;%dH\u2502&quot;, (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );</span></div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>          bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span>, (<span class="keywordtype">int</span>)( pointY + j + 1 ), (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>          bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span>, (<span class="keywordtype">int</span>)( pointY + j + 1 ), (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span> </div>
 <div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span><span class="preprocessor">          #else</span></div>
 <div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span> </div>
@@ -649,7 +649,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span> </div>
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>        <span class="comment">//bufferedPrinter.printf( &quot;\033[%d;%dH\u256F&quot;, (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );</span></div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u256F&quot;</span>, (<span class="keywordtype">int</span>)( pointY + j + 1 ), (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u256F&quot;</span>, (<span class="keywordtype">int</span>)( pointY + j + 1 ), (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
@@ -666,7 +666,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\u256E&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\u256E&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + pointX ) );</div>
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span> </div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
@@ -680,7 +680,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span><span class="preprocessor">          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span> </div>
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>          <span class="comment">//bufferedPrinter.printf( &quot;\033[%d;%dH\u2502&quot;, (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );</span></div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>          bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span> );</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>          bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span> );</div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span> </div>
 <div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span><span class="preprocessor">          #else</span></div>
 <div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span> </div>
@@ -695,7 +695,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>        <span class="comment">//bufferedPrinter.printf( &quot;\033[%d;%dH\u2570&quot;, (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );</span></div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u2570&quot;</span> );</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u2570&quot;</span> );</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span> </div>
@@ -776,7 +776,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span><span class="preprocessor">      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span> </div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>      bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>      bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
 <div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span> </div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span><span class="preprocessor">      #else</span></div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span> </div>
@@ -788,7 +788,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span> </div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\u2500&quot;</span> );</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\u2500&quot;</span> );</div>
 <div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> </div>
 <div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span> </div>
@@ -802,7 +802,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span> </div>
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\u256F&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\u256F&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
 <div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span> </div>
 <div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span> </div>
@@ -816,7 +816,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span><span class="preprocessor">          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
 <div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>          <span class="comment">//bufferedPrinter.printf( &quot;\033[%d;%dH\u2502&quot;, (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );</span></div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>          bufferedPrinter.printf( <span class="stringliteral">&quot;\033[A\033[D\u2502&quot;</span> );</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>          bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[A\033[D\u2502&quot;</span> );</div>
 <div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span> </div>
 <div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span><span class="preprocessor">          #else</span></div>
 <div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span> </div>
@@ -828,7 +828,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span> </div>
 <div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span> </div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[A\033[D\u256D&quot;</span> );</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[A\033[D\u256D&quot;</span> );</div>
 <div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span> </div>
 <div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span> </div>
@@ -842,7 +842,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
 <div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[%d;%dH\u256E&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[%d;%dH\u256E&quot;</span>, (<span class="keywordtype">int</span>)prevPointY, (<span class="keywordtype">int</span>)( yTextSize + 3 + i - 1 ) );</div>
 <div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
 <div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
@@ -855,7 +855,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span> </div>
 <div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span><span class="preprocessor">          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span> </div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>          bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span> );</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>          bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u2502&quot;</span> );</div>
 <div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span> </div>
 <div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><span class="preprocessor">          #else</span></div>
 <div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span> </div>
@@ -867,7 +867,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span> </div>
 <div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span><span class="preprocessor">        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
 <div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> </div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>        bufferedPrinter.printf( <span class="stringliteral">&quot;\033[B\033[D\u2570&quot;</span> );</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>        bufferedPrinter.<a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="stringliteral">&quot;\033[B\033[D\u2570&quot;</span> );</div>
 <div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
 <div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span><span class="preprocessor">        #else</span></div>
 <div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
@@ -900,10 +900,14 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8cpp_source
 <div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a87349dac4a33edc701db5f592344d9a3"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a></div><div class="ttdeci">#define SHELLMINATOR_NUMBER_OF_PLOTS</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00198">Shellminator-DefaultSettings.hpp:198</a></div></div>
 <div class="ttc" id="a_shellminator-_plot_module_8hpp_html"><div class="ttname"><a href="_shellminator-_plot_module_8hpp.html">Shellminator-PlotModule.hpp</a></div></div>
 <div class="ttc" id="aclass_shellminator_buffered_printer_html"><div class="ttname"><a href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></div><div class="ttdoc">ShellminatorBufferedPrinter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8hpp_source.html#l00060">Shellminator-BufferedPrinter.hpp:60</a></div></div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00117">Shellminator.hpp:117</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00133">Shellminator.hpp:132</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_a46408f05e6e75fa69bdc49de31cf41c6"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6">ShellminatorBufferedPrinter::allocate</a></div><div class="ttdeci">bool allocate(int bufferSize)</div><div class="ttdoc">Allocate memory for the internal buffer.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00052">Shellminator-BufferedPrinter.cpp:52</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_a88ef18839525432afccaad59f87944de"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">ShellminatorBufferedPrinter::getBufferSize</a></div><div class="ttdeci">int getBufferSize()</div><div class="ttdoc">Get the allocated memory.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00229">Shellminator-BufferedPrinter.cpp:229</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_aadb670e69391ed2757391ec2ea64943e"><div class="ttname"><a href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">ShellminatorBufferedPrinter::printf</a></div><div class="ttdeci">int printf(const char *fmt,...)</div><div class="ttdoc">Regular printf like function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00121">Shellminator-BufferedPrinter.cpp:121</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_addd89bdf65afad80f3f2ce8372df2df4"><div class="ttname"><a href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">ShellminatorBufferedPrinter::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00187">Shellminator-BufferedPrinter.cpp:187</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00114">Shellminator.hpp:115</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00131">Shellminator.hpp:130</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_acdbd56dfa0dfb9dd509420d25d9c5cd9"><div class="ttname"><a href="class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9">Shellminator::setTerminalCharacterColor</a></div><div class="ttdeci">void setTerminalCharacterColor(uint8_t style, uint8_t color)</div><div class="ttdoc">Bring some color into your code.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00036">Shellminator-Styles.cpp:36</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00139">Shellminator.hpp:139</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00138">Shellminator.hpp:138</a></div></div>
 <div class="ttc" id="aclass_shellminator_plot_html_a1d26148fd018a8cd29eeb0fdf9421b14"><div class="ttname"><a href="class_shellminator_plot.html#a1d26148fd018a8cd29eeb0fdf9421b14">ShellminatorPlot::addPlot</a></div><div class="ttdeci">bool addPlot(float *y, int y_size, int color=0)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00064">Shellminator-PlotModule.cpp:64</a></div></div>
 <div class="ttc" id="aclass_shellminator_plot_html_a75bfc3355b5b3cc7cd6edeee0aea1d85"><div class="ttname"><a href="class_shellminator_plot.html#a75bfc3355b5b3cc7cd6edeee0aea1d85">ShellminatorPlot::ShellminatorPlot</a></div><div class="ttdeci">ShellminatorPlot(Shellminator *shell_p, float *y, int y_size, int color=Shellminator::GREEN)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00053">Shellminator-PlotModule.cpp:53</a></div></div>
 <div class="ttc" id="aclass_shellminator_plot_html_ac1f2d14d461361bafd9106caf876b037"><div class="ttname"><a href="class_shellminator_plot.html#ac1f2d14d461361bafd9106caf876b037">ShellminatorPlot::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00036">Shellminator-PlotModule.cpp:36</a></div></div>

@@ -7,11 +7,6 @@
  * This file is part of the Shellminator project.
  * Modified 2023.05.13
  *
- * To test this example, you need a terminal emulator like PuTTY or Minicom.
- * This example demonstrates how to create and use an execution function.
- * The execution function just prints out the command, but not execute it.
- * To execute the commands, you need a command parser. You can create your
- * own or use Commander as shown in Shellminator_Commander example.
 */
 
 
@@ -29,18 +24,17 @@
 
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
+#include "Shellminator-Progress.hpp"
 
 
 // Use stdio as Channel.
 stdioStream stdioChannel;
 
-// Prototype to a function that will be called every time
-// when you press the enter key.
-void executionFunction( char* command );
+// Create a Shellminator object, and initialize it to use stdioChannel
+Shellminator shell( &stdioChannel );
 
-// Create a Shellminator object, and initialize it to use stdioChannel.
-// Also attach the execution-function.
-Shellminator shell( &stdioChannel, executionFunction );
+// Create a progress bar object and connect it to the shell.
+ShellminatorProgress progress( &shell );
 
 // Create a pretty logo for the terminal.
 const char logo[] =
@@ -56,6 +50,9 @@ const char logo[] =
 ;
 
 
+// Prototype to a function that will be called every time
+// when you press the enter key.
+void executionFunction( char* command, Shellminator* shell );
 
 
 // Main program.
@@ -72,11 +69,7 @@ int main(){
     // Clear the terminal
     shell.clear();
 
-    // Attach the logo.
-    shell.attachLogo( logo );
-
-    // Initialize shell object.
-    shell.begin( "arnold" );
+    stdioChannel.println( "-- Simple Progress Bar Demo --" );
 
 
 
@@ -84,19 +77,23 @@ int main(){
     while( 1 ){
 
 
-        // Process the new data.
-        shell.update();
+        int i;
+        for( i = 0; i < 100; i++ ){
+
+            progress.drawProgressBar( i, "Test progress" );
+            delay( 50 );
+
+        }
+
+        for( i = 100; i > 0; i-- ){
+
+            progress.drawProgressBar( i, "Test progress" );
+            delay( 50 );
+
+        }
 
 
 
     }
-
-}
-
-void executionFunction( char* command ){
-
-  Serial.println( "Execution function called!" );
-  Serial.channel -> print( "Received command: " );
-  Serial.channel -> println( command );
 
 }

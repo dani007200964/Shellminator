@@ -24,13 +24,17 @@
 */
 var menudata={children:[
 {text:"Home",url:"index.html"},
-{text:"Examples",url:"md_docs_markdown_pages_example_codes.html#example_codes",children:[
+{text:"💻 Supported Platforms",url:"md_docs_markdown_pages_supported_platforms.html#supported_platforms"},
+{text:"⏩ Shortcut Keys",url:"md_docs_markdown_pages_shortcut_keys.html#shortcut_keys"},
+{text:"📖 Examples",url:"md_docs_markdown_pages_example_codes.html#example_codes",children:[
 {text:"Basic",url:"md_docs_markdown_pages_examples_example_basic.html#example_basic"},
 {text:"Buffered",url:"md_docs_markdown_pages_examples_example_buffered.html#example_buffered"},
 {text:"Execute",url:"md_docs_markdown_pages_examples_example_execute.html#example_execute"},
 {text:"Execute With Constructor - Simple",url:"md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple"},
-{text:"Execute With Constructor - Advanced",url:"md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced"}]},
-{text:"API",url:"md_docs_markdown_pages_api.html#api",children:[
+{text:"Execute With Constructor - Advanced",url:"md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced"},
+{text:"Progress - Simple",url:"md_docs_markdown_pages_examples_example_progress_simple.html#example_progress_simple"},
+{text:"Progress - Advanced",url:"md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced"}]},
+{text:"🚀 API",url:"md_docs_markdown_pages_api.html#api",children:[
 {text:"Class List",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},
@@ -76,6 +80,7 @@ var menudata={children:[
 {text:"w",url:"functions_func.html#index_w"},
 {text:"~",url:"functions_func.html#index__7E"}]},
 {text:"Variables",url:"functions_vars.html"},
-{text:"Enumerator",url:"functions_eval.html"}]}]}]},
-{text:"Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"},
-{text:"🚧 Developer Zone 🚧",url:"md_docs_markdown_pages_developer_zone.html#developer_zone"}]}
+{text:"Enumerator",url:"functions_eval.html"},
+{text:"Related Functions",url:"functions_rela.html"}]}]}]},
+{text:"📈 Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"},
+{text:"🚧 Developer Zone",url:"md_docs_markdown_pages_developer_zone.html#developer_zone"}]}

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['shellminator_20library_0',['Shellminator library',['../index.html',1,'']]],
-  ['shortcut_20keys_1',['Shortcut Keys',['../md_docs_markdown_pages_shortcut_keys.html',1,'']]],
-  ['supported_20platforms_2',['Supported Platforms',['../md_docs_markdown_pages_supported_platforms.html',1,'']]]
+  ['progress_20_2d_20advanced_0',['Progress - Advanced',['../md_docs_markdown_pages_examples_example_progress_advanced.html',1,'']]],
+  ['progress_20_2d_20simple_1',['Progress - Simple',['../md_docs_markdown_pages_examples_example_progress_simple.html',1,'']]]
 ];

@@ -4,6 +4,7 @@ var hierarchy =
     [ "Shellminator", "class_shellminator.html", null ],
     [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html", null ],
     [ "ShellminatorPlot", "class_shellminator_plot.html", null ],
+    [ "ShellminatorProgress", "class_shellminator_progress.html", null ],
     [ "Stream", null, [
       [ "shellminatorDefaultChannel", "classshellminator_default_channel.html", null ]
     ] ]

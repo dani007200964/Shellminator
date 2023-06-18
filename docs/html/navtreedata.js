@@ -26,14 +26,18 @@ var NAVTREE =
 [
   [ "Shellminator", "index.html", [
     [ "Shellminator library", "index.html", null ],
-    [ "Examples", "md_docs_markdown_pages_example_codes.html#example_codes", [
+    [ "💻 Supported Platforms", "md_docs_markdown_pages_supported_platforms.html#supported_platforms", null ],
+    [ "⏩ Shortcut Keys", "md_docs_markdown_pages_shortcut_keys.html#shortcut_keys", null ],
+    [ "📖 Examples", "md_docs_markdown_pages_example_codes.html#example_codes", [
       [ "Basic", "md_docs_markdown_pages_examples_example_basic.html#example_basic", null ],
       [ "Buffered", "md_docs_markdown_pages_examples_example_buffered.html#example_buffered", null ],
       [ "Execute", "md_docs_markdown_pages_examples_example_execute.html#example_execute", null ],
       [ "Execute With Constructor - Simple", "md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple", null ],
-      [ "Execute With Constructor - Advanced", "md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced", null ]
+      [ "Execute With Constructor - Advanced", "md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced", null ],
+      [ "Progress - Simple", "md_docs_markdown_pages_examples_example_progress_simple.html#example_progress_simple", null ],
+      [ "Progress - Advanced", "md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced", null ]
     ] ],
-    [ "API", "md_docs_markdown_pages_api.html#api", [
+    [ "🚀 API", "md_docs_markdown_pages_api.html#api", [
       [ "Class List", "annotated.html", [
         [ "Class List", "annotated.html", "annotated_dup" ],
         [ "Class Index", "classes.html", null ],
@@ -42,12 +46,13 @@ var NAVTREE =
           [ "All", "functions.html", null ],
           [ "Functions", "functions_func.html", null ],
           [ "Variables", "functions_vars.html", null ],
-          [ "Enumerator", "functions_eval.html", null ]
+          [ "Enumerator", "functions_eval.html", null ],
+          [ "Related Functions", "functions_rela.html", null ]
         ] ]
       ] ]
     ] ],
-    [ "Coverage", "md_docs_markdown_pages_coverage.html#coverage", null ],
-    [ "🚧 Developer Zone 🚧", "md_docs_markdown_pages_developer_zone.html#developer_zone", null ]
+    [ "📈 Coverage", "md_docs_markdown_pages_coverage.html#coverage", null ],
+    [ "🚧 Developer Zone", "md_docs_markdown_pages_developer_zone.html#developer_zone", null ]
   ] ]
 ];
 

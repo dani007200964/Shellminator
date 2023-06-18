@@ -76,6 +76,8 @@ private:
     Shellminator::CYAN    
   };
 
+  ShellminatorBufferedPrinter bufferedPrinter;
+
   void drawScale();
   void drawPlot( uint8_t index );
 

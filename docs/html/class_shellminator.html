@@ -128,6 +128,7 @@ $(document).ready(function(){initNavTree('class_shellminator.html',''); initResi
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="class_shellminator-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Shellminator Class Reference</div></div>
 </div><!--header-->
@@ -356,14 +357,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a04959c5c716600168dbc4b9e0ea5d844"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844">generateQRText</a> (const char *text, enum <a class="el" href="qrcodegen_8h.html#a4823d2c403f1e1ae151939d14003b65c">qrcodegen_Ecc</a> ecc)</td></tr>
 <tr class="memdesc:a04959c5c716600168dbc4b9e0ea5d844"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function generates a QR-code from text.  <a href="class_shellminator.html#a04959c5c716600168dbc4b9e0ea5d844">More...</a><br /></td></tr>
 <tr class="separator:a04959c5c716600168dbc4b9e0ea5d844"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14f3c6d04df9226f744de49aaa65f6c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a14f3c6d04df9226f744de49aaa65f6c1">drawProgressBar</a> (Stream *stream_p, float percentage, char *text, char done, char todo)</td></tr>
-<tr class="separator:a14f3c6d04df9226f744de49aaa65f6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b0ad209e5f79c89e68c1b2ec976d69e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9b0ad209e5f79c89e68c1b2ec976d69e">drawProgressBar</a> (Stream *stream_p, float percentage, char *text)</td></tr>
-<tr class="separator:a9b0ad209e5f79c89e68c1b2ec976d69e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a764a88ff0ce681c6561950015a7ac482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a764a88ff0ce681c6561950015a7ac482">drawProgressBar</a> (float percentage, char *text, char done_p, char todo_p)</td></tr>
-<tr class="separator:a764a88ff0ce681c6561950015a7ac482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1d6d260d76337c73306041aaea946b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab1d6d260d76337c73306041aaea946b5">drawProgressBar</a> (float percentage, char *text)</td></tr>
-<tr class="separator:ab1d6d260d76337c73306041aaea946b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa42838fa5ba17810bf06ea201000d05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">autoDetectTerminal</a> ()</td></tr>
 <tr class="separator:aaa42838fa5ba17810bf06ea201000d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -424,12 +417,17 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a3463b5191301f37fa2db84906f44e2ba"><td class="memItemLeft" align="right" valign="top">static const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a3463b5191301f37fa2db84906f44e2ba">helpText</a> []</td></tr>
 <tr class="memdesc:a3463b5191301f37fa2db84906f44e2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">String, that holds the help text data.  <a href="class_shellminator.html#a3463b5191301f37fa2db84906f44e2ba">More...</a><br /></td></tr>
 <tr class="separator:a3463b5191301f37fa2db84906f44e2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a5e3ad03bd2eaec0fa8d145733cdd3804"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a5e3ad03bd2eaec0fa8d145733cdd3804">ShellminatorProgress</a></td></tr>
+<tr class="separator:a5e3ad03bd2eaec0fa8d145733cdd3804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object. </p>
 <p >It can be used to interface with a <a href="https://en.wikipedia.org/wiki/VT100">VT100</a> compatible terminal like <a href="https://www.putty.org/">PuTTY</a>, <a href="https://ttssh2.osdn.jp/index.html.en">Terra Term</a> or <a href="https://linux.die.net/man/1/minicom">minicom</a>. The module requires an <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/">Arduino-like Serial object</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00117">117</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00114">114</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a306653f230deb8b560058517a95830dc" name="a306653f230deb8b560058517a95830dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a306653f230deb8b560058517a95830dc">&#9670;&#160;</a></span>anonymous enum</h2>
@@ -456,7 +454,7 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33" name="a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"></a>WHITE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00124">124</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00121">121</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -486,7 +484,7 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9" name="aed71921772c5914597df4e0367edf653af0744c45736b598d6b94546344f5e2f9"></a>INVISIBLE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00138">138</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00136">136</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +879,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02787">2787</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02663">2663</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1134,182 +1132,6 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_adab0caaef03f45fdba6dde0d5e0f9a6e_icgraph.svg" width="575" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ab1d6d260d76337c73306041aaea946b5" name="ab1d6d260d76337c73306041aaea946b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1d6d260d76337c73306041aaea946b5">&#9670;&#160;</a></span>drawProgressBar() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Shellminator::drawProgressBar </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>percentage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02779">2779</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_ab1d6d260d76337c73306041aaea946b5_cgraph.svg" width="462" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a764a88ff0ce681c6561950015a7ac482" name="a764a88ff0ce681c6561950015a7ac482"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a764a88ff0ce681c6561950015a7ac482">&#9670;&#160;</a></span>drawProgressBar() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Shellminator::drawProgressBar </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>percentage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>done_p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>todo_p</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02773">2773</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_a764a88ff0ce681c6561950015a7ac482_cgraph.svg" width="462" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a9b0ad209e5f79c89e68c1b2ec976d69e" name="a9b0ad209e5f79c89e68c1b2ec976d69e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b0ad209e5f79c89e68c1b2ec976d69e">&#9670;&#160;</a></span>drawProgressBar() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Shellminator::drawProgressBar </td>
-          <td>(</td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>stream_p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>percentage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02767">2767</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_a9b0ad209e5f79c89e68c1b2ec976d69e_cgraph.svg" width="462" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a14f3c6d04df9226f744de49aaa65f6c1" name="a14f3c6d04df9226f744de49aaa65f6c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14f3c6d04df9226f744de49aaa65f6c1">&#9670;&#160;</a></span>drawProgressBar() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Shellminator::drawProgressBar </td>
-          <td>(</td>
-          <td class="paramtype">Stream *&#160;</td>
-          <td class="paramname"><em>stream_p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>percentage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>done</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>todo</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02665">2665</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_a14f3c6d04df9226f744de49aaa65f6c1_icgraph.svg" width="462" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -3156,6 +2978,31 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a5e3ad03bd2eaec0fa8d145733cdd3804" name="a5e3ad03bd2eaec0fa8d145733cdd3804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3ad03bd2eaec0fa8d145733cdd3804">&#9670;&#160;</a></span>ShellminatorProgress</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="class_shellminator_progress.html">ShellminatorProgress</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00759">759</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8809064de36b67ba2e9800b7e1481f88" name="a8809064de36b67ba2e9800b7e1481f88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8809064de36b67ba2e9800b7e1481f88">&#9670;&#160;</a></span>channel</h2>
@@ -3172,7 +3019,7 @@ Here is the call graph for this function:</div>
 <p>Pointer to the communication class. </p>
 <p >By default it points to the default response handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00709">709</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00708">708</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3190,7 +3037,7 @@ Here is the call graph for this function:</div>
 
 <p>Default communication channel;. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00705">705</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00704">704</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3209,7 +3056,7 @@ Here is the call graph for this function:</div>
 <p>This flag enables or disables character formatting. </p>
 <p >It can be useful when VT100 format parser is not available on the host device. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00699">699</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00698">698</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3236,7 +3083,7 @@ Here is the call graph for this function:</div>
 <p>String, that holds the help text data. </p>
 <dl class="section note"><dt>Note</dt><dd>on AVR it is stored in PROGMEM. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00156">156</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00155">155</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3254,7 +3101,7 @@ Here is the call graph for this function:</div>
 
 <p>If set, the buzzer will be silent. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00702">702</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00701">701</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3280,7 +3127,7 @@ Here is the call graph for this function:</div>
 
 <p>String, that holds the version information. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00151">151</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00150">150</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>

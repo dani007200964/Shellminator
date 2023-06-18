@@ -68,8 +68,8 @@ shell.update();
 
 void executionFunction( char* command ){
 
-  Serial.println( "Execution function called!" );
-  Serial.channel -> print( "Received command: " );
-  Serial.channel -> println( command );
+  {{ channel }}.println( "Execution function called!" );
+  {{ channel }}.print( "Received command: " );
+  {{ channel }}.println( command );
 
 }

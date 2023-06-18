@@ -44,6 +44,8 @@ set( SOURCES
     src/Shellminator-SpecialKeys.cpp
     src/Shellminator-Styles.cpp
     src/Shellminator-SearchModule.cpp
+    src/Shellminator-Progress.hpp
+    src/Shellminator-Progress.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -121,8 +123,10 @@ if( BUILD_EXAMPLES )
 add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
 add_executable( Buffered ${SOURCES} extras/examples_desktop/Desktop/Buffered/Buffered.cpp )
 add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
-add_executable( Execute constructor advanced ${SOURCES} extras/examples_desktop/Desktop/Execute constructor advanced/Execute constructor advanced.cpp )
-add_executable( Execute constructor simple ${SOURCES} extras/examples_desktop/Desktop/Execute constructor simple/Execute constructor simple.cpp )
+add_executable( Executeconstructoradvanced ${SOURCES} extras/examples_desktop/Desktop/Executeconstructoradvanced/Executeconstructoradvanced.cpp )
+add_executable( Executeconstructorsimple ${SOURCES} extras/examples_desktop/Desktop/Executeconstructorsimple/Executeconstructorsimple.cpp )
+add_executable( Progressbaradvanced ${SOURCES} extras/examples_desktop/Desktop/Progressbaradvanced/Progressbaradvanced.cpp )
+add_executable( Progressbarsimple ${SOURCES} extras/examples_desktop/Desktop/Progressbarsimple/Progressbarsimple.cpp )
 add_executable( Runningplot ${SOURCES} extras/examples_desktop/Desktop/Runningplot/Runningplot.cpp )
 add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )
 endif()
