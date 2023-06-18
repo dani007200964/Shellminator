@@ -139,8 +139,15 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <p>There is an option to customize your progress bar. You can define the done and the remaining characters for the bar. You can use unicode characters like this: </p><div class="fragment"><div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot; &quot;</span> );</div>
 </div><!-- fragment --><p >The result will look like this: </p><div class="fragment"><div class="line">-- Advanced Progress Bar Demo --</div>
 <div class="line"> 44.0% ██████████████████                       | Counting Up...</div>
-</div><!-- fragment --><p >if you want to get very fancy, you can specify the colors as well: </p><div class="fragment"><div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
+</div><!-- fragment --><p >if you want to get very fancy, you can specify the colors as well: </p><div class="fragment"><div class="line"><span class="comment">// Set the colors</span></div>
+<div class="line">progress.doneColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
+<div class="line">progress.todoColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>;</div>
+<div class="line">progress.middleColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Draw the progress bar</span></div>
+<div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span> );</div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00125">Shellminator.hpp:125</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00131">Shellminator.hpp:130</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00124">Shellminator.hpp:124</a></div></div>
 </div><!-- fragment --><p >This example shows the advanced solution: </p><div class="fragment"><div class="line"> </div>
 <div class="line"><span class="comment">/*</span></div>
@@ -203,6 +210,19 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"> </div>
 <div class="line">    Serial.println( <span class="stringliteral">&quot;-- Advanced Progress Bar Demo --&quot;</span> );</div>
 <div class="line"> </div>
+<div class="line">    <span class="comment">// Set the colors for the three segments.</span></div>
+<div class="line">    progress.doneColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
+<div class="line">    progress.todoColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>;</div>
+<div class="line">    progress.middleColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Modify the color and the style of the percent text.</span></div>
+<div class="line">    progress.percentColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a>;</div>
+<div class="line">    progress.percentStyle = <a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Modify the color and the style of the user defined progress text.</span></div>
+<div class="line">    progress.textColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a>;</div>
+<div class="line">    progress.textStyle = <a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258">Shellminator::ITALIC</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="line"> </div>
@@ -210,40 +230,34 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"><span class="keywordtype">void</span> loop(){</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">int</span> i;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Count up to 100%</span></div>
 <div class="line">    <span class="keywordflow">for</span>( i = 0; i &lt; 100; i++ ){</div>
 <div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot; &quot;</span> );</div>
+<div class="line">        <span class="comment">// Set the text and the characters for the three segments.</span></div>
+<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;\u2583&quot;</span>, <span class="stringliteral">&quot;\u2599&quot;</span> );</div>
 <div class="line">        delay( 50 );</div>
 <div class="line"> </div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line">    <span class="comment">// Count down to 0%</span></div>
 <div class="line">    <span class="keywordflow">for</span>( i = 100; i &gt; 0; i-- ){</div>
 <div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Down...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot; &quot;</span> );</div>
+<div class="line">        <span class="comment">// Set the text and the characters for the three segments.</span></div>
+<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Down...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;\u2583&quot;</span>, <span class="stringliteral">&quot;\u2599&quot;</span> );</div>
 <div class="line">        delay( 50 );</div>
 <div class="line"> </div>
 <div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">for</span>( i = 0; i &lt; 100; i++ ){</div>
-<div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Colors Up :)&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">for</span>( i = 100; i &gt; 0; i-- ){</div>
-<div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Colors Down...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>, <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">}</div>
 <div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
 <div class="ttc" id="a_shellminator-_progress_8hpp_html"><div class="ttname"><a href="_shellminator-_progress_8hpp.html">Shellminator-Progress.hpp</a></div></div>
 <div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00126">Shellminator.hpp:126</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00127">Shellminator.hpp:127</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00139">Shellminator.hpp:139</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258">Shellminator::ITALIC</a></div><div class="ttdeci">@ ITALIC</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00141">Shellminator.hpp:141</a></div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

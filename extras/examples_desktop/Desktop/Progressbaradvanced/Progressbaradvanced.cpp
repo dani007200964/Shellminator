@@ -80,6 +80,19 @@ int main(){
 
     stdioChannel.println( "-- Advanced Progress Bar Demo --" );
 
+    // Set the colors for the three segments.
+    progress.doneColor = Shellminator::GREEN;
+    progress.todoColor = Shellminator::RED;
+    progress.middleColor = Shellminator::WHITE;
+
+    // Modify the color and the style of the percent text.
+    progress.percentColor = Shellminator::YELLOW;
+    progress.percentStyle = Shellminator::BOLD;
+
+    // Modify the color and the style of the user defined progress text.
+    progress.textColor = Shellminator::BLUE;
+    progress.textStyle = Shellminator::ITALIC;
+
 
 
     // Infinite loop.
@@ -87,34 +100,24 @@ int main(){
 
 
         int i;
+
+        // Count up to 100%
         for( i = 0; i < 100; i++ ){
 
-            progress.drawProgressBar( i, "Counting Up...", "\u2588", " " );
+            // Set the text and the characters for the three segments.
+            progress.drawProgressBar( i, "Counting Up...", "\u2588", "\u2583", "\u2599" );
             delay( 50 );
 
         }
 
+        // Count down to 0%
         for( i = 100; i > 0; i-- ){
 
-            progress.drawProgressBar( i, "Counting Down...", "\u2588", " " );
+            // Set the text and the characters for the three segments.
+            progress.drawProgressBar( i, "Counting Down...", "\u2588", "\u2583", "\u2599" );
             delay( 50 );
 
         }
-
-        for( i = 0; i < 100; i++ ){
-
-            progress.drawProgressBar( i, "Colors Up :)", "\u2588", "-", Shellminator::GREEN, Shellminator::RED );
-            delay( 50 );
-
-        }
-
-        for( i = 100; i > 0; i-- ){
-
-            progress.drawProgressBar( i, "Colors Down...", "\u2588", "-", Shellminator::GREEN, Shellminator::RED );
-            delay( 50 );
-
-        }
-
 
 
 

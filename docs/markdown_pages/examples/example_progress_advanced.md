@@ -36,7 +36,13 @@ The result will look like this:
 if you want to get very fancy, you can specify the colors as well:
 ```cpp
 
-progress.drawProgressBar( i, "Counting Up...", "\u2588", "-", Shellminator::GREEN, Shellminator::RED );
+// Set the colors
+progress.doneColor = Shellminator::GREEN;
+progress.todoColor = Shellminator::RED;
+progress.middleColor = Shellminator::WHITE;
+
+// Draw the progress bar
+progress.drawProgressBar( i, "Counting Up...", "\u2588", "-" );
 
 ```
 

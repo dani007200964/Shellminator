@@ -59,14 +59,24 @@ public:
     ShellminatorProgress( Shellminator* shell_p );
     ShellminatorProgress( Stream* channel_p );
 
-    void drawProgressBar( float percentage, const char* text, const char* done_p, const char* todo_p, uint8_t doneColor_p, uint8_t todoColor_p );
+    void drawProgressBar( float percentage, const char* text, const char* done_p, const char* todo_p, const char* middle_p );
     void drawProgressBar( float percentage, const char* text, const char* done_p, const char* todo_p );
     void drawProgressBar( float percentage, const char* text );
 
+    uint8_t doneColor = 0;
+    uint8_t todoColor = 0;
+    uint8_t middleColor = 0;
+
+    uint8_t percentColor = 0;
+    uint8_t percentStyle = 0;
+
+    uint8_t textColor = 0;
+    uint8_t textStyle = 0;
+
 private:
 
-    void drawProgressBarStream( Stream* channel_p, float percentage, const char* text, const char* done, const char* todo, uint8_t doneColor, uint8_t todoColor );
-    void drawProgressBarShell( float percentage, const char* text, const char* done, const char* todo, uint8_t doneColor, uint8_t todoColor );
+    void drawProgressBarStream( Stream* channel_p, float percentage, const char* text, const char* done, const char* todo, const char* middle );
+    void drawProgressBarShell( float percentage, const char* text, const char* done, const char* todo, const char* middle );
 
     Shellminator* shell = NULL;
     Stream* channel = NULL;

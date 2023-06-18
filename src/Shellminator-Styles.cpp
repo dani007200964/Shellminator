@@ -41,6 +41,14 @@ void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
 
   }
 
+  if( style == 0 ){
+    style = REGULAR;
+  }
+
+  if( color == 0 ){
+    style = WHITE;
+  }
+
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
   channel -> write( 27 );
   channel -> print( '[' );
@@ -66,6 +74,14 @@ void Shellminator::setTerminalCharacterColor( char* buff, uint8_t style, uint8_t
 
   }
 
+  if( style == 0 ){
+    style = REGULAR;
+  }
+
+  if( color == 0 ){
+    style = WHITE;
+  }
+
   sprintf( buff, "\033[%d;%dm", style, color );
 
 }
@@ -78,6 +94,14 @@ void Shellminator::setTerminalCharacterColor( char* buff, uint8_t buffSize, uint
 
   }
 
+  if( style == 0 ){
+    style = REGULAR;
+  }
+
+  if( color == 0 ){
+    style = WHITE;
+  }
+
   snprintf( buff, buffSize, "\033[%d;%dm", style, color );
 
 }
@@ -88,6 +112,14 @@ void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, u
 
     return;
 
+  }
+
+  if( style == 0 ){
+    style = REGULAR;
+  }
+
+  if( color == 0 ){
+    style = WHITE;
   }
 
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
@@ -106,6 +138,14 @@ void Shellminator::setTerminalCharacterColor( ShellminatorBufferedPrinter *print
 
     return;
 
+  }
+
+  if( style == 0 ){
+    style = REGULAR;
+  }
+
+  if( color == 0 ){
+    style = WHITE;
   }
 
   // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html

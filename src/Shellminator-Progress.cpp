@@ -14,7 +14,7 @@ ShellminatorProgress::ShellminatorProgress( Stream* channel_p ){
 
 }
 
-void ShellminatorProgress::drawProgressBarShell( float percentage, const char *text, const char* done, const char* todo, uint8_t doneColor, uint8_t todoColor ){
+void ShellminatorProgress::drawProgressBarShell( float percentage, const char *text, const char* done, const char* todo, const char* middle ){
 
     float ratio;
     uint32_t i;
@@ -36,16 +36,20 @@ void ShellminatorProgress::drawProgressBarShell( float percentage, const char *t
     // If buffering is not available for the shell object, we just simply use the channel from the
     // shell object and print the progress bar to it.
     if( shell -> bufferMemoryAllocated == false ){
-        drawProgressBarStream( shell -> channel, percentage, text, done, todo, doneColor, todoColor );
+        drawProgressBarStream( shell -> channel, percentage, text, done, todo, middle );
         return;
     }
 
     // Check if color formatting requested
-    if( ( todoColor != 0 ) || ( todoColor != 0 ) ){
+    if( ( todoColor != 0 ) || ( todoColor != 0 ) || ( textColor != 0 ) || ( textStyle != 0 ) || ( percentColor != 0 ) || ( percentStyle != 0 ) ){
         colored = true;
     }
 
     ratio = percentage / 100.0;
+
+    if( colored ){
+        Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, percentStyle, percentColor );
+    }
 
     shell -> bufferedPrinter.printf( "\r\033[0K%3d.%d%% ", (int)percentage, (int)((float)percentage * 10.0) % 10 );
 
@@ -70,9 +74,19 @@ void ShellminatorProgress::drawProgressBarShell( float percentage, const char *t
 
                 if( colored ){
 
+                    Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, (uint8_t)Shellminator::REGULAR, middleColor );
+
+                }
+
+                shell -> bufferedPrinter.printf( "%s", middle );
+
+                if( colored ){
+
                     Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, (uint8_t)Shellminator::REGULAR, todoColor );
 
                 }
+
+                continue;
 
             }
 
@@ -82,16 +96,21 @@ void ShellminatorProgress::drawProgressBarShell( float percentage, const char *t
     }
 
     if( colored ){
-        Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, (uint8_t)Shellminator::REGULAR, (uint8_t)Shellminator::WHITE );
+        Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, textStyle, textColor );
     }
 
     shell -> bufferedPrinter.printf( " | %s", text );
+
+    if( colored ){
+        Shellminator::setTerminalCharacterColor( &shell->bufferedPrinter, Shellminator::REGULAR, Shellminator::WHITE );
+    }
 
     shell -> bufferedPrinter.flush();
 
 }
 
-void ShellminatorProgress::drawProgressBarStream( Stream* channel_p, float percentage, const char* text, const char* done, const char* todo, uint8_t doneColor, uint8_t todoColor ){
+// todo Implement everythong from the Shell version!
+void ShellminatorProgress::drawProgressBarStream( Stream* channel_p, float percentage, const char* text, const char* done, const char* todo, const char* middle ){
 
     float ratio;
     uint32_t i;
@@ -178,18 +197,18 @@ void ShellminatorProgress::drawProgressBarStream( Stream* channel_p, float perce
 
 }
 
-void ShellminatorProgress::drawProgressBar( float percentage, const char *text, const char* done_p, const char* todo_p, uint8_t doneColor_p, uint8_t todoColo_p ){
+void ShellminatorProgress::drawProgressBar( float percentage, const char *text, const char* done_p, const char* todo_p, const char* middle_p ){
 
     if( channel ){
 
-        drawProgressBarStream( channel, percentage, text, done_p, todo_p, doneColor_p, todoColo_p );
+        drawProgressBarStream( channel, percentage, text, done_p, todo_p, middle_p );
         return;
 
     }
 
     if( shell ){
 
-        drawProgressBarShell( percentage, text, done_p, todo_p, doneColor_p, todoColo_p );
+        drawProgressBarShell( percentage, text, done_p, todo_p, middle_p );
         return;
 
     }
@@ -200,14 +219,14 @@ void ShellminatorProgress::drawProgressBar( float percentage, const char *text, 
 
     if( channel ){
 
-        drawProgressBarStream( channel, percentage, text, done_p, todo_p, 0, 0 );
+        drawProgressBarStream( channel, percentage, text, done_p, todo_p, todo_p );
         return;
 
     }
 
     if( shell ){
 
-        drawProgressBarShell( percentage, text, done_p, todo_p, 0, 0 );
+        drawProgressBarShell( percentage, text, done_p, todo_p, todo_p );
         return;
 
     }
@@ -218,14 +237,14 @@ void ShellminatorProgress::drawProgressBar( float percentage, const char *text )
 
     if( channel ){
 
-        drawProgressBarStream( channel, percentage, text, "#", "-", 0, 0 );
+        drawProgressBarStream( channel, percentage, text, "#", "-", "-" );
         return;
 
     }
 
     if( shell ){
 
-        drawProgressBarShell( percentage, text, "#", "-", 0, 0 );
+        drawProgressBarShell( percentage, text, "#", "-", "-" );
         return;
 
     }
