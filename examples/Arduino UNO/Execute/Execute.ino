@@ -52,6 +52,7 @@ void setup(){
     // Attach the logo.
     shell.attachLogo( logo );
 
+    // Attach the execution function to the terminal.
     shell.addExecFunc( executionFunction );
 
     // Initialize shell object.

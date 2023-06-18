@@ -1,6 +1,5 @@
 var NAVTREEINDEX0 =
 {
-"@ref api":[2],
 "annotated.html":[2,0,0],
 "class_shellminator.html":[2,0,0,1],
 "class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d":[2,0,0,1,13],
@@ -109,10 +108,15 @@ var NAVTREEINDEX0 =
 "hierarchy.html":[2,0,2],
 "index.html":[0],
 "index.html":[],
+"md_docs_markdown_pages_api.html#api":[2],
 "md_docs_markdown_pages_coverage.html#coverage":[3],
+"md_docs_markdown_pages_developer_zone.html#developer_zone":[4],
 "md_docs_markdown_pages_example_codes.html#example_codes":[1],
 "md_docs_markdown_pages_examples_example_basic.html#example_basic":[1,0],
 "md_docs_markdown_pages_examples_example_buffered.html#example_buffered":[1,1],
+"md_docs_markdown_pages_examples_example_execute.html#example_execute":[1,2],
+"md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced":[1,4],
+"md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple":[1,3],
 "pages.html":[],
 "structqrcodegen___segment.html":[2,0,0,0],
 "structqrcodegen___segment.html#a0e9cd1915812ada8e06cfd49be30f8b9":[2,0,0,0,1],

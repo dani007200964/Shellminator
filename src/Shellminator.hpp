@@ -214,8 +214,37 @@ public:
 
 #endif
 
+  /// Shell object constructor
+  ///
+  /// This is a simple constructor for a Shellminator object.
+  /// @param stream_p Pointer to a Stream object which will be used for communication.
+  ///
+  /// __Example__ 
+  /// - @ref example_basic "Basic Example"
   Shellminator( Stream *stream_p );
+
+  /// Shell object constructor with simple execution-function.
+  ///
+  /// This is a simple constructor for a Shellminator object.
+  /// This version allows to attach an execution-function with the constructor.
+  /// @param stream_p Pointer to a Stream object which will be used for communication.
+  /// @param execution_fn_p Function pointer to a simple execution-function[ void execFunc( char* cmd ) ]
+  /// @note This version works for legacy reasons, but the advanced version is recommended with caller shell access.
+  ///
+  /// __Example__ 
+  /// - @ref example_execute_constructor_simple "Example With Constructor - Simple"
 	Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) );
+
+  /// Shell object constructor with simple execution-function.
+  ///
+  /// This is a simple constructor for a Shellminator object.
+  /// This version allows to attach an execution-function with the constructor.
+  /// @param stream_p Pointer to a Stream object which will be used for communication.
+  /// @param execution_fn_p Function pointer to an advanced execution-function[ void execFunc( char* cmd, Shellminator* shell ) ]
+  /// @note This version is recommended.
+  ///
+  /// __Example__ 
+  /// - @ref example_execute_constructor_advanced "Example With Constructor - Advanced"
 	Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) );
 
   bool enableBuffering( int bufferSize = 32 );
@@ -231,6 +260,9 @@ public:
   /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
   /// 1. argument: is a char* type
   /// 2. argument: is a Shellminator* type
+  ///
+  /// __Example__ 
+  /// - @ref example_execute "Execute"
   void addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) );
 
   /// Shellminator initialization function
@@ -241,6 +273,9 @@ public:
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   ///
   /// Tested in: __test_shellminator_begin.cpp__
+  ///
+  /// __Example__ 
+  /// - @ref example_basic "Basic"
   void begin( char* banner_p );
 
   /// Shellminator initialization function
@@ -251,6 +286,9 @@ public:
   /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
   ///
   /// Tested in: __test_shellminator_begin.cpp__
+  ///
+  /// __Example__ 
+  /// - @ref example_basic "Basic"
   void begin( const char* banner_p );
 
   /// Sends a backspace
@@ -266,6 +304,9 @@ public:
   /// This function clears the terminal screen.
   ///
   /// Tested in: __test_format_commands.cpp__
+  ///
+  /// __Example__ 
+  /// - @ref example_basic "Basic"
   void clear();
 
   /// Update function
@@ -275,6 +316,8 @@ public:
   /// @warning If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
   ///
   /// Tested in: __test_update.cpp__
+  /// __Example__ 
+  /// - @ref example_basic "Basic"
   void update();
 
 	/// Bring some color into your code.

@@ -26,8 +26,11 @@ var menudata={children:[
 {text:"Home",url:"index.html"},
 {text:"Examples",url:"md_docs_markdown_pages_example_codes.html#example_codes",children:[
 {text:"Basic",url:"md_docs_markdown_pages_examples_example_basic.html#example_basic"},
-{text:"Buffered",url:"md_docs_markdown_pages_examples_example_buffered.html#example_buffered"}]},
-{text:"API",url:"@ref api",children:[
+{text:"Buffered",url:"md_docs_markdown_pages_examples_example_buffered.html#example_buffered"},
+{text:"Execute",url:"md_docs_markdown_pages_examples_example_execute.html#example_execute"},
+{text:"Execute With Constructor - Simple",url:"md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple"},
+{text:"Execute With Constructor - Advanced",url:"md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced"}]},
+{text:"API",url:"md_docs_markdown_pages_api.html#api",children:[
 {text:"Class List",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},
@@ -74,4 +77,5 @@ var menudata={children:[
 {text:"~",url:"functions_func.html#index__7E"}]},
 {text:"Variables",url:"functions_vars.html"},
 {text:"Enumerator",url:"functions_eval.html"}]}]}]},
-{text:"Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"}]}
+{text:"Coverage",url:"md_docs_markdown_pages_coverage.html#coverage"},
+{text:"🚧 Developer Zone 🚧",url:"md_docs_markdown_pages_developer_zone.html#developer_zone"}]}

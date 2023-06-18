@@ -28,9 +28,12 @@ var NAVTREE =
     [ "Shellminator library", "index.html", null ],
     [ "Examples", "md_docs_markdown_pages_example_codes.html#example_codes", [
       [ "Basic", "md_docs_markdown_pages_examples_example_basic.html#example_basic", null ],
-      [ "Buffered", "md_docs_markdown_pages_examples_example_buffered.html#example_buffered", null ]
+      [ "Buffered", "md_docs_markdown_pages_examples_example_buffered.html#example_buffered", null ],
+      [ "Execute", "md_docs_markdown_pages_examples_example_execute.html#example_execute", null ],
+      [ "Execute With Constructor - Simple", "md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple", null ],
+      [ "Execute With Constructor - Advanced", "md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced", null ]
     ] ],
-    [ "API", "@ref api", [
+    [ "API", "md_docs_markdown_pages_api.html#api", [
       [ "Class List", "annotated.html", [
         [ "Class List", "annotated.html", "annotated_dup" ],
         [ "Class Index", "classes.html", null ],
@@ -43,13 +46,14 @@ var NAVTREE =
         ] ]
       ] ]
     ] ],
-    [ "Coverage", "md_docs_markdown_pages_coverage.html#coverage", null ]
+    [ "Coverage", "md_docs_markdown_pages_coverage.html#coverage", null ],
+    [ "🚧 Developer Zone 🚧", "md_docs_markdown_pages_developer_zone.html#developer_zone", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"@ref api"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

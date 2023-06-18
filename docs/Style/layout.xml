@@ -3,6 +3,9 @@
     <tab type="usergroup" visible="yes" url="@ref example_codes" title="Examples">
       <tab type="usergroup" visible="yes" url="@ref example_basic" title="Basic" intro=""/>
       <tab type="usergroup" visible="yes" url="@ref example_buffered" title="Buffered" intro=""/>
+      <tab type="usergroup" visible="yes" url="@ref example_execute" title="Execute" intro=""/>
+      <tab type="usergroup" visible="yes" url="@ref example_execute_constructor_simple" title="Execute With Constructor - Simple" intro=""/>
+      <tab type="usergroup" visible="yes" url="@ref example_execute_constructor_advanced" title="Execute With Constructor - Advanced" intro=""/>
     </tab>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">
@@ -18,4 +21,5 @@
         </tab>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref coverage" title="Coverage" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref developer_zone" title="🚧 Developer Zone 🚧" intro=""/>
 </navindex>

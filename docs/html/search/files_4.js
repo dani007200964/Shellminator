@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['qrcodegen_2ec_0',['qrcodegen.c',['../qrcodegen_8c.html',1,'']]],
-  ['qrcodegen_2eh_1',['qrcodegen.h',['../qrcodegen_8h.html',1,'']]]
+  ['license_2etxt_0',['license.txt',['../license_8txt.html',1,'']]]
 ];

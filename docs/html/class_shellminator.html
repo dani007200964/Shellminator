@@ -196,10 +196,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf34b1655abffcffce76603917f756a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#adf34b1655abffcffce76603917f756a8">setClientTimeout</a> (uint16_t clientTimeout_p)</td></tr>
 <tr class="separator:adf34b1655abffcffce76603917f756a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b14e80f75aca0c3c7a93c886dadab89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1b14e80f75aca0c3c7a93c886dadab89">Shellminator</a> (Stream *stream_p)</td></tr>
+<tr class="memdesc:a1b14e80f75aca0c3c7a93c886dadab89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shell object constructor.  <a href="class_shellminator.html#a1b14e80f75aca0c3c7a93c886dadab89">More...</a><br /></td></tr>
 <tr class="separator:a1b14e80f75aca0c3c7a93c886dadab89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac39a64d9e79f1fb9bc99aeaeab3e5ef8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ac39a64d9e79f1fb9bc99aeaeab3e5ef8">Shellminator</a> (Stream *stream_p, void(*execution_fn_p)(char *))</td></tr>
+<tr class="memdesc:ac39a64d9e79f1fb9bc99aeaeab3e5ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shell object constructor with simple execution-function.  <a href="class_shellminator.html#ac39a64d9e79f1fb9bc99aeaeab3e5ef8">More...</a><br /></td></tr>
 <tr class="separator:ac39a64d9e79f1fb9bc99aeaeab3e5ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6b7d39d84b6d34ee5718084d3a9a5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a4f6b7d39d84b6d34ee5718084d3a9a5d">Shellminator</a> (Stream *stream_p, void(*execution_fn_p)(char *, <a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a4f6b7d39d84b6d34ee5718084d3a9a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shell object constructor with simple execution-function.  <a href="class_shellminator.html#a4f6b7d39d84b6d34ee5718084d3a9a5d">More...</a><br /></td></tr>
 <tr class="separator:a4f6b7d39d84b6d34ee5718084d3a9a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc87f366e41a13aa5e22a8a07024697"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9cc87f366e41a13aa5e22a8a07024697">enableBuffering</a> (int bufferSize=32)</td></tr>
 <tr class="separator:a9cc87f366e41a13aa5e22a8a07024697"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -614,6 +617,17 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Shell object constructor. </p>
+<p >This is a simple constructor for a <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream_p</td><td>Pointer to a Stream object which will be used for communication.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_basic.html#example_basic">Basic Example</a> </li>
+</ul>
+
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00306">306</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
@@ -644,6 +658,19 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Shell object constructor with simple execution-function. </p>
+<p >This is a simple constructor for a <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object. This version allows to attach an execution-function with the constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream_p</td><td>Pointer to a Stream object which will be used for communication. </td></tr>
+    <tr><td class="paramname">execution_fn_p</td><td>Function pointer to a simple execution-function[ void execFunc( char* cmd ) ] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This version works for legacy reasons, but the advanced version is recommended with caller shell access.</dd></dl>
+<p><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple">Example With Constructor - Simple</a> </li>
+</ul>
+
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00327">327</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
@@ -673,6 +700,19 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Shell object constructor with simple execution-function. </p>
+<p >This is a simple constructor for a <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object. This version allows to attach an execution-function with the constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream_p</td><td>Pointer to a Stream object which will be used for communication. </td></tr>
+    <tr><td class="paramname">execution_fn_p</td><td>Function pointer to an advanced execution-function[ void execFunc( char* cmd, Shellminator* shell ) ] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This version is recommended.</dd></dl>
+<p><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced">Example With Constructor - Advanced</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00348">348</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
@@ -728,12 +768,15 @@ Static Public Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">execution_fn_p</td><td>Function pointer to the execution function. It has to be a void return type, with two argument:<ol type="1">
 <li>argument: is a char* type</li>
-<li>argument: is a Shellminator* type </li>
+<li>argument: is a Shellminator* type</li>
 </ol>
 </td></tr>
   </table>
   </dd>
 </dl>
+<p><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_execute.html#example_execute">Execute</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00453">453</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
@@ -893,7 +936,10 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
-<p>Tested in: <b>test_shellminator_begin.cpp</b> </p>
+<p>Tested in: <b>test_shellminator_begin.cpp</b></p>
+<p ><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_basic.html#example_basic">Basic</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00637">637</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
@@ -934,7 +980,10 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<p>Tested in: <b>test_shellminator_begin.cpp</b> </p>
+<p>Tested in: <b>test_shellminator_begin.cpp</b></p>
+<p ><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_basic.html#example_basic">Basic</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00653">653</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
@@ -1027,7 +1076,10 @@ Here is the call graph for this function:</div>
 
 <p>Clear screen. </p>
 <p >This function clears the terminal screen.</p>
-<p >Tested in: <b>test_format_commands.cpp</b> </p>
+<p >Tested in: <b>test_format_commands.cpp</b></p>
+<p ><b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_basic.html#example_basic">Basic</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator-_styles_8cpp_source.html#l00188">188</a> of file <a class="el" href="_shellminator-_styles_8cpp_source.html">Shellminator-Styles.cpp</a>.</p>
 
@@ -2981,7 +3033,9 @@ Here is the caller graph for this function:</div>
 <p >This function handles all of the communication related stuff between the code and the terminal application. </p><dl class="section warning"><dt>Warning</dt><dd>This function has to be called periodically. </dd>
 <dd>
 If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!</dd></dl>
-<p>Tested in: <b>test_update.cpp</b> </p>
+<p>Tested in: <b>test_update.cpp</b> <b>Example</b></p><ul>
+<li><a class="el" href="md_docs_markdown_pages_examples_example_basic.html#example_basic">Basic</a> </li>
+</ul>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00922">922</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
@@ -3118,7 +3172,7 @@ Here is the call graph for this function:</div>
 <p>Pointer to the communication class. </p>
 <p >By default it points to the default response handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00666">666</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00709">709</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3136,7 +3190,7 @@ Here is the call graph for this function:</div>
 
 <p>Default communication channel;. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00662">662</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00705">705</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3155,7 +3209,7 @@ Here is the call graph for this function:</div>
 <p>This flag enables or disables character formatting. </p>
 <p >It can be useful when VT100 format parser is not available on the host device. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00656">656</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00699">699</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3200,7 +3254,7 @@ Here is the call graph for this function:</div>
 
 <p>If set, the buzzer will be silent. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00659">659</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00702">702</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3252,7 +3306,7 @@ Here is the call graph for this function:</div>
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sat Jun 17 2023
+      </a> on Sun Jun 18 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -3267,7 +3321,7 @@ Here is the call graph for this function:</div>
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sat Jun 17 2023
+        </a> on Sun Jun 18 2023
       </small></address>
     </li>
   </ul>
