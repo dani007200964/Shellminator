@@ -508,4 +508,3 @@ void Shellminator::ShellminatorPageDownKeyState( char new_char ){
   }
 
 }
-

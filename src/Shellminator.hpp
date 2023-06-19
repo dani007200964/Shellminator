@@ -105,6 +105,8 @@ SOFTWARE.
 /// Version of the module
 #define SHELLMINATOR_VERSION "1.1.2"
 
+#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 12
+
 /// Shellminator object
 ///
 /// It can be used to interface with a <a href="https://en.wikipedia.org/wiki/VT100">VT100</a> compatible terminal like
@@ -628,6 +630,36 @@ public:
 
 #endif
 
+    enum{
+        MOUSE_INVALID,
+        MOUSE_LEFT_PRESSED,
+        MOUSE_LEFT_RELEASED,
+        MOUSE_RIGHT_PRESSED,
+        MOUSE_RIGHT_RELEASED,
+        MOUSE_MIDDLE_PRESSED,
+        MOUSE_MIDDLE_RELEASED,
+        MOUSE_WHEEL_UP,
+        MOUSE_WHEEL_DOWN
+    };
+
+    typedef struct{
+        uint8_t x;
+        uint8_t y;
+        uint8_t event;
+    }mouseEvent_t;
+
+    mouseEvent_t mouseBuffer[ MOUSE_BUFFER_SIZE ];
+    uint8_t mouseBufferWritePtr;
+    uint8_t mouseBufferReadPtr;
+
+    char mouseEventBuffer[ SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE ];
+    uint8_t mouseEventBufferCntr = 0;
+
+    void mouseBegin();
+    void mouseEnd();
+    int mouseAvailable();
+    mouseEvent_t mouseRead();
+
     /// Wait for specific keypress
     ///
     /// It can be useful with a simple prompt like waiting for Y or N characters.
@@ -807,6 +839,7 @@ private:
     void ShellminatorPageDownKeyState();
     void ShellminatorPageDownKeyState(char new_char);
     void ShellminatorProcessRegularCharacter(char new_char);
+    void ShellminatorMouseEventParserState(char new_char);
 
     void (Shellminator::*currentState)(char) = &Shellminator::ShellminatorDefaultState;
 
@@ -816,6 +849,9 @@ private:
     /// with a <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20">text to ASCII converter</a>.
     /// @warning Make sure that the generated string is c/c++ compatible!
     char *logo = NULL;
+
+    void pushMouseEvent( uint8_t x, uint8_t y, uint8_t event );
+    void parseMouseData();
 
 #ifdef __AVR__
     __FlashStringHelper *progmemLogo = NULL;

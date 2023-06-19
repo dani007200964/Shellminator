@@ -9,6 +9,7 @@
         "array": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "istream": "cpp"
     }
 }

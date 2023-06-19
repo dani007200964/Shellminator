@@ -125,6 +125,7 @@ add_executable( Buffered ${SOURCES} extras/examples_desktop/Desktop/Buffered/Buf
 add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
 add_executable( Executeconstructoradvanced ${SOURCES} extras/examples_desktop/Desktop/Executeconstructoradvanced/Executeconstructoradvanced.cpp )
 add_executable( Executeconstructorsimple ${SOURCES} extras/examples_desktop/Desktop/Executeconstructorsimple/Executeconstructorsimple.cpp )
+add_executable( Mouse ${SOURCES} extras/examples_desktop/Desktop/Mouse/Mouse.cpp )
 add_executable( Progressbaradvanced ${SOURCES} extras/examples_desktop/Desktop/Progressbaradvanced/Progressbaradvanced.cpp )
 add_executable( Progressbarsimple ${SOURCES} extras/examples_desktop/Desktop/Progressbarsimple/Progressbarsimple.cpp )
 add_executable( Runningplot ${SOURCES} extras/examples_desktop/Desktop/Runningplot/Runningplot.cpp )

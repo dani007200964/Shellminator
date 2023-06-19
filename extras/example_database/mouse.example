@@ -1,0 +1,117 @@
+EXCLUDE=NONE
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ *
+ * To test this example, you need a terminal emulator like PuTTY or Minicom.
+ * This example shows a simple setup for Shellminator. It will create an
+ * interactive interface, but it does not execute any command.
+ * See Shellminator_execute example for further information.
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+#include "Shellminator-IO.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// Create a Shellminator object, and initialize it to use {{ channel }}
+Shellminator shell( &{{ channel }} );
+
+// Create a pretty logo for the terminal.
+const char logo[] =
+
+    "   _____ __         ____          _             __            \r\n"
+    "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
+    "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
+    " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
+    "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
+    "\r\n"
+    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
+
+;
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+// Attach the logo.
+shell.attachLogo( logo );
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+shell.mouseBegin();
+
+{{ channel }}.println();
+{{ channel }}.println( "Click on the screen with multiple buttons on the mouse." );
+{{ channel }}.println( "The mouse wheel works as well." );
+
+++--LOOP--++
+
+// Process the new data.
+shell.update();
+
+if( shell.mouseAvailable() ){
+
+    Shellminator::mouseEvent_t mouseData = shell.mouseRead();
+    {{ channel }}.print("X: ");
+    {{ channel }}.print( mouseData.x );
+    {{ channel }}.print("\tY: ");
+    {{ channel }}.print( mouseData.y );
+    {{ channel }}.print( "\t" );
+
+    switch( mouseData.event ){
+
+        case Shellminator::MOUSE_LEFT_PRESSED:
+            {{ channel }}.println( "LM P" );
+            break;
+
+        case Shellminator::MOUSE_LEFT_RELEASED:
+            {{ channel }}.println( "LM R" );
+            break;
+
+        case Shellminator::MOUSE_RIGHT_PRESSED:
+            {{ channel }}.println( "RM P" );
+            break;
+
+        case Shellminator::MOUSE_RIGHT_RELEASED:
+            {{ channel }}.println( "RM R" );
+            break;
+
+        case Shellminator::MOUSE_MIDDLE_PRESSED:
+            {{ channel }}.println( "MM P" );
+            break;
+
+        case Shellminator::MOUSE_MIDDLE_RELEASED:
+            {{ channel }}.println( "MM R" );
+            break;
+
+        case Shellminator::MOUSE_WHEEL_UP:
+            {{ channel }}.println( "MW U" );
+            break;
+
+        case Shellminator::MOUSE_WHEEL_DOWN:
+            {{ channel }}.println( "MW D" );
+            break;
+
+        default:
+            {{ channel }}.println( "INVALID" );
+            break;
+
+    }
+
+}
+
+++--FUNCTION_IMPLEMENTATIONS--++
