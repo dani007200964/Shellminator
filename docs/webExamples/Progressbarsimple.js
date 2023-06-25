@@ -661,6 +661,10 @@ function abort(what) {
   ABORT = true;
   EXITSTATUS = 1;
 
+  if (what.indexOf('RuntimeError: unreachable') >= 0) {
+    what += '. "unreachable" may be due to ASYNCIFY_STACK_SIZE not being large enough (try increasing it)';
+  }
+
   // Use a wasm runtime error, because a JS error might be seen as a foreign
   // exception, which means we'd run destructors on it. We need the error to
   // simply make the program stop.
@@ -839,6 +843,8 @@ function createWasm() {
   function receiveInstance(instance, module) {
     var exports = instance.exports;
 
+    exports = Asyncify.instrumentWasmExports(exports);
+
     Module['asm'] = exports;
 
     wasmMemory = Module['asm']['memory'];
@@ -996,7 +1002,7 @@ function dbg(text) {
 }
 
 // end include: runtime_debug.js
-var compilerSettings = {"ASSERTIONS":1,"STACK_OVERFLOW_CHECK":1,"VERBOSE":false,"INVOKE_RUN":true,"EXIT_RUNTIME":0,"STACK_SIZE":65536,"MALLOC":"dlmalloc","ABORTING_MALLOC":true,"INITIAL_MEMORY":16777216,"MAXIMUM_MEMORY":2147483648,"ALLOW_MEMORY_GROWTH":false,"MEMORY_GROWTH_GEOMETRIC_STEP":0.2,"MEMORY_GROWTH_GEOMETRIC_CAP":100663296,"MEMORY_GROWTH_LINEAR_STEP":-1,"MEMORY64":0,"INITIAL_TABLE":-1,"ALLOW_TABLE_GROWTH":false,"GLOBAL_BASE":1024,"USE_CLOSURE_COMPILER":false,"CLOSURE_WARNINGS":"quiet","IGNORE_CLOSURE_COMPILER_ERRORS":false,"DECLARE_ASM_MODULE_EXPORTS":true,"INLINING_LIMIT":false,"SUPPORT_BIG_ENDIAN":false,"SAFE_HEAP":0,"SAFE_HEAP_LOG":false,"EMULATE_FUNCTION_POINTER_CASTS":false,"EXCEPTION_DEBUG":false,"DEMANGLE_SUPPORT":false,"LIBRARY_DEBUG":false,"SYSCALL_DEBUG":false,"SOCKET_DEBUG":false,"DYLINK_DEBUG":0,"FS_DEBUG":false,"SOCKET_WEBRTC":false,"WEBSOCKET_URL":"ws:#","PROXY_POSIX_SOCKETS":false,"WEBSOCKET_SUBPROTOCOL":"binary","OPENAL_DEBUG":false,"WEBSOCKET_DEBUG":false,"GL_ASSERTIONS":false,"TRACE_WEBGL_CALLS":false,"GL_DEBUG":false,"GL_TESTING":false,"GL_MAX_TEMP_BUFFER_SIZE":2097152,"GL_UNSAFE_OPTS":true,"FULL_ES2":false,"GL_EMULATE_GLES_VERSION_STRING_FORMAT":true,"GL_EXTENSIONS_IN_PREFIXED_FORMAT":true,"GL_SUPPORT_AUTOMATIC_ENABLE_EXTENSIONS":true,"GL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS":true,"GL_TRACK_ERRORS":true,"GL_SUPPORT_EXPLICIT_SWAP_CONTROL":false,"GL_POOL_TEMP_BUFFERS":true,"WORKAROUND_OLD_WEBGL_UNIFORM_UPLOAD_IGNORED_OFFSET_BUG":0,"GL_EXPLICIT_UNIFORM_LOCATION":false,"GL_EXPLICIT_UNIFORM_BINDING":false,"USE_WEBGL2":false,"MIN_WEBGL_VERSION":1,"MAX_WEBGL_VERSION":1,"WEBGL2_BACKWARDS_COMPATIBILITY_EMULATION":false,"FULL_ES3":false,"LEGACY_GL_EMULATION":false,"GL_FFP_ONLY":false,"GL_PREINITIALIZED_CONTEXT":false,"USE_WEBGPU":false,"STB_IMAGE":false,"GL_DISABLE_HALF_FLOAT_EXTENSION_IF_BROKEN":false,"GL_WORKAROUND_SAFARI_GETCONTEXT_BUG":true,"JS_MATH":false,"POLYFILL_OLD_MATH_FUNCTIONS":0,"LEGACY_VM_SUPPORT":false,"ENVIRONMENT":"web,webview,worker,node","LZ4":false,"DISABLE_EXCEPTION_CATCHING":1,"EXPORT_EXCEPTION_HANDLING_HELPERS":false,"EXCEPTION_STACK_TRACES":false,"DISABLE_EXCEPTION_THROWING":false,"NODEJS_CATCH_EXIT":true,"NODEJS_CATCH_REJECTION":true,"ASYNCIFY":0,"ASYNCIFY_IGNORE_INDIRECT":false,"ASYNCIFY_STACK_SIZE":4096,"ASYNCIFY_ADVISE":false,"ASYNCIFY_LAZY_LOAD_CODE":false,"ASYNCIFY_DEBUG":0,"CASE_INSENSITIVE_FS":false,"FILESYSTEM":true,"FORCE_FILESYSTEM":1,"NODERAWFS":false,"NODE_CODE_CACHING":false,"EXPORT_ALL":false,"EXPORT_KEEPALIVE":true,"RETAIN_COMPILER_SETTINGS":1,"INCLUDE_FULL_LIBRARY":false,"RELOCATABLE":false,"MAIN_MODULE":0,"SIDE_MODULE":0,"BUILD_AS_WORKER":false,"PROXY_TO_WORKER":false,"PROXY_TO_WORKER_FILENAME":"","PROXY_TO_PTHREAD":false,"LINKABLE":false,"STRICT":false,"IGNORE_MISSING_MAIN":true,"AUTO_ARCHIVE_INDEXES":true,"STRICT_JS":false,"WARN_ON_UNDEFINED_SYMBOLS":true,"ERROR_ON_UNDEFINED_SYMBOLS":true,"SMALL_XHR_CHUNKS":false,"HEADLESS":false,"DETERMINISTIC":false,"MODULARIZE":false,"EXPORT_ES6":false,"USE_ES6_IMPORT_META":true,"BENCHMARK":false,"EXPORT_NAME":"Module","DYNAMIC_EXECUTION":1,"BOOTSTRAPPING_STRUCT_INFO":false,"EMSCRIPTEN_TRACING":false,"USE_GLFW":2,"WASM":1,"STANDALONE_WASM":false,"BINARYEN_IGNORE_IMPLICIT_TRAPS":false,"BINARYEN_EXTRA_PASSES":"","WASM_ASYNC_COMPILATION":true,"DYNCALLS":false,"WASM_BIGINT":false,"EMIT_PRODUCERS_SECTION":false,"EMIT_EMSCRIPTEN_LICENSE":false,"LEGALIZE_JS_FFI":true,"USE_SDL":0,"USE_SDL_GFX":0,"USE_SDL_IMAGE":1,"USE_SDL_TTF":1,"USE_SDL_NET":1,"USE_ICU":false,"USE_ZLIB":false,"USE_BZIP2":false,"USE_GIFLIB":false,"USE_LIBJPEG":false,"USE_LIBPNG":false,"USE_REGAL":false,"USE_BOOST_HEADERS":false,"USE_BULLET":false,"USE_VORBIS":false,"USE_OGG":false,"USE_MPG123":false,"USE_FREETYPE":false,"USE_SDL_MIXER":1,"USE_HARFBUZZ":false,"USE_COCOS2D":0,"USE_MODPLUG":false,"USE_SQLITE3":false,"SHARED_MEMORY":false,"WASM_WORKERS":0,"AUDIO_WORKLET":0,"WEBAUDIO_DEBUG":0,"PTHREAD_POOL_SIZE":0,"PTHREAD_POOL_SIZE_STRICT":1,"PTHREAD_POOL_DELAY_LOAD":false,"DEFAULT_PTHREAD_STACK_SIZE":0,"PTHREADS_PROFILING":false,"ALLOW_BLOCKING_ON_MAIN_THREAD":true,"PTHREADS_DEBUG":false,"EVAL_CTORS":0,"TEXTDECODER":1,"EMBIND_STD_STRING_IS_UTF8":true,"OFFSCREENCANVAS_SUPPORT":false,"OFFSCREENCANVASES_TO_PTHREAD":"#canvas","OFFSCREEN_FRAMEBUFFER":false,"FETCH_SUPPORT_INDEXEDDB":true,"FETCH_DEBUG":false,"FETCH":false,"WASMFS":false,"SINGLE_FILE":false,"AUTO_JS_LIBRARIES":true,"AUTO_NATIVE_LIBRARIES":true,"MIN_FIREFOX_VERSION":68,"MIN_SAFARI_VERSION":140100,"MIN_IE_VERSION":2147483647,"MIN_EDGE_VERSION":2147483647,"MIN_CHROME_VERSION":75,"MIN_NODE_VERSION":101900,"SUPPORT_ERRNO":true,"MINIMAL_RUNTIME":0,"MINIMAL_RUNTIME_STREAMING_WASM_COMPILATION":false,"MINIMAL_RUNTIME_STREAMING_WASM_INSTANTIATION":false,"SUPPORT_LONGJMP":"emscripten","DISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR":true,"HTML5_SUPPORT_DEFERRING_USER_SENSITIVE_REQUESTS":true,"MINIFY_HTML":true,"MAYBE_WASM2JS":false,"ASAN_SHADOW_SIZE":-1,"USE_OFFSET_CONVERTER":false,"LOAD_SOURCE_MAP":false,"DEFAULT_TO_CXX":true,"PRINTF_LONG_DOUBLE":false,"SEPARATE_DWARF_URL":"","ERROR_ON_WASM_CHANGES_AFTER_LINK":false,"ABORT_ON_WASM_EXCEPTIONS":false,"PURE_WASI":false,"IMPORTED_MEMORY":false,"SPLIT_MODULE":false,"AUTOLOAD_DYLIBS":true,"ALLOW_UNIMPLEMENTED_SYSCALLS":true,"TRUSTED_TYPES":false,"POLYFILL":true,"RUNTIME_DEBUG":false,"LEGACY_RUNTIME":false,"OFFSCREEN_FRAMEBUFFER_FORBID_VAO_PATH":false,"TEST_MEMORY_GROWTH_FAILS":false,"TARGET_BASENAME":"Progressbarsimple","TARGET_JS_NAME":"Progressbarsimple.js","SYSCALLS_REQUIRE_FILESYSTEM":true,"AUTODEBUG":false,"WASM2JS":false,"UBSAN_RUNTIME":0,"USE_LSAN":false,"USE_ASAN":false,"EMBIND":false,"MAIN_READS_PARAMS":false,"FETCH_WORKER_FILE":"","WASI_MODULE_NAME":"wasi_snapshot_preview1","EMSCRIPTEN_VERSION":"3.1.40","USE_RTTI":true,"OPT_LEVEL":0,"DEBUG_LEVEL":0,"SHRINK_LEVEL":0,"EMIT_NAME_SECTION":false,"EMIT_SYMBOL_MAP":false,"WASM_BINARY_FILE":"Progressbarsimple.wasm","PTHREAD_WORKER_FILE":"","WASM_WORKER_FILE":"","AUDIO_WORKLET_FILE":"","SOURCE_MAP_BASE":"","MEM_INIT_IN_WASM":true,"SUPPORT_BASE64_EMBEDDING":false,"ENVIRONMENT_MAY_BE_WEB":true,"ENVIRONMENT_MAY_BE_WORKER":true,"ENVIRONMENT_MAY_BE_NODE":true,"ENVIRONMENT_MAY_BE_SHELL":false,"ENVIRONMENT_MAY_BE_WEBVIEW":true,"MINIFY_WASM_IMPORTS_AND_EXPORTS":false,"MINIFY_WASM_IMPORTED_MODULES":false,"MINIFY_WASM_EXPORT_NAMES":true,"TARGET_NOT_SUPPORTED":2147483647,"SUPPORTS_GLOBALTHIS":false,"SUPPORTS_PROMISE_ANY":false,"LTO":0,"CAN_ADDRESS_2GB":false,"SEPARATE_DWARF":false,"WASM_EXCEPTIONS":false,"EXPECT_MAIN":true,"EXPORT_READY_PROMISE":true,"MEMORYPROFILER":false,"GENERATE_SOURCE_MAP":false,"GENERATE_DWARF":false,"STACK_HIGH":0,"STACK_LOW":0,"HEAP_BASE":0,"HAS_MAIN":true,"LINK_AS_CXX":true,"TRANSPILE_TO_ES5":false,"STACK_FIRST":true,"HAVE_EM_ASM":false,"PTHREADS":false,"BULK_MEMORY":false,"AGGRESSIVE_VARIABLE_ELIMINATION":0,"ALIASING_FUNCTION_POINTERS":0,"ASM_JS":1,"BINARYEN":1,"BINARYEN_ASYNC_COMPILATION":true,"BINARYEN_MEM_MAX":2147483648,"BINARYEN_METHOD":"native-wasm","BINARYEN_PASSES":"","BINARYEN_SCRIPTS":"","BINARYEN_TRAP_MODE":-1,"BUILD_AS_SHARED_LIB":0,"DOUBLE_MODE":0,"ELIMINATE_DUPLICATE_FUNCTIONS":0,"ELIMINATE_DUPLICATE_FUNCTIONS_DUMP_EQUIVALENT_FUNCTIONS":0,"ELIMINATE_DUPLICATE_FUNCTIONS_PASSES":5,"EMITTING_JS":1,"EMIT_EMSCRIPTEN_METADATA":0,"ERROR_ON_MISSING_LIBRARIES":1,"EXPORT_BINDINGS":0,"EXPORT_FUNCTION_TABLES":0,"FAST_UNROLLED_MEMCPY_AND_MEMSET":0,"FINALIZE_ASM_JS":0,"FORCE_ALIGNED_MEMORY":0,"FUNCTION_POINTER_ALIGNMENT":2,"LLD_REPORT_UNDEFINED":1,"MEMFS_APPEND_TO_TYPED_ARRAYS":1,"MEMORY_GROWTH_STEP":-1,"MEM_INIT_METHOD":0,"PGO":0,"PRECISE_F32":0,"PRECISE_I64_MATH":1,"QUANTUM_SIZE":4,"RESERVED_FUNCTION_POINTERS":false,"REVERSE_DEPS":"auto","RUNNING_JS_OPTS":0,"RUNTIME_LOGGING":false,"SAFE_SPLIT_MEMORY":0,"SAFE_STACK":0,"SEPARATE_ASM":0,"SEPARATE_ASM_MODULE_NAME":"","SHELL_FILE":"","SIMPLIFY_IFS":1,"SKIP_STACK_IN_SMALL":0,"SPLIT_MEMORY":0,"SWAPPABLE_ASM_MODULE":0,"TOTAL_MEMORY":16777216,"TOTAL_STACK":65536,"UNALIGNED_MEMORY":0,"USES_DYNAMIC_ALLOC":1,"USE_PTHREADS":0,"WARN_UNALIGNED":0,"WASM_BACKEND":-1,"WASM_MEM_MAX":2147483648,"WASM_OBJECT_FILES":0,"WORKAROUND_IOS_9_RIGHT_SHIFT_BUG":0,"FOUR_GB":4294967296,"POINTER_SIZE":4,"STACK_ALIGN":16,"GL_POOL_TEMP_BUFFERS_SIZE":288} ;
+var compilerSettings = {"ASSERTIONS":1,"STACK_OVERFLOW_CHECK":1,"VERBOSE":false,"INVOKE_RUN":true,"EXIT_RUNTIME":0,"STACK_SIZE":65536,"MALLOC":"dlmalloc","ABORTING_MALLOC":true,"INITIAL_MEMORY":16777216,"MAXIMUM_MEMORY":2147483648,"ALLOW_MEMORY_GROWTH":false,"MEMORY_GROWTH_GEOMETRIC_STEP":0.2,"MEMORY_GROWTH_GEOMETRIC_CAP":100663296,"MEMORY_GROWTH_LINEAR_STEP":-1,"MEMORY64":0,"INITIAL_TABLE":-1,"ALLOW_TABLE_GROWTH":false,"GLOBAL_BASE":1024,"USE_CLOSURE_COMPILER":false,"CLOSURE_WARNINGS":"quiet","IGNORE_CLOSURE_COMPILER_ERRORS":false,"DECLARE_ASM_MODULE_EXPORTS":true,"INLINING_LIMIT":false,"SUPPORT_BIG_ENDIAN":false,"SAFE_HEAP":0,"SAFE_HEAP_LOG":false,"EMULATE_FUNCTION_POINTER_CASTS":false,"EXCEPTION_DEBUG":false,"DEMANGLE_SUPPORT":false,"LIBRARY_DEBUG":false,"SYSCALL_DEBUG":false,"SOCKET_DEBUG":false,"DYLINK_DEBUG":0,"FS_DEBUG":false,"SOCKET_WEBRTC":false,"WEBSOCKET_URL":"ws:#","PROXY_POSIX_SOCKETS":false,"WEBSOCKET_SUBPROTOCOL":"binary","OPENAL_DEBUG":false,"WEBSOCKET_DEBUG":false,"GL_ASSERTIONS":false,"TRACE_WEBGL_CALLS":false,"GL_DEBUG":false,"GL_TESTING":false,"GL_MAX_TEMP_BUFFER_SIZE":2097152,"GL_UNSAFE_OPTS":true,"FULL_ES2":false,"GL_EMULATE_GLES_VERSION_STRING_FORMAT":true,"GL_EXTENSIONS_IN_PREFIXED_FORMAT":true,"GL_SUPPORT_AUTOMATIC_ENABLE_EXTENSIONS":true,"GL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS":true,"GL_TRACK_ERRORS":true,"GL_SUPPORT_EXPLICIT_SWAP_CONTROL":false,"GL_POOL_TEMP_BUFFERS":true,"WORKAROUND_OLD_WEBGL_UNIFORM_UPLOAD_IGNORED_OFFSET_BUG":0,"GL_EXPLICIT_UNIFORM_LOCATION":false,"GL_EXPLICIT_UNIFORM_BINDING":false,"USE_WEBGL2":false,"MIN_WEBGL_VERSION":1,"MAX_WEBGL_VERSION":1,"WEBGL2_BACKWARDS_COMPATIBILITY_EMULATION":false,"FULL_ES3":false,"LEGACY_GL_EMULATION":false,"GL_FFP_ONLY":false,"GL_PREINITIALIZED_CONTEXT":false,"USE_WEBGPU":false,"STB_IMAGE":false,"GL_DISABLE_HALF_FLOAT_EXTENSION_IF_BROKEN":false,"GL_WORKAROUND_SAFARI_GETCONTEXT_BUG":true,"JS_MATH":false,"POLYFILL_OLD_MATH_FUNCTIONS":0,"LEGACY_VM_SUPPORT":false,"ENVIRONMENT":"web,webview,worker,node","LZ4":false,"DISABLE_EXCEPTION_CATCHING":1,"EXPORT_EXCEPTION_HANDLING_HELPERS":false,"EXCEPTION_STACK_TRACES":false,"DISABLE_EXCEPTION_THROWING":false,"NODEJS_CATCH_EXIT":true,"NODEJS_CATCH_REJECTION":true,"ASYNCIFY":1,"ASYNCIFY_IGNORE_INDIRECT":false,"ASYNCIFY_STACK_SIZE":4096,"ASYNCIFY_ADVISE":false,"ASYNCIFY_LAZY_LOAD_CODE":false,"ASYNCIFY_DEBUG":0,"CASE_INSENSITIVE_FS":false,"FILESYSTEM":true,"FORCE_FILESYSTEM":1,"NODERAWFS":false,"NODE_CODE_CACHING":false,"EXPORT_ALL":false,"EXPORT_KEEPALIVE":true,"RETAIN_COMPILER_SETTINGS":1,"INCLUDE_FULL_LIBRARY":false,"RELOCATABLE":false,"MAIN_MODULE":0,"SIDE_MODULE":0,"BUILD_AS_WORKER":false,"PROXY_TO_WORKER":false,"PROXY_TO_WORKER_FILENAME":"","PROXY_TO_PTHREAD":false,"LINKABLE":false,"STRICT":false,"IGNORE_MISSING_MAIN":true,"AUTO_ARCHIVE_INDEXES":true,"STRICT_JS":false,"WARN_ON_UNDEFINED_SYMBOLS":true,"ERROR_ON_UNDEFINED_SYMBOLS":true,"SMALL_XHR_CHUNKS":false,"HEADLESS":false,"DETERMINISTIC":false,"MODULARIZE":false,"EXPORT_ES6":false,"USE_ES6_IMPORT_META":true,"BENCHMARK":false,"EXPORT_NAME":"Module","DYNAMIC_EXECUTION":1,"BOOTSTRAPPING_STRUCT_INFO":false,"EMSCRIPTEN_TRACING":false,"USE_GLFW":2,"WASM":1,"STANDALONE_WASM":false,"BINARYEN_IGNORE_IMPLICIT_TRAPS":false,"BINARYEN_EXTRA_PASSES":"","WASM_ASYNC_COMPILATION":true,"DYNCALLS":1,"WASM_BIGINT":false,"EMIT_PRODUCERS_SECTION":false,"EMIT_EMSCRIPTEN_LICENSE":false,"LEGALIZE_JS_FFI":true,"USE_SDL":0,"USE_SDL_GFX":0,"USE_SDL_IMAGE":1,"USE_SDL_TTF":1,"USE_SDL_NET":1,"USE_ICU":false,"USE_ZLIB":false,"USE_BZIP2":false,"USE_GIFLIB":false,"USE_LIBJPEG":false,"USE_LIBPNG":false,"USE_REGAL":false,"USE_BOOST_HEADERS":false,"USE_BULLET":false,"USE_VORBIS":false,"USE_OGG":false,"USE_MPG123":false,"USE_FREETYPE":false,"USE_SDL_MIXER":1,"USE_HARFBUZZ":false,"USE_COCOS2D":0,"USE_MODPLUG":false,"USE_SQLITE3":false,"SHARED_MEMORY":false,"WASM_WORKERS":0,"AUDIO_WORKLET":0,"WEBAUDIO_DEBUG":0,"PTHREAD_POOL_SIZE":0,"PTHREAD_POOL_SIZE_STRICT":1,"PTHREAD_POOL_DELAY_LOAD":false,"DEFAULT_PTHREAD_STACK_SIZE":0,"PTHREADS_PROFILING":false,"ALLOW_BLOCKING_ON_MAIN_THREAD":true,"PTHREADS_DEBUG":false,"EVAL_CTORS":0,"TEXTDECODER":1,"EMBIND_STD_STRING_IS_UTF8":true,"OFFSCREENCANVAS_SUPPORT":false,"OFFSCREENCANVASES_TO_PTHREAD":"#canvas","OFFSCREEN_FRAMEBUFFER":false,"FETCH_SUPPORT_INDEXEDDB":true,"FETCH_DEBUG":false,"FETCH":false,"WASMFS":false,"SINGLE_FILE":false,"AUTO_JS_LIBRARIES":true,"AUTO_NATIVE_LIBRARIES":true,"MIN_FIREFOX_VERSION":68,"MIN_SAFARI_VERSION":140100,"MIN_IE_VERSION":2147483647,"MIN_EDGE_VERSION":2147483647,"MIN_CHROME_VERSION":75,"MIN_NODE_VERSION":101900,"SUPPORT_ERRNO":true,"MINIMAL_RUNTIME":0,"MINIMAL_RUNTIME_STREAMING_WASM_COMPILATION":false,"MINIMAL_RUNTIME_STREAMING_WASM_INSTANTIATION":false,"SUPPORT_LONGJMP":"emscripten","DISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR":true,"HTML5_SUPPORT_DEFERRING_USER_SENSITIVE_REQUESTS":true,"MINIFY_HTML":true,"MAYBE_WASM2JS":false,"ASAN_SHADOW_SIZE":-1,"USE_OFFSET_CONVERTER":false,"LOAD_SOURCE_MAP":false,"DEFAULT_TO_CXX":true,"PRINTF_LONG_DOUBLE":false,"SEPARATE_DWARF_URL":"","ERROR_ON_WASM_CHANGES_AFTER_LINK":false,"ABORT_ON_WASM_EXCEPTIONS":false,"PURE_WASI":false,"IMPORTED_MEMORY":false,"SPLIT_MODULE":false,"AUTOLOAD_DYLIBS":true,"ALLOW_UNIMPLEMENTED_SYSCALLS":true,"TRUSTED_TYPES":false,"POLYFILL":true,"RUNTIME_DEBUG":false,"LEGACY_RUNTIME":false,"OFFSCREEN_FRAMEBUFFER_FORBID_VAO_PATH":false,"TEST_MEMORY_GROWTH_FAILS":false,"TARGET_BASENAME":"Progressbarsimple","TARGET_JS_NAME":"Progressbarsimple.js","SYSCALLS_REQUIRE_FILESYSTEM":true,"AUTODEBUG":false,"WASM2JS":false,"UBSAN_RUNTIME":0,"USE_LSAN":false,"USE_ASAN":false,"EMBIND":false,"MAIN_READS_PARAMS":false,"FETCH_WORKER_FILE":"","WASI_MODULE_NAME":"wasi_snapshot_preview1","EMSCRIPTEN_VERSION":"3.1.40","USE_RTTI":true,"OPT_LEVEL":0,"DEBUG_LEVEL":0,"SHRINK_LEVEL":0,"EMIT_NAME_SECTION":false,"EMIT_SYMBOL_MAP":false,"WASM_BINARY_FILE":"Progressbarsimple.wasm","PTHREAD_WORKER_FILE":"","WASM_WORKER_FILE":"","AUDIO_WORKLET_FILE":"","SOURCE_MAP_BASE":"","MEM_INIT_IN_WASM":true,"SUPPORT_BASE64_EMBEDDING":false,"ENVIRONMENT_MAY_BE_WEB":true,"ENVIRONMENT_MAY_BE_WORKER":true,"ENVIRONMENT_MAY_BE_NODE":true,"ENVIRONMENT_MAY_BE_SHELL":false,"ENVIRONMENT_MAY_BE_WEBVIEW":true,"MINIFY_WASM_IMPORTS_AND_EXPORTS":false,"MINIFY_WASM_IMPORTED_MODULES":false,"MINIFY_WASM_EXPORT_NAMES":true,"TARGET_NOT_SUPPORTED":2147483647,"SUPPORTS_GLOBALTHIS":false,"SUPPORTS_PROMISE_ANY":false,"LTO":0,"CAN_ADDRESS_2GB":false,"SEPARATE_DWARF":false,"WASM_EXCEPTIONS":false,"EXPECT_MAIN":true,"EXPORT_READY_PROMISE":true,"MEMORYPROFILER":false,"GENERATE_SOURCE_MAP":false,"GENERATE_DWARF":false,"STACK_HIGH":0,"STACK_LOW":0,"HEAP_BASE":0,"HAS_MAIN":true,"LINK_AS_CXX":true,"TRANSPILE_TO_ES5":false,"STACK_FIRST":true,"HAVE_EM_ASM":false,"PTHREADS":false,"BULK_MEMORY":false,"AGGRESSIVE_VARIABLE_ELIMINATION":0,"ALIASING_FUNCTION_POINTERS":0,"ASM_JS":1,"BINARYEN":1,"BINARYEN_ASYNC_COMPILATION":true,"BINARYEN_MEM_MAX":2147483648,"BINARYEN_METHOD":"native-wasm","BINARYEN_PASSES":"","BINARYEN_SCRIPTS":"","BINARYEN_TRAP_MODE":-1,"BUILD_AS_SHARED_LIB":0,"DOUBLE_MODE":0,"ELIMINATE_DUPLICATE_FUNCTIONS":0,"ELIMINATE_DUPLICATE_FUNCTIONS_DUMP_EQUIVALENT_FUNCTIONS":0,"ELIMINATE_DUPLICATE_FUNCTIONS_PASSES":5,"EMITTING_JS":1,"EMIT_EMSCRIPTEN_METADATA":0,"ERROR_ON_MISSING_LIBRARIES":1,"EXPORT_BINDINGS":0,"EXPORT_FUNCTION_TABLES":0,"FAST_UNROLLED_MEMCPY_AND_MEMSET":0,"FINALIZE_ASM_JS":0,"FORCE_ALIGNED_MEMORY":0,"FUNCTION_POINTER_ALIGNMENT":2,"LLD_REPORT_UNDEFINED":1,"MEMFS_APPEND_TO_TYPED_ARRAYS":1,"MEMORY_GROWTH_STEP":-1,"MEM_INIT_METHOD":0,"PGO":0,"PRECISE_F32":0,"PRECISE_I64_MATH":1,"QUANTUM_SIZE":4,"RESERVED_FUNCTION_POINTERS":false,"REVERSE_DEPS":"auto","RUNNING_JS_OPTS":0,"RUNTIME_LOGGING":false,"SAFE_SPLIT_MEMORY":0,"SAFE_STACK":0,"SEPARATE_ASM":0,"SEPARATE_ASM_MODULE_NAME":"","SHELL_FILE":"","SIMPLIFY_IFS":1,"SKIP_STACK_IN_SMALL":0,"SPLIT_MEMORY":0,"SWAPPABLE_ASM_MODULE":0,"TOTAL_MEMORY":16777216,"TOTAL_STACK":65536,"UNALIGNED_MEMORY":0,"USES_DYNAMIC_ALLOC":1,"USE_PTHREADS":0,"WARN_UNALIGNED":0,"WASM_BACKEND":-1,"WASM_MEM_MAX":2147483648,"WASM_OBJECT_FILES":0,"WORKAROUND_IOS_9_RIGHT_SHIFT_BUG":0,"FOUR_GB":4294967296,"POINTER_SIZE":4,"STACK_ALIGN":16,"GL_POOL_TEMP_BUFFERS_SIZE":288} ;
 
 function getCompilerSetting(name) {
   if (!(name in compilerSettings)) return 'invalid compiler setting: ' + name;
@@ -1007,7 +1013,8 @@ function getCompilerSetting(name) {
 
 function stdinAvailable() { if( stdinBufferPtr >= stdinBuffer.length ){ return 0; } return 1; }
 function stdinRead() { let ret = -1; if( stdinBufferPtr >= stdinBuffer.length ){ return ret; } ret = stdinBuffer[ stdinBufferPtr ]; stdinBufferPtr++; if( stdinBufferPtr >= stdinBuffer.length ){ stdinBuffer.length = 0; stdinBufferPtr = 0; } return ret; }
-function stdoutWrite(c) { term.write( String.fromCharCode( c ) ); }
+function stdoutWriteChar(c) { term.write( String.fromCharCode( c ) ); }
+function stdoutWriteString(str) { term.write( UTF8ToString( str ) ); }
 
 
 
@@ -4305,26 +4312,19 @@ function stdoutWrite(c) { term.write( String.fromCharCode( c ) ); }
       }
     }
   
-  
-  var wasmTableMirror = [];
-  
-  function getWasmTableEntry(funcPtr) {
-      var func = wasmTableMirror[funcPtr];
-      if (!func) {
-        if (funcPtr >= wasmTableMirror.length) wasmTableMirror.length = funcPtr + 1;
-        wasmTableMirror[funcPtr] = func = wasmTable.get(funcPtr);
-      }
-      assert(wasmTable.get(funcPtr) == func, "JavaScript-side Wasm function table mirror is out of date!");
-      return func;
-    }
   function _emscripten_set_main_loop(func, fps, simulateInfiniteLoop) {
-      var browserIterationFunc = getWasmTableEntry(func);
+      var browserIterationFunc = (() => dynCall_v.call(null, func));
       setMainLoop(browserIterationFunc, fps, simulateInfiniteLoop);
     }
 
-  function _emscripten_sleep() {
-      throw 'Please compile your program with async support in order to use asynchronous operations like emscripten_sleep';
+  function _emscripten_sleep(ms) {
+      // emscripten_sleep() does not return a value, but we still need a |return|
+      // here for stack switching support (ASYNCIFY=2). In that mode this function
+      // returns a Promise instead of nothing, and that Promise is what tells the
+      // wasm VM to pause the stack.
+      return Asyncify.handleSleep((wakeUp) => safeSetTimeout(wakeUp, ms));
     }
+  _emscripten_sleep.isAsync = true;
 
   function _fd_close(fd) {
   try {
@@ -4397,6 +4397,269 @@ function stdoutWrite(c) { term.write( String.fromCharCode( c ) ); }
 
 
 
+
+
+  function runAndAbortIfError(func) {
+      try {
+        return func();
+      } catch (e) {
+        abort(e);
+      }
+    }
+  
+  
+  function sigToWasmTypes(sig) {
+      assert(!sig.includes('j'), 'i64 not permitted in function signatures when WASM_BIGINT is disabled');
+      var typeNames = {
+        'i': 'i32',
+        'j': 'i64',
+        'f': 'f32',
+        'd': 'f64',
+        'p': 'i32',
+      };
+      var type = {
+        parameters: [],
+        results: sig[0] == 'v' ? [] : [typeNames[sig[0]]]
+      };
+      for (var i = 1; i < sig.length; ++i) {
+        assert(sig[i] in typeNames, 'invalid signature char: ' + sig[i]);
+        type.parameters.push(typeNames[sig[i]]);
+      }
+      return type;
+    }
+  
+  function runtimeKeepalivePush() {
+      runtimeKeepaliveCounter += 1;
+    }
+  
+  function runtimeKeepalivePop() {
+      assert(runtimeKeepaliveCounter > 0);
+      runtimeKeepaliveCounter -= 1;
+    }
+  
+  
+  var Asyncify = {instrumentWasmImports:function(imports) {
+        var importPatterns = [/^invoke_.*$/,/^fd_sync$/,/^__wasi_fd_sync$/,/^__asyncjs__.*$/,/^emscripten_idb_load$/,/^emscripten_idb_store$/,/^emscripten_idb_delete$/,/^emscripten_idb_exists$/,/^emscripten_idb_load_blob$/,/^emscripten_idb_store_blob$/,/^emscripten_sleep$/,/^emscripten_wget$/,/^emscripten_wget_data$/,/^emscripten_scan_registers$/,/^emscripten_lazy_load_code$/,/^_load_secondary_module$/,/^emscripten_fiber_swap$/,/^SDL_Delay$/];
+  
+        for (var x in imports) {
+          (function(x) {
+            var original = imports[x];
+            var sig = original.sig;
+            if (typeof original == 'function') {
+              var isAsyncifyImport = original.isAsync ||
+                                     importPatterns.some(pattern => !!x.match(pattern));
+              imports[x] = function() {
+                var originalAsyncifyState = Asyncify.state;
+                try {
+                  return original.apply(null, arguments);
+                } finally {
+                  // Only asyncify-declared imports are allowed to change the
+                  // state.
+                  // Changing the state from normal to disabled is allowed (in any
+                  // function) as that is what shutdown does (and we don't have an
+                  // explicit list of shutdown imports).
+                  var changedToDisabled =
+                        originalAsyncifyState === Asyncify.State.Normal &&
+                        Asyncify.state        === Asyncify.State.Disabled;
+                  // invoke_* functions are allowed to change the state if we do
+                  // not ignore indirect calls.
+                  var ignoredInvoke = x.startsWith('invoke_') &&
+                                      true;
+                  if (Asyncify.state !== originalAsyncifyState &&
+                      !isAsyncifyImport &&
+                      !changedToDisabled &&
+                      !ignoredInvoke) {
+                    throw new Error(`import ${x} was not in ASYNCIFY_IMPORTS, but changed the state`);
+                  }
+                }
+              };
+            }
+          })(x);
+        }
+      },instrumentWasmExports:function(exports) {
+        var ret = {};
+        for (var x in exports) {
+          (function(x) {
+            var original = exports[x];
+            if (typeof original == 'function') {
+              ret[x] = function() {
+                Asyncify.exportCallStack.push(x);
+                try {
+                  return original.apply(null, arguments);
+                } finally {
+                  if (!ABORT) {
+                    var y = Asyncify.exportCallStack.pop();
+                    assert(y === x);
+                    Asyncify.maybeStopUnwind();
+                  }
+                }
+              };
+            } else {
+              ret[x] = original;
+            }
+          })(x);
+        }
+        return ret;
+      },State:{Normal:0,Unwinding:1,Rewinding:2,Disabled:3},state:0,StackSize:4096,currData:null,handleSleepReturnValue:0,exportCallStack:[],callStackNameToId:{},callStackIdToName:{},callStackId:0,asyncPromiseHandlers:null,sleepCallbacks:[],getCallStackId:function(funcName) {
+        var id = Asyncify.callStackNameToId[funcName];
+        if (id === undefined) {
+          id = Asyncify.callStackId++;
+          Asyncify.callStackNameToId[funcName] = id;
+          Asyncify.callStackIdToName[id] = funcName;
+        }
+        return id;
+      },maybeStopUnwind:function() {
+        if (Asyncify.currData &&
+            Asyncify.state === Asyncify.State.Unwinding &&
+            Asyncify.exportCallStack.length === 0) {
+          // We just finished unwinding.
+          // Be sure to set the state before calling any other functions to avoid
+          // possible infinite recursion here (For example in debug pthread builds
+          // the dbg() function itself can call back into WebAssembly to get the
+          // current pthread_self() pointer).
+          Asyncify.state = Asyncify.State.Normal;
+          
+          // Keep the runtime alive so that a re-wind can be done later.
+          runAndAbortIfError(_asyncify_stop_unwind);
+          if (typeof Fibers != 'undefined') {
+            Fibers.trampoline();
+          }
+        }
+      },whenDone:function() {
+        assert(Asyncify.currData, 'Tried to wait for an async operation when none is in progress.');
+        assert(!Asyncify.asyncPromiseHandlers, 'Cannot have multiple async operations in flight at once');
+        return new Promise((resolve, reject) => {
+          Asyncify.asyncPromiseHandlers = {
+            resolve: resolve,
+            reject: reject
+          };
+        });
+      },allocateData:function() {
+        // An asyncify data structure has three fields:
+        //  0  current stack pos
+        //  4  max stack pos
+        //  8  id of function at bottom of the call stack (callStackIdToName[id] == name of js function)
+        //
+        // The Asyncify ABI only interprets the first two fields, the rest is for the runtime.
+        // We also embed a stack in the same memory region here, right next to the structure.
+        // This struct is also defined as asyncify_data_t in emscripten/fiber.h
+        var ptr = _malloc(12 + Asyncify.StackSize);
+        Asyncify.setDataHeader(ptr, ptr + 12, Asyncify.StackSize);
+        Asyncify.setDataRewindFunc(ptr);
+        return ptr;
+      },setDataHeader:function(ptr, stack, stackSize) {
+        HEAP32[((ptr)>>2)] = stack;
+        HEAP32[(((ptr)+(4))>>2)] = stack + stackSize;
+      },setDataRewindFunc:function(ptr) {
+        var bottomOfCallStack = Asyncify.exportCallStack[0];
+        var rewindId = Asyncify.getCallStackId(bottomOfCallStack);
+        HEAP32[(((ptr)+(8))>>2)] = rewindId;
+      },getDataRewindFunc:function(ptr) {
+        var id = HEAP32[(((ptr)+(8))>>2)];
+        var name = Asyncify.callStackIdToName[id];
+        var func = Module['asm'][name];
+        return func;
+      },doRewind:function(ptr) {
+        var start = Asyncify.getDataRewindFunc(ptr);
+        // Once we have rewound and the stack we no longer need to artificially
+        // keep the runtime alive.
+        
+        return start();
+      },handleSleep:function(startAsync) {
+        assert(Asyncify.state !== Asyncify.State.Disabled, 'Asyncify cannot be done during or after the runtime exits');
+        if (ABORT) return;
+        if (Asyncify.state === Asyncify.State.Normal) {
+          // Prepare to sleep. Call startAsync, and see what happens:
+          // if the code decided to call our callback synchronously,
+          // then no async operation was in fact begun, and we don't
+          // need to do anything.
+          var reachedCallback = false;
+          var reachedAfterCallback = false;
+          startAsync((handleSleepReturnValue = 0) => {
+            assert(!handleSleepReturnValue || typeof handleSleepReturnValue == 'number' || typeof handleSleepReturnValue == 'boolean'); // old emterpretify API supported other stuff
+            if (ABORT) return;
+            Asyncify.handleSleepReturnValue = handleSleepReturnValue;
+            reachedCallback = true;
+            if (!reachedAfterCallback) {
+              // We are happening synchronously, so no need for async.
+              return;
+            }
+            // This async operation did not happen synchronously, so we did
+            // unwind. In that case there can be no compiled code on the stack,
+            // as it might break later operations (we can rewind ok now, but if
+            // we unwind again, we would unwind through the extra compiled code
+            // too).
+            assert(!Asyncify.exportCallStack.length, 'Waking up (starting to rewind) must be done from JS, without compiled code on the stack.');
+            Asyncify.state = Asyncify.State.Rewinding;
+            runAndAbortIfError(() => _asyncify_start_rewind(Asyncify.currData));
+            if (typeof Browser != 'undefined' && Browser.mainLoop.func) {
+              Browser.mainLoop.resume();
+            }
+            var asyncWasmReturnValue, isError = false;
+            try {
+              asyncWasmReturnValue = Asyncify.doRewind(Asyncify.currData);
+            } catch (err) {
+              asyncWasmReturnValue = err;
+              isError = true;
+            }
+            // Track whether the return value was handled by any promise handlers.
+            var handled = false;
+            if (!Asyncify.currData) {
+              // All asynchronous execution has finished.
+              // `asyncWasmReturnValue` now contains the final
+              // return value of the exported async WASM function.
+              //
+              // Note: `asyncWasmReturnValue` is distinct from
+              // `Asyncify.handleSleepReturnValue`.
+              // `Asyncify.handleSleepReturnValue` contains the return
+              // value of the last C function to have executed
+              // `Asyncify.handleSleep()`, where as `asyncWasmReturnValue`
+              // contains the return value of the exported WASM function
+              // that may have called C functions that
+              // call `Asyncify.handleSleep()`.
+              var asyncPromiseHandlers = Asyncify.asyncPromiseHandlers;
+              if (asyncPromiseHandlers) {
+                Asyncify.asyncPromiseHandlers = null;
+                (isError ? asyncPromiseHandlers.reject : asyncPromiseHandlers.resolve)(asyncWasmReturnValue);
+                handled = true;
+              }
+            }
+            if (isError && !handled) {
+              // If there was an error and it was not handled by now, we have no choice but to
+              // rethrow that error into the global scope where it can be caught only by
+              // `onerror` or `onunhandledpromiserejection`.
+              throw asyncWasmReturnValue;
+            }
+          });
+          reachedAfterCallback = true;
+          if (!reachedCallback) {
+            // A true async operation was begun; start a sleep.
+            Asyncify.state = Asyncify.State.Unwinding;
+            // TODO: reuse, don't alloc/free every sleep
+            Asyncify.currData = Asyncify.allocateData();
+            if (typeof Browser != 'undefined' && Browser.mainLoop.func) {
+              Browser.mainLoop.pause();
+            }
+            runAndAbortIfError(() => _asyncify_start_unwind(Asyncify.currData));
+          }
+        } else if (Asyncify.state === Asyncify.State.Rewinding) {
+          // Stop a resume.
+          Asyncify.state = Asyncify.State.Normal;
+          runAndAbortIfError(_asyncify_stop_rewind);
+          _free(Asyncify.currData);
+          Asyncify.currData = null;
+          // Call all sleep callbacks now that the sleep-resume is all done.
+          Asyncify.sleepCallbacks.forEach((func) => callUserCallback(func));
+        } else {
+          abort(`invalid state: ${Asyncify.state}`);
+        }
+        return Asyncify.handleSleepReturnValue;
+      },handleAsync:function(startAsync) {
+        return Asyncify.handleSleep((wakeUp) => {
+          // TODO: add error handling as a second param when handleSleep implements it.
+          startAsync().then(wakeUp);
+        });
+      }};
 
 
       // exports
@@ -4669,8 +4932,10 @@ var wasmImports = {
   "fd_write": _fd_write,
   "stdinAvailable": stdinAvailable,
   "stdinRead": stdinRead,
-  "stdoutWrite": stdoutWrite
+  "stdoutWriteChar": stdoutWriteChar,
+  "stdoutWriteString": stdoutWriteString
 };
+Asyncify.instrumentWasmImports(wasmImports);
 var asm = createWasm();
 /** @type {function(...*):?} */
 var ___wasm_call_ctors = createExportWrapper("__wasm_call_ctors");
@@ -4687,6 +4952,11 @@ var _fflush = Module["_fflush"] = createExportWrapper("fflush");
 /** @type {function(...*):?} */
 var _emscripten_stack_init = function() {
   return (_emscripten_stack_init = Module["asm"]["emscripten_stack_init"]).apply(null, arguments);
+};
+
+/** @type {function(...*):?} */
+var _emscripten_stack_set_limits = function() {
+  return (_emscripten_stack_set_limits = Module["asm"]["emscripten_stack_set_limits"]).apply(null, arguments);
 };
 
 /** @type {function(...*):?} */
@@ -4716,9 +4986,37 @@ var _emscripten_stack_get_current = function() {
 };
 
 /** @type {function(...*):?} */
+var dynCall_vii = Module["dynCall_vii"] = createExportWrapper("dynCall_vii");
+/** @type {function(...*):?} */
+var dynCall_iii = Module["dynCall_iii"] = createExportWrapper("dynCall_iii");
+/** @type {function(...*):?} */
+var dynCall_iiii = Module["dynCall_iiii"] = createExportWrapper("dynCall_iiii");
+/** @type {function(...*):?} */
+var dynCall_ii = Module["dynCall_ii"] = createExportWrapper("dynCall_ii");
+/** @type {function(...*):?} */
+var dynCall_vi = Module["dynCall_vi"] = createExportWrapper("dynCall_vi");
+/** @type {function(...*):?} */
+var dynCall_v = Module["dynCall_v"] = createExportWrapper("dynCall_v");
+/** @type {function(...*):?} */
+var dynCall_iidiiii = Module["dynCall_iidiiii"] = createExportWrapper("dynCall_iidiiii");
+/** @type {function(...*):?} */
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
+/** @type {function(...*):?} */
+var dynCall_viiiiii = Module["dynCall_viiiiii"] = createExportWrapper("dynCall_viiiiii");
+/** @type {function(...*):?} */
+var dynCall_viiiii = Module["dynCall_viiiii"] = createExportWrapper("dynCall_viiiii");
+/** @type {function(...*):?} */
+var dynCall_viiii = Module["dynCall_viiii"] = createExportWrapper("dynCall_viiii");
+/** @type {function(...*):?} */
+var _asyncify_start_unwind = createExportWrapper("asyncify_start_unwind");
+/** @type {function(...*):?} */
+var _asyncify_stop_unwind = createExportWrapper("asyncify_stop_unwind");
+/** @type {function(...*):?} */
+var _asyncify_start_rewind = createExportWrapper("asyncify_start_rewind");
+/** @type {function(...*):?} */
+var _asyncify_stop_rewind = createExportWrapper("asyncify_stop_rewind");
 var ___start_em_js = Module['___start_em_js'] = 68460;
-var ___stop_em_js = Module['___stop_em_js'] = 68833;
+var ___stop_em_js = Module['___stop_em_js'] = 68898;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===
@@ -4758,8 +5056,6 @@ var missingLibrarySymbols = [
   'dynCallLegacy',
   'getDynCaller',
   'dynCall',
-  'runtimeKeepalivePush',
-  'runtimeKeepalivePop',
   'asmjsMangle',
   'HandleAllocator',
   'getNativeTypeSize',
@@ -4780,7 +5076,6 @@ var missingLibrarySymbols = [
   'ccall',
   'cwrap',
   'uleb128Encode',
-  'sigToWasmTypes',
   'generateFuncType',
   'convertJsFunctionToWasm',
   'getEmptyTableSlot',
@@ -4886,7 +5181,6 @@ var missingLibrarySymbols = [
   '__glGetActiveAttribOrUniform',
   'writeGLArray',
   'registerWebGlEventCallback',
-  'runAndAbortIfError',
   'SDL_unicode',
   'SDL_ttfContext',
   'SDL_audio',
@@ -4944,6 +5238,8 @@ var unexportedSymbols = [
   'UNWIND_CACHE',
   'readEmAsmArgsArray',
   'handleException',
+  'runtimeKeepalivePush',
+  'runtimeKeepalivePop',
   'callUserCallback',
   'maybeExit',
   'safeSetTimeout',
@@ -4951,6 +5247,7 @@ var unexportedSymbols = [
   'alignMemory',
   'mmapAlloc',
   'convertI32PairToI53Checked',
+  'sigToWasmTypes',
   'freeTableIndexes',
   'functionsInTableMap',
   'setValue',
@@ -4999,6 +5296,9 @@ var unexportedSymbols = [
   'EGL',
   'GLEW',
   'IDBStore',
+  'runAndAbortIfError',
+  'Asyncify',
+  'Fibers',
   'SDL',
   'SDL_gfx',
   'GLFW',

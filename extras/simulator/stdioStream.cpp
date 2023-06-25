@@ -68,11 +68,18 @@ EM_JS( int, stdinRead, (), {
 
 } );
 
-EM_JS( void, stdoutWrite, ( char c ), {
+EM_JS( void, stdoutWriteChar, ( uint8_t c ), {
 
     term.write( String.fromCharCode( c ) );
 
 } );
+
+EM_JS( void, stdoutWriteString, ( const char* str ), {
+
+    term.write( UTF8ToString( str ) );
+
+} );
+
 
 #endif
 
@@ -256,7 +263,7 @@ size_t stdioStream::write( uint8_t b ){
     #endif
     	
     #ifdef __EMSCRIPTEN__
-    stdoutWrite( (char)b );
+    stdoutWriteChar( (char)b );
     #endif
     	
     return 1;
@@ -274,7 +281,7 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
         #endif
             
         #ifdef __EMSCRIPTEN__
-        stdoutWrite( (char)buff[ i ] );
+        stdoutWriteChar( (char)buff[ i ] );
         #endif
 
     }
@@ -291,11 +298,7 @@ size_t stdioStream::write( const char *str ){
     #endif
         
     #ifdef __EMSCRIPTEN__
-    const char* strCopy = str;
-  	while( *strCopy ){
-        stdoutWrite( (char) *strCopy );
-        strCopy++;
-    }
+    stdoutWriteString( str );
     #endif
 
 	return strlen( str );

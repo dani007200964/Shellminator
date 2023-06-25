@@ -235,7 +235,7 @@ for template in templateFiles:
             outputFile.close()
 
             CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + emscriptenExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
-            CMakeContent.append( "\ttarget_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS )\n\n" )
+            CMakeContent.append( "\ttarget_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )\n\n" )
         #print( secondRunData )
 
     # We have to close an if statement at the end.
