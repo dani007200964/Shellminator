@@ -1,5 +1,6 @@
 var class_shellminator =
 [
+    [ "mouseEvent_t", "struct_shellminator_1_1mouse_event__t.html", "struct_shellminator_1_1mouse_event__t" ],
     [ "Shellminator", "class_shellminator.html#a6f9c372a653bae09bf512949d67a935e", null ],
     [ "Shellminator", "class_shellminator.html#a6002c0937a33d8667450ab6a31b79dd7", null ],
     [ "Shellminator", "class_shellminator.html#a738e0b8e897f5643f586353e2c308785", null ],
@@ -38,6 +39,10 @@ var class_shellminator =
     [ "getCursorPosition", "class_shellminator.html#a3cf2cd097eb741beddcaf5340f42a404", null ],
     [ "getTerminalSize", "class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e", null ],
     [ "hideCursor", "class_shellminator.html#a403ea48c3312851979108855989e71ce", null ],
+    [ "mouseAvailable", "class_shellminator.html#a6f6728bb7e60dbb527703e7cb94d3ddc", null ],
+    [ "mouseBegin", "class_shellminator.html#a55e702e81eae5fcb5901c56c039d75b4", null ],
+    [ "mouseEnd", "class_shellminator.html#a35be74e46ad7eac24a03411cc9139668", null ],
+    [ "mouseRead", "class_shellminator.html#ad92c6f611259c28222c49d9b04511103", null ],
     [ "overrideAbortKey", "class_shellminator.html#abad556405bac943db348a5bbbb814c5b", null ],
     [ "overrideDownArrow", "class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10", null ],
     [ "overrideEndKey", "class_shellminator.html#a60bc3f9f41155799e76ab1a9c9438533", null ],
@@ -68,5 +73,10 @@ var class_shellminator =
     [ "channel", "class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88", null ],
     [ "defaultChannel", "class_shellminator.html#ad6c67c816043b4aa64ed6cbbd1101bae", null ],
     [ "enableFormatting", "class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2", null ],
+    [ "mouseBuffer", "class_shellminator.html#ae960fa8f37d55fe524bb84ebfabd3046", null ],
+    [ "mouseBufferReadPtr", "class_shellminator.html#aef0ad2050288dbc01fbf5945e6ba82f0", null ],
+    [ "mouseBufferWritePtr", "class_shellminator.html#a23ceb01a2c3845d093d16e6feeb27c37", null ],
+    [ "mouseEventBuffer", "class_shellminator.html#a6ae26127b755c987b4047f18167142c3", null ],
+    [ "mouseEventBufferCntr", "class_shellminator.html#a6c7e979bb8e1a658bb53bdcb797bb24d", null ],
     [ "mute", "class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d", null ]
 ];

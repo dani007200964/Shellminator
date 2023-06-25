@@ -10,6 +10,9 @@
       <tab type="usergroup" visible="yes" url="@ref example_execute_constructor_advanced" title="Execute With Constructor - Advanced" intro=""/>
       <tab type="usergroup" visible="yes" url="@ref example_progress_simple" title="Progress - Simple" intro=""/>
       <tab type="usergroup" visible="yes" url="@ref example_progress_advanced" title="Progress - Advanced" intro=""/>
+      <tab type="usergroup" visible="yes" url="@ref example_games" title="🕹️ Games" intro="">
+        <tab type="usergroup" visible="yes" url="@ref example_duinocrisis" title="Duino Crisis" intro=""/>
+      </tab>
     </tab>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">

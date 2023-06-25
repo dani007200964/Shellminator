@@ -1,0 +1,67 @@
+BOARD=Emscripten
+CHANNEL=stdioChannel
+ENVIRONMENT=Emscripten
+
+{{ HEADER }}
+
+// std library.
+#include <stdio.h>
+#include <stdlib.h>
+
+// Core System Functions.
+#include "System.h"
+
+// Contains a modified Stream class for communication.
+#include "stdioStream.hpp"
+
+// Contains Emscripten related functions.
+#include <emscripten.h>
+
+{{ INCLUDES }}
+
+// Use stdio as Channel.
+stdioStream stdioChannel;
+
+{{ GLOBAL_VARIABLES }}
+
+// Infinite Loop.
+void loop();
+
+// Init Section.
+void setup();
+
+{{ FUNCTION_PROTOTYPES }}
+
+// Main program.
+int main(){
+
+    // Call init section.
+    setup();
+
+    // Setup the infinite loop and start it.
+    emscripten_set_main_loop( loop, 0, 1 );
+
+    // If we are lucky, the code never reaches this.
+    return 0;
+
+}
+
+{{ FUNCTION_IMPLEMENTATIONS }}
+
+void setup(){
+
+    // Init code.
+{% filter indent( width = 4 ) %}
+{{ SETUP }}
+{% endfilter %}
+
+}
+
+void loop(){
+
+    // Infinite loop.
+{% filter indent( width = 4 ) %}
+{{ LOOP }}
+{% endfilter %}
+
+}

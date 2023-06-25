@@ -42,5 +42,51 @@ unsigned long millis(){
 }
 
 void delay( uint32_t x ){
+
+    #ifdef _WIN32
     Sleep( x );
+    #endif
+
+    #ifdef __EMSCRIPTEN__
+    emscripten_sleep( x );
+    #endif
+    
+}
+
+void randomSeed( unsigned long seed ){
+
+    if( seed != 0 ){
+        srand( seed );
+    }
+
+}
+
+long random( long howbig ){
+
+    if( howbig == 0 ){
+        return 0;
+    }
+
+    return rand() % howbig;
+
+}
+
+long random(long howsmall, long howbig ){
+
+    if( howsmall >= howbig ){
+        return howsmall;
+    }
+
+    long diff = howbig - howsmall;
+
+    return random( diff ) + howsmall;
+
+}
+
+void systemInit(){
+
+    #ifdef __EMSCRIPTEN__
+
+    #endif
+
 }

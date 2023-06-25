@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>{{ EXAMPLE_NAME }}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.17.0/css/xterm.css">
+    </head>
+    <body>
+        <div id="terminal"></div>
+        <script src="https://cdn.jsdelivr.net/npm/xterm@4.17.0/lib/xterm.min.js"></script>
+        <script>
+
+            let inputText = "";
+            let stdinBuffer = [];
+            let stdinBufferPtr = 0;
+
+            /* Create a new xTerm object */
+            const term = new Terminal({
+                cursorBliknk: "true",
+                cursorStyle: "bar",
+            });
+
+            term.onData( data => {
+
+                //inputChar = data;
+                inputText = data;
+                for (const c of data) {
+                    stdinBuffer.push( c.charCodeAt( 0 ) );
+                }
+
+                console.log( stdinBuffer );
+
+            } );
+
+            term.open(document.getElementById("terminal"));
+
+            var Module = {
+
+                preRun: function(){
+
+                    function stdin() {
+                        // Return ASCII code of character, or null if no input
+                        return null;
+                    }
+
+                    function stdout(asciiCode) {
+                        // Do something with the asciiCode
+                        // console.log( String.fromCharCode( asciiCode ) )
+                        term.write( String.fromCharCode( asciiCode ) );
+                    }
+
+                    function stderr(asciiCode) {
+                    // Do something with the asciiCode
+                    }
+
+                    FS.init(stdin, stdout, stderr);
+                }
+            };
+
+
+        </script>
+        <script src={{ EXAMPLE_PATH }}></script>
+    </body>
+</html>

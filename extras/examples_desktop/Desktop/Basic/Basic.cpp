@@ -17,7 +17,9 @@
 #include <stdio.h>
 
 #include <fcntl.h>
+#ifdef _WIN32
 #include <io.h>
+#endif
 #include <wchar.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -63,8 +65,6 @@ int main(){
     }
 
 
-    //! [Basic Setup]
-
     // Clear the terminal
     shell.clear();
 
@@ -73,8 +73,6 @@ int main(){
 
     // Initialize shell object.
     shell.begin( "arnold" );
-
-    //! [Basic Setup]
 
 
 
@@ -88,5 +86,7 @@ int main(){
 
 
     }
+
+    return 0;
 
 }

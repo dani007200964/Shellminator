@@ -38,6 +38,7 @@ import shutil
 import sys
 import getopt
 import json
+from jinja2 import Template
 
 # Badge generator
 import anybadge
@@ -46,7 +47,7 @@ import anybadge
 argv = sys.argv[ 1: ]
 
 helpText =  """Arguments:
--t or --target   : Can be: clean, all, simulator, test, doc, examples
+-t or --target   : Can be: clean, all, simulator, test, doc, examples, web
 -r or --rebuild  : Clear everything and start the build process from the beginning.
 -i or --install  : Installs the necessary libraries for the build system.
 -h or --help     : Help message.
@@ -216,6 +217,79 @@ if ( 'examples' in target ) or ( 'all' in target ):
     print()
     print( 'Examples are built. You can find the executables here: {:s}'.format( rootDirectory + "/" + buildDirectoryName ) )
 
+
+# ---- WebAssembly Build Section ----
+
+# Check if we have to build the examples to the web.
+if ( 'web' in target ) or ( 'all' in target ):
+
+    print()
+    print( '---- Generate CMake files for Examples ----' )
+    print()
+
+    # Create CMake structure
+    command = 'emcmake cmake .. -G "MinGW Makefiles" -DBUILD_WEBASSEMBLY=ON'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "CMake command failed!" )
+        print( "Probably, you have to clean the project and it will work next time :)" )
+        sys.exit( 1 )
+
+    print()
+    print( '---- Build all examples ----' )
+    print()
+
+    # Build the project
+    command = 'cmake --build .'
+    terminalProcess = subprocess.Popen( command, shell=True )
+    terminalProcess.wait()
+
+    if( terminalProcess.returncode !=0 ):
+        print( "CMake build command failed!" )
+        print( "Probably, you have to clean the project and it will work next time :)" )
+        sys.exit( 2 )
+
+    print()
+    print( 'Examples for Web are built. You can find the executables here: {:s}'.format( rootDirectory + "/" + buildDirectoryName ) )
+
+    buildFiles = os.listdir( rootDirectory + '/build' )
+    print( "Files in build folder:" )
+    print( buildFiles )
+
+    # Check if the webExamples directory exists. In this case delet its content.
+    if os.path.isdir( rootDirectory + "/docs/webExamples" ) == True:
+        shutil.rmtree( rootDirectory + "/docs/webExamples" )
+    
+    os.mkdir( rootDirectory + "/docs/webExamples" )
+
+    for file in buildFiles:
+        if file.endswith( ".js" ):
+
+            fileName = file.split(".")[0]
+            wasmFile = file.split(".")[0] + ".wasm"
+            shutil.copyfile( rootDirectory + "/build/" + file,      rootDirectory + "/docs/webExamples/" + file )
+            shutil.copyfile( rootDirectory + "/build/" + wasmFile,  rootDirectory + "/docs/webExamples/" + wasmFile )
+            
+            # Read the next template file line-by-line.
+            templateFile = open( rootDirectory + "/extras/emscripten_template_page.html" )
+            templateData = templateFile.read()
+            templateFile.close()
+
+            # Parameter fields.
+            fields = {
+                'EXAMPLE_NAME': fileName,
+                'EXAMPLE_PATH': "./" + fileName + ".js"
+            }
+
+            # Create a template object from the template file.
+            currentTemplate = Template(  templateData )
+            webPageData  = currentTemplate.render( fields )
+
+            outputFile = open( rootDirectory + "/docs/webExamples/" + fileName + ".html", "w" )
+            outputFile.write( webPageData )
+            outputFile.close()
 
 # ---- Unit Test Section ----
 

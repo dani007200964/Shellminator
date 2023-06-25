@@ -35,11 +35,21 @@ SOFTWARE.
 #define STDIO_STREAM_HPP__
 
 #include "Stream.h"
+
+#include <stdlib.h>
+
+#ifdef _WIN32
 #include <conio.h>
+#include <io.h>
+#endif
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include <stdint.h>
 
 #include <fcntl.h>
-#include <io.h>
 
 #define STDIO_STREAM_BUFFER_SIZE 1024
 

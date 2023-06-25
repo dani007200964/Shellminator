@@ -37,10 +37,23 @@ SOFTWARE.
 #include <ctime>
 #include <stdio.h>
 #include <stdint.h>
+#include <cstdlib>
 
+#ifdef _WIN32
 #include <Windows.h>
+#endif
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 
 unsigned long millis();
 void delay( uint32_t x );
+
+void randomSeed( unsigned long seed );
+long random( long howbig );
+long random( long howsmall, long howbig );
+
+void systemInit();
 
 #endif

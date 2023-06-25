@@ -42,8 +42,6 @@ void setup(){
 
     Serial.begin(115200);
 
-    //! [Basic Setup]
-
     // Clear the terminal
     shell.clear();
 
@@ -52,8 +50,6 @@ void setup(){
 
     // Initialize shell object.
     shell.begin( "arnold" );
-
-    //! [Basic Setup]
 
 
 }

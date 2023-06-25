@@ -33,6 +33,49 @@ SOFTWARE.
 
 #include "stdioStream.hpp"
 
+#ifdef __EMSCRIPTEN__
+
+// This section connects the C part of the code to the
+// javascript running in the webpage. It is necessary
+// to bridge input and output port.
+EM_JS( int, stdinAvailable, (), {
+
+    if( stdinBufferPtr >= stdinBuffer.length ){
+        return 0;
+    }
+
+    return 1;
+
+} );
+
+EM_JS( int, stdinRead, (), {
+
+    let ret = -1;
+
+    if( stdinBufferPtr >= stdinBuffer.length ){
+        return ret;
+    }
+
+    ret = stdinBuffer[ stdinBufferPtr ];
+    stdinBufferPtr++;
+
+    if( stdinBufferPtr >= stdinBuffer.length ){
+        stdinBuffer.length = 0;
+        stdinBufferPtr = 0;
+    }
+
+    return ret;
+
+} );
+
+EM_JS( void, stdoutWrite, ( char c ), {
+
+    term.write( String.fromCharCode( c ) );
+
+} );
+
+#endif
+
 void stdioStream::push( uint8_t data ){
 
 	buffer[ writePointer ] = data;
@@ -60,6 +103,8 @@ void stdioStream::push( uint8_t* data, size_t size ){
 }
 
 void stdioStream::update(){
+
+    #ifdef _WIN32
 
     int key;
 
@@ -124,6 +169,16 @@ void stdioStream::update(){
         }
 
     }
+
+    #endif
+
+    #ifdef __EMSCRIPTEN__
+
+    while( stdinAvailable() ){
+        push( stdinRead() );
+    }
+
+    #endif
 
 }
 
@@ -196,8 +251,15 @@ void stdioStream::flush(){
 
 size_t stdioStream::write( uint8_t b ){
 
+    #ifdef _WIN32
     wprintf( L"%c", (char)b );
-	return 1;
+    #endif
+    	
+    #ifdef __EMSCRIPTEN__
+    stdoutWrite( (char)b );
+    #endif
+    	
+    return 1;
 
 }
 
@@ -206,7 +268,14 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
     uint32_t i;
     for( i = 0; i < size; i++ ){
 
+
+        #ifdef _WIN32
         wprintf( L"%c", buff[ i ] );
+        #endif
+            
+        #ifdef __EMSCRIPTEN__
+        stdoutWrite( (char)buff[ i ] );
+        #endif
 
     }
 	return size;
@@ -215,9 +284,20 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
 
 size_t stdioStream::write( const char *str ){
 
-  	mbstowcs( vOut, str, 10000 );
 
+    #ifdef _WIN32
+  	mbstowcs( vOut, str, 10000 );
   	wprintf( L"%ls", vOut );
+    #endif
+        
+    #ifdef __EMSCRIPTEN__
+    const char* strCopy = str;
+  	while( *strCopy ){
+        stdoutWrite( (char) *strCopy );
+        strCopy++;
+    }
+    #endif
+
 	return strlen( str );
 
 }

@@ -33,7 +33,9 @@ var menudata={children:[
 {text:"Execute With Constructor - Simple",url:"md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple"},
 {text:"Execute With Constructor - Advanced",url:"md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced"},
 {text:"Progress - Simple",url:"md_docs_markdown_pages_examples_example_progress_simple.html#example_progress_simple"},
-{text:"Progress - Advanced",url:"md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced"}]},
+{text:"Progress - Advanced",url:"md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced"},
+{text:"🕹️ Games",url:"md_docs_markdown_pages_examples_example_games.html#example_games",children:[
+{text:"Duino Crisis",url:"md_docs_markdown_pages_examples_example_duinocrisis.html#example_duinocrisis"}]}]},
 {text:"🚀 API",url:"md_docs_markdown_pages_api.html#api",children:[
 {text:"Class List",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
@@ -61,6 +63,7 @@ var menudata={children:[
 {text:"u",url:"functions.html#index_u"},
 {text:"v",url:"functions.html#index_v"},
 {text:"w",url:"functions.html#index_w"},
+{text:"x",url:"functions.html#index_x"},
 {text:"y",url:"functions.html#index_y"},
 {text:"~",url:"functions.html#index__7E"}]},
 {text:"Functions",url:"functions_func.html",children:[
@@ -73,6 +76,7 @@ var menudata={children:[
 {text:"g",url:"functions_func.html#index_g"},
 {text:"h",url:"functions_func.html#index_h"},
 {text:"i",url:"functions_func.html#index_i"},
+{text:"m",url:"functions_func.html#index_m"},
 {text:"o",url:"functions_func.html#index_o"},
 {text:"p",url:"functions_func.html#index_p"},
 {text:"r",url:"functions_func.html#index_r"},

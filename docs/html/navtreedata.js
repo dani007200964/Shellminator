@@ -35,7 +35,10 @@ var NAVTREE =
       [ "Execute With Constructor - Simple", "md_docs_markdown_pages_examples_example_execute_constructor_simple.html#example_execute_constructor_simple", null ],
       [ "Execute With Constructor - Advanced", "md_docs_markdown_pages_examples_example_execute_constructor_advanced.html#example_execute_constructor_advanced", null ],
       [ "Progress - Simple", "md_docs_markdown_pages_examples_example_progress_simple.html#example_progress_simple", null ],
-      [ "Progress - Advanced", "md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced", null ]
+      [ "Progress - Advanced", "md_docs_markdown_pages_examples_example_progress_advanced.html#example_progress_advanced", null ],
+      [ "🕹️ Games", "md_docs_markdown_pages_examples_example_games.html#example_games", [
+        [ "Duino Crisis", "md_docs_markdown_pages_examples_example_duinocrisis.html#example_duinocrisis", null ]
+      ] ]
     ] ],
     [ "🚀 API", "md_docs_markdown_pages_api.html#api", [
       [ "Class List", "annotated.html", [

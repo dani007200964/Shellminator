@@ -17,7 +17,9 @@
 #include <stdio.h>
 
 #include <fcntl.h>
+#ifdef _WIN32
 #include <io.h>
+#endif
 #include <wchar.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -108,5 +110,7 @@ int main(){
 
 
     }
+
+    return 0;
 
 }

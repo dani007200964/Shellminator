@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "Shellminator::mouseEvent_t", "struct_shellminator_1_1mouse_event__t.html", null ],
     [ "qrcodegen_Segment", "structqrcodegen___segment.html", null ],
     [ "Shellminator", "class_shellminator.html", null ],
     [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html", null ],

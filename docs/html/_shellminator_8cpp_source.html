@@ -2224,588 +2224,592 @@ $(document).ready(function(){initNavTree('_shellminator_8cpp_source.html',''); i
 <div class="line"><a id="l02097" name="l02097"></a><span class="lineno"> 2097</span>      currentState = &amp;Shellminator::ShellminatorPageDownKeyState;</div>
 <div class="line"><a id="l02098" name="l02098"></a><span class="lineno"> 2098</span>      <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02099" name="l02099"></a><span class="lineno"> 2099</span> </div>
-<div class="line"><a id="l02100" name="l02100"></a><span class="lineno"> 2100</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l02101" name="l02101"></a><span class="lineno"> 2101</span>      currentState = &amp;Shellminator::ShellminatorDefaultState;</div>
+<div class="line"><a id="l02100" name="l02100"></a><span class="lineno"> 2100</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;&lt;&#39;</span>:</div>
+<div class="line"><a id="l02101" name="l02101"></a><span class="lineno"> 2101</span>      currentState = &amp;Shellminator::ShellminatorMouseEventParserState;</div>
 <div class="line"><a id="l02102" name="l02102"></a><span class="lineno"> 2102</span>      <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02103" name="l02103"></a><span class="lineno"> 2103</span> </div>
-<div class="line"><a id="l02104" name="l02104"></a><span class="lineno"> 2104</span>  }</div>
-<div class="line"><a id="l02105" name="l02105"></a><span class="lineno"> 2105</span> </div>
-<div class="line"><a id="l02106" name="l02106"></a><span class="lineno"> 2106</span>}</div>
+<div class="line"><a id="l02104" name="l02104"></a><span class="lineno"> 2104</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l02105" name="l02105"></a><span class="lineno"> 2105</span>      currentState = &amp;Shellminator::ShellminatorDefaultState;</div>
+<div class="line"><a id="l02106" name="l02106"></a><span class="lineno"> 2106</span>      <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02107" name="l02107"></a><span class="lineno"> 2107</span> </div>
-<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"> 2108</span><span class="keywordtype">void</span> Shellminator::ShellminatorProcessRegularCharacter( <span class="keywordtype">char</span> new_char ){</div>
+<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"> 2108</span>  }</div>
 <div class="line"><a id="l02109" name="l02109"></a><span class="lineno"> 2109</span> </div>
-<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"> 2110</span>  <span class="comment">// General counter variable</span></div>
-<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span>  uint32_t i;</div>
-<div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span> </div>
-<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span>  <span class="comment">// If the cursor is at the end of the command,</span></div>
-<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span>  <span class="comment">// we simply store the new character.</span></div>
-<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>  <span class="keywordflow">if</span>( cursor == cmd_buff_cntr ){</div>
+<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"> 2110</span>}</div>
+<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span> </div>
+<div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span><span class="keywordtype">void</span> Shellminator::ShellminatorProcessRegularCharacter( <span class="keywordtype">char</span> new_char ){</div>
+<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span> </div>
+<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span>  <span class="comment">// General counter variable</span></div>
+<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>  uint32_t i;</div>
 <div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span> </div>
-<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>    cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;</div>
-<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span> </div>
-<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span>  }</div>
+<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>  <span class="comment">// If the cursor is at the end of the command,</span></div>
+<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>  <span class="comment">// we simply store the new character.</span></div>
+<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span>  <span class="keywordflow">if</span>( cursor == cmd_buff_cntr ){</div>
 <div class="line"><a id="l02120" name="l02120"></a><span class="lineno"> 2120</span> </div>
-<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>  <span class="comment">// If the cursor is somewhere in the middle, we have to shift the</span></div>
-<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span>  <span class="comment">// end of the command by one character end insert the new character</span></div>
-<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>  <span class="comment">// to the cursor position.</span></div>
-<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span>  <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l02125" name="l02125"></a><span class="lineno"> 2125</span> </div>
-<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"> 2126</span>    <span class="keywordflow">for</span>( i = cmd_buff_cntr; i &gt; cursor; i-- ){</div>
-<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span> </div>
-<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];</div>
+<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>    cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;</div>
+<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span> </div>
+<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>  }</div>
+<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span> </div>
+<div class="line"><a id="l02125" name="l02125"></a><span class="lineno"> 2125</span>  <span class="comment">// If the cursor is somewhere in the middle, we have to shift the</span></div>
+<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"> 2126</span>  <span class="comment">// end of the command by one character end insert the new character</span></div>
+<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span>  <span class="comment">// to the cursor position.</span></div>
+<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>  <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02129" name="l02129"></a><span class="lineno"> 2129</span> </div>
-<div class="line"><a id="l02130" name="l02130"></a><span class="lineno"> 2130</span>    }</div>
+<div class="line"><a id="l02130" name="l02130"></a><span class="lineno"> 2130</span>    <span class="keywordflow">for</span>( i = cmd_buff_cntr; i &gt; cursor; i-- ){</div>
 <div class="line"><a id="l02131" name="l02131"></a><span class="lineno"> 2131</span> </div>
-<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>    <span class="comment">// Add the new character after the cursor in the buffer</span></div>
-<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span>    cmd_buff[ 0 ][ cursor ] = new_char;</div>
-<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span> </div>
-<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span>  }</div>
-<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span> </div>
-<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span>  <span class="comment">// In this case we have to reset the cmd_buff_dim variable to the default value.</span></div>
-<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span>  cmd_buff_dim = 1;</div>
-<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span> </div>
-<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span>  <span class="comment">// If the cursor was at the end we have to print the</span></div>
-<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span>  <span class="comment">// new character if the cmd_buff had free space at</span></div>
-<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span>  <span class="comment">// the end.</span></div>
-<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span>  <span class="keywordflow">if</span> ( cursor == cmd_buff_cntr ) {</div>
-<div class="line"><a id="l02144" name="l02144"></a><span class="lineno"> 2144</span> </div>
-<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span>    <span class="keywordflow">if</span> ( cmd_buff_cntr &lt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
-<div class="line"><a id="l02146" name="l02146"></a><span class="lineno"> 2146</span> </div>
-<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span>      <span class="keywordflow">if</span>( inSearch ){</div>
+<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];</div>
+<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span> </div>
+<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span>    }</div>
+<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span> </div>
+<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span>    <span class="comment">// Add the new character after the cursor in the buffer</span></div>
+<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span>    cmd_buff[ 0 ][ cursor ] = new_char;</div>
+<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span> </div>
+<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span>  }</div>
+<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span> </div>
+<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span>  <span class="comment">// In this case we have to reset the cmd_buff_dim variable to the default value.</span></div>
+<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span>  cmd_buff_dim = 1;</div>
+<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span> </div>
+<div class="line"><a id="l02144" name="l02144"></a><span class="lineno"> 2144</span>  <span class="comment">// If the cursor was at the end we have to print the</span></div>
+<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span>  <span class="comment">// new character if the cmd_buff had free space at</span></div>
+<div class="line"><a id="l02146" name="l02146"></a><span class="lineno"> 2146</span>  <span class="comment">// the end.</span></div>
+<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span>  <span class="keywordflow">if</span> ( cursor == cmd_buff_cntr ) {</div>
 <div class="line"><a id="l02148" name="l02148"></a><span class="lineno"> 2148</span> </div>
-<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span>        <span class="comment">// Increment counters.</span></div>
-<div class="line"><a id="l02150" name="l02150"></a><span class="lineno"> 2150</span>        cmd_buff_cntr++;</div>
-<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span>        cursor++;</div>
+<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span>    <span class="keywordflow">if</span> ( cmd_buff_cntr &lt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
+<div class="line"><a id="l02150" name="l02150"></a><span class="lineno"> 2150</span> </div>
+<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span>      <span class="keywordflow">if</span>( inSearch ){</div>
 <div class="line"><a id="l02152" name="l02152"></a><span class="lineno"> 2152</span> </div>
-<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>        redrawLine();</div>
-<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span> </div>
-<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>        <span class="comment">// Increment counters.</span></div>
-<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span>        cmd_buff_cntr--;</div>
-<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>        cursor--;</div>
+<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>        <span class="comment">// Increment counters.</span></div>
+<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span>        cmd_buff_cntr++;</div>
+<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>        cursor++;</div>
+<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span> </div>
+<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>        redrawLine();</div>
 <div class="line"><a id="l02158" name="l02158"></a><span class="lineno"> 2158</span> </div>
-<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>      }</div>
-<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span> </div>
-<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>      <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>        <span class="comment">// Increment counters.</span></div>
+<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span>        cmd_buff_cntr--;</div>
+<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>        cursor--;</div>
 <div class="line"><a id="l02162" name="l02162"></a><span class="lineno"> 2162</span> </div>
-<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>        <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; print(new_char);</div>
+<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>      }</div>
 <div class="line"><a id="l02164" name="l02164"></a><span class="lineno"> 2164</span> </div>
-<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>      }</div>
+<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>      <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02166" name="l02166"></a><span class="lineno"> 2166</span> </div>
-<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>    }</div>
+<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>        <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; print(new_char);</div>
 <div class="line"><a id="l02168" name="l02168"></a><span class="lineno"> 2168</span> </div>
-<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>  }</div>
+<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>      }</div>
 <div class="line"><a id="l02170" name="l02170"></a><span class="lineno"> 2170</span> </div>
-<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span>  <span class="comment">// Increment counters.</span></div>
-<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span>  cmd_buff_cntr++;</div>
-<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span>  cursor++;</div>
+<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span>    }</div>
+<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span> </div>
+<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span>  }</div>
 <div class="line"><a id="l02174" name="l02174"></a><span class="lineno"> 2174</span> </div>
-<div class="line"><a id="l02175" name="l02175"></a><span class="lineno"> 2175</span>  <span class="keywordflow">if</span> ( cursor != cmd_buff_cntr ) {</div>
-<div class="line"><a id="l02176" name="l02176"></a><span class="lineno"> 2176</span> </div>
-<div class="line"><a id="l02177" name="l02177"></a><span class="lineno"> 2177</span>    <span class="comment">// Redraw the command line.</span></div>
-<div class="line"><a id="l02178" name="l02178"></a><span class="lineno"> 2178</span>    redrawLine();</div>
-<div class="line"><a id="l02179" name="l02179"></a><span class="lineno"> 2179</span> </div>
-<div class="line"><a id="l02180" name="l02180"></a><span class="lineno"> 2180</span>  }</div>
-<div class="line"><a id="l02181" name="l02181"></a><span class="lineno"> 2181</span> </div>
-<div class="line"><a id="l02182" name="l02182"></a><span class="lineno"> 2182</span>  <span class="comment">// Check if the counters are overloaded.</span></div>
-<div class="line"><a id="l02183" name="l02183"></a><span class="lineno"> 2183</span>  <span class="comment">// the buffer storage is SHELLMINATOR_BUFF_LEN + 2,</span></div>
-<div class="line"><a id="l02184" name="l02184"></a><span class="lineno"> 2184</span>  <span class="comment">// so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN</span></div>
-<div class="line"><a id="l02185" name="l02185"></a><span class="lineno"> 2185</span>  <span class="keywordflow">if</span>( cmd_buff_cntr &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
-<div class="line"><a id="l02186" name="l02186"></a><span class="lineno"> 2186</span> </div>
-<div class="line"><a id="l02187" name="l02187"></a><span class="lineno"> 2187</span>    cmd_buff_cntr = <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>;</div>
-<div class="line"><a id="l02188" name="l02188"></a><span class="lineno"> 2188</span> </div>
-<div class="line"><a id="l02189" name="l02189"></a><span class="lineno"> 2189</span>  }</div>
+<div class="line"><a id="l02175" name="l02175"></a><span class="lineno"> 2175</span>  <span class="comment">// Increment counters.</span></div>
+<div class="line"><a id="l02176" name="l02176"></a><span class="lineno"> 2176</span>  cmd_buff_cntr++;</div>
+<div class="line"><a id="l02177" name="l02177"></a><span class="lineno"> 2177</span>  cursor++;</div>
+<div class="line"><a id="l02178" name="l02178"></a><span class="lineno"> 2178</span> </div>
+<div class="line"><a id="l02179" name="l02179"></a><span class="lineno"> 2179</span>  <span class="keywordflow">if</span> ( cursor != cmd_buff_cntr ) {</div>
+<div class="line"><a id="l02180" name="l02180"></a><span class="lineno"> 2180</span> </div>
+<div class="line"><a id="l02181" name="l02181"></a><span class="lineno"> 2181</span>    <span class="comment">// Redraw the command line.</span></div>
+<div class="line"><a id="l02182" name="l02182"></a><span class="lineno"> 2182</span>    redrawLine();</div>
+<div class="line"><a id="l02183" name="l02183"></a><span class="lineno"> 2183</span> </div>
+<div class="line"><a id="l02184" name="l02184"></a><span class="lineno"> 2184</span>  }</div>
+<div class="line"><a id="l02185" name="l02185"></a><span class="lineno"> 2185</span> </div>
+<div class="line"><a id="l02186" name="l02186"></a><span class="lineno"> 2186</span>  <span class="comment">// Check if the counters are overloaded.</span></div>
+<div class="line"><a id="l02187" name="l02187"></a><span class="lineno"> 2187</span>  <span class="comment">// the buffer storage is SHELLMINATOR_BUFF_LEN + 2,</span></div>
+<div class="line"><a id="l02188" name="l02188"></a><span class="lineno"> 2188</span>  <span class="comment">// so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN</span></div>
+<div class="line"><a id="l02189" name="l02189"></a><span class="lineno"> 2189</span>  <span class="keywordflow">if</span>( cmd_buff_cntr &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
 <div class="line"><a id="l02190" name="l02190"></a><span class="lineno"> 2190</span> </div>
-<div class="line"><a id="l02191" name="l02191"></a><span class="lineno"> 2191</span>  <span class="keywordflow">if</span>( cursor &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
+<div class="line"><a id="l02191" name="l02191"></a><span class="lineno"> 2191</span>    cmd_buff_cntr = <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>;</div>
 <div class="line"><a id="l02192" name="l02192"></a><span class="lineno"> 2192</span> </div>
-<div class="line"><a id="l02193" name="l02193"></a><span class="lineno"> 2193</span>    cursor = <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>;</div>
+<div class="line"><a id="l02193" name="l02193"></a><span class="lineno"> 2193</span>  }</div>
 <div class="line"><a id="l02194" name="l02194"></a><span class="lineno"> 2194</span> </div>
-<div class="line"><a id="l02195" name="l02195"></a><span class="lineno"> 2195</span>  }</div>
+<div class="line"><a id="l02195" name="l02195"></a><span class="lineno"> 2195</span>  <span class="keywordflow">if</span>( cursor &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ) {</div>
 <div class="line"><a id="l02196" name="l02196"></a><span class="lineno"> 2196</span> </div>
-<div class="line"><a id="l02197" name="l02197"></a><span class="lineno"> 2197</span>}</div>
+<div class="line"><a id="l02197" name="l02197"></a><span class="lineno"> 2197</span>    cursor = <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>;</div>
 <div class="line"><a id="l02198" name="l02198"></a><span class="lineno"> 2198</span> </div>
-<div class="line"><a id="l02199" name="l02199"></a><span class="lineno"><a class="line" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2"> 2199</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a>( Stream* source, <span class="keywordtype">char</span> key, uint32_t timeout ){</div>
+<div class="line"><a id="l02199" name="l02199"></a><span class="lineno"> 2199</span>  }</div>
 <div class="line"><a id="l02200" name="l02200"></a><span class="lineno"> 2200</span> </div>
-<div class="line"><a id="l02201" name="l02201"></a><span class="lineno"> 2201</span>  <span class="comment">// Save system time</span></div>
-<div class="line"><a id="l02202" name="l02202"></a><span class="lineno"> 2202</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
-<div class="line"><a id="l02203" name="l02203"></a><span class="lineno"> 2203</span> </div>
-<div class="line"><a id="l02204" name="l02204"></a><span class="lineno"> 2204</span>  <span class="keywordflow">while</span>( source -&gt; available() &lt; 1 ){</div>
-<div class="line"><a id="l02205" name="l02205"></a><span class="lineno"> 2205</span>    <span class="comment">// Wait for key input.</span></div>
-<div class="line"><a id="l02206" name="l02206"></a><span class="lineno"> 2206</span> </div>
-<div class="line"><a id="l02207" name="l02207"></a><span class="lineno"> 2207</span>    <span class="comment">// Check if timeout is specified.</span></div>
-<div class="line"><a id="l02208" name="l02208"></a><span class="lineno"> 2208</span>    <span class="keywordflow">if</span>( timeout == 0 ){</div>
-<div class="line"><a id="l02209" name="l02209"></a><span class="lineno"> 2209</span>      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l02210" name="l02210"></a><span class="lineno"> 2210</span>    }</div>
-<div class="line"><a id="l02211" name="l02211"></a><span class="lineno"> 2211</span> </div>
-<div class="line"><a id="l02212" name="l02212"></a><span class="lineno"> 2212</span>    <span class="comment">// Timeout detection.</span></div>
-<div class="line"><a id="l02213" name="l02213"></a><span class="lineno"> 2213</span>    <span class="keywordflow">if</span>( ( millis() - timerStart ) &gt; timeout ){</div>
-<div class="line"><a id="l02214" name="l02214"></a><span class="lineno"> 2214</span> </div>
-<div class="line"><a id="l02215" name="l02215"></a><span class="lineno"> 2215</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02216" name="l02216"></a><span class="lineno"> 2216</span> </div>
-<div class="line"><a id="l02217" name="l02217"></a><span class="lineno"> 2217</span>    }</div>
+<div class="line"><a id="l02201" name="l02201"></a><span class="lineno"> 2201</span>}</div>
+<div class="line"><a id="l02202" name="l02202"></a><span class="lineno"> 2202</span> </div>
+<div class="line"><a id="l02203" name="l02203"></a><span class="lineno"><a class="line" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2"> 2203</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a>( Stream* source, <span class="keywordtype">char</span> key, uint32_t timeout ){</div>
+<div class="line"><a id="l02204" name="l02204"></a><span class="lineno"> 2204</span> </div>
+<div class="line"><a id="l02205" name="l02205"></a><span class="lineno"> 2205</span>  <span class="comment">// Save system time</span></div>
+<div class="line"><a id="l02206" name="l02206"></a><span class="lineno"> 2206</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
+<div class="line"><a id="l02207" name="l02207"></a><span class="lineno"> 2207</span> </div>
+<div class="line"><a id="l02208" name="l02208"></a><span class="lineno"> 2208</span>  <span class="keywordflow">while</span>( source -&gt; available() &lt; 1 ){</div>
+<div class="line"><a id="l02209" name="l02209"></a><span class="lineno"> 2209</span>    <span class="comment">// Wait for key input.</span></div>
+<div class="line"><a id="l02210" name="l02210"></a><span class="lineno"> 2210</span> </div>
+<div class="line"><a id="l02211" name="l02211"></a><span class="lineno"> 2211</span>    <span class="comment">// Check if timeout is specified.</span></div>
+<div class="line"><a id="l02212" name="l02212"></a><span class="lineno"> 2212</span>    <span class="keywordflow">if</span>( timeout == 0 ){</div>
+<div class="line"><a id="l02213" name="l02213"></a><span class="lineno"> 2213</span>      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l02214" name="l02214"></a><span class="lineno"> 2214</span>    }</div>
+<div class="line"><a id="l02215" name="l02215"></a><span class="lineno"> 2215</span> </div>
+<div class="line"><a id="l02216" name="l02216"></a><span class="lineno"> 2216</span>    <span class="comment">// Timeout detection.</span></div>
+<div class="line"><a id="l02217" name="l02217"></a><span class="lineno"> 2217</span>    <span class="keywordflow">if</span>( ( millis() - timerStart ) &gt; timeout ){</div>
 <div class="line"><a id="l02218" name="l02218"></a><span class="lineno"> 2218</span> </div>
-<div class="line"><a id="l02219" name="l02219"></a><span class="lineno"> 2219</span>  }</div>
+<div class="line"><a id="l02219" name="l02219"></a><span class="lineno"> 2219</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l02220" name="l02220"></a><span class="lineno"> 2220</span> </div>
-<div class="line"><a id="l02221" name="l02221"></a><span class="lineno"> 2221</span>  <span class="comment">// Read the pressed key</span></div>
-<div class="line"><a id="l02222" name="l02222"></a><span class="lineno"> 2222</span>  <span class="keywordtype">char</span> c = source -&gt; read();</div>
-<div class="line"><a id="l02223" name="l02223"></a><span class="lineno"> 2223</span> </div>
-<div class="line"><a id="l02224" name="l02224"></a><span class="lineno"> 2224</span>  <span class="comment">// Compare with the expected key</span></div>
-<div class="line"><a id="l02225" name="l02225"></a><span class="lineno"> 2225</span>  <span class="keywordflow">if</span>( c == key ){</div>
-<div class="line"><a id="l02226" name="l02226"></a><span class="lineno"> 2226</span> </div>
-<div class="line"><a id="l02227" name="l02227"></a><span class="lineno"> 2227</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02228" name="l02228"></a><span class="lineno"> 2228</span> </div>
-<div class="line"><a id="l02229" name="l02229"></a><span class="lineno"> 2229</span>  }</div>
+<div class="line"><a id="l02221" name="l02221"></a><span class="lineno"> 2221</span>    }</div>
+<div class="line"><a id="l02222" name="l02222"></a><span class="lineno"> 2222</span> </div>
+<div class="line"><a id="l02223" name="l02223"></a><span class="lineno"> 2223</span>  }</div>
+<div class="line"><a id="l02224" name="l02224"></a><span class="lineno"> 2224</span> </div>
+<div class="line"><a id="l02225" name="l02225"></a><span class="lineno"> 2225</span>  <span class="comment">// Read the pressed key</span></div>
+<div class="line"><a id="l02226" name="l02226"></a><span class="lineno"> 2226</span>  <span class="keywordtype">char</span> c = source -&gt; read();</div>
+<div class="line"><a id="l02227" name="l02227"></a><span class="lineno"> 2227</span> </div>
+<div class="line"><a id="l02228" name="l02228"></a><span class="lineno"> 2228</span>  <span class="comment">// Compare with the expected key</span></div>
+<div class="line"><a id="l02229" name="l02229"></a><span class="lineno"> 2229</span>  <span class="keywordflow">if</span>( c == key ){</div>
 <div class="line"><a id="l02230" name="l02230"></a><span class="lineno"> 2230</span> </div>
-<div class="line"><a id="l02231" name="l02231"></a><span class="lineno"> 2231</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02231" name="l02231"></a><span class="lineno"> 2231</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l02232" name="l02232"></a><span class="lineno"> 2232</span> </div>
-<div class="line"><a id="l02233" name="l02233"></a><span class="lineno"> 2233</span>}</div>
+<div class="line"><a id="l02233" name="l02233"></a><span class="lineno"> 2233</span>  }</div>
 <div class="line"><a id="l02234" name="l02234"></a><span class="lineno"> 2234</span> </div>
-<div class="line"><a id="l02235" name="l02235"></a><span class="lineno"><a class="line" href="class_shellminator.html#ab1a370fe2d58a32cd595d76e709f63a5"> 2235</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a>( Stream* source, <span class="keywordtype">char</span>* keys, uint32_t timeout ){</div>
+<div class="line"><a id="l02235" name="l02235"></a><span class="lineno"> 2235</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l02236" name="l02236"></a><span class="lineno"> 2236</span> </div>
-<div class="line"><a id="l02237" name="l02237"></a><span class="lineno"> 2237</span>  <span class="comment">// Generic counter variable.</span></div>
-<div class="line"><a id="l02238" name="l02238"></a><span class="lineno"> 2238</span>  uint32_t i;</div>
-<div class="line"><a id="l02239" name="l02239"></a><span class="lineno"> 2239</span> </div>
-<div class="line"><a id="l02240" name="l02240"></a><span class="lineno"> 2240</span>  <span class="comment">// Save system time.</span></div>
-<div class="line"><a id="l02241" name="l02241"></a><span class="lineno"> 2241</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
-<div class="line"><a id="l02242" name="l02242"></a><span class="lineno"> 2242</span> </div>
-<div class="line"><a id="l02243" name="l02243"></a><span class="lineno"> 2243</span>  <span class="keywordflow">while</span>( source -&gt; available() &lt; 1 ){</div>
-<div class="line"><a id="l02244" name="l02244"></a><span class="lineno"> 2244</span>    <span class="comment">// Wait for key input.</span></div>
-<div class="line"><a id="l02245" name="l02245"></a><span class="lineno"> 2245</span> </div>
-<div class="line"><a id="l02246" name="l02246"></a><span class="lineno"> 2246</span>    <span class="comment">// Check if timeout is specified.</span></div>
-<div class="line"><a id="l02247" name="l02247"></a><span class="lineno"> 2247</span>    <span class="keywordflow">if</span>( timeout == 0 ){</div>
-<div class="line"><a id="l02248" name="l02248"></a><span class="lineno"> 2248</span>      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l02249" name="l02249"></a><span class="lineno"> 2249</span>    }</div>
-<div class="line"><a id="l02250" name="l02250"></a><span class="lineno"> 2250</span> </div>
-<div class="line"><a id="l02251" name="l02251"></a><span class="lineno"> 2251</span>    <span class="comment">// Timeout detection.</span></div>
-<div class="line"><a id="l02252" name="l02252"></a><span class="lineno"> 2252</span>    <span class="keywordflow">if</span>( ( millis() - timerStart ) &gt; timeout ){</div>
-<div class="line"><a id="l02253" name="l02253"></a><span class="lineno"> 2253</span> </div>
-<div class="line"><a id="l02254" name="l02254"></a><span class="lineno"> 2254</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02255" name="l02255"></a><span class="lineno"> 2255</span> </div>
-<div class="line"><a id="l02256" name="l02256"></a><span class="lineno"> 2256</span>    }</div>
+<div class="line"><a id="l02237" name="l02237"></a><span class="lineno"> 2237</span>}</div>
+<div class="line"><a id="l02238" name="l02238"></a><span class="lineno"> 2238</span> </div>
+<div class="line"><a id="l02239" name="l02239"></a><span class="lineno"><a class="line" href="class_shellminator.html#ab1a370fe2d58a32cd595d76e709f63a5"> 2239</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a>( Stream* source, <span class="keywordtype">char</span>* keys, uint32_t timeout ){</div>
+<div class="line"><a id="l02240" name="l02240"></a><span class="lineno"> 2240</span> </div>
+<div class="line"><a id="l02241" name="l02241"></a><span class="lineno"> 2241</span>  <span class="comment">// Generic counter variable.</span></div>
+<div class="line"><a id="l02242" name="l02242"></a><span class="lineno"> 2242</span>  uint32_t i;</div>
+<div class="line"><a id="l02243" name="l02243"></a><span class="lineno"> 2243</span> </div>
+<div class="line"><a id="l02244" name="l02244"></a><span class="lineno"> 2244</span>  <span class="comment">// Save system time.</span></div>
+<div class="line"><a id="l02245" name="l02245"></a><span class="lineno"> 2245</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
+<div class="line"><a id="l02246" name="l02246"></a><span class="lineno"> 2246</span> </div>
+<div class="line"><a id="l02247" name="l02247"></a><span class="lineno"> 2247</span>  <span class="keywordflow">while</span>( source -&gt; available() &lt; 1 ){</div>
+<div class="line"><a id="l02248" name="l02248"></a><span class="lineno"> 2248</span>    <span class="comment">// Wait for key input.</span></div>
+<div class="line"><a id="l02249" name="l02249"></a><span class="lineno"> 2249</span> </div>
+<div class="line"><a id="l02250" name="l02250"></a><span class="lineno"> 2250</span>    <span class="comment">// Check if timeout is specified.</span></div>
+<div class="line"><a id="l02251" name="l02251"></a><span class="lineno"> 2251</span>    <span class="keywordflow">if</span>( timeout == 0 ){</div>
+<div class="line"><a id="l02252" name="l02252"></a><span class="lineno"> 2252</span>      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l02253" name="l02253"></a><span class="lineno"> 2253</span>    }</div>
+<div class="line"><a id="l02254" name="l02254"></a><span class="lineno"> 2254</span> </div>
+<div class="line"><a id="l02255" name="l02255"></a><span class="lineno"> 2255</span>    <span class="comment">// Timeout detection.</span></div>
+<div class="line"><a id="l02256" name="l02256"></a><span class="lineno"> 2256</span>    <span class="keywordflow">if</span>( ( millis() - timerStart ) &gt; timeout ){</div>
 <div class="line"><a id="l02257" name="l02257"></a><span class="lineno"> 2257</span> </div>
-<div class="line"><a id="l02258" name="l02258"></a><span class="lineno"> 2258</span>  }</div>
+<div class="line"><a id="l02258" name="l02258"></a><span class="lineno"> 2258</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l02259" name="l02259"></a><span class="lineno"> 2259</span> </div>
-<div class="line"><a id="l02260" name="l02260"></a><span class="lineno"> 2260</span>  <span class="comment">// Read the pressed key</span></div>
-<div class="line"><a id="l02261" name="l02261"></a><span class="lineno"> 2261</span>  <span class="keywordtype">char</span> c = source -&gt; read();</div>
-<div class="line"><a id="l02262" name="l02262"></a><span class="lineno"> 2262</span> </div>
-<div class="line"><a id="l02263" name="l02263"></a><span class="lineno"> 2263</span>  <span class="comment">// Check all characters in keys array.</span></div>
-<div class="line"><a id="l02264" name="l02264"></a><span class="lineno"> 2264</span>  <span class="keywordflow">for</span>( i = 0; i &lt; strlen( keys ); i++ ){</div>
-<div class="line"><a id="l02265" name="l02265"></a><span class="lineno"> 2265</span> </div>
-<div class="line"><a id="l02266" name="l02266"></a><span class="lineno"> 2266</span>    <span class="comment">// If there is a match, return with true.</span></div>
-<div class="line"><a id="l02267" name="l02267"></a><span class="lineno"> 2267</span>    <span class="keywordflow">if</span>( keys[ i ] == c ){</div>
-<div class="line"><a id="l02268" name="l02268"></a><span class="lineno"> 2268</span> </div>
-<div class="line"><a id="l02269" name="l02269"></a><span class="lineno"> 2269</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02270" name="l02270"></a><span class="lineno"> 2270</span> </div>
-<div class="line"><a id="l02271" name="l02271"></a><span class="lineno"> 2271</span>    }</div>
+<div class="line"><a id="l02260" name="l02260"></a><span class="lineno"> 2260</span>    }</div>
+<div class="line"><a id="l02261" name="l02261"></a><span class="lineno"> 2261</span> </div>
+<div class="line"><a id="l02262" name="l02262"></a><span class="lineno"> 2262</span>  }</div>
+<div class="line"><a id="l02263" name="l02263"></a><span class="lineno"> 2263</span> </div>
+<div class="line"><a id="l02264" name="l02264"></a><span class="lineno"> 2264</span>  <span class="comment">// Read the pressed key</span></div>
+<div class="line"><a id="l02265" name="l02265"></a><span class="lineno"> 2265</span>  <span class="keywordtype">char</span> c = source -&gt; read();</div>
+<div class="line"><a id="l02266" name="l02266"></a><span class="lineno"> 2266</span> </div>
+<div class="line"><a id="l02267" name="l02267"></a><span class="lineno"> 2267</span>  <span class="comment">// Check all characters in keys array.</span></div>
+<div class="line"><a id="l02268" name="l02268"></a><span class="lineno"> 2268</span>  <span class="keywordflow">for</span>( i = 0; i &lt; strlen( keys ); i++ ){</div>
+<div class="line"><a id="l02269" name="l02269"></a><span class="lineno"> 2269</span> </div>
+<div class="line"><a id="l02270" name="l02270"></a><span class="lineno"> 2270</span>    <span class="comment">// If there is a match, return with true.</span></div>
+<div class="line"><a id="l02271" name="l02271"></a><span class="lineno"> 2271</span>    <span class="keywordflow">if</span>( keys[ i ] == c ){</div>
 <div class="line"><a id="l02272" name="l02272"></a><span class="lineno"> 2272</span> </div>
-<div class="line"><a id="l02273" name="l02273"></a><span class="lineno"> 2273</span>  }</div>
+<div class="line"><a id="l02273" name="l02273"></a><span class="lineno"> 2273</span>      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l02274" name="l02274"></a><span class="lineno"> 2274</span> </div>
-<div class="line"><a id="l02275" name="l02275"></a><span class="lineno"> 2275</span>  <span class="comment">// No match, return false;</span></div>
-<div class="line"><a id="l02276" name="l02276"></a><span class="lineno"> 2276</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02277" name="l02277"></a><span class="lineno"> 2277</span> </div>
-<div class="line"><a id="l02278" name="l02278"></a><span class="lineno"> 2278</span>}</div>
-<div class="line"><a id="l02279" name="l02279"></a><span class="lineno"> 2279</span> </div>
-<div class="line"><a id="l02280" name="l02280"></a><span class="lineno"><a class="line" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70"> 2280</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a>( Stream* source, <span class="keywordtype">int</span> bufferSize, <span class="keywordtype">char</span>* buffer, <span class="keywordtype">char</span>* lineText, uint32_t timeout, <span class="keywordtype">bool</span> secret ){</div>
+<div class="line"><a id="l02275" name="l02275"></a><span class="lineno"> 2275</span>    }</div>
+<div class="line"><a id="l02276" name="l02276"></a><span class="lineno"> 2276</span> </div>
+<div class="line"><a id="l02277" name="l02277"></a><span class="lineno"> 2277</span>  }</div>
+<div class="line"><a id="l02278" name="l02278"></a><span class="lineno"> 2278</span> </div>
+<div class="line"><a id="l02279" name="l02279"></a><span class="lineno"> 2279</span>  <span class="comment">// No match, return false;</span></div>
+<div class="line"><a id="l02280" name="l02280"></a><span class="lineno"> 2280</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l02281" name="l02281"></a><span class="lineno"> 2281</span> </div>
-<div class="line"><a id="l02282" name="l02282"></a><span class="lineno"> 2282</span>  <span class="comment">// Return value.</span></div>
-<div class="line"><a id="l02283" name="l02283"></a><span class="lineno"> 2283</span>  <span class="keywordtype">int</span> retVal = 0;</div>
-<div class="line"><a id="l02284" name="l02284"></a><span class="lineno"> 2284</span> </div>
-<div class="line"><a id="l02285" name="l02285"></a><span class="lineno"> 2285</span>  <span class="comment">// Tracks the index of the next free slot in the buffer.</span></div>
-<div class="line"><a id="l02286" name="l02286"></a><span class="lineno"> 2286</span>  uint32_t bufferCounter = 0;</div>
-<div class="line"><a id="l02287" name="l02287"></a><span class="lineno"> 2287</span> </div>
-<div class="line"><a id="l02288" name="l02288"></a><span class="lineno"> 2288</span>  <span class="comment">// Save system time.</span></div>
-<div class="line"><a id="l02289" name="l02289"></a><span class="lineno"> 2289</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
-<div class="line"><a id="l02290" name="l02290"></a><span class="lineno"> 2290</span> </div>
-<div class="line"><a id="l02291" name="l02291"></a><span class="lineno"> 2291</span>  <span class="comment">// It will hold the new character.</span></div>
-<div class="line"><a id="l02292" name="l02292"></a><span class="lineno"> 2292</span>  <span class="keywordtype">char</span> c;</div>
-<div class="line"><a id="l02293" name="l02293"></a><span class="lineno"> 2293</span> </div>
-<div class="line"><a id="l02294" name="l02294"></a><span class="lineno"> 2294</span>  <span class="comment">// Print the prompt text.</span></div>
-<div class="line"><a id="l02295" name="l02295"></a><span class="lineno"> 2295</span>  source -&gt; print( lineText );</div>
-<div class="line"><a id="l02296" name="l02296"></a><span class="lineno"> 2296</span> </div>
-<div class="line"><a id="l02297" name="l02297"></a><span class="lineno"> 2297</span>  <span class="comment">// If no timeout event, or no timeout specified, check for new data.</span></div>
-<div class="line"><a id="l02298" name="l02298"></a><span class="lineno"> 2298</span>  <span class="keywordflow">while</span>( ( ( millis() - timerStart ) &lt; timeout ) || timeout == 0 ){</div>
-<div class="line"><a id="l02299" name="l02299"></a><span class="lineno"> 2299</span> </div>
-<div class="line"><a id="l02300" name="l02300"></a><span class="lineno"> 2300</span>    <span class="comment">// Check for new data.</span></div>
-<div class="line"><a id="l02301" name="l02301"></a><span class="lineno"> 2301</span>    <span class="keywordflow">if</span>( source -&gt; available() ){</div>
-<div class="line"><a id="l02302" name="l02302"></a><span class="lineno"> 2302</span> </div>
-<div class="line"><a id="l02303" name="l02303"></a><span class="lineno"> 2303</span>      <span class="comment">// Read new data.</span></div>
-<div class="line"><a id="l02304" name="l02304"></a><span class="lineno"> 2304</span>      c = source -&gt; read();</div>
-<div class="line"><a id="l02305" name="l02305"></a><span class="lineno"> 2305</span> </div>
-<div class="line"><a id="l02306" name="l02306"></a><span class="lineno"> 2306</span>      <span class="comment">// Check for return key.</span></div>
-<div class="line"><a id="l02307" name="l02307"></a><span class="lineno"> 2307</span>      <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\n&#39;</span> ) || ( c == <span class="charliteral">&#39;\r&#39;</span> ) || ( c == <span class="charliteral">&#39;\0&#39;</span> ) ){</div>
-<div class="line"><a id="l02308" name="l02308"></a><span class="lineno"> 2308</span> </div>
-<div class="line"><a id="l02309" name="l02309"></a><span class="lineno"> 2309</span>        <span class="comment">// Terminate the buffer.</span></div>
-<div class="line"><a id="l02310" name="l02310"></a><span class="lineno"> 2310</span>        buffer[ bufferCounter ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l02311" name="l02311"></a><span class="lineno"> 2311</span> </div>
-<div class="line"><a id="l02312" name="l02312"></a><span class="lineno"> 2312</span>        <span class="comment">// print new line.</span></div>
-<div class="line"><a id="l02313" name="l02313"></a><span class="lineno"> 2313</span>        source -&gt; println();</div>
-<div class="line"><a id="l02314" name="l02314"></a><span class="lineno"> 2314</span> </div>
-<div class="line"><a id="l02315" name="l02315"></a><span class="lineno"> 2315</span>        <span class="comment">// Empty the input stream.</span></div>
-<div class="line"><a id="l02316" name="l02316"></a><span class="lineno"> 2316</span>        <span class="keywordflow">while</span>( source -&gt; available() ){</div>
-<div class="line"><a id="l02317" name="l02317"></a><span class="lineno"> 2317</span>          source -&gt; read();</div>
-<div class="line"><a id="l02318" name="l02318"></a><span class="lineno"> 2318</span>        }</div>
-<div class="line"><a id="l02319" name="l02319"></a><span class="lineno"> 2319</span> </div>
-<div class="line"><a id="l02320" name="l02320"></a><span class="lineno"> 2320</span>        <span class="comment">// Return how many characters have been read.</span></div>
-<div class="line"><a id="l02321" name="l02321"></a><span class="lineno"> 2321</span>        <span class="keywordflow">return</span> retVal;</div>
-<div class="line"><a id="l02322" name="l02322"></a><span class="lineno"> 2322</span> </div>
-<div class="line"><a id="l02323" name="l02323"></a><span class="lineno"> 2323</span>      }</div>
-<div class="line"><a id="l02324" name="l02324"></a><span class="lineno"> 2324</span> </div>
-<div class="line"><a id="l02325" name="l02325"></a><span class="lineno"> 2325</span>      <span class="comment">// Check backspace.</span></div>
-<div class="line"><a id="l02326" name="l02326"></a><span class="lineno"> 2326</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\b&#39;</span> ) || ( c == 127 ) ){</div>
-<div class="line"><a id="l02327" name="l02327"></a><span class="lineno"> 2327</span> </div>
-<div class="line"><a id="l02328" name="l02328"></a><span class="lineno"> 2328</span>        <span class="comment">// Check if the buffer is not empty.</span></div>
-<div class="line"><a id="l02329" name="l02329"></a><span class="lineno"> 2329</span>        <span class="keywordflow">if</span>( bufferCounter &gt; 0 ){</div>
-<div class="line"><a id="l02330" name="l02330"></a><span class="lineno"> 2330</span> </div>
-<div class="line"><a id="l02331" name="l02331"></a><span class="lineno"> 2331</span>          <span class="comment">// Set back the cursor.</span></div>
-<div class="line"><a id="l02332" name="l02332"></a><span class="lineno"> 2332</span>          bufferCounter--;</div>
-<div class="line"><a id="l02333" name="l02333"></a><span class="lineno"> 2333</span>          retVal--;</div>
-<div class="line"><a id="l02334" name="l02334"></a><span class="lineno"> 2334</span>          source -&gt; print( <span class="stringliteral">&quot;\b \b&quot;</span> );</div>
-<div class="line"><a id="l02335" name="l02335"></a><span class="lineno"> 2335</span> </div>
-<div class="line"><a id="l02336" name="l02336"></a><span class="lineno"> 2336</span>        }</div>
-<div class="line"><a id="l02337" name="l02337"></a><span class="lineno"> 2337</span> </div>
-<div class="line"><a id="l02338" name="l02338"></a><span class="lineno"> 2338</span>      }</div>
+<div class="line"><a id="l02282" name="l02282"></a><span class="lineno"> 2282</span>}</div>
+<div class="line"><a id="l02283" name="l02283"></a><span class="lineno"> 2283</span> </div>
+<div class="line"><a id="l02284" name="l02284"></a><span class="lineno"><a class="line" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70"> 2284</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a>( Stream* source, <span class="keywordtype">int</span> bufferSize, <span class="keywordtype">char</span>* buffer, <span class="keywordtype">char</span>* lineText, uint32_t timeout, <span class="keywordtype">bool</span> secret ){</div>
+<div class="line"><a id="l02285" name="l02285"></a><span class="lineno"> 2285</span> </div>
+<div class="line"><a id="l02286" name="l02286"></a><span class="lineno"> 2286</span>  <span class="comment">// Return value.</span></div>
+<div class="line"><a id="l02287" name="l02287"></a><span class="lineno"> 2287</span>  <span class="keywordtype">int</span> retVal = 0;</div>
+<div class="line"><a id="l02288" name="l02288"></a><span class="lineno"> 2288</span> </div>
+<div class="line"><a id="l02289" name="l02289"></a><span class="lineno"> 2289</span>  <span class="comment">// Tracks the index of the next free slot in the buffer.</span></div>
+<div class="line"><a id="l02290" name="l02290"></a><span class="lineno"> 2290</span>  uint32_t bufferCounter = 0;</div>
+<div class="line"><a id="l02291" name="l02291"></a><span class="lineno"> 2291</span> </div>
+<div class="line"><a id="l02292" name="l02292"></a><span class="lineno"> 2292</span>  <span class="comment">// Save system time.</span></div>
+<div class="line"><a id="l02293" name="l02293"></a><span class="lineno"> 2293</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
+<div class="line"><a id="l02294" name="l02294"></a><span class="lineno"> 2294</span> </div>
+<div class="line"><a id="l02295" name="l02295"></a><span class="lineno"> 2295</span>  <span class="comment">// It will hold the new character.</span></div>
+<div class="line"><a id="l02296" name="l02296"></a><span class="lineno"> 2296</span>  <span class="keywordtype">char</span> c;</div>
+<div class="line"><a id="l02297" name="l02297"></a><span class="lineno"> 2297</span> </div>
+<div class="line"><a id="l02298" name="l02298"></a><span class="lineno"> 2298</span>  <span class="comment">// Print the prompt text.</span></div>
+<div class="line"><a id="l02299" name="l02299"></a><span class="lineno"> 2299</span>  source -&gt; print( lineText );</div>
+<div class="line"><a id="l02300" name="l02300"></a><span class="lineno"> 2300</span> </div>
+<div class="line"><a id="l02301" name="l02301"></a><span class="lineno"> 2301</span>  <span class="comment">// If no timeout event, or no timeout specified, check for new data.</span></div>
+<div class="line"><a id="l02302" name="l02302"></a><span class="lineno"> 2302</span>  <span class="keywordflow">while</span>( ( ( millis() - timerStart ) &lt; timeout ) || timeout == 0 ){</div>
+<div class="line"><a id="l02303" name="l02303"></a><span class="lineno"> 2303</span> </div>
+<div class="line"><a id="l02304" name="l02304"></a><span class="lineno"> 2304</span>    <span class="comment">// Check for new data.</span></div>
+<div class="line"><a id="l02305" name="l02305"></a><span class="lineno"> 2305</span>    <span class="keywordflow">if</span>( source -&gt; available() ){</div>
+<div class="line"><a id="l02306" name="l02306"></a><span class="lineno"> 2306</span> </div>
+<div class="line"><a id="l02307" name="l02307"></a><span class="lineno"> 2307</span>      <span class="comment">// Read new data.</span></div>
+<div class="line"><a id="l02308" name="l02308"></a><span class="lineno"> 2308</span>      c = source -&gt; read();</div>
+<div class="line"><a id="l02309" name="l02309"></a><span class="lineno"> 2309</span> </div>
+<div class="line"><a id="l02310" name="l02310"></a><span class="lineno"> 2310</span>      <span class="comment">// Check for return key.</span></div>
+<div class="line"><a id="l02311" name="l02311"></a><span class="lineno"> 2311</span>      <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\n&#39;</span> ) || ( c == <span class="charliteral">&#39;\r&#39;</span> ) || ( c == <span class="charliteral">&#39;\0&#39;</span> ) ){</div>
+<div class="line"><a id="l02312" name="l02312"></a><span class="lineno"> 2312</span> </div>
+<div class="line"><a id="l02313" name="l02313"></a><span class="lineno"> 2313</span>        <span class="comment">// Terminate the buffer.</span></div>
+<div class="line"><a id="l02314" name="l02314"></a><span class="lineno"> 2314</span>        buffer[ bufferCounter ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l02315" name="l02315"></a><span class="lineno"> 2315</span> </div>
+<div class="line"><a id="l02316" name="l02316"></a><span class="lineno"> 2316</span>        <span class="comment">// print new line.</span></div>
+<div class="line"><a id="l02317" name="l02317"></a><span class="lineno"> 2317</span>        source -&gt; println();</div>
+<div class="line"><a id="l02318" name="l02318"></a><span class="lineno"> 2318</span> </div>
+<div class="line"><a id="l02319" name="l02319"></a><span class="lineno"> 2319</span>        <span class="comment">// Empty the input stream.</span></div>
+<div class="line"><a id="l02320" name="l02320"></a><span class="lineno"> 2320</span>        <span class="keywordflow">while</span>( source -&gt; available() ){</div>
+<div class="line"><a id="l02321" name="l02321"></a><span class="lineno"> 2321</span>          source -&gt; read();</div>
+<div class="line"><a id="l02322" name="l02322"></a><span class="lineno"> 2322</span>        }</div>
+<div class="line"><a id="l02323" name="l02323"></a><span class="lineno"> 2323</span> </div>
+<div class="line"><a id="l02324" name="l02324"></a><span class="lineno"> 2324</span>        <span class="comment">// Return how many characters have been read.</span></div>
+<div class="line"><a id="l02325" name="l02325"></a><span class="lineno"> 2325</span>        <span class="keywordflow">return</span> retVal;</div>
+<div class="line"><a id="l02326" name="l02326"></a><span class="lineno"> 2326</span> </div>
+<div class="line"><a id="l02327" name="l02327"></a><span class="lineno"> 2327</span>      }</div>
+<div class="line"><a id="l02328" name="l02328"></a><span class="lineno"> 2328</span> </div>
+<div class="line"><a id="l02329" name="l02329"></a><span class="lineno"> 2329</span>      <span class="comment">// Check backspace.</span></div>
+<div class="line"><a id="l02330" name="l02330"></a><span class="lineno"> 2330</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\b&#39;</span> ) || ( c == 127 ) ){</div>
+<div class="line"><a id="l02331" name="l02331"></a><span class="lineno"> 2331</span> </div>
+<div class="line"><a id="l02332" name="l02332"></a><span class="lineno"> 2332</span>        <span class="comment">// Check if the buffer is not empty.</span></div>
+<div class="line"><a id="l02333" name="l02333"></a><span class="lineno"> 2333</span>        <span class="keywordflow">if</span>( bufferCounter &gt; 0 ){</div>
+<div class="line"><a id="l02334" name="l02334"></a><span class="lineno"> 2334</span> </div>
+<div class="line"><a id="l02335" name="l02335"></a><span class="lineno"> 2335</span>          <span class="comment">// Set back the cursor.</span></div>
+<div class="line"><a id="l02336" name="l02336"></a><span class="lineno"> 2336</span>          bufferCounter--;</div>
+<div class="line"><a id="l02337" name="l02337"></a><span class="lineno"> 2337</span>          retVal--;</div>
+<div class="line"><a id="l02338" name="l02338"></a><span class="lineno"> 2338</span>          source -&gt; print( <span class="stringliteral">&quot;\b \b&quot;</span> );</div>
 <div class="line"><a id="l02339" name="l02339"></a><span class="lineno"> 2339</span> </div>
-<div class="line"><a id="l02340" name="l02340"></a><span class="lineno"> 2340</span>      <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02340" name="l02340"></a><span class="lineno"> 2340</span>        }</div>
 <div class="line"><a id="l02341" name="l02341"></a><span class="lineno"> 2341</span> </div>
-<div class="line"><a id="l02342" name="l02342"></a><span class="lineno"> 2342</span>        <span class="comment">// Check if there is empty space in the buffer.</span></div>
-<div class="line"><a id="l02343" name="l02343"></a><span class="lineno"> 2343</span>        <span class="keywordflow">if</span>( bufferCounter &lt; ( bufferSize - 1 ) ){</div>
-<div class="line"><a id="l02344" name="l02344"></a><span class="lineno"> 2344</span> </div>
-<div class="line"><a id="l02345" name="l02345"></a><span class="lineno"> 2345</span>          <span class="comment">// Save the new character to the end of the buffer.</span></div>
-<div class="line"><a id="l02346" name="l02346"></a><span class="lineno"> 2346</span>          buffer[ bufferCounter ] = c;</div>
-<div class="line"><a id="l02347" name="l02347"></a><span class="lineno"> 2347</span> </div>
-<div class="line"><a id="l02348" name="l02348"></a><span class="lineno"> 2348</span>          <span class="comment">// Increment the counters.</span></div>
-<div class="line"><a id="l02349" name="l02349"></a><span class="lineno"> 2349</span>          retVal++;</div>
-<div class="line"><a id="l02350" name="l02350"></a><span class="lineno"> 2350</span>          bufferCounter++;</div>
+<div class="line"><a id="l02342" name="l02342"></a><span class="lineno"> 2342</span>      }</div>
+<div class="line"><a id="l02343" name="l02343"></a><span class="lineno"> 2343</span> </div>
+<div class="line"><a id="l02344" name="l02344"></a><span class="lineno"> 2344</span>      <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02345" name="l02345"></a><span class="lineno"> 2345</span> </div>
+<div class="line"><a id="l02346" name="l02346"></a><span class="lineno"> 2346</span>        <span class="comment">// Check if there is empty space in the buffer.</span></div>
+<div class="line"><a id="l02347" name="l02347"></a><span class="lineno"> 2347</span>        <span class="keywordflow">if</span>( bufferCounter &lt; ( bufferSize - 1 ) ){</div>
+<div class="line"><a id="l02348" name="l02348"></a><span class="lineno"> 2348</span> </div>
+<div class="line"><a id="l02349" name="l02349"></a><span class="lineno"> 2349</span>          <span class="comment">// Save the new character to the end of the buffer.</span></div>
+<div class="line"><a id="l02350" name="l02350"></a><span class="lineno"> 2350</span>          buffer[ bufferCounter ] = c;</div>
 <div class="line"><a id="l02351" name="l02351"></a><span class="lineno"> 2351</span> </div>
-<div class="line"><a id="l02352" name="l02352"></a><span class="lineno"> 2352</span>          <span class="comment">// Check if the echo has to be hidden.</span></div>
-<div class="line"><a id="l02353" name="l02353"></a><span class="lineno"> 2353</span>          <span class="keywordflow">if</span>( secret ){</div>
-<div class="line"><a id="l02354" name="l02354"></a><span class="lineno"> 2354</span>            source -&gt; print( <span class="charliteral">&#39;*&#39;</span> );</div>
-<div class="line"><a id="l02355" name="l02355"></a><span class="lineno"> 2355</span>          }</div>
-<div class="line"><a id="l02356" name="l02356"></a><span class="lineno"> 2356</span>          <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l02357" name="l02357"></a><span class="lineno"> 2357</span>            source -&gt; print( c );</div>
-<div class="line"><a id="l02358" name="l02358"></a><span class="lineno"> 2358</span>          }</div>
-<div class="line"><a id="l02359" name="l02359"></a><span class="lineno"> 2359</span> </div>
-<div class="line"><a id="l02360" name="l02360"></a><span class="lineno"> 2360</span>        }</div>
-<div class="line"><a id="l02361" name="l02361"></a><span class="lineno"> 2361</span>      }</div>
-<div class="line"><a id="l02362" name="l02362"></a><span class="lineno"> 2362</span> </div>
-<div class="line"><a id="l02363" name="l02363"></a><span class="lineno"> 2363</span>    }</div>
-<div class="line"><a id="l02364" name="l02364"></a><span class="lineno"> 2364</span> </div>
-<div class="line"><a id="l02365" name="l02365"></a><span class="lineno"> 2365</span>  }</div>
+<div class="line"><a id="l02352" name="l02352"></a><span class="lineno"> 2352</span>          <span class="comment">// Increment the counters.</span></div>
+<div class="line"><a id="l02353" name="l02353"></a><span class="lineno"> 2353</span>          retVal++;</div>
+<div class="line"><a id="l02354" name="l02354"></a><span class="lineno"> 2354</span>          bufferCounter++;</div>
+<div class="line"><a id="l02355" name="l02355"></a><span class="lineno"> 2355</span> </div>
+<div class="line"><a id="l02356" name="l02356"></a><span class="lineno"> 2356</span>          <span class="comment">// Check if the echo has to be hidden.</span></div>
+<div class="line"><a id="l02357" name="l02357"></a><span class="lineno"> 2357</span>          <span class="keywordflow">if</span>( secret ){</div>
+<div class="line"><a id="l02358" name="l02358"></a><span class="lineno"> 2358</span>            source -&gt; print( <span class="charliteral">&#39;*&#39;</span> );</div>
+<div class="line"><a id="l02359" name="l02359"></a><span class="lineno"> 2359</span>          }</div>
+<div class="line"><a id="l02360" name="l02360"></a><span class="lineno"> 2360</span>          <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02361" name="l02361"></a><span class="lineno"> 2361</span>            source -&gt; print( c );</div>
+<div class="line"><a id="l02362" name="l02362"></a><span class="lineno"> 2362</span>          }</div>
+<div class="line"><a id="l02363" name="l02363"></a><span class="lineno"> 2363</span> </div>
+<div class="line"><a id="l02364" name="l02364"></a><span class="lineno"> 2364</span>        }</div>
+<div class="line"><a id="l02365" name="l02365"></a><span class="lineno"> 2365</span>      }</div>
 <div class="line"><a id="l02366" name="l02366"></a><span class="lineno"> 2366</span> </div>
-<div class="line"><a id="l02367" name="l02367"></a><span class="lineno"> 2367</span>  <span class="comment">// Terminate the buffer.</span></div>
-<div class="line"><a id="l02368" name="l02368"></a><span class="lineno"> 2368</span>  buffer[ bufferCounter ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l02369" name="l02369"></a><span class="lineno"> 2369</span> </div>
-<div class="line"><a id="l02370" name="l02370"></a><span class="lineno"> 2370</span>  source -&gt; println();</div>
-<div class="line"><a id="l02371" name="l02371"></a><span class="lineno"> 2371</span> </div>
-<div class="line"><a id="l02372" name="l02372"></a><span class="lineno"> 2372</span>  <span class="comment">// Empty the input stream.</span></div>
-<div class="line"><a id="l02373" name="l02373"></a><span class="lineno"> 2373</span>  <span class="keywordflow">while</span>( source -&gt; available() ){</div>
-<div class="line"><a id="l02374" name="l02374"></a><span class="lineno"> 2374</span>    source -&gt; read();</div>
-<div class="line"><a id="l02375" name="l02375"></a><span class="lineno"> 2375</span>  }</div>
-<div class="line"><a id="l02376" name="l02376"></a><span class="lineno"> 2376</span> </div>
-<div class="line"><a id="l02377" name="l02377"></a><span class="lineno"> 2377</span>  <span class="comment">// Return with error code. It caused by timeout event.</span></div>
-<div class="line"><a id="l02378" name="l02378"></a><span class="lineno"> 2378</span>  <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l02379" name="l02379"></a><span class="lineno"> 2379</span> </div>
-<div class="line"><a id="l02380" name="l02380"></a><span class="lineno"> 2380</span>}</div>
-<div class="line"><a id="l02381" name="l02381"></a><span class="lineno"> 2381</span> </div>
-<div class="line"><a id="l02382" name="l02382"></a><span class="lineno"><a class="line" href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd"> 2382</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd">Shellminator::selectList</a>( Stream* source, <span class="keywordtype">char</span>* lineText, <span class="keywordtype">int</span> numberOfElements, <span class="keywordtype">char</span>* list[], uint32_t timeout, <span class="keywordtype">bool</span>* selection ){</div>
+<div class="line"><a id="l02367" name="l02367"></a><span class="lineno"> 2367</span>    }</div>
+<div class="line"><a id="l02368" name="l02368"></a><span class="lineno"> 2368</span> </div>
+<div class="line"><a id="l02369" name="l02369"></a><span class="lineno"> 2369</span>  }</div>
+<div class="line"><a id="l02370" name="l02370"></a><span class="lineno"> 2370</span> </div>
+<div class="line"><a id="l02371" name="l02371"></a><span class="lineno"> 2371</span>  <span class="comment">// Terminate the buffer.</span></div>
+<div class="line"><a id="l02372" name="l02372"></a><span class="lineno"> 2372</span>  buffer[ bufferCounter ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l02373" name="l02373"></a><span class="lineno"> 2373</span> </div>
+<div class="line"><a id="l02374" name="l02374"></a><span class="lineno"> 2374</span>  source -&gt; println();</div>
+<div class="line"><a id="l02375" name="l02375"></a><span class="lineno"> 2375</span> </div>
+<div class="line"><a id="l02376" name="l02376"></a><span class="lineno"> 2376</span>  <span class="comment">// Empty the input stream.</span></div>
+<div class="line"><a id="l02377" name="l02377"></a><span class="lineno"> 2377</span>  <span class="keywordflow">while</span>( source -&gt; available() ){</div>
+<div class="line"><a id="l02378" name="l02378"></a><span class="lineno"> 2378</span>    source -&gt; read();</div>
+<div class="line"><a id="l02379" name="l02379"></a><span class="lineno"> 2379</span>  }</div>
+<div class="line"><a id="l02380" name="l02380"></a><span class="lineno"> 2380</span> </div>
+<div class="line"><a id="l02381" name="l02381"></a><span class="lineno"> 2381</span>  <span class="comment">// Return with error code. It caused by timeout event.</span></div>
+<div class="line"><a id="l02382" name="l02382"></a><span class="lineno"> 2382</span>  <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l02383" name="l02383"></a><span class="lineno"> 2383</span> </div>
-<div class="line"><a id="l02384" name="l02384"></a><span class="lineno"> 2384</span>  <span class="comment">// Generic counter variable</span></div>
-<div class="line"><a id="l02385" name="l02385"></a><span class="lineno"> 2385</span>  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a id="l02386" name="l02386"></a><span class="lineno"> 2386</span> </div>
-<div class="line"><a id="l02387" name="l02387"></a><span class="lineno"> 2387</span>  <span class="comment">// Print the prompt text.</span></div>
-<div class="line"><a id="l02388" name="l02388"></a><span class="lineno"> 2388</span>  source -&gt; println( lineText );</div>
-<div class="line"><a id="l02389" name="l02389"></a><span class="lineno"> 2389</span>  <a class="code hl_function" href="class_shellminator.html#a403ea48c3312851979108855989e71ce">Shellminator::hideCursor</a>( source );</div>
+<div class="line"><a id="l02384" name="l02384"></a><span class="lineno"> 2384</span>}</div>
+<div class="line"><a id="l02385" name="l02385"></a><span class="lineno"> 2385</span> </div>
+<div class="line"><a id="l02386" name="l02386"></a><span class="lineno"><a class="line" href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd"> 2386</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd">Shellminator::selectList</a>( Stream* source, <span class="keywordtype">char</span>* lineText, <span class="keywordtype">int</span> numberOfElements, <span class="keywordtype">char</span>* list[], uint32_t timeout, <span class="keywordtype">bool</span>* selection ){</div>
+<div class="line"><a id="l02387" name="l02387"></a><span class="lineno"> 2387</span> </div>
+<div class="line"><a id="l02388" name="l02388"></a><span class="lineno"> 2388</span>  <span class="comment">// Generic counter variable</span></div>
+<div class="line"><a id="l02389" name="l02389"></a><span class="lineno"> 2389</span>  <span class="keywordtype">int</span> i;</div>
 <div class="line"><a id="l02390" name="l02390"></a><span class="lineno"> 2390</span> </div>
-<div class="line"><a id="l02391" name="l02391"></a><span class="lineno"> 2391</span>  <span class="comment">// It is used to track the index of the selected element.</span></div>
-<div class="line"><a id="l02392" name="l02392"></a><span class="lineno"> 2392</span>  <span class="keywordtype">int</span> selectedIndex = 0;</div>
-<div class="line"><a id="l02393" name="l02393"></a><span class="lineno"> 2393</span> </div>
-<div class="line"><a id="l02394" name="l02394"></a><span class="lineno"> 2394</span>  <span class="comment">// It is used for the UP / DOWN arrow key parser state machine.</span></div>
-<div class="line"><a id="l02395" name="l02395"></a><span class="lineno"> 2395</span>  uint8_t keyState = 0;</div>
-<div class="line"><a id="l02396" name="l02396"></a><span class="lineno"> 2396</span> </div>
-<div class="line"><a id="l02397" name="l02397"></a><span class="lineno"> 2397</span>  <span class="comment">// It is true, whem multiple selection mode is active.</span></div>
-<div class="line"><a id="l02398" name="l02398"></a><span class="lineno"> 2398</span>  <span class="keywordtype">bool</span> selectMultiple = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02399" name="l02399"></a><span class="lineno"> 2399</span> </div>
-<div class="line"><a id="l02400" name="l02400"></a><span class="lineno"> 2400</span>  <span class="comment">// The next available key data will be stored here.</span></div>
-<div class="line"><a id="l02401" name="l02401"></a><span class="lineno"> 2401</span>  <span class="keywordtype">char</span> c;</div>
-<div class="line"><a id="l02402" name="l02402"></a><span class="lineno"> 2402</span> </div>
-<div class="line"><a id="l02403" name="l02403"></a><span class="lineno"> 2403</span>  <span class="comment">// Save system time.</span></div>
-<div class="line"><a id="l02404" name="l02404"></a><span class="lineno"> 2404</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
-<div class="line"><a id="l02405" name="l02405"></a><span class="lineno"> 2405</span> </div>
-<div class="line"><a id="l02406" name="l02406"></a><span class="lineno"> 2406</span>  <span class="comment">// Check if multiple selection mode is required.</span></div>
-<div class="line"><a id="l02407" name="l02407"></a><span class="lineno"> 2407</span>  <span class="keywordflow">if</span>( selection != NULL ){</div>
-<div class="line"><a id="l02408" name="l02408"></a><span class="lineno"> 2408</span> </div>
-<div class="line"><a id="l02409" name="l02409"></a><span class="lineno"> 2409</span>    <span class="comment">// Set the flag multiple selection mode.</span></div>
-<div class="line"><a id="l02410" name="l02410"></a><span class="lineno"> 2410</span>    selectMultiple = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02411" name="l02411"></a><span class="lineno"> 2411</span> </div>
-<div class="line"><a id="l02412" name="l02412"></a><span class="lineno"> 2412</span>    <span class="comment">// Reset all elements to zero in the selection array.</span></div>
-<div class="line"><a id="l02413" name="l02413"></a><span class="lineno"> 2413</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
-<div class="line"><a id="l02414" name="l02414"></a><span class="lineno"> 2414</span> </div>
-<div class="line"><a id="l02415" name="l02415"></a><span class="lineno"> 2415</span>      selection[ i ] = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02416" name="l02416"></a><span class="lineno"> 2416</span> </div>
-<div class="line"><a id="l02417" name="l02417"></a><span class="lineno"> 2417</span>    }</div>
+<div class="line"><a id="l02391" name="l02391"></a><span class="lineno"> 2391</span>  <span class="comment">// Print the prompt text.</span></div>
+<div class="line"><a id="l02392" name="l02392"></a><span class="lineno"> 2392</span>  source -&gt; println( lineText );</div>
+<div class="line"><a id="l02393" name="l02393"></a><span class="lineno"> 2393</span>  <a class="code hl_function" href="class_shellminator.html#a403ea48c3312851979108855989e71ce">Shellminator::hideCursor</a>( source );</div>
+<div class="line"><a id="l02394" name="l02394"></a><span class="lineno"> 2394</span> </div>
+<div class="line"><a id="l02395" name="l02395"></a><span class="lineno"> 2395</span>  <span class="comment">// It is used to track the index of the selected element.</span></div>
+<div class="line"><a id="l02396" name="l02396"></a><span class="lineno"> 2396</span>  <span class="keywordtype">int</span> selectedIndex = 0;</div>
+<div class="line"><a id="l02397" name="l02397"></a><span class="lineno"> 2397</span> </div>
+<div class="line"><a id="l02398" name="l02398"></a><span class="lineno"> 2398</span>  <span class="comment">// It is used for the UP / DOWN arrow key parser state machine.</span></div>
+<div class="line"><a id="l02399" name="l02399"></a><span class="lineno"> 2399</span>  uint8_t keyState = 0;</div>
+<div class="line"><a id="l02400" name="l02400"></a><span class="lineno"> 2400</span> </div>
+<div class="line"><a id="l02401" name="l02401"></a><span class="lineno"> 2401</span>  <span class="comment">// It is true, whem multiple selection mode is active.</span></div>
+<div class="line"><a id="l02402" name="l02402"></a><span class="lineno"> 2402</span>  <span class="keywordtype">bool</span> selectMultiple = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02403" name="l02403"></a><span class="lineno"> 2403</span> </div>
+<div class="line"><a id="l02404" name="l02404"></a><span class="lineno"> 2404</span>  <span class="comment">// The next available key data will be stored here.</span></div>
+<div class="line"><a id="l02405" name="l02405"></a><span class="lineno"> 2405</span>  <span class="keywordtype">char</span> c;</div>
+<div class="line"><a id="l02406" name="l02406"></a><span class="lineno"> 2406</span> </div>
+<div class="line"><a id="l02407" name="l02407"></a><span class="lineno"> 2407</span>  <span class="comment">// Save system time.</span></div>
+<div class="line"><a id="l02408" name="l02408"></a><span class="lineno"> 2408</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timerStart = millis();</div>
+<div class="line"><a id="l02409" name="l02409"></a><span class="lineno"> 2409</span> </div>
+<div class="line"><a id="l02410" name="l02410"></a><span class="lineno"> 2410</span>  <span class="comment">// Check if multiple selection mode is required.</span></div>
+<div class="line"><a id="l02411" name="l02411"></a><span class="lineno"> 2411</span>  <span class="keywordflow">if</span>( selection != NULL ){</div>
+<div class="line"><a id="l02412" name="l02412"></a><span class="lineno"> 2412</span> </div>
+<div class="line"><a id="l02413" name="l02413"></a><span class="lineno"> 2413</span>    <span class="comment">// Set the flag multiple selection mode.</span></div>
+<div class="line"><a id="l02414" name="l02414"></a><span class="lineno"> 2414</span>    selectMultiple = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l02415" name="l02415"></a><span class="lineno"> 2415</span> </div>
+<div class="line"><a id="l02416" name="l02416"></a><span class="lineno"> 2416</span>    <span class="comment">// Reset all elements to zero in the selection array.</span></div>
+<div class="line"><a id="l02417" name="l02417"></a><span class="lineno"> 2417</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
 <div class="line"><a id="l02418" name="l02418"></a><span class="lineno"> 2418</span> </div>
-<div class="line"><a id="l02419" name="l02419"></a><span class="lineno"> 2419</span>  }</div>
+<div class="line"><a id="l02419" name="l02419"></a><span class="lineno"> 2419</span>      selection[ i ] = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l02420" name="l02420"></a><span class="lineno"> 2420</span> </div>
-<div class="line"><a id="l02421" name="l02421"></a><span class="lineno"> 2421</span>  <span class="comment">// Infinite loop. The timeout protection is handled inside.</span></div>
-<div class="line"><a id="l02422" name="l02422"></a><span class="lineno"> 2422</span>  <span class="keywordflow">while</span>( 1 ){</div>
-<div class="line"><a id="l02423" name="l02423"></a><span class="lineno"> 2423</span> </div>
-<div class="line"><a id="l02424" name="l02424"></a><span class="lineno"> 2424</span>    <span class="comment">// Print the list.</span></div>
-<div class="line"><a id="l02425" name="l02425"></a><span class="lineno"> 2425</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
-<div class="line"><a id="l02426" name="l02426"></a><span class="lineno"> 2426</span> </div>
-<div class="line"><a id="l02427" name="l02427"></a><span class="lineno"> 2427</span>      <span class="comment">// Single and multiple element mode has to be printed differently.</span></div>
-<div class="line"><a id="l02428" name="l02428"></a><span class="lineno"> 2428</span>      <span class="keywordflow">if</span>( selectMultiple ){</div>
-<div class="line"><a id="l02429" name="l02429"></a><span class="lineno"> 2429</span> </div>
-<div class="line"><a id="l02430" name="l02430"></a><span class="lineno"> 2430</span>        <span class="keywordflow">if</span>( selectedIndex == i ){</div>
-<div class="line"><a id="l02431" name="l02431"></a><span class="lineno"> 2431</span> </div>
-<div class="line"><a id="l02432" name="l02432"></a><span class="lineno"> 2432</span>          source -&gt; print( <span class="charliteral">&#39;&gt;&#39;</span> );</div>
+<div class="line"><a id="l02421" name="l02421"></a><span class="lineno"> 2421</span>    }</div>
+<div class="line"><a id="l02422" name="l02422"></a><span class="lineno"> 2422</span> </div>
+<div class="line"><a id="l02423" name="l02423"></a><span class="lineno"> 2423</span>  }</div>
+<div class="line"><a id="l02424" name="l02424"></a><span class="lineno"> 2424</span> </div>
+<div class="line"><a id="l02425" name="l02425"></a><span class="lineno"> 2425</span>  <span class="comment">// Infinite loop. The timeout protection is handled inside.</span></div>
+<div class="line"><a id="l02426" name="l02426"></a><span class="lineno"> 2426</span>  <span class="keywordflow">while</span>( 1 ){</div>
+<div class="line"><a id="l02427" name="l02427"></a><span class="lineno"> 2427</span> </div>
+<div class="line"><a id="l02428" name="l02428"></a><span class="lineno"> 2428</span>    <span class="comment">// Print the list.</span></div>
+<div class="line"><a id="l02429" name="l02429"></a><span class="lineno"> 2429</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
+<div class="line"><a id="l02430" name="l02430"></a><span class="lineno"> 2430</span> </div>
+<div class="line"><a id="l02431" name="l02431"></a><span class="lineno"> 2431</span>      <span class="comment">// Single and multiple element mode has to be printed differently.</span></div>
+<div class="line"><a id="l02432" name="l02432"></a><span class="lineno"> 2432</span>      <span class="keywordflow">if</span>( selectMultiple ){</div>
 <div class="line"><a id="l02433" name="l02433"></a><span class="lineno"> 2433</span> </div>
-<div class="line"><a id="l02434" name="l02434"></a><span class="lineno"> 2434</span>        }</div>
+<div class="line"><a id="l02434" name="l02434"></a><span class="lineno"> 2434</span>        <span class="keywordflow">if</span>( selectedIndex == i ){</div>
 <div class="line"><a id="l02435" name="l02435"></a><span class="lineno"> 2435</span> </div>
-<div class="line"><a id="l02436" name="l02436"></a><span class="lineno"> 2436</span>        <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02436" name="l02436"></a><span class="lineno"> 2436</span>          source -&gt; print( <span class="charliteral">&#39;&gt;&#39;</span> );</div>
 <div class="line"><a id="l02437" name="l02437"></a><span class="lineno"> 2437</span> </div>
-<div class="line"><a id="l02438" name="l02438"></a><span class="lineno"> 2438</span>          source -&gt; print( <span class="charliteral">&#39; &#39;</span> );</div>
+<div class="line"><a id="l02438" name="l02438"></a><span class="lineno"> 2438</span>        }</div>
 <div class="line"><a id="l02439" name="l02439"></a><span class="lineno"> 2439</span> </div>
-<div class="line"><a id="l02440" name="l02440"></a><span class="lineno"> 2440</span>        }</div>
+<div class="line"><a id="l02440" name="l02440"></a><span class="lineno"> 2440</span>        <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02441" name="l02441"></a><span class="lineno"> 2441</span> </div>
-<div class="line"><a id="l02442" name="l02442"></a><span class="lineno"> 2442</span>        <span class="keywordflow">if</span>( selection[ i ] ){</div>
+<div class="line"><a id="l02442" name="l02442"></a><span class="lineno"> 2442</span>          source -&gt; print( <span class="charliteral">&#39; &#39;</span> );</div>
 <div class="line"><a id="l02443" name="l02443"></a><span class="lineno"> 2443</span> </div>
-<div class="line"><a id="l02444" name="l02444"></a><span class="lineno"> 2444</span>          source -&gt; print( <span class="stringliteral">&quot;[X] &quot;</span> );</div>
+<div class="line"><a id="l02444" name="l02444"></a><span class="lineno"> 2444</span>        }</div>
 <div class="line"><a id="l02445" name="l02445"></a><span class="lineno"> 2445</span> </div>
-<div class="line"><a id="l02446" name="l02446"></a><span class="lineno"> 2446</span>        }</div>
+<div class="line"><a id="l02446" name="l02446"></a><span class="lineno"> 2446</span>        <span class="keywordflow">if</span>( selection[ i ] ){</div>
 <div class="line"><a id="l02447" name="l02447"></a><span class="lineno"> 2447</span> </div>
-<div class="line"><a id="l02448" name="l02448"></a><span class="lineno"> 2448</span>        <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02448" name="l02448"></a><span class="lineno"> 2448</span>          source -&gt; print( <span class="stringliteral">&quot;[X] &quot;</span> );</div>
 <div class="line"><a id="l02449" name="l02449"></a><span class="lineno"> 2449</span> </div>
-<div class="line"><a id="l02450" name="l02450"></a><span class="lineno"> 2450</span>          source -&gt; print( <span class="stringliteral">&quot;[ ] &quot;</span> );</div>
+<div class="line"><a id="l02450" name="l02450"></a><span class="lineno"> 2450</span>        }</div>
 <div class="line"><a id="l02451" name="l02451"></a><span class="lineno"> 2451</span> </div>
-<div class="line"><a id="l02452" name="l02452"></a><span class="lineno"> 2452</span>        }</div>
+<div class="line"><a id="l02452" name="l02452"></a><span class="lineno"> 2452</span>        <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02453" name="l02453"></a><span class="lineno"> 2453</span> </div>
-<div class="line"><a id="l02454" name="l02454"></a><span class="lineno"> 2454</span>      }</div>
+<div class="line"><a id="l02454" name="l02454"></a><span class="lineno"> 2454</span>          source -&gt; print( <span class="stringliteral">&quot;[ ] &quot;</span> );</div>
 <div class="line"><a id="l02455" name="l02455"></a><span class="lineno"> 2455</span> </div>
-<div class="line"><a id="l02456" name="l02456"></a><span class="lineno"> 2456</span>      <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02456" name="l02456"></a><span class="lineno"> 2456</span>        }</div>
 <div class="line"><a id="l02457" name="l02457"></a><span class="lineno"> 2457</span> </div>
-<div class="line"><a id="l02458" name="l02458"></a><span class="lineno"> 2458</span>        <span class="keywordflow">if</span>( selectedIndex == i ){</div>
+<div class="line"><a id="l02458" name="l02458"></a><span class="lineno"> 2458</span>      }</div>
 <div class="line"><a id="l02459" name="l02459"></a><span class="lineno"> 2459</span> </div>
-<div class="line"><a id="l02460" name="l02460"></a><span class="lineno"> 2460</span>          source -&gt; print( <span class="stringliteral">&quot;[X] &quot;</span> );</div>
+<div class="line"><a id="l02460" name="l02460"></a><span class="lineno"> 2460</span>      <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02461" name="l02461"></a><span class="lineno"> 2461</span> </div>
-<div class="line"><a id="l02462" name="l02462"></a><span class="lineno"> 2462</span>        }</div>
+<div class="line"><a id="l02462" name="l02462"></a><span class="lineno"> 2462</span>        <span class="keywordflow">if</span>( selectedIndex == i ){</div>
 <div class="line"><a id="l02463" name="l02463"></a><span class="lineno"> 2463</span> </div>
-<div class="line"><a id="l02464" name="l02464"></a><span class="lineno"> 2464</span>        <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02464" name="l02464"></a><span class="lineno"> 2464</span>          source -&gt; print( <span class="stringliteral">&quot;[X] &quot;</span> );</div>
 <div class="line"><a id="l02465" name="l02465"></a><span class="lineno"> 2465</span> </div>
-<div class="line"><a id="l02466" name="l02466"></a><span class="lineno"> 2466</span>          source -&gt; print( <span class="stringliteral">&quot;[ ] &quot;</span> );</div>
+<div class="line"><a id="l02466" name="l02466"></a><span class="lineno"> 2466</span>        }</div>
 <div class="line"><a id="l02467" name="l02467"></a><span class="lineno"> 2467</span> </div>
-<div class="line"><a id="l02468" name="l02468"></a><span class="lineno"> 2468</span>        }</div>
+<div class="line"><a id="l02468" name="l02468"></a><span class="lineno"> 2468</span>        <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02469" name="l02469"></a><span class="lineno"> 2469</span> </div>
-<div class="line"><a id="l02470" name="l02470"></a><span class="lineno"> 2470</span>      }</div>
+<div class="line"><a id="l02470" name="l02470"></a><span class="lineno"> 2470</span>          source -&gt; print( <span class="stringliteral">&quot;[ ] &quot;</span> );</div>
 <div class="line"><a id="l02471" name="l02471"></a><span class="lineno"> 2471</span> </div>
-<div class="line"><a id="l02472" name="l02472"></a><span class="lineno"> 2472</span>      <span class="comment">// Print the data from the list for the current element.</span></div>
-<div class="line"><a id="l02473" name="l02473"></a><span class="lineno"> 2473</span>      source -&gt; print( list[ i ] );</div>
-<div class="line"><a id="l02474" name="l02474"></a><span class="lineno"> 2474</span> </div>
-<div class="line"><a id="l02475" name="l02475"></a><span class="lineno"> 2475</span>      <span class="comment">// If it is not the last element, print a new line.</span></div>
-<div class="line"><a id="l02476" name="l02476"></a><span class="lineno"> 2476</span>      <span class="keywordflow">if</span>( i &lt; ( numberOfElements - 1 ) ){</div>
-<div class="line"><a id="l02477" name="l02477"></a><span class="lineno"> 2477</span> </div>
-<div class="line"><a id="l02478" name="l02478"></a><span class="lineno"> 2478</span>        source -&gt; println();</div>
-<div class="line"><a id="l02479" name="l02479"></a><span class="lineno"> 2479</span> </div>
-<div class="line"><a id="l02480" name="l02480"></a><span class="lineno"> 2480</span>      }</div>
+<div class="line"><a id="l02472" name="l02472"></a><span class="lineno"> 2472</span>        }</div>
+<div class="line"><a id="l02473" name="l02473"></a><span class="lineno"> 2473</span> </div>
+<div class="line"><a id="l02474" name="l02474"></a><span class="lineno"> 2474</span>      }</div>
+<div class="line"><a id="l02475" name="l02475"></a><span class="lineno"> 2475</span> </div>
+<div class="line"><a id="l02476" name="l02476"></a><span class="lineno"> 2476</span>      <span class="comment">// Print the data from the list for the current element.</span></div>
+<div class="line"><a id="l02477" name="l02477"></a><span class="lineno"> 2477</span>      source -&gt; print( list[ i ] );</div>
+<div class="line"><a id="l02478" name="l02478"></a><span class="lineno"> 2478</span> </div>
+<div class="line"><a id="l02479" name="l02479"></a><span class="lineno"> 2479</span>      <span class="comment">// If it is not the last element, print a new line.</span></div>
+<div class="line"><a id="l02480" name="l02480"></a><span class="lineno"> 2480</span>      <span class="keywordflow">if</span>( i &lt; ( numberOfElements - 1 ) ){</div>
 <div class="line"><a id="l02481" name="l02481"></a><span class="lineno"> 2481</span> </div>
-<div class="line"><a id="l02482" name="l02482"></a><span class="lineno"> 2482</span>    }</div>
+<div class="line"><a id="l02482" name="l02482"></a><span class="lineno"> 2482</span>        source -&gt; println();</div>
 <div class="line"><a id="l02483" name="l02483"></a><span class="lineno"> 2483</span> </div>
-<div class="line"><a id="l02484" name="l02484"></a><span class="lineno"> 2484</span>    <span class="comment">// Wait for the next keypress. If no timeout event, or the timeout</span></div>
-<div class="line"><a id="l02485" name="l02485"></a><span class="lineno"> 2485</span>    <span class="comment">// handling is disabled, just wait for the next key.</span></div>
-<div class="line"><a id="l02486" name="l02486"></a><span class="lineno"> 2486</span>    <span class="keywordflow">while</span>( ( ( millis() - timerStart ) &lt; timeout ) || timeout == 0 ){</div>
+<div class="line"><a id="l02484" name="l02484"></a><span class="lineno"> 2484</span>      }</div>
+<div class="line"><a id="l02485" name="l02485"></a><span class="lineno"> 2485</span> </div>
+<div class="line"><a id="l02486" name="l02486"></a><span class="lineno"> 2486</span>    }</div>
 <div class="line"><a id="l02487" name="l02487"></a><span class="lineno"> 2487</span> </div>
-<div class="line"><a id="l02488" name="l02488"></a><span class="lineno"> 2488</span>      <span class="comment">// If key is available, stop waiting.</span></div>
-<div class="line"><a id="l02489" name="l02489"></a><span class="lineno"> 2489</span>      <span class="keywordflow">if</span>( source -&gt; available() &gt; 0 ){</div>
-<div class="line"><a id="l02490" name="l02490"></a><span class="lineno"> 2490</span> </div>
-<div class="line"><a id="l02491" name="l02491"></a><span class="lineno"> 2491</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l02492" name="l02492"></a><span class="lineno"> 2492</span> </div>
-<div class="line"><a id="l02493" name="l02493"></a><span class="lineno"> 2493</span>      }</div>
+<div class="line"><a id="l02488" name="l02488"></a><span class="lineno"> 2488</span>    <span class="comment">// Wait for the next keypress. If no timeout event, or the timeout</span></div>
+<div class="line"><a id="l02489" name="l02489"></a><span class="lineno"> 2489</span>    <span class="comment">// handling is disabled, just wait for the next key.</span></div>
+<div class="line"><a id="l02490" name="l02490"></a><span class="lineno"> 2490</span>    <span class="keywordflow">while</span>( ( ( millis() - timerStart ) &lt; timeout ) || timeout == 0 ){</div>
+<div class="line"><a id="l02491" name="l02491"></a><span class="lineno"> 2491</span> </div>
+<div class="line"><a id="l02492" name="l02492"></a><span class="lineno"> 2492</span>      <span class="comment">// If key is available, stop waiting.</span></div>
+<div class="line"><a id="l02493" name="l02493"></a><span class="lineno"> 2493</span>      <span class="keywordflow">if</span>( source -&gt; available() &gt; 0 ){</div>
 <div class="line"><a id="l02494" name="l02494"></a><span class="lineno"> 2494</span> </div>
-<div class="line"><a id="l02495" name="l02495"></a><span class="lineno"> 2495</span>    }</div>
+<div class="line"><a id="l02495" name="l02495"></a><span class="lineno"> 2495</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02496" name="l02496"></a><span class="lineno"> 2496</span> </div>
-<div class="line"><a id="l02497" name="l02497"></a><span class="lineno"> 2497</span>    <span class="comment">// Check for timeout! If the previous while is finished, but key is</span></div>
-<div class="line"><a id="l02498" name="l02498"></a><span class="lineno"> 2498</span>    <span class="comment">// not available, that means timeout occured!</span></div>
-<div class="line"><a id="l02499" name="l02499"></a><span class="lineno"> 2499</span>    <span class="keywordflow">if</span>( source -&gt; available() &lt;= 0 ){</div>
+<div class="line"><a id="l02497" name="l02497"></a><span class="lineno"> 2497</span>      }</div>
+<div class="line"><a id="l02498" name="l02498"></a><span class="lineno"> 2498</span> </div>
+<div class="line"><a id="l02499" name="l02499"></a><span class="lineno"> 2499</span>    }</div>
 <div class="line"><a id="l02500" name="l02500"></a><span class="lineno"> 2500</span> </div>
-<div class="line"><a id="l02501" name="l02501"></a><span class="lineno"> 2501</span>      <span class="comment">// This case turn on the cursor and return with error code.</span></div>
-<div class="line"><a id="l02502" name="l02502"></a><span class="lineno"> 2502</span>      <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
-<div class="line"><a id="l02503" name="l02503"></a><span class="lineno"> 2503</span>      source -&gt; println();</div>
-<div class="line"><a id="l02504" name="l02504"></a><span class="lineno"> 2504</span>      <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l02505" name="l02505"></a><span class="lineno"> 2505</span> </div>
-<div class="line"><a id="l02506" name="l02506"></a><span class="lineno"> 2506</span>    }</div>
-<div class="line"><a id="l02507" name="l02507"></a><span class="lineno"> 2507</span> </div>
-<div class="line"><a id="l02508" name="l02508"></a><span class="lineno"> 2508</span>    <span class="comment">// Process key data.</span></div>
-<div class="line"><a id="l02509" name="l02509"></a><span class="lineno"> 2509</span>    <span class="keywordflow">while</span>( source -&gt; available() &gt; 0 ){</div>
-<div class="line"><a id="l02510" name="l02510"></a><span class="lineno"> 2510</span> </div>
-<div class="line"><a id="l02511" name="l02511"></a><span class="lineno"> 2511</span>      <span class="comment">// Read next key.</span></div>
-<div class="line"><a id="l02512" name="l02512"></a><span class="lineno"> 2512</span>      c = source -&gt; read();</div>
-<div class="line"><a id="l02513" name="l02513"></a><span class="lineno"> 2513</span> </div>
-<div class="line"><a id="l02514" name="l02514"></a><span class="lineno"> 2514</span>      <span class="comment">// Check for enter key.</span></div>
-<div class="line"><a id="l02515" name="l02515"></a><span class="lineno"> 2515</span>      <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\r&#39;</span> ) || ( c == <span class="charliteral">&#39;\n&#39;</span> ) || ( c == <span class="charliteral">&#39;\0&#39;</span> ) ){</div>
-<div class="line"><a id="l02516" name="l02516"></a><span class="lineno"> 2516</span> </div>
-<div class="line"><a id="l02517" name="l02517"></a><span class="lineno"> 2517</span>        <span class="comment">// If multiple select mode is active, we have to return the number of selected elements.</span></div>
-<div class="line"><a id="l02518" name="l02518"></a><span class="lineno"> 2518</span>        <span class="keywordflow">if</span>( selectMultiple ){</div>
-<div class="line"><a id="l02519" name="l02519"></a><span class="lineno"> 2519</span> </div>
-<div class="line"><a id="l02520" name="l02520"></a><span class="lineno"> 2520</span>          <span class="comment">// Calculate the number of selected elements.</span></div>
-<div class="line"><a id="l02521" name="l02521"></a><span class="lineno"> 2521</span>          selectedIndex = 0;</div>
-<div class="line"><a id="l02522" name="l02522"></a><span class="lineno"> 2522</span> </div>
-<div class="line"><a id="l02523" name="l02523"></a><span class="lineno"> 2523</span>          <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
-<div class="line"><a id="l02524" name="l02524"></a><span class="lineno"> 2524</span> </div>
-<div class="line"><a id="l02525" name="l02525"></a><span class="lineno"> 2525</span>            <span class="keywordflow">if</span>( selection[ i ] ){</div>
+<div class="line"><a id="l02501" name="l02501"></a><span class="lineno"> 2501</span>    <span class="comment">// Check for timeout! If the previous while is finished, but key is</span></div>
+<div class="line"><a id="l02502" name="l02502"></a><span class="lineno"> 2502</span>    <span class="comment">// not available, that means timeout occured!</span></div>
+<div class="line"><a id="l02503" name="l02503"></a><span class="lineno"> 2503</span>    <span class="keywordflow">if</span>( source -&gt; available() &lt;= 0 ){</div>
+<div class="line"><a id="l02504" name="l02504"></a><span class="lineno"> 2504</span> </div>
+<div class="line"><a id="l02505" name="l02505"></a><span class="lineno"> 2505</span>      <span class="comment">// This case turn on the cursor and return with error code.</span></div>
+<div class="line"><a id="l02506" name="l02506"></a><span class="lineno"> 2506</span>      <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
+<div class="line"><a id="l02507" name="l02507"></a><span class="lineno"> 2507</span>      source -&gt; println();</div>
+<div class="line"><a id="l02508" name="l02508"></a><span class="lineno"> 2508</span>      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l02509" name="l02509"></a><span class="lineno"> 2509</span> </div>
+<div class="line"><a id="l02510" name="l02510"></a><span class="lineno"> 2510</span>    }</div>
+<div class="line"><a id="l02511" name="l02511"></a><span class="lineno"> 2511</span> </div>
+<div class="line"><a id="l02512" name="l02512"></a><span class="lineno"> 2512</span>    <span class="comment">// Process key data.</span></div>
+<div class="line"><a id="l02513" name="l02513"></a><span class="lineno"> 2513</span>    <span class="keywordflow">while</span>( source -&gt; available() &gt; 0 ){</div>
+<div class="line"><a id="l02514" name="l02514"></a><span class="lineno"> 2514</span> </div>
+<div class="line"><a id="l02515" name="l02515"></a><span class="lineno"> 2515</span>      <span class="comment">// Read next key.</span></div>
+<div class="line"><a id="l02516" name="l02516"></a><span class="lineno"> 2516</span>      c = source -&gt; read();</div>
+<div class="line"><a id="l02517" name="l02517"></a><span class="lineno"> 2517</span> </div>
+<div class="line"><a id="l02518" name="l02518"></a><span class="lineno"> 2518</span>      <span class="comment">// Check for enter key.</span></div>
+<div class="line"><a id="l02519" name="l02519"></a><span class="lineno"> 2519</span>      <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39;\r&#39;</span> ) || ( c == <span class="charliteral">&#39;\n&#39;</span> ) || ( c == <span class="charliteral">&#39;\0&#39;</span> ) ){</div>
+<div class="line"><a id="l02520" name="l02520"></a><span class="lineno"> 2520</span> </div>
+<div class="line"><a id="l02521" name="l02521"></a><span class="lineno"> 2521</span>        <span class="comment">// If multiple select mode is active, we have to return the number of selected elements.</span></div>
+<div class="line"><a id="l02522" name="l02522"></a><span class="lineno"> 2522</span>        <span class="keywordflow">if</span>( selectMultiple ){</div>
+<div class="line"><a id="l02523" name="l02523"></a><span class="lineno"> 2523</span> </div>
+<div class="line"><a id="l02524" name="l02524"></a><span class="lineno"> 2524</span>          <span class="comment">// Calculate the number of selected elements.</span></div>
+<div class="line"><a id="l02525" name="l02525"></a><span class="lineno"> 2525</span>          selectedIndex = 0;</div>
 <div class="line"><a id="l02526" name="l02526"></a><span class="lineno"> 2526</span> </div>
-<div class="line"><a id="l02527" name="l02527"></a><span class="lineno"> 2527</span>              selectedIndex++;</div>
+<div class="line"><a id="l02527" name="l02527"></a><span class="lineno"> 2527</span>          <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
 <div class="line"><a id="l02528" name="l02528"></a><span class="lineno"> 2528</span> </div>
-<div class="line"><a id="l02529" name="l02529"></a><span class="lineno"> 2529</span>            }</div>
+<div class="line"><a id="l02529" name="l02529"></a><span class="lineno"> 2529</span>            <span class="keywordflow">if</span>( selection[ i ] ){</div>
 <div class="line"><a id="l02530" name="l02530"></a><span class="lineno"> 2530</span> </div>
-<div class="line"><a id="l02531" name="l02531"></a><span class="lineno"> 2531</span>          }</div>
+<div class="line"><a id="l02531" name="l02531"></a><span class="lineno"> 2531</span>              selectedIndex++;</div>
 <div class="line"><a id="l02532" name="l02532"></a><span class="lineno"> 2532</span> </div>
-<div class="line"><a id="l02533" name="l02533"></a><span class="lineno"> 2533</span>        }</div>
+<div class="line"><a id="l02533" name="l02533"></a><span class="lineno"> 2533</span>            }</div>
 <div class="line"><a id="l02534" name="l02534"></a><span class="lineno"> 2534</span> </div>
-<div class="line"><a id="l02535" name="l02535"></a><span class="lineno"> 2535</span>        <span class="comment">// Turn on the cursor and return the right value.</span></div>
-<div class="line"><a id="l02536" name="l02536"></a><span class="lineno"> 2536</span>        <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
-<div class="line"><a id="l02537" name="l02537"></a><span class="lineno"> 2537</span>        source -&gt; println();</div>
-<div class="line"><a id="l02538" name="l02538"></a><span class="lineno"> 2538</span>        <span class="keywordflow">return</span> selectedIndex;</div>
-<div class="line"><a id="l02539" name="l02539"></a><span class="lineno"> 2539</span> </div>
-<div class="line"><a id="l02540" name="l02540"></a><span class="lineno"> 2540</span>      }</div>
-<div class="line"><a id="l02541" name="l02541"></a><span class="lineno"> 2541</span> </div>
-<div class="line"><a id="l02542" name="l02542"></a><span class="lineno"> 2542</span>      <span class="comment">// Check for abort key or backspace.</span></div>
-<div class="line"><a id="l02543" name="l02543"></a><span class="lineno"> 2543</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == 0x03 ) || ( c == 127 ) || ( c == <span class="charliteral">&#39;\b&#39;</span> ) ){</div>
-<div class="line"><a id="l02544" name="l02544"></a><span class="lineno"> 2544</span> </div>
-<div class="line"><a id="l02545" name="l02545"></a><span class="lineno"> 2545</span>        <span class="comment">// Turn on cursor and return with error code.</span></div>
-<div class="line"><a id="l02546" name="l02546"></a><span class="lineno"> 2546</span>        <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
-<div class="line"><a id="l02547" name="l02547"></a><span class="lineno"> 2547</span>        source -&gt; println();</div>
-<div class="line"><a id="l02548" name="l02548"></a><span class="lineno"> 2548</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l02549" name="l02549"></a><span class="lineno"> 2549</span> </div>
-<div class="line"><a id="l02550" name="l02550"></a><span class="lineno"> 2550</span>      }</div>
-<div class="line"><a id="l02551" name="l02551"></a><span class="lineno"> 2551</span> </div>
-<div class="line"><a id="l02552" name="l02552"></a><span class="lineno"> 2552</span>      <span class="comment">// In multiple selection mode, we can select or deselect an element</span></div>
-<div class="line"><a id="l02553" name="l02553"></a><span class="lineno"> 2553</span>      <span class="comment">// with the space key.</span></div>
-<div class="line"><a id="l02554" name="l02554"></a><span class="lineno"> 2554</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39; &#39;</span> ) &amp;&amp; selectMultiple ){</div>
+<div class="line"><a id="l02535" name="l02535"></a><span class="lineno"> 2535</span>          }</div>
+<div class="line"><a id="l02536" name="l02536"></a><span class="lineno"> 2536</span> </div>
+<div class="line"><a id="l02537" name="l02537"></a><span class="lineno"> 2537</span>        }</div>
+<div class="line"><a id="l02538" name="l02538"></a><span class="lineno"> 2538</span> </div>
+<div class="line"><a id="l02539" name="l02539"></a><span class="lineno"> 2539</span>        <span class="comment">// Turn on the cursor and return the right value.</span></div>
+<div class="line"><a id="l02540" name="l02540"></a><span class="lineno"> 2540</span>        <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
+<div class="line"><a id="l02541" name="l02541"></a><span class="lineno"> 2541</span>        source -&gt; println();</div>
+<div class="line"><a id="l02542" name="l02542"></a><span class="lineno"> 2542</span>        <span class="keywordflow">return</span> selectedIndex;</div>
+<div class="line"><a id="l02543" name="l02543"></a><span class="lineno"> 2543</span> </div>
+<div class="line"><a id="l02544" name="l02544"></a><span class="lineno"> 2544</span>      }</div>
+<div class="line"><a id="l02545" name="l02545"></a><span class="lineno"> 2545</span> </div>
+<div class="line"><a id="l02546" name="l02546"></a><span class="lineno"> 2546</span>      <span class="comment">// Check for abort key or backspace.</span></div>
+<div class="line"><a id="l02547" name="l02547"></a><span class="lineno"> 2547</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == 0x03 ) || ( c == 127 ) || ( c == <span class="charliteral">&#39;\b&#39;</span> ) ){</div>
+<div class="line"><a id="l02548" name="l02548"></a><span class="lineno"> 2548</span> </div>
+<div class="line"><a id="l02549" name="l02549"></a><span class="lineno"> 2549</span>        <span class="comment">// Turn on cursor and return with error code.</span></div>
+<div class="line"><a id="l02550" name="l02550"></a><span class="lineno"> 2550</span>        <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
+<div class="line"><a id="l02551" name="l02551"></a><span class="lineno"> 2551</span>        source -&gt; println();</div>
+<div class="line"><a id="l02552" name="l02552"></a><span class="lineno"> 2552</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l02553" name="l02553"></a><span class="lineno"> 2553</span> </div>
+<div class="line"><a id="l02554" name="l02554"></a><span class="lineno"> 2554</span>      }</div>
 <div class="line"><a id="l02555" name="l02555"></a><span class="lineno"> 2555</span> </div>
-<div class="line"><a id="l02556" name="l02556"></a><span class="lineno"> 2556</span>        selection[ selectedIndex ] = !selection[ selectedIndex ];</div>
-<div class="line"><a id="l02557" name="l02557"></a><span class="lineno"> 2557</span> </div>
-<div class="line"><a id="l02558" name="l02558"></a><span class="lineno"> 2558</span>      }</div>
+<div class="line"><a id="l02556" name="l02556"></a><span class="lineno"> 2556</span>      <span class="comment">// In multiple selection mode, we can select or deselect an element</span></div>
+<div class="line"><a id="l02557" name="l02557"></a><span class="lineno"> 2557</span>      <span class="comment">// with the space key.</span></div>
+<div class="line"><a id="l02558" name="l02558"></a><span class="lineno"> 2558</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39; &#39;</span> ) &amp;&amp; selectMultiple ){</div>
 <div class="line"><a id="l02559" name="l02559"></a><span class="lineno"> 2559</span> </div>
-<div class="line"><a id="l02560" name="l02560"></a><span class="lineno"> 2560</span>      <span class="comment">// Arrow key logic.</span></div>
-<div class="line"><a id="l02561" name="l02561"></a><span class="lineno"> 2561</span>      <span class="keywordflow">switch</span>( keyState ){</div>
-<div class="line"><a id="l02562" name="l02562"></a><span class="lineno"> 2562</span> </div>
-<div class="line"><a id="l02563" name="l02563"></a><span class="lineno"> 2563</span>        <span class="comment">// Default state</span></div>
-<div class="line"><a id="l02564" name="l02564"></a><span class="lineno"> 2564</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a id="l02565" name="l02565"></a><span class="lineno"> 2565</span> </div>
-<div class="line"><a id="l02566" name="l02566"></a><span class="lineno"> 2566</span>          <span class="comment">// If ESC character received, go to the next state</span></div>
-<div class="line"><a id="l02567" name="l02567"></a><span class="lineno"> 2567</span>          <span class="keywordflow">if</span>( c == 27 ){</div>
-<div class="line"><a id="l02568" name="l02568"></a><span class="lineno"> 2568</span> </div>
-<div class="line"><a id="l02569" name="l02569"></a><span class="lineno"> 2569</span>            keyState = 1;</div>
-<div class="line"><a id="l02570" name="l02570"></a><span class="lineno"> 2570</span> </div>
-<div class="line"><a id="l02571" name="l02571"></a><span class="lineno"> 2571</span>          }</div>
+<div class="line"><a id="l02560" name="l02560"></a><span class="lineno"> 2560</span>        selection[ selectedIndex ] = !selection[ selectedIndex ];</div>
+<div class="line"><a id="l02561" name="l02561"></a><span class="lineno"> 2561</span> </div>
+<div class="line"><a id="l02562" name="l02562"></a><span class="lineno"> 2562</span>      }</div>
+<div class="line"><a id="l02563" name="l02563"></a><span class="lineno"> 2563</span> </div>
+<div class="line"><a id="l02564" name="l02564"></a><span class="lineno"> 2564</span>      <span class="comment">// Arrow key logic.</span></div>
+<div class="line"><a id="l02565" name="l02565"></a><span class="lineno"> 2565</span>      <span class="keywordflow">switch</span>( keyState ){</div>
+<div class="line"><a id="l02566" name="l02566"></a><span class="lineno"> 2566</span> </div>
+<div class="line"><a id="l02567" name="l02567"></a><span class="lineno"> 2567</span>        <span class="comment">// Default state</span></div>
+<div class="line"><a id="l02568" name="l02568"></a><span class="lineno"> 2568</span>        <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a id="l02569" name="l02569"></a><span class="lineno"> 2569</span> </div>
+<div class="line"><a id="l02570" name="l02570"></a><span class="lineno"> 2570</span>          <span class="comment">// If ESC character received, go to the next state</span></div>
+<div class="line"><a id="l02571" name="l02571"></a><span class="lineno"> 2571</span>          <span class="keywordflow">if</span>( c == 27 ){</div>
 <div class="line"><a id="l02572" name="l02572"></a><span class="lineno"> 2572</span> </div>
-<div class="line"><a id="l02573" name="l02573"></a><span class="lineno"> 2573</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l02574" name="l02574"></a><span class="lineno"> 2574</span>        </div>
-<div class="line"><a id="l02575" name="l02575"></a><span class="lineno"> 2575</span>        <span class="comment">// ESC char received</span></div>
-<div class="line"><a id="l02576" name="l02576"></a><span class="lineno"> 2576</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a id="l02577" name="l02577"></a><span class="lineno"> 2577</span> </div>
-<div class="line"><a id="l02578" name="l02578"></a><span class="lineno"> 2578</span>          <span class="comment">// If [ character received, go to the next state</span></div>
-<div class="line"><a id="l02579" name="l02579"></a><span class="lineno"> 2579</span>          <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;[&#39;</span> ){</div>
-<div class="line"><a id="l02580" name="l02580"></a><span class="lineno"> 2580</span> </div>
-<div class="line"><a id="l02581" name="l02581"></a><span class="lineno"> 2581</span>            keyState = 2;</div>
-<div class="line"><a id="l02582" name="l02582"></a><span class="lineno"> 2582</span> </div>
-<div class="line"><a id="l02583" name="l02583"></a><span class="lineno"> 2583</span>          }</div>
+<div class="line"><a id="l02573" name="l02573"></a><span class="lineno"> 2573</span>            keyState = 1;</div>
+<div class="line"><a id="l02574" name="l02574"></a><span class="lineno"> 2574</span> </div>
+<div class="line"><a id="l02575" name="l02575"></a><span class="lineno"> 2575</span>          }</div>
+<div class="line"><a id="l02576" name="l02576"></a><span class="lineno"> 2576</span> </div>
+<div class="line"><a id="l02577" name="l02577"></a><span class="lineno"> 2577</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02578" name="l02578"></a><span class="lineno"> 2578</span>        </div>
+<div class="line"><a id="l02579" name="l02579"></a><span class="lineno"> 2579</span>        <span class="comment">// ESC char received</span></div>
+<div class="line"><a id="l02580" name="l02580"></a><span class="lineno"> 2580</span>        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l02581" name="l02581"></a><span class="lineno"> 2581</span> </div>
+<div class="line"><a id="l02582" name="l02582"></a><span class="lineno"> 2582</span>          <span class="comment">// If [ character received, go to the next state</span></div>
+<div class="line"><a id="l02583" name="l02583"></a><span class="lineno"> 2583</span>          <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;[&#39;</span> ){</div>
 <div class="line"><a id="l02584" name="l02584"></a><span class="lineno"> 2584</span> </div>
-<div class="line"><a id="l02585" name="l02585"></a><span class="lineno"> 2585</span>          <span class="comment">// Otherwise go to default state</span></div>
-<div class="line"><a id="l02586" name="l02586"></a><span class="lineno"> 2586</span>          <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l02587" name="l02587"></a><span class="lineno"> 2587</span> </div>
-<div class="line"><a id="l02588" name="l02588"></a><span class="lineno"> 2588</span>            keyState = 0;</div>
-<div class="line"><a id="l02589" name="l02589"></a><span class="lineno"> 2589</span> </div>
-<div class="line"><a id="l02590" name="l02590"></a><span class="lineno"> 2590</span>          }</div>
+<div class="line"><a id="l02585" name="l02585"></a><span class="lineno"> 2585</span>            keyState = 2;</div>
+<div class="line"><a id="l02586" name="l02586"></a><span class="lineno"> 2586</span> </div>
+<div class="line"><a id="l02587" name="l02587"></a><span class="lineno"> 2587</span>          }</div>
+<div class="line"><a id="l02588" name="l02588"></a><span class="lineno"> 2588</span> </div>
+<div class="line"><a id="l02589" name="l02589"></a><span class="lineno"> 2589</span>          <span class="comment">// Otherwise go to default state</span></div>
+<div class="line"><a id="l02590" name="l02590"></a><span class="lineno"> 2590</span>          <span class="keywordflow">else</span>{</div>
 <div class="line"><a id="l02591" name="l02591"></a><span class="lineno"> 2591</span> </div>
-<div class="line"><a id="l02592" name="l02592"></a><span class="lineno"> 2592</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02592" name="l02592"></a><span class="lineno"> 2592</span>            keyState = 0;</div>
 <div class="line"><a id="l02593" name="l02593"></a><span class="lineno"> 2593</span> </div>
-<div class="line"><a id="l02594" name="l02594"></a><span class="lineno"> 2594</span>        <span class="comment">// [ char received</span></div>
-<div class="line"><a id="l02595" name="l02595"></a><span class="lineno"> 2595</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a id="l02596" name="l02596"></a><span class="lineno"> 2596</span> </div>
-<div class="line"><a id="l02597" name="l02597"></a><span class="lineno"> 2597</span>          <span class="comment">// Up arrow</span></div>
-<div class="line"><a id="l02598" name="l02598"></a><span class="lineno"> 2598</span>          <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;A&#39;</span> ){</div>
-<div class="line"><a id="l02599" name="l02599"></a><span class="lineno"> 2599</span> </div>
-<div class="line"><a id="l02600" name="l02600"></a><span class="lineno"> 2600</span>            <span class="comment">// Move the cursor and detect underflow.</span></div>
-<div class="line"><a id="l02601" name="l02601"></a><span class="lineno"> 2601</span>            selectedIndex--;</div>
-<div class="line"><a id="l02602" name="l02602"></a><span class="lineno"> 2602</span>            <span class="keywordflow">if</span>( selectedIndex &lt; 0 ){</div>
+<div class="line"><a id="l02594" name="l02594"></a><span class="lineno"> 2594</span>          }</div>
+<div class="line"><a id="l02595" name="l02595"></a><span class="lineno"> 2595</span> </div>
+<div class="line"><a id="l02596" name="l02596"></a><span class="lineno"> 2596</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02597" name="l02597"></a><span class="lineno"> 2597</span> </div>
+<div class="line"><a id="l02598" name="l02598"></a><span class="lineno"> 2598</span>        <span class="comment">// [ char received</span></div>
+<div class="line"><a id="l02599" name="l02599"></a><span class="lineno"> 2599</span>        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a id="l02600" name="l02600"></a><span class="lineno"> 2600</span> </div>
+<div class="line"><a id="l02601" name="l02601"></a><span class="lineno"> 2601</span>          <span class="comment">// Up arrow</span></div>
+<div class="line"><a id="l02602" name="l02602"></a><span class="lineno"> 2602</span>          <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;A&#39;</span> ){</div>
 <div class="line"><a id="l02603" name="l02603"></a><span class="lineno"> 2603</span> </div>
-<div class="line"><a id="l02604" name="l02604"></a><span class="lineno"> 2604</span>              selectedIndex = 0;</div>
-<div class="line"><a id="l02605" name="l02605"></a><span class="lineno"> 2605</span> </div>
-<div class="line"><a id="l02606" name="l02606"></a><span class="lineno"> 2606</span>            }</div>
+<div class="line"><a id="l02604" name="l02604"></a><span class="lineno"> 2604</span>            <span class="comment">// Move the cursor and detect underflow.</span></div>
+<div class="line"><a id="l02605" name="l02605"></a><span class="lineno"> 2605</span>            selectedIndex--;</div>
+<div class="line"><a id="l02606" name="l02606"></a><span class="lineno"> 2606</span>            <span class="keywordflow">if</span>( selectedIndex &lt; 0 ){</div>
 <div class="line"><a id="l02607" name="l02607"></a><span class="lineno"> 2607</span> </div>
-<div class="line"><a id="l02608" name="l02608"></a><span class="lineno"> 2608</span>          }</div>
+<div class="line"><a id="l02608" name="l02608"></a><span class="lineno"> 2608</span>              selectedIndex = 0;</div>
 <div class="line"><a id="l02609" name="l02609"></a><span class="lineno"> 2609</span> </div>
-<div class="line"><a id="l02610" name="l02610"></a><span class="lineno"> 2610</span>          <span class="comment">// Down arrow</span></div>
-<div class="line"><a id="l02611" name="l02611"></a><span class="lineno"> 2611</span>          <span class="keywordflow">else</span> <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;B&#39;</span> ){</div>
-<div class="line"><a id="l02612" name="l02612"></a><span class="lineno"> 2612</span> </div>
-<div class="line"><a id="l02613" name="l02613"></a><span class="lineno"> 2613</span>            <span class="comment">// Move the cursor and detect overflow.</span></div>
-<div class="line"><a id="l02614" name="l02614"></a><span class="lineno"> 2614</span>            selectedIndex++;</div>
-<div class="line"><a id="l02615" name="l02615"></a><span class="lineno"> 2615</span>            <span class="keywordflow">if</span>( selectedIndex &gt;= numberOfElements ){</div>
+<div class="line"><a id="l02610" name="l02610"></a><span class="lineno"> 2610</span>            }</div>
+<div class="line"><a id="l02611" name="l02611"></a><span class="lineno"> 2611</span> </div>
+<div class="line"><a id="l02612" name="l02612"></a><span class="lineno"> 2612</span>          }</div>
+<div class="line"><a id="l02613" name="l02613"></a><span class="lineno"> 2613</span> </div>
+<div class="line"><a id="l02614" name="l02614"></a><span class="lineno"> 2614</span>          <span class="comment">// Down arrow</span></div>
+<div class="line"><a id="l02615" name="l02615"></a><span class="lineno"> 2615</span>          <span class="keywordflow">else</span> <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;B&#39;</span> ){</div>
 <div class="line"><a id="l02616" name="l02616"></a><span class="lineno"> 2616</span> </div>
-<div class="line"><a id="l02617" name="l02617"></a><span class="lineno"> 2617</span>              selectedIndex = numberOfElements - 1;</div>
-<div class="line"><a id="l02618" name="l02618"></a><span class="lineno"> 2618</span> </div>
-<div class="line"><a id="l02619" name="l02619"></a><span class="lineno"> 2619</span>            }</div>
+<div class="line"><a id="l02617" name="l02617"></a><span class="lineno"> 2617</span>            <span class="comment">// Move the cursor and detect overflow.</span></div>
+<div class="line"><a id="l02618" name="l02618"></a><span class="lineno"> 2618</span>            selectedIndex++;</div>
+<div class="line"><a id="l02619" name="l02619"></a><span class="lineno"> 2619</span>            <span class="keywordflow">if</span>( selectedIndex &gt;= numberOfElements ){</div>
 <div class="line"><a id="l02620" name="l02620"></a><span class="lineno"> 2620</span> </div>
-<div class="line"><a id="l02621" name="l02621"></a><span class="lineno"> 2621</span>          }</div>
+<div class="line"><a id="l02621" name="l02621"></a><span class="lineno"> 2621</span>              selectedIndex = numberOfElements - 1;</div>
 <div class="line"><a id="l02622" name="l02622"></a><span class="lineno"> 2622</span> </div>
-<div class="line"><a id="l02623" name="l02623"></a><span class="lineno"> 2623</span>          <span class="comment">// Go to default state</span></div>
-<div class="line"><a id="l02624" name="l02624"></a><span class="lineno"> 2624</span>          keyState = 0;</div>
-<div class="line"><a id="l02625" name="l02625"></a><span class="lineno"> 2625</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02623" name="l02623"></a><span class="lineno"> 2623</span>            }</div>
+<div class="line"><a id="l02624" name="l02624"></a><span class="lineno"> 2624</span> </div>
+<div class="line"><a id="l02625" name="l02625"></a><span class="lineno"> 2625</span>          }</div>
 <div class="line"><a id="l02626" name="l02626"></a><span class="lineno"> 2626</span> </div>
-<div class="line"><a id="l02627" name="l02627"></a><span class="lineno"> 2627</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l02627" name="l02627"></a><span class="lineno"> 2627</span>          <span class="comment">// Go to default state</span></div>
 <div class="line"><a id="l02628" name="l02628"></a><span class="lineno"> 2628</span>          keyState = 0;</div>
 <div class="line"><a id="l02629" name="l02629"></a><span class="lineno"> 2629</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02630" name="l02630"></a><span class="lineno"> 2630</span> </div>
-<div class="line"><a id="l02631" name="l02631"></a><span class="lineno"> 2631</span>      }</div>
-<div class="line"><a id="l02632" name="l02632"></a><span class="lineno"> 2632</span> </div>
-<div class="line"><a id="l02633" name="l02633"></a><span class="lineno"> 2633</span>    }</div>
+<div class="line"><a id="l02631" name="l02631"></a><span class="lineno"> 2631</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l02632" name="l02632"></a><span class="lineno"> 2632</span>          keyState = 0;</div>
+<div class="line"><a id="l02633" name="l02633"></a><span class="lineno"> 2633</span>          <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l02634" name="l02634"></a><span class="lineno"> 2634</span> </div>
-<div class="line"><a id="l02635" name="l02635"></a><span class="lineno"> 2635</span>    <span class="comment">// If a keypress happened, we have to refresh the list.</span></div>
-<div class="line"><a id="l02636" name="l02636"></a><span class="lineno"> 2636</span>    <span class="comment">// We have to delete the previously printed content.</span></div>
-<div class="line"><a id="l02637" name="l02637"></a><span class="lineno"> 2637</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
+<div class="line"><a id="l02635" name="l02635"></a><span class="lineno"> 2635</span>      }</div>
+<div class="line"><a id="l02636" name="l02636"></a><span class="lineno"> 2636</span> </div>
+<div class="line"><a id="l02637" name="l02637"></a><span class="lineno"> 2637</span>    }</div>
 <div class="line"><a id="l02638" name="l02638"></a><span class="lineno"> 2638</span> </div>
-<div class="line"><a id="l02639" name="l02639"></a><span class="lineno"> 2639</span>      source -&gt; print( <span class="stringliteral">&quot;\033[2K\033[A&quot;</span> );</div>
-<div class="line"><a id="l02640" name="l02640"></a><span class="lineno"> 2640</span> </div>
-<div class="line"><a id="l02641" name="l02641"></a><span class="lineno"> 2641</span>    }</div>
+<div class="line"><a id="l02639" name="l02639"></a><span class="lineno"> 2639</span>    <span class="comment">// If a keypress happened, we have to refresh the list.</span></div>
+<div class="line"><a id="l02640" name="l02640"></a><span class="lineno"> 2640</span>    <span class="comment">// We have to delete the previously printed content.</span></div>
+<div class="line"><a id="l02641" name="l02641"></a><span class="lineno"> 2641</span>    <span class="keywordflow">for</span>( i = 0; i &lt; numberOfElements; i++ ){</div>
 <div class="line"><a id="l02642" name="l02642"></a><span class="lineno"> 2642</span> </div>
-<div class="line"><a id="l02643" name="l02643"></a><span class="lineno"> 2643</span>    source -&gt; println();</div>
+<div class="line"><a id="l02643" name="l02643"></a><span class="lineno"> 2643</span>      source -&gt; print( <span class="stringliteral">&quot;\033[2K\033[A&quot;</span> );</div>
 <div class="line"><a id="l02644" name="l02644"></a><span class="lineno"> 2644</span> </div>
-<div class="line"><a id="l02645" name="l02645"></a><span class="lineno"> 2645</span>    </div>
+<div class="line"><a id="l02645" name="l02645"></a><span class="lineno"> 2645</span>    }</div>
 <div class="line"><a id="l02646" name="l02646"></a><span class="lineno"> 2646</span> </div>
-<div class="line"><a id="l02647" name="l02647"></a><span class="lineno"> 2647</span>  }</div>
+<div class="line"><a id="l02647" name="l02647"></a><span class="lineno"> 2647</span>    source -&gt; println();</div>
 <div class="line"><a id="l02648" name="l02648"></a><span class="lineno"> 2648</span> </div>
-<div class="line"><a id="l02649" name="l02649"></a><span class="lineno"> 2649</span>  <span class="comment">// Normally, we should not be here. In case of any problem,</span></div>
-<div class="line"><a id="l02650" name="l02650"></a><span class="lineno"> 2650</span>  <span class="comment">// turn on the cursor, and return with error code.</span></div>
-<div class="line"><a id="l02651" name="l02651"></a><span class="lineno"> 2651</span>  <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
-<div class="line"><a id="l02652" name="l02652"></a><span class="lineno"> 2652</span>  source -&gt; println();</div>
-<div class="line"><a id="l02653" name="l02653"></a><span class="lineno"> 2653</span>  <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l02654" name="l02654"></a><span class="lineno"> 2654</span> </div>
-<div class="line"><a id="l02655" name="l02655"></a><span class="lineno"> 2655</span>}</div>
-<div class="line"><a id="l02656" name="l02656"></a><span class="lineno"> 2656</span> </div>
-<div class="line"><a id="l02657" name="l02657"></a><span class="lineno"><a class="line" href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7"> 2657</a></span><a class="code hl_class" href="class_shellminator.html">Shellminator</a>* <a class="code hl_function" href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">Shellminator::castVoidToShellminator</a>( <span class="keywordtype">void</span>* ptr ){</div>
+<div class="line"><a id="l02649" name="l02649"></a><span class="lineno"> 2649</span>    </div>
+<div class="line"><a id="l02650" name="l02650"></a><span class="lineno"> 2650</span> </div>
+<div class="line"><a id="l02651" name="l02651"></a><span class="lineno"> 2651</span>  }</div>
+<div class="line"><a id="l02652" name="l02652"></a><span class="lineno"> 2652</span> </div>
+<div class="line"><a id="l02653" name="l02653"></a><span class="lineno"> 2653</span>  <span class="comment">// Normally, we should not be here. In case of any problem,</span></div>
+<div class="line"><a id="l02654" name="l02654"></a><span class="lineno"> 2654</span>  <span class="comment">// turn on the cursor, and return with error code.</span></div>
+<div class="line"><a id="l02655" name="l02655"></a><span class="lineno"> 2655</span>  <a class="code hl_function" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a>( source );</div>
+<div class="line"><a id="l02656" name="l02656"></a><span class="lineno"> 2656</span>  source -&gt; println();</div>
+<div class="line"><a id="l02657" name="l02657"></a><span class="lineno"> 2657</span>  <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l02658" name="l02658"></a><span class="lineno"> 2658</span> </div>
-<div class="line"><a id="l02659" name="l02659"></a><span class="lineno"> 2659</span>  <span class="keywordflow">return</span> (<a class="code hl_class" href="class_shellminator.html">Shellminator</a>*)ptr;</div>
+<div class="line"><a id="l02659" name="l02659"></a><span class="lineno"> 2659</span>}</div>
 <div class="line"><a id="l02660" name="l02660"></a><span class="lineno"> 2660</span> </div>
-<div class="line"><a id="l02661" name="l02661"></a><span class="lineno"> 2661</span>}</div>
+<div class="line"><a id="l02661" name="l02661"></a><span class="lineno"><a class="line" href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7"> 2661</a></span><a class="code hl_class" href="class_shellminator.html">Shellminator</a>* <a class="code hl_function" href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">Shellminator::castVoidToShellminator</a>( <span class="keywordtype">void</span>* ptr ){</div>
 <div class="line"><a id="l02662" name="l02662"></a><span class="lineno"> 2662</span> </div>
-<div class="line"><a id="l02663" name="l02663"></a><span class="lineno"><a class="line" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05"> 2663</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">Shellminator::autoDetectTerminal</a>(){</div>
+<div class="line"><a id="l02663" name="l02663"></a><span class="lineno"> 2663</span>  <span class="keywordflow">return</span> (<a class="code hl_class" href="class_shellminator.html">Shellminator</a>*)ptr;</div>
 <div class="line"><a id="l02664" name="l02664"></a><span class="lineno"> 2664</span> </div>
-<div class="line"><a id="l02665" name="l02665"></a><span class="lineno"> 2665</span>  <span class="keywordtype">char</span> buff[ 20 ] = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l02666" name="l02666"></a><span class="lineno"> 2666</span>  <span class="keywordtype">char</span> magic[] = { 5, 0 };</div>
-<div class="line"><a id="l02667" name="l02667"></a><span class="lineno"> 2667</span>  <a class="code hl_function" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a>( <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a>, <span class="keyword">sizeof</span>( buff ), buff, magic, 500 );</div>
+<div class="line"><a id="l02665" name="l02665"></a><span class="lineno"> 2665</span>}</div>
+<div class="line"><a id="l02666" name="l02666"></a><span class="lineno"> 2666</span> </div>
+<div class="line"><a id="l02667" name="l02667"></a><span class="lineno"><a class="line" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05"> 2667</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">Shellminator::autoDetectTerminal</a>(){</div>
 <div class="line"><a id="l02668" name="l02668"></a><span class="lineno"> 2668</span> </div>
-<div class="line"><a id="l02669" name="l02669"></a><span class="lineno"> 2669</span>  <span class="keywordflow">if</span>( strcmp( buff, <span class="stringliteral">&quot;PuTTY&quot;</span> ) == 0 ){</div>
-<div class="line"><a id="l02670" name="l02670"></a><span class="lineno"> 2670</span> </div>
-<div class="line"><a id="l02671" name="l02671"></a><span class="lineno"> 2671</span>  }</div>
+<div class="line"><a id="l02669" name="l02669"></a><span class="lineno"> 2669</span>  <span class="keywordtype">char</span> buff[ 20 ] = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l02670" name="l02670"></a><span class="lineno"> 2670</span>  <span class="keywordtype">char</span> magic[] = { 5, 0 };</div>
+<div class="line"><a id="l02671" name="l02671"></a><span class="lineno"> 2671</span>  <a class="code hl_function" href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a>( <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a>, <span class="keyword">sizeof</span>( buff ), buff, magic, 500 );</div>
 <div class="line"><a id="l02672" name="l02672"></a><span class="lineno"> 2672</span> </div>
-<div class="line"><a id="l02673" name="l02673"></a><span class="lineno"> 2673</span>  <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02673" name="l02673"></a><span class="lineno"> 2673</span>  <span class="keywordflow">if</span>( strcmp( buff, <span class="stringliteral">&quot;PuTTY&quot;</span> ) == 0 ){</div>
 <div class="line"><a id="l02674" name="l02674"></a><span class="lineno"> 2674</span> </div>
-<div class="line"><a id="l02675" name="l02675"></a><span class="lineno"> 2675</span>    <a class="code hl_variable" href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">enableFormatting</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02676" name="l02676"></a><span class="lineno"> 2676</span>    <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; println( <span class="stringliteral">&quot;unknown terminal...&quot;</span> );</div>
-<div class="line"><a id="l02677" name="l02677"></a><span class="lineno"> 2677</span>    </div>
-<div class="line"><a id="l02678" name="l02678"></a><span class="lineno"> 2678</span>  }</div>
-<div class="line"><a id="l02679" name="l02679"></a><span class="lineno"> 2679</span> </div>
-<div class="line"><a id="l02680" name="l02680"></a><span class="lineno"> 2680</span>}</div>
-<div class="line"><a id="l02681" name="l02681"></a><span class="lineno"> 2681</span> </div>
+<div class="line"><a id="l02675" name="l02675"></a><span class="lineno"> 2675</span>  }</div>
+<div class="line"><a id="l02676" name="l02676"></a><span class="lineno"> 2676</span> </div>
+<div class="line"><a id="l02677" name="l02677"></a><span class="lineno"> 2677</span>  <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l02678" name="l02678"></a><span class="lineno"> 2678</span> </div>
+<div class="line"><a id="l02679" name="l02679"></a><span class="lineno"> 2679</span>    <a class="code hl_variable" href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">enableFormatting</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02680" name="l02680"></a><span class="lineno"> 2680</span>    <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; println( <span class="stringliteral">&quot;unknown terminal...&quot;</span> );</div>
+<div class="line"><a id="l02681" name="l02681"></a><span class="lineno"> 2681</span>    </div>
+<div class="line"><a id="l02682" name="l02682"></a><span class="lineno"> 2682</span>  }</div>
+<div class="line"><a id="l02683" name="l02683"></a><span class="lineno"> 2683</span> </div>
+<div class="line"><a id="l02684" name="l02684"></a><span class="lineno"> 2684</span>}</div>
+<div class="line"><a id="l02685" name="l02685"></a><span class="lineno"> 2685</span> </div>
 <div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a0a9c2ccd245f809ea628d5a6a447f40d"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a0a9c2ccd245f809ea628d5a6a447f40d">SHELLMINATOR_BANNER_PATH_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BANNER_PATH_LEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00076">Shellminator-DefaultSettings.hpp:76</a></div></div>
 <div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a3ddabc8c441626dba3679faf61863c5f"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_LEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00064">Shellminator-DefaultSettings.hpp:64</a></div></div>
 <div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a43e8d7753b97ae4dc5423d70e29ec750"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a43e8d7753b97ae4dc5423d70e29ec750">SHELLMINATOR_BANNER_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BANNER_LEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00072">Shellminator-DefaultSettings.hpp:72</a></div></div>
@@ -2822,50 +2826,50 @@ $(document).ready(function(){initNavTree('_shellminator_8cpp_source.html',''); i
 <div class="ttc" id="aclass_shellminator_buffered_printer_html_a88ef18839525432afccaad59f87944de"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">ShellminatorBufferedPrinter::getBufferSize</a></div><div class="ttdeci">int getBufferSize()</div><div class="ttdoc">Get the allocated memory.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00229">Shellminator-BufferedPrinter.cpp:229</a></div></div>
 <div class="ttc" id="aclass_shellminator_buffered_printer_html_aadb670e69391ed2757391ec2ea64943e"><div class="ttname"><a href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">ShellminatorBufferedPrinter::printf</a></div><div class="ttdeci">int printf(const char *fmt,...)</div><div class="ttdoc">Regular printf like function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00121">Shellminator-BufferedPrinter.cpp:121</a></div></div>
 <div class="ttc" id="aclass_shellminator_buffered_printer_html_addd89bdf65afad80f3f2ce8372df2df4"><div class="ttname"><a href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">ShellminatorBufferedPrinter::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00187">Shellminator-BufferedPrinter.cpp:187</a></div></div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00114">Shellminator.hpp:115</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00116">Shellminator.hpp:117</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a0262b7bdcb0f22a7f0d17f8ca76fc35d"><div class="ttname"><a href="class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d">Shellminator::begin</a></div><div class="ttdeci">void begin(char *banner_p)</div><div class="ttdoc">Shellminator initialization function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00637">Shellminator.cpp:637</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a148b57cedf698acd67209daaeb525c9c"><div class="ttname"><a href="class_shellminator.html#a148b57cedf698acd67209daaeb525c9c">Shellminator::setCursorPosition</a></div><div class="ttdeci">void setCursorPosition(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01308">Shellminator.cpp:1308</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a151f3987b48362142340e1a396b89a37"><div class="ttname"><a href="class_shellminator.html#a151f3987b48362142340e1a396b89a37">Shellminator::generateQRText</a></div><div class="ttdeci">void generateQRText(char *text)</div><div class="ttdoc">This function generates a QR-code from text.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01598">Shellminator.cpp:1598</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a1a51aad4620e2253ccec92b0d208043e"><div class="ttname"><a href="class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e">Shellminator::getTerminalSize</a></div><div class="ttdeci">bool getTerminalSize(int *width, int *height)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01318">Shellminator.cpp:1318</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a20473a985306d512d56901da3b32c8e7"><div class="ttname"><a href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">Shellminator::castVoidToShellminator</a></div><div class="ttdeci">static Shellminator * castVoidToShellminator(void *ptr)</div><div class="ttdoc">This is a helper function for pointer casting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02657">Shellminator.cpp:2657</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a20473a985306d512d56901da3b32c8e7"><div class="ttname"><a href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">Shellminator::castVoidToShellminator</a></div><div class="ttdeci">static Shellminator * castVoidToShellminator(void *ptr)</div><div class="ttdoc">This is a helper function for pointer casting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02661">Shellminator.cpp:2661</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a2494d3a395b52ea6017948472a535940"><div class="ttname"><a href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator::showCursor</a></div><div class="ttdeci">void showCursor()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00192">Shellminator-Styles.cpp:192</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a274ba9dece047e5d4b3c23cae6c91317"><div class="ttname"><a href="class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317">Shellminator::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clear screen.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00228">Shellminator-Styles.cpp:228</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a2b2337f24347bbe8dcc0c02ebf55ffc2"><div class="ttname"><a href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a></div><div class="ttdeci">static bool waitForKey(Stream *source, char key, uint32_t timeout=0)</div><div class="ttdoc">Wait for specific keypress.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02199">Shellminator.cpp:2199</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a2b2337f24347bbe8dcc0c02ebf55ffc2"><div class="ttname"><a href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">Shellminator::waitForKey</a></div><div class="ttdeci">static bool waitForKey(Stream *source, char key, uint32_t timeout=0)</div><div class="ttdoc">Wait for specific keypress.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02203">Shellminator.cpp:2203</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a2fd33cc9433d6d575a7c6e6e0019b682"><div class="ttname"><a href="class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682">Shellminator::printHistory</a></div><div class="ttdeci">void printHistory()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00521">Shellminator.cpp:521</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00125">Shellminator.hpp:125</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00131">Shellminator.hpp:130</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator::MAGENTA</a></div><div class="ttdeci">@ MAGENTA</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00128">Shellminator.hpp:128</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00127">Shellminator.hpp:127</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a3463b5191301f37fa2db84906f44e2ba"><div class="ttname"><a href="class_shellminator.html#a3463b5191301f37fa2db84906f44e2ba">Shellminator::helpText</a></div><div class="ttdeci">static const char helpText[]</div><div class="ttdoc">String, that holds the help text data.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00155">Shellminator.hpp:155</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00127">Shellminator.hpp:127</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00133">Shellminator.hpp:132</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator::MAGENTA</a></div><div class="ttdeci">@ MAGENTA</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00130">Shellminator.hpp:130</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00129">Shellminator.hpp:129</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a3463b5191301f37fa2db84906f44e2ba"><div class="ttname"><a href="class_shellminator.html#a3463b5191301f37fa2db84906f44e2ba">Shellminator::helpText</a></div><div class="ttdeci">static const char helpText[]</div><div class="ttdoc">String, that holds the help text data.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00157">Shellminator.hpp:157</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a3cf2cd097eb741beddcaf5340f42a404"><div class="ttname"><a href="class_shellminator.html#a3cf2cd097eb741beddcaf5340f42a404">Shellminator::getCursorPosition</a></div><div class="ttdeci">bool getCursorPosition(int *x, int *y, uint32_t timeout=100)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01172">Shellminator.cpp:1172</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a3f8933d5b0360a3f4b3bff32e12a77d1"><div class="ttname"><a href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">Shellminator::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00922">Shellminator.cpp:922</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a403b9dd14b8f241c8ca97a6820b3da12"><div class="ttname"><a href="class_shellminator.html#a403b9dd14b8f241c8ca97a6820b3da12">Shellminator::addExecFunc</a></div><div class="ttdeci">void addExecFunc(void(*execution_fn_p)(char *))</div><div class="ttdoc">Execution function attacher function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00445">Shellminator.cpp:445</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a403ea48c3312851979108855989e71ce"><div class="ttname"><a href="class_shellminator.html#a403ea48c3312851979108855989e71ce">Shellminator::hideCursor</a></div><div class="ttdeci">void hideCursor()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00156">Shellminator-Styles.cpp:156</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a47aef4e6e8cb630be8799c5b982205d2"><div class="ttname"><a href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">Shellminator::enableFormatting</a></div><div class="ttdeci">bool enableFormatting</div><div class="ttdoc">This flag enables or disables character formatting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00698">Shellminator.hpp:698</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a47aef4e6e8cb630be8799c5b982205d2"><div class="ttname"><a href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">Shellminator::enableFormatting</a></div><div class="ttdeci">bool enableFormatting</div><div class="ttdoc">This flag enables or disables character formatting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00730">Shellminator.hpp:730</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a501a9207ab6e968ba081477d6c41651a"><div class="ttname"><a href="class_shellminator.html#a501a9207ab6e968ba081477d6c41651a">Shellminator::clientDisconnect</a></div><div class="ttdeci">void clientDisconnect()</div><div class="ttdoc">Disconnect WiFiClient telnet client.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00909">Shellminator.cpp:909</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a5f76bb962817d2a5fbbe626036dfbda1"><div class="ttname"><a href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">Shellminator::sendBackspace</a></div><div class="ttdeci">void sendBackspace()</div><div class="ttdoc">Sends a backspace.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00672">Shellminator.cpp:672</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a634f65f3de75cdd4ec196bb836ce1f6f"><div class="ttname"><a href="class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f">Shellminator::beginServer</a></div><div class="ttdeci">void beginServer()</div><div class="ttdoc">Start WiFi Server.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00125">Shellminator.cpp:125</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a6a74cf2bf2746c17ef6b8874f75ec4d7"><div class="ttname"><a href="class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7">Shellminator::printBanner</a></div><div class="ttdeci">void printBanner()</div><div class="ttdoc">This function prints the banner text.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00461">Shellminator.cpp:461</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a6f9c372a653bae09bf512949d67a935e"><div class="ttname"><a href="class_shellminator.html#a6f9c372a653bae09bf512949d67a935e">Shellminator::Shellminator</a></div><div class="ttdeci">Shellminator(WiFiServer *server_p)</div><div class="ttdoc">Constructor for WiFi Server.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00064">Shellminator.cpp:64</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00708">Shellminator.hpp:708</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00740">Shellminator.hpp:740</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a893fa5b32fc230746af031d95f19123d"><div class="ttname"><a href="class_shellminator.html#a893fa5b32fc230746af031d95f19123d">Shellminator::stopServer</a></div><div class="ttdeci">void stopServer()</div><div class="ttdoc">Stop WiFi Server.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00136">Shellminator.cpp:136</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a89e86946143cf1051a8047f56432e409"><div class="ttname"><a href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">Shellminator::beep</a></div><div class="ttdeci">void beep()</div><div class="ttdoc">Generate a beep sound on the terminal device.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01364">Shellminator.cpp:1364</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a9cc87f366e41a13aa5e22a8a07024697"><div class="ttname"><a href="class_shellminator.html#a9cc87f366e41a13aa5e22a8a07024697">Shellminator::enableBuffering</a></div><div class="ttdeci">bool enableBuffering(int bufferSize=32)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00369">Shellminator.cpp:369</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_a9fa53611dd2665ba501e349d3697345d"><div class="ttname"><a href="class_shellminator.html#a9fa53611dd2665ba501e349d3697345d">Shellminator::setBannerPathText</a></div><div class="ttdeci">void setBannerPathText(char *bannerPath_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00405">Shellminator.cpp:405</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aaa42838fa5ba17810bf06ea201000d05"><div class="ttname"><a href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">Shellminator::autoDetectTerminal</a></div><div class="ttdeci">void autoDetectTerminal()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02663">Shellminator.cpp:2663</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ab7190607c86f67ccc4522c3362d6c29d"><div class="ttname"><a href="class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d">Shellminator::mute</a></div><div class="ttdeci">bool mute</div><div class="ttdoc">If set, the buzzer will be silent.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00701">Shellminator.hpp:701</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_abb5b4fda8fc932a43ba8ebc6ec2f4e70"><div class="ttname"><a href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a></div><div class="ttdeci">static int input(Stream *source, int bufferSize, char *buffer, char *lineText, uint32_t timeout, bool secret=false)</div><div class="ttdoc">Input prompt.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02280">Shellminator.cpp:2280</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_abda51506ee9282323c3365bcb8d8a7cd"><div class="ttname"><a href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd">Shellminator::selectList</a></div><div class="ttdeci">static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection=NULL)</div><div class="ttdoc">Select list.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02382">Shellminator.cpp:2382</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aaa42838fa5ba17810bf06ea201000d05"><div class="ttname"><a href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">Shellminator::autoDetectTerminal</a></div><div class="ttdeci">void autoDetectTerminal()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02667">Shellminator.cpp:2667</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ab7190607c86f67ccc4522c3362d6c29d"><div class="ttname"><a href="class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d">Shellminator::mute</a></div><div class="ttdeci">bool mute</div><div class="ttdoc">If set, the buzzer will be silent.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00733">Shellminator.hpp:733</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abb5b4fda8fc932a43ba8ebc6ec2f4e70"><div class="ttname"><a href="class_shellminator.html#abb5b4fda8fc932a43ba8ebc6ec2f4e70">Shellminator::input</a></div><div class="ttdeci">static int input(Stream *source, int bufferSize, char *buffer, char *lineText, uint32_t timeout, bool secret=false)</div><div class="ttdoc">Input prompt.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02284">Shellminator.cpp:2284</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abda51506ee9282323c3365bcb8d8a7cd"><div class="ttname"><a href="class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd">Shellminator::selectList</a></div><div class="ttdeci">static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection=NULL)</div><div class="ttdoc">Select list.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l02386">Shellminator.cpp:2386</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_ac02b3349caba171c2bbf7e518497bc55"><div class="ttname"><a href="class_shellminator.html#ac02b3349caba171c2bbf7e518497bc55">Shellminator::attachLogo</a></div><div class="ttdeci">void attachLogo(char *logo_p)</div><div class="ttdoc">This function attaches a logo to the terminal.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00425">Shellminator.cpp:425</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_acd2c421ddc842d8f0f2769b0e391ab5c"><div class="ttname"><a href="class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c">Shellminator::printHelp</a></div><div class="ttdeci">void printHelp()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00605">Shellminator.cpp:605</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_acdbd56dfa0dfb9dd509420d25d9c5cd9"><div class="ttname"><a href="class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9">Shellminator::setTerminalCharacterColor</a></div><div class="ttdeci">void setTerminalCharacterColor(uint8_t style, uint8_t color)</div><div class="ttdoc">Bring some color into your code.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00036">Shellminator-Styles.cpp:36</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ad6c67c816043b4aa64ed6cbbd1101bae"><div class="ttname"><a href="class_shellminator.html#ad6c67c816043b4aa64ed6cbbd1101bae">Shellminator::defaultChannel</a></div><div class="ttdeci">shellminatorDefaultChannel defaultChannel</div><div class="ttdoc">Default communication channel;.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00704">Shellminator.hpp:704</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ad6c67c816043b4aa64ed6cbbd1101bae"><div class="ttname"><a href="class_shellminator.html#ad6c67c816043b4aa64ed6cbbd1101bae">Shellminator::defaultChannel</a></div><div class="ttdeci">shellminatorDefaultChannel defaultChannel</div><div class="ttdoc">Default communication channel;.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00736">Shellminator.hpp:736</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_adab0caaef03f45fdba6dde0d5e0f9a6e"><div class="ttname"><a href="class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e">Shellminator::drawLogo</a></div><div class="ttdeci">void drawLogo()</div><div class="ttdoc">Draws the startup logo.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01330">Shellminator.cpp:1330</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_add7e945a09b5b74a48d475e16832c1a1"><div class="ttname"><a href="class_shellminator.html#add7e945a09b5b74a48d475e16832c1a1">Shellminator::setBannerText</a></div><div class="ttdeci">void setBannerText(char *banner_p)</div><div class="ttdoc">This function sets the banner text.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00385">Shellminator.cpp:385</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_adf34b1655abffcffce76603917f756a8"><div class="ttname"><a href="class_shellminator.html#adf34b1655abffcffce76603917f756a8">Shellminator::setClientTimeout</a></div><div class="ttdeci">void setClientTimeout(uint16_t clientTimeout_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00146">Shellminator.cpp:146</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ae6331836254886ef6cd4293fc5572b3c"><div class="ttname"><a href="class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c">Shellminator::version</a></div><div class="ttdeci">static const char * version</div><div class="ttdoc">String, that holds the version information.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00150">Shellminator.hpp:150</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00139">Shellminator.hpp:139</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00138">Shellminator.hpp:138</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae6331836254886ef6cd4293fc5572b3c"><div class="ttname"><a href="class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c">Shellminator::version</a></div><div class="ttdeci">static const char * version</div><div class="ttdoc">String, that holds the version information.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00152">Shellminator.hpp:152</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00141">Shellminator.hpp:141</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00140">Shellminator.hpp:140</a></div></div>
 <div class="ttc" id="aqrcodegen_8c_html_a2eb79247b6f8bed92514c1815fe0079c"><div class="ttname"><a href="qrcodegen_8c.html#a2eb79247b6f8bed92514c1815fe0079c">qrcodegen_encodeText</a></div><div class="ttdeci">bool qrcodegen_encodeText(const char *text, uint8_t tempBuffer[], uint8_t qrcode[], enum qrcodegen_Ecc ecl, int minVersion, int maxVersion, enum qrcodegen_Mask mask, bool boostEcl)</div><div class="ttdef"><b>Definition:</b> <a href="qrcodegen_8c_source.html#l00129">qrcodegen.c:129</a></div></div>
 <div class="ttc" id="aqrcodegen_8c_html_a495cb24d97c9b90a9c1e8a62903debf5"><div class="ttname"><a href="qrcodegen_8c.html#a495cb24d97c9b90a9c1e8a62903debf5">qrcodegen_getModule</a></div><div class="ttdeci">bool qrcodegen_getModule(const uint8_t qrcode[], int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="qrcodegen_8c_source.html#l00762">qrcodegen.c:762</a></div></div>
 <div class="ttc" id="aqrcodegen_8c_html_afe30b8ff2b6218f37a2945871e6f11b8"><div class="ttname"><a href="qrcodegen_8c.html#afe30b8ff2b6218f37a2945871e6f11b8">qrcodegen_getSize</a></div><div class="ttdeci">int qrcodegen_getSize(const uint8_t qrcode[])</div><div class="ttdef"><b>Definition:</b> <a href="qrcodegen_8c_source.html#l00752">qrcodegen.c:752</a></div></div>
@@ -2896,7 +2900,7 @@ $(document).ready(function(){initNavTree('_shellminator_8cpp_source.html',''); i
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 18 2023
+      </a> on Fri Jun 23 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -2911,7 +2915,7 @@ $(document).ready(function(){initNavTree('_shellminator_8cpp_source.html',''); i
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 18 2023
+        </a> on Fri Jun 23 2023
       </small></address>
     </li>
   </ul>

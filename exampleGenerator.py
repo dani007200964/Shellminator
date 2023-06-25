@@ -65,6 +65,7 @@ rootDirectory = os.getcwd()
 arduinoExampleFolder = "/examples"
 desktopExampleFolder = "/extras/examples_desktop"
 doxygenExampleFolder = "/extras/examples_doxygen"
+emscriptenExampleFolder = "/extras/examples_emscripten"
 
 # Clear the examples folders.
 if os.path.isdir(  rootDirectory + arduinoExampleFolder ):
@@ -76,10 +77,14 @@ if os.path.isdir(  rootDirectory + desktopExampleFolder ):
 if os.path.isdir(  rootDirectory + doxygenExampleFolder ):
     shutil.rmtree( rootDirectory + doxygenExampleFolder )
 
+if os.path.isdir(  rootDirectory + emscriptenExampleFolder ):
+    shutil.rmtree( rootDirectory + emscriptenExampleFolder )
+
 # Generate the example folders.
 os.mkdir( rootDirectory + arduinoExampleFolder )
 os.mkdir( rootDirectory + desktopExampleFolder )
 os.mkdir( rootDirectory + doxygenExampleFolder )
+os.mkdir( rootDirectory + emscriptenExampleFolder )
 
 # Load the content of the project CMakeLists file.
 with open( rootDirectory + "/CMakeLists.txt" ) as file:
@@ -134,6 +139,11 @@ for template in templateFiles:
 
     if environmentInfo == 'Desktop':
         os.mkdir( rootDirectory + desktopExampleFolder + "/" + boardInfo )
+        CMakeContent.append( "if( BUILD_EXAMPLES )\n" )
+
+    if environmentInfo == 'Emscripten':
+        os.mkdir( rootDirectory + emscriptenExampleFolder + "/" + boardInfo )
+        CMakeContent.append( "if( BUILD_WEBASSEMBLY )\n" )
 
     # Inner loop. We go through every example file.
     for example in exampleFiles:
@@ -216,15 +226,27 @@ for template in templateFiles:
             outputFile.write( secondRunData )
             outputFile.close()
 
-            CMakeContent.append( "add_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+            CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
 
+        if environmentInfo == 'Emscripten':
+            os.mkdir( rootDirectory + emscriptenExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
+            outputFile = open( rootDirectory + emscriptenExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp", "w" )
+            outputFile.write( secondRunData )
+            outputFile.close()
 
+            CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + emscriptenExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+            CMakeContent.append( "\ttarget_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS )\n\n" )
         #print( secondRunData )
 
-# We have to close an if statement at the end.
-CMakeContent.append( "endif()" )
+    # We have to close an if statement at the end.
+    if environmentInfo == 'Desktop':
+        CMakeContent.append( "endif()\n" )
+
+    if environmentInfo == 'Emscripten':
+        CMakeContent.append( "endif()\n" )
 
 CMakeFile = open( rootDirectory + "/CMakeLists.txt", "w" )
 CMakeFile.write( listToString( CMakeContent ) )
+CMakeFile.close()
 #print( CMakeContent )
 
