@@ -24,15 +24,6 @@ if (RUN_TESTS)
 
 endif()
 
-if (BUILD_WEBASSEMBLY)
-    #set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS")
-endif()
-
-# emscripten specific
-# add_compile_options( -sNO_EXIT_RUNTIME=1 )
-# add_compile_options( -sFORCE_FILESYSTEM=1 )
-
 include_directories( 
     src
     extras/simulator
