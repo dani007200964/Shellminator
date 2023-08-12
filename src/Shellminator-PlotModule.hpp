@@ -34,11 +34,6 @@ SOFTWARE.
 #ifndef SHELLMINATOR_PLOT_MODULE_HPP_
 #define SHELLMINATOR_PLOT_MODULE_HPP_
 
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
-#include "Shellminator.hpp"
-#include "Shellminator-BufferedPrinter.hpp"
-
 #ifdef ARDUINO
 #include "Arduino.h"
 #else
@@ -47,71 +42,134 @@ SOFTWARE.
 
 #include "Stream.h"
 
+#include "Shellminator-DefaultSettings.hpp"
+#include "Shellminator-IO.hpp"
+#include "Shellminator.hpp"
+#include "Shellminator-Screen.hpp"
+#include "Shellminator-BufferedPrinter.hpp"
+
+
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
 
-class ShellminatorPlot{
+/// This class can create a simple plotter object.
+///
+/// With this class, you can easily create a plotter object,
+/// which is capable of real time plotting.
+/// It can be attached to the main terminal with the beginScreen function.
+class ShellminatorPlot : public ShellminatorScreen{
 
 public:
 
-  ShellminatorPlot( Shellminator* shell_p, float* y, int y_size, int color = Shellminator::GREEN );
+    /// Empty constructor.
+    ShellminatorPlot();
 
-  bool begin();
+    /// Constructor for user calculated float array.
+    ///
+    /// With this constructor you can create a plotter object which is using a
+    /// user created dataset.
+    /// @param data_p Pointer to a float array, which contains the data points to be printed.
+    /// @param dataSize_p The size of the float array in elements( NOT IN BYTES! ).
+    /// @param color_p Optionally, you can specify the color of the plot. Available colors:
+    /// @param name_p The name of the plot.
+    ///                *Shellminator::RED
+    ///                *Shellminator::GREEN
+    ///                *Shellminator::WHITE
+    ShellminatorPlot( float* data_p, int dataSize_p, const char* name_p, int color_p = Shellminator::GREEN );
 
-  bool addPlot( float* y, int y_size, int color = 0 );
+    /// Init function.
+    ///
+    /// This function is called by the host terminal, when the plot object gets registered to it.
+    void init() override;
 
-  void draw( bool redraw = false );
+    /// Draw function.
+    ///
+    /// This function is called by the host terminal, periodically.
+    /// @param parent_p Pointer to the caller terminal object.
+    /// @param width_p The width of the screen area in characters.
+    /// @param height_p The height of the screen area in characters.
+    /// @todo Buffering!
+    void draw( Shellminator* parent_p, int width_p, int  height_p ) override;
 
+    /// Origin of the top left corner.
+    ///
+    /// You can specify a custom origin point for the object with this function.
+    /// @param x X coordinate of the new origin( starts from 1 ).
+    /// @param y Y coordinate of the new origin( starts from 1 ).
+    /// @note The origin of the object is always the top left corner.
+    void setOrigin( int x, int y ) override;
 
 private:
 
-  uint8_t colorTable[ 6 ]{
-    Shellminator::GREEN,
-    Shellminator::RED,
-    Shellminator::BLUE,
-    Shellminator::YELLOW,
-    Shellminator::MAGENTA,
-    Shellminator::CYAN    
-  };
+    /// Pointer to the data array.
+    float* data = NULL;
 
-  ShellminatorBufferedPrinter bufferedPrinter;
+    /// Size of the data array in elements.
+    int dataSize = 0;
 
-  void drawScale();
-  void drawPlot( uint8_t index );
+    /// Plot name.
+    const char* name = NULL;
 
-  float lerp( float v0, float v1, float t );
-  float mapFloat( float x, float inStart, float inStop, float outStart, float outStop );
+    /// Color code for the plot.
+    int color = Shellminator::GREEN;
 
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    /// Draw the scale for the plot.
+    ///
+    /// The scale is on the left side with this implementation.
+    /// It can be overriden to create different kinds of plots.
+    virtual void drawScale();
 
-  ShellminatorBufferedPrinter bufferedPrinter;
+    /// Draw the plot data.
+    ///
+    /// This function renders the data points from the data array.
+    /// It can be overriden to create different kinds of plots.
+    virtual void drawPlot();
 
-  #endif
+    /// Pointer to the caller terminal.
+    Shellminator* parent = NULL;
 
+    /// Terminal width in characters.
+    int width;
 
-  int terminalSizeX;
-  int terminalSizeY;
+    /// Terminal height in characters.
+    int height;
 
-  float min;
-  float max;
+    /// This buffer holds a generated string that
+    /// us used to print numbers to the scale.
+    char valueTextBuffer[ 15 ];
 
-  int yTextSize;
-  int resultTextSize;
+    /// This variable holds the size of the largest
+    /// element generated in the valueTextBuffer.
+    int valueTextSizeMax = 0;
 
-  Shellminator* shell = NULL;
+    /// This variable holds the size of the last
+    /// elements text.
+    int resultTextSize = 0;
 
-  float* yDataF[ SHELLMINATOR_NUMBER_OF_PLOTS ];
-  int* yDataI[ SHELLMINATOR_NUMBER_OF_PLOTS ];
+    /// Holds the minimum value in the data array.
+    float min;
 
-  int plotColor[ SHELLMINATOR_NUMBER_OF_PLOTS ];
+    /// Holds the maximum value in the data array.
+    float max;
 
-  int yDataSize;
+    /// X coordinate of the origin.
+    int originX = 1;
 
-  uint8_t numberOfPlots = 0;
+    /// Y coordinate of the origin.
+    int originY = 1;
 
-  char plotName[ SHELLMINATOR_PLOT_NAME_SIZE ] = "Plot";
+    /// Linear interpolation.
+    ///
+    /// Original [source](https://en.wikipedia.org/wiki/Linear_interpolation)
+    /// @param v0 First corner value.
+    /// @param v1 Second corner value.
+    /// @param t Control value between 0.0 and 1.0.
+    float lerp( float v0, float v1, float t );
+
+    /// Floating point implementation of the map function.
+    float mapFloat( float x, float inStart, float inStop, float outStart, float outStop );
 
 };
 

@@ -1100,6 +1100,16 @@ void Shellminator::update() {
 
   }
 
+  if( screen != NULL ){
+    if( ( millis() - screenTimerStart ) > 500 ){
+        screenTimerStart = millis();
+        int width;
+        int height;
+        getTerminalSize( &width, &height );
+        screen -> draw( this, width, height );
+    }
+  }
+
   #ifdef COMMANDER_API_VERSION
 
   // Command highlight section.
@@ -1317,13 +1327,30 @@ void Shellminator::setCursorPosition( int x, int y ){
 
 bool Shellminator::getTerminalSize( int* width, int* height ){
 
-  // This is a tricky solution.
-  // Firstly, we send the cursor to a very large bottom right coordinate.
-  // The terminal emulator will push the cursor as far as it can.
-  // Than, we read the actual position. This will be equal with the terminal size.
-  setCursorPosition( 999, 999 );
+    int currentX;
+    int currentY;
 
-  return getCursorPosition( width, height );
+    // Save the current position.
+    // Later we can restore it.
+    if( !getCursorPosition( &currentX, &currentY ) ){
+        return false;
+    }
+
+    // This is a tricky solution.
+    // Firstly, we send the cursor to a very large bottom right coordinate.
+    // The terminal emulator will push the cursor as far as it can.
+    // Than, we read the actual position. This will be equal with the terminal size.
+    setCursorPosition( 999, 999 );
+
+    if( !getCursorPosition( width, height ) ){
+        return false;
+    }
+
+    // Restore the original position.
+    setCursorPosition( currentX, currentY );
+
+    // If we are here, that means everything went well.
+    return true;
 
 }
 
@@ -1654,6 +1681,15 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
       break;
 
     case 27:
+
+      // Check is a screen object is drawing.
+      if( screen != NULL ){
+        // In this case we have to end the drawing process.
+        endScreen();
+        // And set the state machine back to default state.
+        currentState = &Shellminator::ShellminatorDefaultState;
+        break;
+      }
       currentState = &Shellminator::ShellminatorEscapeCharacterState;
       break;
 
@@ -2035,17 +2071,17 @@ void Shellminator::ShellminatorAbortState(){
 
 void Shellminator::ShellminatorEscapeCharacterState( char new_char ){
 
-  if( new_char == '[' ){
+    if( new_char == '[' ){
 
-    currentState = &Shellminator::ShellminatorEscapeBracketState;
+        currentState = &Shellminator::ShellminatorEscapeBracketState;
 
-  }
+    }
 
-  else{
+    else{
 
-    currentState = &Shellminator::ShellminatorDefaultState;
+        currentState = &Shellminator::ShellminatorDefaultState;
 
-  }
+    }
 
 }
 
@@ -2682,4 +2718,57 @@ void Shellminator::autoDetectTerminal(){
   }
 
 }
+
+void Shellminator::beginScreen( ShellminatorScreen* screen_p ){
+
+    int i;
+    int height = 0;
+    int width = 0;
+
+    if( screen_p == NULL ){
+        return;
+    }
+
+    getTerminalSize( &width, &height );
+
+    screen = screen_p;
+    hideCursor();
+
+    for( i = 0; i < height; i++ ){
+        channel -> println();
+    }
+    
+    screen -> init();
+    screenTimerStart = millis();
+}
+
+void Shellminator::endScreen(){
+    
+    // These variables will hold the terminal size.
+    int width;
+    int height;
+
+    // Get the terminal site.
+    getTerminalSize( &width, &height );
+
+    // Clear the pointer to the screen object.
+    screen = NULL;
+
+    // Set the cursor to the last line.
+    setCursorPosition( 1, height );
+
+    // Enable the cursor again.
+    showCursor();
+
+    // Create a new line for the prompt.
+    channel -> println();
+
+    // Print the banner.
+    printBanner();
+
+    // Set the cursor and the counter to zero.
+    cursor = 0;
+    cmd_buff_cntr = 0;
+}
+
 

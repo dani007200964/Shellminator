@@ -30,7 +30,7 @@ Shellminator shell( &Serial );
 float data1[ NUMBER_OF_DATA_POINTS ];
 
 // Create a plotter object.
-ShellminatorPlot plot( &shell, data1, sizeof( data1 ) / sizeof( data1[ 0 ] ) );
+ShellminatorPlot plot( data1, NUMBER_OF_DATA_POINTS );
 
 // Create a pretty logo for the terminal.
 const char logo[] =
@@ -56,24 +56,20 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
+    /*
     if( !plot.begin() ){
 
         Serial.println( "Memory allocation failed for plot!" );
 
     }
+    */
 
     Serial.println( "Program Start!" );
 
-    // Generate a pretty sine-wave.
-    for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
-
-        data1[i] = sin( 3.14159265358979323846 * 4.0 * (float)i / (float)NUMBER_OF_DATA_POINTS  ) * 3.0;
-
-    }
-
-    plot.draw();
+    //plot.draw();
 
     shell.begin( "arnold" );
+    shell.beginScreen( &plot );
 
 
 }
@@ -82,6 +78,14 @@ void setup(){
 void loop(){
 
     // Process the new data.
+
+    // Generate a pretty sine-wave.
+    for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
+
+        data1[i] = sin( 3.14159265358979323846 * 4.0 * (float)i / (float)NUMBER_OF_DATA_POINTS  ) * 3.0 + millis() / 5000.0;
+
+    }
+
     shell.update();
 
 

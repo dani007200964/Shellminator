@@ -73,6 +73,7 @@ SOFTWARE.
 #endif
 
 #include "Shellminator-BufferedPrinter.hpp"
+#include "Shellminator-Screen.hpp"
 
 #ifdef __has_include
 #if __has_include("Commander-API.hpp")
@@ -630,6 +631,9 @@ public:
 
 #endif
 
+    void beginScreen( ShellminatorScreen* screen_p );
+    void endScreen();
+
     enum{
         MOUSE_INVALID,
         MOUSE_LEFT_PRESSED,
@@ -797,6 +801,9 @@ private:
 
     // If memory allocation is failed for the buffer, this flag will be false.
     bool bufferMemoryAllocated = false;
+
+    ShellminatorScreen* screen = NULL;
+    unsigned long screenTimerStart;
 
     // Wrapper for the redrawLine without buffering.
     void redrawLineSimple();

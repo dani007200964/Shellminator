@@ -35,6 +35,7 @@ set( SOURCES
     src/Shellminator-Browser-Response.hpp
     src/Shellminator-IO.cpp
     src/Shellminator-IO.hpp
+    src/Shellminator-Screen.hpp
     src/Shellminator-BufferedPrinter.cpp
     src/Shellminator-BufferedPrinter.hpp
     src/Shellminator-PlotModule.cpp
@@ -130,7 +131,7 @@ if( BUILD_EXAMPLES )
 	add_executable( Mouse ${SOURCES} extras/examples_desktop/Desktop/Mouse/Mouse.cpp )
 	add_executable( Progressbaradvanced ${SOURCES} extras/examples_desktop/Desktop/Progressbaradvanced/Progressbaradvanced.cpp )
 	add_executable( Progressbarsimple ${SOURCES} extras/examples_desktop/Desktop/Progressbarsimple/Progressbarsimple.cpp )
-	add_executable( Runningplot ${SOURCES} extras/examples_desktop/Desktop/Runningplot/Runningplot.cpp )
+	add_executable( Screenbasic ${SOURCES} extras/examples_desktop/Desktop/Screenbasic/Screenbasic.cpp )
 	add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
@@ -161,8 +162,8 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( Progressbarsimple ${SOURCES} extras/examples_emscripten/Emscripten/Progressbarsimple/Progressbarsimple.cpp )
 	target_link_options( Progressbarsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Runningplot ${SOURCES} extras/examples_emscripten/Emscripten/Runningplot/Runningplot.cpp )
-	target_link_options( Runningplot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( Screenbasic ${SOURCES} extras/examples_emscripten/Emscripten/Screenbasic/Screenbasic.cpp )
+	target_link_options( Screenbasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Simpleplot ${SOURCES} extras/examples_emscripten/Emscripten/Simpleplot/Simpleplot.cpp )
 	target_link_options( Simpleplot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

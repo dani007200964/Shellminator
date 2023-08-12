@@ -27,13 +27,9 @@
 // Contains Emscripten related functions.
 #include <emscripten.h>
 
-#include "math.h"
-
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
-#include "Shellminator-PlotModule.hpp"
-
-#define NUMBER_OF_DATA_POINTS 30
+#include "Shellminator-Screen.hpp"
 
 
 // Use stdio as Channel.
@@ -41,14 +37,6 @@ stdioStream stdioChannel;
 
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
-
-// The plot will be generated from the content of this data array.
-float data1[ NUMBER_OF_DATA_POINTS ];
-
-// Create a plotter object.
-ShellminatorPlot plot( &shell, data1, sizeof( data1 ) / sizeof( data1[ 0 ] ) );
-
-unsigned long timerStart = 0;
 
 // Create a pretty logo for the terminal.
 const char logo[] =
@@ -62,6 +50,31 @@ const char logo[] =
     "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
 
 ;
+
+class teszt : public ShellminatorScreen{
+
+public:
+    void draw( Shellminator* parent, int width, int  height ) override;
+    void init()override;
+private:
+    int cntr;
+};
+
+void teszt::draw( Shellminator* parent, int width, int  height ){
+    parent -> clear();
+    parent -> channel -> print( "Counter: " );
+    parent -> channel -> print( cntr );
+    cntr++;
+    if( cntr >= 100 ){
+        parent -> endScreen();
+    }
+}
+
+void teszt::init(){
+    cntr=0;
+}
+
+teszt X;
 
 
 // Infinite Loop.
@@ -95,25 +108,12 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    if( !plot.begin() ){
+    // Attach the logo.
+    shell.attachLogo( logo );
 
-        stdioChannel.println( "Memory allocation failed for plot!" );
-
-    }
-
-    stdioChannel.println( "Program Start!" );
-
-    shell.hideCursor();
-
-    // Generate a pretty sine-wave.
-    for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
-
-        data1[i] = sin( 3.14159265358979323846 * 4.0 * (float)i / (float)NUMBER_OF_DATA_POINTS  ) * 3.0;
-
-    }
-
-    plot.draw();
-
+    // Initialize shell object.
+    shell.begin( "arnold" );
+    shell.beginScreen( &X );
 
 
 
@@ -123,22 +123,8 @@ void loop(){
 
     // Infinite loop.
 
-    // Only draw the plot every 100ms.
-    if( ( millis() - timerStart ) > 100 ){
-
-        // Save current time to detect the new drawing event.
-        timerStart = millis();
-        
-        // Generate a pretty sine-wave.
-        for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
-
-            data1[i] = sin( 3.14159265358979323846 * 4.0 * (float)i / (float)NUMBER_OF_DATA_POINTS + millis() / 1000.0  ) * 3.0;
-
-        }
-
-        plot.draw( true );
-
-    }
+    // Process the new data.
+    shell.update();
 
 
 

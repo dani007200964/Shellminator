@@ -33,239 +33,230 @@ SOFTWARE.
 
 #include "Shellminator-PlotModule.hpp"
 
-bool ShellminatorPlot::begin(){
+ShellminatorPlot::ShellminatorPlot( float* data_p, int dataSize_p, const char* name_p, int color_p ){
+    data = data_p;
+    dataSize = dataSize_p;
+    name = name_p;
+    color = color_p;
+}
 
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+ShellminatorPlot::ShellminatorPlot(){
+    data = NULL;
+    dataSize = 0;
+    name = NULL;
+}
 
-  bufferedPrinter.allocate( SHELLMINATOR_PLOT_BUFF_SIZE );
-  if( bufferedPrinter.getBufferSize() != SHELLMINATOR_PLOT_BUFF_SIZE ){
 
-    return false;
+void ShellminatorPlot::init(){
+}
 
-  }
+void ShellminatorPlot::setOrigin( int x, int y ){
+    originX = x;
+    originY = y;
 
-  #endif
+    if( originX < 1 ){
+        originX = 1;
+    }
 
-  return true;
+    if( originY < 1 ){
+        originY = 1;
+    }
 
 }
 
-ShellminatorPlot::ShellminatorPlot( Shellminator* shell_p, float* y, int y_size, int color ){
+void ShellminatorPlot::draw( Shellminator* parent_p, int width_p, int  height_p ){
 
-  shell = shell_p;
-  yDataF[ 0 ] = y;
-  plotColor[ 0 ] = color;
-  yDataSize = y_size;
-  numberOfPlots = 1;
-  bufferedPrinter = ShellminatorBufferedPrinter( shell -> channel );
+    int i;
+    int j;
 
-}
-
-bool ShellminatorPlot::addPlot( float* y, int y_size, int color ){
-
-  if( numberOfPlots >= SHELLMINATOR_NUMBER_OF_PLOTS ){
-
-    return false;
-
-  }
-
-  if( yDataSize != y_size ){
-
-    return false;
-
-  }
-
-  yDataF[ numberOfPlots ] = y;
-
-  if( color == 0 ){
-
-    if( numberOfPlots < 6 ){
-
-      color = colorTable[ numberOfPlots ];
-
+    if( parent_p == NULL ){
+        return;
     }
 
-    else{
-
-      color = colorTable[ 5 ];
-
+    if( parent_p -> channel == NULL ){
+        return;
     }
 
-  }
-
-  plotColor[ numberOfPlots ] = color;
-  yDataSize = y_size;
-  numberOfPlots++;
-
-  return true;
-
-}
-
-void ShellminatorPlot::draw( bool redraw ){
-
-  int i;
-  int j;
-
-  if( shell -> getTerminalSize( &terminalSizeX, &terminalSizeY ) == false ){
-    terminalSizeX = 30;
-    terminalSizeY = 30;
-  }
-
-  // Hide the cursor
-  // Shellminator::hideCursor( shell -> channel );
-
-  terminalSizeY -= 2;
-
-  // Clearing the screen area
-  if( redraw == false ){
-
-    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-    bufferedPrinter.printf( "\033[2K" );
-
-    for( i = 0; i < terminalSizeY; i++ ){
-
-      bufferedPrinter.printf( "\r\n" );
-
+    // Handle incorrect input data.
+    if( data == NULL ){
+        return;
     }
 
-
-    #else
-
-    shell -> channel -> print( "\033[2K" );
-    for( i = 0; i < terminalSizeY; i++ ){
-
-      shell -> channel -> println();
-
+    // Handle incorrect input data size.
+    if( dataSize <= 0 ){
+        return;
     }
 
-    #endif
+    if( name == NULL ){
+        return;
+    }
 
+    // Save the arguments to internal variables.
+    // It is required to make these parameters accessible
+    // to the other member functions.
+    parent = parent_p;
+    width = width_p;
+    height = height_p - 1;
 
-  }
+    // Set the name text color.
+    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::UNDERLINE, Shellminator::WHITE );
 
-  else{
+    // Calculate the length of the name.
+    j = strlen( name );
 
-    #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    // Set cursor to make the text appear on the top center.
+    parent -> setCursorPosition( originX + width / 2 - j / 2, originY );
 
-    bufferedPrinter.printf( "\033[%d;%dH\033[J", 1, 1 );
+    // Print instructions and plot name only at first draw.
+    parent -> channel -> print( name );
 
-    #else
+    // Set the cursor to the origin position.
+    parent -> setCursorPosition( originX, originY );
 
-    shell -> setCursorPosition( 1, 1 );
-    shell -> channel -> print( "\033[J" );
+    // Reset variables to a safe state.
+    min = data[ 0 ];
+    max = data[ 0 ];
 
-    #endif
+    // Calculate the min and max values for the scale.
+    for( i = 0; i < dataSize; i++ ){
 
-  }
+        if( min > data[ i ] ){
 
-  if( yDataF[ 0 ]!= NULL ){
-
-    min = yDataF[ 0 ][ 0 ];
-    max = yDataF[ 0 ][ 0 ];
-
-  }
-
-  else{
-
-    min = yDataI[ 0 ][ 0 ];
-    max = yDataI[ 0 ][ 0 ];
-
-  }
-
-  // Calculating min and max values for scale.
-  for( i = 0; i < numberOfPlots; i++ ){
-
-    if( yDataF[ i ] != NULL ){
-
-      for( j = 0; j < yDataSize; j++ ){
-
-        if( min > yDataF[ i ][ j ] ){
-
-          min = yDataF[ i ][ j ];
+            min = data[ i ];
 
         }
 
-        if( max < yDataF[ i ][ j ] ){
+        if( max < data[ i ] ){
 
-          max = yDataF[ i ][ j ];
+            max = data[ i ];
 
         }
-
-      }
 
     }
 
-    else{
+    // To round down
+    min = ( (int)min ) - 1;
 
-      for( j = 0; j < yDataSize; j++ ){
+    // To round up
+    max = ( (int)max ) + 1;
 
-        if( min > yDataI[ i ][ j ] ){
+    drawScale();
 
-          min = yDataI[ i ][ j ];
-
-        }
-
-        if( max < yDataI[ i ][ j ] ){
-
-          max = yDataI[ i ][ j ];
-
-        }
-
-      }
-
-    }
-
-  }
-
-  // To round down
-  min = ( (int)min ) - 1;
-
-  // To round up
-  max = ( (int)max ) + 1;
-
-  // Draw the scale
-  drawScale();
-
-
-  for( i = 0; i <numberOfPlots; i++ ){
-
-    drawPlot( i );
-
-  }
-
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-  bufferedPrinter.printf( "\033[%d;%dm\033[%d;%dH", (int)Shellminator::REGULAR, (int)Shellminator::WHITE, terminalSizeY + 1, 1 );
-  bufferedPrinter.flush();
-
-  #else
-
-  Shellminator::setTerminalCharacterColor( shell -> channel, Shellminator::REGULAR, Shellminator::WHITE );
-
-  shell -> setCursorPosition( 1, terminalSizeY + 1 );
-
-  #endif
+    drawPlot();
 
 }
 
 void ShellminatorPlot::drawScale(){
 
+    int i;
+    int j;
+
+    float tmp;
+    float tmpDecimalPart;
+
+    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
+    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::BOLD, Shellminator::WHITE );
+
+    // Draw the scale.
+    for( i = 0; i < height; i++ ){
+
+        // Interpolate the value within the height steps.
+        tmp = lerp( max, min, (float)i / (float)( height -1 ) );
+
+        // Calculate the numbers after the decimal point.
+        // It has to be always positive!
+        tmpDecimalPart = tmp;
+        if( tmpDecimalPart < 0.0 ){
+            tmpDecimalPart *= -1.0;
+        }
+
+        // Generate the string of the number to the data buffer.
+        // Just in case terminate the end of the buffer to avoid
+        // any string problems.
+        snprintf( valueTextBuffer, sizeof( valueTextBuffer ), "%3d.%d", (int)tmp, (int)( (int)( tmpDecimalPart * 10.0 ) ) % 10 );
+        valueTextBuffer[ sizeof( valueTextBuffer ) - 1 ] = '\0';
+
+        // Calculate the length of the number
+        // string and store it to variable j.
+        j = strlen( valueTextBuffer );
+
+        // Basic maximum value finding.
+        // If the current text size is greater than the value
+        // in valueTextSizeMax, overwrite valueTextSizeMax with it.
+        // It is required to find the size of the largest printed
+        // number on the Y axes.
+        if( j > valueTextSizeMax ){
+            valueTextSizeMax = j;
+        }
+
+        // Set the position of the current line.
+        parent -> setCursorPosition( originX, originY + 1 + i );
+
+        // Print the actual data string to the output stream.
+        parent -> channel -> print( valueTextBuffer );
+        parent -> channel -> print( "\033[K" );
+
+        // We have to print a new line only if we are not in the last iteration.
+        if( i < ( height - 1 ) ){
+            //parent -> channel -> println();
+        }
+
+    }
+
+    // Draw vertical scaling grid
+    parent -> setCursorPosition( originX + valueTextSizeMax + 1, originY + 1 );
+
+    for( i = 0; i < height; i++ ){
+
+        parent -> channel -> print( "\u2524" );
+
+        if( i < ( height - 1 ) ){
+            parent -> channel -> print( "\033[B\033[D" );
+        }
+
+    }
+
+    // Generate the value string for the last element.
+    // Save the last elements value to the tmp variable.
+    tmp = data[ dataSize - 1 ];
+
+    // Calculate the numbers after the decimal point.
+    // It has to be always positive!
+    tmpDecimalPart = tmp;
+    if( tmpDecimalPart < 0.0 ){
+        tmpDecimalPart *= -1.0;
+    }
+
+    // Generate string from the last element.
+    snprintf( valueTextBuffer, sizeof( valueTextBuffer ), " %d.%d", (int)tmp, (int)( (int)( tmpDecimalPart * 10.0 ) ) % 10 );
+    valueTextBuffer[ sizeof( valueTextBuffer ) - 1 ] = '\0';
+
+    // Calculate the length of the result text.
+    resultTextSize = strlen( valueTextBuffer );
+
+    // Set the cursor to the result scaling grid position.
+    parent -> setCursorPosition( originX + width - resultTextSize - 2, originY + 1 );
+
+    // Draw vertical scaling grid to the end for the result.
+    for( i = 0; i < height; i++ ){
+
+        parent -> channel -> print( "\u251C" );
+        
+        if( i < ( height - 1 ) ){
+            parent -> channel -> print( "\033[B\033[D" );
+        }
+
+  }
+
+
+/*
   int i;
   int j;
   char yTextBuffer[ 15 ];
   float tmp;
   float tmpPos;
 
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-  bufferedPrinter.printf( "\033[%d;%dH", 1, 1 );
-
-  #else
-
   shell -> setCursorPosition( 1, 1 );
-
-  #endif
 
   // Draw the numbers between min and max
   yTextSize = 0;
@@ -331,7 +322,7 @@ void ShellminatorPlot::drawScale(){
   // Draw result values
   resultTextSize = 0;
 
-  // Calculate the widht of the largest value in characters.
+  // Calculate the width of the largest value in characters.
   for( i = 0; i < numberOfPlots; i++ ){
 
     snprintf( yTextBuffer, sizeof( yTextBuffer ), "%3d", (int)yDataF[i][ yDataSize - 1 ] );
@@ -407,359 +398,213 @@ void ShellminatorPlot::drawScale(){
     #endif
 
   }
+  */
 
 }
 
-void ShellminatorPlot::drawPlot( uint8_t index ){
+void ShellminatorPlot::drawPlot(){
 
-  int i;
-  int j;
-  int terminalWidth;
+    int i;
+    int j;
+    int terminalWidth;
 
-  int avgStartIndex;
-  int avgEndIndex;
+    float prevPointX;
+    float prevPointY;
 
-  float prevPointX;
-  float prevPointY;
+    float pointY;
+    float pointX;
 
-  float avg;
+    int avgStartIndex;
+    int avgEndIndex;
 
-  float pointY;
-  float pointX;
+    float avg;
 
-  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, color );
+    // terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 3 );
+    terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 3 );
 
-  bufferedPrinter.printf( "\033[%d;%dm", (int)Shellminator::REGULAR, plotColor[ index ] );
-  bufferedPrinter.flush();
+    // We have less data points than 'pixels' in the terminal
+    if( ( dataSize / terminalWidth ) == 0 ){
 
-  #else
+        for( i = 1; i < dataSize; i++ ){
 
-  Shellminator::setTerminalCharacterColor( shell -> channel, Shellminator::REGULAR, plotColor[ index ] );
+            prevPointY = mapFloat( data[ i - 1 ], min, max, height, 2 );
+            prevPointX = mapFloat( i - 1, 0, ( dataSize - 1 ), 0, terminalWidth );
 
-  #endif
+            pointY = mapFloat( data[ i ], min, max, height, 2 );
+            pointX = mapFloat( i, 0, ( dataSize - 1 ), 0, terminalWidth );
 
-  terminalWidth = terminalSizeX - ( yTextSize + 2 ) - ( resultTextSize + 3 );
+            //parent -> setCursorPosition( valueTextSizeMax + 3 + prevPointX, prevPointY );
+            parent -> setCursorPosition( originX + valueTextSizeMax + 2 + prevPointX, originY + prevPointY );
 
-  // We have less data points than 'pixels' in the terminal
-  if( ( yDataSize / terminalWidth ) == 0 ){
+            // Print the horizontal line
+            for( j = 0; j < ( (int)pointX - (int)prevPointX ); j++ ){
 
-    for( i = 1; i < yDataSize; i++ ){
+                //parent -> channel -> print( "\u2500" );
+                //parent -> channel -> print( "*" );
+                parent -> channel -> print( "\u2022" );
 
-      prevPointY = mapFloat( yDataF[ index ][ i - 1 ], min, max, terminalSizeY, 1 );
-      prevPointX = mapFloat( i - 1, 0, ( yDataSize - 1 ), 0, terminalWidth );
+            }
 
-      pointY = mapFloat( yDataF[ index ][ i ], min, max, terminalSizeY, 1 );
-      pointX = mapFloat( i, 0, ( yDataSize - 1 ), 0, terminalWidth );
+            // Print vertical line everywhere except the last data point.
+            if( i < ( dataSize - 1 ) ){
+                
+                // Check if we have to go down.
+                if( (int)pointY > (int)prevPointY ){
 
-      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+                    for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
+                        parent -> channel -> print( "\033[B\033[D" );
+                        parent -> channel -> print( "\u2022" );
+                    }
 
-      bufferedPrinter.printf( "\033[%d;%dH", (int)prevPointY, (int)( yTextSize + 3 + prevPointX ) );
+                }
 
-      #else
+                // Check if we have to go Up.
+                if( (int)prevPointY > (int)pointY ){
 
-      shell -> setCursorPosition( yTextSize + 3 + prevPointX, prevPointY );
+                    for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
+                        parent -> channel -> print( "\033[A\033[D" );
+                        parent -> channel -> print( "\u2022" );
+                    }
 
-      #endif
+                }
 
-      // Print the horizontal line
-      for( j = 0; j < ( (int)pointX - (int)prevPointX ); j++ ){
+            }
 
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\u2500" );
-
-        #else
-
-        shell -> channel -> print( "\u2500" );
-
-        #endif
-
-      }
+        }
 
     }
 
-    // Print vertical lines with endings.
-    for( i = 1; i < yDataSize; i++ ){
+    // We have more points than 'pixels'.
+    else{
 
-      prevPointY = mapFloat( yDataF[ index ][ i - 1 ], min, max, terminalSizeY, 1 );
-      prevPointX = mapFloat( i - 1, 0, ( yDataSize - 1 ), 0, terminalWidth );
+        // Az elérhető szélességgel számolva minden pontot úgy rajzolunk ki, hogy
+        // A ponthoz megkeressük a közvetlen környezetében lévő mintákhoz tartozó indexeket.
+        // pédául a 3. pontot akarom kirajzolni, akkor annak a közvetlen környezete a 2. ponthoz tartozó
+        // minta után és a 4. pointhoz tartó mintáig tart. Ezeknek veszem az átlagát és azt rajzolom ki.
 
-      pointY = mapFloat( yDataF[ index ][ i ], min, max, terminalSizeY, 1 );
-      pointX = mapFloat( i, 0, ( yDataSize - 1 ), 0, terminalWidth );
+        for( i = 1; i < terminalWidth; i++ ){
 
-      // Print the vertical line.
-      // Prev point is smaller than the current.
-      if( (int)pointY < (int)prevPointY ){
+            // Finding the indexes for the left and right boundaries
+            avgStartIndex = mapFloat( i - 1, 0, terminalWidth, 0, dataSize );
+            avgEndIndex = mapFloat( i + 1, 0, terminalWidth, 0, dataSize );
 
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+            // Check and handle buffer overflow.
+            if( avgStartIndex < 0 ){
+                avgStartIndex = 0;
+            }
 
-        bufferedPrinter.printf( "\033[%d;%dH\u256D", (int)pointY, (int)( yTextSize + 3 + pointX ) );
+            // Check and handle buffer overflow.
+            if( avgEndIndex >= dataSize ){
+                avgEndIndex = dataSize - 1;
+            }
 
-        #else
+            // Averaging the numbers in the specified range
+            avg = 0.0;
+            for( j = avgStartIndex; j < avgEndIndex; j++ ){
+                avg += data[ j ];
+            }
 
-        shell -> setCursorPosition( yTextSize + 3 + pointX, pointY );
-        shell -> channel -> print( "\u256D" );
+            // Protect against zero division.
+            if( ( avgEndIndex - avgStartIndex ) != 0 ){
+                avg /= (float)( avgEndIndex - avgStartIndex );
+            }
+            else{
+                return;
+            }
 
-        #endif
+            // Calculate coordinates for the current point.
+            pointY = mapFloat( avg, min, max, height, 2 );
+            pointX = i;
 
-        for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
+            // Do the same for the previous point
+            // Finding the indexes for the laft and right boundaries
+            avgStartIndex = mapFloat( i - 2, 0, terminalWidth, 0, dataSize );
+            avgEndIndex = mapFloat( i, 0, terminalWidth, 0, dataSize );
 
-          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
+            // Check and handle buffer overflow.
+            if( avgStartIndex < 0 ){
+                avgStartIndex = 0;
+            }
 
-          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-          bufferedPrinter.printf( "\033[B\033[D\u2502", (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
+            // Check and handle buffer overflow.
+            if( avgEndIndex >= dataSize ){
+                avgEndIndex = dataSize - 1;
+            }
 
-          #else
+            // Averaging the numbers in the specified range
+            avg = 0.0;
+            for( j = avgStartIndex; j < avgEndIndex; j++ ){
+                avg += data[ j ];
+            }
 
-          //shell -> setCursorPosition( yTextSize + 3 + pointX, pointY + j + 1 );
-          //shell -> channel -> print( "\u2502" );
-          shell -> channel -> print( "\033[B\033[D\u2502" );
+            // Protect against zero division.
+            if( ( avgEndIndex - avgStartIndex ) != 0 ){
+                avg /= (float)( avgEndIndex - avgStartIndex );
+            }
+            else{
+                return;
+            }
 
-          #endif
+            prevPointY = mapFloat( avg, min, max, height, 2 );
+            //prevPointX = i - 1;
+
+            parent -> setCursorPosition( valueTextSizeMax + 3 + i - 1, prevPointY );
+
+            // If the previous point have the same value as the current one, we just print it.
+            /*
+            if( (int)prevPointY == (int)pointY ){
+
+                //parent -> channel -> print( "\u2022" );
+
+            }
+            
+
+            // If the previous point is greater, than the current one, we have to draw upwards.
+            else if( (int)pointY < (int)prevPointY  ){
+
+                //bufferedPrinter.printf( "\033[%d;%dH\u256F", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
+
+            }
+
+            */
+
+            parent -> channel -> print( "\u2022" );
+
+            // Print vertical line everywhere except the last data point.
+            if( i < ( dataSize - 1 ) ){
+                
+                // Check if we have to go down.
+                if( (int)pointY > (int)prevPointY ){
+
+                    for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
+                        parent -> channel -> print( "\033[B\033[D" );
+                        parent -> channel -> print( "\u2022" );
+                    }
+
+                }
+
+                // Check if we have to go Up.
+                if( (int)prevPointY > (int)pointY ){
+
+                    for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
+                        parent -> channel -> print( "\033[A\033[D" );
+                        parent -> channel -> print( "\u2022" );
+                    }
+
+                }
+
+            }
 
         }
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        //bufferedPrinter.printf( "\033[%d;%dH\u256F", (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-        bufferedPrinter.printf( "\033[B\033[D\u256F", (int)( pointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-
-        #else
-
-        //shell -> setCursorPosition( yTextSize + 3 + pointX, pointY + j + 1 );
-        //shell -> channel -> print( "\u256F" );
-        shell -> channel -> print( "\033[B\033[D\u256F" );
-
-        #endif
-
-      }
-
-      // Prev point is larger than the current.
-      if( (int)pointY > (int)prevPointY ){
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\033[%d;%dH\u256E", (int)prevPointY, (int)( yTextSize + 3 + pointX ) );
-
-        #else
-
-        shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY );
-        shell -> channel -> print( "\u256E" );
-
-        #endif
-
-        for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
-
-          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-          bufferedPrinter.printf( "\033[B\033[D\u2502" );
-
-          #else
-
-          //shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
-          //shell -> channel -> print( "\u2502" );
-          shell -> channel -> print( "\033[B\033[D\u2502" );
-
-          #endif
-
-        }
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        //bufferedPrinter.printf( "\033[%d;%dH\u2570", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-        bufferedPrinter.printf( "\033[B\033[D\u2570" );
-
-        #else
-
-        //shell -> setCursorPosition( yTextSize + 3 + pointX, prevPointY + j + 1 );
-        //shell -> channel -> print( "\u2570" );
-        shell -> channel -> print( "\033[B\033[D\u2570" );
-
-        #endif
-
-      }
 
     }
 
-  }
-
-  // We have more points than 'pixels'.
-  else{
-
-    // Az elérhető szélességgel számolva minden pontot úgy rajzolunk ki, hogy
-    // A ponthoz megkeressük a közvetlen környezetében lévő mintákhoz tartozó indexeket.
-    // pédául a 3. pontot akarom kirajzolni, akkor annak a közvetlen környezete a 2. ponthoz tartozó
-    // minta után és a 4. pointhoz tartó mintáig tart. Ezeknek veszem az átlagát és azt rajzolom ki.
-
-    for( i = 1; i < terminalWidth; i++ ){
-
-      // Finding the indexes for the laft and right boundaries
-      avgStartIndex = mapFloat( i - 1, 0, terminalWidth, 0, yDataSize );
-      avgEndIndex = mapFloat( i + 1, 0, terminalWidth, 0, yDataSize );
-
-      // Check for buffer overflow
-      if( avgStartIndex < 0 ){
-        avgStartIndex = 0;
-      }
-
-      if( avgEndIndex >= yDataSize ){
-        avgEndIndex = yDataSize - 1;
-      }
-
-      // Averaging the numbers in the specified range
-      avg = 0.0;
-      for( j = avgStartIndex; j < avgEndIndex; j++ ){
-        avg += yDataF[ index ][ j ];
-      }
-
-      if( ( avgEndIndex - avgStartIndex ) != 0 ){
-        avg /= (float)( avgEndIndex - avgStartIndex );
-      }
-
-      pointY = mapFloat( avg, min, max, terminalSizeY, 1 );
-      pointX = i;
-
-      // Do the same for the previous point
-      // Finding the indexes for the laft and right boundaries
-      avgStartIndex = mapFloat( i - 2, 0, terminalWidth, 0, yDataSize );
-      avgEndIndex = mapFloat( i, 0, terminalWidth, 0, yDataSize );
-
-      // Check for buffer overflow
-      if( avgStartIndex < 0 ){
-        avgStartIndex = 0;
-      }
-
-      if( avgEndIndex >= yDataSize ){
-        avgEndIndex = yDataSize - 1;
-      }
-
-      // Averaging the numbers in the specified range
-      avg = 0.0;
-      for( j = avgStartIndex; j < avgEndIndex; j++ ){
-        avg += yDataF[ index ][ j ];
-      }
-
-      if( ( avgEndIndex - avgStartIndex ) != 0 ){
-        avg /= (float)( avgEndIndex - avgStartIndex );
-      }
-
-      prevPointY = mapFloat( avg, min, max, terminalSizeY, 1 );
-      //prevPointX = i - 1;
-
-      #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-      bufferedPrinter.printf( "\033[%d;%dH", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
-
-      #else
-
-      shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
-
-      #endif
-
-      if( (int)prevPointY == (int)pointY ){
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\u2500" );
-
-        #else
-
-        shell -> channel -> print( "\u2500" );
-
-        #endif
-
-      }
-
-      else if( (int)pointY < (int)prevPointY  ){
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\033[%d;%dH\u256F", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
-
-        #else
-
-        shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
-        shell -> channel -> print( "\u256F" );
-
-        #endif
-
-        for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
-
-          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-          //bufferedPrinter.printf( "\033[%d;%dH\u2502", (int)( prevPointY + j + 1 ), (int)( yTextSize + 3 + pointX ) );
-          bufferedPrinter.printf( "\033[A\033[D\u2502" );
-
-          #else
-
-          shell -> channel -> print( "\033[A\033[D\u2502" );
-
-          #endif
-
-        }
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\033[A\033[D\u256D" );
-
-        #else
-
-        shell -> channel -> print( "\033[A\033[D\u256D" );
-
-        #endif
-
-      }
-
-      else{
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\033[%d;%dH\u256E", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
-
-        #else
-
-        shell -> setCursorPosition( yTextSize + 3 + i - 1, prevPointY );
-        shell -> channel -> print( "\u256E" );
-
-        #endif
-
-        for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
-
-          #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-          bufferedPrinter.printf( "\033[B\033[D\u2502" );
-
-          #else
-
-          shell -> channel -> print( "\033[B\033[D\u2502" );
-
-          #endif
-
-        }
-
-        #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE
-
-        bufferedPrinter.printf( "\033[B\033[D\u2570" );
-
-        #else
-
-        shell -> channel -> print( "\033[B\033[D\u2570" );
-
-        #endif
-
-      }
-
-
-    }
-
-
-
-  }
+    parent -> channel -> print( "\033[C\033[C" );
+    parent -> channel -> print( valueTextBuffer );
   
 }
 
-// https://en.wikipedia.org/wiki/Linear_interpolation
 float ShellminatorPlot::lerp( float v0, float v1, float t ){
   return( 1.0 - t ) * v0 + t * v1;
 }
