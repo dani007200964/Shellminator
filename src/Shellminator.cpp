@@ -1111,7 +1111,7 @@ void Shellminator::update() {
   }
 
   if( screen != NULL ){
-    if( ( millis() - screenTimerStart ) > 500 ){
+    if( ( millis() - screenTimerStart ) > screenUpdatePeriod ){
         screenTimerStart = millis();
         int width;
         int height;
@@ -2733,7 +2733,7 @@ void Shellminator::autoDetectTerminal(){
 
 }
 
-void Shellminator::beginScreen( ShellminatorScreen* screen_p ){
+void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod ){
 
     int i;
     int height = 0;
@@ -2752,6 +2752,7 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p ){
         channel -> println();
     }
     
+    screenUpdatePeriod = updatePeriod;
     screen -> init();
     screenTimerStart = millis();
 }

@@ -113,6 +113,7 @@ public:
   /// @param ... Variadic list.
   /// @returns The number of printed characters.
   /// @note If you finished printing, you need to use the flush function to put the data out to the specified Stream channel.
+  /// @todo Make it work with AVR progmem.
   int printf( const char *fmt, ... );
 
   /// Flush function.

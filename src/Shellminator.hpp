@@ -632,7 +632,7 @@ public:
 
 #endif
 
-    void beginScreen( ShellminatorScreen* screen_p );
+    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
     void endScreen();
 
     enum{
@@ -813,6 +813,7 @@ private:
 
     ShellminatorScreen* screen = NULL;
     unsigned long screenTimerStart;
+    int screenUpdatePeriod;
 
     // Wrapper for the redrawLine without buffering.
     void redrawLineSimple();

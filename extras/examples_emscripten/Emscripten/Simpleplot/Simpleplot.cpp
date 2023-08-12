@@ -46,7 +46,7 @@ Shellminator shell( &stdioChannel );
 float data1[ NUMBER_OF_DATA_POINTS ];
 
 // Create a plotter object.
-ShellminatorPlot plot( data1, NUMBER_OF_DATA_POINTS );
+ShellminatorPlot plot( data1, NUMBER_OF_DATA_POINTS, "Plot" );
 
 // Create a pretty logo for the terminal.
 const char logo[] =
