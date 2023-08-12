@@ -82,7 +82,7 @@ void teszt::init(){
 teszt X;
 */
 
-#define NUMBER_OF_DATA_POINTS 20
+#define NUMBER_OF_DATA_POINTS 500
 
 // The plot will be generated from the content of this data array.
 float sawtoothPoints[ NUMBER_OF_DATA_POINTS ];
@@ -161,6 +161,11 @@ int main(){
     // Attach the logo.
     shell.attachLogo( logo );
 
+    // Try to enable buffering.
+    if( shell.enableBuffering() ){
+        stdioChannel.println( "Memory allocation failed for buffering!" );
+    }
+
     // Initialize shell object.
     shell.begin( "arnold" );
     shell.beginScreen( &splitLayout );
@@ -171,7 +176,7 @@ int main(){
         for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
 
             sinePoints[i] = sin( 3.14159265358979323846 * 4.0 * (float)i / (float)NUMBER_OF_DATA_POINTS  ) * 3.0 + millis() / 5000.0;
-            sawtoothPoints[i] = ( i%5 ) + millis() / 5000.0;
+            sawtoothPoints[i] = ( i % 200 ) + millis() / 5000.0;
 
         }
 

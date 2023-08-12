@@ -130,6 +130,10 @@ private:
     /// Pointer to the caller terminal.
     Shellminator* parent = NULL;
 
+    /// Pointer to the caller terminals buffered printer object.
+    /// @note It must be NULL if the buffering is disabled!
+    ShellminatorBufferedPrinter* bufferedPrinter = NULL;
+
     /// Terminal width in characters.
     int width;
 

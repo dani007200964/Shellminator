@@ -98,20 +98,75 @@ void ShellminatorPlot::draw( Shellminator* parent_p, int width_p, int  height_p 
     width = width_p;
     height = height_p - 1;
 
-    // Set the name text color.
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::UNDERLINE, Shellminator::WHITE );
+    // Try to access the caller terminals buffered printer.
+    bufferedPrinter = parent -> getBufferedPrinter();
 
     // Calculate the length of the name.
     j = strlen( name );
 
+    // Set the name text color.
+    if( bufferedPrinter == NULL ){
+        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::UNDERLINE, Shellminator::WHITE );
+    }
+    else{
+        Shellminator::setTerminalCharacterColor( bufferedPrinter, Shellminator::UNDERLINE, Shellminator::WHITE );
+    }
+
+
     // Set cursor to make the text appear on the top center.
-    parent -> setCursorPosition( originX + width / 2 - j / 2, originY );
+    if( bufferedPrinter == NULL ){
+        parent -> setCursorPosition( originX + width / 2 - j / 2, originY );
+    }
+    else{
+        Shellminator::setCursorPosition( bufferedPrinter, originX + width / 2 - j / 2, originY );
+    }
 
     // Print instructions and plot name only at first draw.
-    parent -> channel -> print( name );
+    if( bufferedPrinter == NULL ){
+        parent -> channel -> print( name );
+    }
+    else{
+        bufferedPrinter -> printf( name );
+    }
 
     // Set the cursor to the origin position.
-    parent -> setCursorPosition( originX, originY );
+    if( bufferedPrinter == NULL ){
+        parent -> setCursorPosition( originX, originY );
+    }
+    else{
+        Shellminator::setCursorPosition( bufferedPrinter, originX, originY );
+    }
+
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        // Set the name text color.
+        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::UNDERLINE, Shellminator::WHITE );
+
+        // Set cursor to make the text appear on the top center.
+        parent -> setCursorPosition( originX + width / 2 - j / 2, originY );
+
+        // Print instructions and plot name only at first draw.
+        parent -> channel -> print( name );
+
+        // Set the cursor to the origin position.
+        parent -> setCursorPosition( originX, originY );
+    }
+
+    // If buffering enabled.
+    else{
+        // Set the name text color.
+        Shellminator::setTerminalCharacterColor( bufferedPrinter, Shellminator::UNDERLINE, Shellminator::WHITE );
+
+        // Set cursor to make the text appear on the top center.
+        Shellminator::setCursorPosition( bufferedPrinter, originX + width / 2 - j / 2, originY );
+
+        // Print instructions and plot name only at first draw.
+        bufferedPrinter -> printf( name );
+
+        // Set the cursor to the origin position.
+        Shellminator::setCursorPosition( bufferedPrinter, originX, originY );
+    }
+
 
     // Reset variables to a safe state.
     min = data[ 0 ];
@@ -140,9 +195,15 @@ void ShellminatorPlot::draw( Shellminator* parent_p, int width_p, int  height_p 
     // To round up
     max = ( (int)max ) + 1;
 
+    // Draw the scaling grid with numbers.
     drawScale();
 
+    // Draw the data points.
     drawPlot();
+
+    if( bufferedPrinter != NULL ){
+        bufferedPrinter -> flush();
+    }
 
 }
 
@@ -154,8 +215,19 @@ void ShellminatorPlot::drawScale(){
     float tmp;
     float tmpDecimalPart;
 
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::BOLD, Shellminator::WHITE );
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        // Set the correct style.
+        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
+        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::BOLD, Shellminator::WHITE );
+    }
+
+    // If buffering enabled.
+    else{
+        // Set the correct style.
+        Shellminator::setTerminalCharacterColor( bufferedPrinter, Shellminator::REGULAR, Shellminator::WHITE );
+        Shellminator::setTerminalCharacterColor( bufferedPrinter, Shellminator::BOLD, Shellminator::WHITE );
+    }
 
     // Draw the scale.
     for( i = 0; i < height; i++ ){
@@ -189,29 +261,57 @@ void ShellminatorPlot::drawScale(){
             valueTextSizeMax = j;
         }
 
-        // Set the position of the current line.
-        parent -> setCursorPosition( originX, originY + 1 + i );
+        // If buffering disabled.
+        if( bufferedPrinter == NULL ){
+            // Set the position of the current line.
+            parent -> setCursorPosition( originX, originY + 1 + i );
 
-        // Print the actual data string to the output stream.
-        parent -> channel -> print( valueTextBuffer );
-        parent -> channel -> print( "\033[K" );
+            // Print the actual data string to the output stream.
+            parent -> channel -> print( valueTextBuffer );
+            parent -> channel -> print( "\033[K" );
+        }
 
-        // We have to print a new line only if we are not in the last iteration.
-        if( i < ( height - 1 ) ){
-            //parent -> channel -> println();
+        // If buffering enabled.
+        else{
+            // Set the position of the current line.
+            Shellminator::setCursorPosition( bufferedPrinter, originX, originY + 1 + i );
+
+            // Print the actual data string to the output stream.
+            bufferedPrinter -> printf( valueTextBuffer );
+            bufferedPrinter -> printf( "\033[K" );
         }
 
     }
 
-    // Draw vertical scaling grid
-    parent -> setCursorPosition( originX + valueTextSizeMax + 1, originY + 1 );
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        // Draw vertical scaling grid
+        parent -> setCursorPosition( originX + valueTextSizeMax + 1, originY + 1 );
+    }
+
+    // If buffering enabled.
+    else{
+        Shellminator::setCursorPosition( bufferedPrinter, originX + valueTextSizeMax + 1, originY + 1 );
+    }
 
     for( i = 0; i < height; i++ ){
 
-        parent -> channel -> print( "\u2524" );
+        // If buffering disabled.
+        if( bufferedPrinter == NULL ){
+            parent -> channel -> print( "\u2524" );
+            // Arrow down + left
+            if( i < ( height - 1 ) ){
+                parent -> channel -> print( "\033[B\033[D" );
+            }
+        }
 
-        if( i < ( height - 1 ) ){
-            parent -> channel -> print( "\033[B\033[D" );
+        // If buffering enabled.
+        else{
+            bufferedPrinter -> printf( "\u2524" );
+            // Arrow down + left
+            if( i < ( height - 1 ) ){
+                bufferedPrinter -> printf( "\033[B\033[D" );
+            }
         }
 
     }
@@ -234,16 +334,36 @@ void ShellminatorPlot::drawScale(){
     // Calculate the length of the result text.
     resultTextSize = strlen( valueTextBuffer );
 
-    // Set the cursor to the result scaling grid position.
-    parent -> setCursorPosition( originX + width - resultTextSize - 2, originY + 1 );
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        // Set the cursor to the result scaling grid position.
+        parent -> setCursorPosition( originX + width - resultTextSize - 2, originY + 1 );
+    }
+    // If buffering enabled.
+    else{
+        // Set the cursor to the result scaling grid position.
+        Shellminator::setCursorPosition( bufferedPrinter, originX + width - resultTextSize - 2, originY + 1 );
+    }
 
     // Draw vertical scaling grid to the end for the result.
     for( i = 0; i < height; i++ ){
 
-        parent -> channel -> print( "\u251C" );
-        
-        if( i < ( height - 1 ) ){
-            parent -> channel -> print( "\033[B\033[D" );
+        // If buffering disabled.
+        if( bufferedPrinter == NULL ){
+            parent -> channel -> print( "\u251C" );
+            // Arrow down + left
+            if( i < ( height - 1 ) ){
+                parent -> channel -> print( "\033[B\033[D" );
+            }
+        }
+
+        // If buffering enabled.
+        else{
+            bufferedPrinter -> printf( "\u251C" );
+            // Arrow down + left
+            if( i < ( height - 1 ) ){
+                bufferedPrinter -> printf( "\033[B\033[D" );
+            }
         }
 
   }
@@ -419,8 +539,16 @@ void ShellminatorPlot::drawPlot(){
 
     float avg;
 
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, color );
-    // terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 3 );
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, color );
+    }
+
+    // If buffering enabled.
+    else{
+        Shellminator::setTerminalCharacterColor( bufferedPrinter, Shellminator::REGULAR, color );
+    }
+
     terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 3 );
 
     // We have less data points than 'pixels' in the terminal
@@ -434,15 +562,28 @@ void ShellminatorPlot::drawPlot(){
             pointY = mapFloat( data[ i ], min, max, height, 2 );
             pointX = mapFloat( i, 0, ( dataSize - 1 ), 0, terminalWidth );
 
-            //parent -> setCursorPosition( valueTextSizeMax + 3 + prevPointX, prevPointY );
-            parent -> setCursorPosition( originX + valueTextSizeMax + 2 + prevPointX, originY + prevPointY );
+            // If buffering disabled.
+            if( bufferedPrinter == NULL ){
+                parent -> setCursorPosition( originX + valueTextSizeMax + 2 + prevPointX, originY + prevPointY );
+            }
+
+            // If buffering enabled.
+            else{
+                Shellminator::setCursorPosition( bufferedPrinter, originX + valueTextSizeMax + 2 + prevPointX, originY + prevPointY );
+            }
 
             // Print the horizontal line
             for( j = 0; j < ( (int)pointX - (int)prevPointX ); j++ ){
 
-                //parent -> channel -> print( "\u2500" );
-                //parent -> channel -> print( "*" );
-                parent -> channel -> print( "\u2022" );
+                // If buffering disabled.
+                if( bufferedPrinter == NULL ){
+                    parent -> channel -> print( "\u2022" );
+                }
+
+                // If buffering enabled.
+                else{
+                    bufferedPrinter -> printf( "\u2022" );
+                }
 
             }
 
@@ -453,8 +594,19 @@ void ShellminatorPlot::drawPlot(){
                 if( (int)pointY > (int)prevPointY ){
 
                     for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
-                        parent -> channel -> print( "\033[B\033[D" );
-                        parent -> channel -> print( "\u2022" );
+
+                        // If buffering disabled.
+                        if( bufferedPrinter == NULL ){
+                            parent -> channel -> print( "\033[B\033[D" );
+                            parent -> channel -> print( "\u2022" );
+                        }
+                        
+                        // If buffering enabled.
+                        else{
+                            bufferedPrinter -> printf( "\033[B\033[D" );
+                            bufferedPrinter -> printf( "\u2022" );
+                        }
+
                     }
 
                 }
@@ -463,8 +615,19 @@ void ShellminatorPlot::drawPlot(){
                 if( (int)prevPointY > (int)pointY ){
 
                     for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
-                        parent -> channel -> print( "\033[A\033[D" );
-                        parent -> channel -> print( "\u2022" );
+
+                        // If buffering disabled.
+                        if( bufferedPrinter == NULL ){
+                            parent -> channel -> print( "\033[A\033[D" );
+                            parent -> channel -> print( "\u2022" );
+                        }
+                        
+                        // If buffering enabled.
+                        else{
+                            bufferedPrinter -> printf( "\033[A\033[D" );
+                            bufferedPrinter -> printf( "\u2022" );
+                        }
+
                     }
 
                 }
@@ -547,29 +710,18 @@ void ShellminatorPlot::drawPlot(){
             }
 
             prevPointY = mapFloat( avg, min, max, height, 2 );
-            //prevPointX = i - 1;
 
-            parent -> setCursorPosition( valueTextSizeMax + 3 + i - 1, prevPointY );
-
-            // If the previous point have the same value as the current one, we just print it.
-            /*
-            if( (int)prevPointY == (int)pointY ){
-
-                //parent -> channel -> print( "\u2022" );
-
-            }
-            
-
-            // If the previous point is greater, than the current one, we have to draw upwards.
-            else if( (int)pointY < (int)prevPointY  ){
-
-                //bufferedPrinter.printf( "\033[%d;%dH\u256F", (int)prevPointY, (int)( yTextSize + 3 + i - 1 ) );
-
+            // If buffering disabled.
+            if( bufferedPrinter == NULL ){
+                parent -> setCursorPosition( originX + valueTextSizeMax + 3 + i - 1, originY + prevPointY );
+                parent -> channel -> print( "\u2022" );
             }
 
-            */
-
-            parent -> channel -> print( "\u2022" );
+            // If buffering enabled.
+            else{
+                Shellminator::setCursorPosition( bufferedPrinter, originX + valueTextSizeMax + 3 + i - 1, originY + prevPointY );
+                bufferedPrinter -> printf( "\u2022" );
+            }
 
             // Print vertical line everywhere except the last data point.
             if( i < ( dataSize - 1 ) ){
@@ -578,8 +730,19 @@ void ShellminatorPlot::drawPlot(){
                 if( (int)pointY > (int)prevPointY ){
 
                     for( j = 0; j < ( (int)pointY - (int)prevPointY ) - 1; j++ ){
-                        parent -> channel -> print( "\033[B\033[D" );
-                        parent -> channel -> print( "\u2022" );
+
+                        // If buffering disabled.
+                        if( bufferedPrinter == NULL ){
+                            parent -> channel -> print( "\033[B\033[D" );
+                            parent -> channel -> print( "\u2022" );
+                        }
+                        
+                        // If buffering enabled.
+                        else{
+                            bufferedPrinter -> printf( "\033[B\033[D" );
+                            bufferedPrinter -> printf( "\u2022" );
+                        }
+
                     }
 
                 }
@@ -588,8 +751,19 @@ void ShellminatorPlot::drawPlot(){
                 if( (int)prevPointY > (int)pointY ){
 
                     for( j = 0; j < ( (int)prevPointY - (int)pointY ) - 1; j++ ){
-                        parent -> channel -> print( "\033[A\033[D" );
-                        parent -> channel -> print( "\u2022" );
+
+                        // If buffering disabled.
+                        if( bufferedPrinter == NULL ){
+                            parent -> channel -> print( "\033[A\033[D" );
+                            parent -> channel -> print( "\u2022" );
+                        }
+                        
+                        // If buffering enabled.
+                        else{
+                            bufferedPrinter -> printf( "\033[A\033[D" );
+                            bufferedPrinter -> printf( "\u2022" );
+                        }
+
                     }
 
                 }
@@ -600,9 +774,17 @@ void ShellminatorPlot::drawPlot(){
 
     }
 
-    parent -> channel -> print( "\033[C\033[C" );
-    parent -> channel -> print( valueTextBuffer );
-  
+    // If buffering disabled.
+    if( bufferedPrinter == NULL ){
+        parent -> channel -> print( "\033[C\033[C" );
+        parent -> channel -> print( valueTextBuffer );
+    }
+
+    // If buffering enabled.
+    else{
+        bufferedPrinter -> printf( "\033[C\033[C" );
+        bufferedPrinter -> printf( valueTextBuffer );
+    }
 }
 
 float ShellminatorPlot::lerp( float v0, float v1, float t ){

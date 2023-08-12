@@ -382,6 +382,16 @@ bool Shellminator::enableBuffering( int bufferSize ){
 
 }
 
+ShellminatorBufferedPrinter* Shellminator::getBufferedPrinter(){
+    
+    if( bufferMemoryAllocated == false ){
+        return NULL;
+    }
+
+    return &bufferedPrinter;
+
+}
+
 void Shellminator::setBannerText( char* banner_p ){
 
   // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
@@ -1323,6 +1333,10 @@ void Shellminator::setCursorPosition( int x, int y ){
   channel -> print( x );
   channel -> print( 'H' );
 
+}
+
+void Shellminator::setCursorPosition( ShellminatorBufferedPrinter* printer, int x, int y ){
+    printer -> printf( "\033[%d;%dH", y, x );
 }
 
 bool Shellminator::getTerminalSize( int* width, int* height ){

@@ -374,6 +374,7 @@ public:
 
     bool getCursorPosition(int *x, int *y, uint32_t timeout = 100);
     void setCursorPosition(int x, int y);
+    static void setCursorPosition( ShellminatorBufferedPrinter* printer, int x, int y );
 
     bool getTerminalSize(int *width, int *height);
 
@@ -742,6 +743,14 @@ public:
     /// Pointer to the communication class. By default
     /// it points to the default response handler.
     Stream *channel = &defaultChannel;
+
+    /// Get the buffered printer object address.
+    ///
+    /// With this function the bufferedPrinter object can be accessed
+    /// from outside.
+    /// @returns If it returns NULL that means, the buffered printer is not enabled, or the memory allocation for it is failed.
+    ///          In this case it is not usable. If it is not NULL, you can use it.
+    ShellminatorBufferedPrinter* getBufferedPrinter();
 
 #ifdef COMMANDER_API_VERSION
 
