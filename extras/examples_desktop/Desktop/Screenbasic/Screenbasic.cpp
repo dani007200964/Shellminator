@@ -164,9 +164,9 @@ int main(){
     stdioChannel.println( "Program Start!" );
 
     // Try to enable buffering.
-    //if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
-    //    stdioChannel.println( "Memory allocation failed for buffering!" );
-    //}
+    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
+        stdioChannel.println( "Memory allocation failed for buffering!" );
+    }
 
     // Initialize shell object.
     shell.begin( "arnold" );

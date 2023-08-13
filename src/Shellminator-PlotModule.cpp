@@ -50,10 +50,12 @@ ShellminatorPlot::ShellminatorPlot(){
 void ShellminatorPlot::init( Shellminator* parent_p ){
     parent = parent_p;
     
+    bufferingEnabled = true;
     selectedChannel = parent -> getBufferedPrinter();
 
     if( selectedChannel == NULL ){
         selectedChannel = parent -> channel;
+        bufferingEnabled = false;
     }
 
 }
@@ -165,6 +167,10 @@ void ShellminatorPlot::draw( int width_p, int  height_p ){
 
     // Draw the data points.
     drawPlot();
+
+    if( bufferingEnabled ){
+        selectedChannel -> flush();
+    }
 
 }
 

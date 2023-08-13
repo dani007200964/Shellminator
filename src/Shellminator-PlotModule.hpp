@@ -130,8 +130,12 @@ private:
     /// Pointer to the caller terminal.
     Shellminator* parent = NULL;
 
-    // This will be redirected to the parents channel by default.
+    /// This will be redirected to the parents channel by default.
     Stream* selectedChannel = NULL;
+
+    /// If this flag is true, that means the buffering is enabled
+    /// on the caller terminal.
+    bool bufferingEnabled = false;
 
     /// Terminal width in characters.
     int width;
