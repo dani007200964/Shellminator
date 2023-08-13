@@ -132,27 +132,6 @@ void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, u
 
 }
 
-void Shellminator::setTerminalCharacterColor( ShellminatorBufferedPrinter *printer_p, uint8_t style, uint8_t color ){
-
-  if( printer_p == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  printer_p -> printf( "\033[%d;%dm", style, color );
-
-}
-
 void Shellminator::hideCursor(){
 
   if( !enableFormatting ){

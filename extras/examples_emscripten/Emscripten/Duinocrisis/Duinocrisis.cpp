@@ -202,6 +202,9 @@ private:
 // An array of obstacles.
 obstacle obstacles[ NUMBER_OF_OBSTACLES ];
 
+#define TERMINAL_BUFFER_SIZE 50
+char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+
 
 // Main program.
 int main(){
@@ -601,7 +604,7 @@ void setup(){
     shell.clear();
 
     // Try to allocate memory for 100 characters.
-    if( !shell.enableBuffering( 50 ) ){
+    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
 
         // If it fails, print the problem.
         // The error is handled internally, and it will still work, but without buffering.

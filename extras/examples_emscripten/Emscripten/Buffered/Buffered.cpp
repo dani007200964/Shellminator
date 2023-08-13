@@ -50,6 +50,9 @@ const char logo[] =
 
 ;
 
+#define TERMINAL_BUFFER_SIZE 50
+char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+
 
 // Infinite Loop.
 void loop();
@@ -83,7 +86,7 @@ void setup(){
     shell.clear();
 
     // Try to allocate memory for 100 characters.
-    if( !shell.enableBuffering( 100 ) ){
+    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
 
         // If it fails, print the problem.
         // The error is handled internally, and it will still work, but without buffering.

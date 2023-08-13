@@ -366,19 +366,20 @@ Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Sh
 
 }
 
-bool Shellminator::enableBuffering( int bufferSize ){
+bool Shellminator::enableBuffering( char* buffer, int bufferSize ){
 
-  bufferedPrinter = ShellminatorBufferedPrinter( channel );
-  
-  bufferMemoryAllocated = bufferedPrinter.allocate( SHELLMINATOR_PLOT_BUFF_SIZE );
+    if( buffer == NULL ){
+        return false;
+    }
 
-  if( bufferedPrinter.getBufferSize() != SHELLMINATOR_PLOT_BUFF_SIZE ){
+    if( bufferSize < 1 ){
+        return false;
+    }
 
-    bufferMemoryAllocated = false;
-
-  }
-
-  return bufferMemoryAllocated;
+    bufferedPrinter = ShellminatorBufferedPrinter( channel, buffer, bufferSize );
+    
+    bufferMemoryAllocated = true;
+    return bufferMemoryAllocated;
 
 }
 
@@ -468,179 +469,158 @@ void Shellminator::addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) 
 
 }
 
-void Shellminator::printBanner() {
+void Shellminator::printBanner(){
 
-  lastBannerSize = 0;
+    lastBannerSize = 0;
 
-  // Check if we can use buffering.
-  if( bufferMemoryAllocated ){
+    // This will be redirected to the channel by default.
+    Stream* selectedChannel = channel;
 
-    // Sets the terminal style to bold and the color to green.
-    setTerminalCharacterColor( &bufferedPrinter, BOLD, GREEN );
-
-    // Print the banner text and save it's size.
-    bufferedPrinter.printf( (const char*)banner );
-    lastBannerSize += strlen( banner );
-
-    // Sets the terminal style to regular and the color to white.
-    setTerminalCharacterColor( &bufferedPrinter, BOLD, WHITE );
-
-    // Print the banner text and save it's size.
-    bufferedPrinter.printf( ":" );
-    lastBannerSize++;
-
-    setTerminalCharacterColor( &bufferedPrinter, BOLD, BLUE );
-
-    bufferedPrinter.printf( (const char*)bannerPath );
-    lastBannerSize += strlen( bannerPath );
-
-    setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
-
-    bufferedPrinter.printf( " " );
-    lastBannerSize++;
-
-    bufferedPrinter.flush();
-
-  }
-
-  else{
+    // If buffering is enabled, overwrite the
+    // selectedChannel to the buffered printer.
+    if( bufferMemoryAllocated ){
+        selectedChannel = &bufferedPrinter;
+    }
 
     // Sets the terminal style to bold and the color to green.
-    setTerminalCharacterColor( BOLD, GREEN );
+    setTerminalCharacterColor( selectedChannel, BOLD, GREEN );
 
     // Print the banner text and save it's size.
-    lastBannerSize += channel -> print( banner );
+    lastBannerSize += selectedChannel -> print( banner );
 
     // Sets the terminal style to regular and the color to white.
-    setTerminalCharacterColor( BOLD, WHITE );
+    setTerminalCharacterColor( selectedChannel, BOLD, WHITE );
 
-    lastBannerSize += channel -> print( ':' );
+    lastBannerSize += selectedChannel -> print( ':' );
 
-    setTerminalCharacterColor( BOLD, BLUE );
+    setTerminalCharacterColor( selectedChannel, BOLD, BLUE );
 
-    lastBannerSize += channel -> print( bannerPath );
+    lastBannerSize += selectedChannel -> print( bannerPath );
 
-    setTerminalCharacterColor( REGULAR, WHITE );
+    setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
 
-    lastBannerSize += channel -> print( ' ' );
+    lastBannerSize += selectedChannel -> print( ' ' );
 
-  }
+    if( bufferMemoryAllocated ){
+        selectedChannel -> flush();
+    }
 
 }
 
 void Shellminator::printHistory(){
 
-  uint32_t i;
-  uint32_t firstBuffDim = 1;
-  uint32_t index;
+    uint32_t i;
+    uint32_t firstBuffDim = 1;
+    uint32_t index;
 
-  // Check the first valid command in the buffer
-  for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
+    // This will be redirected to the channel by default.
+    Stream* selectedChannel= channel;
 
-    // If it's found, store it's index to firstBuffDim
-    if( cmd_buff[ i ][ 0 ] == '\0' ){
-      firstBuffDim = i - 1;
-      break;
-    }
-
-  }
-
-  // If the history is empty, we can return.
-  if( firstBuffDim == 0 ){
-    return;
-  }
-
-  // If the history is full, we have to protect
-  // firstBuffDim variable.
-  if( i >= SHELLMINATOR_BUFF_DIM ){
-    firstBuffDim = SHELLMINATOR_BUFF_DIM - 1;
-  }
-
-  // Print the history.
-  for( i = firstBuffDim; i > 0; i-- ){
-
-    index = firstBuffDim - i + 1;
-
-    // Check if we can use buffering.
+    // If buffering is enabled, overwrite the
+    // selectedChannel to the buffered printer.
     if( bufferMemoryAllocated ){
+        selectedChannel = &bufferedPrinter;
+    }
 
-      if( enableFormatting ){
+    // Check the first valid command in the buffer
+    for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
 
-        bufferedPrinter.printf( "  \033[1;35m%3d  \033[0;37m%s\r\n", index, cmd_buff[ i ] );
-
-      }
-
-      else{
-
-        bufferedPrinter.printf( "  %3d  %s\r\n", index, cmd_buff[ i ] );
-
-      }
+        // If it's found, store it's index to firstBuffDim
+        if( cmd_buff[ i ][ 0 ] == '\0' ){
+        firstBuffDim = i - 1;
+        break;
+        }
 
     }
 
-    else{
+    // If the history is empty, we can return.
+    if( firstBuffDim == 0 ){
+        return;
+    }
 
-      channel -> print( ' ' );
-      channel -> print( ' ' );
+    // If the history is full, we have to protect
+    // firstBuffDim variable.
+    if( i >= SHELLMINATOR_BUFF_DIM ){
+        firstBuffDim = SHELLMINATOR_BUFF_DIM - 1;
+    }
 
-      // It is used to ident digits.
-      if( index < 10 ){
+    // Print the history.
+    for( i = firstBuffDim; i > 0; i-- ){
 
-        channel -> print( ' ' );
-        channel -> print( ' ' );
+        index = firstBuffDim - i + 1;
 
-      }
+        selectedChannel -> print( ' ' );
+        selectedChannel -> print( ' ' );
 
-      // It is used to ident digits.
-      else if( index < 100 ){
+        // It is used to ident digits.
+        if( index < 10 ){
 
-        channel -> print( ' ' );
+            selectedChannel -> print( ' ' );
+            selectedChannel -> print( ' ' );
 
-      }
+        }
 
-      // Print the index and the command.
-      setTerminalCharacterColor( BOLD, MAGENTA );
-      channel -> print( index );
-      setTerminalCharacterColor( REGULAR, WHITE );
-      channel -> print( ' ' );
-      channel -> print( ' ' );
-      channel -> println( cmd_buff[ i ] );
+        // It is used to ident digits.
+        else if( index < 100 ){
+
+            selectedChannel -> print( ' ' );
+
+        }
+
+        // Print the index and the command.
+        setTerminalCharacterColor( selectedChannel, BOLD, MAGENTA );
+        selectedChannel -> print( index );
+        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+        selectedChannel -> print( ' ' );
+        selectedChannel -> print( ' ' );
+        selectedChannel -> println( cmd_buff[ i ] );
 
     }
 
-  }
+    if( bufferMemoryAllocated ){
+        selectedChannel -> flush();
+    }
 
 }
 
 void Shellminator::printHelp(){
 
-  #ifdef __AVR__
+    // This will be redirected to the channel by default.
+    Stream* selectedChannel= channel;
 
-    uint32_t i;
-
-    for( i = 0; i < strlen_P( helpText ); i++ ){
-
-      char c = pgm_read_byte_near( helpText + i );
-      channel -> print( c );
-
+    // If buffering is enabled, overwrite the
+    // selectedChannel to the buffered printer.
+    if( bufferMemoryAllocated ){
+        selectedChannel = &bufferedPrinter;
     }
 
+    #ifdef __AVR__
 
-  #else
+        uint32_t i;
 
-    channel -> print( helpText );
+        for( i = 0; i < strlen_P( helpText ); i++ ){
 
-  #endif
+        char c = pgm_read_byte_near( helpText + i );
+        selectedChannel -> print( c );
 
-  #ifdef COMMANDER_API_VERSION
+        }
 
-    if( commander != NULL ){
 
-      commander -> printHelp( channel, enableFormatting );
+    #else
 
-    }
+        selectedChannel -> print( helpText );
 
-  #endif
+    #endif
+
+    #ifdef COMMANDER_API_VERSION
+
+        if( commander != NULL ){
+
+            commander -> printHelp( channel, enableFormatting );
+
+        }
+
+    #endif
 
 }
 
@@ -688,223 +668,118 @@ void Shellminator::sendBackspace() {
 
 void Shellminator::redrawLine(){
 
-  if( bufferMemoryAllocated ){
+    // -- Note --
+    //
+    // Even if formatting is disabled, this function requires VT100 commands.
+    // Please not use it if you dont't want any formatting.
 
-    redrawLineBuffered();
+    // General counter variable
+    #ifdef COMMANDER_API_VERSION
 
-  }
+    uint32_t i;
 
-  else{
+    #endif
 
-    redrawLineSimple();
+    int32_t j = -1;
 
-  }
+    // This will be redirected to the channel by default.
+    Stream* selectedChannel= channel;
 
-}
-
-
-void Shellminator::redrawLineSimple(){
-
-  // -- Note --
-  //
-  // Even if formatting is disabled, this function requires VT100 commands.
-  // Please not use it if you dont't want any formatting.
-
-  // General counter variable
-  #ifdef COMMANDER_API_VERSION
-
-  uint32_t i;
-
-  #endif
-
-  int32_t j = -1;
-
-  if( inSearch ){
-
-    redrawHistorySearch();
-    return;
-
-  }
-
-  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
-
-    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-  }
-
-  // Terminate the command at the cmd_buff_cntr
-  // to not print out the previous command's data.
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
-
-  // Return to the beginning of the line and print the banner
-  // then the command buffer will be printed (with colors)
-  channel -> print( '\r' );
-
-  printBanner();
-
-  channel -> write( 27 );
-  channel -> print( "[0K" );
+    // If buffering is enabled, overwrite the
+    // selectedChannel to the buffered printer.
+    if( bufferMemoryAllocated ){
+        selectedChannel = &bufferedPrinter;
+    }
 
 
-  #ifdef COMMANDER_API_VERSION
+    if( inSearch ){
 
-  // If the command is found in Commander's API-tree
-  // it will be highlighted.
-  if( commandFound ){
-
-    setTerminalCharacterColor( BOLD, GREEN );
-
-    for( i = 0; i < cmd_buff_cntr; i++ ){
-
-      // If a space character is found, we have to change
-      // back the color to white for the arguments.
-      if( cmd_buff[ 0 ][ i ] == ' ' ){
-
-        j = i;
-        cmd_buff[ 0 ][ i ] = '\0';
-        break;
-
-      }
+        redrawHistorySearch();
+        return;
 
     }
 
-  }
+    if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
 
-  else{
-
-    setTerminalCharacterColor( REGULAR, WHITE );
-
-  }
-
-  #endif
-
-  channel -> print( (char*) &cmd_buff[ 0 ] );
-
-  if( ( j >= 0 ) ){
-
-    cmd_buff[ 0 ][ j ] = ' ';
-
-    setTerminalCharacterColor( REGULAR, WHITE );
-    channel -> print( (char*) &cmd_buff[ 0 ][ j ] );
-
-  }
-
-  channel -> write( 27 );
-  channel -> print( "[0K" );
-
-  if( cmd_buff_cntr > cursor ){
-
-    channel -> write( 27 );    // ESC character( decimal 27 )
-    channel -> print( '[' );  // VT100 Cursor command.
-    channel -> print( uint8_t( cmd_buff_cntr - cursor ) );  // Step cursor
-    channel -> print( 'D' );  // Left.
-
-  }
-
-  setTerminalCharacterColor( REGULAR, WHITE );
-
-}
-
-void Shellminator::redrawLineBuffered(){
-
-  // -- Note --
-  //
-  // Even if formatting is disabled, this function requires VT100 commands.
-  // Please not use it if you dont't want any formatting.
-
-  // General counter variable
-  #ifdef COMMANDER_API_VERSION
-
-  uint32_t i;
-
-  #endif
-
-  int32_t j = -1;
-
-  if( inSearch ){
-
-    redrawHistorySearch();
-    return;
-
-  }
-
-  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
-
-    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-  }
-
-  // Terminate the command at the cmd_buff_cntr
-  // to not print out the previous command's data.
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
-
-  if( enableFormatting ){
-
-    bufferedPrinter.printf( "\r\033[1;32m%s\033[1;37m:\033[1;34m%s\033[0;37m \033[0K", banner, bannerPath );
-
-  }
-
-  else{
-
-    bufferedPrinter.printf( "\r%s:%s \033[0K", banner, bannerPath );
-
-  }
-
-  #ifdef COMMANDER_API_VERSION
-
-  // If the command is found in Commander's API-tree
-  // it will be highlighted.
-  if( commandFound ){
-
-    setTerminalCharacterColor( &bufferedPrinter, BOLD, GREEN );
-
-    for( i = 0; i < cmd_buff_cntr; i++ ){
-
-      // If a space character is found, we have to change
-      // back the color to white for the arguments.
-      if( cmd_buff[ 0 ][ i ] == ' ' ){
-
-        j = i;
-        cmd_buff[ 0 ][ i ] = '\0';
-        break;
-
-      }
+        cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
 
     }
 
-  }
+    // Terminate the command at the cmd_buff_cntr
+    // to not print out the previous command's data.
+    cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
-  else{
+    // Return to the beginning of the line and print the banner
+    // then the command buffer will be printed (with colors)
+    selectedChannel -> print( '\r' );
 
-    setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
+    printBanner();
 
-  }
+    selectedChannel -> write( 27 );
+    selectedChannel -> print( "[0K" );
 
-  #endif
 
-  bufferedPrinter.printf( (const char*) &cmd_buff[ 0 ] );
+    #ifdef COMMANDER_API_VERSION
 
-  if( ( j >= 0 ) ){
+    // If the command is found in Commander's API-tree
+    // it will be highlighted.
+    if( commandFound ){
 
-    cmd_buff[ 0 ][ j ] = ' ';
+        setTerminalCharacterColor( selectedChannel, BOLD, GREEN );
 
-    setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
-    bufferedPrinter.printf( (const char*) &cmd_buff[ 0 ][ j ] );
+        for( i = 0; i < cmd_buff_cntr; i++ ){
 
-  }
+        // If a space character is found, we have to change
+        // back the color to white for the arguments.
+        if( cmd_buff[ 0 ][ i ] == ' ' ){
 
-  // After all the buffer is out, we can "kill" the rest of the line
-  // (clear the line from cursor to the end)
-  bufferedPrinter.printf( "\033[0K" );
+            j = i;
+            cmd_buff[ 0 ][ i ] = '\0';
+            break;
 
-  if( cmd_buff_cntr > cursor ){
+        }
 
-    bufferedPrinter.printf( "\033[%dD", uint8_t( cmd_buff_cntr - cursor ) );
+        }
 
-  }
+    }
 
-  setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
-  bufferedPrinter.flush();
+    else{
+
+        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+
+    }
+
+    #endif
+
+    selectedChannel -> print( (char*) &cmd_buff[ 0 ] );
+
+    if( ( j >= 0 ) ){
+
+        cmd_buff[ 0 ][ j ] = ' ';
+
+        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+        selectedChannel -> print( (char*) &cmd_buff[ 0 ][ j ] );
+
+    }
+
+    selectedChannel -> write( 27 );
+    selectedChannel -> print( "[0K" );
+
+    if( cmd_buff_cntr > cursor ){
+
+        selectedChannel -> write( 27 );    // ESC character( decimal 27 )
+        selectedChannel -> print( '[' );  // VT100 Cursor command.
+        selectedChannel -> print( uint8_t( cmd_buff_cntr - cursor ) );  // Step cursor
+        selectedChannel -> print( 'D' );  // Left.
+
+    }
+
+    setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+
+    if( bufferMemoryAllocated ){
+        selectedChannel -> flush();
+    }
+
 
 }
 
@@ -940,7 +815,7 @@ void Shellminator::update() {
 
     if( server -> hasClient() ){
 
-      // If we are alredy connected, we have to reject the new connection.
+      // If we are already connected, we have to reject the new connection.
       if( CLIENT_STATE ){
 
         // Connection reject event!
@@ -1116,7 +991,7 @@ void Shellminator::update() {
         int width;
         int height;
         getTerminalSize( &width, &height );
-        screen -> draw( this, width, height );
+        screen -> draw( width, height );
     }
   }
 
@@ -1327,16 +1202,22 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
 void Shellminator::setCursorPosition( int x, int y ){
 
-  channel -> print( "\033[" );
-  channel -> print( y );
-  channel -> print( ';' );
-  channel -> print( x );
-  channel -> print( 'H' );
+    channel -> print( "\033[" );
+    channel -> print( y );
+    channel -> print( ';' );
+    channel -> print( x );
+    channel -> print( 'H' );
 
 }
 
-void Shellminator::setCursorPosition( ShellminatorBufferedPrinter* printer, int x, int y ){
-    printer -> printf( "\033[%d;%dH", y, x );
+void Shellminator::setCursorPosition( Stream* channel_p, int x, int y ){
+
+    channel_p -> print( "\033[" );
+    channel_p -> print( y );
+    channel_p -> print( ';' );
+    channel_p -> print( x );
+    channel_p -> print( 'H' );
+
 }
 
 bool Shellminator::getTerminalSize( int* width, int* height ){
@@ -2753,7 +2634,7 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     }
     
     screenUpdatePeriod = updatePeriod;
-    screen -> init();
+    screen -> init( this );
     screenTimerStart = millis();
 }
 

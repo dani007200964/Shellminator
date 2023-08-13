@@ -47,6 +47,9 @@ Shellminator shell( &stdioChannel );
 float sawtoothPoints[ NUMBER_OF_DATA_POINTS ];
 float sinePoints[ NUMBER_OF_DATA_POINTS ];
 
+#define TERMINAL_BUFFER_SIZE 50
+char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+
 // Create a class named layout. This is inherited from the ShellminatorScreen class,
 // this way it can be added to the terminal as a screen.
 class layout : public ShellminatorScreen{
@@ -54,10 +57,10 @@ class layout : public ShellminatorScreen{
 public:
 
     // Override the base draw function with our custom one.
-    void draw( Shellminator* parent, int width, int  height ) override;
+    void draw( int width, int  height ) override;
 
     // Override the base init function with our custom one.
-    void init()override;
+    void init( Shellminator* parent_p )override;
 
 private:
 
@@ -65,9 +68,19 @@ private:
     ShellminatorPlot plotLeft;
     ShellminatorPlot plotRight;
 
+    // It has to hold the reference of the caller terminal.
+    // It has to be saved in init.
+    Shellminator* parent = NULL;
+
 };
 
-void layout::draw( Shellminator* parent, int width, int  height ){
+void layout::draw( int width, int  height ){
+
+    // If the reference to the caller terminal is invalid,
+    // we can not continue.
+    if( parent == NULL ){
+        return;
+    }
 
     // Size of the left plot.
     int widthLeft;
@@ -105,18 +118,25 @@ void layout::draw( Shellminator* parent, int width, int  height ){
 
     // IMPORTANT! We have to draw from left to right and from up to down.
     // For this reason we start the drawing with the left plot.
-    plotLeft.draw( parent, widthLeft, heightLeft );
+    plotLeft.draw( widthLeft, heightLeft );
 
     // Draw the right plot secondly.
-    plotRight.draw( parent, widthRight, heightRight );
+    plotRight.draw( widthRight, heightRight );
 
 }
 
-void layout::init(){
+void layout::init( Shellminator* parent_p ){
+
+    // Save the reference of the caller terminal.
+    parent = parent_p;
 
     // Construct the two plot objects.
     plotLeft = ShellminatorPlot( sinePoints, NUMBER_OF_DATA_POINTS, "Sine", Shellminator::RED );
     plotRight = ShellminatorPlot( sawtoothPoints, NUMBER_OF_DATA_POINTS, "Sawtooth", Shellminator::GREEN );
+
+    // Initialise the plot objects.
+    plotLeft.init( parent );
+    plotRight.init( parent );
 
 }
 
@@ -155,8 +175,10 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
+    stdioChannel.println( "Program Start!" );
+
     // Try to enable buffering.
-    if( shell.enableBuffering() ){
+    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
         stdioChannel.println( "Memory allocation failed for buffering!" );
     }
 

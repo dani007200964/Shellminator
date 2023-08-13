@@ -15,7 +15,7 @@ ShellminatorProgress::ShellminatorProgress( Stream* channel_p ){
 }
 
 void ShellminatorProgress::drawProgressBarShell( float percentage, const char *text, const char* done, const char* todo, const char* middle ){
-
+    /*
     float ratio;
     uint32_t i;
     bool colored = false;
@@ -106,12 +106,13 @@ void ShellminatorProgress::drawProgressBarShell( float percentage, const char *t
     }
 
     shell -> bufferedPrinter.flush();
+    */
 
 }
 
-// todo Implement everythong from the Shell version!
+// todo Implement everything from the Shell version!
 void ShellminatorProgress::drawProgressBarStream( Stream* channel_p, float percentage, const char* text, const char* done, const char* todo, const char* middle ){
-
+    /*
     float ratio;
     uint32_t i;
     bool colored = false;
@@ -194,11 +195,12 @@ void ShellminatorProgress::drawProgressBarStream( Stream* channel_p, float perce
 
     channel_p -> print( " | " );
     channel_p -> print( text );
+    */
 
 }
 
 void ShellminatorProgress::drawProgressBar( float percentage, const char *text, const char* done_p, const char* todo_p, const char* middle_p ){
-
+    /*
     if( channel ){
 
         drawProgressBarStream( channel, percentage, text, done_p, todo_p, middle_p );
@@ -212,11 +214,12 @@ void ShellminatorProgress::drawProgressBar( float percentage, const char *text, 
         return;
 
     }
+    */
 
 }
 
 void ShellminatorProgress::drawProgressBar( float percentage, const char *text, const char* done_p, const char* todo_p ){
-
+    /*
     if( channel ){
 
         drawProgressBarStream( channel, percentage, text, done_p, todo_p, todo_p );
@@ -230,11 +233,12 @@ void ShellminatorProgress::drawProgressBar( float percentage, const char *text, 
         return;
 
     }
+    */
 
 }
 
 void ShellminatorProgress::drawProgressBar( float percentage, const char *text ){
-
+    /*
     if( channel ){
 
         drawProgressBarStream( channel, percentage, text, "#", "-", "-" );
@@ -248,5 +252,6 @@ void ShellminatorProgress::drawProgressBar( float percentage, const char *text )
         return;
 
     }
+    */
 
 }

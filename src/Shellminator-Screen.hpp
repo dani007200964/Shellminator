@@ -50,16 +50,16 @@ public:
     ///
     /// This function is called by the host terminal, periodically. You have to put all
     /// the drawing stuff in this function.
-    /// @param parent_p Pointer to the caller terminal object.
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
-    virtual void draw( Shellminator* parent, int width, int  height ){ /* To make the linker happy... */ }
+    virtual void draw( int width, int  height ){ /* To make the linker happy... */ }
 
     /// Init function.
     ///
     /// This function is called by the host terminal, when the plot object gets registered to it.
     /// You can put all the initialisation section here.
-    virtual void init(){ /* To make the linker happy... */ }
+    /// @param parent_p Pointer to the caller terminal object.
+    virtual void init( Shellminator* parent_p ){ /* To make the linker happy... */ }
 
     /// Origin of the top left corner.
     ///

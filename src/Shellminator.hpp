@@ -249,7 +249,7 @@ public:
     /// - @ref example_execute_constructor_advanced "Example With Constructor - Advanced"
     Shellminator(Stream *stream_p, void (*execution_fn_p)(char *, Shellminator *));
 
-    bool enableBuffering(int bufferSize = 32);
+    bool enableBuffering( char* buffer, int bufferSize );
 
     /// Execution function attacher function
     ///
@@ -361,9 +361,6 @@ public:
     /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
     static void setTerminalCharacterColor(Stream *stream_p, uint8_t style, uint8_t color);
 
-    /// @note ShellminatorBufferedPrinter object requires a flush() after this command.
-    static void setTerminalCharacterColor(ShellminatorBufferedPrinter *printer_p, uint8_t style, uint8_t color);
-
     void hideCursor();
     static void hideCursor(char *buff, uint8_t bufferSize);
     static void hideCursor(Stream *stream_p);
@@ -372,11 +369,11 @@ public:
     static void showCursor(char *buff, uint8_t buffSize);
     static void showCursor(Stream *stream_p);
 
-    bool getCursorPosition(int *x, int *y, uint32_t timeout = 100);
-    void setCursorPosition(int x, int y);
-    static void setCursorPosition( ShellminatorBufferedPrinter* printer, int x, int y );
+    bool getCursorPosition( int *x, int *y, uint32_t timeout = 100 );
+    void setCursorPosition( int x, int y );
+    static void setCursorPosition( Stream* channel_p, int x, int y );
 
-    bool getTerminalSize(int *width, int *height);
+    bool getTerminalSize( int *width, int *height );
 
     /// This is a helper function for pointer casting.
     ///
@@ -632,6 +629,15 @@ public:
 
 #endif
 
+    /// Register Screen object to draw.
+    ///
+    /// This function can be used to register a Screen object to the terminal.
+    /// After the Screen object is registered, it will take over the control against
+    /// the terminal interface.
+    /// @param screen_p Pointer to a screen object.
+    /// @param updatePeriod Optionally, you can specify the screen refresh time in milliseconds.
+    //                      I recommend to don't go below 150ms.
+    /// @note To close the Screen, you have to press the escape or the abort( ctrl-c ) key.
     void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
     void endScreen();
 
@@ -814,18 +820,6 @@ private:
     ShellminatorScreen* screen = NULL;
     unsigned long screenTimerStart;
     int screenUpdatePeriod;
-
-    // Wrapper for the redrawLine without buffering.
-    void redrawLineSimple();
-
-    // Wrapper for the redrawLine with buffering.
-    void redrawLineBuffered();
-
-    // Wrapper for the redrawHistorySearch without buffering.
-    void redrawHistorySearchSimple();
-
-    // Wrapper for the redrawHistorySearch with buffering.
-    void redrawHistorySearchBuffered();
 
     // State-machine functions.
     /// @todo Finish the documentation for state-machine part.

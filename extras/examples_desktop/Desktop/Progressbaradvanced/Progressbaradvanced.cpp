@@ -51,6 +51,9 @@ const char logo[] =
 
 ;
 
+#define TERMINAL_BUFFER_SIZE 50
+char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+
 
 // Prototype to a function that will be called every time
 // when you press the enter key.
@@ -69,7 +72,7 @@ int main(){
 
 
     // Try to allocate memory for 40 characters.
-    if( !shell.enableBuffering( 40 ) ){
+    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
 
         // If it fails, print the problem.
         // The error is handled internally, and it will still work, but without buffering.

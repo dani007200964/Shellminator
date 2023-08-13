@@ -82,16 +82,16 @@ public:
     /// Init function.
     ///
     /// This function is called by the host terminal, when the plot object gets registered to it.
-    void init() override;
+    /// @param parent_p Pointer to the caller terminal object.
+    void init( Shellminator* parent_p ) override;
 
     /// Draw function.
     ///
     /// This function is called by the host terminal, periodically.
-    /// @param parent_p Pointer to the caller terminal object.
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
     /// @todo Buffering!
-    void draw( Shellminator* parent_p, int width_p, int  height_p ) override;
+    void draw( int width_p, int  height_p ) override;
 
     /// Origin of the top left corner.
     ///
@@ -130,9 +130,8 @@ private:
     /// Pointer to the caller terminal.
     Shellminator* parent = NULL;
 
-    /// Pointer to the caller terminals buffered printer object.
-    /// @note It must be NULL if the buffering is disabled!
-    ShellminatorBufferedPrinter* bufferedPrinter = NULL;
+    // This will be redirected to the parents channel by default.
+    Stream* selectedChannel = NULL;
 
     /// Terminal width in characters.
     int width;
