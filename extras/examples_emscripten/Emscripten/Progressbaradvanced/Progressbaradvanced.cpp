@@ -51,7 +51,7 @@ const char logo[] =
 ;
 
 #define TERMINAL_BUFFER_SIZE 50
-char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+uint8_t terminalBuffer[ TERMINAL_BUFFER_SIZE ];
 
 
 // Infinite Loop.

@@ -203,7 +203,7 @@ private:
 obstacle obstacles[ NUMBER_OF_OBSTACLES ];
 
 #define TERMINAL_BUFFER_SIZE 50
-char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+uint8_t terminalBuffer[ TERMINAL_BUFFER_SIZE ];
 
 
 // Main program.

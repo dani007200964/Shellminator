@@ -202,8 +202,8 @@ SOFTWARE.
   #define SHELLMINATOR_PLOT_BUFF_SIZE 300
 #endif
 
-#ifndef MOUSE_BUFFER_SIZE
-  #define MOUSE_BUFFER_SIZE 5
+#ifndef EVENT_BUFFER_SIZE
+  #define EVENT_BUFFER_SIZE 5
 #endif
 
 #endif

@@ -37,7 +37,7 @@ float sawtoothPoints[ NUMBER_OF_DATA_POINTS ];
 float sinePoints[ NUMBER_OF_DATA_POINTS ];
 
 #define TERMINAL_BUFFER_SIZE 50
-char terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+uint8_t terminalBuffer[ TERMINAL_BUFFER_SIZE ];
 
 // Create a class named layout. This is inherited from the ShellminatorScreen class,
 // this way it can be added to the terminal as a screen.

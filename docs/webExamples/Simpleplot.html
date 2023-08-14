@@ -12,6 +12,9 @@
             let stdinBuffer = [];
             let stdinBufferPtr = 0;
 
+            let unicodeBytesLeft = 0;
+            let unicodeBuffer = [];
+
             /* Create a new xTerm object */
             const term = new Terminal({
                 cursorBliknk: "true",

@@ -71,7 +71,6 @@ void ShellminatorPlot::setOrigin( int x, int y ){
     if( originY < 1 ){
         originY = 1;
     }
-
 }
 
 void ShellminatorPlot::draw( int width_p, int  height_p ){

@@ -27,31 +27,32 @@
 // Contains Emscripten related functions.
 #include <emscripten.h>
 
+#include "math.h"
+
 #include "Shellminator.hpp"
 #include "Shellminator-IO.hpp"
+#include "Shellminator-Buttons.hpp"
+
+#define NUMBER_OF_DATA_POINTS 30
 
 
 // Use stdio as Channel.
 stdioStream stdioChannel;
 
+void buttonClick( void ){
+
+}
+
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-// Create a pretty logo for the terminal.
-const char logo[] =
+// The plot will be generated from the content of this data array.
+float data1[ NUMBER_OF_DATA_POINTS ];
 
-    "   _____ __         ____          _             __            \r\n"
-    "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
-    "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
-    " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
-    "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-    "\r\n"
-    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
+// Create a plotter object.
+ShellminatorButton button( "Plot", buttonClick, 10, 3 );
 
-;
-
-#define TERMINAL_BUFFER_SIZE 50
-uint8_t terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+Shellminator::shellEvent_t buttonEvent;
 
 
 // Infinite Loop.
@@ -85,20 +86,16 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    // Try to allocate memory for 100 characters.
-    if( !shell.enableBuffering( terminalBuffer, TERMINAL_BUFFER_SIZE ) ){
+    stdioChannel.println( "Program Start!" );
 
-        // If it fails, print the problem.
-        // The error is handled internally, and it will still work, but without buffering.
-        stdioChannel.println( "Can not allocate memory for buffering!" );
+    buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
+    buttonEvent.data = (uint8_t)'x';
 
-    }
+    button.attachEvent( buttonEvent );
+    button.setEventModeAuto();
 
-    // Attach the logo.
-    shell.attachLogo( logo );
-
-    // Initialize shell object.
     shell.begin( "arnold" );
+    shell.beginScreen( &button );
 
 
 

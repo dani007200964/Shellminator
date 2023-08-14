@@ -249,7 +249,7 @@ public:
     /// - @ref example_execute_constructor_advanced "Example With Constructor - Advanced"
     Shellminator(Stream *stream_p, void (*execution_fn_p)(char *, Shellminator *));
 
-    bool enableBuffering( char* buffer, int bufferSize );
+    bool enableBuffering( uint8_t* buffer, int bufferSize );
 
     /// Execution function attacher function
     ///
@@ -641,8 +641,27 @@ public:
     void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
     void endScreen();
 
-    enum{
-        MOUSE_INVALID,
+
+
+
+
+
+    typedef enum{
+        /*
+        SHELLMINATOR_MOUSE_EVENT,
+        SHELLMINATOR_KEY_EVENT,
+        SHELLMINATOR_CODED_KEY_EVENT
+        */
+       SHELL_EVENT_EMPTY,
+       SHELL_EVENT_MOUSE,
+       SHELL_EVENT_KEY,
+       SHELL_EVENT_CODED_KEY
+    }shellEventType_t;
+
+    typedef enum{
+        /*
+        EMPTY_EVENT,
+        REGULAR_KEY,
         MOUSE_LEFT_PRESSED,
         MOUSE_LEFT_RELEASED,
         MOUSE_RIGHT_PRESSED,
@@ -650,26 +669,49 @@ public:
         MOUSE_MIDDLE_PRESSED,
         MOUSE_MIDDLE_RELEASED,
         MOUSE_WHEEL_UP,
-        MOUSE_WHEEL_DOWN
-    };
+        MOUSE_WHEEL_DOWN,
+        UP_ARROW,
+        DOWN_ARROW,
+        LEFT_ARROW,
+        RIGHT_ARROW,
+        HOME_KEY,
+        END_KEY
+        */
+        EVENT_CODE_EMPTY,
+        EVENT_CODE_KEY,
+        EVENT_CODE_MOUSE_LEFT_PRESSED,
+        EVENT_CODE_MOUSE_LEFT_RELEASED,
+        EVENT_CODE_MOUSE_RIGHT_PRESSED,
+        EVENT_CODE_MOUSE_RIGHT_RELEASED,
+        EVENT_CODE_MOUSE_MIDDLE_PRESSED,
+        EVENT_CODE_MOUSE_MIDDLE_RELEASED,
+        EVENT_CODE_MOUSE_WHEEL_UP,
+        EVENT_CODE_MOUSE_WHEEL_DOWN,
+    }eventCodes_t;
 
     typedef struct{
+        shellEventType_t type;
+        eventCodes_t eventCode;
+        uint8_t data;
         uint8_t x;
         uint8_t y;
-        uint8_t event;
-    }mouseEvent_t;
+    }shellEvent_t;
 
-    mouseEvent_t mouseBuffer[ MOUSE_BUFFER_SIZE ];
-    uint8_t mouseBufferWritePtr;
-    uint8_t mouseBufferReadPtr;
+
+    shellEvent_t eventBuffer[ EVENT_BUFFER_SIZE ];
+    uint8_t eventBufferWritePtr;
+    uint8_t eventBufferReadPtr;
+
+    int eventAvailable();
+    shellEvent_t readEvent();
+
+
 
     char mouseEventBuffer[ SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE ];
-    uint8_t mouseEventBufferCntr = 0;
+    uint8_t mouseEventBufferCounter = 0;
 
     void mouseBegin();
     void mouseEnd();
-    int mouseAvailable();
-    mouseEvent_t mouseRead();
 
     /// Wait for specific keypress
     ///
@@ -861,7 +903,7 @@ private:
     /// @warning Make sure that the generated string is c/c++ compatible!
     char *logo = NULL;
 
-    void pushMouseEvent( uint8_t x, uint8_t y, uint8_t event );
+    void pushEvent( shellEvent_t event );
     void parseMouseData();
 
 #ifdef __AVR__

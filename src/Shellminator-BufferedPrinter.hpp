@@ -70,7 +70,7 @@ public:
   ///
   /// With this constructor, you can specify the Stream object.
   /// @param channel_p Pointer to a Stream object. This object will be used as output.
-  ShellminatorBufferedPrinter( Stream* channel_p, char* buffer_p, int bufferSize_p );
+  ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p );
 
   /// Available bytes in the channel.
   ///
@@ -96,7 +96,7 @@ public:
   /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
   size_t write( uint8_t b ) override;
 
-  size_t write( const char *str ) override;
+  size_t write(const uint8_t *data, size_t size) override;
 
 private:
 
@@ -109,7 +109,7 @@ private:
   // Pointer to the output Stream object.
   Stream* channel = NULL;
 
-  char* buffer = NULL;
+  uint8_t* buffer = NULL;
   int bufferPointer = 0;
 
   int bufferSize = 0;

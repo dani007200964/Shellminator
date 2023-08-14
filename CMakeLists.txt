@@ -40,6 +40,8 @@ set( SOURCES
     src/Shellminator-BufferedPrinter.hpp
     src/Shellminator-PlotModule.cpp
     src/Shellminator-PlotModule.hpp
+    src/Shellminator-Buttons.cpp
+    src/Shellminator-Buttons.hpp
     src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
@@ -124,6 +126,7 @@ endif()
 if( BUILD_EXAMPLES )
 	add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
 	add_executable( Buffered ${SOURCES} extras/examples_desktop/Desktop/Buffered/Buffered.cpp )
+	add_executable( Button ${SOURCES} extras/examples_desktop/Desktop/Button/Button.cpp )
 	add_executable( Duinocrisis ${SOURCES} extras/examples_desktop/Desktop/Duinocrisis/Duinocrisis.cpp )
 	add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
 	add_executable( Executeconstructoradvanced ${SOURCES} extras/examples_desktop/Desktop/Executeconstructoradvanced/Executeconstructoradvanced.cpp )
@@ -140,6 +143,9 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Buffered ${SOURCES} extras/examples_emscripten/Emscripten/Buffered/Buffered.cpp )
 	target_link_options( Buffered PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Button ${SOURCES} extras/examples_emscripten/Emscripten/Button/Button.cpp )
+	target_link_options( Button PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Duinocrisis ${SOURCES} extras/examples_emscripten/Emscripten/Duinocrisis/Duinocrisis.cpp )
 	target_link_options( Duinocrisis PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

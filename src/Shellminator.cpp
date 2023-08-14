@@ -191,97 +191,113 @@ const char Shellminator::helpText[] = {
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
 
-  wsServer = wsServer_p;
-  serverID = serverID_p;
-  webSocketChannel.select( wsServer, serverID );
-  webSocketChannel.setTimeout( 10 );
-  channel = &webSocketChannel;
+    wsServer = wsServer_p;
+    serverID = serverID_p;
+    webSocketChannel.select( wsServer, serverID );
+    webSocketChannel.setTimeout( 10 );
+    channel = &webSocketChannel;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-  execution_fn_with_parrent = NULL;
+    // Because we did not specified the execution function, we have to make it a NULL
+    // pointer to make it detectable.
+    execution_fn = NULL;
+    execution_fn_with_parrent = NULL;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p ){
 
-  wsServer = wsServer_p;
-  serverID = 0;
-  webSocketChannel.select( wsServer, serverID );
-  webSocketChannel.setTimeout( 10 );
-  channel = &webSocketChannel;
+    wsServer = wsServer_p;
+    serverID = 0;
+    webSocketChannel.select( wsServer, serverID );
+    webSocketChannel.setTimeout( 10 );
+    channel = &webSocketChannel;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-  execution_fn_with_parrent = NULL;
+    // Because we did not specified the execution function, we have to make it a NULL
+    // pointer to make it detectable.
+    execution_fn = NULL;
+    execution_fn_with_parrent = NULL;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) ){
 
-  wsServer = wsServer_p;
-  serverID = serverID_p;
-  webSocketChannel.select( wsServer, serverID );
-  channel = &webSocketChannel;
+    wsServer = wsServer_p;
+    serverID = serverID_p;
+    webSocketChannel.select( wsServer, serverID );
+    channel = &webSocketChannel;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // passing execution_fn_p to execution_fn
-  execution_fn = execution_fn_p;
-  execution_fn_with_parrent = NULL;
+    // passing execution_fn_p to execution_fn
+    execution_fn = execution_fn_p;
+    execution_fn_with_parrent = NULL;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char*, Shellminator* ) ){
 
-  wsServer = wsServer_p;
-  serverID = serverID_p;
-  webSocketChannel.select( wsServer, serverID );
-  channel = &webSocketChannel;
+    wsServer = wsServer_p;
+    serverID = serverID_p;
+    webSocketChannel.select( wsServer, serverID );
+    channel = &webSocketChannel;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // passing execution_fn_p to execution_fn_with_parrent
-  execution_fn = NULL;
-  execution_fn_with_parrent = execution_fn_p;
+    // passing execution_fn_p to execution_fn_with_parrent
+    execution_fn = NULL;
+    execution_fn_with_parrent = execution_fn_p;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
@@ -305,68 +321,81 @@ void Shellminator::websocketDisconnect(){
 
 Shellminator::Shellminator( Stream *stream_p ){
 
-  channel = stream_p;
+    channel = stream_p;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-  execution_fn_with_parrent = NULL;
+    // Because we did not specified the execution function, we have to make it a NULL
+    // pointer to make it detectable.
+    execution_fn = NULL;
+    execution_fn_with_parrent = NULL;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
+
 
 }
 
 Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) ){
 
-  channel = stream_p;
+    channel = stream_p;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = execution_fn_p;
-  execution_fn_with_parrent = NULL;
+    // Because we did not specified the execution function, we have to make it a NULL
+    // pointer to make it detectable.
+    execution_fn = execution_fn_p;
+    execution_fn_with_parrent = NULL;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
 Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) ){
 
-  channel = stream_p;
+    channel = stream_p;
 
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
+    // It has to be zero. We dont want to process any garbage.
+    cmd_buff_cntr = 0;
 
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
+    // This has to be 1 minimum, because the 0th element is used for the incoming data.
+    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
+    cmd_buff_dim = 1;
 
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
+    // Just in case terminate the begining of the buffer
+    cmd_buff[ 0 ][ 0 ] = '\0';
 
-  // Because we did not specified the execution function, we have to make it a NULL
-  // pointer to make it detectable.
-  execution_fn = NULL;
-  execution_fn_with_parrent = execution_fn_p;
+    // Because we did not specified the execution function, we have to make it a NULL
+    // pointer to make it detectable.
+    execution_fn = NULL;
+    execution_fn_with_parrent = execution_fn_p;
+
+    // Reset all the event pointers.
+    eventBufferWritePtr = 0;
+    eventBufferReadPtr = 0;
 
 }
 
-bool Shellminator::enableBuffering( char* buffer, int bufferSize ){
+bool Shellminator::enableBuffering( uint8_t* buffer, int bufferSize ){
 
     if( buffer == NULL ){
         return false;
@@ -695,6 +724,11 @@ void Shellminator::redrawLine(){
     if( inSearch ){
 
         redrawHistorySearch();
+
+        if( bufferMemoryAllocated ){
+            selectedChannel -> flush();
+        }
+
         return;
 
     }
@@ -779,7 +813,6 @@ void Shellminator::redrawLine(){
     if( bufferMemoryAllocated ){
         selectedChannel -> flush();
     }
-
 
 }
 
@@ -1066,137 +1099,152 @@ void Shellminator::update() {
 
 bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
-  char c;
-  uint8_t charState = 0;
+    char c;
+    uint8_t charState = 0;
 
-  char xBuff[ 4 ];
-  uint8_t xBuffCntr = 0;
+    char xBuff[ 4 ];
+    uint8_t xBuffCntr = 0;
 
-  char yBuff[ 4 ];
-  uint8_t yBuffCntr = 0;
+    char yBuff[ 4 ];
+    uint8_t yBuffCntr = 0;
 
-  // Save system time
-  unsigned long timerStart = millis();
+    // Save system time
+    unsigned long timerStart;
 
-  // Flush the input buffer.
-  while( channel -> available() ){
-    channel -> read();
-  }
-
-  // Send the request.
-  channel -> print( (const char*)"\033[6n" );
-
-  // If no timeout event, or no timeout specified, check for new data.
-  while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
-
-    // Process all data if available.
+    // Flush the input buffer.
     while( channel -> available() ){
+        channel -> read();
+    }
 
-      // Read character
-      c = channel -> read();
+    // Send the request.
+    channel -> print( (const char*)"\033[6n" );
 
-      switch( charState ){
+    timerStart = millis();
 
-        // Inital state. We expect ESC character.
-        case 0:
+    // If no timeout event, or no timeout specified, check for new data.
+    while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
 
-          // If ESC character is received, go to the next state.
-          if( c == 27 ){
-            charState = 1;
-          }
-          
-          // Otherwise, something wrong.
-          else{
-            return false;
-          }
+        // Process all data if available.
+        while( channel -> available() ){
 
-          break;
+            // Read character
+            c = channel -> read();
 
-        // Second character state. We expect '[' character.
-        case 1:
+            switch( charState ){
 
-          // If '[' character is received, go to the next state.
-          if( c == '[' ){
-            charState = 2;
-          }
-          
-          // Otherwise, something wrong.
-          else{
-            return false;
-          }
-          
-          break;
+                // Inital state. We expect ESC character.
+                case 0:
 
-        // We wait for ';' character. Until this character we put the data in
-        // the yBuff;
-        case 2:
+                    // If ESC character is received, go to the next state.
+                    if( c == 27 ){
+                        charState = 1;
+                    }
+                    
+                    // Otherwise, something wrong.
+                    else{
+                        channel -> println( "\r\nERROR: CASE 0\r\n" );
+                        return false;
+                    }
 
-          // If ';' character is received, go to the next state.
-          if( c == ';' ){
-            charState = 3;
-            yBuff[ yBuffCntr ] = '\0';
-          }
+                    break;
 
-          else{
+                // Second character state. We expect '[' character.
+                case 1:
 
-            yBuff[ yBuffCntr ] = c;
-            yBuffCntr++;
+                    // If '[' character is received, go to the next state.
+                    if( c == '[' ){
+                        charState = 2;
+                    }
+                    
+                    // Otherwise, something wrong.
+                    else{
+                        channel -> println( "\r\nERROR: CASE 1\r\n" );
+                        return false;
+                    }
+                    
+                    break;
 
-            // Protection against buffer overflow.
-            if( yBuffCntr >= 4 ){
-              return false;
+                // We wait for ';' character. Until this character we put the data in
+                // the yBuff;
+                case 2:
+
+                    // If ';' character is received, go to the next state.
+                    if( c == ';' ){
+                        charState = 3;
+                        yBuff[ yBuffCntr ] = '\0';
+                    }
+
+                    else{
+
+                        yBuff[ yBuffCntr ] = c;
+                        yBuffCntr++;
+
+                        // Protection against buffer overflow.
+                        if( yBuffCntr >= 4 ){
+                            channel -> println( "\r\nERROR: CASE 2\r\n" );
+                        return false;
+                        }
+
+                    }
+                    
+                    break;
+
+                // We wait for 'R' character. Until this character we put the data in
+                // the yBuff;
+                case 3:
+
+                    // If 'R' character is received, we finished with data collecting.
+                    if( c == 'R' ){
+                        xBuff[ xBuffCntr ] = '\0';
+
+                        // We have to parse the numbers.
+                        charState  = sscanf( (const char*)xBuff, "%d", x );
+                        charState += sscanf( (const char*)yBuff, "%d", y );
+
+                        // Check if all data is number.
+                        if( charState == 2 ){
+                        return true;
+                        }
+
+                        // Conversion went wrong.
+                        else{
+                        channel -> println( "\r\nERROR: CASE 3 R\r\n" );
+                        return false;
+                        }
+
+                    }
+
+                    else{
+
+                        xBuff[ xBuffCntr ] = c;
+                        xBuffCntr++;
+
+                        // Protection against buffer overflow.
+                        if( xBuffCntr >= 4 ){
+                        channel -> println( "\r\nERROR: CASE 3\r\n" );
+                        return false;
+                        }
+
+                    }
+                    
+                    break;
+
             }
 
-          }
-          
-          break;
+        }
 
-        // We wait for 'R' character. Until this character we put the data in
-        // the yBuff;
-        case 3:
-
-          // If 'R' character is received, we finished with data collecting.
-          if( c == 'R' ){
-            xBuff[ xBuffCntr ] = '\0';
-
-            // We have to parse the numbers.
-            charState  = sscanf( (const char*)xBuff, "%d", x );
-            charState += sscanf( (const char*)yBuff, "%d", y );
-
-            // Check if all data is number.
-            if( charState == 2 ){
-              return true;
-            }
-
-            // Conversion went wront.
-            else{
-              return false;
-            }
-
-          }
-
-          else{
-
-            xBuff[ xBuffCntr ] = c;
-            xBuffCntr++;
-
-            // Protection against buffer overflow.
-            if( xBuffCntr >= 4 ){
-              return false;
-            }
-
-          }
-          
-          break;
-
-      }
+        // If emscripten is teh build target, a small sleep is necessary.
+        // The xterm js frontend can do its job, while the 'c++' code sleeps.
+        #ifdef EMSCRIPTEN
+            emscripten_sleep( 20 );
+        #endif
 
     }
 
-  }
+    channel -> println( "\r\nTIMEOUT!\r\n" );
 
-  // We should not be here.
-  return false;
+    // We should not be here.
+    return false;
 
 }
 
@@ -1527,6 +1575,8 @@ void Shellminator::generateQRText( char* text ){
 
 void Shellminator::ShellminatorDefaultState( char new_char ){
 
+    shellEvent_t event;
+
   switch( new_char ){
 
     case '\0':
@@ -1544,6 +1594,14 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
       break;
 
     case '\r':
+      // Check is a screen object is drawing.
+      if( screen != NULL ){
+        // In this case we have to end the drawing process.
+        endScreen();
+        // And set the state machine back to default state.
+        currentState = &Shellminator::ShellminatorDefaultState;
+        break;
+      }
       ShellminatorEnterKeyState();
       break;
 
@@ -1577,20 +1635,18 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
 
     case 27:
 
-      // Check is a screen object is drawing.
-      if( screen != NULL ){
-        // In this case we have to end the drawing process.
-        endScreen();
-        // And set the state machine back to default state.
-        currentState = &Shellminator::ShellminatorDefaultState;
-        break;
-      }
       currentState = &Shellminator::ShellminatorEscapeCharacterState;
       break;
 
     default:
-      ShellminatorProcessRegularCharacter( new_char );
       currentState = &Shellminator::ShellminatorDefaultState;
+      if( screen != NULL ){
+        event.type = SHELL_EVENT_KEY;
+        event.data = (uint8_t)new_char;
+        pushEvent( event );
+        break;
+      }
+      ShellminatorProcessRegularCharacter( new_char );
       break;
 
   }
@@ -2599,6 +2655,9 @@ void Shellminator::autoDetectTerminal(){
 
   char buff[ 20 ] = "";
   char magic[] = { 5, 0 };
+
+    return;
+
   Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
 
   if( strcmp( buff, "PuTTY" ) == 0 ){
@@ -2632,10 +2691,11 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     for( i = 0; i < height; i++ ){
         channel -> println();
     }
-    
+    mouseBegin();
+
     screenUpdatePeriod = updatePeriod;
-    screen -> init( this );
     screenTimerStart = millis();
+    screen -> init( this );
 }
 
 void Shellminator::endScreen(){
@@ -2643,6 +2703,8 @@ void Shellminator::endScreen(){
     // These variables will hold the terminal size.
     int width;
     int height;
+
+    mouseEnd();
 
     // Get the terminal site.
     getTerminalSize( &width, &height );
@@ -2666,5 +2728,89 @@ void Shellminator::endScreen(){
     cursor = 0;
     cmd_buff_cntr = 0;
 }
+
+void Shellminator::pushEvent( shellEvent_t event ){
+  
+    // This solution uses a circular buffer, so it has two pointers.
+    // The write pointer always tracks the next free slot in the buffer.
+    // Store the new values there.
+    eventBuffer[ eventBufferWritePtr ] = event;
+
+    // Increment the write pointer.
+    eventBufferWritePtr++;
+    
+    // Detect overflow.
+    if( eventBufferWritePtr >= EVENT_BUFFER_SIZE ){
+        // Handle overflow.
+        eventBufferWritePtr = 0;
+    }
+
+}
+
+int Shellminator::eventAvailable(){
+
+    // This solution uses a circular buffer, so it has two pointers.
+    // One for read and one for writing.
+    // If they point to the same place, that means, there is no data available.
+	if( eventBufferWritePtr == eventBufferReadPtr ){
+		return 0;
+	}
+
+    // The first case is, when the Write pointer is ahead of the read pointer.
+	else if( eventBufferWritePtr > eventBufferReadPtr ){
+		return eventBufferWritePtr - eventBufferReadPtr;
+	}
+
+    // The second case is, when the Read pointer is 'ahead' of the write pointer.
+    // It happens when overflow event occurs with the circular buffer.
+	else{
+
+		return EVENT_BUFFER_SIZE - eventBufferReadPtr + eventBufferWritePtr;
+
+	}
+
+}
+
+Shellminator::shellEvent_t Shellminator::readEvent(){
+
+    // This struct will be returned.
+    shellEvent_t ret;
+
+    // By default set the returned event to invalid.
+    ret.eventCode = EVENT_CODE_EMPTY;
+
+    // This solution uses a circular buffer, so it has two pointers.
+    // One for read and one for writing.
+    // If they point to the same place, that means, there is no data available.
+    if( eventBufferWritePtr == eventBufferReadPtr ){
+
+        // This case return with invalid event code.
+        return ret;
+
+    }
+
+    // Any other case, that means it has at least one new item to be read.
+    else{
+
+        // Get the next data from the circular structure.
+        ret = eventBuffer[ eventBufferReadPtr ];
+
+        // Increment the read pointer.
+        eventBufferReadPtr++;
+
+        // Check for overflow.
+        if( eventBufferReadPtr >= EVENT_BUFFER_SIZE ){
+
+            // Handle overflow.
+            eventBufferReadPtr = 0;
+        }
+
+    }
+
+    // Return with the next element data.
+    return ret;
+
+}
+
 
 

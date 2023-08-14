@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Runningplot</title>
+        <title>Screenbasic</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.17.0/css/xterm.css">
     </head>
     <body>
@@ -11,6 +11,9 @@
             let inputText = "";
             let stdinBuffer = [];
             let stdinBufferPtr = 0;
+
+            let unicodeBytesLeft = 0;
+            let unicodeBuffer = [];
 
             /* Create a new xTerm object */
             const term = new Terminal({
@@ -36,6 +39,6 @@
 
 
         </script>
-        <script src=./Runningplot.js></script>
+        <script src=./Screenbasic.js></script>
     </body>
 </html>

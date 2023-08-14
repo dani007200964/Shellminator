@@ -41,7 +41,7 @@ ShellminatorBufferedPrinter::ShellminatorBufferedPrinter(){
 
 }
 
-ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, char* buffer_p, int bufferSize_p ){
+ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p ){
 
     channel = channel_p;
     buffer = buffer_p;
@@ -74,9 +74,20 @@ void ShellminatorBufferedPrinter::clearBuffer(){
 
 void ShellminatorBufferedPrinter::flush(){
     // Terminate the buffer.
-    buffer[ bufferPointer ] = '\0';
-    channel -> print( buffer );
+    //buffer[ bufferPointer ] = '\0';
+    //channel -> print( buffer );
+    //bufferPointer = 0;
+    /*
+    int i;
+
+    for( i = 0; i < bufferPointer; i++ ){
+        channel -> write( buffer[ i ] );
+    }
+    */
+
+    channel -> write( buffer, bufferPointer );
     bufferPointer = 0;
+
 }
 
 size_t ShellminatorBufferedPrinter::write( uint8_t b ){
@@ -97,7 +108,7 @@ size_t ShellminatorBufferedPrinter::write( uint8_t b ){
 
     // If the pointer reaches the last possible element,
     // we have to flush the output buffer and reset the bufferPointer.
-    if( bufferPointer >= ( bufferSize - 2 ) ){
+    if( bufferPointer >= ( bufferSize - 1 ) ){
 
         flush();
 
@@ -107,9 +118,9 @@ size_t ShellminatorBufferedPrinter::write( uint8_t b ){
 
 }
 
-size_t ShellminatorBufferedPrinter::write( const char *str ){
+size_t ShellminatorBufferedPrinter::write( const uint8_t *data, size_t size ){
 
-    int ret = 0;
+    int i;
 
     // Handle incorrect buffer size or channel.
     if( ( bufferSize < 1 ) || ( channel == NULL ) ){
@@ -119,26 +130,22 @@ size_t ShellminatorBufferedPrinter::write( const char *str ){
 
     }
 
-    while( *str ){
-
+    for( i = 0; i < size; i++ ){
         // Save the current character in the buffer to the next free slot in the buffer.
-        buffer[ bufferPointer ] = *str;
+        buffer[ bufferPointer ] = data[ i ];
 
         // Increment the buffer pointer.
         bufferPointer++;
-        ret++;
 
-        if( bufferPointer >= ( bufferSize - 2 ) ){
+        if( bufferPointer >= ( bufferSize - 1 ) ){
 
             flush();
 
         }
 
-        // Increment the pointer.
-        str++;
 
     }
 
-    return ret;
+    return size;
 
 }
