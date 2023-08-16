@@ -134,6 +134,7 @@ if( BUILD_EXAMPLES )
 	add_executable( Mouse ${SOURCES} extras/examples_desktop/Desktop/Mouse/Mouse.cpp )
 	add_executable( Progressbaradvanced ${SOURCES} extras/examples_desktop/Desktop/Progressbaradvanced/Progressbaradvanced.cpp )
 	add_executable( Progressbarsimple ${SOURCES} extras/examples_desktop/Desktop/Progressbarsimple/Progressbarsimple.cpp )
+	add_executable( Screenadvanced ${SOURCES} extras/examples_desktop/Desktop/Screenadvanced/Screenadvanced.cpp )
 	add_executable( Screenbasic ${SOURCES} extras/examples_desktop/Desktop/Screenbasic/Screenbasic.cpp )
 	add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )
 endif()
@@ -167,6 +168,9 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Progressbarsimple ${SOURCES} extras/examples_emscripten/Emscripten/Progressbarsimple/Progressbarsimple.cpp )
 	target_link_options( Progressbarsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Screenadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Screenadvanced/Screenadvanced.cpp )
+	target_link_options( Screenadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Screenbasic ${SOURCES} extras/examples_emscripten/Emscripten/Screenbasic/Screenbasic.cpp )
 	target_link_options( Screenbasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

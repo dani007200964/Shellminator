@@ -28,10 +28,6 @@ EXCLUDE=NONE
 
 ++--GLOBAL_VARIABLES--++
 
-void buttonClick( void ){
-
-}
-
 // Create a Shellminator object, and initialize it to use {{ channel }}
 Shellminator shell( &{{ channel }} );
 
@@ -39,11 +35,14 @@ Shellminator shell( &{{ channel }} );
 float data1[ NUMBER_OF_DATA_POINTS ];
 
 // Create a plotter object.
-ShellminatorButton button( "Plot", buttonClick, 10, 3 );
+ShellminatorButton button( "Plot" );
 
 Shellminator::shellEvent_t buttonEvent;
 
 ++--FUNCTION_PROTOTYPES--++
+
+// This function will be called, when the button is pressed.
+void buttonClick( void );
 
 ++--SETUP--++
 
@@ -57,9 +56,11 @@ buttonEvent.data = (uint8_t)'x';
 
 button.attachEvent( buttonEvent );
 button.setEventModeAuto();
+button.setRoundCorners();
+button.setColor( Shellminator::RED );
 
 shell.begin( "arnold" );
-shell.beginScreen( &button );
+shell.beginScreen( &button, 100 );
 
 ++--LOOP--++
 
@@ -67,3 +68,7 @@ shell.beginScreen( &button );
 shell.update();
 
 ++--FUNCTION_IMPLEMENTATIONS--++
+
+void buttonClick( void ){
+    button.setColor( Shellminator::GREEN );
+}

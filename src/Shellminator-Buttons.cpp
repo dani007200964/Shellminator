@@ -33,52 +33,100 @@ SOFTWARE.
 
 #include "Shellminator-Buttons.hpp"
 
+/*
+┌──────┐
+│      │
+└─────┤─┘
+◖◖█
+
+╭──────╮
+│      │
+╰────┤ ╯
+
+
+*/
+
+const char ShellminatorButton::topLeftCornerRound[ 4 ]     = "\u256D";
+const char ShellminatorButton::topRightCornerRound[ 4 ]    = "\u256E";
+const char ShellminatorButton::bottomLeftCornerRound[ 4 ]  = "\u2570";
+const char ShellminatorButton::bottomRightCornerRound[ 4 ] = "\u256F";
+
+const char ShellminatorButton::topLeftCornerSquare[ 4 ]     = "\u250C";
+const char ShellminatorButton::topRightCornerSquare[ 4 ]    = "\u2510";
+const char ShellminatorButton::bottomLeftCornerSquare[ 4 ]  = "\u2514";
+const char ShellminatorButton::bottomRightCornerSquare[ 4 ] = "\u2518";
+
+const char ShellminatorButton::horizontalLineDefault[ 4 ] = "\u2500";
+const char ShellminatorButton::verticalLineDefault[ 4 ]   = "\u2502";
+
 ShellminatorButton::ShellminatorButton(){
 
     name = NULL;
     func = NULL;
-    width = 0;
-    height = 0;
+    width = 1;
+    height = 1;
 
 }
 
-ShellminatorButton::ShellminatorButton( const char* name_p, void(*func_p)(void), int width_p, int height_p ){
+ShellminatorButton::ShellminatorButton( const char* name_p ){
 
+    if( name_p == NULL ){
+        return;
+    }
+
+    // Save the parameters to internal variables.
     name = name_p;
-    func = func_p;
 
-    width = width_p;
-    height = height_p;
-
+    // Set the origin to default.
     originX = 1;
     originY = 1;
 
+    width = 1;
+    height = 1;
+
+    func = NULL;
+
+    // The default corner type is square.
+    topLeftCorner = topLeftCornerSquare;
+    topRightCorner = topRightCornerSquare;
+    bottomLeftCorner = bottomLeftCornerSquare;
+    bottomRightCorner = bottomRightCornerSquare;
+
+    horizontalLine = horizontalLineDefault;
+    verticalLine = verticalLineDefault;
+
+    // Set the eventCode to empty. This means
+    // that the button wont trigger to any event.
     event.eventCode = Shellminator::EVENT_CODE_EMPTY;
 
+    // Calculate the text size.
     textWidth = strlen( name_p );
-
-    if( width < ( textWidth + 4 ) ){
-        width = textWidth + 4;
-    }
 
 }
 
 void ShellminatorButton::attachEvent( Shellminator::shellEvent_t event_p ){
 
+    // Save the trigger event struct.
     event = event_p;
 
+    // If trigger event is a regular key, save the data to internal variables.
     if( event_p.type == Shellminator::SHELL_EVENT_KEY ){
         eventText[ 0 ] = (char)event.data;
         eventText[ 1 ] = '\0';
         eventTextSize = 1;
     }
 
+    // Otherwise, we can not enable trigger event functionality.
     else{
         event.type = Shellminator::SHELL_EVENT_EMPTY;
         eventTextSize = 0;
         return;
     }
 
+}
+
+void ShellminatorButton::attachTriggerFunction( void(*func_p)(void) ){
+    func = func_p;
 }
 
 void ShellminatorButton::setEventModeAuto(){
@@ -88,14 +136,33 @@ void ShellminatorButton::setEventModeManual(){
     eventAutoCheck = false;
 }
 
+void ShellminatorButton::setRoundCorners(){
+    topLeftCorner     = topLeftCornerRound;
+    topRightCorner    = topRightCornerRound;
+    bottomLeftCorner  = bottomLeftCornerRound;
+    bottomRightCorner = bottomRightCornerRound;
+}
+
+void ShellminatorButton::setSquareCorners(){
+    topLeftCorner     = topLeftCornerSquare;
+    topRightCorner    = topRightCornerSquare;
+    bottomLeftCorner  = bottomLeftCornerSquare;
+    bottomRightCorner = bottomRightCornerSquare;
+}
+
+void ShellminatorButton::setColor( uint8_t color_p ){
+    color = color_p;
+}
+
 void ShellminatorButton::checkEvent( Shellminator::shellEvent_t event_p ){
 
-    //triggered = true;
-
+    // In case of empty event, we can't do anything.
     if( event_p.type == Shellminator::SHELL_EVENT_EMPTY ){
         return;
     }
 
+    // If the event is key related, we have to check if the key
+    // matches with the attached key.
     if( event.type == Shellminator::SHELL_EVENT_KEY ){
         if( event_p.data == event.data ){
             triggered = true;
@@ -103,38 +170,46 @@ void ShellminatorButton::checkEvent( Shellminator::shellEvent_t event_p ){
         }
     }
 
-}
+    // Check if the event was a left mouse release.
+    if( ( event_p.type == Shellminator::SHELL_EVENT_MOUSE ) && ( event_p.eventCode == Shellminator::EVENT_CODE_MOUSE_LEFT_RELEASED ) ){
 
-void ShellminatorButton::setOrigin( int x, int y ){
-    originX = x;
-    originY = y;
+        // Check if the event happened in the area of the button.
+        if( ( event_p.x >= originX ) &&
+            ( event_p.y >= originY ) &&
+            ( event_p.x < ( originX + width ) ) &&
+            ( event_p.y < ( originY + height ) ) ){
 
-    if( originX < 1 ){
-        originX = 1;
+            triggered = true;
+            return;
+        }
+
     }
 
-    if( originY < 1 ){
-        originY = 1;
-    }
 }
 
 void ShellminatorButton::init( Shellminator* parent_p ){
-
     parent = parent_p;
+    
+    bufferingEnabled = true;
+    selectedChannel = parent -> getBufferedPrinter();
 
+    if( selectedChannel == NULL ){
+        selectedChannel = parent -> channel;
+        bufferingEnabled = false;
+    }
 }
-
-/*
-┌──────┐
-│      │
-└─────┤─┘
-◖◖█
-*/
 
 void ShellminatorButton::draw( int width_p, int  height_p ){
 
+    // Generic counter.
     int i;
+
+    // The upper limit of the for loops calculated
+    // to this variable.
     int limit;
+
+    // If automatic event polling is enabled,
+    // the event will be read to this variable.
     Shellminator::shellEvent_t parentEvent;
 
     if( parent == NULL ){
@@ -145,89 +220,131 @@ void ShellminatorButton::draw( int width_p, int  height_p ){
         return;
     }
 
-    // Check if 
+    if( selectedChannel == NULL ){
+        return;
+    }
+
+    width = width_p;
+    height = height_p;
+
+    // If the user specified width is too small,
+    // overwrite it with valid configuration.
+    if( width < ( textWidth + 4 ) ){
+        width = textWidth + 4;
+    }
+
+    // The height must be exactly 3.
+    if( height != 3 ){
+        height = 3;
+    }
+
+    // Check if event polling is done by the object.
     if( eventAutoCheck ){
+        // If it does, check if there is an available event.
         if( parent -> eventAvailable() ){
+            // If so, pread it and check it.
             parentEvent = parent -> readEvent();
             checkEvent( parentEvent );
-
-            // Check if the event was a left mouse release.
-            if( ( parentEvent.type == Shellminator::SHELL_EVENT_MOUSE ) && ( parentEvent.eventCode == Shellminator::EVENT_CODE_MOUSE_LEFT_RELEASED ) ){
-
-                // Check if the event happened in rhe area of the button.
-                if( ( parentEvent.x >= originX ) && ( parentEvent.y >= originY ) && ( parentEvent.x < ( originX + width ) ) && ( parentEvent.y < ( originY + height ) ) ){
-                    triggered = true;
-                }
-
-            }
         }
     }
 
-    parent -> setCursorPosition( originX, originY );
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
+    // Set cursor to origin and set color to the specified one.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY );
+    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
 
     // Print the top part.
-    parent -> channel -> print( "\u250C" );
+    selectedChannel -> print( topLeftCorner );
     for( i = 1; i < ( width - 1 ); i++ ){
-        parent -> channel -> print( "\u2500" );
+        selectedChannel -> print( horizontalLine );
     }
-    parent -> channel -> println( "\u2510" );
+    selectedChannel -> print( topRightCorner );
+
+    // Middle line.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
 
     // Print the middle section with the text.
-    parent -> channel -> print( "\u2502" );
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+    selectedChannel -> print( verticalLine );
 
+    // Erase the whole line.
+    selectedChannel -> println( "\033[0K" );
+
+    // Set cursor to make the text centered.
+    limit = ( width - textWidth ) / 2;
+    Shellminator::setCursorPosition( selectedChannel, originX + limit, originY + 1 );
+
+    // In case of trigger event, set it to low intensity.
     if( triggered ){
-        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::LOW_INTENSITY, Shellminator::WHITE );
+        // Create inverted text.
+        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
+        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::LOW_INTENSITY, color );
     }
 
-    limit = ( width - textWidth - 2 ) / 2;
-    for( i = 0; i < limit; i++ ){
-        parent -> channel -> print( ' ' );
-    }
+    // Print the name text.
+    selectedChannel -> print( name );
 
-    parent -> channel -> print( name );
+    // Set mode to regular.
+    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
 
-    limit = ( width - textWidth - 2 ) - limit;
-    for( i = 0; i < limit; i++ ){
-        parent -> channel -> print( ' ' );
-    }
+    // Set cursor to print the right frame bar.
+    Shellminator::setCursorPosition( selectedChannel, originX + width - 1, originY + 1 );
 
-    Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
-    parent -> channel -> println( "\u2502" );
+    // print the right border.
+    selectedChannel -> print( verticalLine );
+
+    // Bottom line.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 2 );
 
     // Print the bottom part.
-    parent -> channel -> print( "\u2514" );
+    selectedChannel -> print( bottomLeftCorner );
 
+    // Check if a key event is attached. In this case the triggering key
+    // will be displayed on the bottom right.
     if( event.type != Shellminator::SHELL_EVENT_EMPTY ){
         limit = eventTextSize + 2;
     }
 
+    // Otherwise a regular corner will be printed.
     else{
         limit = 1;
     }
 
+    // Print as many horizontal characters as needed.
     for( i = 1; ( i < width - limit ); i++ ){
-        parent -> channel -> print( "\u2500" );
+        selectedChannel -> print( horizontalLine );
     }
 
+    // Check if a key nape has to be displayed.
     if( event.type != Shellminator::SHELL_EVENT_EMPTY ){
-        parent -> channel -> print( "\u2524" );
+        selectedChannel -> print( "\u2524" );
 
+        // If triggered, the text must be inverted.
         if( triggered ){
-            Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+            Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
         }
 
-        parent -> channel -> print( eventText );
+        // Print the triggering key name.
+        selectedChannel -> print( eventText );
 
-        Shellminator::setTerminalCharacterColor( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
-        parent -> channel -> print( "\u2502" );
+        // Set the format back to regular an finish the line.
+        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
+        selectedChannel -> print( "\u2502" );
     }
 
     else{
-        parent -> channel -> print( "\u2518" );
+        // Set the format back to regular an finish the line.
+        selectedChannel -> print( "\u2518" );
     }
 
+    if( bufferingEnabled ){
+        selectedChannel -> flush();
+    }
+
+    // Call the attached function in case of trigger event.
+    if( triggered && ( func != NULL ) ){
+        func();
+    }
+
+    // No matter what, clear the trigger flag.
     triggered = false;
 
 }

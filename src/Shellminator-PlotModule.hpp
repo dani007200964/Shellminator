@@ -93,14 +93,6 @@ public:
     /// @todo Buffering!
     void draw( int width_p, int  height_p ) override;
 
-    /// Origin of the top left corner.
-    ///
-    /// You can specify a custom origin point for the object with this function.
-    /// @param x X coordinate of the new origin( starts from 1 ).
-    /// @param y Y coordinate of the new origin( starts from 1 ).
-    /// @note The origin of the object is always the top left corner.
-    void setOrigin( int x, int y ) override;
-
 private:
 
     /// Pointer to the data array.
@@ -127,21 +119,12 @@ private:
     /// It can be overriden to create different kinds of plots.
     virtual void drawPlot();
 
-    /// Pointer to the caller terminal.
-    Shellminator* parent = NULL;
-
     /// This will be redirected to the parents channel by default.
     Stream* selectedChannel = NULL;
 
     /// If this flag is true, that means the buffering is enabled
     /// on the caller terminal.
     bool bufferingEnabled = false;
-
-    /// Terminal width in characters.
-    int width;
-
-    /// Terminal height in characters.
-    int height;
 
     /// This buffer holds a generated string that
     /// us used to print numbers to the scale.
@@ -160,12 +143,6 @@ private:
 
     /// Holds the maximum value in the data array.
     float max;
-
-    /// X coordinate of the origin.
-    int originX = 1;
-
-    /// Y coordinate of the origin.
-    int originY = 1;
 
     /// Linear interpolation.
     ///

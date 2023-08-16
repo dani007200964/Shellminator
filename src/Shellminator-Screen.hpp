@@ -52,7 +52,7 @@ public:
     /// the drawing stuff in this function.
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
-    virtual void draw( int width, int  height ){ /* To make the linker happy... */ }
+    virtual void draw( int width_p, int  height_p ){ /* To make the linker happy... */ }
 
     /// Init function.
     ///
@@ -67,7 +67,33 @@ public:
     /// @param x X coordinate of the new origin( starts from 1 ).
     /// @param y Y coordinate of the new origin( starts from 1 ).
     /// @note The origin of the object is always the top left corner.
-    virtual void setOrigin( int x, int y ){ /* To make the linker happy... */ }
+    virtual void setOrigin( int x, int y ){
+        originX = x;
+        originY = y;
+        if( originX < 1 ){ originX = 1; }
+        if( originY < 1 ){ originY = 1; }
+    }
+
+    int left(){ return originX - 1; }
+    int right(){ return originX + width; }
+    int up(){ return originY - 1; }
+    int down(){ return originY + height; }
+
+protected:
+
+    Shellminator* parent = NULL;
+
+    /// Actual width of the object.
+    int width = 1;
+
+    /// Actual height of the object.
+    int height = 1;
+
+    /// X coordinate of the origin.
+    int originX = 1;
+
+    /// Y coordinate of the origin.
+    int originY = 1;
 
 };
 

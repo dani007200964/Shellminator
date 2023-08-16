@@ -57,20 +57,6 @@ void ShellminatorPlot::init( Shellminator* parent_p ){
         selectedChannel = parent -> channel;
         bufferingEnabled = false;
     }
-
-}
-
-void ShellminatorPlot::setOrigin( int x, int y ){
-    originX = x;
-    originY = y;
-
-    if( originX < 1 ){
-        originX = 1;
-    }
-
-    if( originY < 1 ){
-        originY = 1;
-    }
 }
 
 void ShellminatorPlot::draw( int width_p, int  height_p ){
@@ -222,7 +208,7 @@ void ShellminatorPlot::drawScale(){
 
         // Print the actual data string to the output stream.
         selectedChannel -> print( valueTextBuffer );
-        selectedChannel -> print( "\033[K" );
+        selectedChannel -> print( "\033[0K" );
 
     }
 

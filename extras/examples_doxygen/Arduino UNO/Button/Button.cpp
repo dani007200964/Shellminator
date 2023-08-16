@@ -23,10 +23,6 @@
 #define NUMBER_OF_DATA_POINTS 30
 
 
-void buttonClick( void ){
-
-}
-
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 
@@ -34,11 +30,13 @@ Shellminator shell( &Serial );
 float data1[ NUMBER_OF_DATA_POINTS ];
 
 // Create a plotter object.
-ShellminatorButton button( "Plot", buttonClick, 10, 3 );
+ShellminatorButton button( "Plot" );
 
 Shellminator::shellEvent_t buttonEvent;
 
 
+// This function will be called, when the button is pressed.
+void buttonClick( void );
 
 
 // System init section.
@@ -56,9 +54,11 @@ void setup(){
 
     button.attachEvent( buttonEvent );
     button.setEventModeAuto();
+    button.setRoundCorners();
+    button.setColor( Shellminator::RED );
 
     shell.begin( "arnold" );
-    shell.beginScreen( &button );
+    shell.beginScreen( &button, 100 );
 
 
 }
@@ -70,4 +70,8 @@ void loop(){
     shell.update();
 
 
+}
+
+void buttonClick( void ){
+    button.setColor( Shellminator::GREEN );
 }

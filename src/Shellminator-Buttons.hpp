@@ -67,7 +67,7 @@ public:
     /// Empty constructor.
     ShellminatorButton();
 
-    ShellminatorButton( const char* name_p, void(*func_p)(void), int width_p, int height_p );
+    ShellminatorButton( const char* name_p );
 
     /// Init function.
     ///
@@ -83,21 +83,16 @@ public:
     /// @todo Buffering!
     void draw( int width_p, int  height_p ) override;
 
-    /// Origin of the top left corner.
-    ///
-    /// You can specify a custom origin point for the object with this function.
-    /// @param x X coordinate of the new origin( starts from 1 ).
-    /// @param y Y coordinate of the new origin( starts from 1 ).
-    /// @note The origin of the object is always the top left corner.
-    void setOrigin( int x, int y ) override;
-
     void attachEvent( Shellminator::shellEvent_t event_p );
     void checkEvent( Shellminator::shellEvent_t event_p );
+    void attachTriggerFunction( void(*func_p)(void) );
     void setEventModeAuto();
     void setEventModeManual();
+    void setRoundCorners();
+    void setSquareCorners();
+    void setColor( uint8_t color_p );
 
 private:
-    Shellminator* parent = NULL;
     const char* name;
 
     bool triggered = false;
@@ -107,16 +102,36 @@ private:
     char eventText[ 5 ];
     int eventTextSize = 0;;
 
-    void(*func)(void) = NULL;
-    int width = 0;
     int textWidth;
-    int height = 0;
 
-    /// X coordinate of the origin.
-    int originX = 1;
+    void(*func)(void) = NULL;
 
-    /// Y coordinate of the origin.
-    int originY = 1;
+    /// This will be redirected to the parents channel by default.
+    Stream* selectedChannel = NULL;
+    bool bufferingEnabled;
+
+    uint8_t color = Shellminator::WHITE;
+
+    static const char topLeftCornerRound[ 4 ];
+    static const char topRightCornerRound[ 4 ];
+    static const char bottomLeftCornerRound[ 4 ];
+    static const char bottomRightCornerRound[ 4 ];
+
+    static const char topLeftCornerSquare[ 4 ];
+    static const char topRightCornerSquare[ 4 ];
+    static const char bottomLeftCornerSquare[ 4 ];
+    static const char bottomRightCornerSquare[ 4 ];
+
+    static const char horizontalLineDefault[ 4 ];
+    static const char verticalLineDefault[ 4 ];
+
+    const char* topLeftCorner;
+    const char* topRightCorner;
+    const char* bottomLeftCorner;
+    const char* bottomRightCorner;
+
+    const char* horizontalLine;
+    const char* verticalLine;
 
 };
 

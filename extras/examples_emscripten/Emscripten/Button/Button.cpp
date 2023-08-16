@@ -39,10 +39,6 @@
 // Use stdio as Channel.
 stdioStream stdioChannel;
 
-void buttonClick( void ){
-
-}
-
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
@@ -50,7 +46,7 @@ Shellminator shell( &stdioChannel );
 float data1[ NUMBER_OF_DATA_POINTS ];
 
 // Create a plotter object.
-ShellminatorButton button( "Plot", buttonClick, 10, 3 );
+ShellminatorButton button( "Plot" );
 
 Shellminator::shellEvent_t buttonEvent;
 
@@ -61,6 +57,8 @@ void loop();
 // Init Section.
 void setup();
 
+// This function will be called, when the button is pressed.
+void buttonClick( void );
 
 
 // Main program.
@@ -77,7 +75,9 @@ int main(){
 
 }
 
-
+void buttonClick( void ){
+    button.setColor( Shellminator::GREEN );
+}
 
 void setup(){
 
@@ -93,9 +93,11 @@ void setup(){
 
     button.attachEvent( buttonEvent );
     button.setEventModeAuto();
+    button.setRoundCorners();
+    button.setColor( Shellminator::RED );
 
     shell.begin( "arnold" );
-    shell.beginScreen( &button );
+    shell.beginScreen( &button, 100 );
 
 
 

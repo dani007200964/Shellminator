@@ -1142,7 +1142,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
                     
                     // Otherwise, something wrong.
                     else{
-                        channel -> println( "\r\nERROR: CASE 0\r\n" );
+                        //channel -> println( "\r\nERROR: CASE 0\r\n" );
                         return false;
                     }
 
@@ -1158,7 +1158,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
                     
                     // Otherwise, something wrong.
                     else{
-                        channel -> println( "\r\nERROR: CASE 1\r\n" );
+                        //channel -> println( "\r\nERROR: CASE 1\r\n" );
                         return false;
                     }
                     
@@ -1181,7 +1181,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
                         // Protection against buffer overflow.
                         if( yBuffCntr >= 4 ){
-                            channel -> println( "\r\nERROR: CASE 2\r\n" );
+                            //channel -> println( "\r\nERROR: CASE 2\r\n" );
                         return false;
                         }
 
@@ -1208,7 +1208,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
                         // Conversion went wrong.
                         else{
-                        channel -> println( "\r\nERROR: CASE 3 R\r\n" );
+                        //channel -> println( "\r\nERROR: CASE 3 R\r\n" );
                         return false;
                         }
 
@@ -1221,7 +1221,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
                         // Protection against buffer overflow.
                         if( xBuffCntr >= 4 ){
-                        channel -> println( "\r\nERROR: CASE 3\r\n" );
+                        //channel -> println( "\r\nERROR: CASE 3\r\n" );
                         return false;
                         }
 
@@ -1241,7 +1241,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
     }
 
-    channel -> println( "\r\nTIMEOUT!\r\n" );
+    //channel -> println( "\r\nTIMEOUT!\r\n" );
 
     // We should not be here.
     return false;
