@@ -91,7 +91,12 @@ public:
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
     /// @todo Buffering!
-    void draw( int width_p, int  height_p ) override;
+    void draw() override;
+
+    void update( int width_p, int  height_p ) override;
+
+    bool redrawRequest() override;
+
 
 private:
 

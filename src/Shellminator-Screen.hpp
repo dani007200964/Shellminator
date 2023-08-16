@@ -50,9 +50,7 @@ public:
     ///
     /// This function is called by the host terminal, periodically. You have to put all
     /// the drawing stuff in this function.
-    /// @param width_p The width of the screen area in characters.
-    /// @param height_p The height of the screen area in characters.
-    virtual void draw( int width_p, int  height_p ){ /* To make the linker happy... */ }
+    virtual void draw(){ /* To make the linker happy... */ }
 
     /// Init function.
     ///
@@ -73,6 +71,13 @@ public:
         if( originX < 1 ){ originX = 1; }
         if( originY < 1 ){ originY = 1; }
     }
+
+    /// Update function
+    /// @param width_p The width of the screen area in characters.
+    /// @param height_p The height of the screen area in characters.
+    virtual void update( int width_p, int  height_p ){ /* To make the linker happy... */ }
+
+    virtual bool redrawRequest(){ return false; }
 
     int left(){ return originX - 1; }
     int right(){ return originX + width; }

@@ -81,13 +81,14 @@ public:
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
     /// @todo Buffering!
-    void draw( int width_p, int  height_p ) override;
+    void draw() override;
+
+    void update( int width_p, int  height_p ) override;
+
+    bool redrawRequest() override;
 
     void attachEvent( Shellminator::shellEvent_t event_p );
-    void checkEvent( Shellminator::shellEvent_t event_p );
     void attachTriggerFunction( void(*func_p)(void) );
-    void setEventModeAuto();
-    void setEventModeManual();
     void setRoundCorners();
     void setSquareCorners();
     void setColor( uint8_t color_p );
@@ -97,7 +98,6 @@ private:
 
     bool triggered = false;
 
-    bool eventAutoCheck = false;
     Shellminator::shellEvent_t event;
     char eventText[ 5 ];
     int eventTextSize = 0;;
@@ -109,6 +109,8 @@ private:
     /// This will be redirected to the parents channel by default.
     Stream* selectedChannel = NULL;
     bool bufferingEnabled;
+
+    bool redraw = true;
 
     uint8_t color = Shellminator::WHITE;
 

@@ -129,13 +129,6 @@ void ShellminatorButton::attachTriggerFunction( void(*func_p)(void) ){
     func = func_p;
 }
 
-void ShellminatorButton::setEventModeAuto(){
-    eventAutoCheck = true;
-}
-void ShellminatorButton::setEventModeManual(){
-    eventAutoCheck = false;
-}
-
 void ShellminatorButton::setRoundCorners(){
     topLeftCorner     = topLeftCornerRound;
     topRightCorner    = topRightCornerRound;
@@ -154,39 +147,6 @@ void ShellminatorButton::setColor( uint8_t color_p ){
     color = color_p;
 }
 
-void ShellminatorButton::checkEvent( Shellminator::shellEvent_t event_p ){
-
-    // In case of empty event, we can't do anything.
-    if( event_p.type == Shellminator::SHELL_EVENT_EMPTY ){
-        return;
-    }
-
-    // If the event is key related, we have to check if the key
-    // matches with the attached key.
-    if( event.type == Shellminator::SHELL_EVENT_KEY ){
-        if( event_p.data == event.data ){
-            triggered = true;
-            return;
-        }
-    }
-
-    // Check if the event was a left mouse release.
-    if( ( event_p.type == Shellminator::SHELL_EVENT_MOUSE ) && ( event_p.eventCode == Shellminator::EVENT_CODE_MOUSE_LEFT_RELEASED ) ){
-
-        // Check if the event happened in the area of the button.
-        if( ( event_p.x >= originX ) &&
-            ( event_p.y >= originY ) &&
-            ( event_p.x < ( originX + width ) ) &&
-            ( event_p.y < ( originY + height ) ) ){
-
-            triggered = true;
-            return;
-        }
-
-    }
-
-}
-
 void ShellminatorButton::init( Shellminator* parent_p ){
     parent = parent_p;
     
@@ -199,30 +159,9 @@ void ShellminatorButton::init( Shellminator* parent_p ){
     }
 }
 
-void ShellminatorButton::draw( int width_p, int  height_p ){
+void ShellminatorButton::update( int width_p, int  height_p ){
 
-    // Generic counter.
-    int i;
-
-    // The upper limit of the for loops calculated
-    // to this variable.
-    int limit;
-
-    // If automatic event polling is enabled,
-    // the event will be read to this variable.
-    Shellminator::shellEvent_t parentEvent;
-
-    if( parent == NULL ){
-        return;
-    }
-
-    if( name == NULL ){
-        return;
-    }
-
-    if( selectedChannel == NULL ){
-        return;
-    }
+    Shellminator::shellEvent_t newEvent;
 
     width = width_p;
     height = height_p;
@@ -238,14 +177,77 @@ void ShellminatorButton::draw( int width_p, int  height_p ){
         height = 3;
     }
 
-    // Check if event polling is done by the object.
-    if( eventAutoCheck ){
-        // If it does, check if there is an available event.
-        if( parent -> eventAvailable() ){
-            // If so, pread it and check it.
-            parentEvent = parent -> readEvent();
-            checkEvent( parentEvent );
+    if( parent == NULL ){
+        return;
+    }
+
+    newEvent = parent -> readEvent();
+
+    // In case of empty event, we can't do anything.
+    if( newEvent.type == Shellminator::SHELL_EVENT_EMPTY ){
+        return;
+    }
+
+    if( newEvent.type != event.type ){
+        return;
+    }
+
+    // If the event is key related, we have to check if the key
+    // matches with the attached key.
+    if( newEvent.type == Shellminator::SHELL_EVENT_KEY ){
+        if( newEvent.data == event.data ){
+            triggered = true;
+            redraw = true;
+            return;
         }
+    }
+
+    // Check if the event was a left mouse release.
+    if( ( newEvent.type == Shellminator::SHELL_EVENT_MOUSE ) && ( newEvent.eventCode == Shellminator::EVENT_CODE_MOUSE_LEFT_RELEASED ) ){
+
+        // Check if the event happened in the area of the button.
+        if( ( newEvent.x >= originX ) &&
+            ( newEvent.y >= originY ) &&
+            ( newEvent.x < ( originX + width ) ) &&
+            ( newEvent.y < ( originY + height ) ) ){
+
+            triggered = true;
+            redraw = true;
+            return;
+        }
+
+    }
+
+}
+
+bool ShellminatorButton::redrawRequest(){
+
+    if( redraw ){
+        redraw = false;
+        return true;
+    }
+    return false;
+}
+
+void ShellminatorButton::draw(){
+
+    // Generic counter.
+    int i;
+
+    // The upper limit of the for loops calculated
+    // to this variable.
+    int limit;
+
+    if( parent == NULL ){
+        return;
+    }
+
+    if( name == NULL ){
+        return;
+    }
+
+    if( selectedChannel == NULL ){
+        return;
     }
 
     // Set cursor to origin and set color to the specified one.
@@ -339,12 +341,15 @@ void ShellminatorButton::draw( int width_p, int  height_p ){
         selectedChannel -> flush();
     }
 
-    // Call the attached function in case of trigger event.
-    if( triggered && ( func != NULL ) ){
-        func();
-    }
+    if( triggered ){
 
-    // No matter what, clear the trigger flag.
-    triggered = false;
+        if( func != NULL ){
+            func();
+        }
+
+        redraw = true;
+
+        triggered = false;
+    }
 
 }

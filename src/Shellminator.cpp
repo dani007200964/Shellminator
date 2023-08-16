@@ -1019,13 +1019,20 @@ void Shellminator::update() {
   }
 
   if( screen != NULL ){
+
     if( ( millis() - screenTimerStart ) > screenUpdatePeriod ){
         screenTimerStart = millis();
-        int width;
-        int height;
-        getTerminalSize( &width, &height );
-        screen -> draw( width, height );
+        getTerminalSize( &terminalWidth, &terminalHeight );
+
+        if( screen -> redrawRequest() ){
+            screen -> draw();
+        }
+
     }
+
+    screen -> update( terminalWidth, terminalHeight );
+    popEvent();
+
   }
 
   #ifdef COMMANDER_API_VERSION
@@ -2676,22 +2683,22 @@ void Shellminator::autoDetectTerminal(){
 void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod ){
 
     int i;
-    int height = 0;
-    int width = 0;
 
     if( screen_p == NULL ){
         return;
     }
 
-    getTerminalSize( &width, &height );
+    getTerminalSize( &terminalWidth, &terminalHeight );
 
     screen = screen_p;
     hideCursor();
 
-    for( i = 0; i < height; i++ ){
+    for( i = 0; i < terminalHeight; i++ ){
         channel -> println();
     }
     mouseBegin();
+
+    screen -> update( terminalWidth, terminalHeight );
 
     screenUpdatePeriod = updatePeriod;
     screenTimerStart = millis();
@@ -2795,6 +2802,28 @@ Shellminator::shellEvent_t Shellminator::readEvent(){
         // Get the next data from the circular structure.
         ret = eventBuffer[ eventBufferReadPtr ];
 
+    }
+
+    // Return with the next element data.
+    return ret;
+
+}
+
+void Shellminator::popEvent(){
+
+    // This solution uses a circular buffer, so it has two pointers.
+    // One for read and one for writing.
+    // If they point to the same place, that means, there is no data available.
+    if( eventBufferWritePtr == eventBufferReadPtr ){
+
+        // This case return.
+        return;
+
+    }
+
+    // Any other case, that means it has at least one new item to be read.
+    else{
+
         // Increment the read pointer.
         eventBufferReadPtr++;
 
@@ -2806,9 +2835,6 @@ Shellminator::shellEvent_t Shellminator::readEvent(){
         }
 
     }
-
-    // Return with the next element data.
-    return ret;
 
 }
 

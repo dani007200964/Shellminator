@@ -705,6 +705,11 @@ public:
     int eventAvailable();
     shellEvent_t readEvent();
 
+    /// Remove the current element from the buffer.
+    void popEvent();
+
+    int terminalWidth = 1;
+    int terminalHeight = 1;
 
 
     char mouseEventBuffer[ SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE ];

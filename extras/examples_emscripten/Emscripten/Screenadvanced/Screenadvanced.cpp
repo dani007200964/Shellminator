@@ -53,7 +53,11 @@ class layout : public ShellminatorScreen{
 public:
 
     // Override the base draw function with our custom one.
-    void draw( int width, int  height ) override;
+    void draw() override;
+
+    void update( int width_p, int  height_p ) override;
+
+    bool redrawRequest() override;
 
     // Override the base init function with our custom one.
     void init( Shellminator* parent_p )override;
@@ -71,7 +75,21 @@ private:
 
 };
 
-void layout::draw( int width, int  height ){
+void layout::draw(){
+
+    // If the reference to the caller terminal is invalid,
+    // we can not continue.
+    if( parent == NULL ){
+        return;
+    }
+
+    startButton.draw();
+    stopButton.draw();
+    reloadButton.draw();
+
+}
+
+void layout::update( int width_p, int  height_p ){
 
     // If the reference to the caller terminal is invalid,
     // we can not continue.
@@ -80,14 +98,23 @@ void layout::draw( int width, int  height ){
     }
 
     startButton.setOrigin( 1, 1 );
-    startButton.draw( width / 2, 1 );
+    startButton.update( width_p / 2, 1 );
 
     stopButton.setOrigin( startButton.right(), 1 );
-    stopButton.draw( width - startButton.right(), 1 );
+    stopButton.update( width_p - startButton.right(), 1 );
 
     reloadButton.setOrigin( 1, stopButton.down() );
-    reloadButton.draw( width, 3 );
+    reloadButton.update( width_p, 3 );
 
+}
+
+bool layout::redrawRequest(){
+    bool redraw = false;
+    redraw |= startButton.redrawRequest();
+    redraw |= stopButton.redrawRequest();
+    redraw |= reloadButton.redrawRequest();
+
+    return redraw;
 }
 
 void layout::init( Shellminator* parent_p ){

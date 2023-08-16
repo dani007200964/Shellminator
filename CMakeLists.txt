@@ -124,58 +124,10 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	add_executable( Basic ${SOURCES} extras/examples_desktop/Desktop/Basic/Basic.cpp )
-	add_executable( Buffered ${SOURCES} extras/examples_desktop/Desktop/Buffered/Buffered.cpp )
-	add_executable( Button ${SOURCES} extras/examples_desktop/Desktop/Button/Button.cpp )
-	add_executable( Duinocrisis ${SOURCES} extras/examples_desktop/Desktop/Duinocrisis/Duinocrisis.cpp )
-	add_executable( Execute ${SOURCES} extras/examples_desktop/Desktop/Execute/Execute.cpp )
-	add_executable( Executeconstructoradvanced ${SOURCES} extras/examples_desktop/Desktop/Executeconstructoradvanced/Executeconstructoradvanced.cpp )
-	add_executable( Executeconstructorsimple ${SOURCES} extras/examples_desktop/Desktop/Executeconstructorsimple/Executeconstructorsimple.cpp )
-	add_executable( Mouse ${SOURCES} extras/examples_desktop/Desktop/Mouse/Mouse.cpp )
-	add_executable( Progressbaradvanced ${SOURCES} extras/examples_desktop/Desktop/Progressbaradvanced/Progressbaradvanced.cpp )
-	add_executable( Progressbarsimple ${SOURCES} extras/examples_desktop/Desktop/Progressbarsimple/Progressbarsimple.cpp )
 	add_executable( Screenadvanced ${SOURCES} extras/examples_desktop/Desktop/Screenadvanced/Screenadvanced.cpp )
-	add_executable( Screenbasic ${SOURCES} extras/examples_desktop/Desktop/Screenbasic/Screenbasic.cpp )
-	add_executable( Simpleplot ${SOURCES} extras/examples_desktop/Desktop/Simpleplot/Simpleplot.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
-	add_executable( Basic ${SOURCES} extras/examples_emscripten/Emscripten/Basic/Basic.cpp )
-	target_link_options( Basic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Buffered ${SOURCES} extras/examples_emscripten/Emscripten/Buffered/Buffered.cpp )
-	target_link_options( Buffered PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Button ${SOURCES} extras/examples_emscripten/Emscripten/Button/Button.cpp )
-	target_link_options( Button PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Duinocrisis ${SOURCES} extras/examples_emscripten/Emscripten/Duinocrisis/Duinocrisis.cpp )
-	target_link_options( Duinocrisis PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Execute ${SOURCES} extras/examples_emscripten/Emscripten/Execute/Execute.cpp )
-	target_link_options( Execute PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Executeconstructoradvanced ${SOURCES} extras/examples_emscripten/Emscripten/Executeconstructoradvanced/Executeconstructoradvanced.cpp )
-	target_link_options( Executeconstructoradvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Executeconstructorsimple ${SOURCES} extras/examples_emscripten/Emscripten/Executeconstructorsimple/Executeconstructorsimple.cpp )
-	target_link_options( Executeconstructorsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Mouse ${SOURCES} extras/examples_emscripten/Emscripten/Mouse/Mouse.cpp )
-	target_link_options( Mouse PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Progressbaradvanced ${SOURCES} extras/examples_emscripten/Emscripten/Progressbaradvanced/Progressbaradvanced.cpp )
-	target_link_options( Progressbaradvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Progressbarsimple ${SOURCES} extras/examples_emscripten/Emscripten/Progressbarsimple/Progressbarsimple.cpp )
-	target_link_options( Progressbarsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
 	add_executable( Screenadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Screenadvanced/Screenadvanced.cpp )
 	target_link_options( Screenadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Screenbasic ${SOURCES} extras/examples_emscripten/Emscripten/Screenbasic/Screenbasic.cpp )
-	target_link_options( Screenbasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( Simpleplot ${SOURCES} extras/examples_emscripten/Emscripten/Simpleplot/Simpleplot.cpp )
-	target_link_options( Simpleplot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

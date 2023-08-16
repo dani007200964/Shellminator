@@ -59,7 +59,20 @@ void ShellminatorPlot::init( Shellminator* parent_p ){
     }
 }
 
-void ShellminatorPlot::draw( int width_p, int  height_p ){
+void ShellminatorPlot::update( int width_p, int  height_p ){
+    // Save the arguments to internal variables.
+    // It is required to make these parameters accessible
+    // to the other member functions.
+    width = width_p;
+    height = height_p - 1;
+}
+
+bool ShellminatorPlot::redrawRequest(){
+    return true;
+}
+
+
+void ShellminatorPlot::draw(){
 
     int i;
     int j;
@@ -85,12 +98,6 @@ void ShellminatorPlot::draw( int width_p, int  height_p ){
     if( name == NULL ){
         return;
     }
-
-    // Save the arguments to internal variables.
-    // It is required to make these parameters accessible
-    // to the other member functions.
-    width = width_p;
-    height = height_p - 1;
 
     // Calculate the length of the name.
     j = strlen( name );
