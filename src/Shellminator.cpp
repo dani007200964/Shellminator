@@ -540,7 +540,17 @@ void Shellminator::redrawLine(){
 
     #endif
 
-    selectedChannel -> print( (char*) &cmd_buff[ 0 ] );
+    if( inputActive && inputSecretMode ){
+        i = 0;
+        while( cmd_buff[ 0 ][ i ] ){
+            selectedChannel -> print( "\u2022" );
+            i++;
+        }
+    }
+
+    else{
+        selectedChannel -> print( (char*) &cmd_buff[ 0 ] );
+    }
 
     if( ( j >= 0 ) ){
 
@@ -1349,79 +1359,87 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
 
     shellEvent_t event;
 
-  switch( new_char ){
+    switch( new_char ){
 
-    case '\0':
-      break;
+        case '\0':
+            break;
 
-    case '\n':
-      break;
+        case '\n':
+            break;
 
-    case '\b':
-      ShellminatorBackspaceState();
-      break;
+        case '\b':
+            ShellminatorBackspaceState();
+            break;
 
-    case 127:
-      ShellminatorBackspaceState();
-      break;
+        case 127:
+            ShellminatorBackspaceState();
+            break;
 
-    case '\r':
-      // Check is a screen object is drawing.
-      if( screen != NULL ){
-        // In this case we have to end the drawing process.
-        endScreen();
-        // And set the state machine back to default state.
-        currentState = &Shellminator::ShellminatorDefaultState;
-        break;
-      }
-      ShellminatorEnterKeyState();
-      break;
+        case '\r':
+            // Check is a screen object is drawing.
+            if( screen != NULL ){
+                // In this case we have to end the drawing process.
+                endScreen();
+                // And set the state machine back to default state.
+                currentState = &Shellminator::ShellminatorDefaultState;
+                break;
+            }
+            ShellminatorEnterKeyState();
+            break;
 
-    case 0x01:
-      ShellminatorBeginningOfLineState();
-      break;
+        case 0x01:
+            ShellminatorBeginningOfLineState();
+            break;
 
-    case 0x05:
-      ShellminatorEndOfLineState();
-      break;
+        case 0x05:
+            ShellminatorEndOfLineState();
+            break;
 
-    case 0x04:
-      ShellminatorLogoutState();
-      break;
+        case 0x04:
+            ShellminatorLogoutState();
+            break;
 
-    case 0x12:
-      ShellminatorReverseSearchState();
-      break;
+        case 0x12:
+            if( inputActive || ( screen != NULL ) ){
+                break;
+            }
+            ShellminatorReverseSearchState();
+            break;
 
-    case 0x0C:
-      ShellminatorClearScreenState();
-      break;
+        case 0x0C:
+            if( inputActive || ( screen != NULL ) ){
+                break;
+            }
+            ShellminatorClearScreenState();
+            break;
 
-    case '\t':
-      ShellminatorAutoCompleteState();
-      break;
+        case '\t':
+            if( inputActive || ( screen != NULL ) ){
+                break;
+            }
+            ShellminatorAutoCompleteState();
+            break;
 
-    case 0x03:
-      ShellminatorAbortState();
-      break;
+        case 0x03:
+            ShellminatorAbortState();
+            break;
 
-    case 27:
+        case 27:
+            currentState = &Shellminator::ShellminatorEscapeCharacterState;
+            break;
 
-      currentState = &Shellminator::ShellminatorEscapeCharacterState;
-      break;
+        default:
+            currentState = &Shellminator::ShellminatorDefaultState;
+            if( screen != NULL ){
+                event.type = SHELL_EVENT_KEY;
+                event.data = (uint8_t)new_char;
+                pushEvent( event );
+                break;
+            }
+            ShellminatorProcessRegularCharacter( new_char );
+            break;
 
-    default:
-      currentState = &Shellminator::ShellminatorDefaultState;
-      if( screen != NULL ){
-        event.type = SHELL_EVENT_KEY;
-        event.data = (uint8_t)new_char;
-        pushEvent( event );
-        break;
-      }
-      ShellminatorProcessRegularCharacter( new_char );
-      break;
-
-  }
+    }
 
 }
 
@@ -1513,6 +1531,22 @@ void Shellminator::ShellminatorEnterKeyState(){
 
     if( inputActive ){
         inputActive = false;
+
+        // Copy the data from the input to the destination.
+        strncpy( inputDestinationBuffer, cmd_buff[ 0 ], inputDestinationBufferSize );
+
+        // Just in case terminate the string.
+        inputDestinationBuffer[ inputDestinationBufferSize - 1 ] = '\0';
+
+        if( inputCallback != NULL ){
+            inputCallback( inputDestinationBuffer, inputDestinationBufferSize, this );
+        }
+
+        // To empty the incoming string we have to zero it's counter.
+        cmd_buff_cntr = 0;
+        cursor = 0;
+
+        printBanner();
         return;
     }
 
@@ -1798,61 +1832,73 @@ void Shellminator::ShellminatorEscapeCharacterState( char new_char ){
 
 void Shellminator::ShellminatorEscapeBracketState( char new_char ){
 
-  switch( new_char ){
+    switch( new_char ){
 
-    case 'A':
-      ShellminatorUpArrowKeyState();
-      break;
+        case 'A':
+            if( inputActive ){
+                break;
+            }
+            ShellminatorUpArrowKeyState();
+            break;
 
-    case 'B':
-      ShellminatorDownArrowKeyState();
-      break;
+        case 'B':
+            if( inputActive ){
+                break;
+            }
+            ShellminatorDownArrowKeyState();
+            break;
 
-    case 'D':
-      ShellminatorLeftArrowKeyState();
-      break;
+        case 'D':
+            ShellminatorLeftArrowKeyState();
+            break;
 
-    case 'C':
-      ShellminatorRightArrowKeyState();
-      break;
+        case 'C':
+            ShellminatorRightArrowKeyState();
+            break;
 
-    case 'H':
-      ShellminatorHomeKeyState();
-      break;
+        case 'H':
+            ShellminatorHomeKeyState();
+            break;
 
-    case '1':
-      currentState = &Shellminator::ShellminatorHomeKeyState;
-      break;
+        case '1':
+            currentState = &Shellminator::ShellminatorHomeKeyState;
+            break;
 
-    case 'F':
-      ShellminatorEndKeyState();
-      break;
+        case 'F':
+            ShellminatorEndKeyState();
+            break;
 
-    case '4':
-      currentState = &Shellminator::ShellminatorEndKeyState;
-      break;
+        case '4':
+            currentState = &Shellminator::ShellminatorEndKeyState;
+            break;
 
-    case '3':
-      currentState = &Shellminator::ShellminatorDelKeyState;
-      break;
+        case '3':
+            currentState = &Shellminator::ShellminatorDelKeyState;
+            break;
 
-    case '5':
-      currentState = &Shellminator::ShellminatorPageUpKeyState;
-      break;
+        case '5':
+            if( inputActive ){
+                break;
+            }
+            currentState = &Shellminator::ShellminatorPageUpKeyState;
+            break;
 
-    case '6':
-      currentState = &Shellminator::ShellminatorPageDownKeyState;
-      break;
+        case '6':
+            if( inputActive ){
+                break;
+            }
+            currentState = &Shellminator::ShellminatorPageDownKeyState;
+            break;
 
-    case '<':
-      currentState = &Shellminator::ShellminatorMouseEventParserState;
-      break;
+        case '<':
+            currentState = &Shellminator::ShellminatorMouseEventParserState;
+            break;
 
-    default:
-      currentState = &Shellminator::ShellminatorDefaultState;
-      break;
+        default:
+            currentState = &Shellminator::ShellminatorDefaultState;
+            break;
 
-  }
+    }
 
 }
 
@@ -1909,10 +1955,12 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
       }
 
+      else if( inputActive && inputSecretMode ){
+        channel -> print( "\u2022" );
+      }
+
       else{
-
-        channel -> print(new_char);
-
+        channel -> print( new_char );
       }
 
     }
@@ -2028,11 +2076,46 @@ bool Shellminator::waitForKey( Stream* source, char* keys, uint32_t timeout ){
 
 }
 
-void Shellminator::input( char *buffer, int bufferSize, const char *lineText, void(*callback)(char*, int), bool secret ){
+void Shellminator::input( char *buffer, int bufferSize, const char *instruction, void(*callback)(char*, int, Shellminator*), bool secret ){
+    
+    // Create a new line for the input prompt.
     channel -> println();
+
+    // Save the buffer and its size.
+    inputDestinationBuffer = buffer;
+    inputDestinationBufferSize = bufferSize;
+
+    // If the output buffer is larger, than the internal buffer,
+    // limit its size. The terminal interface can't handle more
+    // characters anyway.
+    if( inputDestinationBufferSize > SHELLMINATOR_BUFF_LEN ){
+        inputDestinationBufferSize = SHELLMINATOR_BUFF_LEN;
+    }
+
+    // Save the callback function address.
+    inputCallback = callback;
+
+    // Calculate the text size for the instruction text.
+    inputInstuctionSize = strlen( instruction );
+
+    // Print the instruction.
+    channel -> print( instruction );
+
+    // Save the flag for the input prompt.
     inputActive = true;
-    inputInstuctionSize = strlen( lineText );
-    channel -> print( lineText );
+
+    // Save the secret mode setting.
+    inputSecretMode = secret;
+
+    // In case of secret mode, print a lock
+    // and midify the instruction text size
+    // accordingly.
+    if( inputSecretMode ){
+        channel -> print( "\U0001F512  " );
+        inputInstuctionSize += 3;
+    }
+
+    // Redraw the line.
     redrawLine();
 }
 

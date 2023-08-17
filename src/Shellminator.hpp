@@ -389,7 +389,7 @@ public:
     /// ![Screen Coordinate System](screen_space.png)
     /// The __origin__ is on the top left and it's coordinate is 1;1.
     /// The screen size can vary.
-    bool getCursorPosition( int *x, int *y, uint32_t timeout = 100 );
+    bool getCursorPosition( int *x, int *y, uint32_t timeout = 250 );
 
     /// Set the position of the cursor.
     ///
@@ -686,7 +686,7 @@ public:
     /// @note To close the Screen, you have to press the return or the abort( ctrl+c ) key.
     ///
     /// @note To close the Screen session from code, you can use the @ref endScreen function.
-    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 100 );
+    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
 
     /// Abort Screen session.
     ///
@@ -820,7 +820,7 @@ public:
     /// Input prompt.
     ///
     /// It is a simple prompt for user input.
-    void input( char *buffer, int bufferSize, const char *lineText, void(*callback)(char*, int), bool secret = false );
+    void input( char *buffer, int bufferSize, const char *instruction, void(*callback)(char*, int, Shellminator*), bool secret = false );
     
 
     /// Select list.
@@ -1125,6 +1125,10 @@ private:
 
     bool inputActive = false;
     int inputInstuctionSize = 0;
+    char* inputDestinationBuffer;
+    int inputDestinationBufferSize;
+    bool inputSecretMode;
+    void(*inputCallback)(char*, int, Shellminator*);
 
 
 #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
