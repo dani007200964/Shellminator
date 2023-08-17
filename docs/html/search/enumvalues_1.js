@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cyan_0',['CYAN',['../class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36',1,'Shellminator']]]
+  ['cyan_0',['CYAN',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2af20b5605d832c2de91cddc2922eacc36',1,'Shellminator']]]
 ];

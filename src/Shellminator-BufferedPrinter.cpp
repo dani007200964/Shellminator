@@ -131,7 +131,7 @@ size_t ShellminatorBufferedPrinter::write( const uint8_t *data, size_t size ){
     }
 
     for( i = 0; i < size; i++ ){
-        // Save the current character in the buffer to the next free slot in the buffer.
+        // Save the current character in the data to the next free slot in the buffer.
         buffer[ bufferPointer ] = data[ i ];
 
         // Increment the buffer pointer.

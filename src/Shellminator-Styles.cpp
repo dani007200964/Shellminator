@@ -33,126 +33,13 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 
-void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
-
-  if( !enableFormatting ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  channel -> write( 27 );
-  channel -> print( '[' );
-  channel -> print( style );
-  channel -> print( ';' );
-  channel -> print( color );
-  channel -> print( 'm' );
-
-}
-
-void Shellminator::setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  if( !enableFormatting ){
-
-    *buff='\0';
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  sprintf( buff, "\033[%d;%dm", style, color );
-
-}
-
-void Shellminator::setTerminalCharacterColor( char* buff, uint8_t buffSize, uint8_t style, uint8_t color ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  snprintf( buff, buffSize, "\033[%d;%dm", style, color );
-
-}
-
-void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color ){
-
-  if( stream_p == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  stream_p -> write( 27 );
-  stream_p -> print( '[' );
-  stream_p -> print( style );
-  stream_p -> print( ';' );
-  stream_p -> print( color );
-  stream_p -> print( 'm' );
-
-}
-
 void Shellminator::hideCursor(){
 
   if( !enableFormatting ){
-
     return;
-
   }
 
-  channel -> print( (const char*)"\033[?25l" );
-
-}
-
-void Shellminator::hideCursor( char* buff, uint8_t bufferSize ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  snprintf( buff, bufferSize, "\033[?25l" );
+  hideCursor( channel );
 
 }
 
@@ -171,24 +58,10 @@ void Shellminator::hideCursor( Stream *stream_p ){
 void Shellminator::showCursor(){
 
   if( !enableFormatting ){
-
     return;
-
   }
 
-  channel -> print( (const char*)"\033[?25h" );
-
-}
-
-void Shellminator::showCursor( char* buff, uint8_t buffSize ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  snprintf( buff, buffSize, "\033[?25h" );
+  showCursor( channel );
 
 }
 
@@ -213,3 +86,44 @@ void Shellminator::clear() {
   channel -> print( (const char*)"[J" );  // VT100 screen erase command
 
 }
+
+void Shellminator::setFormatFunc( Stream *stream_p, int firstArg, ... ){
+
+    va_list list;
+    int next;
+
+    if( stream_p == NULL ){
+        return;
+    }
+
+    stream_p -> print( "\033[" );
+    stream_p -> print( firstArg );
+
+    va_start( list, firstArg );
+    
+    next = va_arg( list, int );
+    while( next >= 0 ){
+        stream_p -> print( ';' );
+        stream_p -> print( next );
+        next = va_arg( list, int );
+    }
+
+    stream_p -> print( 'm' );
+
+    va_end( list );
+
+}
+
+void Shellminator::formatFunc( int firstArg, ... ){
+
+    va_list args;
+
+    va_start( args, firstArg );
+
+    setFormatFunc( channel, firstArg, args );
+
+    va_end( args );
+
+}
+
+

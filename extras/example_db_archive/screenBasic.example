@@ -63,7 +63,7 @@ private:
 
 };
 
-void layout::draw( int width, int  height ){
+void layout::draw(){
 
     // If the reference to the caller terminal is invalid,
     // we can not continue.

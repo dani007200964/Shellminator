@@ -129,25 +129,95 @@ $(document).ready(function(){initNavTree('class_shellminator_plot.html',''); ini
 </div><!--header-->
 <div class="contents">
 
+<p>This class can create a simple plotter object.  
+ <a href="class_shellminator_plot.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_shellminator-_plot_module_8hpp_source.html">Shellminator-PlotModule.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ShellminatorPlot:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_plot__inherit__graph.svg" width="146" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for ShellminatorPlot:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_plot__coll__graph.svg" width="387" height="362"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a75bfc3355b5b3cc7cd6edeee0aea1d85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a75bfc3355b5b3cc7cd6edeee0aea1d85">ShellminatorPlot</a> (<a class="el" href="class_shellminator.html">Shellminator</a> *shell_p, float *y, int y_size, int color=<a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>)</td></tr>
-<tr class="separator:a75bfc3355b5b3cc7cd6edeee0aea1d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1f2d14d461361bafd9106caf876b037"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#ac1f2d14d461361bafd9106caf876b037">begin</a> ()</td></tr>
-<tr class="separator:ac1f2d14d461361bafd9106caf876b037"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d26148fd018a8cd29eeb0fdf9421b14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a1d26148fd018a8cd29eeb0fdf9421b14">addPlot</a> (float *y, int y_size, int color=0)</td></tr>
-<tr class="separator:a1d26148fd018a8cd29eeb0fdf9421b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7616591a9cd44c546bed9ec33b2020"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#aea7616591a9cd44c546bed9ec33b2020">draw</a> (bool redraw=false)</td></tr>
-<tr class="separator:aea7616591a9cd44c546bed9ec33b2020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884bc7f179be465f7cef5e59da6a1237"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a> ()</td></tr>
+<tr class="memdesc:a884bc7f179be465f7cef5e59da6a1237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">More...</a><br /></td></tr>
+<tr class="separator:a884bc7f179be465f7cef5e59da6a1237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c0c3aaaf089f6e56c04f9b18ce4c52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#aa6c0c3aaaf089f6e56c04f9b18ce4c52">ShellminatorPlot</a> (float *data_p, int dataSize_p, const char *name_p, int color_p=<a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>)</td></tr>
+<tr class="memdesc:aa6c0c3aaaf089f6e56c04f9b18ce4c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for user calculated float array.  <a href="class_shellminator_plot.html#aa6c0c3aaaf089f6e56c04f9b18ce4c52">More...</a><br /></td></tr>
+<tr class="separator:aa6c0c3aaaf089f6e56c04f9b18ce4c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ebfc8d5a024f39bffc0107926c3ad9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">init</a> (<a class="el" href="class_shellminator.html">Shellminator</a> *parent_p) override</td></tr>
+<tr class="memdesc:a89ebfc8d5a024f39bffc0107926c3ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init function.  <a href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">More...</a><br /></td></tr>
+<tr class="separator:a89ebfc8d5a024f39bffc0107926c3ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0397f69d0a061af1804200d4b6d1bc96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">draw</a> () override</td></tr>
+<tr class="memdesc:a0397f69d0a061af1804200d4b6d1bc96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw function.  <a href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">More...</a><br /></td></tr>
+<tr class="separator:a0397f69d0a061af1804200d4b6d1bc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07bb6fd84a8b3199135766c9f3a8c6e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">update</a> (int width_p, int height_p) override</td></tr>
+<tr class="memdesc:a07bb6fd84a8b3199135766c9f3a8c6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function.  <a href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">More...</a><br /></td></tr>
+<tr class="separator:a07bb6fd84a8b3199135766c9f3a8c6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f441185ded0dbab5e14bbd9640afbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">setColor</a> (<a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a> color_p)</td></tr>
+<tr class="memdesc:a15f441185ded0dbab5e14bbd9640afbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the color of the plot.  <a href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">More...</a><br /></td></tr>
+<tr class="separator:a15f441185ded0dbab5e14bbd9640afbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_shellminator_screen"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_shellminator_screen')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td></tr>
+<tr class="memitem:af3c4d172abc914d9e86fd1679c90d22e inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#af3c4d172abc914d9e86fd1679c90d22e">draw</a> ()</td></tr>
+<tr class="memdesc:af3c4d172abc914d9e86fd1679c90d22e inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw function.  <a href="class_shellminator_screen.html#af3c4d172abc914d9e86fd1679c90d22e">More...</a><br /></td></tr>
+<tr class="separator:af3c4d172abc914d9e86fd1679c90d22e inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab227cd8886be6937ac6c0e4315780f2d inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#ab227cd8886be6937ac6c0e4315780f2d">init</a> (<a class="el" href="class_shellminator.html">Shellminator</a> *parent_p)</td></tr>
+<tr class="memdesc:ab227cd8886be6937ac6c0e4315780f2d inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init function.  <a href="class_shellminator_screen.html#ab227cd8886be6937ac6c0e4315780f2d">More...</a><br /></td></tr>
+<tr class="separator:ab227cd8886be6937ac6c0e4315780f2d inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60fb1d0c5c484288241119e66b601951 inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a60fb1d0c5c484288241119e66b601951">setOrigin</a> (int x, int y)</td></tr>
+<tr class="memdesc:a60fb1d0c5c484288241119e66b601951 inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Origin of the top left corner.  <a href="class_shellminator_screen.html#a60fb1d0c5c484288241119e66b601951">More...</a><br /></td></tr>
+<tr class="separator:a60fb1d0c5c484288241119e66b601951 inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772b52297ac083e64b916cec8000811a inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a772b52297ac083e64b916cec8000811a">update</a> (int width_p, int height_p)</td></tr>
+<tr class="memdesc:a772b52297ac083e64b916cec8000811a inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function.  <a href="class_shellminator_screen.html#a772b52297ac083e64b916cec8000811a">More...</a><br /></td></tr>
+<tr class="separator:a772b52297ac083e64b916cec8000811a inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2b133c7d13f8bf8225c34eb89d78d9 inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a4b2b133c7d13f8bf8225c34eb89d78d9">left</a> ()</td></tr>
+<tr class="memdesc:a4b2b133c7d13f8bf8225c34eb89d78d9 inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the coordinate of the left column next to the object.  <a href="class_shellminator_screen.html#a4b2b133c7d13f8bf8225c34eb89d78d9">More...</a><br /></td></tr>
+<tr class="separator:a4b2b133c7d13f8bf8225c34eb89d78d9 inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230a346a6eb08ebbf51b79bf81e7cbd5 inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a230a346a6eb08ebbf51b79bf81e7cbd5">right</a> ()</td></tr>
+<tr class="memdesc:a230a346a6eb08ebbf51b79bf81e7cbd5 inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the coordinate of the right column next to the object.  <a href="class_shellminator_screen.html#a230a346a6eb08ebbf51b79bf81e7cbd5">More...</a><br /></td></tr>
+<tr class="separator:a230a346a6eb08ebbf51b79bf81e7cbd5 inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc36824fb23b17034d5efc91e7065d83 inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#acc36824fb23b17034d5efc91e7065d83">up</a> ()</td></tr>
+<tr class="memdesc:acc36824fb23b17034d5efc91e7065d83 inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the coordinate of the upper row next to the object.  <a href="class_shellminator_screen.html#acc36824fb23b17034d5efc91e7065d83">More...</a><br /></td></tr>
+<tr class="separator:acc36824fb23b17034d5efc91e7065d83 inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d526eb830942c3398194206962c544 inherit pub_methods_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a05d526eb830942c3398194206962c544">down</a> ()</td></tr>
+<tr class="memdesc:a05d526eb830942c3398194206962c544 inherit pub_methods_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the coordinate of the lower row next to the object.  <a href="class_shellminator_screen.html#a05d526eb830942c3398194206962c544">More...</a><br /></td></tr>
+<tr class="separator:a05d526eb830942c3398194206962c544 inherit pub_methods_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_shellminator_screen"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_shellminator_screen')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td></tr>
+<tr class="memitem:a1791c819682bf400da74279df57a1d65 inherit pro_attribs_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator.html">Shellminator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a1791c819682bf400da74279df57a1d65">parent</a> = NULL</td></tr>
+<tr class="memdesc:a1791c819682bf400da74279df57a1d65 inherit pro_attribs_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the caller terminal object.  <a href="class_shellminator_screen.html#a1791c819682bf400da74279df57a1d65">More...</a><br /></td></tr>
+<tr class="separator:a1791c819682bf400da74279df57a1d65 inherit pro_attribs_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94051b46d88a4ae19b9453080faf2b6 inherit pro_attribs_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#aa94051b46d88a4ae19b9453080faf2b6">width</a> = 1</td></tr>
+<tr class="memdesc:aa94051b46d88a4ae19b9453080faf2b6 inherit pro_attribs_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual width of the object.  <a href="class_shellminator_screen.html#aa94051b46d88a4ae19b9453080faf2b6">More...</a><br /></td></tr>
+<tr class="separator:aa94051b46d88a4ae19b9453080faf2b6 inherit pro_attribs_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cac8dd98ce2fd5fe012f285e8f35447 inherit pro_attribs_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a1cac8dd98ce2fd5fe012f285e8f35447">height</a> = 1</td></tr>
+<tr class="memdesc:a1cac8dd98ce2fd5fe012f285e8f35447 inherit pro_attribs_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual height of the object.  <a href="class_shellminator_screen.html#a1cac8dd98ce2fd5fe012f285e8f35447">More...</a><br /></td></tr>
+<tr class="separator:a1cac8dd98ce2fd5fe012f285e8f35447 inherit pro_attribs_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6285040b52a721b1c4b229ba3f3740 inherit pro_attribs_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a9c6285040b52a721b1c4b229ba3f3740">originX</a> = 1</td></tr>
+<tr class="memdesc:a9c6285040b52a721b1c4b229ba3f3740 inherit pro_attribs_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">X coordinate of the origin.  <a href="class_shellminator_screen.html#a9c6285040b52a721b1c4b229ba3f3740">More...</a><br /></td></tr>
+<tr class="separator:a9c6285040b52a721b1c4b229ba3f3740 inherit pro_attribs_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b1df77d6227cefb8be9a3a837f8ab80 inherit pro_attribs_class_shellminator_screen"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_screen.html#a6b1df77d6227cefb8be9a3a837f8ab80">originY</a> = 1</td></tr>
+<tr class="memdesc:a6b1df77d6227cefb8be9a3a837f8ab80 inherit pro_attribs_class_shellminator_screen"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y coordinate of the origin.  <a href="class_shellminator_screen.html#a6b1df77d6227cefb8be9a3a837f8ab80">More...</a><br /></td></tr>
+<tr class="separator:a6b1df77d6227cefb8be9a3a837f8ab80 inherit pro_attribs_class_shellminator_screen"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8hpp_source.html#l00055">55</a> of file <a class="el" href="_shellminator-_plot_module_8hpp_source.html">Shellminator-PlotModule.hpp</a>.</p>
+<div class="textblock"><p >This class can create a simple plotter object. </p>
+<p >With this class, you can easily create a plotter object, which is capable of real time plotting. It can be attached to the main terminal with the beginScreen function. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8hpp_source.html#l00062">62</a> of file <a class="el" href="_shellminator-_plot_module_8hpp_source.html">Shellminator-PlotModule.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a75bfc3355b5b3cc7cd6edeee0aea1d85" name="a75bfc3355b5b3cc7cd6edeee0aea1d85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75bfc3355b5b3cc7cd6edeee0aea1d85">&#9670;&#160;</a></span>ShellminatorPlot()</h2>
+<a id="a884bc7f179be465f7cef5e59da6a1237" name="a884bc7f179be465f7cef5e59da6a1237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884bc7f179be465f7cef5e59da6a1237">&#9670;&#160;</a></span>ShellminatorPlot() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,122 +225,221 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">ShellminatorPlot::ShellminatorPlot </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_shellminator.html">Shellminator</a> *&#160;</td>
-          <td class="paramname"><em>shell_p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>color</em> = <code><a class="el" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00053">53</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1d26148fd018a8cd29eeb0fdf9421b14" name="a1d26148fd018a8cd29eeb0fdf9421b14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d26148fd018a8cd29eeb0fdf9421b14">&#9670;&#160;</a></span>addPlot()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ShellminatorPlot::addPlot </td>
-          <td>(</td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>color</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00064">64</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac1f2d14d461361bafd9106caf876b037" name="ac1f2d14d461361bafd9106caf876b037"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1f2d14d461361bafd9106caf876b037">&#9670;&#160;</a></span>begin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ShellminatorPlot::begin </td>
-          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00036">36</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_plot_ac1f2d14d461361bafd9106caf876b037_cgraph.svg" width="394" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00044">44</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aea7616591a9cd44c546bed9ec33b2020" name="aea7616591a9cd44c546bed9ec33b2020"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea7616591a9cd44c546bed9ec33b2020">&#9670;&#160;</a></span>draw()</h2>
+<a id="aa6c0c3aaaf089f6e56c04f9b18ce4c52" name="aa6c0c3aaaf089f6e56c04f9b18ce4c52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c0c3aaaf089f6e56c04f9b18ce4c52">&#9670;&#160;</a></span>ShellminatorPlot() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
+          <td class="memname">ShellminatorPlot::ShellminatorPlot </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dataSize_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>color_p</em> = <code><a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor for user calculated float array. </p>
+<p >With this constructor you can create a plotter object which is using a user created dataset. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_p</td><td>Pointer to a float array, which contains the data points to be printed. </td></tr>
+    <tr><td class="paramname">dataSize_p</td><td>The size of the float array in elements( NOT IN BYTES! ). </td></tr>
+    <tr><td class="paramname">color_p</td><td>Optionally, you can specify the color of the plot. Available colors: </td></tr>
+    <tr><td class="paramname">name_p</td><td>The name of the plot. *Shellminator::RED *Shellminator::GREEN *Shellminator::WHITE </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00036">36</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0397f69d0a061af1804200d4b6d1bc96" name="a0397f69d0a061af1804200d4b6d1bc96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0397f69d0a061af1804200d4b6d1bc96">&#9670;&#160;</a></span>draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
           <td class="memname">void ShellminatorPlot::draw </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>redraw</em> = <code>false</code></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw function. </p>
+<p >This function is called by the caller terminal if redraw is requested. If you need to draw your screen, the requestRedraw function must be called on the parent terminal object. The reason for this is to save some CPU time and do not waste it to draw something unnecessarily. </p>
+
+<p>Reimplemented from <a class="el" href="class_shellminator_screen.html#af3c4d172abc914d9e86fd1679c90d22e">ShellminatorScreen</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00099">99</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_plot_a0397f69d0a061af1804200d4b6d1bc96_cgraph.svg" width="416" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a89ebfc8d5a024f39bffc0107926c3ad9" name="a89ebfc8d5a024f39bffc0107926c3ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89ebfc8d5a024f39bffc0107926c3ad9">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorPlot::init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_shellminator.html">Shellminator</a> *&#160;</td>
+          <td class="paramname"><em>parent_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Init function. </p>
+<p >This function is called by the host terminal, when the plot object gets registered to it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent_p</td><td>Pointer to the caller terminal object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_shellminator_screen.html#ab227cd8886be6937ac6c0e4315780f2d">ShellminatorScreen</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00051">51</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a15f441185ded0dbab5e14bbd9640afbc" name="a15f441185ded0dbab5e14bbd9640afbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f441185ded0dbab5e14bbd9640afbc">&#9670;&#160;</a></span>setColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorPlot::setColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a>&#160;</td>
+          <td class="paramname"><em>color_p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00104">104</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_plot_aea7616591a9cd44c546bed9ec33b2020_cgraph.svg" width="616" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p>Set the color of the plot. </p>
+<p >With this function, you can set the color of the plot. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color_p</td><td>Specify a color from <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2" title="VT100 color codes.">Shellminator::textColor_t</a> enumeration. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00621">621</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
+
 </div>
+</div>
+<a id="a07bb6fd84a8b3199135766c9f3a8c6e9" name="a07bb6fd84a8b3199135766c9f3a8c6e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07bb6fd84a8b3199135766c9f3a8c6e9">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorPlot::update </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update function. </p>
+<p >The update function must be used to process events and not to draw the objects. It is called much frequently than, the draw function. All the event handling should be done in the update function, including key and mouse detection along with various events. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width_p</td><td>The width of the screen area in characters. </td></tr>
+    <tr><td class="paramname">height_p</td><td>The height of the screen area in characters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_shellminator_screen.html#a772b52297ac083e64b916cec8000811a">ShellminatorScreen</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_plot_module_8cpp_source.html#l00067">67</a> of file <a class="el" href="_shellminator-_plot_module_8cpp_source.html">Shellminator-PlotModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +465,7 @@ Here is the call graph for this function:</div>
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -311,7 +480,7 @@ Here is the call graph for this function:</div>
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

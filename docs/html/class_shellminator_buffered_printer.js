@@ -1,13 +1,11 @@
 var class_shellminator_buffered_printer =
 [
     [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a", null ],
-    [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html#a7945363d53d26cb12af5f7c3b3c74144", null ],
-    [ "~ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html#a0d6423521acdcadb64b7435f43ebd39a", null ],
-    [ "allocate", "class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6", null ],
-    [ "deallocate", "class_shellminator_buffered_printer.html#a8ecadfaa26b7d97ba81dd576702f2459", null ],
-    [ "flush", "class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4", null ],
-    [ "getBufferSize", "class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de", null ],
-    [ "getChannel", "class_shellminator_buffered_printer.html#adeab81bd97caa1e14c89fde50086ec0d", null ],
-    [ "printf", "class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e", null ],
-    [ "setChannel", "class_shellminator_buffered_printer.html#a2e2c36f0e7c8f9069d741040266a137e", null ]
+    [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html#a4aa80341264a753333c403b29742db64", null ],
+    [ "available", "class_shellminator_buffered_printer.html#ac54c70b98cefe894793af67e3ebbe493", null ],
+    [ "flush", "class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d", null ],
+    [ "peek", "class_shellminator_buffered_printer.html#a7cdf0d0997a465d6cc47ff2528d7fdbc", null ],
+    [ "read", "class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9", null ],
+    [ "write", "class_shellminator_buffered_printer.html#affefb97addfa3c7d5ee88442f016f26d", null ],
+    [ "write", "class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2", null ]
 ];

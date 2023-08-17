@@ -128,16 +128,14 @@ $(document).ready(function(){initNavTree('class_shellminator_buffered_printer.ht
 
 <p>This is the complete list of members for <a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6">allocate</a>(int bufferSize)</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a8ecadfaa26b7d97ba81dd576702f2459">deallocate</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">flush</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">getBufferSize</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#adeab81bd97caa1e14c89fde50086ec0d">getChannel</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>(const char *fmt,...)</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a2e2c36f0e7c8f9069d741040266a137e">setChannel</a>(Stream *channel_p)</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a7945363d53d26cb12af5f7c3b3c74144">ShellminatorBufferedPrinter</a>(Stream *channel_p)</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a0d6423521acdcadb64b7435f43ebd39a">~ShellminatorBufferedPrinter</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#ac54c70b98cefe894793af67e3ebbe493">available</a>() override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d">flush</a>() override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a7cdf0d0997a465d6cc47ff2528d7fdbc">peek</a>() override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9">read</a>() override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a>()</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#a4aa80341264a753333c403b29742db64">ShellminatorBufferedPrinter</a>(Stream *channel_p, uint8_t *buffer_p, int bufferSize_p)</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2">write</a>(uint8_t b) override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html#affefb97addfa3c7d5ee88442f016f26d">write</a>(const uint8_t *data, size_t size) override</td><td class="entry"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -159,7 +157,7 @@ $(document).ready(function(){initNavTree('class_shellminator_buffered_printer.ht
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -174,7 +172,7 @@ $(document).ready(function(){initNavTree('class_shellminator_buffered_printer.ht
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

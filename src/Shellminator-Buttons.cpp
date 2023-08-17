@@ -163,6 +163,10 @@ void ShellminatorButton::update( int width_p, int  height_p ){
 
     Shellminator::shellEvent_t newEvent;
 
+    if( parent == NULL ){
+        return;
+    }
+
     width = width_p;
     height = height_p;
 
@@ -177,10 +181,6 @@ void ShellminatorButton::update( int width_p, int  height_p ){
         height = 3;
     }
 
-    if( parent == NULL ){
-        return;
-    }
-
     newEvent = parent -> readEvent();
 
     // In case of empty event, we can't do anything.
@@ -188,15 +188,17 @@ void ShellminatorButton::update( int width_p, int  height_p ){
         return;
     }
 
-    if( newEvent.type != event.type ){
+    if( newEvent.type == Shellminator::SHELL_EVENT_RESIZE ){
+        redraw = true;
         return;
     }
 
     // If the event is key related, we have to check if the key
     // matches with the attached key.
-    if( newEvent.type == Shellminator::SHELL_EVENT_KEY ){
+    if( ( newEvent.type == Shellminator::SHELL_EVENT_KEY ) && ( newEvent.type == event.type ) ){
         if( newEvent.data == event.data ){
             triggered = true;
+            parent -> requestRedraw();
             redraw = true;
             return;
         }
@@ -212,21 +214,13 @@ void ShellminatorButton::update( int width_p, int  height_p ){
             ( newEvent.y < ( originY + height ) ) ){
 
             triggered = true;
+            parent -> requestRedraw();
             redraw = true;
             return;
         }
 
     }
 
-}
-
-bool ShellminatorButton::redrawRequest(){
-
-    if( redraw ){
-        redraw = false;
-        return true;
-    }
-    return false;
 }
 
 void ShellminatorButton::draw(){
@@ -250,9 +244,60 @@ void ShellminatorButton::draw(){
         return;
     }
 
-    // Set cursor to origin and set color to the specified one.
+    // Only draw if resized event or timer event happened.
+    if( !redraw ){
+        return;
+    }
+    redraw = false;
+
+    // print the parts, that has to be drawn every time.
+    // Middle line section.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
+
+    // Set color to the specified one.
+    //Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
+
+    // In case of trigger event, set it to low intensity.
+    if( triggered ){
+        // Create inverted text.
+        //Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
+        Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, color );
+    }
+
+    else{
+        Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, color );
+    }
+
+    // Print the middle section with the text.
+    selectedChannel -> print( verticalLine );
+
+    // Calculate text starting position.
+    // It has to be centered.
+    limit = ( width - textWidth ) / 2;
+
+    // Print as many spaces as needed, to make the text centered.
+    // We print spaces to clear the unwanted garbage from the line.
+    for( i = 1; i < limit; i++ ){
+        selectedChannel -> print( ' ' );
+    }
+
+    // Print the name text.
+    selectedChannel -> print( name );
+
+    // Calculate how many characters left until line end.
+    limit = width - ( limit + textWidth );
+
+    // Print as many spaces as needed, to make the text centered.
+    // We print spaces to clear the unwanted garbage from the line.
+    for( i = 1; i < limit; i++ ){
+        selectedChannel -> print( ' ' );
+    }
+
+    // print the right border.
+    selectedChannel -> print( verticalLine );
+
+    // Set cursor to origin.
     Shellminator::setCursorPosition( selectedChannel, originX, originY );
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
 
     // Print the top part.
     selectedChannel -> print( topLeftCorner );
@@ -260,38 +305,6 @@ void ShellminatorButton::draw(){
         selectedChannel -> print( horizontalLine );
     }
     selectedChannel -> print( topRightCorner );
-
-    // Middle line.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
-
-    // Print the middle section with the text.
-    selectedChannel -> print( verticalLine );
-
-    // Erase the whole line.
-    selectedChannel -> println( "\033[0K" );
-
-    // Set cursor to make the text centered.
-    limit = ( width - textWidth ) / 2;
-    Shellminator::setCursorPosition( selectedChannel, originX + limit, originY + 1 );
-
-    // In case of trigger event, set it to low intensity.
-    if( triggered ){
-        // Create inverted text.
-        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
-        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::LOW_INTENSITY, color );
-    }
-
-    // Print the name text.
-    selectedChannel -> print( name );
-
-    // Set mode to regular.
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
-
-    // Set cursor to print the right frame bar.
-    Shellminator::setCursorPosition( selectedChannel, originX + width - 1, originY + 1 );
-
-    // print the right border.
-    selectedChannel -> print( verticalLine );
 
     // Bottom line.
     Shellminator::setCursorPosition( selectedChannel, originX, originY + 2 );
@@ -315,20 +328,15 @@ void ShellminatorButton::draw(){
         selectedChannel -> print( horizontalLine );
     }
 
-    // Check if a key nape has to be displayed.
+    // Check if a key name has to be displayed.
     if( event.type != Shellminator::SHELL_EVENT_EMPTY ){
         selectedChannel -> print( "\u2524" );
-
-        // If triggered, the text must be inverted.
-        if( triggered ){
-            Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
-        }
 
         // Print the triggering key name.
         selectedChannel -> print( eventText );
 
         // Set the format back to regular an finish the line.
-        Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
+        Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, color );
         selectedChannel -> print( "\u2502" );
     }
 
@@ -347,6 +355,7 @@ void ShellminatorButton::draw(){
             func();
         }
 
+        parent -> requestRedraw();
         redraw = true;
 
         triggered = false;

@@ -124,9 +124,13 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
+	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
 	add_executable( Screenadvanced ${SOURCES} extras/examples_desktop/Desktop/Screenadvanced/Screenadvanced.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
+	add_executable( Inputsimple ${SOURCES} extras/examples_emscripten/Emscripten/Inputsimple/Inputsimple.cpp )
+	target_link_options( Inputsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
 	add_executable( Screenadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Screenadvanced/Screenadvanced.cpp )
 	target_link_options( Screenadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 

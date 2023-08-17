@@ -8,5 +8,5 @@ var searchData=
   ['clientdisconnect_5',['clientDisconnect',['../class_shellminator.html#a501a9207ab6e968ba081477d6c41651a',1,'Shellminator']]],
   ['coverage_6',['Coverage',['../md_docs_markdown_pages_coverage.html',1,'']]],
   ['coverage_2emd_7',['coverage.md',['../coverage_8md.html',1,'']]],
-  ['cyan_8',['CYAN',['../class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36',1,'Shellminator']]]
+  ['cyan_8',['CYAN',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2af20b5605d832c2de91cddc2922eacc36',1,'Shellminator']]]
 ];

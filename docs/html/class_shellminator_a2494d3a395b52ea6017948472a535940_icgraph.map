@@ -1,4 +1,5 @@
 <map id="Shellminator::showCursor" name="Shellminator::showCursor">
-<area shape="rect" id="node1" title=" " alt="" coords="212,5,383,31"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd" title="Select list." alt="" coords="5,5,164,31"/>
+<area shape="rect" id="node1" title="Show the cursor." alt="" coords="217,31,388,56"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a95945bd5860aaed1ac544da1b3800447" title="Abort Screen session." alt="" coords="5,5,169,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd" title="Select list." alt="" coords="8,55,167,80"/>
 </map>

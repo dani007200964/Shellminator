@@ -1,8 +1,9 @@
 <map id="Shellminator::update" name="Shellminator::update">
-<area shape="rect" id="node1" title="Update function." alt="" coords="5,56,147,81"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="200,5,357,31"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9" title="Bring some color into your code." alt="" coords="415,42,585,82"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="195,107,363,132"/>
-<area shape="rect" id="node5" href="$class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4" title="Flush function." alt="" coords="637,129,816,169"/>
-<area shape="rect" id="node6" href="$class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e" title="Regular printf like function." alt="" coords="411,157,589,197"/>
+<area shape="rect" id="node1" title="Update function." alt="" coords="5,80,147,105"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="213,5,371,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="195,55,389,80"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="215,104,369,129"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="208,153,376,179"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a3cf2cd097eb741beddcaf5340f42a404" title="Get the position of the cursor." alt="" coords="437,19,643,44"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="437,92,643,117"/>
 </map>

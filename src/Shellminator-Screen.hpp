@@ -48,8 +48,11 @@ public:
 
     /// Draw function.
     ///
-    /// This function is called by the host terminal, periodically. You have to put all
-    /// the drawing stuff in this function.
+    /// This function is called by the caller terminal if redraw
+    /// is requested. If you need to draw your screen, the 
+    /// requestRedraw function must be called on the parent terminal
+    /// object. The reason for this is to save some CPU time and do
+    /// not waste it to draw something unnecessarily.
     virtual void draw(){ /* To make the linker happy... */ }
 
     /// Init function.
@@ -72,20 +75,32 @@ public:
         if( originY < 1 ){ originY = 1; }
     }
 
-    /// Update function
+    /// Update function.
+    ///
+    /// The update function must be used to process events and not to
+    /// draw the objects. It is called much frequently than, the draw
+    /// function. All the event handling should be done in the update
+    /// function, including key and mouse detection along with various
+    /// events.
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
     virtual void update( int width_p, int  height_p ){ /* To make the linker happy... */ }
 
-    virtual bool redrawRequest(){ return false; }
-
+    /// Return the coordinate of the left column next to the object.
     int left(){ return originX - 1; }
+
+    /// Return the coordinate of the right column next to the object.
     int right(){ return originX + width; }
+
+    /// Return the coordinate of the upper row next to the object.
     int up(){ return originY - 1; }
+
+    /// Return the coordinate of the lower row next to the object.
     int down(){ return originY + height; }
 
 protected:
 
+    /// Pointer to the caller terminal object.
     Shellminator* parent = NULL;
 
     /// Actual width of the object.

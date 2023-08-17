@@ -133,90 +133,12 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"><span class="comment">// With a Shellminator object.</span></div>
 <div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
 <div class="line"><a class="code hl_class" href="class_shellminator_progress.html">ShellminatorProgress</a> progress( &amp;shell );</div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00116">Shellminator.hpp:117</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00170">Shellminator.hpp:171</a></div></div>
 <div class="ttc" id="aclass_shellminator_progress_html"><div class="ttname"><a href="class_shellminator_progress.html">ShellminatorProgress</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_progress_8hpp_source.html#l00055">Shellminator-Progress.hpp:55</a></div></div>
 </div><!-- fragment --><p >If you make a simple system, you can use the simple solution with a Stream object, like Serial. </p><dl class="section note"><dt>Note</dt><dd>However it is recommended to use the advanced solution. It is more flexible, and it can be used with buffering.</dd></dl>
 <p>The result will look like this: </p><div class="fragment"><div class="line">-- Simple Progress Bar Demo --</div>
 <div class="line"> 39.0% ################------------------------ | Test progress</div>
-</div><!-- fragment --><p >This example shows the simple solution: </p><div class="fragment"><div class="line"> </div>
-<div class="line"><span class="comment">/*</span></div>
-<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
-<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
-<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
-<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment">*/</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_progress_8hpp.html">Shellminator-Progress.hpp</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a Shellminator object, and initialize it to use Serial</span></div>
-<div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a progress bar object and connect it to the shell.</span></div>
-<div class="line"><a class="code hl_class" href="class_shellminator_progress.html">ShellminatorProgress</a> progress( &amp;shell );</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a pretty logo for the terminal.</span></div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> logo[] =</div>
-<div class="line"> </div>
-<div class="line">    <span class="stringliteral">&quot;   _____ __         ____          _             __            \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot; ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n&quot;</span></div>
-<div class="line"> </div>
-<div class="line">;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Prototype to a function that will be called every time</span></div>
-<div class="line"><span class="comment">// when you press the enter key.</span></div>
-<div class="line"><span class="keywordtype">void</span> executionFunction( <span class="keywordtype">char</span>* command, <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* shell );</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// System init section.</span></div>
-<div class="line"><span class="keywordtype">void</span> setup(){</div>
-<div class="line"> </div>
-<div class="line">    Serial.begin(115200);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Clear the terminal</span></div>
-<div class="line">    shell.clear();</div>
-<div class="line"> </div>
-<div class="line">    Serial.println( <span class="stringliteral">&quot;-- Simple Progress Bar Demo --&quot;</span> );</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Infinite loop.</span></div>
-<div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordtype">int</span> i;</div>
-<div class="line">    <span class="keywordflow">for</span>( i = 0; i &lt; 100; i++ ){</div>
-<div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Test progress&quot;</span> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">for</span>( i = 100; i &gt; 0; i-- ){</div>
-<div class="line"> </div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Test progress&quot;</span> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">}</div>
-<div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
-<div class="ttc" id="a_shellminator-_progress_8hpp_html"><div class="ttname"><a href="_shellminator-_progress_8hpp.html">Shellminator-Progress.hpp</a></div></div>
-<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p >This example shows the simple solution: </p><div class="fragment"></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 
@@ -238,7 +160,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -253,7 +175,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

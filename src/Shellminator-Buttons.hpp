@@ -85,8 +85,6 @@ public:
 
     void update( int width_p, int  height_p ) override;
 
-    bool redrawRequest() override;
-
     void attachEvent( Shellminator::shellEvent_t event_p );
     void attachTriggerFunction( void(*func_p)(void) );
     void setRoundCorners();
@@ -97,6 +95,9 @@ private:
     const char* name;
 
     bool triggered = false;
+
+    bool redraw = true;
+
 
     Shellminator::shellEvent_t event;
     char eventText[ 5 ];
@@ -109,8 +110,6 @@ private:
     /// This will be redirected to the parents channel by default.
     Stream* selectedChannel = NULL;
     bool bufferingEnabled;
-
-    bool redraw = true;
 
     uint8_t color = Shellminator::WHITE;
 

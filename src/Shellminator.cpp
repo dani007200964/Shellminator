@@ -78,47 +78,6 @@ Shellminator::Shellminator( WiFiServer *server_p ){
   // Because we did not specified the execution function, we have to make it a NULL
   // pointer to make it detectable.
   execution_fn = NULL;
-  execution_fn_with_parrent = NULL;
-
-}
-
-Shellminator::Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char* ) ){
-
-  server = server_p;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // passing execution_fn_p to execution_fn
-  execution_fn = execution_fn_p;
-  execution_fn_with_parrent = NULL;
-
-}
-
-Shellminator::Shellminator( WiFiServer *server_p, void( *execution_fn_p )( char*, Shellminator* ) ){
-
-  server = server_p;
-
-  // It has to be zero. We dont want to process any garbage.
-  cmd_buff_cntr = 0;
-
-  // This has to be 1 minimum, because the 0th element is used for the incoming data.
-  // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-  cmd_buff_dim = 1;
-
-  // Just in case terminate the begining of the buffer
-  cmd_buff[ 0 ][ 0 ] = '\0';
-
-  // passing execution_fn_p to execution_fn_with_parrent
-  execution_fn = NULL;
-  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -151,42 +110,6 @@ void Shellminator::setClientTimeout( uint16_t clientTimeout_p ){
 
 #endif
 
-#ifdef __AVR__
-
-const char Shellminator::helpText[] PROGMEM = {
-  "\r\n"
-  "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
-  "\r\n"
-  "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
-  "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"
-  "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"
-  "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"
-  "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"
-  "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"
-  "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"
-  "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
-  "\r\n"
-};
-
-#else
-
-const char Shellminator::helpText[] = {
-  "\r\n"
-  "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"
-  "\r\n"
-  "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"
-  "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"
-  "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"
-  "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"
-  "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"
-  "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"
-  "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"
-  "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"
-  "\r\n"
-};
-
-#endif
-
 #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
 
 Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
@@ -210,7 +133,6 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p ){
     // Because we did not specified the execution function, we have to make it a NULL
     // pointer to make it detectable.
     execution_fn = NULL;
-    execution_fn_with_parrent = NULL;
 
     // Reset all the event pointers.
     eventBufferWritePtr = 0;
@@ -239,61 +161,6 @@ Shellminator::Shellminator(	WebSocketsServer *wsServer_p ){
     // Because we did not specified the execution function, we have to make it a NULL
     // pointer to make it detectable.
     execution_fn = NULL;
-    execution_fn_with_parrent = NULL;
-
-    // Reset all the event pointers.
-    eventBufferWritePtr = 0;
-    eventBufferReadPtr = 0;
-
-}
-
-Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char* ) ){
-
-    wsServer = wsServer_p;
-    serverID = serverID_p;
-    webSocketChannel.select( wsServer, serverID );
-    channel = &webSocketChannel;
-
-    // It has to be zero. We dont want to process any garbage.
-    cmd_buff_cntr = 0;
-
-    // This has to be 1 minimum, because the 0th element is used for the incoming data.
-    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-    cmd_buff_dim = 1;
-
-    // Just in case terminate the begining of the buffer
-    cmd_buff[ 0 ][ 0 ] = '\0';
-
-    // passing execution_fn_p to execution_fn
-    execution_fn = execution_fn_p;
-    execution_fn_with_parrent = NULL;
-
-    // Reset all the event pointers.
-    eventBufferWritePtr = 0;
-    eventBufferReadPtr = 0;
-
-}
-
-Shellminator::Shellminator(	WebSocketsServer *wsServer_p, uint8_t serverID_p, void( *execution_fn_p )( char*, Shellminator* ) ){
-
-    wsServer = wsServer_p;
-    serverID = serverID_p;
-    webSocketChannel.select( wsServer, serverID );
-    channel = &webSocketChannel;
-
-    // It has to be zero. We dont want to process any garbage.
-    cmd_buff_cntr = 0;
-
-    // This has to be 1 minimum, because the 0th element is used for the incoming data.
-    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-    cmd_buff_dim = 1;
-
-    // Just in case terminate the begining of the buffer
-    cmd_buff[ 0 ][ 0 ] = '\0';
-
-    // passing execution_fn_p to execution_fn_with_parrent
-    execution_fn = NULL;
-    execution_fn_with_parrent = execution_fn_p;
 
     // Reset all the event pointers.
     eventBufferWritePtr = 0;
@@ -336,62 +203,11 @@ Shellminator::Shellminator( Stream *stream_p ){
     // Because we did not specified the execution function, we have to make it a NULL
     // pointer to make it detectable.
     execution_fn = NULL;
-    execution_fn_with_parrent = NULL;
 
     // Reset all the event pointers.
     eventBufferWritePtr = 0;
     eventBufferReadPtr = 0;
 
-
-}
-
-Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char* ) ){
-
-    channel = stream_p;
-
-    // It has to be zero. We dont want to process any garbage.
-    cmd_buff_cntr = 0;
-
-    // This has to be 1 minimum, because the 0th element is used for the incoming data.
-    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-    cmd_buff_dim = 1;
-
-    // Just in case terminate the begining of the buffer
-    cmd_buff[ 0 ][ 0 ] = '\0';
-
-    // Because we did not specified the execution function, we have to make it a NULL
-    // pointer to make it detectable.
-    execution_fn = execution_fn_p;
-    execution_fn_with_parrent = NULL;
-
-    // Reset all the event pointers.
-    eventBufferWritePtr = 0;
-    eventBufferReadPtr = 0;
-
-}
-
-Shellminator::Shellminator( Stream *stream_p, void( *execution_fn_p )( char*, Shellminator* ) ){
-
-    channel = stream_p;
-
-    // It has to be zero. We dont want to process any garbage.
-    cmd_buff_cntr = 0;
-
-    // This has to be 1 minimum, because the 0th element is used for the incoming data.
-    // The maximum value has to be ( SHELLMINATOR_BUFF_DIM - 1 )
-    cmd_buff_dim = 1;
-
-    // Just in case terminate the begining of the buffer
-    cmd_buff[ 0 ][ 0 ] = '\0';
-
-    // Because we did not specified the execution function, we have to make it a NULL
-    // pointer to make it detectable.
-    execution_fn = NULL;
-    execution_fn_with_parrent = execution_fn_p;
-
-    // Reset all the event pointers.
-    eventBufferWritePtr = 0;
-    eventBufferReadPtr = 0;
 
 }
 
@@ -422,33 +238,13 @@ ShellminatorBufferedPrinter* Shellminator::getBufferedPrinter(){
 
 }
 
-void Shellminator::setBannerText( char* banner_p ){
-
-  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
-  strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
-
-  // Just in case close the string
-  banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
-
-}
-
 void Shellminator::setBannerText( const char* banner_p ){
 
   // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
   strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
 
-  // Just in case close the string
+  // Just in case terminate the string
   banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
-
-}
-
-void Shellminator::setBannerPathText( char* bannerPath_p ){
-
-  // Copy the content from bannerPath_p to bannerPath. Because strncpy we can be sure that it wont overflow.
-  strncpy( bannerPath, bannerPath_p, SHELLMINATOR_BANNER_PATH_LEN );
-
-  // Just in case close the string
-  bannerPath[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
 
 }
 
@@ -459,12 +255,6 @@ void Shellminator::setBannerPathText( const char* bannerPath_p ){
 
   // Just in case close the string
   bannerPath[ SHELLMINATOR_BANNER_PATH_LEN - 1 ] = '\0';
-
-}
-
-void Shellminator::attachLogo( char* logo_p ){
-
-  logo = logo_p;
 
 }
 
@@ -482,19 +272,9 @@ void Shellminator::attachLogo( const char* logo_p ){
 
 }
 
-void Shellminator::addExecFunc( void( *execution_fn_p )( char* ) ){
+void Shellminator::attachExecFunc( void( *execution_fn_p )( char*, Shellminator* ) ){
 
-  // passing execution_fn_p to execution_fn
   execution_fn = execution_fn_p;
-  execution_fn_with_parrent = NULL;
-
-}
-
-void Shellminator::addExecFunc( void( *execution_fn_p )( char*, Shellminator* ) ){
-
-  // passing execution_fn_p to execution_fn_with_parrent
-  execution_fn = NULL;
-  execution_fn_with_parrent = execution_fn_p;
 
 }
 
@@ -512,21 +292,21 @@ void Shellminator::printBanner(){
     }
 
     // Sets the terminal style to bold and the color to green.
-    setTerminalCharacterColor( selectedChannel, BOLD, GREEN );
+    setFormat( selectedChannel, BOLD, GREEN );
 
     // Print the banner text and save it's size.
     lastBannerSize += selectedChannel -> print( banner );
 
     // Sets the terminal style to regular and the color to white.
-    setTerminalCharacterColor( selectedChannel, BOLD, WHITE );
+    setFormat( selectedChannel, WHITE );
 
     lastBannerSize += selectedChannel -> print( ':' );
 
-    setTerminalCharacterColor( selectedChannel, BOLD, BLUE );
+    setFormat( selectedChannel, BLUE );
 
     lastBannerSize += selectedChannel -> print( bannerPath );
 
-    setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+    setFormat( selectedChannel, REGULAR, WHITE );
 
     lastBannerSize += selectedChannel -> print( ' ' );
 
@@ -597,9 +377,9 @@ void Shellminator::printHistory(){
         }
 
         // Print the index and the command.
-        setTerminalCharacterColor( selectedChannel, BOLD, MAGENTA );
+        setFormat( selectedChannel, BOLD, MAGENTA );
         selectedChannel -> print( index );
-        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+        setFormat( selectedChannel, REGULAR, WHITE );
         selectedChannel -> print( ' ' );
         selectedChannel -> print( ' ' );
         selectedChannel -> println( cmd_buff[ i ] );
@@ -623,23 +403,7 @@ void Shellminator::printHelp(){
         selectedChannel = &bufferedPrinter;
     }
 
-    #ifdef __AVR__
-
-        uint32_t i;
-
-        for( i = 0; i < strlen_P( helpText ); i++ ){
-
-        char c = pgm_read_byte_near( helpText + i );
-        selectedChannel -> print( c );
-
-        }
-
-
-    #else
-
-        selectedChannel -> print( helpText );
-
-    #endif
+    selectedChannel -> print( __CONST_TXT__( SHELLMINATOR_HELP_TEXT ) );
 
     #ifdef COMMANDER_API_VERSION
 
@@ -653,22 +417,6 @@ void Shellminator::printHelp(){
 
 }
 
-void Shellminator::begin( char* banner_p ) {
-
-  // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
-  strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
-
-  // Just in case close the string
-  banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
-
-  // Draw the startup logo.
-  drawLogo();
-
-  // Print the banner message.
-  printBanner();
-
-}
-
 void Shellminator::begin( const char* banner_p ) {
 
   // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
@@ -678,7 +426,7 @@ void Shellminator::begin( const char* banner_p ) {
   banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
   // Set the terminal color and style to the defined settings for the logo
-  setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+  setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
   // Draw the startup logo.
   drawLogo();
@@ -691,7 +439,7 @@ void Shellminator::begin( const char* banner_p ) {
 void Shellminator::sendBackspace() {
 
   // Send a simple backspace combo to the serial port
-  channel -> print( (const char*)"\b \b" );
+  channel -> print( __CONST_TXT__( "\b \b" ) );
 
 }
 
@@ -747,10 +495,17 @@ void Shellminator::redrawLine(){
     // then the command buffer will be printed (with colors)
     selectedChannel -> print( '\r' );
 
-    printBanner();
+    if( !inputActive ){
+        printBanner();
+    }
+    else{
+        selectedChannel -> write( 27 );    // ESC character( decimal 27 )
+        selectedChannel -> print( '[' );  // VT100 Cursor command.
+        selectedChannel -> print( inputInstuctionSize );  // Step cursor
+        selectedChannel -> print( 'C' );  // Left.
+    }
 
-    selectedChannel -> write( 27 );
-    selectedChannel -> print( "[0K" );
+    selectedChannel -> print( __CONST_TXT__( "\033[0K" ) );
 
 
     #ifdef COMMANDER_API_VERSION
@@ -759,7 +514,7 @@ void Shellminator::redrawLine(){
     // it will be highlighted.
     if( commandFound ){
 
-        setTerminalCharacterColor( selectedChannel, BOLD, GREEN );
+        setFormat( selectedChannel, BOLD, GREEN );
 
         for( i = 0; i < cmd_buff_cntr; i++ ){
 
@@ -779,7 +534,7 @@ void Shellminator::redrawLine(){
 
     else{
 
-        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+        setFormat( selectedChannel, REGULAR, WHITE );
 
     }
 
@@ -791,13 +546,12 @@ void Shellminator::redrawLine(){
 
         cmd_buff[ 0 ][ j ] = ' ';
 
-        setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+        setFormat( selectedChannel, REGULAR, WHITE );
         selectedChannel -> print( (char*) &cmd_buff[ 0 ][ j ] );
 
     }
 
-    selectedChannel -> write( 27 );
-    selectedChannel -> print( "[0K" );
+    selectedChannel -> print( __CONST_TXT__( "\033[0K" ) );
 
     if( cmd_buff_cntr > cursor ){
 
@@ -808,7 +562,7 @@ void Shellminator::redrawLine(){
 
     }
 
-    setTerminalCharacterColor( selectedChannel, REGULAR, WHITE );
+    setFormat( selectedChannel, REGULAR, WHITE );
 
     if( bufferMemoryAllocated ){
         selectedChannel -> flush();
@@ -828,7 +582,7 @@ void Shellminator::clientDisconnect(){
 
   if( clientConnected && client.connected() ){
 
-    client.println( "Logout!" );
+    client.println( __CONST_TXT__( "Logout!" ) );
     client.stop();
 
   }
@@ -875,7 +629,7 @@ void Shellminator::update() {
         channel = &client;
 
         // Set the terminal color and style to the defined settings for the logo
-        setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+        setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
         drawLogo();
 
@@ -1022,9 +776,20 @@ void Shellminator::update() {
 
     if( ( millis() - screenTimerStart ) > screenUpdatePeriod ){
         screenTimerStart = millis();
-        getTerminalSize( &terminalWidth, &terminalHeight );
 
-        if( screen -> redrawRequest() ){
+        int w;
+        int h;
+
+        getTerminalSize( &w, &h );
+        if( ( terminalWidth != w ) || ( terminalHeight != h ) ){
+            pushEvent( ( shellEvent_t ){ SHELL_EVENT_RESIZE } );
+            screenRedraw = true;
+        }
+        terminalWidth = w;
+        terminalHeight = h;
+
+        if( screenRedraw ){
+            screenRedraw = false;
             screen -> draw();
         }
 
@@ -1124,7 +889,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
     }
 
     // Send the request.
-    channel -> print( (const char*)"\033[6n" );
+    channel -> print( __CONST_TXT__( "\033[6n" ) );
 
     timerStart = millis();
 
@@ -1210,7 +975,7 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
                         // Check if all data is number.
                         if( charState == 2 ){
-                        return true;
+                            return true;
                         }
 
                         // Conversion went wrong.
@@ -1257,17 +1022,17 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
 
 void Shellminator::setCursorPosition( int x, int y ){
 
-    channel -> print( "\033[" );
-    channel -> print( y );
-    channel -> print( ';' );
-    channel -> print( x );
-    channel -> print( 'H' );
+    setCursorPosition( channel, x, y );
 
 }
 
 void Shellminator::setCursorPosition( Stream* channel_p, int x, int y ){
 
-    channel_p -> print( "\033[" );
+    // Boundary protection.
+    if( x < 1 ) x = 1;
+    if( y < 1 ) y = 1;
+
+    channel_p -> print( __CONST_TXT__( "\033[" ) );
     channel_p -> print( y );
     channel_p -> print( ';' );
     channel_p -> print( x );
@@ -1309,13 +1074,13 @@ void Shellminator::drawLogo() {
   if( logo ){
 
     // Set the terminal color and style to the defined settings for the logo
-    setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
     // Draws the startup logo to the terminal interface.
     channel -> print( logo );
 
     // Set the terminal style to normal.
-    setTerminalCharacterColor( REGULAR, WHITE );
+    setFormat( channel, REGULAR, WHITE );
 
   }
 
@@ -1324,13 +1089,13 @@ void Shellminator::drawLogo() {
   else if( progmemLogo ){
 
     // Set the terminal color and style to the defined settings for the logo
-    setTerminalCharacterColor( SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
     // Draws the startup logo to the terminal interface.
     channel -> print( progmemLogo );
 
     // Set the terminal style to normal.
-    setTerminalCharacterColor( REGULAR, WHITE );
+    setFormat( channel, REGULAR, WHITE );
 
   }
 
@@ -1688,7 +1453,7 @@ void Shellminator::ShellminatorBackspaceState(){
 
       else{
 
-      channel -> print("\b \b"); // just delete the last character from the terminal
+      channel -> print( __CONST_TXT__( "\b \b" ) ); // just delete the last character from the terminal
       cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
 
       }
@@ -1744,15 +1509,19 @@ void Shellminator::ShellminatorEnterKeyState(){
   cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
   // We send a line break to the terminal to put the next data in new line
-  channel -> print( '\r' );
-  channel -> print( '\n' );
+  channel -> println();
+
+    if( inputActive ){
+        inputActive = false;
+        return;
+    }
 
   inSearch = false;
 
   // If the arrived data is not just a single enter we have to process the command.
   if ( cmd_buff_cntr > 0 ) {
 
-    // Flush out everyting before command execution.
+    // Flush out everything before command execution.
     // It is required for the prompts, because sometimes garbage
     // can be found in the channel stream. It has to be removed before
     // prompt reading.
@@ -1772,19 +1541,11 @@ void Shellminator::ShellminatorEnterKeyState(){
 
     }
 
-    // We haveto check that execution_fn_with_parrent is not NULL.
-    else if( execution_fn_with_parrent != NULL ){
-
-      // If it is a valid, then call it's function.
-      execution_fn_with_parrent( cmd_buff[ 0 ], this );
-
-    }
-
     // We haveto check that execution_fn is not NULL.
-    else if( execution_fn != NULL ){
+    if( execution_fn != NULL ){
 
       // If it is a valid, then call it's function.
-      execution_fn( cmd_buff[ 0 ] );
+      execution_fn( cmd_buff[ 0 ], this );
 
     }
 
@@ -1802,17 +1563,10 @@ void Shellminator::ShellminatorEnterKeyState(){
 
     // If not, then just print it with Serial.
     else{
-      channel -> print( (const char*)"cmd: " );
+      channel -> print( __CONST_TXT__( "cmd: " ) );
       channel -> print( cmd_buff[ 0 ] );
       channel -> println();
     }
-
-    // Send a new line after command execution,
-    // so we will not overwrite the last line of the
-    // command output with the banner
-    // --- It maybe not necessary ---
-    //channel -> print( '\r' );
-    //channel -> print( '\n' );
 
     // After we processed the command we have to shift the history upwards.
     // To protect the copy against buffer overflow we use strncpy
@@ -2017,8 +1771,7 @@ void Shellminator::ShellminatorAbortState(){
   cmd_buff_dim = 1;
 
   // We send a line break to the terminal to put the next data in new line
-  channel -> print( '\r' );
-  channel -> print( '\n' );
+  channel -> println();
 
   printBanner();
 
@@ -2150,7 +1903,7 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
         redrawLine();
 
-        // Increment counters.
+        // Decrement counters.
         cmd_buff_cntr--;
         cursor--;
 
@@ -2275,106 +2028,12 @@ bool Shellminator::waitForKey( Stream* source, char* keys, uint32_t timeout ){
 
 }
 
-int Shellminator::input( Stream* source, int bufferSize, char* buffer, char* lineText, uint32_t timeout, bool secret ){
-
-  // Return value.
-  int retVal = 0;
-
-  // Tracks the index of the next free slot in the buffer.
-  uint32_t bufferCounter = 0;
-
-  // Save system time.
-  unsigned long timerStart = millis();
-
-  // It will hold the new character.
-  char c;
-
-  // Print the prompt text.
-  source -> print( lineText );
-
-  // If no timeout event, or no timeout specified, check for new data.
-  while( ( ( millis() - timerStart ) < timeout ) || timeout == 0 ){
-
-    // Check for new data.
-    if( source -> available() ){
-
-      // Read new data.
-      c = source -> read();
-
-      // Check for return key.
-      if( ( c == '\n' ) || ( c == '\r' ) || ( c == '\0' ) ){
-
-        // Terminate the buffer.
-        buffer[ bufferCounter ] = '\0';
-
-        // print new line.
-        source -> println();
-
-        // Empty the input stream.
-        while( source -> available() ){
-          source -> read();
-        }
-
-        // Return how many characters have been read.
-        return retVal;
-
-      }
-
-      // Check backspace.
-      else if( ( c == '\b' ) || ( c == 127 ) ){
-
-        // Check if the buffer is not empty.
-        if( bufferCounter > 0 ){
-
-          // Set back the cursor.
-          bufferCounter--;
-          retVal--;
-          source -> print( "\b \b" );
-
-        }
-
-      }
-
-      else{
-
-        // Check if there is empty space in the buffer.
-        if( bufferCounter < ( bufferSize - 1 ) ){
-
-          // Save the new character to the end of the buffer.
-          buffer[ bufferCounter ] = c;
-
-          // Increment the counters.
-          retVal++;
-          bufferCounter++;
-
-          // Check if the echo has to be hidden.
-          if( secret ){
-            source -> print( '*' );
-          }
-          else{
-            source -> print( c );
-          }
-
-        }
-      }
-
-    }
-
-  }
-
-  // Terminate the buffer.
-  buffer[ bufferCounter ] = '\0';
-
-  source -> println();
-
-  // Empty the input stream.
-  while( source -> available() ){
-    source -> read();
-  }
-
-  // Return with error code. It caused by timeout event.
-  return -1;
-
+void Shellminator::input( char *buffer, int bufferSize, const char *lineText, void(*callback)(char*, int), bool secret ){
+    channel -> println();
+    inputActive = true;
+    inputInstuctionSize = strlen( lineText );
+    channel -> print( lineText );
+    redrawLine();
 }
 
 int Shellminator::selectList( Stream* source, char* lineText, int numberOfElements, char* list[], uint32_t timeout, bool* selection ){
@@ -2665,7 +2324,7 @@ void Shellminator::autoDetectTerminal(){
 
     return;
 
-  Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
+  //Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
 
   if( strcmp( buff, "PuTTY" ) == 0 ){
 
@@ -2674,7 +2333,7 @@ void Shellminator::autoDetectTerminal(){
   else{
 
     enableFormatting = false;
-    channel -> println( "unknown terminal..." );
+    channel -> println( __CONST_TXT__( "unknown terminal..." ) );
     
   }
 
@@ -2699,7 +2358,7 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     mouseBegin();
 
     screen -> update( terminalWidth, terminalHeight );
-
+    screenRedraw = true;
     screenUpdatePeriod = updatePeriod;
     screenTimerStart = millis();
     screen -> init( this );
@@ -2734,6 +2393,10 @@ void Shellminator::endScreen(){
     // Set the cursor and the counter to zero.
     cursor = 0;
     cmd_buff_cntr = 0;
+}
+
+void Shellminator::requestRedraw(){
+    screenRedraw = true;
 }
 
 void Shellminator::pushEvent( shellEvent_t event ){
@@ -2837,6 +2500,4 @@ void Shellminator::popEvent(){
     }
 
 }
-
-
 

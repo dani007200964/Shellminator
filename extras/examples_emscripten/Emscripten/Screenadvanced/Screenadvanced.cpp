@@ -31,20 +31,29 @@
 #include "Shellminator-IO.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-Buttons.hpp"
+#include "Shellminator-PlotModule.hpp"
 #include <math.h>
 
 
 // Use stdio as Channel.
 stdioStream stdioChannel;
 
-// The data array will contain this much points.
-#define NUMBER_OF_DATA_POINTS 15
-
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-#define TERMINAL_BUFFER_SIZE 50
+#define TERMINAL_BUFFER_SIZE 500
 uint8_t terminalBuffer[ TERMINAL_BUFFER_SIZE ];
+float scaler = 0.0;
+
+// The data array will contain this much points.
+#define NUMBER_OF_DATA_POINTS 15
+
+// Array of data points for the plot.
+float sinePoints[ NUMBER_OF_DATA_POINTS ];
+
+void startButtonEvent();
+void stopButtonEvent();
+void reloadButtonEvent();
 
 // Create a class named layout. This is inherited from the ShellminatorScreen class,
 // this way it can be added to the terminal as a screen.
@@ -57,14 +66,15 @@ public:
 
     void update( int width_p, int  height_p ) override;
 
-    bool redrawRequest() override;
-
     // Override the base init function with our custom one.
     void init( Shellminator* parent_p )override;
 
+    // Create the ShellminatorPlot object.
+    ShellminatorPlot plot;
+
 private:
 
-    // Create the two ShellminatorPlot object. We will use them side by side in out layout.
+    // Create the three ShellminatorButton object.
     ShellminatorButton startButton;
     ShellminatorButton stopButton;
     ShellminatorButton reloadButton;
@@ -87,6 +97,8 @@ void layout::draw(){
     stopButton.draw();
     reloadButton.draw();
 
+    plot.draw();
+
 }
 
 void layout::update( int width_p, int  height_p ){
@@ -106,15 +118,9 @@ void layout::update( int width_p, int  height_p ){
     reloadButton.setOrigin( 1, stopButton.down() );
     reloadButton.update( width_p, 3 );
 
-}
+    plot.setOrigin( 1, reloadButton.down() );
+    plot.update( width_p / 2, height_p - reloadButton.down() );
 
-bool layout::redrawRequest(){
-    bool redraw = false;
-    redraw |= startButton.redrawRequest();
-    redraw |= stopButton.redrawRequest();
-    redraw |= reloadButton.redrawRequest();
-
-    return redraw;
 }
 
 void layout::init( Shellminator* parent_p ){
@@ -125,28 +131,39 @@ void layout::init( Shellminator* parent_p ){
     // Save the reference of the caller terminal.
     parent = parent_p;
 
+    // Construct the three button objects.
     startButton = ShellminatorButton( "Start" );
     stopButton = ShellminatorButton( "Stop" );
     reloadButton = ShellminatorButton( "Reload" );
 
+    // Construct the plot object.
+    plot = ShellminatorPlot( sinePoints, NUMBER_OF_DATA_POINTS, "Sine", Shellminator::RED );
+
+    // Initialise the button objects.
     startButton.init( parent );
     stopButton.init( parent );
     reloadButton.init( parent );
+
+    // Initialise the plot objects.
+    plot.init( parent );
 
     // Set the button event for the start button.
     buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
     buttonEvent.data = (uint8_t)'s';
     startButton.attachEvent( buttonEvent );
+    startButton.attachTriggerFunction( startButtonEvent );
 
     // Set the button event for the stop button.
     buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
     buttonEvent.data = (uint8_t)'x';
     stopButton.attachEvent( buttonEvent );
+    stopButton.attachTriggerFunction( stopButtonEvent );
 
     // Set the button event for the reload button.
     buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
     buttonEvent.data = (uint8_t)'r';
     reloadButton.attachEvent( buttonEvent );
+    reloadButton.attachTriggerFunction( reloadButtonEvent );
 
     startButton.setColor( Shellminator::GREEN );
     stopButton.setColor( Shellminator::RED );
@@ -181,6 +198,17 @@ int main(){
 
 }
 
+void startButtonEvent(){
+    scaler = 1.0;
+}
+
+void stopButtonEvent(){
+    scaler = 0.0;
+}
+
+void reloadButtonEvent(){
+    splitLayout.plot.setColor( Shellminator::GREEN );
+}
 
 
 void setup(){
@@ -211,6 +239,13 @@ void setup(){
 void loop(){
 
     // Infinite loop.
+
+    // Fill the data arrays with new data
+    for( int i = 0; i < NUMBER_OF_DATA_POINTS; i++ ){
+
+        sinePoints[i] = sin( 3.14159265358979323846 * 4.0 * i / NUMBER_OF_DATA_POINTS + millis() / 5000.0 ) * scaler;
+
+    }
 
     // Process the new data.
     shell.update();

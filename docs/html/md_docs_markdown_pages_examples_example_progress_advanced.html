@@ -133,132 +133,23 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"><span class="comment">// With a Shellminator object.</span></div>
 <div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
 <div class="line"><a class="code hl_class" href="class_shellminator_progress.html">ShellminatorProgress</a> progress( &amp;shell );</div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00116">Shellminator.hpp:117</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00170">Shellminator.hpp:171</a></div></div>
 <div class="ttc" id="aclass_shellminator_progress_html"><div class="ttname"><a href="class_shellminator_progress.html">ShellminatorProgress</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_progress_8hpp_source.html#l00055">Shellminator-Progress.hpp:55</a></div></div>
 </div><!-- fragment --><p >If you make a simple system, you can use the simple solution with a Stream object, like Serial. </p><dl class="section note"><dt>Note</dt><dd>However it is recommended to use the advanced solution. It is more flexible, and it can be used with buffering.</dd></dl>
 <p>There is an option to customize your progress bar. You can define the done and the remaining characters for the bar. You can use unicode characters like this: </p><div class="fragment"><div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot; &quot;</span> );</div>
 </div><!-- fragment --><p >The result will look like this: </p><div class="fragment"><div class="line">-- Advanced Progress Bar Demo --</div>
 <div class="line"> 44.0% ██████████████████                       | Counting Up...</div>
 </div><!-- fragment --><p >if you want to get very fancy, you can specify the colors as well: </p><div class="fragment"><div class="line"><span class="comment">// Set the colors</span></div>
-<div class="line">progress.doneColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
-<div class="line">progress.todoColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>;</div>
-<div class="line">progress.middleColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>;</div>
+<div class="line">progress.doneColor = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
+<div class="line">progress.todoColor = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>;</div>
+<div class="line">progress.middleColor = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Draw the progress bar</span></div>
 <div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span> );</div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00127">Shellminator.hpp:127</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00133">Shellminator.hpp:132</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00126">Shellminator.hpp:126</a></div></div>
-</div><!-- fragment --><p >This example shows the advanced solution: </p><div class="fragment"><div class="line"> </div>
-<div class="line"><span class="comment">/*</span></div>
-<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
-<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
-<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
-<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment">*/</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_progress_8hpp.html">Shellminator-Progress.hpp</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a Shellminator object, and initialize it to use Serial</span></div>
-<div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a progress bar object and connect it to the shell.</span></div>
-<div class="line"><a class="code hl_class" href="class_shellminator_progress.html">ShellminatorProgress</a> progress( &amp;shell );</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a pretty logo for the terminal.</span></div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> logo[] =</div>
-<div class="line"> </div>
-<div class="line">    <span class="stringliteral">&quot;   _____ __         ____          _             __            \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot; ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;\r\n&quot;</span></div>
-<div class="line">    <span class="stringliteral">&quot;Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n&quot;</span></div>
-<div class="line"> </div>
-<div class="line">;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Prototype to a function that will be called every time</span></div>
-<div class="line"><span class="comment">// when you press the enter key.</span></div>
-<div class="line"><span class="keywordtype">void</span> executionFunction( <span class="keywordtype">char</span>* command, <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* shell );</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// System init section.</span></div>
-<div class="line"><span class="keywordtype">void</span> setup(){</div>
-<div class="line"> </div>
-<div class="line">    Serial.begin(115200);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Try to allocate memory for 40 characters.</span></div>
-<div class="line">    <span class="keywordflow">if</span>( !shell.enableBuffering( 40 ) ){</div>
-<div class="line"> </div>
-<div class="line">        <span class="comment">// If it fails, print the problem.</span></div>
-<div class="line">        <span class="comment">// The error is handled internally, and it will still work, but without buffering.</span></div>
-<div class="line">        Serial.println( <span class="stringliteral">&quot;Can not allocate memory for buffering!&quot;</span> );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Clear the terminal</span></div>
-<div class="line">    shell.clear();</div>
-<div class="line"> </div>
-<div class="line">    Serial.println( <span class="stringliteral">&quot;-- Advanced Progress Bar Demo --&quot;</span> );</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Set the colors for the three segments.</span></div>
-<div class="line">    progress.doneColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
-<div class="line">    progress.todoColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>;</div>
-<div class="line">    progress.middleColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Modify the color and the style of the percent text.</span></div>
-<div class="line">    progress.percentColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a>;</div>
-<div class="line">    progress.percentStyle = <a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a>;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Modify the color and the style of the user defined progress text.</span></div>
-<div class="line">    progress.textColor = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a>;</div>
-<div class="line">    progress.textStyle = <a class="code hl_enumvalue" href="class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258">Shellminator::ITALIC</a>;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Infinite loop.</span></div>
-<div class="line"><span class="keywordtype">void</span> loop(){</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordtype">int</span> i;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Count up to 100%</span></div>
-<div class="line">    <span class="keywordflow">for</span>( i = 0; i &lt; 100; i++ ){</div>
-<div class="line"> </div>
-<div class="line">        <span class="comment">// Set the text and the characters for the three segments.</span></div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;\u2583&quot;</span>, <span class="stringliteral">&quot;\u2599&quot;</span> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Count down to 0%</span></div>
-<div class="line">    <span class="keywordflow">for</span>( i = 100; i &gt; 0; i-- ){</div>
-<div class="line"> </div>
-<div class="line">        <span class="comment">// Set the text and the characters for the three segments.</span></div>
-<div class="line">        progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Down...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;\u2583&quot;</span>, <span class="stringliteral">&quot;\u2599&quot;</span> );</div>
-<div class="line">        delay( 50 );</div>
-<div class="line"> </div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">}</div>
-<div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
-<div class="ttc" id="a_shellminator-_progress_8hpp_html"><div class="ttname"><a href="_shellminator-_progress_8hpp.html">Shellminator-Progress.hpp</a></div></div>
-<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00128">Shellminator.hpp:128</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00129">Shellminator.hpp:129</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00141">Shellminator.hpp:141</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258"><div class="ttname"><a href="class_shellminator.html#aed71921772c5914597df4e0367edf653ab50fc9f0a5ea4e96ce3011f2f67a6258">Shellminator::ITALIC</a></div><div class="ttdeci">@ ITALIC</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00143">Shellminator.hpp:143</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00181">Shellminator.hpp:181</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00187">Shellminator.hpp:186</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00180">Shellminator.hpp:180</a></div></div>
+</div><!-- fragment --><p >This example shows the advanced solution: </p><div class="fragment"></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 
@@ -280,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -295,7 +186,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

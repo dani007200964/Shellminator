@@ -1,4 +1,5 @@
 <map id="Shellminator::hideCursor" name="Shellminator::hideCursor">
-<area shape="rect" id="node1" title=" " alt="" coords="212,5,376,31"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd" title="Select list." alt="" coords="5,5,164,31"/>
+<area shape="rect" id="node1" title="Hide the cursor." alt="" coords="228,31,392,56"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#afb9fb0cea8cbfb13d5457dd88e5ce4b2" title="Register Screen object to draw." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#abda51506ee9282323c3365bcb8d8a7cd" title="Select list." alt="" coords="13,55,172,80"/>
 </map>

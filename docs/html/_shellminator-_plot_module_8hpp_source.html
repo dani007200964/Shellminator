@@ -161,107 +161,100 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#ifndef SHELLMINATOR_PLOT_MODULE_HPP_</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define SHELLMINATOR_PLOT_MODULE_HPP_</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_buffered_printer_8hpp.html">Shellminator-BufferedPrinter.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;System.h&quot;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;Stream.h&quot;</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_shellminator_plot.html">   55</a></span><span class="keyword">class </span><a class="code hl_class" href="class_shellminator_plot.html">ShellminatorPlot</a>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;System.h&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;Stream.h&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">//#include &quot;Shellminator-DefaultSettings.hpp&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//#include &quot;Shellminator-IO.hpp&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_screen_8hpp.html">Shellminator-Screen.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_buffered_printer_8hpp.html">Shellminator-BufferedPrinter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_class" href="class_shellminator_plot.html">ShellminatorPlot</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* shell_p, <span class="keywordtype">float</span>* y, <span class="keywordtype">int</span> y_size, <span class="keywordtype">int</span> color = <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a> );</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_plot.html#ac1f2d14d461361bafd9106caf876b037">begin</a>();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_plot.html#a1d26148fd018a8cd29eeb0fdf9421b14">addPlot</a>( <span class="keywordtype">float</span>* y, <span class="keywordtype">int</span> y_size, <span class="keywordtype">int</span> color = 0 );</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#aea7616591a9cd44c546bed9ec33b2020">draw</a>( <span class="keywordtype">bool</span> redraw = <span class="keyword">false</span> );</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  uint8_t colorTable[ 6 ]{</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>,</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a>,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a>,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator::MAGENTA</a>,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_enumvalue" href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36">Shellminator::CYAN</a>    </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  };</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_class" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a> bufferedPrinter;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">void</span> drawScale();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordtype">void</span> drawPlot( uint8_t index );</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordtype">float</span> lerp( <span class="keywordtype">float</span> v0, <span class="keywordtype">float</span> v1, <span class="keywordtype">float</span> t );</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordtype">float</span> mapFloat( <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> inStart, <span class="keywordtype">float</span> inStop, <span class="keywordtype">float</span> outStart, <span class="keywordtype">float</span> outStop );</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">  #ifdef SHELLMINATOR_ENABLE_HIGH_MEMORY_USAGE</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_class" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a> bufferedPrinter;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">  #endif</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">int</span> terminalSizeX;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordtype">int</span> terminalSizeY;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_shellminator_plot.html">   62</a></span><span class="keyword">class </span><a class="code hl_class" href="class_shellminator_plot.html">ShellminatorPlot</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_function" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_function" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a>( <span class="keywordtype">float</span>* data_p, <span class="keywordtype">int</span> dataSize_p, <span class="keyword">const</span> <span class="keywordtype">char</span>* name_p, <span class="keywordtype">int</span> color_p = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a> );</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">init</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent_p ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">draw</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">float</span> min;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keywordtype">float</span> max;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">int</span> yTextSize;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordtype">int</span> resultTextSize;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* shell = NULL;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">float</span>* yDataF[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a> ];</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keywordtype">int</span>* yDataI[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a> ];</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">update</a>( <span class="keywordtype">int</span> width_p, <span class="keywordtype">int</span>  height_p ) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keywordtype">int</span> plotColor[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a> ];</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordtype">int</span> yDataSize;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  uint8_t numberOfPlots = 0;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">setColor</a>( <a class="code hl_enumeration" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a> color_p );</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordtype">char</span> plotName[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#ab92582910f9430fc5f911d36fe74b315">SHELLMINATOR_PLOT_NAME_SIZE</a> ] = <span class="stringliteral">&quot;Plot&quot;</span>;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>};</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">float</span>* data = NULL;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">int</span> dataSize = 0;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordtype">bool</span> redraw = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> plotTimerStart;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">int</span> plotRedrawPeriod;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* name = NULL;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">int</span> color = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawScale();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawPlot();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    Stream* selectedChannel = NULL;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">bool</span> bufferingEnabled = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">char</span> valueTextBuffer[ 15 ];</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">int</span> valueTextSizeMax = 0;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">int</span> resultTextSize = 0;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">float</span> min;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">float</span> max;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> clearCell[2];</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> dotCell[5];</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">float</span> lerp( <span class="keywordtype">float</span> v0, <span class="keywordtype">float</span> v1, <span class="keywordtype">float</span> t );</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">float</span> mapFloat( <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> inStart, <span class="keywordtype">float</span> inStop, <span class="keywordtype">float</span> outStart, <span class="keywordtype">float</span> outStop );</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>};</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
 <div class="ttc" id="a_shellminator-_buffered_printer_8hpp_html"><div class="ttname"><a href="_shellminator-_buffered_printer_8hpp.html">Shellminator-BufferedPrinter.hpp</a></div></div>
-<div class="ttc" id="a_shellminator-_default_settings_8hpp_html"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a></div></div>
-<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a87349dac4a33edc701db5f592344d9a3"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a87349dac4a33edc701db5f592344d9a3">SHELLMINATOR_NUMBER_OF_PLOTS</a></div><div class="ttdeci">#define SHELLMINATOR_NUMBER_OF_PLOTS</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00198">Shellminator-DefaultSettings.hpp:198</a></div></div>
-<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_ab92582910f9430fc5f911d36fe74b315"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#ab92582910f9430fc5f911d36fe74b315">SHELLMINATOR_PLOT_NAME_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_PLOT_NAME_SIZE</div><div class="ttdoc">If defined, enables the WebSocket Module.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00194">Shellminator-DefaultSettings.hpp:194</a></div></div>
-<div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_screen_8hpp_html"><div class="ttname"><a href="_shellminator-_screen_8hpp.html">Shellminator-Screen.hpp</a></div></div>
 <div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html"><div class="ttname"><a href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></div><div class="ttdoc">ShellminatorBufferedPrinter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8hpp_source.html#l00060">Shellminator-BufferedPrinter.hpp:60</a></div></div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00116">Shellminator.hpp:117</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00128">Shellminator.hpp:128</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00127">Shellminator.hpp:127</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dca91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00126">Shellminator.hpp:126</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcad06d3a3c3f700f97ce14f1d1fd6d2630">Shellminator::MAGENTA</a></div><div class="ttdeci">@ MAGENTA</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00130">Shellminator.hpp:130</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf20b5605d832c2de91cddc2922eacc36">Shellminator::CYAN</a></div><div class="ttdeci">@ CYAN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00131">Shellminator.hpp:131</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43"><div class="ttname"><a href="class_shellminator.html#a306653f230deb8b560058517a95830dcaf95ebb6a78871306269588a3fe74ad43">Shellminator::BLUE</a></div><div class="ttdeci">@ BLUE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00129">Shellminator.hpp:129</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html"><div class="ttname"><a href="class_shellminator_plot.html">ShellminatorPlot</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8hpp_source.html#l00055">Shellminator-PlotModule.hpp:55</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_a1d26148fd018a8cd29eeb0fdf9421b14"><div class="ttname"><a href="class_shellminator_plot.html#a1d26148fd018a8cd29eeb0fdf9421b14">ShellminatorPlot::addPlot</a></div><div class="ttdeci">bool addPlot(float *y, int y_size, int color=0)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00064">Shellminator-PlotModule.cpp:64</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_ac1f2d14d461361bafd9106caf876b037"><div class="ttname"><a href="class_shellminator_plot.html#ac1f2d14d461361bafd9106caf876b037">ShellminatorPlot::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00036">Shellminator-PlotModule.cpp:36</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_aea7616591a9cd44c546bed9ec33b2020"><div class="ttname"><a href="class_shellminator_plot.html#aea7616591a9cd44c546bed9ec33b2020">ShellminatorPlot::draw</a></div><div class="ttdeci">void draw(bool redraw=false)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00104">Shellminator-PlotModule.cpp:104</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00170">Shellminator.hpp:171</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a></div><div class="ttdeci">textColor_t</div><div class="ttdoc">VT100 color codes.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00177">Shellminator.hpp:178</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00181">Shellminator.hpp:181</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html"><div class="ttname"><a href="class_shellminator_plot.html">ShellminatorPlot</a></div><div class="ttdoc">This class can create a simple plotter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8hpp_source.html#l00062">Shellminator-PlotModule.hpp:62</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a0397f69d0a061af1804200d4b6d1bc96"><div class="ttname"><a href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">ShellminatorPlot::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">Draw function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00099">Shellminator-PlotModule.cpp:99</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a07bb6fd84a8b3199135766c9f3a8c6e9"><div class="ttname"><a href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">ShellminatorPlot::update</a></div><div class="ttdeci">void update(int width_p, int height_p) override</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00067">Shellminator-PlotModule.cpp:67</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a15f441185ded0dbab5e14bbd9640afbc"><div class="ttname"><a href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">ShellminatorPlot::setColor</a></div><div class="ttdeci">void setColor(Shellminator::textColor_t color_p)</div><div class="ttdoc">Set the color of the plot.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00621">Shellminator-PlotModule.cpp:621</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a884bc7f179be465f7cef5e59da6a1237"><div class="ttname"><a href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot::ShellminatorPlot</a></div><div class="ttdeci">ShellminatorPlot()</div><div class="ttdoc">Empty constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00044">Shellminator-PlotModule.cpp:44</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a89ebfc8d5a024f39bffc0107926c3ad9"><div class="ttname"><a href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">ShellminatorPlot::init</a></div><div class="ttdeci">void init(Shellminator *parent_p) override</div><div class="ttdoc">Init function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00051">Shellminator-PlotModule.cpp:51</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html"><div class="ttname"><a href="class_shellminator_screen.html">ShellminatorScreen</a></div><div class="ttdoc">This is an abstract object for graphics element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00045">Shellminator-Screen.hpp:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -284,7 +277,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -299,7 +292,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

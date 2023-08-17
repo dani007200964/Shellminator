@@ -1,4 +1,9 @@
 <map id="Shellminator::setCursorPosition" name="Shellminator::setCursorPosition">
-<area shape="rect" id="node1" title=" " alt="" coords="248,5,453,31"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="5,5,200,31"/>
+<area shape="rect" id="node1" title="Set the position of the cursor." alt="" coords="683,95,888,121"/>
+<area shape="rect" id="node2" href="$class_shellminator_button.html#a22fb8ed5140c6d03196bcd3d7c931d84" title="Draw function." alt="" coords="471,5,603,45"/>
+<area shape="rect" id="node3" href="$class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96" title="Draw function." alt="" coords="461,70,613,95"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a95945bd5860aaed1ac544da1b3800447" title="Abort Screen session." alt="" coords="228,121,392,146"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="440,171,635,197"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#afb9fb0cea8cbfb13d5457dd88e5ce4b2" title="Register Screen object to draw." alt="" coords="5,209,180,234"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="239,246,381,271"/>
 </map>

@@ -42,8 +42,8 @@ SOFTWARE.
 
 #include "Stream.h"
 
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
+//#include "Shellminator-DefaultSettings.hpp"
+//#include "Shellminator-IO.hpp"
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
@@ -87,15 +87,29 @@ public:
 
     /// Draw function.
     ///
-    /// This function is called by the host terminal, periodically.
-    /// @param width_p The width of the screen area in characters.
-    /// @param height_p The height of the screen area in characters.
-    /// @todo Buffering!
+    /// This function is called by the caller terminal if redraw
+    /// is requested. If you need to draw your screen, the 
+    /// requestRedraw function must be called on the parent terminal
+    /// object. The reason for this is to save some CPU time and do
+    /// not waste it to draw something unnecessarily.
     void draw() override;
 
+    /// Update function.
+    ///
+    /// The update function must be used to process events and not to
+    /// draw the objects. It is called much frequently than, the draw
+    /// function. All the event handling should be done in the update
+    /// function, including key and mouse detection along with various
+    /// events.
+    /// @param width_p The width of the screen area in characters.
+    /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
-    bool redrawRequest() override;
+    /// Set the color of the plot.
+    ///
+    /// With this function, you can set the color of the plot.
+    /// @param color_p Specify a color from Shellminator::textColor_t enumeration.
+    void setColor( Shellminator::textColor_t color_p );
 
 
 private:
@@ -105,6 +119,11 @@ private:
 
     /// Size of the data array in elements.
     int dataSize = 0;
+
+    bool redraw = true;
+
+    unsigned long plotTimerStart;
+    int plotRedrawPeriod;
 
     /// Plot name.
     const char* name = NULL;
@@ -148,6 +167,9 @@ private:
 
     /// Holds the maximum value in the data array.
     float max;
+
+    static const char clearCell[2];
+    static const char dotCell[5];
 
     /// Linear interpolation.
     ///

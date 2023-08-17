@@ -178,64 +178,50 @@ $(document).ready(function(){initNavTree('_shellminator-_buffered_printer_8hpp_s
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_shellminator_buffered_printer.html">   60</a></span><span class="keyword">class </span><a class="code hl_class" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a>{</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_shellminator_buffered_printer.html">   60</a></span><span class="keyword">class </span><a class="code hl_class" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a> : <span class="keyword">public</span> Stream{</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <a class="code hl_function" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a>();</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_function" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a>( Stream* channel_p );</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_function" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a>( Stream* channel_p, uint8_t* buffer_p, <span class="keywordtype">int</span> bufferSize_p );</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_function" href="class_shellminator_buffered_printer.html#a0d6423521acdcadb64b7435f43ebd39a">~ShellminatorBufferedPrinter</a>();</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6">allocate</a>( <span class="keywordtype">int</span> bufferSize );</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_buffered_printer.html#ac54c70b98cefe894793af67e3ebbe493">available</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9">read</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_buffered_printer.html#a7cdf0d0997a465d6cc47ff2528d7fdbc">peek</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#a8ecadfaa26b7d97ba81dd576702f2459">deallocate</a>();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#a2e2c36f0e7c8f9069d741040266a137e">setChannel</a>( Stream* channel_p );</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  Stream* <a class="code hl_function" href="class_shellminator_buffered_printer.html#adeab81bd97caa1e14c89fde50086ec0d">getChannel</a>();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">printf</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *fmt, ... );</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">flush</a>();</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">getBufferSize</a>();</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordtype">void</span> clearBuffer();</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="comment">// It tracks how much memory is allocated for characters.</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordtype">int</span> bufferSize = -1;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="comment">// Pointer to the buffer. Malloc will use this address.</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="keywordtype">char</span> *acceleratorBuffer = NULL;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <span class="comment">// It points to the next free element&#39;s address in the buffer.</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordtype">char</span> *acceleratorBufferPointer;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="comment">// It indicates how much free characters are available in the buffer.</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  uint32_t availableCharacters;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="comment">// Pointer to the output Stream object.</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  Stream* channel = NULL;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>};</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">void</span>   <a class="code hl_function" href="class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d">flush</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2">write</a>( uint8_t b ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordtype">void</span> clearBuffer();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="comment">// Pointer to the output Stream object.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  Stream* channel = NULL;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  uint8_t* buffer = NULL;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <span class="keywordtype">int</span> bufferPointer = 0;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordtype">int</span> bufferSize = 0;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>};</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_shellminator-_default_settings_8hpp_html"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a></div></div>
 <div class="ttc" id="a_shellminator-_i_o_8hpp_html"><div class="ttname"><a href="_shellminator-_i_o_8hpp.html">Shellminator-IO.hpp</a></div></div>
 <div class="ttc" id="aclass_shellminator_buffered_printer_html"><div class="ttname"><a href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a></div><div class="ttdoc">ShellminatorBufferedPrinter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8hpp_source.html#l00060">Shellminator-BufferedPrinter.hpp:60</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_a0d6423521acdcadb64b7435f43ebd39a"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a0d6423521acdcadb64b7435f43ebd39a">ShellminatorBufferedPrinter::~ShellminatorBufferedPrinter</a></div><div class="ttdeci">~ShellminatorBufferedPrinter()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00102">Shellminator-BufferedPrinter.cpp:102</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_a2e2c36f0e7c8f9069d741040266a137e"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a2e2c36f0e7c8f9069d741040266a137e">ShellminatorBufferedPrinter::setChannel</a></div><div class="ttdeci">void setChannel(Stream *channel_p)</div><div class="ttdoc">Set the output Stream.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00109">Shellminator-BufferedPrinter.cpp:109</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_a0932985299a2419d63d346e3716bf88d"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d">ShellminatorBufferedPrinter::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Flush the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00075">Shellminator-BufferedPrinter.cpp:75</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_a28c0c24b755c0771df2cef148bfd70c9"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9">ShellminatorBufferedPrinter::read</a></div><div class="ttdeci">int read() override</div><div class="ttdoc">Read one byte form the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00059">Shellminator-BufferedPrinter.cpp:59</a></div></div>
 <div class="ttc" id="aclass_shellminator_buffered_printer_html_a3b45ccc1571bd9312e2964e301f30b3a"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter::ShellminatorBufferedPrinter</a></div><div class="ttdeci">ShellminatorBufferedPrinter()</div><div class="ttdoc">Empty constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00036">Shellminator-BufferedPrinter.cpp:36</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_a46408f05e6e75fa69bdc49de31cf41c6"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6">ShellminatorBufferedPrinter::allocate</a></div><div class="ttdeci">bool allocate(int bufferSize)</div><div class="ttdoc">Allocate memory for the internal buffer.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00052">Shellminator-BufferedPrinter.cpp:52</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_a88ef18839525432afccaad59f87944de"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de">ShellminatorBufferedPrinter::getBufferSize</a></div><div class="ttdeci">int getBufferSize()</div><div class="ttdoc">Get the allocated memory.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00229">Shellminator-BufferedPrinter.cpp:229</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_a8ecadfaa26b7d97ba81dd576702f2459"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a8ecadfaa26b7d97ba81dd576702f2459">ShellminatorBufferedPrinter::deallocate</a></div><div class="ttdeci">void deallocate()</div><div class="ttdoc">Deallocate memory.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00083">Shellminator-BufferedPrinter.cpp:83</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_aadb670e69391ed2757391ec2ea64943e"><div class="ttname"><a href="class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e">ShellminatorBufferedPrinter::printf</a></div><div class="ttdeci">int printf(const char *fmt,...)</div><div class="ttdoc">Regular printf like function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00121">Shellminator-BufferedPrinter.cpp:121</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_addd89bdf65afad80f3f2ce8372df2df4"><div class="ttname"><a href="class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4">ShellminatorBufferedPrinter::flush</a></div><div class="ttdeci">void flush()</div><div class="ttdoc">Flush function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00187">Shellminator-BufferedPrinter.cpp:187</a></div></div>
-<div class="ttc" id="aclass_shellminator_buffered_printer_html_adeab81bd97caa1e14c89fde50086ec0d"><div class="ttname"><a href="class_shellminator_buffered_printer.html#adeab81bd97caa1e14c89fde50086ec0d">ShellminatorBufferedPrinter::getChannel</a></div><div class="ttdeci">Stream * getChannel()</div><div class="ttdoc">Get the output Stream.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00115">Shellminator-BufferedPrinter.cpp:115</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_a7cdf0d0997a465d6cc47ff2528d7fdbc"><div class="ttname"><a href="class_shellminator_buffered_printer.html#a7cdf0d0997a465d6cc47ff2528d7fdbc">ShellminatorBufferedPrinter::peek</a></div><div class="ttdeci">int peek() override</div><div class="ttdoc">Peek the firtst byte from the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00063">Shellminator-BufferedPrinter.cpp:63</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_ac54c70b98cefe894793af67e3ebbe493"><div class="ttname"><a href="class_shellminator_buffered_printer.html#ac54c70b98cefe894793af67e3ebbe493">ShellminatorBufferedPrinter::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Available bytes in the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00055">Shellminator-BufferedPrinter.cpp:55</a></div></div>
+<div class="ttc" id="aclass_shellminator_buffered_printer_html_aee1df8e705fbfc3ec1fe752b1a7e37a2"><div class="ttname"><a href="class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2">ShellminatorBufferedPrinter::write</a></div><div class="ttdeci">size_t write(uint8_t b) override</div><div class="ttdoc">Write one byte to the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buffered_printer_8cpp_source.html#l00093">Shellminator-BufferedPrinter.cpp:93</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -258,7 +244,7 @@ $(document).ready(function(){initNavTree('_shellminator-_buffered_printer_8hpp_s
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -273,7 +259,7 @@ $(document).ready(function(){initNavTree('_shellminator-_buffered_printer_8hpp_s
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

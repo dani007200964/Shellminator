@@ -128,10 +128,22 @@ $(document).ready(function(){initNavTree('class_shellminator_plot.html',''); ini
 
 <p>This is the complete list of members for <a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_plot.html#a1d26148fd018a8cd29eeb0fdf9421b14">addPlot</a>(float *y, int y_size, int color=0)</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#ac1f2d14d461361bafd9106caf876b037">begin</a>()</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_plot.html#aea7616591a9cd44c546bed9ec33b2020">draw</a>(bool redraw=false)</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#a75bfc3355b5b3cc7cd6edeee0aea1d85">ShellminatorPlot</a>(Shellminator *shell_p, float *y, int y_size, int color=Shellminator::GREEN)</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a05d526eb830942c3398194206962c544">down</a>()</td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">draw</a>() override</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a1cac8dd98ce2fd5fe012f285e8f35447">height</a></td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">init</a>(Shellminator *parent_p) override</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a4b2b133c7d13f8bf8225c34eb89d78d9">left</a>()</td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_screen.html#a9c6285040b52a721b1c4b229ba3f3740">originX</a></td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a6b1df77d6227cefb8be9a3a837f8ab80">originY</a></td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_screen.html#a1791c819682bf400da74279df57a1d65">parent</a></td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a230a346a6eb08ebbf51b79bf81e7cbd5">right</a>()</td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">setColor</a>(Shellminator::textColor_t color_p)</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_screen.html#a60fb1d0c5c484288241119e66b601951">setOrigin</a>(int x, int y)</td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a>()</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_plot.html#aa6c0c3aaaf089f6e56c04f9b18ce4c52">ShellminatorPlot</a>(float *data_p, int dataSize_p, const char *name_p, int color_p=Shellminator::GREEN)</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_screen.html#acc36824fb23b17034d5efc91e7065d83">up</a>()</td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">update</a>(int width_p, int height_p) override</td><td class="entry"><a class="el" href="class_shellminator_plot.html">ShellminatorPlot</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_shellminator_screen.html#aa94051b46d88a4ae19b9453080faf2b6">width</a></td><td class="entry"><a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -153,7 +165,7 @@ $(document).ready(function(){initNavTree('class_shellminator_plot.html',''); ini
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Sun Jun 25 2023
+      </a> on Thu Aug 17 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -168,7 +180,7 @@ $(document).ready(function(){initNavTree('class_shellminator_plot.html',''); ini
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Sun Jun 25 2023
+        </a> on Thu Aug 17 2023
       </small></address>
     </li>
   </ul>

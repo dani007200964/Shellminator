@@ -1,0 +1,4 @@
+<map id="ShellminatorBufferedPrinter::flush" name="ShellminatorBufferedPrinter::flush">
+<area shape="rect" id="node1" title="Flush the channel." alt="" coords="232,5,411,45"/>
+<area shape="rect" id="node2" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="5,5,184,45"/>
+</map>

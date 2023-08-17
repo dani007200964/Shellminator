@@ -103,10 +103,63 @@ SOFTWARE.
 
 #endif
 
+// Clever solution to handle constant string data.
+// Thank you ondras12345!
+#ifndef __CONST_TXT__
+    #if defined(ARDUINO) && defined(__AVR__)
+        #define __CONST_TXT__(s) F(s)
+    #else
+        #define __CONST_TXT__(s) (const char*)(s)
+    #endif
+#endif
+
+#define SHELLMINATOR_HELP_TEXT   "\r\n"                                                     \
+    "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"                   \
+    "\r\n"                                                                                  \
+    "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"       \
+    "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"             \
+    "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"                                             \
+    "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"                                    \
+    "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"        \
+    "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"          \
+    "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"       \
+    "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"             \
+    "\r\n"                                                                                  \
+
+
 /// Version of the module
 #define SHELLMINATOR_VERSION "1.1.2"
 
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 12
+
+/// Basic text formatting.
+///
+/// You can use this macro to modify the style or color of the printed text.
+/// It can be used without a Shellminator object.
+/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+///       monitor does not support these features.
+///
+/// This macro is made to make the usage of @ref setFormatFunc function safe.
+/// @note please use this macro instead of @ref setFormatFunc.
+/// @param streamObject Pointer to a Stream object.
+/// @param ... Format specifiers. You can give as many specifier as you like.
+///
+/// Example: @code{cpp} Shellminator::setFormat( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
+#define setFormat( streamObject, ... ) setFormatFunc( (streamObject), __VA_ARGS__, -1 );
+
+/// Basic text formatting.
+///
+/// You can use this macro to modify the style or color of the printed text.
+/// It can only be used with a Shellminator object.
+/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+///       monitor does not support these features.
+///
+/// This macro is made to make the usage of @ref formatFunc function safe.
+/// @note please use this macro instead of @ref formatFunc.
+/// @param ... Format specifiers. You can give as many specifier as you like.
+///
+/// Example: @code{cpp} shell.format( Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
+#define format( ... ) formatFunc( __VA_ARGS__, -1 );
 
 /// Shellminator object
 ///
@@ -121,7 +174,7 @@ public:
     /// VT100 color codes
     ///
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color codes</a>.
-    enum
+    enum textColor_t
     {
         BLACK = 30,
         RED = 31,
@@ -136,7 +189,7 @@ public:
     /// VT100 font sytles
     ///
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>.
-    enum
+    enum textStyle_t
     {
         REGULAR = 0,
         BOLD = 1,
@@ -152,11 +205,6 @@ public:
     /// String, that holds the version information
     static const char *version;
 
-    /// String, that holds the help text data.
-    ///
-    /// @note on AVR it is stored in PROGMEM.
-    static const char helpText[];
-
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
     /// Constructor for WiFi Server
@@ -165,24 +213,6 @@ public:
     /// It is used to create a telnet based terminal.
     /// @param server_p Pointer to a WiFiServer object.
     Shellminator(WiFiServer *server_p);
-
-    /// Constructor for WiFi Server with execution function.
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-    Shellminator(WiFiServer *server_p, void (*execution_fn_p)(char *));
-
-    /// Constructor for WiFi Server with execution function.
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
-    /// 1. argument: is a char* type
-    /// 2. argument: is a Shellminator* type
-    Shellminator(WiFiServer *server_p, void (*execution_fn_p)(char *, Shellminator *));
 
     /// Start WiFi Server
     ///
@@ -204,10 +234,6 @@ public:
 
     Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p);
 
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p, void (*execution_fn_p)(char *));
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p, void (*execution_fn_p)(char *, Shellminator *));
-
     void webSocketPush(uint8_t data);
 
     void webSocketPush(uint8_t *data, size_t size);
@@ -220,157 +246,180 @@ public:
     ///
     /// This is a simple constructor for a Shellminator object.
     /// @param stream_p Pointer to a Stream object which will be used for communication.
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic Example"
     Shellminator(Stream *stream_p);
 
-    /// Shell object constructor with simple execution-function.
+    /// Enable buffering to gain speed.
     ///
-    /// This is a simple constructor for a Shellminator object.
-    /// This version allows to attach an execution-function with the constructor.
-    /// @param stream_p Pointer to a Stream object which will be used for communication.
-    /// @param execution_fn_p Function pointer to a simple execution-function[ void execFunc( char* cmd ) ]
-    /// @note This version works for legacy reasons, but the advanced version is recommended with caller shell access.
-    ///
-    /// __Example__
-    /// - @ref example_execute_constructor_simple "Example With Constructor - Simple"
-    Shellminator(Stream *stream_p, void (*execution_fn_p)(char *));
-
-    /// Shell object constructor with simple execution-function.
-    ///
-    /// This is a simple constructor for a Shellminator object.
-    /// This version allows to attach an execution-function with the constructor.
-    /// @param stream_p Pointer to a Stream object which will be used for communication.
-    /// @param execution_fn_p Function pointer to an advanced execution-function[ void execFunc( char* cmd, Shellminator* shell ) ]
-    /// @note This version is recommended.
-    ///
-    /// __Example__
-    /// - @ref example_execute_constructor_advanced "Example With Constructor - Advanced"
-    Shellminator(Stream *stream_p, void (*execution_fn_p)(char *, Shellminator *));
-
+    /// With this function, a buffer can be attached to the object.
+    /// It can be used to accelerate the printing process. Because this
+    /// library meant to work on low power devices, with limited amount of
+    /// dynamic memory, all rendering happens in place. It has one downside
+    /// tough. The printing not happens in one time. Small independent printing
+    /// actions renders the final result. The frontend on a PC can't handle this
+    /// very well, if the data is coming fast. A much better solution is to
+    /// collect the printed data into a buffer, and flush it, when we are finished.
+    /// You can achieve this functionality with this function.
+    /// @param buffer Pointer to a buffer. It has to be uint8_t type.
+    /// @param bufferSize The size of the buffer in elements.
+    /// @returns When the buffering is enabled successfully, it will return true.
+    /// @note On low-end devices like an AVR, it might be too much. I suggest to use this
+    ///       functionality on systems that has at least 10kBytes of dynamic memory.
     bool enableBuffering( uint8_t* buffer, int bufferSize );
 
-    /// Execution function attacher function
+    /// Register a function callback for command execution.
     ///
-    /// This function allows you to add or replace the execution function after the constructor.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-    void addExecFunc(void (*execution_fn_p)(char *));
-
-    /// Execution function attacher function
+    /// With this function you can attach an external function to the object
+    /// This function will be called when a command is typed and the return
+    /// key is pressed.
+    /// @param execution_fn_p Function pointer to the execution function.
     ///
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
-    /// 1. argument: is a char* type
-    /// 2. argument: is a Shellminator* type
+    /// The execution function prototype must be like this:
+    /// @code{cpp} void myExecFunc( char* command, Shellminator* caller ); @endcode
     ///
-    /// __Example__
-    /// - @ref example_execute "Execute"
-    void addExecFunc(void (*execution_fn_p)(char *, Shellminator *));
-
-    /// Shellminator initialization function
+    /// You can use any name you like, but the arguments and the return type has to
+    /// be the same. Practical example for impementation:
     ///
-    /// This function initializes the object and prints the startup logo.
-    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
-    /// @warning You have to call this function before all other member functions!
-    /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
-    ///
-    /// Tested in: __test_shellminator_begin.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
-    void begin(char *banner_p);
+    /// @code{cpp}
+    /// void myExecFunc( char* command, Shellminator* caller ){
+    ///     caller -> channel -> print( "Hurray! I got this: " );
+    ///     caller -> channel -> println( command );
+    /// }
+    /// @endcode
+    void attachExecFunc(void (*execution_fn_p)(char *, Shellminator *));
 
     /// Shellminator initialization function
     ///
     /// This function initializes the object and prints the startup logo.
-    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
+    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN.
+    /// Leftover characters are truncated!
     /// @warning You have to call this function before all other member functions!
     /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
-    ///
-    /// Tested in: __test_shellminator_begin.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
     void begin(const char *banner_p);
 
     /// Sends a backspace
     ///
     /// This function makes a backspace in the terminal application. Basically it deletes the last character
     /// in the terminal screen.
-    ///
-    /// Tested in: __test_format_commands.cpp__
     void sendBackspace();
 
     /// Clear screen
     ///
     /// This function clears the terminal screen.
-    ///
-    /// Tested in: __test_format_commands.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
     void clear();
 
     /// Update function
     ///
     /// This function handles all of the communication related stuff between the code and the terminal application.
     /// @warning This function has to be called periodically.
-    /// @warning If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
-    ///
-    /// Tested in: __test_update.cpp__
-    /// __Example__
-    /// - @ref example_basic "Basic"
+    ///          If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
     void update();
 
-    /// Bring some color into your code.
+    /// Basic text formatting.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    void setTerminalCharacterColor(uint8_t style, uint8_t color);
+    /// You can use this function to modify the style or color of the printed text. This function
+    /// can be accessed from outside of an object.
+    /// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+    ///       monitor does not support these features.
+    /// @param stream_p Pointer to a Stream object.
+    /// @param firstArg The first format specifier.
+    /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
+    /// @warning There is a dedicated macro for this function, called @ref setFormat. Please
+    ///          use this macro to avoid problems.
+    static void setFormatFunc( Stream *stream_p, int firstArg, ... );
 
-    /// Bring some color into your code.
+    /// Basic text formatting.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// The output goes to a buffer;
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    static void setTerminalCharacterColor(char *buff, uint8_t buffSize, uint8_t style, uint8_t color);
+    /// You can use this function to modify the style or color of the printed text. This function
+    /// can only be accessed with an object.
+    /// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+    ///       monitor does not support these features.
+    /// @param firstArg The first format specifier.
+    /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
+    /// @warning There is a dedicated macro for this function, called @ref format. Please
+    ///          use this macro to avoid problems.
+    void formatFunc( int firstArg, ... );
 
-    /// Bring some color into your code.
+    /// Hide the cursor.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// The output goes to a buffer;
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    /// @warning It is legacy code! The buffer is not protected against overflow! Please use protected version( it has 4 arguments ).
-    void setTerminalCharacterColor(char *buff, uint8_t style, uint8_t color);
-
-    /// Bring some color into your code.
-    ///
-    /// This function changes the color and style of the terminal application characters.
-    /// This function can be used outside of a Shellminator object.
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param style Arduino Serial object to print the style code.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    static void setTerminalCharacterColor(Stream *stream_p, uint8_t style, uint8_t color);
-
+    /// This function disables the cursor on the host terminal. This function can only be accessed
+    /// with an object.
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
     void hideCursor();
-    static void hideCursor(char *buff, uint8_t bufferSize);
+
+    /// Hide the cursor.
+    ///
+    /// This function disables the cursor on the host terminal. This function can be accessed
+    /// outside of the class.
+    /// @param stream_p Pointer to a Stream object.
     static void hideCursor(Stream *stream_p);
 
+    /// Show the cursor.
+    ///
+    /// This function enables the cursor on the host terminal. This function can only be accessed
+    /// with an object.
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
     void showCursor();
-    static void showCursor(char *buff, uint8_t buffSize);
+
+    /// Show the cursor.
+    ///
+    /// This function enables the cursor on the host terminal. This function can be accessed
+    /// outside of the class.
+    /// @param stream_p Pointer to a Stream object.
     static void showCursor(Stream *stream_p);
 
+    /// Get the position of the cursor.
+    ///
+    /// This function can be used to query the current location
+    /// of the cursor. The result will be passed back on the arguments.
+    /// @param x Pointer to an integer. The horizontal coordinate will be
+    ///          written to the variable where this pointer points.
+    /// @param y Pointer to an integer. The horizontal coordinate will be
+    ///          written to the variable where this pointer points.
+    /// @param timeout You can specify a maximum time to wait for the answer
+    ///                in milliseconds. the default value is 100ms.
+    /// @returns If the query was successful it will return true. Otherwise
+    ///          the value in the variables corresponding to x and y is
+    ///          not usable.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
     bool getCursorPosition( int *x, int *y, uint32_t timeout = 100 );
+
+    /// Set the position of the cursor.
+    ///
+    /// This function can be used to set the cursor location to a specified
+    /// coordinate. This function can only be accessed with an object.
+    /// @param x New X-coordinate of the cursor.
+    /// @param y New Y-coordinate of the cursor.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
+    /// @note Setting an invalid cursor position is not possible, it is
+    ///       protected by the terminal interface and this function as well.
     void setCursorPosition( int x, int y );
+
+    /// Set the position of the cursor.
+    ///
+    /// This function can be used to set the cursor location to a specified
+    /// coordinate. This function can be accessed outside of the class.
+    /// @param channel_p Pointer to a Stream object.
+    /// @param x New X-coordinate of the cursor.
+    /// @param y New Y-coordinate of the cursor.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
+    /// @note Setting an invalid cursor position is not possible, it is
+    ///       protected by the terminal interface and this function as well.
     static void setCursorPosition( Stream* channel_p, int x, int y );
 
     bool getTerminalSize( int *width, int *height );
@@ -382,7 +431,9 @@ public:
     /// @param ptr Pointer to a Shellminator object in void*.
     /// @warning The address stored in ptr has to be a valid addres for a Shellminator object.
     /// @returns Casted pointer.
-    static Shellminator *castVoidToShellminator(void *ptr);
+    /// @todo track the created objects in an internal static array and compare their pointer
+    ///       values with the given one.
+    static Shellminator *castVoidToShellminator( void *ptr );
 
     /// Draws the startup logo
     ///
@@ -392,33 +443,28 @@ public:
     /// This function prints the banner text.
     void printBanner();
 
+    /// Print command history.
     void printHistory();
 
+    /// Print help text.
     void printHelp();
 
     /// This function sets the banner text.
     ///
     /// It can be used when you want to change the banner text runtime.
     /// @param banner_p String that contains the new banner text.
-    void setBannerText(char *banner_p);
-
-    /// This function sets the banner text.
     ///
-    /// It can be used when you want to change the banner text runtime.
-    /// @param banner_p String that contains the new banner text.
+    /// ![Banner Text Elements](banner_text.png)
     void setBannerText(const char *banner_p);
 
-    void setBannerPathText(char *bannerPath_p);
-    void setBannerPathText(const char *bannerPath_p);
-
-    /// This function attaches a logo to the terminal.
+    /// This function sets the banner path text.
     ///
-    /// The logo is just a character array.
-    /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
-    /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
-    /// Add '\r' to all line end.
-    /// @param logo_p Pointer to the logo's address.
-    void attachLogo(char *logo_p);
+    /// It can be used when you want to change the banner path text runtime.
+    /// @param banner_p String that contains the new banner text.
+    /// @note the default banner path text is `$`
+    ///
+    /// ![Banner Text Elements](banner_text.png)
+    void setBannerPathText(const char *bannerPath_p);
 
     /// This function attaches a logo to the terminal.
     ///
@@ -637,84 +683,118 @@ public:
     /// @param screen_p Pointer to a screen object.
     /// @param updatePeriod Optionally, you can specify the screen refresh time in milliseconds.
     //                      I recommend to don't go below 150ms.
-    /// @note To close the Screen, you have to press the escape or the abort( ctrl-c ) key.
-    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+    /// @note To close the Screen, you have to press the return or the abort( ctrl+c ) key.
+    ///
+    /// @note To close the Screen session from code, you can use the @ref endScreen function.
+    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 100 );
+
+    /// Abort Screen session.
+    ///
+    /// With this function you can abort a registered Screen session.
     void endScreen();
 
+    /// Redraw request from a Screen object.
+    ///
+    /// This function is used by the attached Screen object. The Screen object can
+    /// signal the terminal interface with this function, to call the draw function
+    /// in the next drawing session. The drawing only happens, when an event triggers it,
+    /// to save some CPU time. This way the Screen drawing is much efficient.
+    void requestRedraw();
 
-
-
-
-
+    /// Shell Event enumeration.
     typedef enum{
-        /*
-        SHELLMINATOR_MOUSE_EVENT,
-        SHELLMINATOR_KEY_EVENT,
-        SHELLMINATOR_CODED_KEY_EVENT
-        */
-       SHELL_EVENT_EMPTY,
-       SHELL_EVENT_MOUSE,
-       SHELL_EVENT_KEY,
-       SHELL_EVENT_CODED_KEY
+       SHELL_EVENT_EMPTY,       ///< This is used to handle default or empty values. If this value is assigned to an event, it won't do anything.
+       SHELL_EVENT_RESIZE,      ///< If the object detects a resize event, it will be available to the Screen object with this flag.
+       SHELL_EVENT_MOUSE,       ///< To identify mouse related events.
+       SHELL_EVENT_KEY,         ///< To identify simple key events like: `A`, `b`... @note Case sensitive!
+       SHELL_EVENT_CODED_KEY    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
     }shellEventType_t;
 
+    /// Coded event enumeration.
     typedef enum{
-        /*
-        EMPTY_EVENT,
-        REGULAR_KEY,
-        MOUSE_LEFT_PRESSED,
-        MOUSE_LEFT_RELEASED,
-        MOUSE_RIGHT_PRESSED,
-        MOUSE_RIGHT_RELEASED,
-        MOUSE_MIDDLE_PRESSED,
-        MOUSE_MIDDLE_RELEASED,
-        MOUSE_WHEEL_UP,
-        MOUSE_WHEEL_DOWN,
-        UP_ARROW,
-        DOWN_ARROW,
-        LEFT_ARROW,
-        RIGHT_ARROW,
-        HOME_KEY,
-        END_KEY
-        */
-        EVENT_CODE_EMPTY,
-        EVENT_CODE_KEY,
-        EVENT_CODE_MOUSE_LEFT_PRESSED,
-        EVENT_CODE_MOUSE_LEFT_RELEASED,
-        EVENT_CODE_MOUSE_RIGHT_PRESSED,
-        EVENT_CODE_MOUSE_RIGHT_RELEASED,
-        EVENT_CODE_MOUSE_MIDDLE_PRESSED,
-        EVENT_CODE_MOUSE_MIDDLE_RELEASED,
-        EVENT_CODE_MOUSE_WHEEL_UP,
-        EVENT_CODE_MOUSE_WHEEL_DOWN,
+        EVENT_CODE_EMPTY,                   ///< This is used to handle default or empty values. If this value is assigned to an event, it won't do anything.
+        EVENT_CODE_MOUSE_LEFT_PRESSED,      ///< Left Mouse Button Pressed
+        EVENT_CODE_MOUSE_LEFT_RELEASED,     ///< Left Mouse Button Released
+        EVENT_CODE_MOUSE_RIGHT_PRESSED,     ///< Right Mouse Button Pressed
+        EVENT_CODE_MOUSE_RIGHT_RELEASED,    ///< Right Mouse Button Released
+        EVENT_CODE_MOUSE_MIDDLE_PRESSED,    ///< Middle Mouse Button Pressed
+        EVENT_CODE_MOUSE_MIDDLE_RELEASED,   ///< Middle Mouse Button Released
+        EVENT_CODE_MOUSE_WHEEL_UP,          ///< Mouse Wheel Scrolled Up
+        EVENT_CODE_MOUSE_WHEEL_DOWN,        ///< Mouse Wheel Scrolled Down
+        EVENT_CODE_UP_ARROW,                ///< Up Arrow Pressed
+        EVENT_CODE_DOWN_ARROW,              ///< Down Arrow Pressed
+        EVENT_CODE_LEFT_ARROW,              ///< Left Arrow Pressed
+        EVENT_CODE_RIGHT_ARROW,             ///< Right Arrow Pressed
+        EVENT_CODE_HOME,                    ///< Home Button Pressed
+        EVENT_CODE_END                      ///< End Button Pressed
     }eventCodes_t;
 
+    /// Shell event structure.
+    ///
+    /// This structure holds the necessary fields
+    /// to store and decode shell events. It is
+    /// used to communicate with the attached Screen
+    /// objects.
     typedef struct{
-        shellEventType_t type;
-        eventCodes_t eventCode;
-        uint8_t data;
-        uint8_t x;
-        uint8_t y;
+        shellEventType_t type;      ///< Identifies the type of the event.
+        eventCodes_t eventCode;     ///< Stores the event code in case of `SHELL_EVENT_CODED_KEY` or `SHELL_EVENT_MOUSE` type.
+        uint8_t data;               ///< In case of `SHELL_EVENT_KEY` type, stores the corresponding character to the pressed key. @note Case sensitive!
+        uint8_t x;                  ///< In case of `SHELL_EVENT_MOUSE` type, stores the X-coordinate of the mouse event.
+        uint8_t y;                  ///< In case of `SHELL_EVENT_MOUSE` type, stores the Y-coordinate of the mouse event.
     }shellEvent_t;
 
-
+    /// The events are stored in this buffer.
+    ///
+    /// It uses a circular structure to store the events.
+    /// Usually this buffer should not has to be big.
     shellEvent_t eventBuffer[ EVENT_BUFFER_SIZE ];
+
+    /// Write position for the eventBuffers circular structure.
     uint8_t eventBufferWritePtr;
+
+    /// Read position for the eventBuffers circular structure.
     uint8_t eventBufferReadPtr;
 
+    /// Get the number of events available for reading from the eventBuffer.
+    /// @return The number of events available to read.
     int eventAvailable();
+
+    /// Read an event.
+    ///
+    /// With this function, you can read an event from the event buffer.
+    /// Unlike Arduino-like read methods, this won't pop the event from
+    /// the buffer after reading. This way a complex Screen layout is
+    /// much easier to make.
+    /// @return The next available event from the event buffer.
+    /// @note If there is no available event in the buffer, the returned
+    ///       event type will be `SHELL_EVENT_EMPTY`.
     shellEvent_t readEvent();
 
     /// Remove the current element from the buffer.
+    ///
+    /// It has to be used after calling the update function of the attached Screen object.
+    /// This way an event won't get parsed multiple times.
     void popEvent();
 
+    /// Stores the width of the terminal in characters.
     int terminalWidth = 1;
+
+    /// Stores the height of the terminal in characters.
     int terminalHeight = 1;
 
-
+    /// This buffer is used to parse the mouse coordinates form the
+    /// host terminals answer.
     char mouseEventBuffer[ SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE ];
+
+    /// This variable traks the next free characters location in the mouseEventBuffer.
     uint8_t mouseEventBufferCounter = 0;
 
+    /// Enable mouse reports.
+    ///
+    /// With this function you can enable X-term like
+    /// mouse reporting on the host terminal.
+    /// @note Sadly it won't work on the Windows emulator @emoji :disappointed:.
+    ///       However it works with Xterm.js and PuTTY.
     void mouseBegin();
     void mouseEnd();
 
@@ -739,17 +819,9 @@ public:
 
     /// Input prompt.
     ///
-    /// It is a simple prompt for user input. It can handle backspace events.
-    /// @note Cursor manipulation is not implemented yet.
-    /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
-    /// @param bufferSize The size of the output buffer. If it is 20 characters lont, 19 character fits in it,
-    /// because of the termination '\0' character.
-    /// @param buffer Pointer to the output buffer.
-    /// @param lineText Character array. You can specify the prompt instructions here.
-    /// @param timeout Timeout in ms. If it is 0, that means no timeout.
-    /// @param secret If the prompt is used for a password( or something confidential ) it can be set to true.
-    /// in this case the echoed characters will be replaced with '*' characters. [ optional, false by default ]
-    static int input(Stream *source, int bufferSize, char *buffer, char *lineText, uint32_t timeout, bool secret = false);
+    /// It is a simple prompt for user input.
+    void input( char *buffer, int bufferSize, const char *lineText, void(*callback)(char*, int), bool secret = false );
+    
 
     /// Select list.
     ///
@@ -867,6 +939,7 @@ private:
     ShellminatorScreen* screen = NULL;
     unsigned long screenTimerStart;
     int screenUpdatePeriod;
+    bool screenRedraw;
 
     // State-machine functions.
     /// @todo Finish the documentation for state-machine part.
@@ -917,9 +990,7 @@ private:
 
     /// This function-pointer stores the execution function pointer.
     /// This function will be called when a command recives.
-    void (*execution_fn)(char *);
-
-    void (*execution_fn_with_parrent)(char *, Shellminator *);
+    void (*execution_fn)( char*, Shellminator* );
 
     /// Text buffer
     ///
@@ -1051,6 +1122,10 @@ private:
 
     bool inSearch = false;
     int32_t searchMatch;
+
+    bool inputActive = false;
+    int inputInstuctionSize = 0;
+
 
 #ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
 

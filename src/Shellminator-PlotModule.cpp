@@ -38,6 +38,7 @@ ShellminatorPlot::ShellminatorPlot( float* data_p, int dataSize_p, const char* n
     dataSize = dataSize_p;
     name = name_p;
     color = color_p;
+    plotRedrawPeriod = 500;
 }
 
 ShellminatorPlot::ShellminatorPlot(){
@@ -50,6 +51,10 @@ ShellminatorPlot::ShellminatorPlot(){
 void ShellminatorPlot::init( Shellminator* parent_p ){
     parent = parent_p;
     
+    if( parent == NULL ){
+        return;
+    }
+
     bufferingEnabled = true;
     selectedChannel = parent -> getBufferedPrinter();
 
@@ -60,22 +65,44 @@ void ShellminatorPlot::init( Shellminator* parent_p ){
 }
 
 void ShellminatorPlot::update( int width_p, int  height_p ){
-    // Save the arguments to internal variables.
-    // It is required to make these parameters accessible
-    // to the other member functions.
+
+    // Save the widht and height to internal variables.
     width = width_p;
-    height = height_p - 1;
-}
+    height = height_p;
 
-bool ShellminatorPlot::redrawRequest(){
-    return true;
-}
+    Shellminator::shellEvent_t newEvent;
 
+    if( parent == NULL ){
+        return;
+    }
+
+    if( ( millis() - plotTimerStart ) > plotRedrawPeriod ){
+        plotTimerStart = millis();
+        parent -> requestRedraw();
+        redraw = true;
+    }
+
+    newEvent = parent -> readEvent();
+
+    // In case of empty event, we can't do anything.
+    if( newEvent.type == Shellminator::SHELL_EVENT_EMPTY ){
+        return;
+    }
+
+    if( newEvent.type == Shellminator::SHELL_EVENT_RESIZE ){
+        redraw = true;
+        return;
+    }
+
+}
 
 void ShellminatorPlot::draw(){
 
     int i;
     int j;
+
+    int textWidth;
+    int limit;
 
     if( parent == NULL ){
         return;
@@ -99,29 +126,44 @@ void ShellminatorPlot::draw(){
         return;
     }
 
+    // Only draw if resized event or timer event happened.
+    if( !redraw ){
+        return;
+    }
+
+    redraw = false;
+    
     // Calculate the length of the name.
-    j = strlen( name );
+    textWidth = strlen( name );
 
     // Set the name text color.
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::UNDERLINE, Shellminator::WHITE );
+    Shellminator::setFormat( selectedChannel, Shellminator::BOLD, Shellminator::WHITE );
 
     // Set cursor to make the text appear on the top center.
-    Shellminator::setCursorPosition( selectedChannel, originX + width / 2 - j / 2, originY );
-
-    // Print instructions and plot name only at first draw.
-    selectedChannel -> print( name );
-
-    // Set the cursor to the origin position.
+    //Shellminator::setCursorPosition( selectedChannel, originX + width / 2 - j / 2, originY );
     Shellminator::setCursorPosition( selectedChannel, originX, originY );
 
-    // Set the name text color.
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::UNDERLINE, Shellminator::WHITE );
+    // Calculate text starting position.
+    // It has to be centered.
+    limit = ( width - textWidth ) / 2;
 
-    // Set cursor to make the text appear on the top center.
-    Shellminator::setCursorPosition( selectedChannel, originX + width / 2 - j / 2, originY );
+    // Print as many spaces as needed, to make the text centered.
+    // We print spaces to clear the unwanted garbage from the line.
+    for( i = 0; i < limit; i++ ){
+        selectedChannel -> print( ' ' );
+    }
 
     // Print instructions and plot name only at first draw.
     selectedChannel -> print( name );
+
+    // Calculate how many characters left until line end.
+    limit = width - ( limit + textWidth );
+
+    // Print as many spaces as needed, to make the text centered.
+    // We print spaces to clear the unwanted garbage from the line.
+    for( i = 0; i < limit; i++ ){
+        selectedChannel -> print( ' ' );
+    }
 
     // Set the cursor to the origin position.
     Shellminator::setCursorPosition( selectedChannel, originX, originY );
@@ -170,19 +212,20 @@ void ShellminatorPlot::drawScale(){
 
     int i;
     int j;
+    int currentTextSize;
 
     float tmp;
     float tmpDecimalPart;
+    char sign[2] = { '\0', '\0' };
 
     // Set the correct style.
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, Shellminator::WHITE );
-    Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BOLD, Shellminator::WHITE );
+    Shellminator::setFormat( selectedChannel, Shellminator::BOLD, Shellminator::WHITE );
 
     // Draw the scale.
-    for( i = 0; i < height; i++ ){
+    for( i = 0; i < ( height - 1 ); i++ ){
 
         // Interpolate the value within the height steps.
-        tmp = lerp( max, min, (float)i / (float)( height -1 ) );
+        tmp = lerp( max, min, (float)i / (float)( height - 2 ) );
 
         // Calculate the numbers after the decimal point.
         // It has to be always positive!
@@ -191,23 +234,33 @@ void ShellminatorPlot::drawScale(){
             tmpDecimalPart *= -1.0;
         }
 
+        sign[ 0 ] = ' ';
+        if( tmp < 0.0f  ){
+            if( (int)tmp == 0 ){
+                sign[ 0 ] = '-';
+            }
+            else{
+                sign[ 0 ] = '\0';
+            }
+        }
+
         // Generate the string of the number to the data buffer.
         // Just in case terminate the end of the buffer to avoid
         // any string problems.
-        snprintf( valueTextBuffer, sizeof( valueTextBuffer ), "%3d.%d", (int)tmp, (int)( (int)( tmpDecimalPart * 10.0 ) ) % 10 );
+        snprintf( valueTextBuffer, sizeof( valueTextBuffer ), "%s%d.%d", sign, (int)tmp, (int)( (int)( tmpDecimalPart * 10.0 ) ) % 10 );
         valueTextBuffer[ sizeof( valueTextBuffer ) - 1 ] = '\0';
 
         // Calculate the length of the number
-        // string and store it to variable j.
-        j = strlen( valueTextBuffer );
+        // string and store it to variable currentTextSize.
+        currentTextSize = strlen( valueTextBuffer );
 
         // Basic maximum value finding.
         // If the current text size is greater than the value
         // in valueTextSizeMax, overwrite valueTextSizeMax with it.
         // It is required to find the size of the largest printed
         // number on the Y axes.
-        if( j > valueTextSizeMax ){
-            valueTextSizeMax = j;
+        if( currentTextSize > valueTextSizeMax ){
+            valueTextSizeMax = currentTextSize;
         }
 
         // Set the position of the current line.
@@ -215,18 +268,18 @@ void ShellminatorPlot::drawScale(){
 
         // Print the actual data string to the output stream.
         selectedChannel -> print( valueTextBuffer );
-        selectedChannel -> print( "\033[0K" );
+        //selectedChannel -> print( "\033[0K" );
 
     }
 
     // Draw vertical scaling grid
     Shellminator::setCursorPosition( selectedChannel, originX + valueTextSizeMax + 1, originY + 1 );
 
-    for( i = 0; i < height; i++ ){
+    for( i = 0; i < ( height - 1 ); i++ ){
 
         selectedChannel -> print( "\u2524" );
         // Arrow down + left
-        if( i < ( height - 1 ) ){
+        if( i < ( height - 2 ) ){
             selectedChannel -> print( "\033[B\033[D" );
         }
 
@@ -254,11 +307,12 @@ void ShellminatorPlot::drawScale(){
     Shellminator::setCursorPosition( selectedChannel, originX + width - resultTextSize - 2, originY + 1 );
 
     // Draw vertical scaling grid to the end for the result.
-    for( i = 0; i < height; i++ ){
+    for( i = 0; i < ( height - 1 ); i++ ){
 
         selectedChannel -> print( "\u251C" );
+        
         // Arrow down + left
-        if( i < ( height - 1 ) ){
+        if( i < ( height - 2 ) ){
             selectedChannel -> print( "\033[B\033[D" );
         }
 
@@ -266,6 +320,7 @@ void ShellminatorPlot::drawScale(){
 
 }
 
+/*
 void ShellminatorPlot::drawPlot(){
 
     int i;
@@ -292,10 +347,10 @@ void ShellminatorPlot::drawPlot(){
 
         for( i = 1; i < dataSize; i++ ){
 
-            prevPointY = mapFloat( data[ i - 1 ], min, max, height, 2 );
+            prevPointY = mapFloat( data[ i - 1 ], min, max, height - 1, 2 );
             prevPointX = mapFloat( i - 1, 0, ( dataSize - 1 ), 0, terminalWidth );
 
-            pointY = mapFloat( data[ i ], min, max, height, 2 );
+            pointY = mapFloat( data[ i ], min, max, height - 1, 2 );
             pointX = mapFloat( i, 0, ( dataSize - 1 ), 0, terminalWidth );
 
             Shellminator::setCursorPosition( selectedChannel, originX + valueTextSizeMax + 2 + prevPointX, originY + prevPointY );
@@ -379,7 +434,7 @@ void ShellminatorPlot::drawPlot(){
             }
 
             // Calculate coordinates for the current point.
-            pointY = mapFloat( avg, min, max, height, 2 );
+            pointY = mapFloat( avg, min, max, height - 1, 2 );
             pointX = i;
 
             // Do the same for the previous point
@@ -411,7 +466,7 @@ void ShellminatorPlot::drawPlot(){
                 return;
             }
 
-            prevPointY = mapFloat( avg, min, max, height, 2 );
+            prevPointY = mapFloat( avg, min, max, height - 1, 2 );
 
             Shellminator::setCursorPosition( selectedChannel, originX + valueTextSizeMax + 3 + i - 1, originY + prevPointY );
             selectedChannel -> print( "\u2022" );
@@ -454,6 +509,8 @@ void ShellminatorPlot::drawPlot(){
 
 }
 
+*/
+
 float ShellminatorPlot::lerp( float v0, float v1, float t ){
   return( 1.0 - t ) * v0 + t * v1;
 }
@@ -463,3 +520,107 @@ float ShellminatorPlot::mapFloat( float x, float inStart, float inStop, float ou
   return outStart + ( outStop - outStart ) * ( ( x - inStart ) / ( inStop - inStart ) );
 
 }
+
+
+void ShellminatorPlot::drawPlot(){
+
+    int i;
+    int j;
+    int terminalWidth;
+
+    //float prevPointX;
+    //float prevPointY;
+
+    //float pointY;
+    //float pointX;
+
+    //int avgStartIndex;
+    //int avgEndIndex;
+
+    //float avg;
+
+    int horizontalIndex;
+    int verticalIndex;
+
+    int horizontalIndexNext;
+    int verticalIndexNext;
+
+    const char* nextChar;
+
+    Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, color );
+
+    terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 2 );
+
+    for( i = 0; i < ( height - 1 ); i++ ){
+
+        Shellminator::setCursorPosition( selectedChannel, originX + valueTextSizeMax + 2, originY + 1 + i );
+
+        for( j = 0; j < terminalWidth; j++ ){
+
+            /*
+            // Check if we have a vertical line.
+            if( ( i > 0 ) && ( i < ( height - 2 ) ) && ( j < ( terminalWidth - 1 ) ) ){
+
+                
+
+            }*/
+
+            // Find the actual data point for the current horizontal position.
+            horizontalIndex = lerp( 0, dataSize, (float)j / terminalWidth );
+            verticalIndex = mapFloat( data[ horizontalIndex ], min, max, height-1, 0 );
+            //Shellminator::setCursorPosition( selectedChannel, originX + valueTextSizeMax + 3 + i - 1, originY + verticalIndex );
+            //selectedChannel -> print( '*' );
+
+            nextChar = clearCell;
+
+            if( j < ( terminalWidth - 1 ) ){
+                horizontalIndexNext = lerp( 0, dataSize, (float)( j + 1 ) / terminalWidth );
+                verticalIndexNext = mapFloat( data[ horizontalIndexNext ], min, max, height-1, 0 );
+            }
+
+            if( verticalIndex == i ){
+                //selectedChannel -> print( "\u2022" );
+                nextChar = dotCell;
+            }
+
+            else if( ( verticalIndex < i ) && ( verticalIndexNext > i ) ){
+                //selectedChannel -> print( '+' );
+                nextChar = dotCell;
+            }
+
+            else if( ( verticalIndex > i ) && ( verticalIndexNext < i ) ){
+                //selectedChannel -> print( '+' );
+                nextChar = dotCell;
+            }
+
+            selectedChannel -> print( nextChar );
+
+
+        }
+
+        // Cursor right with one characters.
+        selectedChannel -> print( "\033[C" );
+
+        // Check if it is the most right data point.
+        if( verticalIndex == i ){
+            // If it is, print the result value.
+            selectedChannel -> print( valueTextBuffer );
+        }
+        else{
+            // If it is not, print as many whitespace
+            // characters, as long the result text.
+            for( j = 0; j < resultTextSize; j++ ){
+                selectedChannel -> print( ' ' );
+            }
+        }
+
+    }
+
+}
+
+void ShellminatorPlot::setColor( Shellminator::textColor_t color_p ){
+    color = color_p;
+}
+
+const char ShellminatorPlot::clearCell[2] = " ";
+const char ShellminatorPlot::dotCell[5] = "\u2022";
