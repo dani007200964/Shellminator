@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="class_shellminator.html#afb9fb0cea8cbfb13d5457dd88e5ce4b2" target="_top" xlink:title="Register Screen object to draw.">
+<g id="a_node2"><a xlink:href="class_shellminator.html#a614043dd51087e5867950f5a52756681" target="_top" xlink:title="Register Screen object to draw.">
 <polygon fill="white" stroke="#666666" points="131,-65 0,-65 0,-46 131,-46 131,-65"/>
 <text text-anchor="middle" x="65.5" y="-53" font-family="Helvetica,sans-Serif" font-size="10.00">Shellminator::beginScreen</text>
 </a>

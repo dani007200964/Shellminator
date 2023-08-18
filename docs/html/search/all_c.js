@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['originx_0',['originX',['../class_shellminator_screen.html#a9c6285040b52a721b1c4b229ba3f3740',1,'ShellminatorScreen']]],
-  ['originy_1',['originY',['../class_shellminator_screen.html#a6b1df77d6227cefb8be9a3a837f8ab80',1,'ShellminatorScreen']]],
-  ['overrideabortkey_2',['overrideAbortKey',['../class_shellminator.html#abad556405bac943db348a5bbbb814c5b',1,'Shellminator']]],
-  ['overridedownarrow_3',['overrideDownArrow',['../class_shellminator.html#a7cfb4ffe2458ccd1d1363e09c1b05c10',1,'Shellminator']]],
-  ['overrideendkey_4',['overrideEndKey',['../class_shellminator.html#a60bc3f9f41155799e76ab1a9c9438533',1,'Shellminator']]],
-  ['overridehomekey_5',['overrideHomeKey',['../class_shellminator.html#a144ead7ad06045fee92f77cd1bd5ec18',1,'Shellminator']]],
-  ['overrideleftarrow_6',['overrideLeftArrow',['../class_shellminator.html#ac1f32ea578a68060cea634480fb2b9bc',1,'Shellminator']]],
-  ['overridelogoutkey_7',['overrideLogoutKey',['../class_shellminator.html#a155412a88e1dff3640703ec8149bec3f',1,'Shellminator']]],
-  ['overridepagedownkey_8',['overridePageDownKey',['../class_shellminator.html#a9d9d97cd8cf48214c50bf53c1388b5d2',1,'Shellminator']]],
-  ['overridepageupkey_9',['overridePageUpKey',['../class_shellminator.html#aa0f424c5fce99eb783db9efe72dabb2d',1,'Shellminator']]],
-  ['overriderightarrow_10',['overrideRightArrow',['../class_shellminator.html#a4a40597483618a8a05e1b787d81bf50b',1,'Shellminator']]],
-  ['overridesearchkey_11',['overrideSearchKey',['../class_shellminator.html#ab9c22b28f6c6174b9ae4fe1ad92c188d',1,'Shellminator']]],
-  ['overrideuparrow_12',['overrideUpArrow',['../class_shellminator.html#a2e054598bd72a647809a9b041af10631',1,'Shellminator']]]
+  ['parent_0',['parent',['../class_shellminator_screen.html#a1791c819682bf400da74279df57a1d65',1,'ShellminatorScreen']]],
+  ['peek_1',['peek',['../class_shellminator_buffered_printer.html#a7cdf0d0997a465d6cc47ff2528d7fdbc',1,'ShellminatorBufferedPrinter::peek()'],['../classshellminator_default_channel.html#a705d6613c6241e59557f5d1e64c85d98',1,'shellminatorDefaultChannel::peek()']]],
+  ['percentcolor_2',['percentColor',['../class_shellminator_progress.html#a274844adf35915e81f18c5f993c70d7b',1,'ShellminatorProgress']]],
+  ['percentstyle_3',['percentStyle',['../class_shellminator_progress.html#aa71a36338e7592bef191c48762bc280a',1,'ShellminatorProgress']]],
+  ['popevent_4',['popEvent',['../class_shellminator.html#aa06eec48be6c382f33bb465746993883',1,'Shellminator']]],
+  ['print_5',['print',['../classshellminator_default_channel.html#ab55311182c60a29b8460a281c7f40224',1,'shellminatorDefaultChannel::print(char c)'],['../classshellminator_default_channel.html#a556c3f1b6c510e55e46db80230f1164d',1,'shellminatorDefaultChannel::print(uint8_t b)'],['../classshellminator_default_channel.html#a3051d9acf32646ee8e0ff553d17d2388',1,'shellminatorDefaultChannel::print(char *str)'],['../classshellminator_default_channel.html#a44debe1399e88b604f0852085e79636e',1,'shellminatorDefaultChannel::print(const char *str)']]],
+  ['printbanner_6',['printBanner',['../class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7',1,'Shellminator']]],
+  ['printhelp_7',['printHelp',['../class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c',1,'Shellminator']]],
+  ['printhistory_8',['printHistory',['../class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682',1,'Shellminator']]],
+  ['progress_20_2d_20advanced_9',['Progress - Advanced',['../md_docs_markdown_pages_examples_example_progress_advanced.html',1,'']]],
+  ['progress_20_2d_20simple_10',['Progress - Simple',['../md_docs_markdown_pages_examples_example_progress_simple.html',1,'']]]
 ];

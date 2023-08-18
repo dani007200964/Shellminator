@@ -1,5 +1,6 @@
 <map id="Shellminator::begin" name="Shellminator::begin">
-<area shape="rect" id="node1" title="Shellminator initialization function." alt="" coords="5,31,139,56"/>
+<area shape="rect" id="node1" title="Shellminator initialization function." alt="" coords="5,55,139,80"/>
 <area shape="rect" id="node2" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="192,5,349,31"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="187,55,355,80"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8" title="Input prompt." alt="" coords="205,55,336,80"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="187,104,355,129"/>
 </map>

@@ -450,11 +450,7 @@ void Shellminator::ShellminatorPageUpKeyState(){
 
   }
 
-  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
   historySearchBackward();
-
-  #endif
 
 }
 
@@ -485,11 +481,7 @@ void Shellminator::ShellminatorPageDownKeyState(){
 
   }
 
-  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
   historySearchForward();
-
-  #endif
 
 }
 

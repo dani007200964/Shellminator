@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['read_0',['read',['../class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9',1,'ShellminatorBufferedPrinter::read()'],['../classshellminator_default_channel.html#a372eede2705eb20d7b884b3c8cde358d',1,'shellminatorDefaultChannel::read()']]],
-  ['readevent_1',['readEvent',['../class_shellminator.html#ad3814e6fd6e4294c10ab242cf58a6290',1,'Shellminator']]],
-  ['red_2',['RED',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e',1,'Shellminator']]],
-  ['reedsolomoncomputedivisor_3',['reedSolomonComputeDivisor',['../qrcodegen_8c.html#ac74eae03dc0c0462a79eee356ff40443',1,'qrcodegen.c']]],
-  ['reedsolomoncomputeremainder_4',['reedSolomonComputeRemainder',['../qrcodegen_8c.html#a859a4a9e045e79ca631ea58807c07713',1,'qrcodegen.c']]],
-  ['reedsolomonmultiply_5',['reedSolomonMultiply',['../qrcodegen_8c.html#af3eccd8d887a881d203a8bad18b81902',1,'qrcodegen.c']]],
-  ['regular_6',['REGULAR',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67',1,'Shellminator']]],
-  ['requestredraw_7',['requestRedraw',['../class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf',1,'Shellminator']]],
-  ['reverse_8',['REVERSE',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163abd42c47d8515509b138a757070d80a61',1,'Shellminator']]],
-  ['right_9',['right',['../class_shellminator_screen.html#a230a346a6eb08ebbf51b79bf81e7cbd5',1,'ShellminatorScreen']]]
+  ['terminalheight_0',['terminalHeight',['../class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74',1,'Shellminator']]],
+  ['terminalwidth_1',['terminalWidth',['../class_shellminator.html#a8621934bb93a13846da931110e7a3f80',1,'Shellminator']]],
+  ['textcolor_2',['textColor',['../class_shellminator_progress.html#a56ba3c9e9cbb7be88f34e03b70a8f9e4',1,'ShellminatorProgress']]],
+  ['textcolor_5ft_3',['textColor_t',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2',1,'Shellminator']]],
+  ['textstyle_4',['textStyle',['../class_shellminator_progress.html#a783b0d206396b81231f15d7d86d60194',1,'ShellminatorProgress']]],
+  ['textstyle_5ft_5',['textStyle_t',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163',1,'Shellminator']]],
+  ['todo_20list_6',['Todo List',['../todo.html',1,'']]],
+  ['todocolor_7',['todoColor',['../class_shellminator_progress.html#a836b8c2f97c4ff6dd95ab1eb5b2a4bcb',1,'ShellminatorProgress']]],
+  ['type_8',['type',['../struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54',1,'Shellminator::shellEvent_t']]]
 ];

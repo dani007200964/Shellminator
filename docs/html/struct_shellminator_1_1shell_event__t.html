@@ -143,18 +143,20 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a769a3c1e4e330769435968e98fc4d0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the event code in case of <code>SHELL_EVENT_CODED_KEY</code> or <code>SHELL_EVENT_MOUSE</code> type.  <a href="struct_shellminator_1_1shell_event__t.html#a769a3c1e4e330769435968e98fc4d0e6">More...</a><br /></td></tr>
 <tr class="separator:a769a3c1e4e330769435968e98fc4d0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22c306ca0b45ce7e25470791f48cbd7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">data</a></td></tr>
-<tr class="memdesc:af22c306ca0b45ce7e25470791f48cbd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the corresponding character to the pressed key.  <a href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">More...</a><br /></td></tr>
+<tr class="memdesc:af22c306ca0b45ce7e25470791f48cbd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_KEY</code> type, stores the corresponding character to the pressed key.  <a href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">More...</a><br /></td></tr>
 <tr class="separator:af22c306ca0b45ce7e25470791f48cbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b49d11afa348e1893798d2b45bd2f84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a5b49d11afa348e1893798d2b45bd2f84">x</a></td></tr>
+<tr class="memdesc:a5b49d11afa348e1893798d2b45bd2f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_MOUSE</code> type, stores the X-coordinate of the mouse event.  <a href="struct_shellminator_1_1shell_event__t.html#a5b49d11afa348e1893798d2b45bd2f84">More...</a><br /></td></tr>
 <tr class="separator:a5b49d11afa348e1893798d2b45bd2f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75f1d5616e47b3378d34142ec1b13103"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a75f1d5616e47b3378d34142ec1b13103">y</a></td></tr>
+<tr class="memdesc:a75f1d5616e47b3378d34142ec1b13103"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_MOUSE</code> type, stores the Y-coordinate of the mouse event.  <a href="struct_shellminator_1_1shell_event__t.html#a75f1d5616e47b3378d34142ec1b13103">More...</a><br /></td></tr>
 <tr class="separator:a75f1d5616e47b3378d34142ec1b13103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Shell event structure. </p>
 <p >This structure holds the necessary fields to store and decode shell events. It is used to communicate with the attached Screen objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00738">738</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00798">798</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="af22c306ca0b45ce7e25470791f48cbd7" name="af22c306ca0b45ce7e25470791f48cbd7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af22c306ca0b45ce7e25470791f48cbd7">&#9670;&#160;</a></span>data</h2>
@@ -168,10 +170,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Stores the corresponding character to the pressed key. </p>
+<p>In case of <code>SHELL_EVENT_KEY</code> type, stores the corresponding character to the pressed key. </p>
 <dl class="section note"><dt>Note</dt><dd>Case sensitive! </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00741">741</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00801">801</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -189,7 +191,7 @@ Public Attributes</h2></td></tr>
 
 <p>Stores the event code in case of <code>SHELL_EVENT_CODED_KEY</code> or <code>SHELL_EVENT_MOUSE</code> type. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00740">740</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00800">800</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -207,7 +209,7 @@ Public Attributes</h2></td></tr>
 
 <p>Identifies the type of the event. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00739">739</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00799">799</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -223,7 +225,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00742">742</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p>In case of <code>SHELL_EVENT_MOUSE</code> type, stores the X-coordinate of the mouse event. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00802">802</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -239,7 +243,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00743">743</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p>In case of <code>SHELL_EVENT_MOUSE</code> type, stores the Y-coordinate of the mouse event. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00803">803</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +271,7 @@ Public Attributes</h2></td></tr>
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Thu Aug 17 2023
+      </a> on Fri Aug 18 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -280,7 +286,7 @@ Public Attributes</h2></td></tr>
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Thu Aug 17 2023
+        </a> on Fri Aug 18 2023
       </small></address>
     </li>
   </ul>

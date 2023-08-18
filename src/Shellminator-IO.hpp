@@ -62,11 +62,6 @@ SOFTWARE.
 #include <WebSocketsServer.h>
 #endif
 
-#ifndef ARDUINO
-
-
-
-#endif
 
 /// Shellminator channel class
 ///
@@ -82,53 +77,53 @@ class shellminatorDefaultChannel : public Stream{
 
 public:
 
-  /// Available bytes in the channel.
-  ///
-  /// @returns The available bytes in the channel. Because it is the base class, it returns 0.
-  int    available()                               	{ return 0;  }
+    /// Available bytes in the channel.
+    ///
+    /// @returns The available bytes in the channel. Because it is the base class, it returns 0.
+    int    available()                               	{ return 0;  }
 
-  /// Read one byte form the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will be removed from the channel. Because it is the base class, it returns -1.
-  int    read()                                    	{ return -1; }
+    /// Read one byte form the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will be removed from the channel. Because it is the base class, it returns -1.
+    int    read()                                    	{ return -1; }
 
-  /// Peek the firsts byte from the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel. Because it is the base class, it returns 0.
-  int    peek()                                    	{ return 0;  }
+    /// Peek the firsts byte from the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel. Because it is the base class, it returns 0.
+    int    peek()                                    	{ return 0;  }
 
-  /// Flush the channel.
-  void   flush()                                   	{ return;    }
+    /// Flush the channel.
+    void   flush()                                   	{ return;    }
 
-  /// Write one byte to the channel.
-  ///
-  /// @param b The value that has to be written to the channel.
-  /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
-  size_t write( uint8_t b )                        	{ return 0;  }
+    /// Write one byte to the channel.
+    ///
+    /// @param b The value that has to be written to the channel.
+    /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
+    size_t write( uint8_t b )                        	{ return 0;  }
 
-  /// Print one character to the channel.
-  ///
-  /// @param c The character that has to be printed to the channel.
-  /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( char c )                           	{ return 0;  }
+    /// Print one character to the channel.
+    ///
+    /// @param c The character that has to be printed to the channel.
+    /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
+    size_t print( char c )                           	{ return 0;  }
 
-  /// Print one byte to the channel.
-  ///
-  /// @param b The value that has to be printed to the channel.
-  /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( uint8_t b )                         { return 0;  }
+    /// Print one byte to the channel.
+    ///
+    /// @param b The value that has to be printed to the channel.
+    /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
+    size_t print( uint8_t b )                         { return 0;  }
 
-  /// Print c-string to the channel.
-  ///
-  /// @param str The string that has to be printed to the channel.
-  /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( char *str )                        	{ return 0;  }
+    /// Print c-string to the channel.
+    ///
+    /// @param str The string that has to be printed to the channel.
+    /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
+    size_t print( char *str )                        	{ return 0;  }
 
-  /// Print c-string to the channel.
-  ///
-  /// @param str The string that has to be printed to the channel.
-  /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
-  size_t print( const char *str )                  	{ return 0;  }
+    /// Print c-string to the channel.
+    ///
+    /// @param str The string that has to be printed to the channel.
+    /// @returns The number of bytes that has been successfully printed to the channel. Because it is the base class, it returns 0.
+    size_t print( const char *str )                  	{ return 0;  }
 
 };
 

@@ -29,6 +29,7 @@ include_directories(
     extras/simulator
     extras/simulator/Commander-API
     extras/Unity/src
+    extras/nayuki-qrcodegen
 )
 
 set( SOURCES
@@ -49,8 +50,13 @@ set( SOURCES
     src/Shellminator-Styles.cpp
     src/Shellminator-SearchModule.cpp
     src/Shellminator-MouseInterface.cpp
+    src/Shellminator-Crypto.cpp
+    src/Shellminator-Input.cpp
+    src/Shellminator-Events.cpp
     src/Shellminator-Progress.hpp
     src/Shellminator-Progress.cpp
+    src/Shellminator-QR-Code-Module.hpp
+    src/Shellminator-QR-Code-Module.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -70,6 +76,9 @@ set( SOURCES
     extras/simulator/Commander-API/Commander-IO.cpp
     extras/simulator/Commander-API/Commander-IO.hpp
     extras/simulator/Commander-API/Commander-Settings.hpp
+
+    extras/nayuki-qrcodegen/qrcodegen.c
+    extras/nayuki-qrcodegen/qrcodegen.h
 )
 
 if (RUN_TESTS)
@@ -125,11 +134,19 @@ endif()
 
 if( BUILD_EXAMPLES )
 	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
+	add_executable( Password ${SOURCES} extras/examples_desktop/Desktop/Password/Password.cpp )
+	add_executable( Qrcode ${SOURCES} extras/examples_desktop/Desktop/Qrcode/Qrcode.cpp )
 	add_executable( Screenadvanced ${SOURCES} extras/examples_desktop/Desktop/Screenadvanced/Screenadvanced.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
 	add_executable( Inputsimple ${SOURCES} extras/examples_emscripten/Emscripten/Inputsimple/Inputsimple.cpp )
 	target_link_options( Inputsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Password ${SOURCES} extras/examples_emscripten/Emscripten/Password/Password.cpp )
+	target_link_options( Password PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Qrcode ${SOURCES} extras/examples_emscripten/Emscripten/Qrcode/Qrcode.cpp )
+	target_link_options( Qrcode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Screenadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Screenadvanced/Screenadvanced.cpp )
 	target_link_options( Screenadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

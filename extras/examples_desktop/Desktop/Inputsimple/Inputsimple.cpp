@@ -52,9 +52,8 @@ const char logo[] =
 ;
 
 
-void inputCallback( char* buffer, int bufferSize, Shellminator* caller ){
-    caller -> channel -> print( "Got: " );
-    caller -> channel -> println( buffer );
+void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
+
 }
 
 
@@ -80,7 +79,7 @@ int main(){
 
     char inputBuffer[ 10 ];
 
-    shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback, true );
+    shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback );
 
 
 

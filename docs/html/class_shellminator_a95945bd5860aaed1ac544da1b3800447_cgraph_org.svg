@@ -50,7 +50,7 @@
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="class_shellminator.html#a35be74e46ad7eac24a03411cc9139668" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_shellminator.html#a35be74e46ad7eac24a03411cc9139668" target="_top" xlink:title="Disable mouse reports.">
 <polygon fill="white" stroke="#666666" points="293.5,-111 170.5,-111 170.5,-92 293.5,-92 293.5,-111"/>
 <text text-anchor="middle" x="232" y="-99" font-family="Helvetica,sans-Serif" font-size="10.00">Shellminator::mouseEnd</text>
 </a>
@@ -95,7 +95,7 @@
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="class_shellminator.html#a3cf2cd097eb741beddcaf5340f42a404" target="_top" xlink:title="Get the position of the cursor.">
+<g id="a_node3"><a xlink:href="class_shellminator.html#aecbb745ff1da8944983276e361cbc830" target="_top" xlink:title="Get the position of the cursor.">
 <polygon fill="white" stroke="#666666" points="495,-204 341,-204 341,-185 495,-185 495,-204"/>
 <text text-anchor="middle" x="418" y="-192" font-family="Helvetica,sans-Serif" font-size="10.00">Shellminator::getCursorPosition</text>
 </a>

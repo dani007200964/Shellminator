@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bitlength_0',['bitLength',['../structqrcodegen___segment.html#a3f9c0e922dbb1a8aa5f8fea7fbe90ad3',1,'qrcodegen_Segment']]]
+  ['channel_0',['channel',['../class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88',1,'Shellminator']]]
 ];

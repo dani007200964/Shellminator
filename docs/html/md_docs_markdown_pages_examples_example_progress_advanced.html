@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"><span class="comment">// With a Shellminator object.</span></div>
 <div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
 <div class="line"><a class="code hl_class" href="class_shellminator_progress.html">ShellminatorProgress</a> progress( &amp;shell );</div>
-<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00170">Shellminator.hpp:171</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00189">Shellminator.hpp:190</a></div></div>
 <div class="ttc" id="aclass_shellminator_progress_html"><div class="ttname"><a href="class_shellminator_progress.html">ShellminatorProgress</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_progress_8hpp_source.html#l00055">Shellminator-Progress.hpp:55</a></div></div>
 </div><!-- fragment --><p >If you make a simple system, you can use the simple solution with a Stream object, like Serial. </p><dl class="section note"><dt>Note</dt><dd>However it is recommended to use the advanced solution. It is more flexible, and it can be used with buffering.</dd></dl>
 <p>There is an option to customize your progress bar. You can define the done and the remaining characters for the bar. You can use unicode characters like this: </p><div class="fragment"><div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot; &quot;</span> );</div>
@@ -146,9 +146,9 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
 <div class="line"> </div>
 <div class="line"><span class="comment">// Draw the progress bar</span></div>
 <div class="line">progress.drawProgressBar( i, <span class="stringliteral">&quot;Counting Up...&quot;</span>, <span class="stringliteral">&quot;\u2588&quot;</span>, <span class="stringliteral">&quot;-&quot;</span> );</div>
-<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00181">Shellminator.hpp:181</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00187">Shellminator.hpp:186</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00180">Shellminator.hpp:180</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdoc">Green text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00200">Shellminator.hpp:200</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdoc">White text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00206">Shellminator.hpp:205</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdoc">Red text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00199">Shellminator.hpp:199</a></div></div>
 </div><!-- fragment --><p >This example shows the advanced solution: </p><div class="fragment"></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Thu Aug 17 2023
+      </a> on Fri Aug 18 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('md_docs_markdown_pages_examples_exampl
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Thu Aug 17 2023
+        </a> on Fri Aug 18 2023
       </small></address>
     </li>
   </ul>

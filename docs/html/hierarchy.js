@@ -1,9 +1,9 @@
 var hierarchy =
 [
-    [ "qrcodegen_Segment", "structqrcodegen___segment.html", null ],
     [ "Shellminator::shellEvent_t", "struct_shellminator_1_1shell_event__t.html", null ],
     [ "Shellminator", "class_shellminator.html", null ],
     [ "ShellminatorProgress", "class_shellminator_progress.html", null ],
+    [ "ShellminatorQR", "class_shellminator_q_r.html", null ],
     [ "ShellminatorScreen", "class_shellminator_screen.html", [
       [ "ShellminatorButton", "class_shellminator_button.html", null ],
       [ "ShellminatorPlot", "class_shellminator_plot.html", null ]

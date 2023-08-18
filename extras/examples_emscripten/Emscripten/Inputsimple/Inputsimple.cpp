@@ -57,7 +57,7 @@ void loop();
 // Init Section.
 void setup();
 
-void inputCallback( char* buffer, int bufferSize ){
+void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
 }
 

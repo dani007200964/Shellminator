@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data_0',['data',['../structqrcodegen___segment.html#a0e9cd1915812ada8e06cfd49be30f8b9',1,'qrcodegen_Segment::data()'],['../struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7',1,'Shellminator::shellEvent_t::data()']]],
+  ['data_0',['data',['../struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7',1,'Shellminator::shellEvent_t']]],
   ['defaultchannel_1',['defaultChannel',['../class_shellminator.html#ad6c67c816043b4aa64ed6cbbd1101bae',1,'Shellminator']]],
   ['developer_20zone_2',['Developer Zone',['../md_docs_markdown_pages_developer_zone.html',1,'']]],
   ['developer_5fzone_2emd_3',['developer_zone.md',['../developer__zone_8md.html',1,'']]],

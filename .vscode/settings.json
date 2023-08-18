@@ -11,5 +11,8 @@
         "xstring": "cpp",
         "xmemory": "cpp",
         "istream": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "microcontroller"
+    ]
 }

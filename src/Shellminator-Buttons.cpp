@@ -42,10 +42,32 @@ SOFTWARE.
 ╭──────╮
 │      │
 ╰────┤ ╯
+▄▖
+▌
 
+▗▂▂▂▂▂▖
+▐
 
+██
+██
+
+▗▄▄▄▄▄▄▄▄▄▄
+▐   asdasd ▌
+▀▀▀▀▀▀▀▀▀▀▀▀
+
+⏋
+⎿
+
+⌜▄    ⌝
+ Hello
+⌞    ⌟
+⌜    ⌝
+ Hello
+⌞   ⮩x
 */
 
+
+/*
 const char ShellminatorButton::topLeftCornerRound[ 4 ]     = "\u256D";
 const char ShellminatorButton::topRightCornerRound[ 4 ]    = "\u256E";
 const char ShellminatorButton::bottomLeftCornerRound[ 4 ]  = "\u2570";
@@ -58,6 +80,22 @@ const char ShellminatorButton::bottomRightCornerSquare[ 4 ] = "\u2518";
 
 const char ShellminatorButton::horizontalLineDefault[ 4 ] = "\u2500";
 const char ShellminatorButton::verticalLineDefault[ 4 ]   = "\u2502";
+
+*/
+
+const char ShellminatorButton::topLeftCornerRound[ 4 ]     = "\u256D";
+const char ShellminatorButton::topRightCornerRound[ 4 ]    = "\u256E";
+const char ShellminatorButton::bottomLeftCornerRound[ 4 ]  = "\u2570";
+const char ShellminatorButton::bottomRightCornerRound[ 4 ] = "\u256F";
+
+const char ShellminatorButton::topLeftCornerSquare[ 4 ]     = "\u2597";
+const char ShellminatorButton::topRightCornerSquare[ 4 ]    = "\u2510";
+const char ShellminatorButton::bottomLeftCornerSquare[ 4 ]  = "\u2514";
+const char ShellminatorButton::bottomRightCornerSquare[ 4 ] = "\u2518";
+
+const char ShellminatorButton::horizontalLineDefault[ 4 ] = "\u2582";
+const char ShellminatorButton::verticalLineDefault[ 4 ]   = "\u2590";
+
 
 ShellminatorButton::ShellminatorButton(){
 
@@ -223,6 +261,7 @@ void ShellminatorButton::update( int width_p, int  height_p ){
 
 }
 
+/*
 void ShellminatorButton::draw(){
 
     // Generic counter.
@@ -360,5 +399,179 @@ void ShellminatorButton::draw(){
 
         triggered = false;
     }
+
+}
+*/
+
+/*
+void ShellminatorButton::draw(){
+
+    // Generic counter.
+    int i;
+
+    // The upper limit of the for loops calculated
+    // to this variable.
+    int limit;
+
+    if( parent == NULL ){
+        return;
+    }
+
+    if( name == NULL ){
+        return;
+    }
+
+    if( selectedChannel == NULL ){
+        return;
+    }
+
+    // Only draw if resized event or timer event happened.
+    if( !redraw ){
+        return;
+    }
+    redraw = false;
+
+    //Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY );
+    Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::WHITE );
+
+    // Top line section.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY );
+
+    selectedChannel -> print( "\u231C" );
+
+    for( i = 1; i < ( width - 2 ); i++ ){
+        selectedChannel -> print( "\u2584" );
+    }
+
+    selectedChannel -> print( "\u231D" );
+
+    // Middle line section
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
+
+    selectedChannel -> print( ' ' );
+
+    limit = ( width - textWidth ) / 2;
+    for( i = 1; i < limit; i++ ){
+        selectedChannel -> print( "\u2588" );
+    }
+
+    if( triggered ){
+        //Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::BACKGROUND, Shellminator::WHITE, Shellminator::BG_BLACK );        
+    }
+    else{
+        Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::WHITE, Shellminator::BG_BLACK );
+    }
+    selectedChannel -> print( name );
+    Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::BLACK, Shellminator::BG_WHITE );
+    Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::WHITE );
+
+    limit = width - ( limit + textWidth );
+    for( i = 1; i < limit - 1; i++ ){
+        selectedChannel -> print( "\u2588" );
+    }
+
+    // Bottom line section.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 2 );
+
+    selectedChannel -> print( "\u231E" );
+
+    for( i = 1; i < ( width - 2 ); i++ ){
+        selectedChannel -> print( "\u2580" );
+    }
+
+    selectedChannel -> print( "\u231F" );
+
+    Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, Shellminator::WHITE );
+
+    if( bufferingEnabled ){
+        selectedChannel -> flush();
+    }
+
+    if( triggered ){
+
+        if( func != NULL ){
+            func();
+        }
+
+        parent -> requestRedraw();
+        redraw = true;
+
+        triggered = false;
+    }
+
+}
+
+*/
+
+void ShellminatorButton::draw(){
+
+    // Generic counter.
+    int i;
+
+    // The upper limit of the for loops calculated
+    // to this variable.
+    int limit;
+
+    if( parent == NULL ){
+        return;
+    }
+
+    if( name == NULL ){
+        return;
+    }
+
+    if( selectedChannel == NULL ){
+        return;
+    }
+
+    // Only draw if resized event or timer event happened.
+    if( !redraw ){
+        return;
+    }
+    redraw = false;
+
+    // Top line section.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY );
+
+    selectedChannel -> print( "\u250C" );
+
+    limit = ( width - textWidth ) / 2;  
+    for( i = 1; i < limit; i++ ){
+        selectedChannel -> print( "\u2500" );
+    }
+
+    Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::WHITE );
+
+    selectedChannel -> print( name );
+
+    Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, Shellminator::WHITE );
+
+    limit = width - ( limit + textWidth );
+    for( i = 1; i < limit - 1; i++ ){
+        selectedChannel -> print( "\u2500" );
+    }
+
+    selectedChannel -> print( "\u2510" );
+
+
+    // Bottom line section.
+    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
+
+    selectedChannel -> print( "\u2514" );
+
+     limit = ( width - 1 ) / 2;  
+    for( i = 1; i < limit; i++ ){
+        selectedChannel -> print( "\u2500" );
+    }
+
+    selectedChannel -> print( "\u2BA9" );
+
+    limit = width - ( limit + 1 );
+    for( i = 1; i < limit - 1; i++ ){
+        selectedChannel -> print( "\u2500" );
+    }
+
+    selectedChannel -> print( "\u2518" );
+
 
 }

@@ -214,8 +214,6 @@ void Shellminator::redrawHistorySearch(){
 
 int Shellminator::substring( char* str1, char* str2 ){
 
-    // https://www.geeksforgeeks.org/check-string-substring-another/
-
     int i;
     int j;
 

@@ -130,18 +130,17 @@ $(document).ready(function(){initNavTree('_shellminator_8hpp.html',''); initResi
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_shellminator-_default_settings_8hpp_source.html">Shellminator-DefaultSettings.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_shellminator-_i_o_8hpp_source.html">Shellminator-IO.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_shellminator-_buffered_printer_8hpp_source.html">Shellminator-BufferedPrinter.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_shellminator-_screen_8hpp_source.html">Shellminator-Screen.hpp</a>&quot;</code><br />
 <code>#include &quot;Arduino.h&quot;</code><br />
 <code>#include &lt;avr/pgmspace.h&gt;</code><br />
 <code>#include &quot;Stream.h&quot;</code><br />
 <code>#include &lt;ESP8266WiFi.h&gt;</code><br />
 <code>#include &lt;WiFi.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_shellminator-_buffered_printer_8hpp_source.html">Shellminator-BufferedPrinter.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_shellminator-_screen_8hpp_source.html">Shellminator-Screen.hpp</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdarg.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="qrcodegen_8h_source.html">external/nayuki-qrcodegen/qrcodegen.h</a>&quot;</code><br />
 </div>
 <p><a href="_shellminator_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -159,10 +158,11 @@ Macros</h2></td></tr>
 <tr class="memitem:a222496dd92808ca61af5ab40a657653e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a222496dd92808ca61af5ab40a657653e">SHELLMINATOR_HELP_TEXT</a></td></tr>
 <tr class="memdesc:a222496dd92808ca61af5ab40a657653e"><td class="mdescLeft">&#160;</td><td class="mdescRight">+---&mdash; Custom configuration ---&mdash;+ | | | This is where you have to config | | your defines! | | | +---------------------------------&mdash;+  <a href="_shellminator_8hpp.html#a222496dd92808ca61af5ab40a657653e">More...</a><br /></td></tr>
 <tr class="separator:a222496dd92808ca61af5ab40a657653e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41bdbfb8b733755c31f674b077e6fe58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a>&#160;&#160;&#160;&quot;1.1.2&quot;</td></tr>
+<tr class="memitem:a41bdbfb8b733755c31f674b077e6fe58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a>&#160;&#160;&#160;&quot;2.0.0&quot;</td></tr>
 <tr class="memdesc:a41bdbfb8b733755c31f674b077e6fe58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version of the module.  <a href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">More...</a><br /></td></tr>
 <tr class="separator:a41bdbfb8b733755c31f674b077e6fe58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7cd2cf6d8a593f481109d0f26565472"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#ad7cd2cf6d8a593f481109d0f26565472">SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE</a>&#160;&#160;&#160;12</td></tr>
+<tr class="memitem:ad7cd2cf6d8a593f481109d0f26565472"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#ad7cd2cf6d8a593f481109d0f26565472">SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE</a>&#160;&#160;&#160;15</td></tr>
+<tr class="memdesc:ad7cd2cf6d8a593f481109d0f26565472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer size for the mouse event parser.  <a href="_shellminator_8hpp.html#ad7cd2cf6d8a593f481109d0f26565472">More...</a><br /></td></tr>
 <tr class="separator:ad7cd2cf6d8a593f481109d0f26565472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a312d2d9241847afe7ee519bec707bfe3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator_8hpp.html#a312d2d9241847afe7ee519bec707bfe3">setFormat</a>(streamObject, ...)&#160;&#160;&#160;setFormatFunc( (streamObject), __VA_ARGS__, -1 );</td></tr>
 <tr class="memdesc:a312d2d9241847afe7ee519bec707bfe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic text formatting.  <a href="_shellminator_8hpp.html#a312d2d9241847afe7ee519bec707bfe3">More...</a><br /></td></tr>
@@ -198,11 +198,11 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 <p>Example: </p><div class="fragment"><div class="line">shell.format( <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a>, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a> ); </div>
-<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a></div><div class="ttdeci">@ BLINKING</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00199">Shellminator.hpp:199</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00195">Shellminator.hpp:195</a></div></div>
-<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00182">Shellminator.hpp:182</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a></div><div class="ttdeci">@ BLINKING</div><div class="ttdoc">Blinking text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00218">Shellminator.hpp:218</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdoc">Bold text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00214">Shellminator.hpp:214</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdoc">Yellow text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00201">Shellminator.hpp:201</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00162">162</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00181">181</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,7 @@ Macros</h2></td></tr>
 </dl>
 <p>Example: </p><div class="fragment"><div class="line">Shellminator::setFormat( &amp;Serial, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a>, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c">Shellminator::BLINKING</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a> ); </div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00148">148</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00167">167</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -273,8 +273,9 @@ Macros</h2></td></tr>
 <div class="line">    <span class="stringliteral">&quot;\r\n&quot;</span>                                                                                  \</div>
 </div><!-- fragment -->
 <p>+---&mdash; Custom configuration ---&mdash;+ | | | This is where you have to config | | your defines! | | | +---------------------------------&mdash;+ </p>
+<p >Help information </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00116">116</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00134">134</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -285,12 +286,14 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE&#160;&#160;&#160;12</td>
+          <td class="memname">#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE&#160;&#160;&#160;15</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00133">133</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p>Buffer size for the mouse event parser. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00152">152</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -301,14 +304,14 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SHELLMINATOR_VERSION&#160;&#160;&#160;&quot;1.1.2&quot;</td>
+          <td class="memname">#define SHELLMINATOR_VERSION&#160;&#160;&#160;&quot;2.0.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Version of the module. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00131">131</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00149">149</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -334,7 +337,7 @@ Macros</h2></td></tr>
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Thu Aug 17 2023
+      </a> on Fri Aug 18 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -349,7 +352,7 @@ Macros</h2></td></tr>
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Thu Aug 17 2023
+        </a> on Fri Aug 18 2023
       </small></address>
     </li>
   </ul>

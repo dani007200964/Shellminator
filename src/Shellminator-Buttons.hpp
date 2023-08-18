@@ -83,6 +83,7 @@ public:
     /// @todo Buffering!
     void draw() override;
 
+    
     void update( int width_p, int  height_p ) override;
 
     void attachEvent( Shellminator::shellEvent_t event_p );

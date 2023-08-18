@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['underline_0',['UNDERLINE',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644',1,'Shellminator']]],
-  ['up_1',['up',['../class_shellminator_screen.html#acc36824fb23b17034d5efc91e7065d83',1,'ShellminatorScreen']]],
-  ['update_2',['update',['../class_shellminator_button.html#ad01d6b0dad843b7b9ead29ee98b06f82',1,'ShellminatorButton::update()'],['../class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9',1,'ShellminatorPlot::update()'],['../class_shellminator_screen.html#a772b52297ac083e64b916cec8000811a',1,'ShellminatorScreen::update()'],['../class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1',1,'Shellminator::update()']]]
+  ['waitforkey_0',['waitForKey',['../class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2',1,'Shellminator::waitForKey(Stream *source, char key, uint32_t timeout=0)'],['../class_shellminator.html#ab1a370fe2d58a32cd595d76e709f63a5',1,'Shellminator::waitForKey(Stream *source, char *keys, uint32_t timeout=0)']]],
+  ['white_1',['WHITE',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33',1,'Shellminator']]],
+  ['width_2',['width',['../class_shellminator_screen.html#aa94051b46d88a4ae19b9453080faf2b6',1,'ShellminatorScreen']]],
+  ['write_3',['write',['../class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2',1,'ShellminatorBufferedPrinter::write(uint8_t b) override'],['../class_shellminator_buffered_printer.html#affefb97addfa3c7d5ee88442f016f26d',1,'ShellminatorBufferedPrinter::write(const uint8_t *data, size_t size) override'],['../classshellminator_default_channel.html#aaf07d0dd4996d676a066eb8290b39b5e',1,'shellminatorDefaultChannel::write()']]]
 ];

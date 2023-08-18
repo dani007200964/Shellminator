@@ -34,21 +34,31 @@ SOFTWARE.
 #ifndef SHELLMINATOR_HPP_
 #define SHELLMINATOR_HPP_
 
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
+//---- Shellminator related headers. ----//
+#include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
+#include "Shellminator-IO.hpp"                  // 
+#include "Shellminator-BufferedPrinter.hpp"
+#include "Shellminator-Screen.hpp"
 
 #ifdef ARDUINO
-#include "Arduino.h"
+    #include "Arduino.h"
 #else
-#include "System.h"
+    // For the simulator, I implemented the 
+    // required functions from the Arduino.h
+    // manually.
+    #include "System.h"
 #endif
 
 #ifdef __AVR__
 
-#include <avr/pgmspace.h>
+    // If we are using an AVR microcontroller,
+    // we need to store the constant texts
+    // in program memory.
+    #include <avr/pgmspace.h>
 
 #endif
 
+// This library is using the Stream class as communication channel.
 #include "Stream.h"
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
@@ -66,25 +76,38 @@ SOFTWARE.
 
 #endif
 
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
-
-#include "external/sha256/terminal_sha256.h"
-
-#endif
-
-#include "Shellminator-BufferedPrinter.hpp"
-#include "Shellminator-Screen.hpp"
-
+// 'Smart' macro to include the supported
+// external libraries.
 #ifdef __has_include
-#if __has_include("Commander-API.hpp")
-#include "Commander-API.hpp"
-#endif
+
+    // Check for Commander-API library.
+    #if __has_include ("Commander-API.hpp")
+        #include "Commander-API.hpp"
+    #endif
+
+    // Check for WebSocketServer library
+    #if __has_include ( "WebSocketsServer.h" )
+        #include <WebSocketsServer.h>
+        #ifndef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+            #define SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
+        #endif
+    #endif
+
+    // Check for nayuki QR-Code-generator
+    // ( c implementation needed not c++ one )
+    #if __has_include ( "qrcodegen.h" )
+        #ifndef __AVR__
+            #include "qrcodegen.h"
+            #ifndef SHELLMINATOR_ENABLE_QR_SUPPORT
+                #define SHELLMINATOR_ENABLE_QR_SUPPORT
+            #endif
+        #endif
+    #endif
+
+    
 #endif
 
-#ifdef COMMANDER_API_VERSION
-#include "Commander-API.hpp"
-#endif
-
+// std library headers.
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -97,12 +120,6 @@ SOFTWARE.
 ///  |                                    |
 ///  +------------------------------------+
 
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
-
-#include "external/nayuki-qrcodegen/qrcodegen.h"
-
-#endif
-
 // Clever solution to handle constant string data.
 // Thank you ondras12345!
 #ifndef __CONST_TXT__
@@ -113,6 +130,7 @@ SOFTWARE.
     #endif
 #endif
 
+/// Help information
 #define SHELLMINATOR_HELP_TEXT   "\r\n"                                                     \
     "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"                   \
     "\r\n"                                                                                  \
@@ -128,9 +146,10 @@ SOFTWARE.
 
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "1.1.2"
+#define SHELLMINATOR_VERSION "2.0.0"
 
-#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 12
+/// Buffer size for the mouse event parser.
+#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
 
 /// Basic text formatting.
 ///
@@ -176,14 +195,29 @@ public:
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color codes</a>.
     enum textColor_t
     {
-        BLACK = 30,
-        RED = 31,
-        GREEN = 32,
-        YELLOW = 33,
-        BLUE = 34,
-        MAGENTA = 35,
-        CYAN = 36,
-        WHITE = 37
+        BLACK = 30,     ///< Black text color
+        RED = 31,       ///< Red text color
+        GREEN = 32,     ///< Green text color
+        YELLOW = 33,    ///< Yellow text color
+        BLUE = 34,      ///< Blue text color
+        MAGENTA = 35,   ///< Magenta text color
+        CYAN = 36,      ///< Cyane text color
+        WHITE = 37      ///< White text color
+    };
+
+    /// VT100 color codes
+    ///
+    /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible background color codes</a>.
+    enum backgroundColor_t
+    {
+        BG_BLACK = 40,     ///< Black text color
+        BG_RED = 41,       ///< Red text color
+        BG_GREEN = 42,     ///< Green text color
+        BG_YELLOW = 43,    ///< Yellow text color
+        BG_BLUE = 44,      ///< Blue text color
+        BG_MAGENTA = 45,   ///< Magenta text color
+        BG_CYAN = 46,      ///< Cyane text color
+        BG_WHITE = 47      ///< White text color
     };
 
     /// VT100 font sytles
@@ -191,15 +225,15 @@ public:
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>.
     enum textStyle_t
     {
-        REGULAR = 0,
-        BOLD = 1,
-        LOW_INTENSITY = 2,
-        ITALIC = 3,
-        UNDERLINE = 4,
-        BLINKING = 5,
-        REVERSE = 6,
-        BACKGROUND = 7,
-        INVISIBLE = 8
+        REGULAR = 0,        ///< Regular text style
+        BOLD = 1,           ///< Bold text style
+        LOW_INTENSITY = 2,  ///< Low intensity text style
+        ITALIC = 3,         ///< Italic text style
+        UNDERLINE = 4,      ///< Underline text style
+        BLINKING = 5,       ///< Blinking text style
+        REVERSE = 6,        ///< Reverse text style
+        BACKGROUND = 7,     ///< Background text style
+        INVISIBLE = 8       ///< Invisible text style
     };
 
     /// String, that holds the version information
@@ -661,19 +695,60 @@ public:
 
 #endif
 
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+    /// Enable login password.
+    ///
+    /// With this function you can add a login password.
+    /// There is a twist in the story tough. Instead of storing
+    /// the password itself, we have to store a hash that is generated
+    /// from the password. The reason for this is simple. If you store
+    /// the password, it can be dumped from the compiled firmware and
+    /// it is easily hackable. If you store a hash, that is generated
+    /// from the password, it is much safer, because ideally, you can
+    /// not generate the original password back from its hash.
+    ///
+    /// The default implementation uses a crc32 hash generator. It
+    /// is not the safest, and not the prettiest, but it can be run on
+    /// low end hardware fairly well. You can replace this hash
+    /// algorithm to a custom one with the @ref setPasswordHashFunction.
+    ///
+    /// Using this is fairly simple, you need to generate a hash from
+    /// your password. You can find an online hash generator
+    /// [here](https://crccalc.com/). Set the input to __ASCII__ and the
+    /// output to __HEX__ with __CRC32__ mode. For this demo I will use
+    /// `Password` as password. The online tool calculated the result
+    /// which is __0xCCB42483__. This is all the information what we need.
+    ///
+    /// Example code:
+    /// @code{cpp}
+    /// // We have to split the hash to bytes. The default CRC32
+    /// // hash function produces a 32-bit( 4-byte ) hash, so
+    /// // we have to split the hash into 4-bytes. Splitting
+    /// // 0xCCB42483 is easy.
+    /// uint8_t passwordHash[] = { 0xCC, 0xB4, 0x24, 0x83 };
+    /// 
+    /// // Attach the hash to the terminal object in the init section.
+    /// shell.setPassword( passwordHash, sizeof( passwordHash ) );
+    /// @endcode
+    void setPassword( uint8_t* hashData, int hashSize );
 
-    void enablePasswordProtection(uint8_t *passwordHashAddress_p);
-    void enablePasswordProtection(const uint8_t *passwordHashAddress_p);
-    void enablePasswordProtection(char *passwordHashAddress_p);
-    void enablePasswordProtection(const char *passwordHashAddress_p);
-    void disablePasswordProtection();
-    bool checkPassword(uint8_t *pwStr);
-    bool checkPassword(const uint8_t *pwStr);
-    bool checkPassword(char *pwStr);
-    bool checkPassword(const char *pwStr);
-
-#endif
+    /// Replace the built-in CRC32 hash generator.
+    ///
+    /// If you want some more modern solution instead of the good old
+    /// CRC32, you can do this with this function. You need a hash 
+    /// function which looks like this:
+    /// @code{cpp}
+    /// void customHash( uint8_t* inputData, int inputDataSize, uint8_t* outputData, int outputDataSize );
+    /// @endcode
+    ///
+    /// The hash must be generated from the inputData, and it's must be generated to the outputData.
+    /// @warning It is very, very important to specify the correct hash size with the @ref setPassword
+    ///          function in the init section. This will determinate the allocated memory for the
+    ///          outputData buffer. If it not set correctly, it will cause buffer overflow!
+    ///
+    /// @note Hash functions usually produce a fixed length hash. For example CRC32 produces a 32-bit hash,
+    ///       SHA256 produces a 256-bit hash... Please select a hash function with fixed length result and
+    ///       use this length as the second argument for the @ref setPassword function.
+    void setPasswordHashFunction( void(*hashFunc_p)( uint8_t*, int, uint8_t*, int ) );
 
     /// Register Screen object to draw.
     ///
@@ -796,6 +871,8 @@ public:
     /// @note Sadly it won't work on the Windows emulator @emoji :disappointed:.
     ///       However it works with Xterm.js and PuTTY.
     void mouseBegin();
+
+    /// Disable mouse reports.
     void mouseEnd();
 
     /// Wait for specific keypress
@@ -819,7 +896,31 @@ public:
 
     /// Input prompt.
     ///
-    /// It is a simple prompt for user input.
+    /// It is a simple prompt for user input. You can create
+    /// simple queries with this function. This is a non-blocking
+    /// function, and this means, that the it will take over the
+    /// control from the terminal until the user finishes.
+    /// It can be interrupted with the abort key( ctrl-c ).
+    /// @param buffer Pointer to a buffer. The typed text will be copied to this buffer.
+    ///               The result will be always terminated to make it compatible with str
+    ///               functions.
+    /// @param bufferSize The size of the buffer.
+    /// @param instruction Instruction text for the prompt. It can be helpful to instruct
+    ///                    the user about what information is needed in this prompt.
+    /// @param callback When the input typed the data and the return key is pressed, this
+    ///                 function will be called. The typed text will be available on the
+    ///                 arguments.
+    /// @param secret If you has to request some sensitive data, you can set this flag to
+    ///               true. This way, the prompt will echo back `*` characters instead
+    ///               of the actual ones.
+    ///
+    /// Example callback function:
+    /// @code{cpp}
+    /// void inputCallback( char* text, int textSize, Shellminator* parent ){
+    ///     parent -> print( "Hurray! I got something: " );
+    ///     parent -> print( text );
+    /// }
+    /// @endcode
     void input( char *buffer, int bufferSize, const char *instruction, void(*callback)(char*, int, Shellminator*), bool secret = false );
     
 
@@ -849,7 +950,7 @@ public:
     /// @returns In single element mode, it will return the index of the selected element. In multiple element
     ///          mode, it will return the number of selected elements from the list. If timeout or abort event
     ///          occurs, it will return -1.
-    static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection = NULL);
+    //static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection = NULL);
 
     /// Generate a beep sound on the terminal device.
     void beep();
@@ -863,6 +964,7 @@ public:
     bool mute = false;
 
     /// Default communication channel;
+    /// @todo Why do I need this???
     shellminatorDefaultChannel defaultChannel;
 
     /// Pointer to the communication class. By default
@@ -883,63 +985,55 @@ public:
 
 #endif
 
-// Configuration for QR code specific parts.
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @note The error correction is Medium by default.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(char *text);
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @note The error correction is Medium by default.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(const char *text);
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @param ecc Error correction level.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(char *text, enum qrcodegen_Ecc ecc);
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @param ecc Error correction level.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(const char *text, enum qrcodegen_Ecc ecc);
-
-#endif
-
     void autoDetectTerminal();
 
     friend class ShellminatorProgress;
 
 private:
-    // It can be used to accelerate the data sending process.
-    // With this, the output will be rendered onec without flickering.
+    /// It can be used to accelerate the data sending process.
+    /// With this, the output will be rendered once without flickering.
     ShellminatorBufferedPrinter bufferedPrinter;
 
-    // If memory allocation is failed for the buffer, this flag will be false.
+    /// If memory is allocated, this will be true;
     bool bufferMemoryAllocated = false;
 
+    /// Pointer to a ShellminatorScreen object.
+    /// It will be used when Screen drawing is enabled.
     ShellminatorScreen* screen = NULL;
+
+    /// The screen is drawn within a pre-defined periods.
+    /// This variable stores the last time when a drawing
+    /// event occurred.
     unsigned long screenTimerStart;
+
+    /// The time interval between two drawings.
     int screenUpdatePeriod;
+
+    /// This flag shows if a request come from the Screen
+    /// object to issue a draw function call.
     bool screenRedraw;
+
+    /// Stores the address of the password hash array.
+    uint8_t* passwordHash = NULL;
+
+    /// Stores the password hash array size.
+    int passwordHashSize = 0;
+
+    /// If logging in is required this flag will be true.
+    bool loggedIn = false;
+
+    /// Pointer to the hash function.
+    void(*passwordHashFunc)( uint8_t*, int, uint8_t*, int ) = NULL;
+
+    /// Check the password.
+    ///
+    /// This function generates a hash from its argument string
+    /// and compares it with the hash stored in the passwordHash
+    /// array.
+    /// @param password Input text to compare.
+    /// @returns If the computed and the stored hash matches, it
+    ///          will return true.
+    bool checkPassword( const char* password );
 
     // State-machine functions.
     /// @todo Finish the documentation for state-machine part.
@@ -972,6 +1066,7 @@ private:
     void ShellminatorProcessRegularCharacter(char new_char);
     void ShellminatorMouseEventParserState(char new_char);
 
+    /// Function pointer to the current state of the main state-machine.
     void (Shellminator::*currentState)(char) = &Shellminator::ShellminatorDefaultState;
 
     /// Pointer to a string that holds the startup logo
@@ -981,10 +1076,22 @@ private:
     /// @warning Make sure that the generated string is c/c++ compatible!
     char *logo = NULL;
 
+    /// Push a new event to the event buffer.
     void pushEvent( shellEvent_t event );
+
+    /// Parse mouse data.
+    ///
+    /// It is used by the main state machine.
+    /// Its main task is to parse the mouse string
+    /// and if it is parsed successfully, generate
+    /// a new event in the event buffer for it.
     void parseMouseData();
 
 #ifdef __AVR__
+    /// On AVR there is an oprion to store the
+    /// logo in the program memory.
+    /// @note I highly recommend using this on AVR
+    ///       to save some memory.
     __FlashStringHelper *progmemLogo = NULL;
 #endif
 
@@ -1003,7 +1110,7 @@ private:
     /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
     /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
     /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-    char cmd_buff[SHELLMINATOR_BUFF_DIM][SHELLMINATOR_BUFF_LEN + 1] = {{0}};
+    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
 
     /// This variable tracks the index of the previous command while you browsing the command history
     uint32_t cmd_buff_dim = 1;
@@ -1020,6 +1127,8 @@ private:
     /// This character array stores the banner text.
     char banner[SHELLMINATOR_BANNER_LEN] = {'\0'};
 
+    /// This character array stores the banner path text.
+    /// default banner path text is `$`.
     char bannerPath[SHELLMINATOR_BANNER_PATH_LEN] = "$";
 
     /// Size of the last printed banner in characters.
@@ -1115,37 +1224,55 @@ private:
 
 #endif
 
+    /// This function is used to search the
+    /// previous matching command in the history.
     void historySearchBackward();
+
+    /// This function is used to search the
+    /// next matching command in the history.
     void historySearchForward();
+
+    /// If reverse search mode is active,
+    /// this function is used to print the
+    /// text correctly.
     void redrawHistorySearch();
+
+    /// Basic substring function.
+    ///
+    /// The original source can be found
+    /// [here](// https://www.geeksforgeeks.org/check-string-substring-another/)
     int substring(char *str1, char *str2);
 
+    /// If reverse search mode is active, this flag will be true.
     bool inSearch = false;
-    int32_t searchMatch;
 
+    /// Used to parse reverse search.
+    int searchMatch;
+
+    /// This flag will be true when an input prompt is active.
     bool inputActive = false;
+
+    /// This will store the length of the instruction text
+    /// size in an input.
     int inputInstuctionSize = 0;
+
+    /// Pointer to a buffer that will be used to store the
+    /// text, that is typed to an input.
     char* inputDestinationBuffer;
+
+    /// Size of the buffer that is attached to an input.
     int inputDestinationBufferSize;
+
+    /// If secret mode is activated on an input, this
+    /// flag will be true.
     bool inputSecretMode;
+
+    /// This function will be called when an input
+    /// is finished.
     void(*inputCallback)(char*, int, Shellminator*);
 
-
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
-
-    SHA256_CTX passwordHashCtx;
-    uint8_t passwordHashBuffer[SHA256_BLOCK_SIZE];
-    uint8_t *passwordHashAddress = NULL;
-
-#endif
-
-// QR-code configuration specific parts.
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
-
-    uint8_t qr_data[qrcodegen_BUFFER_LEN_MAX];
-    uint8_t qr_tempBuff[qrcodegen_BUFFER_LEN_MAX];
-
-#endif
+    // For unit testing
+    friend class ShellminatorUT;
 };
 
 #endif
