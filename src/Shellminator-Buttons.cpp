@@ -33,69 +33,6 @@ SOFTWARE.
 
 #include "Shellminator-Buttons.hpp"
 
-/*
-┌──────┐
-│      │
-└─────┤─┘
-◖◖█
-
-╭──────╮
-│      │
-╰────┤ ╯
-▄▖
-▌
-
-▗▂▂▂▂▂▖
-▐
-
-██
-██
-
-▗▄▄▄▄▄▄▄▄▄▄
-▐   asdasd ▌
-▀▀▀▀▀▀▀▀▀▀▀▀
-
-⏋
-⎿
-
-⌜▄    ⌝
- Hello
-⌞    ⌟
-⌜    ⌝
- Hello
-⌞   ⮩x
-*/
-
-
-/*
-const char ShellminatorButton::topLeftCornerRound[ 4 ]     = "\u256D";
-const char ShellminatorButton::topRightCornerRound[ 4 ]    = "\u256E";
-const char ShellminatorButton::bottomLeftCornerRound[ 4 ]  = "\u2570";
-const char ShellminatorButton::bottomRightCornerRound[ 4 ] = "\u256F";
-
-const char ShellminatorButton::topLeftCornerSquare[ 4 ]     = "\u250C";
-const char ShellminatorButton::topRightCornerSquare[ 4 ]    = "\u2510";
-const char ShellminatorButton::bottomLeftCornerSquare[ 4 ]  = "\u2514";
-const char ShellminatorButton::bottomRightCornerSquare[ 4 ] = "\u2518";
-
-const char ShellminatorButton::horizontalLineDefault[ 4 ] = "\u2500";
-const char ShellminatorButton::verticalLineDefault[ 4 ]   = "\u2502";
-
-*/
-
-const char ShellminatorButton::topLeftCornerRound[ 4 ]     = "\u256D";
-const char ShellminatorButton::topRightCornerRound[ 4 ]    = "\u256E";
-const char ShellminatorButton::bottomLeftCornerRound[ 4 ]  = "\u2570";
-const char ShellminatorButton::bottomRightCornerRound[ 4 ] = "\u256F";
-
-const char ShellminatorButton::topLeftCornerSquare[ 4 ]     = "\u2597";
-const char ShellminatorButton::topRightCornerSquare[ 4 ]    = "\u2510";
-const char ShellminatorButton::bottomLeftCornerSquare[ 4 ]  = "\u2514";
-const char ShellminatorButton::bottomRightCornerSquare[ 4 ] = "\u2518";
-
-const char ShellminatorButton::horizontalLineDefault[ 4 ] = "\u2582";
-const char ShellminatorButton::verticalLineDefault[ 4 ]   = "\u2590";
-
 
 ShellminatorButton::ShellminatorButton(){
 
@@ -123,15 +60,6 @@ ShellminatorButton::ShellminatorButton( const char* name_p ){
     height = 1;
 
     func = NULL;
-
-    // The default corner type is square.
-    topLeftCorner = topLeftCornerSquare;
-    topRightCorner = topRightCornerSquare;
-    bottomLeftCorner = bottomLeftCornerSquare;
-    bottomRightCorner = bottomRightCornerSquare;
-
-    horizontalLine = horizontalLineDefault;
-    verticalLine = verticalLineDefault;
 
     // Set the eventCode to empty. This means
     // that the button wont trigger to any event.
@@ -167,21 +95,7 @@ void ShellminatorButton::attachTriggerFunction( void(*func_p)(void) ){
     func = func_p;
 }
 
-void ShellminatorButton::setRoundCorners(){
-    topLeftCorner     = topLeftCornerRound;
-    topRightCorner    = topRightCornerRound;
-    bottomLeftCorner  = bottomLeftCornerRound;
-    bottomRightCorner = bottomRightCornerRound;
-}
-
-void ShellminatorButton::setSquareCorners(){
-    topLeftCorner     = topLeftCornerSquare;
-    topRightCorner    = topRightCornerSquare;
-    bottomLeftCorner  = bottomLeftCornerSquare;
-    bottomRightCorner = bottomRightCornerSquare;
-}
-
-void ShellminatorButton::setColor( uint8_t color_p ){
+void ShellminatorButton::setColor( Shellminator::textColor_t color_p ){
     color = color_p;
 }
 
@@ -231,7 +145,6 @@ void ShellminatorButton::update( int width_p, int  height_p ){
             if( func != NULL ){
                 func();
             }
-            //redraw = true;
             return;
         }
     }
@@ -248,7 +161,6 @@ void ShellminatorButton::update( int width_p, int  height_p ){
             if( func != NULL ){
                 func();
             }
-            //redraw = true;
             return;
         }
 
@@ -290,18 +202,18 @@ void ShellminatorButton::draw(){
 
     Shellminator::setFormat( channel, Shellminator::REGULAR, color );
 
-    channel -> print( "\u250C" );
+    channel -> print( __CONST_TXT__( "\u250C" ) );
 
     for( i = 2; i < width; i++ ){
-        channel -> print( "\u2500" );
+        channel -> print( __CONST_TXT__( "\u2500" ) );
     }
 
-    channel -> print( "\u2510" );
+    channel -> print( __CONST_TXT__( "\u2510" ) );
 
     // Middle line section.
     Shellminator::setCursorPosition( channel, originX, originY + 1 );
 
-    channel -> print( "\u2502" );
+    channel -> print( __CONST_TXT__( "\u2502" ) );
 
     if( eventTextSize > 0 ){
         printedEventTextSize = eventTextSize + 6;
@@ -313,13 +225,13 @@ void ShellminatorButton::draw(){
 
     Shellminator::setFormat( channel, Shellminator::BOLD, Shellminator::WHITE );
 
-    channel -> print( "\u2BA9  " );
+    channel -> print( __CONST_TXT__( "\u2BA9  " ) );
     channel -> print( name );
 
     if( eventTextSize > 0 ){
-        channel -> print( "  [ " );
+        channel -> print( __CONST_TXT__( "  [ " ) );
         channel -> print( eventText );
-        channel -> print( " ]" );
+        channel -> print( __CONST_TXT__( " ]" ) );
     }
 
     Shellminator::setFormat( channel, Shellminator::REGULAR, color );
@@ -329,17 +241,17 @@ void ShellminatorButton::draw(){
         channel -> print( ' ' );
     }
 
-    channel -> print( "\u2502" );
+    channel -> print( __CONST_TXT__( "\u2502" ) );
 
     // Bottom line section.
     Shellminator::setCursorPosition( channel, originX, originY + 2 );
 
-    channel -> print( "\u2514" );
+    channel -> print( __CONST_TXT__( "\u2514" ) );
 
     for( i = 2; i < width; i++ ){
-        channel -> print( "\u2500" );
+        channel -> print( __CONST_TXT__( "\u2500" ) );
     }
 
-    channel -> print( "\u2518" );
+    channel -> print( __CONST_TXT__( "\u2518" ) );
 
 }

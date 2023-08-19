@@ -88,9 +88,7 @@ public:
 
     void attachEvent( Shellminator::shellEvent_t event_p );
     void attachTriggerFunction( void(*func_p)(void) );
-    void setRoundCorners();
-    void setSquareCorners();
-    void setColor( uint8_t color_p );
+    void setColor( Shellminator::textColor_t color_p );
 
 private:
     const char* name;
@@ -108,28 +106,7 @@ private:
 
     void(*func)(void) = NULL;
 
-    uint8_t color = Shellminator::WHITE;
-
-    static const char topLeftCornerRound[ 4 ];
-    static const char topRightCornerRound[ 4 ];
-    static const char bottomLeftCornerRound[ 4 ];
-    static const char bottomRightCornerRound[ 4 ];
-
-    static const char topLeftCornerSquare[ 4 ];
-    static const char topRightCornerSquare[ 4 ];
-    static const char bottomLeftCornerSquare[ 4 ];
-    static const char bottomRightCornerSquare[ 4 ];
-
-    static const char horizontalLineDefault[ 4 ];
-    static const char verticalLineDefault[ 4 ];
-
-    const char* topLeftCorner;
-    const char* topRightCorner;
-    const char* bottomLeftCorner;
-    const char* bottomRightCorner;
-
-    const char* horizontalLine;
-    const char* verticalLine;
+    Shellminator::textColor_t color = Shellminator::WHITE;
 
 };
 

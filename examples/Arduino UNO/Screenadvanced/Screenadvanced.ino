@@ -153,7 +153,6 @@ void layout::init( Shellminator* parent_p, Stream* channel_p ){
     startButton.setColor( Shellminator::GREEN );
     stopButton.setColor( Shellminator::RED );
     reloadButton.setColor( Shellminator::YELLOW );
-    reloadButton.setRoundCorners();
 
 }
 
