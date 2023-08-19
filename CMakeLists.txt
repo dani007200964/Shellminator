@@ -29,7 +29,7 @@ include_directories(
     extras/simulator
     extras/simulator/Commander-API
     extras/Unity/src
-    extras/nayuki-qrcodegen
+    extras/nayuki-qrcodegen/QR-Code-generator/c
 )
 
 set( SOURCES
@@ -77,8 +77,8 @@ set( SOURCES
     extras/simulator/Commander-API/Commander-IO.hpp
     extras/simulator/Commander-API/Commander-Settings.hpp
 
-    extras/nayuki-qrcodegen/qrcodegen.c
-    extras/nayuki-qrcodegen/qrcodegen.h
+    extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.c
+    extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.h
 )
 
 if (RUN_TESTS)
