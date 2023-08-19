@@ -82,7 +82,13 @@ public:
     /// Init function.
     ///
     /// This function is called by the host terminal, when the plot object gets registered to it.
+    /// You can put all the initialisation section here.
     /// @param parent_p Pointer to the caller terminal object.
+    /// @param channel_p This is a pointer to a Stream object, which can be used to print the output
+    ///                  data.
+    /// @note Please use the `channel_p` object instead of `parent -> channel` method.
+    ///       This object can be a regular channel __or a buffer accelerated one.__
+    ///       The logic behind the buffering and flushing is handled by the caller terminal.
     void init( Shellminator* parent_p, Stream* channel_p ) override;
 
     /// Draw function.

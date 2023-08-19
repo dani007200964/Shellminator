@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shelleventtype_5ft_0',['shellEventType_t',['../class_shellminator.html#acc322ed067ab7377aa9914445c8a235d',1,'Shellminator']]]
+  ['eventcodes_5ft_0',['eventCodes_t',['../class_shellminator.html#a12e98da6f684005b068021140d077b18',1,'Shellminator']]]
 ];

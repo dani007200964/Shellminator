@@ -1,9 +1,11 @@
 <map id="Shellminator::update" name="Shellminator::update">
-<area shape="rect" id="node1" title="Update function." alt="" coords="5,80,147,105"/>
+<area shape="rect" id="node1" title="Update function." alt="" coords="5,120,147,145"/>
 <area shape="rect" id="node2" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="213,5,371,31"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="195,55,389,80"/>
-<area shape="rect" id="node6" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="215,104,369,129"/>
-<area shape="rect" id="node7" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="208,153,376,179"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="437,19,643,44"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="437,92,643,117"/>
+<area shape="rect" id="node3" href="$class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d" title="Flush the channel." alt="" coords="203,55,381,95"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="195,120,389,145"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="215,169,369,195"/>
+<area shape="rect" id="node9" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="208,219,376,244"/>
+<area shape="rect" id="node4" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="451,55,629,95"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="437,120,643,145"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="437,193,643,219"/>
 </map>

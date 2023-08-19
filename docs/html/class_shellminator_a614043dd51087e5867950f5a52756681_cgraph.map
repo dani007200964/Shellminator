@@ -1,12 +1,14 @@
 <map id="Shellminator::beginScreen" name="Shellminator::beginScreen">
-<area shape="rect" id="node1" title="Register Screen object to draw." alt="" coords="5,92,180,117"/>
+<area shape="rect" id="node1" title="Register Screen object to draw." alt="" coords="5,123,180,148"/>
 <area shape="rect" id="node2" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="451,41,645,67"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a403ea48c3312851979108855989e71ce" title="Hide the cursor." alt="" coords="233,67,397,92"/>
-<area shape="rect" id="node6" href="$class_shellminator.html#a55e702e81eae5fcb5901c56c039d75b4" title="Enable mouse reports." alt="" coords="228,116,403,141"/>
-<area shape="rect" id="node7" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="245,189,386,215"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a403ea48c3312851979108855989e71ce" title="Hide the cursor." alt="" coords="233,97,397,123"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#a55e702e81eae5fcb5901c56c039d75b4" title="Enable mouse reports." alt="" coords="228,147,403,172"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="245,220,386,245"/>
 <area shape="rect" id="node3" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="693,5,899,31"/>
 <area shape="rect" id="node4" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="693,79,899,104"/>
-<area shape="rect" id="node8" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="469,140,627,165"/>
-<area shape="rect" id="node9" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="471,189,625,215"/>
-<area shape="rect" id="node10" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="464,239,632,264"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="469,133,627,159"/>
+<area shape="rect" id="node9" href="$class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d" title="Flush the channel." alt="" coords="459,183,637,223"/>
+<area shape="rect" id="node11" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="471,248,625,273"/>
+<area shape="rect" id="node12" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="464,297,632,323"/>
+<area shape="rect" id="node10" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="707,183,885,223"/>
 </map>

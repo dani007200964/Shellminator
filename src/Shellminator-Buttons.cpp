@@ -77,9 +77,28 @@ void ShellminatorButton::attachEvent( Shellminator::shellEvent_t event_p ){
 
     // If trigger event is a regular key, save the data to internal variables.
     if( event_p.type == Shellminator::SHELL_EVENT_KEY ){
-        eventText[ 0 ] = (char)event.data;
-        eventText[ 1 ] = '\0';
-        eventTextSize = 1;
+        if( isUpper( (char)event.data ) ){
+            eventText[ 0 ] = 0xE2;
+            eventText[ 1 ] = 0x86;
+            eventText[ 2 ] = 0x91;
+            eventText[ 3 ] = ' ';
+            eventText[ 4 ] = (char)event.data;
+            eventText[ 5 ] = '\0';
+            eventTextSize = 3;
+        }
+
+        else if( isLower( (char)event.data ) ){
+            eventText[ 0 ] = (char)event.data;
+            eventText[ 1 ] = '\0';
+            eventTextSize = 1;
+        }
+
+        else{
+            event.type = Shellminator::SHELL_EVENT_EMPTY;
+            eventTextSize = 0;
+            return;
+        }
+
     }
 
     // Otherwise, we can not enable trigger event functionality.
@@ -91,7 +110,7 @@ void ShellminatorButton::attachEvent( Shellminator::shellEvent_t event_p ){
 
 }
 
-void ShellminatorButton::attachTriggerFunction( void(*func_p)(void) ){
+void ShellminatorButton::attachTriggerFunction( void(*func_p)(ShellminatorScreen*) ){
     func = func_p;
 }
 
@@ -143,7 +162,7 @@ void ShellminatorButton::update( int width_p, int  height_p ){
     if( ( newEvent.type == Shellminator::SHELL_EVENT_KEY ) && ( newEvent.type == event.type ) ){
         if( newEvent.data == event.data ){
             if( func != NULL ){
-                func();
+                func( this );
             }
             return;
         }
@@ -159,7 +178,7 @@ void ShellminatorButton::update( int width_p, int  height_p ){
             ( newEvent.y < ( originY + height ) ) ){
 
             if( func != NULL ){
-                func();
+                func( this );
             }
             return;
         }
@@ -255,3 +274,20 @@ void ShellminatorButton::draw(){
     channel -> print( __CONST_TXT__( "\u2518" ) );
 
 }
+
+bool ShellminatorButton::isUpper( char c ){
+    return ( c >= 'A' ) && ( c <= 'Z' );
+}
+
+bool ShellminatorButton::isLower( char c ){
+    return ( c >= 'a' ) && ( c <= 'z' );
+}
+
+char ShellminatorButton::toUpper( char c ){
+    if( isLower( c ) ){
+        // Check ASCII table to decode this magic.
+        return c - ( 'a' - 'A' );
+    }
+    return c;
+}
+

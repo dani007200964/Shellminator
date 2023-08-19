@@ -51,9 +51,9 @@ float scaler = 0.0;
 // Array of data points for the plot.
 float sinePoints[ NUMBER_OF_DATA_POINTS ];
 
-void startButtonEvent();
-void stopButtonEvent();
-void reloadButtonEvent();
+void startButtonEvent( ShellminatorScreen* parent );
+void stopButtonEvent( ShellminatorScreen* parent );
+void reloadButtonEvent( ShellminatorScreen* parent );
 
 // Create a class named layout. This is inherited from the ShellminatorScreen class,
 // this way it can be added to the terminal as a screen.
@@ -162,7 +162,7 @@ void layout::init( Shellminator* parent_p, Stream* channel_p ){
 
     // Set the button event for the reload button.
     buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
-    buttonEvent.data = (uint8_t)'r';
+    buttonEvent.data = (uint8_t)'R';
     reloadButton.attachEvent( buttonEvent );
     reloadButton.attachTriggerFunction( reloadButtonEvent );
 
@@ -198,15 +198,15 @@ int main(){
 
 }
 
-void startButtonEvent(){
+void startButtonEvent( ShellminatorScreen* parent ){
     scaler = 1.0;
 }
 
-void stopButtonEvent(){
+void stopButtonEvent( ShellminatorScreen* parent ){
     scaler = 0.0;
 }
 
-void reloadButtonEvent(){
+void reloadButtonEvent( ShellminatorScreen* parent ){
     splitLayout.plot.setColor( Shellminator::GREEN );
 }
 

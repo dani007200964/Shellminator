@@ -189,59 +189,55 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_function" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a>( <span class="keywordtype">float</span>* data_p, <span class="keywordtype">int</span> dataSize_p, <span class="keyword">const</span> <span class="keywordtype">char</span>* name_p, <span class="keywordtype">int</span> color_p = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a> );</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">init</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent_p ) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">draw</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">update</a>( <span class="keywordtype">int</span> width_p, <span class="keywordtype">int</span>  height_p ) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">setColor</a>( <a class="code hl_enumeration" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a> color_p );</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a34a73a145bbea26037a5fd7c472e5ebe">init</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent_p, Stream* channel_p ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">draw</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">update</a>( <span class="keywordtype">int</span> width_p, <span class="keywordtype">int</span>  height_p ) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">float</span>* data = NULL;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">setColor</a>( <a class="code hl_enumeration" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a> color_p );</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">int</span> dataSize = 0;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordtype">bool</span> redraw = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> plotTimerStart;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">int</span> plotRedrawPeriod;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* name = NULL;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordtype">float</span>* data = NULL;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">int</span> dataSize = 0;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordtype">bool</span> redraw = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">int</span> color = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> plotTimerStart;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">int</span> plotRedrawPeriod;</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawScale();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* name = NULL;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">int</span> color = <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>;</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawPlot();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawScale();</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    Stream* selectedChannel = NULL;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">bool</span> bufferingEnabled = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">char</span> valueTextBuffer[ 15 ];</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">int</span> valueTextSizeMax = 0;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">int</span> resultTextSize = 0;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">float</span> min;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">float</span> max;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> clearCell[2];</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> dotCell[5];</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">float</span> lerp( <span class="keywordtype">float</span> v0, <span class="keywordtype">float</span> v1, <span class="keywordtype">float</span> t );</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">float</span> mapFloat( <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> inStart, <span class="keywordtype">float</span> inStop, <span class="keywordtype">float</span> outStart, <span class="keywordtype">float</span> outStop );</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>};</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawPlot();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordtype">char</span> valueTextBuffer[ 15 ];</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">int</span> valueTextSizeMax = 0;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">int</span> resultTextSize = 0;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">float</span> min;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordtype">float</span> max;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> clearCell[2];</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> dotCell[5];</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">float</span> lerp( <span class="keywordtype">float</span> v0, <span class="keywordtype">float</span> v1, <span class="keywordtype">float</span> t );</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">float</span> mapFloat( <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> inStart, <span class="keywordtype">float</span> inStop, <span class="keywordtype">float</span> outStart, <span class="keywordtype">float</span> outStop );</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>};</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
 <div class="ttc" id="a_shellminator-_buffered_printer_8hpp_html"><div class="ttname"><a href="_shellminator-_buffered_printer_8hpp.html">Shellminator-BufferedPrinter.hpp</a></div></div>
 <div class="ttc" id="a_shellminator-_screen_8hpp_html"><div class="ttname"><a href="_shellminator-_screen_8hpp.html">Shellminator-Screen.hpp</a></div></div>
 <div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
@@ -249,12 +245,12 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
 <div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">Shellminator::textColor_t</a></div><div class="ttdeci">textColor_t</div><div class="ttdoc">VT100 color codes.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00196">Shellminator.hpp:197</a></div></div>
 <div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdoc">Green text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00200">Shellminator.hpp:200</a></div></div>
 <div class="ttc" id="aclass_shellminator_plot_html"><div class="ttname"><a href="class_shellminator_plot.html">ShellminatorPlot</a></div><div class="ttdoc">This class can create a simple plotter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8hpp_source.html#l00062">Shellminator-PlotModule.hpp:62</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_a0397f69d0a061af1804200d4b6d1bc96"><div class="ttname"><a href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">ShellminatorPlot::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">Draw function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00099">Shellminator-PlotModule.cpp:99</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_a07bb6fd84a8b3199135766c9f3a8c6e9"><div class="ttname"><a href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">ShellminatorPlot::update</a></div><div class="ttdeci">void update(int width_p, int height_p) override</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00067">Shellminator-PlotModule.cpp:67</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_a15f441185ded0dbab5e14bbd9640afbc"><div class="ttname"><a href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">ShellminatorPlot::setColor</a></div><div class="ttdeci">void setColor(Shellminator::textColor_t color_p)</div><div class="ttdoc">Set the color of the plot.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00419">Shellminator-PlotModule.cpp:419</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a0397f69d0a061af1804200d4b6d1bc96"><div class="ttname"><a href="class_shellminator_plot.html#a0397f69d0a061af1804200d4b6d1bc96">ShellminatorPlot::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">Draw function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00097">Shellminator-PlotModule.cpp:97</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a07bb6fd84a8b3199135766c9f3a8c6e9"><div class="ttname"><a href="class_shellminator_plot.html#a07bb6fd84a8b3199135766c9f3a8c6e9">ShellminatorPlot::update</a></div><div class="ttdeci">void update(int width_p, int height_p) override</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00065">Shellminator-PlotModule.cpp:65</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a15f441185ded0dbab5e14bbd9640afbc"><div class="ttname"><a href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">ShellminatorPlot::setColor</a></div><div class="ttdeci">void setColor(Shellminator::textColor_t color_p)</div><div class="ttdoc">Set the color of the plot.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00413">Shellminator-PlotModule.cpp:413</a></div></div>
+<div class="ttc" id="aclass_shellminator_plot_html_a34a73a145bbea26037a5fd7c472e5ebe"><div class="ttname"><a href="class_shellminator_plot.html#a34a73a145bbea26037a5fd7c472e5ebe">ShellminatorPlot::init</a></div><div class="ttdeci">void init(Shellminator *parent_p, Stream *channel_p) override</div><div class="ttdoc">Init function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00051">Shellminator-PlotModule.cpp:51</a></div></div>
 <div class="ttc" id="aclass_shellminator_plot_html_a884bc7f179be465f7cef5e59da6a1237"><div class="ttname"><a href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot::ShellminatorPlot</a></div><div class="ttdeci">ShellminatorPlot()</div><div class="ttdoc">Empty constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00044">Shellminator-PlotModule.cpp:44</a></div></div>
-<div class="ttc" id="aclass_shellminator_plot_html_a89ebfc8d5a024f39bffc0107926c3ad9"><div class="ttname"><a href="class_shellminator_plot.html#a89ebfc8d5a024f39bffc0107926c3ad9">ShellminatorPlot::init</a></div><div class="ttdeci">void init(Shellminator *parent_p) override</div><div class="ttdoc">Init function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_plot_module_8cpp_source.html#l00051">Shellminator-PlotModule.cpp:51</a></div></div>
-<div class="ttc" id="aclass_shellminator_screen_html"><div class="ttname"><a href="class_shellminator_screen.html">ShellminatorScreen</a></div><div class="ttdoc">This is an abstract object for graphics element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00045">Shellminator-Screen.hpp:45</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html"><div class="ttname"><a href="class_shellminator_screen.html">ShellminatorScreen</a></div><div class="ttdoc">This is an abstract object for graphics element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00046">Shellminator-Screen.hpp:46</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
@@ -277,7 +273,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Aug 18 2023
+      </a> on Sat Aug 19 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -292,7 +288,7 @@ $(document).ready(function(){initNavTree('_shellminator-_plot_module_8hpp_source
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Aug 18 2023
+        </a> on Sat Aug 19 2023
       </small></address>
     </li>
   </ul>

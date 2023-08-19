@@ -1,4 +1,6 @@
 <map id="ShellminatorBufferedPrinter::flush" name="ShellminatorBufferedPrinter::flush">
-<area shape="rect" id="node1" title="Flush the channel." alt="" coords="232,5,411,45"/>
-<area shape="rect" id="node2" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="5,5,184,45"/>
+<area shape="rect" id="node1" title="Flush the channel." alt="" coords="455,79,633,119"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="247,29,388,55"/>
+<area shape="rect" id="node4" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="228,79,407,119"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a614043dd51087e5867950f5a52756681" title="Register Screen object to draw." alt="" coords="5,29,180,55"/>
 </map>

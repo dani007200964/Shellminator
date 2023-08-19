@@ -167,6 +167,20 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ae4b01c47b1a9a3d30f802863b3d123b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">VT100 color codes.  <a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">More...</a><br /></td></tr>
 <tr class="separator:ae4b01c47b1a9a3d30f802863b3d123b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae116bb8aa278d39111b6bf4126e13f99"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99">backgroundColor_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a31734e58e72b83ce6e217bf3cbfde72b">BG_BLACK</a> = 40
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a90b3629161a2d93419408b41058f519f">BG_RED</a> = 41
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99ab45977702c51083a26ec5299d943a742">BG_GREEN</a> = 42
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a200482aafdbbb39fb3d479226893de1d">BG_YELLOW</a> = 43
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aab7043c2ec9d0950ac3c4f80588d87c8">BG_BLUE</a> = 44
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a256bd84d4fe51270e068b539a087aa40">BG_MAGENTA</a> = 45
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aa2d784418308c40ff3bba2428659cb0f">BG_CYAN</a> = 46
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a8b89748894b82d8a988f176ad00f2b08">BG_WHITE</a> = 47
+<br />
+ }</td></tr>
+<tr class="memdesc:ae116bb8aa278d39111b6bf4126e13f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">VT100 color codes.  <a href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99">More...</a><br /></td></tr>
+<tr class="separator:ae116bb8aa278d39111b6bf4126e13f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc95c4d61e5ade5ded52128907ed163"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163">textStyle_t</a> { <br />
 &#160;&#160;<a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a> = 0
 , <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">BOLD</a> = 1
@@ -439,10 +453,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a9735882b57418e8fb9d62b77afb25a29"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9735882b57418e8fb9d62b77afb25a29">eventBufferReadPtr</a></td></tr>
 <tr class="memdesc:a9735882b57418e8fb9d62b77afb25a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read position for the eventBuffers circular structure.  <a href="class_shellminator.html#a9735882b57418e8fb9d62b77afb25a29">More...</a><br /></td></tr>
 <tr class="separator:a9735882b57418e8fb9d62b77afb25a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8621934bb93a13846da931110e7a3f80"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a8621934bb93a13846da931110e7a3f80">terminalWidth</a> = 1</td></tr>
+<tr class="memitem:a8621934bb93a13846da931110e7a3f80"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a8621934bb93a13846da931110e7a3f80">terminalWidth</a> = 80</td></tr>
 <tr class="memdesc:a8621934bb93a13846da931110e7a3f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the width of the terminal in characters.  <a href="class_shellminator.html#a8621934bb93a13846da931110e7a3f80">More...</a><br /></td></tr>
 <tr class="separator:a8621934bb93a13846da931110e7a3f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc21997f25dd19743f40433c7ea1ed74"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74">terminalHeight</a> = 1</td></tr>
+<tr class="memitem:adc21997f25dd19743f40433c7ea1ed74"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74">terminalHeight</a> = 30</td></tr>
 <tr class="memdesc:adc21997f25dd19743f40433c7ea1ed74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the height of the terminal in characters.  <a href="class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74">More...</a><br /></td></tr>
 <tr class="separator:adc21997f25dd19743f40433c7ea1ed74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ae26127b755c987b4047f18167142c3"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a6ae26127b755c987b4047f18167142c3">mouseEventBuffer</a> [<a class="el" href="_shellminator_8hpp.html#ad7cd2cf6d8a593f481109d0f26565472">SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE</a>]</td></tr>
@@ -483,6 +497,43 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00189">189</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ae116bb8aa278d39111b6bf4126e13f99" name="ae116bb8aa278d39111b6bf4126e13f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae116bb8aa278d39111b6bf4126e13f99">&#9670;&#160;</a></span>backgroundColor_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99">Shellminator::backgroundColor_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>VT100 color codes. </p>
+<p >This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible background color codes</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99a31734e58e72b83ce6e217bf3cbfde72b" name="ae116bb8aa278d39111b6bf4126e13f99a31734e58e72b83ce6e217bf3cbfde72b"></a>BG_BLACK&#160;</td><td class="fielddoc"><p >Black text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99a90b3629161a2d93419408b41058f519f" name="ae116bb8aa278d39111b6bf4126e13f99a90b3629161a2d93419408b41058f519f"></a>BG_RED&#160;</td><td class="fielddoc"><p >Red text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99ab45977702c51083a26ec5299d943a742" name="ae116bb8aa278d39111b6bf4126e13f99ab45977702c51083a26ec5299d943a742"></a>BG_GREEN&#160;</td><td class="fielddoc"><p >Green text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99a200482aafdbbb39fb3d479226893de1d" name="ae116bb8aa278d39111b6bf4126e13f99a200482aafdbbb39fb3d479226893de1d"></a>BG_YELLOW&#160;</td><td class="fielddoc"><p >Yellow text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99aab7043c2ec9d0950ac3c4f80588d87c8" name="ae116bb8aa278d39111b6bf4126e13f99aab7043c2ec9d0950ac3c4f80588d87c8"></a>BG_BLUE&#160;</td><td class="fielddoc"><p >Blue text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99a256bd84d4fe51270e068b539a087aa40" name="ae116bb8aa278d39111b6bf4126e13f99a256bd84d4fe51270e068b539a087aa40"></a>BG_MAGENTA&#160;</td><td class="fielddoc"><p >Magenta text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99aa2d784418308c40ff3bba2428659cb0f" name="ae116bb8aa278d39111b6bf4126e13f99aa2d784418308c40ff3bba2428659cb0f"></a>BG_CYAN&#160;</td><td class="fielddoc"><p >Cyane text color. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae116bb8aa278d39111b6bf4126e13f99a8b89748894b82d8a988f176ad00f2b08" name="ae116bb8aa278d39111b6bf4126e13f99a8b89748894b82d8a988f176ad00f2b08"></a>BG_WHITE&#160;</td><td class="fielddoc"><p >White text color. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00211">211</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a12e98da6f684005b068021140d077b18" name="a12e98da6f684005b068021140d077b18"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a12e98da6f684005b068021140d077b18">&#9670;&#160;</a></span>eventCodes_t</h2>
 
@@ -529,7 +580,7 @@ Friends</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00774">774</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00789">789</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -560,7 +611,7 @@ Friends</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00765">765</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00780">780</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +687,7 @@ Friends</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00211">211</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00226">226</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +779,7 @@ Friends</h2></td></tr>
 <div class="line">    caller -&gt; <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; print( <span class="stringliteral">&quot;Hurray! I got this: &quot;</span> );</div>
 <div class="line">    caller -&gt; <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> -&gt; println( command );</div>
 <div class="line">}</div>
-<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00957">Shellminator.hpp:957</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00972">Shellminator.hpp:972</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l00277">277</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
@@ -805,7 +856,7 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02071">2071</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02073">2073</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -846,7 +897,7 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>In single element mode, it will return the index of the selected element. In multiple element mode, it will return the number of selected elements from the list. If timeout or abort event occurs, it will return -1. Generate a beep sound on the terminal device. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01281">1281</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01289">1289</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -928,11 +979,11 @@ Here is the caller graph for this function:</div>
 <dd>
 To close the Screen session from code, you can use the <a class="el" href="class_shellminator.html#a95945bd5860aaed1ac544da1b3800447">endScreen</a> function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02093">2093</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02095">2095</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_a614043dd51087e5867950f5a52756681_cgraph.svg" width="100%" height="502"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_a614043dd51087e5867950f5a52756681_cgraph.svg" width="100%" height="546"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -997,9 +1048,9 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>The address stored in ptr has to be a valid addres for a <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Casted pointer. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>track the created objects in an internal static array and compare their pointer values with the given one. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>track the created objects in an internal static array and compare their pointer values with the given one. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02065">2065</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02067">2067</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -1064,7 +1115,7 @@ Here is the call graph for this function:</div>
 <p>Draws the startup logo. </p>
 <p >Draws the startup logo in the terminal </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01247">1247</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01255">1255</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -1132,7 +1183,7 @@ Here is the caller graph for this function:</div>
 <p>Abort Screen session. </p>
 <p >With this function you can abort a registered Screen session. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02118">2118</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02121">2121</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1518,7 +1569,7 @@ Here is the call graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>If the query was successful it will return true. Otherwise the value in the variables corresponding to x and y is not usable.</dd></dl>
 <p>The screen coordinate system works like this: <img src="screen_space.png" alt="" class="inline" title="Screen Coordinate System"/>     The <b>origin</b> is on the top left and it's coordinate is 1;1. The screen size can vary. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01030">1030</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01038">1038</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -1553,7 +1604,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01218">1218</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01226">1226</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -2211,7 +2262,7 @@ Here is the caller graph for this function:</div>
 <p>Redraw request from a Screen object. </p>
 <p >This function is used by the attached Screen object. The Screen object can signal the terminal interface with this function, to call the draw function in the next drawing session. The drawing only happens, when an event triggers it, to save some CPU time. This way the Screen drawing is much efficient. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02149">2149</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02152">2152</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -2358,7 +2409,7 @@ Banner Text Elements</div></div>
 </dl>
 <p>The screen coordinate system works like this: <img src="screen_space.png" alt="" class="inline" title="Screen Coordinate System"/>     The <b>origin</b> is on the top left and it's coordinate is 1;1. The screen size can vary. </p><dl class="section note"><dt>Note</dt><dd>Setting an invalid cursor position is not possible, it is protected by the terminal interface and this function as well. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01198">1198</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01206">1206</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -2423,7 +2474,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>The screen coordinate system works like this: <img src="screen_space.png" alt="" class="inline" title="Screen Coordinate System"/>     The <b>origin</b> is on the top left and it's coordinate is 1;1. The screen size can vary. </p><dl class="section note"><dt>Note</dt><dd>Setting an invalid cursor position is not possible, it is protected by the terminal interface and this function as well. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01204">1204</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01212">1212</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -2673,7 +2724,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_a3f8933d5b0360a3f4b3bff32e12a77d1_cgraph.svg" width="648" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_a3f8933d5b0360a3f4b3bff32e12a77d1_cgraph.svg" width="648" height="250"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -2734,7 +2785,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if any of the expected keys match. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02020">2020</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l02022">2022</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -2789,7 +2840,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the expected key is arrived. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01984">1984</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8cpp_source.html#l01986">1986</a> of file <a class="el" href="_shellminator_8cpp_source.html">Shellminator.cpp</a>.</p>
 
 </div>
 </div>
@@ -2814,7 +2865,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00981">981</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00990">990</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2838,7 +2889,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l01273">1273</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l01277">1277</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2858,7 +2909,7 @@ Here is the caller graph for this function:</div>
 <p>Pointer to the communication class. </p>
 <p >By default it points to the default response handler. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00957">957</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00972">972</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2875,9 +2926,9 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Default communication channel;. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Why do I need this??? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Why do I need this??? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00953">953</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00968">968</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2896,7 +2947,7 @@ Here is the caller graph for this function:</div>
 <p>This flag enables or disables character formatting. </p>
 <p >It can be useful when VT100 format parser is not available on the host device. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00946">946</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00961">961</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2915,7 +2966,7 @@ Here is the caller graph for this function:</div>
 <p>The events are stored in this buffer. </p>
 <p >It uses a circular structure to store the events. Usually this buffer should not has to be big. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00810">810</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00825">825</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2933,7 +2984,7 @@ Here is the caller graph for this function:</div>
 
 <p>Read position for the eventBuffers circular structure. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00816">816</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00831">831</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2951,7 +3002,7 @@ Here is the caller graph for this function:</div>
 
 <p>Write position for the eventBuffers circular structure. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00813">813</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00828">828</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2969,7 +3020,7 @@ Here is the caller graph for this function:</div>
 
 <p>This buffer is used to parse the mouse coordinates form the host terminals answer. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00847">847</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00862">862</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -2987,7 +3038,7 @@ Here is the caller graph for this function:</div>
 
 <p>This variable traks the next free characters location in the mouseEventBuffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00850">850</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00865">865</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3005,7 +3056,7 @@ Here is the caller graph for this function:</div>
 
 <p>If set, the buzzer will be silent. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00949">949</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00964">964</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3016,14 +3067,14 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Shellminator::terminalHeight = 1</td>
+          <td class="memname">int Shellminator::terminalHeight = 30</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Stores the height of the terminal in characters. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00843">843</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00858">858</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3034,14 +3085,14 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Shellminator::terminalWidth = 1</td>
+          <td class="memname">int Shellminator::terminalWidth = 80</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Stores the width of the terminal in characters. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00840">840</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00855">855</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3067,7 +3118,7 @@ Here is the caller graph for this function:</div>
 
 <p>String, that holds the version information. </p>
 
-<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00225">225</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00240">240</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
 
 </div>
 </div>
@@ -3093,7 +3144,7 @@ Here is the caller graph for this function:</div>
       <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
       <a href="http://www.doxygen.org/index.html">
         <img class="footer" src="doxygen.svg" alt="doxygen"/>
-      </a> on Fri Aug 18 2023
+      </a> on Sat Aug 19 2023
       <hr class="footer"/><address class="footer"><small>
         <a title="PlatformIO" href="https://registry.platformio.org/libraries/dani007200964/Shellminator/">
           <img class="footer" src="platformio_logo.png" alt="PlatformIO" style="height:20px;width:auto;"/>
@@ -3108,7 +3159,7 @@ Here is the caller graph for this function:</div>
         <b>Shellminator V1.2.0</b> &nbsp;|&nbsp; Generated by:
         <a href="http://www.doxygen.org/index.html">
           <img class="footer" src="doxygen.svg" alt="doxygen"/>
-        </a> on Fri Aug 18 2023
+        </a> on Sat Aug 19 2023
       </small></address>
     </li>
   </ul>

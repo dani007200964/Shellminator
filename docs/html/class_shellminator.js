@@ -1,6 +1,16 @@
 var class_shellminator =
 [
     [ "shellEvent_t", "struct_shellminator_1_1shell_event__t.html", "struct_shellminator_1_1shell_event__t" ],
+    [ "backgroundColor_t", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99", [
+      [ "BG_BLACK", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a31734e58e72b83ce6e217bf3cbfde72b", null ],
+      [ "BG_RED", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a90b3629161a2d93419408b41058f519f", null ],
+      [ "BG_GREEN", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99ab45977702c51083a26ec5299d943a742", null ],
+      [ "BG_YELLOW", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a200482aafdbbb39fb3d479226893de1d", null ],
+      [ "BG_BLUE", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aab7043c2ec9d0950ac3c4f80588d87c8", null ],
+      [ "BG_MAGENTA", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a256bd84d4fe51270e068b539a087aa40", null ],
+      [ "BG_CYAN", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aa2d784418308c40ff3bba2428659cb0f", null ],
+      [ "BG_WHITE", "class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a8b89748894b82d8a988f176ad00f2b08", null ]
+    ] ],
     [ "eventCodes_t", "class_shellminator.html#a12e98da6f684005b068021140d077b18", [
       [ "EVENT_CODE_EMPTY", "class_shellminator.html#a12e98da6f684005b068021140d077b18af4212847241a913a896f598c10714e53", null ],
       [ "EVENT_CODE_MOUSE_LEFT_PRESSED", "class_shellminator.html#a12e98da6f684005b068021140d077b18a0d8daa79eb5ece4b218ff6c86192ee8e", null ],
