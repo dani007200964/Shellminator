@@ -73,7 +73,7 @@ public:
     ///
     /// This function is called by the host terminal, when the plot object gets registered to it.
     /// @param parent_p Pointer to the caller terminal object.
-    void init( Shellminator* parent_p ) override;
+    void init( Shellminator* parent_p, Stream* channel_p ) override;
 
     /// Draw function.
     ///
@@ -107,10 +107,6 @@ private:
     int textWidth;
 
     void(*func)(void) = NULL;
-
-    /// This will be redirected to the parents channel by default.
-    Stream* selectedChannel = NULL;
-    bool bufferingEnabled;
 
     uint8_t color = Shellminator::WHITE;
 

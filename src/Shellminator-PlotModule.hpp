@@ -83,7 +83,7 @@ public:
     ///
     /// This function is called by the host terminal, when the plot object gets registered to it.
     /// @param parent_p Pointer to the caller terminal object.
-    void init( Shellminator* parent_p ) override;
+    void init( Shellminator* parent_p, Stream* channel_p ) override;
 
     /// Draw function.
     ///
@@ -142,13 +142,6 @@ private:
     /// This function renders the data points from the data array.
     /// It can be overriden to create different kinds of plots.
     virtual void drawPlot();
-
-    /// This will be redirected to the parents channel by default.
-    Stream* selectedChannel = NULL;
-
-    /// If this flag is true, that means the buffering is enabled
-    /// on the caller terminal.
-    bool bufferingEnabled = false;
 
     /// This buffer holds a generated string that
     /// us used to print numbers to the scale.

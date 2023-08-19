@@ -185,16 +185,9 @@ void ShellminatorButton::setColor( uint8_t color_p ){
     color = color_p;
 }
 
-void ShellminatorButton::init( Shellminator* parent_p ){
+void ShellminatorButton::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
-    
-    bufferingEnabled = true;
-    selectedChannel = parent -> getBufferedPrinter();
-
-    if( selectedChannel == NULL ){
-        selectedChannel = parent -> channel;
-        bufferingEnabled = false;
-    }
+    channel = channel_p;
 }
 
 void ShellminatorButton::update( int width_p, int  height_p ){
@@ -235,9 +228,10 @@ void ShellminatorButton::update( int width_p, int  height_p ){
     // matches with the attached key.
     if( ( newEvent.type == Shellminator::SHELL_EVENT_KEY ) && ( newEvent.type == event.type ) ){
         if( newEvent.data == event.data ){
-            triggered = true;
-            parent -> requestRedraw();
-            redraw = true;
+            if( func != NULL ){
+                func();
+            }
+            //redraw = true;
             return;
         }
     }
@@ -251,9 +245,10 @@ void ShellminatorButton::update( int width_p, int  height_p ){
             ( newEvent.x < ( originX + width ) ) &&
             ( newEvent.y < ( originY + height ) ) ){
 
-            triggered = true;
-            parent -> requestRedraw();
-            redraw = true;
+            if( func != NULL ){
+                func();
+            }
+            //redraw = true;
             return;
         }
 
@@ -261,11 +256,12 @@ void ShellminatorButton::update( int width_p, int  height_p ){
 
 }
 
-/*
 void ShellminatorButton::draw(){
 
     // Generic counter.
     int i;
+
+    int printedEventTextSize = 0;
 
     // The upper limit of the for loops calculated
     // to this variable.
@@ -275,11 +271,11 @@ void ShellminatorButton::draw(){
         return;
     }
 
-    if( name == NULL ){
+    if(  channel == NULL){
         return;
     }
 
-    if( selectedChannel == NULL ){
+    if( name == NULL ){
         return;
     }
 
@@ -289,289 +285,61 @@ void ShellminatorButton::draw(){
     }
     redraw = false;
 
-    // print the parts, that has to be drawn every time.
+    // Top line section.
+    Shellminator::setCursorPosition( channel, originX, originY );
+
+    Shellminator::setFormat( channel, Shellminator::REGULAR, color );
+
+    channel -> print( "\u250C" );
+
+    for( i = 2; i < width; i++ ){
+        channel -> print( "\u2500" );
+    }
+
+    channel -> print( "\u2510" );
+
     // Middle line section.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
+    Shellminator::setCursorPosition( channel, originX, originY + 1 );
 
-    // Set color to the specified one.
-    //Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::REGULAR, color );
+    channel -> print( "\u2502" );
 
-    // In case of trigger event, set it to low intensity.
-    if( triggered ){
-        // Create inverted text.
-        //Shellminator::setTerminalCharacterColor( selectedChannel, Shellminator::BACKGROUND, color );
-        Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, color );
+    if( eventTextSize > 0 ){
+        printedEventTextSize = eventTextSize + 6;
     }
-
-    else{
-        Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, color );
-    }
-
-    // Print the middle section with the text.
-    selectedChannel -> print( verticalLine );
-
-    // Calculate text starting position.
-    // It has to be centered.
-    limit = ( width - textWidth ) / 2;
-
-    // Print as many spaces as needed, to make the text centered.
-    // We print spaces to clear the unwanted garbage from the line.
+    limit = ( width - ( textWidth + 3 + printedEventTextSize ) ) / 2;
     for( i = 1; i < limit; i++ ){
-        selectedChannel -> print( ' ' );
+        channel -> print( ' ' );
     }
 
-    // Print the name text.
-    selectedChannel -> print( name );
+    Shellminator::setFormat( channel, Shellminator::BOLD, Shellminator::WHITE );
 
-    // Calculate how many characters left until line end.
-    limit = width - ( limit + textWidth );
+    channel -> print( "\u2BA9  " );
+    channel -> print( name );
 
-    // Print as many spaces as needed, to make the text centered.
-    // We print spaces to clear the unwanted garbage from the line.
+    if( eventTextSize > 0 ){
+        channel -> print( "  [ " );
+        channel -> print( eventText );
+        channel -> print( " ]" );
+    }
+
+    Shellminator::setFormat( channel, Shellminator::REGULAR, color );
+
+    limit = width - ( limit + textWidth + 3 + printedEventTextSize );
     for( i = 1; i < limit; i++ ){
-        selectedChannel -> print( ' ' );
+        channel -> print( ' ' );
     }
 
-    // print the right border.
-    selectedChannel -> print( verticalLine );
-
-    // Set cursor to origin.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY );
-
-    // Print the top part.
-    selectedChannel -> print( topLeftCorner );
-    for( i = 1; i < ( width - 1 ); i++ ){
-        selectedChannel -> print( horizontalLine );
-    }
-    selectedChannel -> print( topRightCorner );
-
-    // Bottom line.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 2 );
-
-    // Print the bottom part.
-    selectedChannel -> print( bottomLeftCorner );
-
-    // Check if a key event is attached. In this case the triggering key
-    // will be displayed on the bottom right.
-    if( event.type != Shellminator::SHELL_EVENT_EMPTY ){
-        limit = eventTextSize + 2;
-    }
-
-    // Otherwise a regular corner will be printed.
-    else{
-        limit = 1;
-    }
-
-    // Print as many horizontal characters as needed.
-    for( i = 1; ( i < width - limit ); i++ ){
-        selectedChannel -> print( horizontalLine );
-    }
-
-    // Check if a key name has to be displayed.
-    if( event.type != Shellminator::SHELL_EVENT_EMPTY ){
-        selectedChannel -> print( "\u2524" );
-
-        // Print the triggering key name.
-        selectedChannel -> print( eventText );
-
-        // Set the format back to regular an finish the line.
-        Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, color );
-        selectedChannel -> print( "\u2502" );
-    }
-
-    else{
-        // Set the format back to regular an finish the line.
-        selectedChannel -> print( "\u2518" );
-    }
-
-    if( bufferingEnabled ){
-        selectedChannel -> flush();
-    }
-
-    if( triggered ){
-
-        if( func != NULL ){
-            func();
-        }
-
-        parent -> requestRedraw();
-        redraw = true;
-
-        triggered = false;
-    }
-
-}
-*/
-
-/*
-void ShellminatorButton::draw(){
-
-    // Generic counter.
-    int i;
-
-    // The upper limit of the for loops calculated
-    // to this variable.
-    int limit;
-
-    if( parent == NULL ){
-        return;
-    }
-
-    if( name == NULL ){
-        return;
-    }
-
-    if( selectedChannel == NULL ){
-        return;
-    }
-
-    // Only draw if resized event or timer event happened.
-    if( !redraw ){
-        return;
-    }
-    redraw = false;
-
-    //Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY );
-    Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::WHITE );
-
-    // Top line section.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY );
-
-    selectedChannel -> print( "\u231C" );
-
-    for( i = 1; i < ( width - 2 ); i++ ){
-        selectedChannel -> print( "\u2584" );
-    }
-
-    selectedChannel -> print( "\u231D" );
-
-    // Middle line section
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
-
-    selectedChannel -> print( ' ' );
-
-    limit = ( width - textWidth ) / 2;
-    for( i = 1; i < limit; i++ ){
-        selectedChannel -> print( "\u2588" );
-    }
-
-    if( triggered ){
-        //Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::BACKGROUND, Shellminator::WHITE, Shellminator::BG_BLACK );        
-    }
-    else{
-        Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::WHITE, Shellminator::BG_BLACK );
-    }
-    selectedChannel -> print( name );
-    Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::BLACK, Shellminator::BG_WHITE );
-    Shellminator::setFormat( selectedChannel, Shellminator::LOW_INTENSITY, Shellminator::WHITE );
-
-    limit = width - ( limit + textWidth );
-    for( i = 1; i < limit - 1; i++ ){
-        selectedChannel -> print( "\u2588" );
-    }
+    channel -> print( "\u2502" );
 
     // Bottom line section.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 2 );
+    Shellminator::setCursorPosition( channel, originX, originY + 2 );
 
-    selectedChannel -> print( "\u231E" );
+    channel -> print( "\u2514" );
 
-    for( i = 1; i < ( width - 2 ); i++ ){
-        selectedChannel -> print( "\u2580" );
+    for( i = 2; i < width; i++ ){
+        channel -> print( "\u2500" );
     }
 
-    selectedChannel -> print( "\u231F" );
-
-    Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, Shellminator::WHITE );
-
-    if( bufferingEnabled ){
-        selectedChannel -> flush();
-    }
-
-    if( triggered ){
-
-        if( func != NULL ){
-            func();
-        }
-
-        parent -> requestRedraw();
-        redraw = true;
-
-        triggered = false;
-    }
-
-}
-
-*/
-
-void ShellminatorButton::draw(){
-
-    // Generic counter.
-    int i;
-
-    // The upper limit of the for loops calculated
-    // to this variable.
-    int limit;
-
-    if( parent == NULL ){
-        return;
-    }
-
-    if( name == NULL ){
-        return;
-    }
-
-    if( selectedChannel == NULL ){
-        return;
-    }
-
-    // Only draw if resized event or timer event happened.
-    if( !redraw ){
-        return;
-    }
-    redraw = false;
-
-    // Top line section.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY );
-
-    selectedChannel -> print( "\u250C" );
-
-    limit = ( width - textWidth ) / 2;  
-    for( i = 1; i < limit; i++ ){
-        selectedChannel -> print( "\u2500" );
-    }
-
-    Shellminator::setFormat( selectedChannel, Shellminator::BACKGROUND, Shellminator::WHITE );
-
-    selectedChannel -> print( name );
-
-    Shellminator::setFormat( selectedChannel, Shellminator::REGULAR, Shellminator::WHITE );
-
-    limit = width - ( limit + textWidth );
-    for( i = 1; i < limit - 1; i++ ){
-        selectedChannel -> print( "\u2500" );
-    }
-
-    selectedChannel -> print( "\u2510" );
-
-
-    // Bottom line section.
-    Shellminator::setCursorPosition( selectedChannel, originX, originY + 1 );
-
-    selectedChannel -> print( "\u2514" );
-
-     limit = ( width - 1 ) / 2;  
-    for( i = 1; i < limit; i++ ){
-        selectedChannel -> print( "\u2500" );
-    }
-
-    selectedChannel -> print( "\u2BA9" );
-
-    limit = width - ( limit + 1 );
-    for( i = 1; i < limit - 1; i++ ){
-        selectedChannel -> print( "\u2500" );
-    }
-
-    selectedChannel -> print( "\u2518" );
-
+    channel -> print( "\u2518" );
 
 }

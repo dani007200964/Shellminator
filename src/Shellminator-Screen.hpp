@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_SCREEN_HPP__
 
 #include "Shellminator.hpp"
+#include "Stream.h"
 
 // Created for forward loading.
 class Shellminator;
@@ -60,7 +61,7 @@ public:
     /// This function is called by the host terminal, when the plot object gets registered to it.
     /// You can put all the initialisation section here.
     /// @param parent_p Pointer to the caller terminal object.
-    virtual void init( Shellminator* parent_p ){ /* To make the linker happy... */ }
+    virtual void init( Shellminator* parent_p, Stream* channel_p ){ /* To make the linker happy... */ }
 
     /// Origin of the top left corner.
     ///
@@ -102,6 +103,8 @@ protected:
 
     /// Pointer to the caller terminal object.
     Shellminator* parent = NULL;
+
+    Stream* channel = NULL;
 
     /// Actual width of the object.
     int width = 1;

@@ -903,10 +903,10 @@ void Shellminator::update() {
         // If a Screen is attached, we have to request the terminal
         // size periodically. The intervall for this is specidied
         // in the screenUpdatePeriod variable.
-        if( ( millis() - screenTimerStart ) > screenUpdatePeriod ){
+        if( ( millis() - sizeTimerStart ) > 2000 ){
 
             // Save system time to detect the next timing event.
-            screenTimerStart = millis();
+            sizeTimerStart = millis();
 
             // Try to get the screen size.
             getTerminalSize( &w, &h );
@@ -937,17 +937,25 @@ void Shellminator::update() {
             // Check if we have a redraw request.
             if( screenRedraw ){
 
-                // In this case we have to clear the flag first.
-                // The order is important, because it is possible
-                // that the Screen object will generate a redraw
-                // request in the draw function.
-                screenRedraw = false;
-
-                // Call the Screen objects draw function.
-                screen -> draw();
-
             }
 
+        }
+
+        if( screenRedraw && ( ( millis() - screenTimerStart ) > screenUpdatePeriod ) ){
+            // In this case we have to clear the flag first.
+            // The order is important, because it is possible
+            // that the Screen object will generate a redraw
+            // request in the draw function.
+            screenRedraw = false;
+
+            // Call the Screen objects draw function.
+            screen -> draw();
+
+            // Check if buffering is enabled.
+            // If so, we have to flush the buffer to the output stream.
+            if( bufferMemoryAllocated ){
+                bufferedPrinter.flush();
+            }
         }
 
         // Call the Screen objects update function periodically.
@@ -2106,7 +2114,8 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     screenRedraw = true;
     screenUpdatePeriod = updatePeriod;
     screenTimerStart = millis();
-    screen -> init( this );
+    sizeTimerStart = millis();
+    screen -> init( this, bufferMemoryAllocated ? &bufferedPrinter : channel );
 }
 
 void Shellminator::endScreen(){

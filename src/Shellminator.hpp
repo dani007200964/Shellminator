@@ -852,10 +852,10 @@ public:
     void popEvent();
 
     /// Stores the width of the terminal in characters.
-    int terminalWidth = 1;
+    int terminalWidth = 80;
 
     /// Stores the height of the terminal in characters.
-    int terminalHeight = 1;
+    int terminalHeight = 30;
 
     /// This buffer is used to parse the mouse coordinates form the
     /// host terminals answer.
@@ -1004,7 +1004,9 @@ private:
     /// The screen is drawn within a pre-defined periods.
     /// This variable stores the last time when a drawing
     /// event occurred.
-    unsigned long screenTimerStart;
+    unsigned long screenTimerStart = 0;
+
+    unsigned long sizeTimerStart = 0;
 
     /// The time interval between two drawings.
     int screenUpdatePeriod;

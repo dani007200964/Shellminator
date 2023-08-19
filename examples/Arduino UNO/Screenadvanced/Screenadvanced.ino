@@ -51,7 +51,7 @@ public:
     void update( int width_p, int  height_p ) override;
 
     // Override the base init function with our custom one.
-    void init( Shellminator* parent_p )override;
+    void init( Shellminator* parent_p, Stream* channel_p )override;
 
     // Create the ShellminatorPlot object.
     ShellminatorPlot plot;
@@ -107,13 +107,14 @@ void layout::update( int width_p, int  height_p ){
 
 }
 
-void layout::init( Shellminator* parent_p ){
+void layout::init( Shellminator* parent_p, Stream* channel_p ){
 
     // It will be used to configure the button events.
     Shellminator::shellEvent_t buttonEvent;
 
     // Save the reference of the caller terminal.
     parent = parent_p;
+    channel = channel_p;
 
     // Construct the three button objects.
     startButton = ShellminatorButton( "Start" );
@@ -124,12 +125,12 @@ void layout::init( Shellminator* parent_p ){
     plot = ShellminatorPlot( sinePoints, NUMBER_OF_DATA_POINTS, "Sine", Shellminator::RED );
 
     // Initialise the button objects.
-    startButton.init( parent );
-    stopButton.init( parent );
-    reloadButton.init( parent );
+    startButton.init( parent, channel );
+    stopButton.init( parent, channel );
+    reloadButton.init( parent, channel );
 
     // Initialise the plot objects.
-    plot.init( parent );
+    plot.init( parent, channel );
 
     // Set the button event for the start button.
     buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
