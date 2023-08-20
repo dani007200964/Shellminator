@@ -15,7 +15,6 @@
 
 
 #include "Shellminator.hpp"
-#include "Shellminator-IO.hpp"
 
 
 // Create a Shellminator object, and initialize it to use Serial

@@ -38,11 +38,11 @@ const char *Shellminator::version = SHELLMINATOR_VERSION;
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
 #ifdef ESP32
-  #define CLIENT_STATE client.connected()
+    #define CLIENT_STATE client.connected()
 #endif
 
 #ifdef ESP8266
-  #define CLIENT_STATE ( client.status() == ESTABLISHED )
+    #define CLIENT_STATE ( client.status() == ESTABLISHED )
 #endif
 
 const uint8_t Shellminator::TELNET_IAC_DONT_LINEMODE[]          = { 255, 254, 34 };
@@ -468,6 +468,11 @@ void Shellminator::printHelp(){
 
 void Shellminator::begin( const char* banner_p ) {
 
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
+
     // Copy the content from banner_p to banner. Because strncpy we can be sure that it wont overflow.
     strncpy( banner, banner_p, SHELLMINATOR_BANNER_LEN );
 
@@ -513,8 +518,13 @@ void Shellminator::begin( const char* banner_p ) {
 
 void Shellminator::sendBackspace() {
 
-  // Send a simple backspace combo to the serial port
-  channel -> print( __CONST_TXT__( "\b \b" ) );
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
+
+    // Send a simple backspace combo to the serial port
+    channel -> print( __CONST_TXT__( "\b \b" ) );
 
 }
 
@@ -871,13 +881,18 @@ void Shellminator::update() {
         // the update function won't do anything( as should ).
         else{
 
-        channel = &defaultChannel;
+            channel = &defaultChannel;
 
         }
 
     }
 
     #endif
+
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
 
     // We have to check the channel buffer. If it is not empty we can read as many characters as possible.
     while ( channel -> available() ) {
@@ -1065,6 +1080,11 @@ bool Shellminator::getCursorPosition( int* x, int* y, uint32_t timeout ){
     // To save system time for timeout detection.
     unsigned long timerStart;
 
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return false;
+    }
+
     // Flush the input buffer.
     while( channel -> available() ){
         channel -> read();
@@ -1211,6 +1231,11 @@ void Shellminator::setCursorPosition( int x, int y ){
 
 void Shellminator::setCursorPosition( Stream* channel_p, int x, int y ){
 
+    // If channel is not specified, we have to stop here.
+    if( channel_p == NULL ){
+        return;
+    }
+
     // Boundary protection.
     if( x < 1 ) x = 1;
     if( y < 1 ) y = 1;
@@ -1254,46 +1279,56 @@ bool Shellminator::getTerminalSize( int* width, int* height ){
 
 void Shellminator::drawLogo() {
 
-  if( logo ){
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
 
-    // Set the terminal color and style to the defined settings for the logo
-    setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    if( logo ){
 
-    // Draws the startup logo to the terminal interface.
-    channel -> print( logo );
+        // Set the terminal color and style to the defined settings for the logo
+        setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
-    // Set the terminal style to normal.
-    setFormat( channel, REGULAR, WHITE );
+        // Draws the startup logo to the terminal interface.
+        channel -> print( logo );
 
-  }
+        // Set the terminal style to normal.
+        setFormat( channel, REGULAR, WHITE );
 
-  #ifdef __AVR__
+    }
 
-  else if( progmemLogo ){
+    #ifdef __AVR__
 
-    // Set the terminal color and style to the defined settings for the logo
-    setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    else if( progmemLogo ){
 
-    // Draws the startup logo to the terminal interface.
-    channel -> print( progmemLogo );
+        // Set the terminal color and style to the defined settings for the logo
+        setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
-    // Set the terminal style to normal.
-    setFormat( channel, REGULAR, WHITE );
+        // Draws the startup logo to the terminal interface.
+        channel -> print( progmemLogo );
 
-  }
+        // Set the terminal style to normal.
+        setFormat( channel, REGULAR, WHITE );
 
-  #endif
+    }
+
+    #endif
 
 }
 
 void Shellminator::beep(){
 
-  if( !mute ){
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
 
-    // Bell character.
-    channel -> print( '\a' );
+    if( !mute ){
 
-  }
+        // Bell character.
+        channel -> print( '\a' );
+
+    }
 
 }
 
@@ -1450,33 +1485,38 @@ void Shellminator::ShellminatorBackspaceState(){
 
 void Shellminator::ShellminatorEnterKeyState(){
 
-  // If the enter key is pressed cmd_buff_dim has to be reset to the default value
-  cmd_buff_dim = 1;
+    // If the enter key is pressed cmd_buff_dim has to be reset to the default value
+    cmd_buff_dim = 1;
 
-  // General counter variable
-  int i;
+    // General counter variable
+    int i;
 
-  if( inSearch  ){
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
 
-    if( searchMatch > 0 ){
+    if( inSearch  ){
 
-      inSearch = false;
-      strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
-      cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-      redrawLine();
+        if( searchMatch > 0 ){
+
+        inSearch = false;
+        strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
+        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+        redrawLine();
+
+        }
+
+        else{
+        cmd_buff_cntr = 0;
+        }
 
     }
 
-    else{
-      cmd_buff_cntr = 0;
-    }
-
-  }
-
-  // Because a command is sent we have to close it. Basically we replace the arrived
-  // '\r' character with a '\0' string terminator character. Now we have our command
-  // in a C/C++ like standard string format.
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
+    // Because a command is sent we have to close it. Basically we replace the arrived
+    // '\r' character with a '\0' string terminator character. Now we have our command
+    // in a C/C++ like standard string format.
+    cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
     // Check if we have an active input prompt.
     if( inputActive ){
@@ -1531,93 +1571,77 @@ void Shellminator::ShellminatorEnterKeyState(){
 
     }
 
-  // We send a line break to the terminal to put the next data in new line
-  channel -> println();
+    // We send a line break to the terminal to put the next data in new line
+    channel -> println();
 
-  inSearch = false;
+    inSearch = false;
 
-  // If the arrived data is not just a single enter we have to process the command.
-  if ( cmd_buff_cntr > 0 ) {
+    // If the arrived data is not just a single enter we have to process the command.
+    if ( cmd_buff_cntr > 0 ) {
 
-    // Flush out everything before command execution.
-    // It is required for the prompts, because sometimes garbage
-    // can be found in the channel stream. It has to be removed before
-    // prompt reading.
-    while( channel -> available() ){
-      channel -> read();
-    }
+        // Flush out everything before command execution.
+        // It is required for the prompts, because sometimes garbage
+        // can be found in the channel stream. It has to be removed before
+        // prompt reading.
+        while( channel -> available() ){
+            channel -> read();
+        }
 
-    if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
+        if( ( strcmp( cmd_buff[ 0 ], "help" ) == 0 ) || ( strcmp( cmd_buff[ 0 ], "?" ) == 0 ) ){
+            printHelp();
+        }
 
-      printHelp();
+        else if( strcmp( cmd_buff[ 0 ], "history" ) == 0 ){
+            printHistory();
+        }
 
-    }
+        // We haveto check that execution_fn is not NULL.
+        else if( execution_fn != NULL ){
+            // If it is a valid, then call it's function.
+            execution_fn( cmd_buff[ 0 ], this );
+        }
 
-    else if( strcmp( cmd_buff[ 0 ], "history" ) == 0 ){
+        #ifdef COMMANDER_API_VERSION
+            // If a Commander object is added, it can be used
+            // to execute the command without an execution_fn.
+            else if( commander != NULL ){
+                commander -> execute( cmd_buff[ 0 ], channel, this );
+            }
+        #endif
 
-      printHistory();
+        // If not, then just print it with Serial.
+        else{
+            channel -> print( __CONST_TXT__( "cmd: " ) );
+            channel -> print( cmd_buff[ 0 ] );
+            channel -> println();
+        }
 
-    }
-
-    // We haveto check that execution_fn is not NULL.
-    if( execution_fn != NULL ){
-
-      // If it is a valid, then call it's function.
-      execution_fn( cmd_buff[ 0 ], this );
-
-    }
-
-    #ifdef COMMANDER_API_VERSION
-
-    // If a Commander object is added, it can be used
-    // to execute the command without an execution_fn.
-    else if( commander != NULL ){
-
-      commander -> execute( cmd_buff[ 0 ], channel, this );
-
-    }
-
-    #endif
-
-    // If not, then just print it with Serial.
-    else{
-      channel -> print( __CONST_TXT__( "cmd: " ) );
-      channel -> print( cmd_buff[ 0 ] );
-      channel -> println();
-    }
-
-    // After we processed the command we have to shift the history upwards.
-    // To protect the copy against buffer overflow we use strncpy
-    for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
-
-      strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
+        // After we processed the command we have to shift the history upwards.
+        // To protect the copy against buffer overflow we use strncpy
+        for ( i = ( SHELLMINATOR_BUFF_DIM - 1 ); i > 0; i-- ) {
+            strncpy( cmd_buff[ i ], cmd_buff[ i - 1 ], SHELLMINATOR_BUFF_LEN + 1 );
+        }
 
     }
 
-  }
+    // After the command processing finished we print a new banner to the terminal.
+    // This means that the device is finished and waits the new command.
+    printBanner();
 
-  // After the command processing finished we print a new banner to the terminal.
-  // This means that the device is finished and waits the new command.
-  printBanner();
-
-  // To empty the incoming string we have to zero it's counter.
-  cmd_buff_cntr = 0;
-  cursor = 0;
+    // To empty the incoming string we have to zero it's counter.
+    cmd_buff_cntr = 0;
+    cursor = 0;
 
 }
 
 void Shellminator::ShellminatorBeginningOfLineState(){
-
-  cursor = 0;
-  redrawLine();
-
+    cursor = 0;
+    redrawLine();
 }
 
 void Shellminator::ShellminatorEndOfLineState(){
-
-  cursor = cmd_buff_cntr;
-  redrawLine();
-
+    cursor = cmd_buff_cntr;
+    redrawLine();
 }
 
 void Shellminator::ShellminatorLogoutState(){
@@ -1634,186 +1658,172 @@ void Shellminator::ShellminatorLogoutState(){
 
 
     #ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    clientDisconnect();
-
+        clientDisconnect();
     #endif
 
     #ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    websocketDisconnect();
-
+        websocketDisconnect();
     #endif
 
 }
 
 void Shellminator::ShellminatorReverseSearchState(){
 
-  if( searchKeyFunc ){
+    if( searchKeyFunc ){
+        searchKeyFunc();
+        return;
+    }
 
-    searchKeyFunc();
-    return;
-
-  }
-
-  inSearch = !inSearch;
-  redrawLine();
+    inSearch = !inSearch;
+    redrawLine();
 
 }
 
 void Shellminator::ShellminatorClearScreenState(){
 
-  // Only works, if the terminal interface can handle formatting.
-  if( enableFormatting ){
-
-    clear();
-    redrawLine();
-
-  }
+    // Only works, if the terminal interface can handle formatting.
+    if( enableFormatting ){
+        clear();
+        redrawLine();
+    }
 
 }
 
 void Shellminator::ShellminatorAutoCompleteState(){
 
-  // Auto complete section.
-  #ifdef COMMANDER_API_VERSION
+    // Auto complete section.
+    #ifdef COMMANDER_API_VERSION
 
-  // General counter variable
-  uint32_t i;
+    // General counter variable
+    uint32_t i;
 
-  // Firstly, we have to set the cursor to the end of the input command.
-  // If the algorythm fills the missing characters, they have to placed
-  // at the end.
-  cursor = cmd_buff_cntr;
+    // Firstly, we have to set the cursor to the end of the input command.
+    // If the algorythm fills the missing characters, they have to placed
+    // at the end.
+    cursor = cmd_buff_cntr;
 
-  // Pointer to a Commander API-tree element.
-  Commander::API_t *commandAddress;
+    // Pointer to a Commander API-tree element.
+    Commander::API_t *commandAddress;
 
-  // The next auto filled character will be placed in this variable.
-  char nextChar;
+    // The next auto filled character will be placed in this variable.
+    char nextChar;
 
-  // This flag holds an auto complete conflict event.
-  // Conflict event happens:
-  // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
-  // - if cmd_buff_cntr would overflow Commanders command tree.
-  // - if we found the end of the last command.
-  bool conflict = false;
+    // This flag holds an auto complete conflict event.
+    // Conflict event happens:
+    // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
+    // - if cmd_buff_cntr would overflow Commanders command tree.
+    // - if we found the end of the last command.
+    bool conflict = false;
 
-  // PROGMEM based tree is not supported for auto complete yet.
-  if( commander -> memoryType != Commander::MEMORY_REGULAR ){
-    return;
-  }
+    // PROGMEM based tree is not supported for auto complete yet.
+    if( commander -> memoryType != Commander::MEMORY_REGULAR ){
+        return;
+    }
 
-  // If there is no conflict event, we are trying
-  // to fill as many characters as possible.
-  while( !conflict ){
+    // If there is no conflict event, we are trying
+    // to fill as many characters as possible.
+    while( !conflict ){
 
-    // Reset the counter to the first Commander API-tree element.
-    i = 0;
+        // Reset the counter to the first Commander API-tree element.
+        i = 0;
 
-    // Get the address of the element indexed by i.
-    // If the indexed elment does not exists, Commander
-    // will return NULL.
-    commandAddress = commander -> operator[]( (int)i );
+        // Get the address of the element indexed by i.
+        // If the indexed elment does not exists, Commander
+        // will return NULL.
+        commandAddress = commander -> operator[]( (int)i );
 
-    // Set to default state.
-    nextChar = '\0';
+        // Set to default state.
+        nextChar = '\0';
 
-    // Go through all elements in Commanders API-tree.
-    while( commandAddress ){
+        // Go through all elements in Commanders API-tree.
+        while( commandAddress ){
 
-      // We have to check that the typed command is exists within an existing command.
-      if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
+        // We have to check that the typed command is exists within an existing command.
+        if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
 
-        // If it does, we have to check for conflict.
-        if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
+            // If it does, we have to check for conflict.
+            if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
 
-          // If there is no conflict we can set the next character from the command that we found.
-          nextChar = commandAddress -> name[ cmd_buff_cntr ];
+            // If there is no conflict we can set the next character from the command that we found.
+            nextChar = commandAddress -> name[ cmd_buff_cntr ];
+
+            }
+
+            else{
+
+            // We have to check that the next character in the command
+            // tree is not the same as the value in nextChar.
+            if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
+
+                // Trigger conflict.
+                conflict = true;
+
+            }
+
+            }
 
         }
 
-        else{
+        // Increment i to get the next command's index.
+        i++;
 
-          // We have to check that the next character in the command
-          // tree is not the same as the value in nextChar.
-          if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
-
-            // Trigger conflict.
-            conflict = true;
-
-          }
+        // Get the address of the element indexed by i.
+        commandAddress = commander -> operator[]( (int)i );
 
         }
 
-      }
+        // If nextChar does not changed since start, that means
+        // we did not found anything similar.
+        if( nextChar == '\0' ){
 
-      // Increment i to get the next command's index.
-      i++;
+        // We have to trigger conflict to abort the process.
+        conflict = true;
 
-      // Get the address of the element indexed by i.
-      commandAddress = commander -> operator[]( (int)i );
+        }
 
-    }
+        // If we does not had a conflict event, we have to process
+        // the foind character as a regular character.
+        if( !conflict ){
 
-    // If nextChar does not changed since start, that means
-    // we did not found anything similar.
-    if( nextChar == '\0' ){
+        process( nextChar );
 
-      // We have to trigger conflict to abort the process.
-      conflict = true;
-
-    }
-
-    // If we does not had a conflict event, we have to process
-    // the foind character as a regular character.
-    if( !conflict ){
-
-      process( nextChar );
+        }
 
     }
 
-  }
-
-  #endif
+    #endif
 
 }
 
 void Shellminator::ShellminatorAbortState(){
 
-  if( abortKeyFunc ){
+    if( abortKeyFunc ){
+        abortKeyFunc();
+    }
 
-    abortKeyFunc();
+    inSearch = false;
 
-  }
+    // If the abort key is pressed cmd_buff_dim has to be reset to the default value
+    cmd_buff_dim = 1;
 
-  inSearch = false;
+    // We send a line break to the terminal to put the next data in new line
+    channel -> println();
 
-  // If the abort key is pressed cmd_buff_dim has to be reset to the default value
-  cmd_buff_dim = 1;
+    printBanner();
 
-  // We send a line break to the terminal to put the next data in new line
-  channel -> println();
-
-  printBanner();
-
-  cursor = 0;
-  cmd_buff_cntr = 0;
+    cursor = 0;
+    cmd_buff_cntr = 0;
 
 }
 
 void Shellminator::ShellminatorEscapeCharacterState( char new_char ){
 
     if( new_char == '[' ){
-
         currentState = &Shellminator::ShellminatorEscapeBracketState;
-
     }
 
     else{
-
         currentState = &Shellminator::ShellminatorDefaultState;
-
     }
 
 }
@@ -1892,230 +1902,243 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
 
 void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
-  // General counter variable
-  uint32_t i;
+    // General counter variable
+    uint32_t i;
 
-  // If the cursor is at the end of the command,
-  // we simply store the new character.
-  if( cursor == cmd_buff_cntr ){
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
 
-    cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
+    // If the cursor is at the end of the command,
+    // we simply store the new character.
+    if( cursor == cmd_buff_cntr ){
+        cmd_buff[ 0 ][ cmd_buff_cntr ] = new_char;
+    }
 
-  }
+    // If the cursor is somewhere in the middle, we have to shift the
+    // end of the command by one character end insert the new character
+    // to the cursor position.
+    else{
 
-  // If the cursor is somewhere in the middle, we have to shift the
-  // end of the command by one character end insert the new character
-  // to the cursor position.
-  else{
+        for( i = cmd_buff_cntr; i > cursor; i-- ){
+            cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+        }
 
-    for( i = cmd_buff_cntr; i > cursor; i-- ){
-
-      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i - 1 ];
+        // Add the new character after the cursor in the buffer
+        cmd_buff[ 0 ][ cursor ] = new_char;
 
     }
 
-    // Add the new character after the cursor in the buffer
-    cmd_buff[ 0 ][ cursor ] = new_char;
+    // In this case we have to reset the cmd_buff_dim variable to the default value.
+    cmd_buff_dim = 1;
 
-  }
+    // If the cursor was at the end we have to print the
+    // new character if the cmd_buff had free space at
+    // the end.
+    if ( cursor == cmd_buff_cntr ) {
 
-  // In this case we have to reset the cmd_buff_dim variable to the default value.
-  cmd_buff_dim = 1;
+        if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
-  // If the cursor was at the end we have to print the
-  // new character if the cmd_buff had free space at
-  // the end.
-  if ( cursor == cmd_buff_cntr ) {
+            if( inSearch ){
 
-    if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
+                // Increment counters.
+                cmd_buff_cntr++;
+                cursor++;
 
-      if( inSearch ){
+                redrawLine();
 
-        // Increment counters.
-        cmd_buff_cntr++;
-        cursor++;
+                // Decrement counters.
+                cmd_buff_cntr--;
+                cursor--;
 
+            }
+
+            else if( inputActive && inputSecretMode ){
+                channel -> print( "\u2022" );
+            }
+
+            else{
+                channel -> print( new_char );
+            }
+
+        }
+
+    }
+
+    // Increment counters.
+    cmd_buff_cntr++;
+    cursor++;
+
+    if ( cursor != cmd_buff_cntr ) {
+        // Redraw the command line.
         redrawLine();
-
-        // Decrement counters.
-        cmd_buff_cntr--;
-        cursor--;
-
-      }
-
-      else if( inputActive && inputSecretMode ){
-        channel -> print( "\u2022" );
-      }
-
-      else{
-        channel -> print( new_char );
-      }
-
     }
 
-  }
+    // Check if the counters are overloaded.
+    // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
+    // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
+    if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
+        cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
+    }
 
-  // Increment counters.
-  cmd_buff_cntr++;
-  cursor++;
-
-  if ( cursor != cmd_buff_cntr ) {
-
-    // Redraw the command line.
-    redrawLine();
-
-  }
-
-  // Check if the counters are overloaded.
-  // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
-  // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
-  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
-
-    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-  }
-
-  if( cursor > SHELLMINATOR_BUFF_LEN ) {
-
-    cursor = SHELLMINATOR_BUFF_LEN;
-
-  }
+    if( cursor > SHELLMINATOR_BUFF_LEN ) {
+        cursor = SHELLMINATOR_BUFF_LEN;
+    }
 
 }
 
 bool Shellminator::waitForKey( Stream* source, char key, uint32_t timeout ){
 
-  // Save system time
-  unsigned long timerStart = millis();
+    // Save system time
+    unsigned long timerStart = millis();
 
-  while( source -> available() < 1 ){
-    // Wait for key input.
+    while( source -> available() < 1 ){
+        // Wait for key input.
 
-    // Check if timeout is specified.
-    if( timeout == 0 ){
-      continue;
+        // Check if timeout is specified.
+        if( timeout == 0 ){
+            continue;
+        }
+
+        // Timeout detection.
+        if( ( millis() - timerStart ) > timeout ){
+            return false;
+        }
+
     }
 
-    // Timeout detection.
-    if( ( millis() - timerStart ) > timeout ){
+    // Read the pressed key
+    char c = source -> read();
 
-      return false;
-
+    // Compare with the expected key
+    if( c == key ){
+        return true;
     }
 
-  }
-
-  // Read the pressed key
-  char c = source -> read();
-
-  // Compare with the expected key
-  if( c == key ){
-
-    return true;
-
-  }
-
-  return false;
+    return false;
 
 }
 
 bool Shellminator::waitForKey( Stream* source, char* keys, uint32_t timeout ){
 
-  // Generic counter variable.
-  uint32_t i;
+    // Generic counter variable.
+    uint32_t i;
 
-  // Save system time.
-  unsigned long timerStart = millis();
+    // Save system time.
+    unsigned long timerStart = millis();
 
-  while( source -> available() < 1 ){
-    // Wait for key input.
+    while( source -> available() < 1 ){
+        // Wait for key input.
 
-    // Check if timeout is specified.
-    if( timeout == 0 ){
-      continue;
-    }
+        // Check if timeout is specified.
+        if( timeout == 0 ){
+            continue;
+        }
 
-    // Timeout detection.
-    if( ( millis() - timerStart ) > timeout ){
-
-      return false;
-
-    }
-
-  }
-
-  // Read the pressed key
-  char c = source -> read();
-
-  // Check all characters in keys array.
-  for( i = 0; i < strlen( keys ); i++ ){
-
-    // If there is a match, return with true.
-    if( keys[ i ] == c ){
-
-      return true;
+        // Timeout detection.
+        if( ( millis() - timerStart ) > timeout ){
+            return false;
+        }
 
     }
 
-  }
+    // Read the pressed key
+    char c = source -> read();
 
-  // No match, return false;
-  return false;
+    // Check all characters in keys array.
+    for( i = 0; i < strlen( keys ); i++ ){
+
+        // If there is a match, return with true.
+        if( keys[ i ] == c ){
+            return true;
+        }
+
+    }
+
+    // No match, return false;
+    return false;
 
 }
 
 Shellminator* Shellminator::castVoidToShellminator( void* ptr ){
-
-  return (Shellminator*)ptr;
-
+      return (Shellminator*)ptr;
 }
 
 void Shellminator::autoDetectTerminal(){
 
-  char buff[ 20 ] = "";
-  char magic[] = { 5, 0 };
+
+    // !!! Not working yet !!!
+    char buff[ 20 ] = "";
+    char magic[] = { 5, 0 };
 
     return;
 
-  //Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
+    //Shellminator::input( channel, sizeof( buff ), buff, magic, 500 );
 
-  if( strcmp( buff, "PuTTY" ) == 0 ){
+    if( strcmp( buff, "PuTTY" ) == 0 ){
 
-  }
+    }
 
-  else{
+    else{
 
-    enableFormatting = false;
-    channel -> println( __CONST_TXT__( "unknown terminal..." ) );
-    
-  }
+        enableFormatting = false;
+        channel -> println( __CONST_TXT__( "unknown terminal..." ) );
+        
+    }
 
 }
 
 void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod ){
 
+    // Generic counter.
     int i;
 
+    // If the Screen object pointer is invalid, we have to stop here.
     if( screen_p == NULL ){
         return;
     }
 
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
+
+    // We need the terminal size for the initial run.
     getTerminalSize( &terminalWidth, &terminalHeight );
 
+    // Save Screen object pointer to internal variable.
     screen = screen_p;
+
+    // Turn off cursor. It would look ugly when drawing.
     hideCursor();
 
+    // Basically, we clear the screen i a funky way.
+    // Instead of remove the previous data, we shift it upwards
+    // to make it avaiable after the Screen finished.
     for( i = 0; i < terminalHeight; i++ ){
         channel -> println();
     }
+
+    // Request mouse reports form host.
     mouseBegin();
 
-    screen -> update( terminalWidth, terminalHeight );
+    // Set the redraw flag to true, to force the redraw request.
     screenRedraw = true;
+
+    // Save the redraw intervall to internal variable.
     screenUpdatePeriod = updatePeriod;
+
+    // Save system time to the timers.
     screenTimerStart = millis();
     sizeTimerStart = millis();
+
+    // Call the Screens init function.
     screen -> init( this, bufferMemoryAllocated ? &bufferedPrinter : channel );
+
+    // Call the Screens update function.
+    screen -> update( terminalWidth, terminalHeight );
+
 }
 
 void Shellminator::endScreen(){
@@ -2124,6 +2147,7 @@ void Shellminator::endScreen(){
     int width;
     int height;
 
+    // Stop mouse reports on host.
     mouseEnd();
 
     // Get the terminal site.
@@ -2150,5 +2174,6 @@ void Shellminator::endScreen(){
 }
 
 void Shellminator::requestRedraw(){
+    // Set the redraw flag.
     screenRedraw = true;
 }

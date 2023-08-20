@@ -35,7 +35,6 @@ SOFTWARE.
 #define SHELLMINATOR_PLOT_MODULE_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
 #include "Shellminator.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
 

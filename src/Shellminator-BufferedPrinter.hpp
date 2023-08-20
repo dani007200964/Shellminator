@@ -35,7 +35,6 @@ SOFTWARE.
 #define SHELLMINATOR_BUFFERED_PRINTER_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
 
 #ifdef ARDUINO
 #include "Arduino.h"

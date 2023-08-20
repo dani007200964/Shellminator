@@ -28,7 +28,6 @@
 #include <emscripten.h>
 
 #include "Shellminator.hpp"
-#include "Shellminator-IO.hpp"
 
 
 // Use stdio as Channel.

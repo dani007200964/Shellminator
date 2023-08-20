@@ -88,7 +88,7 @@ void ShellminatorButton::attachEvent( Shellminator::shellEvent_t event_p ){
         }
 
         else if( isLower( (char)event.data ) ){
-            eventText[ 0 ] = (char)event.data;
+            eventText[ 0 ] = toUpper( (char)event.data );
             eventText[ 1 ] = '\0';
             eventTextSize = 1;
         }

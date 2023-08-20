@@ -19,7 +19,6 @@ EXCLUDE=NONE
 ++--INCLUDES--++
 
 #include "Shellminator.hpp"
-#include "Shellminator-IO.hpp"
 #include "Shellminator-QR-Code-Module.hpp"
 
 ++--GLOBAL_VARIABLES--++

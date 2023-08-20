@@ -34,8 +34,6 @@ include_directories(
 
 set( SOURCES
     src/Shellminator-Browser-Response.hpp
-    src/Shellminator-IO.cpp
-    src/Shellminator-IO.hpp
     src/Shellminator-Screen.hpp
     src/Shellminator-BufferedPrinter.cpp
     src/Shellminator-BufferedPrinter.hpp

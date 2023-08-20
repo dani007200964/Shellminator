@@ -29,7 +29,6 @@
 #include "stdioStream.hpp"
 
 #include "Shellminator.hpp"
-#include "Shellminator-IO.hpp"
 
 
 // Use stdio as Channel.

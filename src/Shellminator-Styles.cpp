@@ -35,55 +35,48 @@ SOFTWARE.
 
 void Shellminator::hideCursor(){
 
-  if( !enableFormatting ){
-    return;
-  }
+    if( !enableFormatting ){
+        return;
+    }
 
-  hideCursor( channel );
+    hideCursor( channel );
 
 }
 
 void Shellminator::hideCursor( Stream *stream_p ){
 
-  if( stream_p == NULL ){
+    if( stream_p == NULL ){
+        return;
+    }
 
-    return;
-
-  }
-
-  stream_p -> print( (const char*)"\033[?25l" );
+    stream_p -> print( __CONST_TXT__( "\033[?25l" ) );
 
 }
 
 void Shellminator::showCursor(){
 
-  if( !enableFormatting ){
-    return;
-  }
+    if( !enableFormatting ){
+        return;
+    }
 
-  showCursor( channel );
+    showCursor( channel );
 
 }
 
 void Shellminator::showCursor( Stream *stream_p ){
 
-  if( stream_p == NULL ){
+    if( stream_p == NULL ){
+        return;
+    }
 
-    return;
-
-  }
-
-  stream_p -> print( (const char*)"\033[?25h" );
+    stream_p -> print( __CONST_TXT__( "\033[?25h" ) );
 
 }
 
 void Shellminator::clear() {
 
   // explanation can be found here: http://braun-home.net/michael/info/misc/VT100_commands.htm
-  channel -> write( 27 );    // ESC character( decimal 27 )
-  channel -> print( (const char*)"[H" );  // VT100 Home command
-  channel -> write( 27 );    // ESC character( decimal 27 )
-  channel -> print( (const char*)"[J" );  // VT100 screen erase command
+  channel -> print( __CONST_TXT__( "\033[H\033[J" ) );  // VT100 Home command
 
 }
 
@@ -96,7 +89,7 @@ void Shellminator::setFormatFunc( Stream *stream_p, int firstArg, ... ){
         return;
     }
 
-    stream_p -> print( "\033[" );
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
     stream_p -> print( firstArg );
 
     va_start( list, firstArg );

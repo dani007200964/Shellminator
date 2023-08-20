@@ -42,8 +42,6 @@ SOFTWARE.
 
 #include "Stream.h"
 
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
@@ -163,14 +161,31 @@ private:
     /// This variable stores the event key text size.
     int eventTextSize = 0;
 
+    /// Pointer to the event callback function.
+    /// It it is null, the callback is disabled.
     void(*func)(ShellminatorScreen*) = NULL;
 
+    /// Button frame color. Default is White.
     Shellminator::textColor_t color = Shellminator::WHITE;
 
+    /// Check if the character is uppercase.
+    /// @param c Character to be checked.
+    /// @returns Returns true if the input character is uppercase.
     bool isUpper( char c );
+
+    /// Check if the character is lowercase.
+    /// @param c Character to be checked.
+    /// @returns Returns true if the input character is lowercase.
     bool isLower( char c );
+
+    /// Make the character uppercase.
+    /// @param c Character to convert to uppercase.
+    /// @returns Returns the uppercase  character if the input character was lowercase.
+    ///          Otherwise returns the input character.
     char toUpper( char c );
     
+    // For unit testing
+    friend class ShellminatorButtonUT;
 };
 
 #endif

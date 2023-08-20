@@ -36,7 +36,6 @@ SOFTWARE.
 
 //---- Shellminator related headers. ----//
 #include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
-#include "Shellminator-IO.hpp"                  // 
 #include "Shellminator-BufferedPrinter.hpp"
 #include "Shellminator-Screen.hpp"
 
@@ -963,13 +962,9 @@ public:
     /// If set, the buzzer will be silent.
     bool mute = false;
 
-    /// Default communication channel;
-    /// @todo Why do I need this???
-    shellminatorDefaultChannel defaultChannel;
-
     /// Pointer to the communication class. By default
     /// it points to the default response handler.
-    Stream *channel = &defaultChannel;
+    Stream *channel = NULL;
 
     /// Get the buffered printer object address.
     ///
@@ -1273,7 +1268,7 @@ private:
     /// is finished.
     void(*inputCallback)(char*, int, Shellminator*);
 
-    // For unit testing
+    // For unit testin.
     friend class ShellminatorUT;
 };
 

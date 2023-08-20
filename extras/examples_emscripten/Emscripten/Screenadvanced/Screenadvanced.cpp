@@ -28,7 +28,6 @@
 #include <emscripten.h>
 
 #include "Shellminator.hpp"
-#include "Shellminator-IO.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-Buttons.hpp"
 #include "Shellminator-PlotModule.hpp"
