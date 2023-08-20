@@ -219,7 +219,7 @@ void ShellminatorButton::draw(){
     // Top line section.
     Shellminator::setCursorPosition( channel, originX, originY );
 
-    Shellminator::setFormat( channel, Shellminator::REGULAR, color );
+    Shellminator::setFormat_m( channel, Shellminator::REGULAR, color );
 
     channel -> print( __CONST_TXT__( "\u250C" ) );
 
@@ -242,7 +242,7 @@ void ShellminatorButton::draw(){
         channel -> print( ' ' );
     }
 
-    Shellminator::setFormat( channel, Shellminator::BOLD, Shellminator::WHITE );
+    Shellminator::setFormat_m( channel, Shellminator::BOLD, Shellminator::WHITE );
 
     channel -> print( __CONST_TXT__( "\u2BA9  " ) );
     channel -> print( name );
@@ -253,7 +253,7 @@ void ShellminatorButton::draw(){
         channel -> print( __CONST_TXT__( " ]" ) );
     }
 
-    Shellminator::setFormat( channel, Shellminator::REGULAR, color );
+    Shellminator::setFormat_m( channel, Shellminator::REGULAR, color );
 
     limit = width - ( limit + textWidth + 3 + printedEventTextSize );
     for( i = 1; i < limit; i++ ){

@@ -68,9 +68,7 @@ int Shellminator::eventAvailable(){
     // The second case is, when the Read pointer is 'ahead' of the write pointer.
     // It happens when overflow event occurs with the circular buffer.
 	else{
-
 		return EVENT_BUFFER_SIZE - eventBufferReadPtr + eventBufferWritePtr;
-
 	}
 
 }
@@ -87,18 +85,14 @@ Shellminator::shellEvent_t Shellminator::readEvent(){
     // One for read and one for writing.
     // If they point to the same place, that means, there is no data available.
     if( eventBufferWritePtr == eventBufferReadPtr ){
-
         // This case return with invalid event code.
         return ret;
-
     }
 
     // Any other case, that means it has at least one new item to be read.
     else{
-
         // Get the next data from the circular structure.
         ret = eventBuffer[ eventBufferReadPtr ];
-
     }
 
     // Return with the next element data.
@@ -112,10 +106,8 @@ void Shellminator::popEvent(){
     // One for read and one for writing.
     // If they point to the same place, that means, there is no data available.
     if( eventBufferWritePtr == eventBufferReadPtr ){
-
         // This case return.
         return;
-
     }
 
     // Any other case, that means it has at least one new item to be read.
@@ -126,7 +118,6 @@ void Shellminator::popEvent(){
 
         // Check for overflow.
         if( eventBufferReadPtr >= EVENT_BUFFER_SIZE ){
-
             // Handle overflow.
             eventBufferReadPtr = 0;
         }

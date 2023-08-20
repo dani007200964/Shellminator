@@ -29,9 +29,10 @@
 #include "stdioStream.hpp"
 
 #include "Shellminator.hpp"
-#include "Shellminator-Screen.hpp"
-#include "Shellminator-Buttons.hpp"
-#include "Shellminator-PlotModule.hpp"
+//#include "Shellminator-Screen.hpp"
+//#include "Shellminator-Buttons.hpp"
+//#include "Shellminator-PlotModule.hpp"
+#include "Shellminator-GUI.hpp"
 #include <math.h>
 
 
@@ -108,6 +109,9 @@ void layout::update( int width_p, int  height_p ){
     if( parent == NULL ){
         return;
     }
+
+    height = height_p;
+    width = width_p;
 
     startButton.setOrigin( 1, 1 );
     startButton.update( width_p / 2, 1 );

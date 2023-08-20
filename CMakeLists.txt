@@ -37,10 +37,13 @@ set( SOURCES
     src/Shellminator-Screen.hpp
     src/Shellminator-BufferedPrinter.cpp
     src/Shellminator-BufferedPrinter.hpp
-    src/Shellminator-PlotModule.cpp
-    src/Shellminator-PlotModule.hpp
-    src/Shellminator-Buttons.cpp
-    src/Shellminator-Buttons.hpp
+    src/Shellminator-GUI.hpp
+    src/GUI/Shellminator-PlotModule.cpp
+    src/GUI/Shellminator-PlotModule.hpp
+    src/GUI/Shellminator-Buttons.cpp
+    src/GUI/Shellminator-Buttons.hpp
+    src/GUI/Shellminator-Progress.hpp
+    src/GUI/Shellminator-Progress.cpp
     src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
@@ -51,8 +54,6 @@ set( SOURCES
     src/Shellminator-Crypto.cpp
     src/Shellminator-Input.cpp
     src/Shellminator-Events.cpp
-    src/Shellminator-Progress.hpp
-    src/Shellminator-Progress.cpp
     src/Shellminator-QR-Code-Module.hpp
     src/Shellminator-QR-Code-Module.cpp
 
@@ -133,6 +134,7 @@ endif()
 if( BUILD_EXAMPLES )
 	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
 	add_executable( Password ${SOURCES} extras/examples_desktop/Desktop/Password/Password.cpp )
+	add_executable( Progress ${SOURCES} extras/examples_desktop/Desktop/Progress/Progress.cpp )
 	add_executable( Qrcode ${SOURCES} extras/examples_desktop/Desktop/Qrcode/Qrcode.cpp )
 	add_executable( Screenadvanced ${SOURCES} extras/examples_desktop/Desktop/Screenadvanced/Screenadvanced.cpp )
 endif()
@@ -142,6 +144,9 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( Password ${SOURCES} extras/examples_emscripten/Emscripten/Password/Password.cpp )
 	target_link_options( Password PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Progress ${SOURCES} extras/examples_emscripten/Emscripten/Progress/Progress.cpp )
+	target_link_options( Progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Qrcode ${SOURCES} extras/examples_emscripten/Emscripten/Qrcode/Qrcode.cpp )
 	target_link_options( Qrcode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

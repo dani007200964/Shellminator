@@ -163,7 +163,7 @@ SOFTWARE.
 /// @param ... Format specifiers. You can give as many specifier as you like.
 ///
 /// Example: @code{cpp} Shellminator::setFormat( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-#define setFormat( streamObject, ... ) setFormatFunc( (streamObject), __VA_ARGS__, -1 );
+#define setFormat_m( streamObject, ... ) setFormatFunc( (streamObject), __VA_ARGS__, -1 );
 
 /// Basic text formatting.
 ///
@@ -177,7 +177,7 @@ SOFTWARE.
 /// @param ... Format specifiers. You can give as many specifier as you like.
 ///
 /// Example: @code{cpp} shell.format( Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-#define format( ... ) formatFunc( __VA_ARGS__, -1 );
+#define format_m( ... ) formatFunc( __VA_ARGS__, -1 );
 
 /// Shellminator object
 ///

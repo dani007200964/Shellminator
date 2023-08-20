@@ -31,8 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef SHELLMINATOR_BUTTONS_HPP_
-#define SHELLMINATOR_BUTTONS_HPP_
+#ifndef SHELLMINATOR_PROGRESS_HPP_
+#define SHELLMINATOR_PROGRESS_HPP_
 
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -44,8 +44,6 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
-#include "Shellminator-BufferedPrinter.hpp"
-
 
 #include <stdio.h>
 #include <stdint.h>
@@ -58,19 +56,11 @@ SOFTWARE.
 /// With this class, you can easily create a plotter object,
 /// which is capable of real time plotting.
 /// It can be attached to the main terminal with the beginScreen function.
-class ShellminatorButton : public ShellminatorScreen{
+class ShellminatorProgress : public ShellminatorScreen{
 
 public:
 
-    /// Empty constructor.
-    ShellminatorButton();
-
-    /// Constructor with name.
-    ///
-    /// This constructor must be used to use the object properly.
-    /// @param name_p This is a string, which will be displayed
-    ///               on the center of the button.
-    ShellminatorButton( const char* name_p );
+    ShellminatorProgress();
 
     /// Init function.
     ///
@@ -104,88 +94,71 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
-    /// Attach optional event.
+    /// Set progress text.
     ///
-    /// Optionally, you can attach a keyboard event to the button.
-    /// It could be handy when the host terminal emulator does not
-    /// support keyboard reporting( sadly, Windows currently does
-    /// this in the emulator... ).
-    /// @param event_p A configured structure, that contains the event data.
-    ///
-    /// Example code:
-    /// @code{cpp}
-    /// // Create a structure to store the configuration.
-    /// Shellminator::shellEvent_t buttonEvent;
-    ///
-    /// // Configure the event to make it trigger for the 's' key.
-    /// buttonEvent.type = Shellminator::SHELL_EVENT_KEY;
-    /// buttonEvent.data = (uint8_t)'s';
-    /// @endcode
-    void attachEvent( Shellminator::shellEvent_t event_p );
+    /// You can give some information about the current process step.
+    /// @param text_p Progress text.
+    void setText( const char* text_p );
 
-    /// Attach a callback.
+    /// Format options.
     ///
-    /// You can attach a callback function to the button.
-    /// When a mouse click event is detected on the button,
-    /// or the attached event triggers, this function will
-    /// be called.
-    /// @param func_p Pointer to a function, which will be called.
+    /// You can specify a custom format to add some useful informations
+    /// about the progress.
+    /// @param format_p Format string.
     ///
-    /// Example callback function prototype: `void buttonEvent( ShellminatorScreen* parent );`
-    /// A pointer to the caller button is passed to the callback. This way the callback
-    /// function can access the caller button.
-    void attachTriggerFunction( void(*func_p)(ShellminatorScreen*) );
+    /// Format string option characters:
+    /// -`s` : Seconds since start event.
+    /// -`m` : Minutes since start event.
+    /// -`t` : Time since start event[ mm:ss ].
+    /// -`r` : Estimated remaining time[ mm:ss ].
+    /// -` ` : Blank space will be printed.
+    /// -`|` : Vertical separator will be printed.
+    ///
+    /// For example this format `ms| r` will produce this string: `0m 3s | 01:30 left`
+    void setFormat( const char* format_p );
 
-    /// You can modify the color of the frame.
+    /// Set current percentage.
+    /// @param percentage_p Percentage value[ 0.0 - 100.0 ].
+    void setPercentage( float percentage_p );
+
+    /// Set current step.
+    /// @param current Current step index.
+    /// @param total Number of total steps.
+    void setStep( int current, int total );
+
+    /// You can modify the color of the bar.
     void setColor( Shellminator::textColor_t color_p );
 
+    /// Start trigger event.
+    ///
+    /// Start event for timings.
+    /// @note The timing functions will not work properly if
+    /// this function is not called. The best practice is
+    /// to call this function right before the progress start.
+    void start();
+
 private:
-
-    /// This variable stores a pointer to the name text.
-    const char* name;
-
-    /// @brief  This variable stores the name text width.
-    int textWidth;
 
     /// This flag shows that redraw is necessary. In this
     /// implementation redraw is only required when the
     /// screen is resized.
     bool redraw = true;
 
-    /// This variable stores the custom trigger event data.
-    Shellminator::shellEvent_t event;
-
-    /// This is a buffer to store the event key text.
-    char eventText[ 6 ];
-
-    /// This variable stores the event key text size.
-    int eventTextSize = 0;
-
-    /// Pointer to the event callback function.
-    /// It it is null, the callback is disabled.
-    void(*func)(ShellminatorScreen*) = NULL;
-
-    /// Button frame color. Default is White.
+    // Color of the bars.
     Shellminator::textColor_t color = Shellminator::WHITE;
-
-    /// Check if the character is uppercase.
-    /// @param c Character to be checked.
-    /// @returns Returns true if the input character is uppercase.
-    bool isUpper( char c );
-
-    /// Check if the character is lowercase.
-    /// @param c Character to be checked.
-    /// @returns Returns true if the input character is lowercase.
-    bool isLower( char c );
-
-    /// Make the character uppercase.
-    /// @param c Character to convert to uppercase.
-    /// @returns Returns the uppercase  character if the input character was lowercase.
-    ///          Otherwise returns the input character.
-    char toUpper( char c );
     
-    // For unit testing
-    friend class ShellminatorButtonUT;
+    // Internal variable for the percentage value.
+    float percentage = 0.0;
+    
+    // Pointer to the text.
+    const char* text = NULL;
+
+    // Pointer to the format string.
+    const char* format = NULL;
+
+    // To track the start time.
+    unsigned long timerStart = 0;
+
 };
 
 #endif

@@ -302,25 +302,25 @@ void Shellminator::printBanner(){
     }
 
     // Sets the terminal style to bold and the color to green.
-    setFormat( selectedChannel, BOLD, GREEN );
+    setFormat_m( selectedChannel, BOLD, GREEN );
 
     // Print the banner text and save it's size.
     lastBannerSize += selectedChannel -> print( banner );
 
     // Sets the terminal style to regular and the color to white.
-    setFormat( selectedChannel, WHITE );
+    setFormat_m( selectedChannel, WHITE );
 
     // Print the separator.
     lastBannerSize += selectedChannel -> print( ':' );
 
     // Set color to blue.
-    setFormat( selectedChannel, BLUE );
+    setFormat_m( selectedChannel, BLUE );
 
     // Print banner path text.
     lastBannerSize += selectedChannel -> print( bannerPath );
 
     // Set formatting to default.
-    setFormat( selectedChannel, REGULAR, WHITE );
+    setFormat_m( selectedChannel, REGULAR, WHITE );
 
     // Print one space at the end to separate the banner from the user text.
     lastBannerSize += selectedChannel -> print( ' ' );
@@ -412,9 +412,9 @@ void Shellminator::printHistory(){
         }
 
         // Print the index and the command.
-        setFormat( selectedChannel, BOLD, MAGENTA );
+        setFormat_m( selectedChannel, BOLD, MAGENTA );
         selectedChannel -> print( index );
-        setFormat( selectedChannel, REGULAR, WHITE );
+        setFormat_m( selectedChannel, REGULAR, WHITE );
         selectedChannel -> print( ' ' );
         selectedChannel -> print( ' ' );
         selectedChannel -> println( cmd_buff[ i ] );
@@ -480,7 +480,7 @@ void Shellminator::begin( const char* banner_p ) {
     banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
     // Set the terminal color and style to the defined settings for the logo
-    setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    setFormat_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
     // Draw the startup logo.
     drawLogo();
@@ -616,7 +616,7 @@ void Shellminator::redrawLine(){
     // it will be highlighted.
     if( commandFound ){
 
-        setFormat( selectedChannel, BOLD, GREEN );
+        setFormat_m( selectedChannel, BOLD, GREEN );
 
         for( i = 0; i < cmd_buff_cntr; i++ ){
 
@@ -636,7 +636,7 @@ void Shellminator::redrawLine(){
 
     else{
 
-        setFormat( selectedChannel, REGULAR, WHITE );
+        setFormat_m( selectedChannel, REGULAR, WHITE );
 
     }
 
@@ -667,7 +667,7 @@ void Shellminator::redrawLine(){
 
         cmd_buff[ 0 ][ j ] = ' ';
 
-        setFormat( selectedChannel, REGULAR, WHITE );
+        setFormat_m( selectedChannel, REGULAR, WHITE );
         selectedChannel -> print( (char*) &cmd_buff[ 0 ][ j ] );
 
     }
@@ -688,7 +688,7 @@ void Shellminator::redrawLine(){
     }
 
     // Restore the color and style for user text.
-    setFormat( selectedChannel, REGULAR, WHITE );
+    setFormat_m( selectedChannel, REGULAR, WHITE );
 
     // Check if buffering is enabled.
     // If so, we have to flush the buffer to the output stream.
@@ -766,7 +766,7 @@ void Shellminator::update() {
                 channel = &client;
 
                 // Set the terminal color and style to the defined settings for the logo
-                setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+                setFormat_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
                 drawLogo();
 
@@ -1287,13 +1287,13 @@ void Shellminator::drawLogo() {
     if( logo ){
 
         // Set the terminal color and style to the defined settings for the logo
-        setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+        setFormat_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
         // Draws the startup logo to the terminal interface.
         channel -> print( logo );
 
         // Set the terminal style to normal.
-        setFormat( channel, REGULAR, WHITE );
+        setFormat_m( channel, REGULAR, WHITE );
 
     }
 
@@ -1302,13 +1302,13 @@ void Shellminator::drawLogo() {
     else if( progmemLogo ){
 
         // Set the terminal color and style to the defined settings for the logo
-        setFormat( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+        setFormat_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
         // Draws the startup logo to the terminal interface.
         channel -> print( progmemLogo );
 
         // Set the terminal style to normal.
-        setFormat( channel, REGULAR, WHITE );
+        setFormat_m( channel, REGULAR, WHITE );
 
     }
 
@@ -2153,17 +2153,20 @@ void Shellminator::endScreen(){
     // Get the terminal site.
     getTerminalSize( &width, &height );
 
+    // Set the cursor below the last drawn element.
+    setCursorPosition( 1, screen -> down() );
+
     // Clear the pointer to the screen object.
     screen = NULL;
 
     // Set the cursor to the last line.
-    setCursorPosition( 1, height );
+    // setCursorPosition( 1, height );
 
     // Enable the cursor again.
     showCursor();
 
     // Create a new line for the prompt.
-    channel -> println();
+    //channel -> println();
 
     // Print the banner.
     printBanner();
