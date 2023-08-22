@@ -39,5 +39,6 @@ SOFTWARE.
 #include "GUI/Shellminator-Buttons.hpp"
 #include "GUI/Shellminator-PlotModule.hpp"
 #include "GUI/Shellminator-Progress.hpp"
+#include "GUI/Shellminator-List.hpp"
 
 #endif

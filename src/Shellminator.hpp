@@ -787,6 +787,7 @@ public:
     /// Coded event enumeration.
     typedef enum{
         EVENT_CODE_EMPTY,                   ///< This is used to handle default or empty values. If this value is assigned to an event, it won't do anything.
+        EVENT_CODE_RETURN,                   ///< Return or Enter key is pressed.
         EVENT_CODE_MOUSE_LEFT_PRESSED,      ///< Left Mouse Button Pressed
         EVENT_CODE_MOUSE_LEFT_RELEASED,     ///< Left Mouse Button Released
         EVENT_CODE_MOUSE_RIGHT_PRESSED,     ///< Right Mouse Button Pressed

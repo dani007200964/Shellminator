@@ -4,3 +4,7 @@
 [submodule "extras/Unity"]
 	path = extras/Unity
 	url = https://github.com/ThrowTheSwitch/Unity.git
+[submodule "extras/Commander-API"]
+	path = extras/Commander-API
+	url = https://github.com/dani007200964/Commander-API.git
+	branch = dev

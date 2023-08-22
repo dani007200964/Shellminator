@@ -1365,6 +1365,14 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
         case '\r':
             // Check is a screen object is drawing.
             if( screen != NULL ){
+
+                // Push the return key event to the event buffer.
+                pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_RETURN } );
+
+                // Call the Screens update function.
+                // This way it can react to the return event.
+                screen -> update( terminalWidth, terminalHeight );
+
                 // In this case we have to end the drawing process.
                 endScreen();
                 // And set the state machine back to default state.

@@ -126,6 +126,11 @@ void Shellminator::ShellminatorUpArrowKeyState(){
     // Because we have finished the escape sequence interpretation we reset the state-machine.
     currentState = &Shellminator::ShellminatorDefaultState;
 
+    if( screen != NULL ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_UP_ARROW } );
+        return;
+    }
+
     // Check if the arrow function is overriden.
     if( upArrowOverrideFunc ){
         upArrowOverrideFunc();
@@ -176,6 +181,10 @@ void Shellminator::ShellminatorDownArrowKeyState(){
         return;
     }
 
+    if( screen != NULL ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_DOWN_ARROW } );
+        return;
+    }
 
     // We have to check that we can go lover in history, and we are not in the first previous command.
     if ( cmd_buff_dim > 2 ) {

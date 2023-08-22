@@ -27,7 +27,7 @@ endif()
 include_directories( 
     src
     extras/simulator
-    extras/simulator/Commander-API
+    extras/Commander-API/src
     extras/Unity/src
     extras/nayuki-qrcodegen/QR-Code-generator/c
 )
@@ -44,6 +44,8 @@ set( SOURCES
     src/GUI/Shellminator-Buttons.hpp
     src/GUI/Shellminator-Progress.hpp
     src/GUI/Shellminator-Progress.cpp
+    src/GUI/Shellminator-List.hpp
+    src/GUI/Shellminator-List.cpp
     src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
@@ -70,11 +72,18 @@ set( SOURCES
     extras/simulator/stdioStream.cpp
     #extras/simulator/Commander-API/Commander-API-Commands.cpp
     #extras/simulator/Commander-API/Commander-API-Commands.hpp
-    extras/simulator/Commander-API/Commander-API.cpp
-    extras/simulator/Commander-API/Commander-API.hpp
-    extras/simulator/Commander-API/Commander-IO.cpp
-    extras/simulator/Commander-API/Commander-IO.hpp
-    extras/simulator/Commander-API/Commander-Settings.hpp
+    #extras/simulator/Commander-API/Commander-API.cpp
+    #extras/simulator/Commander-API/Commander-API.hpp
+    #extras/simulator/Commander-API/Commander-IO.cpp
+    #extras/simulator/Commander-API/Commander-IO.hpp
+    #extras/simulator/Commander-API/Commander-Settings.hpp
+    extras/Commander-API/src/Commander-API.hpp
+    extras/Commander-API/src/Commander-API.cpp
+    extras/Commander-API/src/Commander-IO.hpp
+    extras/Commander-API/src/Commander-IO.cpp
+    extras/Commander-API/src/Commander-Utils.hpp
+    extras/Commander-API/src/Commander-Utils.cpp
+    extras/Commander-API/src/Commander-Settings.hpp
 
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.c
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.h
@@ -133,6 +142,7 @@ endif()
 
 if( BUILD_EXAMPLES )
 	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
+	add_executable( List ${SOURCES} extras/examples_desktop/Desktop/List/List.cpp )
 	add_executable( Password ${SOURCES} extras/examples_desktop/Desktop/Password/Password.cpp )
 	add_executable( Progress ${SOURCES} extras/examples_desktop/Desktop/Progress/Progress.cpp )
 	add_executable( Qrcode ${SOURCES} extras/examples_desktop/Desktop/Qrcode/Qrcode.cpp )
@@ -141,6 +151,9 @@ endif()
 if( BUILD_WEBASSEMBLY )
 	add_executable( Inputsimple ${SOURCES} extras/examples_emscripten/Emscripten/Inputsimple/Inputsimple.cpp )
 	target_link_options( Inputsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( List ${SOURCES} extras/examples_emscripten/Emscripten/List/List.cpp )
+	target_link_options( List PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( Password ${SOURCES} extras/examples_emscripten/Emscripten/Password/Password.cpp )
 	target_link_options( Password PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

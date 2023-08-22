@@ -10,7 +10,8 @@
         "vector": "cpp",
         "xstring": "cpp",
         "xmemory": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "typeinfo": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

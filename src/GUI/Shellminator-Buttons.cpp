@@ -202,7 +202,7 @@ void ShellminatorButton::draw(){
         return;
     }
 
-    if(  channel == NULL){
+    if( channel == NULL){
         return;
     }
 
