@@ -32,8 +32,8 @@ SOFTWARE.
 */
 
 
-#ifndef SHELLMINATOR_LIST_HPP_
-#define SHELLMINATOR_LIST_HPP_
+#ifndef SHELLMINATOR_LIST_DETAILED_HPP_
+#define SHELLMINATOR_LIST_DETAILED_HPP_
 
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -45,20 +45,21 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
+#include "Shellminator-List.hpp"
 
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
 
-class ShellminatorList : public ShellminatorScreen{
+class ShellminatorListDetailed : public ShellminatorList{
 
 public:
 
     /// Empty constructor.
-    ShellminatorList();
+    ShellminatorListDetailed();
 
-    ShellminatorList( const char* optionsList_p[], int listSize_p, const char* instruction_p );
+    ShellminatorListDetailed( const char* optionsList_p[], const char* detailList_p[], int listSize_p, const char* instruction_p );
 
     /// Init function.
     ///
@@ -72,52 +73,12 @@ public:
     ///       The logic behind the buffering and flushing is handled by the caller terminal.
     void init( Shellminator* parent_p, Stream* channel_p ) override;
 
-    /// Draw function.
-    ///
-    /// This function is called by the caller terminal if redraw
-    /// is requested. If you need to draw your screen, the 
-    /// requestRedraw function must be called on the parent terminal
-    /// object. The reason for this is to save some CPU time and do
-    /// not waste it to draw something unnecessarily.
-    void draw() override;
-    
-    /// Update function.
-    ///
-    /// The update function must be used to process events and not to
-    /// draw the objects. It is called much frequently than, the draw
-    /// function. All the event handling should be done in the update
-    /// function, including key and mouse detection along with various
-    /// events.
-    /// @param width_p The width of the screen area in characters.
-    /// @param height_p The height of the screen area in characters.
-    void update( int width_p, int  height_p ) override;
-
-    void attachCallback( void(*func_p)(const char*[], int, int, ShellminatorScreen*) );
-
-    virtual void printExtra( int index );
+    void printExtra( int index ) override;
 
 protected:
 
-    /// This flag shows that redraw is necessary. In this
-    /// implementation redraw is only required when the
-    /// screen is resized.
-    bool redraw = true;
-
-    int selected = 0;
-    int drawOffset = 0;
-
-    /// Pointer to the event callback function.
-    /// It it is null, the callback is disabled.
-    void(*func)(const char*[], int, int, ShellminatorScreen*) = NULL;
-
-    /// Pointer to the options list.
-    const char** optionsList = NULL;
-
-    /// Size of the options list.
-    int listSize = 0;
-
-    /// Pointer to the instruction list.
-    const char* instruction = NULL;
+    int detailStart = 0;
+    const char** detailList = NULL;
 
 };
 

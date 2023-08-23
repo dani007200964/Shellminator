@@ -38,6 +38,7 @@ SOFTWARE.
 #include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
 #include "Shellminator-BufferedPrinter.hpp"
 #include "Shellminator-Screen.hpp"
+#include "Shellminator-VT100-Commands.hpp"
 
 #ifdef ARDUINO
     #include "Arduino.h"
@@ -129,21 +130,6 @@ SOFTWARE.
     #endif
 #endif
 
-/// Help information
-#define SHELLMINATOR_HELP_TEXT   "\r\n"                                                     \
-    "\033[1;31m----\033[1;32m Shortcut Keys \033[1;31m----\033[0;37m\r\n"                   \
-    "\r\n"                                                                                  \
-    "\033[1;31mCtrl-A\033[1;32m : Jumps the cursor to the beginning of the line.\r\n"       \
-    "\033[1;31mCtrl-E\033[1;32m : Jumps the cursor to the end of the line.\r\n"             \
-    "\033[1;31mCtrl-D\033[1;32m : Log Out.\r\n"                                             \
-    "\033[1;31mCtrl-R\033[1;32m : Reverse-i-search.\r\n"                                    \
-    "\033[1;31mPg-Up\033[1;32m  : History search backwards and auto completion.\r\n"        \
-    "\033[1;31mPg-Down\033[1;32m: History search forward and auto completion.\r\n"          \
-    "\033[1;31mHome\033[1;32m   : Jumps the cursor to the beginning of the line.\r\n"       \
-    "\033[1;31mEnd\033[1;32m    : Jumps the cursor to the end of the line.\r\n"             \
-    "\r\n"                                                                                  \
-
-
 /// Version of the module
 #define SHELLMINATOR_VERSION "2.0.0"
 
@@ -174,10 +160,13 @@ SOFTWARE.
 ///
 /// This macro is made to make the usage of @ref formatFunc function safe.
 /// @note please use this macro instead of @ref formatFunc.
+/// @param streamObject Pointer to a Stream object.
 /// @param ... Format specifiers. You can give as many specifier as you like.
 ///
-/// Example: @code{cpp} shell.format( Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-#define format_m( ... ) formatFunc( __VA_ARGS__, -1 );
+/// Example: @code{cpp} shell.format( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
+///
+/// @note If formatting is disabled on the object, it won't do anything.
+#define format_m( streamObject, ... ) formatFunc( (streamObject), __VA_ARGS__, -1 );
 
 /// Shellminator object
 ///
@@ -358,6 +347,8 @@ public:
     /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
     /// @warning There is a dedicated macro for this function, called @ref setFormat. Please
     ///          use this macro to avoid problems.
+    ///
+    /// @note If formatting is disabled on the object, it won't do anything.
     static void setFormatFunc( Stream *stream_p, int firstArg, ... );
 
     /// Basic text formatting.
@@ -366,13 +357,14 @@ public:
     /// can only be accessed with an object.
     /// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
     ///       monitor does not support these features.
+    /// @param stream_p Pointer to a Stream object.
     /// @param firstArg The first format specifier.
     /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
     /// @note It will only do anything if the formatting is enabled on the corresponding object.
     ///       Please check @ref enableFormatting for more information.
     /// @warning There is a dedicated macro for this function, called @ref format. Please
     ///          use this macro to avoid problems.
-    void formatFunc( int firstArg, ... );
+    void formatFunc( Stream *stream_p, int firstArg, ... );
 
     /// Hide the cursor.
     ///

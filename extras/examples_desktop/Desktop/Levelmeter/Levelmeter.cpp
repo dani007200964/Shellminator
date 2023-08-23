@@ -14,18 +14,19 @@
 */
 
 
-// std library.
 #include <stdio.h>
-#include <stdlib.h>
 
-// Core System Functions.
+#include <fcntl.h>
+#ifdef _WIN32
+#include <io.h>
+#endif
+#include <wchar.h>
+#include <stdlib.h>
+#include <locale.h>
+
 #include "System.h"
 
-// Contains a modified Stream class for communication.
 #include "stdioStream.hpp"
-
-// Contains Emscripten related functions.
-#include <emscripten.h>
 
 #include "Shellminator.hpp"
 #include "Shellminator-GUI.hpp"
@@ -37,62 +38,47 @@ stdioStream stdioChannel;
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-ShellminatorProgress progress;
+ShellminatorLevelMeter level( "CPU Temp" );
 
-
-// Infinite Loop.
-void loop();
-
-// Init Section.
-void setup();
 
 
 
 // Main program.
 int main(){
 
-    // Call init section.
-    setup();
+    // System init section.
+    if( setlocale(LC_ALL, NULL) == NULL ){
 
-    // Setup the infinite loop and start it.
-    emscripten_set_main_loop( loop, 0, 1 );
+        wprintf( L"Error setting locale!\r\n" );
 
-    // If we are lucky, the code never reaches this.
-    return 0;
+    }
 
-}
-
-
-
-void setup(){
-
-    // Init code.
 
     // Clear the terminal
     shell.clear();
-    shell.enableFormatting = false;
+    //shell.enableFormatting = false;
 
     // Initialize shell object.
     shell.begin( "arnold" );
-    progress.setText( "Calculating something..." );
-    progress.setFormat( "ms| r" );
-    progress.setColor( Shellminator::RED );
-    shell.beginScreen( &progress );
-    progress.start();
+    level.setWarningPercentage( 50.0 );
+    level.setErrorPercentage( 80.0 );
+    shell.beginScreen( &level );
 
 
-
-}
-
-void loop(){
 
     // Infinite loop.
-
-    progress.setPercentage( ( ( millis() / 10 ) % 10000 ) / 10000.0 * 100.0 );
-
-    // Process the new data.
-    shell.update();
+    while( 1 ){
 
 
+        level.setPercentage( ( ( millis() / 10 ) % 1000 ) / 1000.0 * 100.0 );
+
+        // Process the new data.
+        shell.update();
+
+
+
+    }
+
+    return 0;
 
 }

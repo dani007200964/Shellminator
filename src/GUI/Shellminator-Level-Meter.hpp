@@ -31,9 +31,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
-#ifndef SHELLMINATOR_LIST_HPP_
-#define SHELLMINATOR_LIST_HPP_
+#ifndef SHELLMINATOR_LEVEL_METER_HPP_
+#define SHELLMINATOR_LEVEL_METER_HPP_
 
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -51,14 +50,13 @@ SOFTWARE.
 #include <string.h>
 #include <stdarg.h>
 
-class ShellminatorList : public ShellminatorScreen{
+class ShellminatorLevelMeter : public ShellminatorScreen{
 
 public:
 
-    /// Empty constructor.
-    ShellminatorList();
+    ShellminatorLevelMeter();
 
-    ShellminatorList( const char* optionsList_p[], int listSize_p, const char* instruction_p );
+    ShellminatorLevelMeter( const char* name_p );
 
     /// Init function.
     ///
@@ -92,32 +90,28 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
-    void attachCallback( void(*func_p)(const char*[], int, int, ShellminatorScreen*) );
+    /// Set current percentage.
+    /// @param percentage_p Percentage value[ 0.0 - 100.0 ].
+    void setPercentage( float percentage_p );
 
-    virtual void printExtra( int index );
+    void setWarningPercentage( float percentage_p );
+    void setErrorPercentage( float percentage_p );
 
-protected:
-
+private:
     /// This flag shows that redraw is necessary. In this
     /// implementation redraw is only required when the
     /// screen is resized.
     bool redraw = true;
 
-    int selected = 0;
-    int drawOffset = 0;
+    float percentage = 0;
 
-    /// Pointer to the event callback function.
-    /// It it is null, the callback is disabled.
-    void(*func)(const char*[], int, int, ShellminatorScreen*) = NULL;
+    int warningPercentage = -1.0;
 
-    /// Pointer to the options list.
-    const char** optionsList = NULL;
+    int errorPercentage = -1.0;
 
-    /// Size of the options list.
-    int listSize = 0;
-
-    /// Pointer to the instruction list.
-    const char* instruction = NULL;
+    const char* name;
+    int nameSize = 0;
+    
 
 };
 

@@ -172,6 +172,7 @@ void setup(){
 
     // Clear the terminal
     shell.clear();
+    shell.enableFormatting = false;
 
     Serial.println( "Program Start!" );
 

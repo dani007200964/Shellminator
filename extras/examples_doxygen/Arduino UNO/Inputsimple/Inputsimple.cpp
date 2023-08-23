@@ -46,6 +46,7 @@ void setup(){
 
     // Clear the terminal
     shell.clear();
+    shell.enableFormatting = false;
 
     // Attach the logo.
     shell.attachLogo( logo );

@@ -37,11 +37,13 @@ ShellminatorList::ShellminatorList(){
 
     optionsList = NULL;
     listSize = 0;
+    instruction = NULL;
     selected = 0;
+    drawOffset = 0;
     func = NULL;
 }
 
-ShellminatorList::ShellminatorList( const char* optionsList_p[], int listSize_p ){
+ShellminatorList::ShellminatorList( const char* optionsList_p[], int listSize_p, const char* instruction_p ){
 
     if( listSize_p > 32 ){
         listSize_p = 32;
@@ -49,7 +51,9 @@ ShellminatorList::ShellminatorList( const char* optionsList_p[], int listSize_p 
 
     optionsList = optionsList_p;
     listSize = listSize_p;
+    instruction = instruction_p;
     selected = 0;
+    drawOffset = 0;
     func = NULL;
 }
 
@@ -57,6 +61,7 @@ void ShellminatorList::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
     selected = 0;
+    drawOffset = 0;
 }
 
 void ShellminatorList::update( int width_p, int  height_p ){
@@ -70,8 +75,8 @@ void ShellminatorList::update( int width_p, int  height_p ){
     width = width_p;
     height = height_p;
 
-    if( height > listSize ){
-        height = listSize;
+    if( height > ( listSize + 1 ) ){
+        height = listSize + 1;
     }
 
     newEvent = parent -> readEvent();
@@ -90,6 +95,9 @@ void ShellminatorList::update( int width_p, int  height_p ){
 
         if( newEvent.eventCode == Shellminator::EVENT_CODE_UP_ARROW ){
             selected--;
+            if( ( selected < drawOffset ) && ( drawOffset > 0 ) ){
+                drawOffset--;
+            }
             if( selected < 0 ){
                 selected = 0;
             }
@@ -100,6 +108,9 @@ void ShellminatorList::update( int width_p, int  height_p ){
 
         if( newEvent.eventCode == Shellminator::EVENT_CODE_DOWN_ARROW ){
             selected++;
+            if( ( selected > ( height - 2 + drawOffset ) ) && ( drawOffset < ( listSize - ( height - 1 ) ) ) ){
+                drawOffset++;
+            }
             if( selected >= listSize ){
                 selected = listSize - 1;
             }
@@ -124,11 +135,20 @@ void ShellminatorList::attachCallback( void(*func_p)(const char*[], int, int, Sh
     func = func_p;
 }
 
+void ShellminatorList::printExtra( int index ){
+    channel -> print( "\033[0K" );
+}
+
+
 void ShellminatorList::draw(){
 
     // Generic counter.
     int i;
 
+    // Used to safe array indexing.
+    int index;
+
+    // Check for the necessary parameters.
     if( parent == NULL ){
         return;
     }
@@ -145,36 +165,74 @@ void ShellminatorList::draw(){
         return;
     }
 
+    if( instruction == NULL ){
+        return;
+    }
+
     // Only draw if resized event or timer event happened.
     if( !redraw ){
         return;
     }
     redraw = false;
 
-    for( i = 0; i < height; i++ ){
+    // Set cursor to top left and print the instruction text.
+    Shellminator::setCursorPosition( channel, 1, 1 );
+    channel -> print( instruction );
+    channel -> print( "\033[0K" );
 
-        //if( i >= listSize ){
-            //break;
-        //}
+    // Print as many elements as high the remaining screen is.
+    for( i = 1; i < height; i++ ){
 
+        // Calculate the index of the current option.
+        index = ( i - 1 ) + drawOffset;
+
+        // Set cursor to the current options location.
         Shellminator::setCursorPosition( channel, 1, i + 1 );
 
-        if( i == selected ){
-            Shellminator::setFormat_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+        // Check if the current option is the selected one.
+        if( index == selected ){
+            // If selected change the format to
+            // background to highlight the selection.
+            // Also print some graphics to the beginning.
+            parent -> format_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
             channel -> print( "\u2BA9 " );
         }
 
         else{
+            // Otherwise, just print blank spaces.
             channel -> print( "  " );
         }
 
-        channel -> print( optionsList[ i ] );
-        channel -> print( ' ' );
-
-        if( i == selected ){
-            Shellminator::setFormat_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+        // If we are not at the top of the list,
+        // we have to indicate that, we have more
+        // options 'hidden' upwards.
+        if( ( i == 1 ) && ( drawOffset > 0 ) ){
+            channel -> print( "\u2191 " );
         }
 
+        // If we are not at the bottom of the list,
+        // we have to indicate that, we have more
+        // options 'hidden' downwards.
+        else if( ( i == ( height - 1 ) ) && ( drawOffset < ( listSize - ( height - 1 ) ) ) ){
+            channel -> print( "\u2193 " );
+        }
+
+        // Otherwise, we just print blank spaces.
+        else{
+            channel -> print( "  " );            
+        }
+
+        // Print the option with a blak space at the end.
+        channel -> print( optionsList[ index ] );
+        channel -> print( ' ' );
+
+        // Check if the current option is the selected one.
+        if( index == selected ){
+            // If selected, we have to change back the formatting to regular.
+            parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+        }
+
+        printExtra( index );
 
     }
 

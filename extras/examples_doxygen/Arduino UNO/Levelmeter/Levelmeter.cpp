@@ -15,28 +15,15 @@
 
 
 #include "Shellminator.hpp"
+#include "Shellminator-GUI.hpp"
 
 
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 
-// Create a pretty logo for the terminal.
-const char logo[] =
-
-    "   _____ __         ____          _             __            \r\n"
-    "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
-    "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
-    " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
-    "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-    "\r\n"
-    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
-
-;
+ShellminatorLevelMeter level( "CPU Temp" );
 
 
-void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
-
-}
 
 
 // System init section.
@@ -46,23 +33,21 @@ void setup(){
 
     // Clear the terminal
     shell.clear();
-    shell.enableFormatting = false;
-
-    // Attach the logo.
-    shell.attachLogo( logo );
+    //shell.enableFormatting = false;
 
     // Initialize shell object.
     shell.begin( "arnold" );
-
-    char inputBuffer[ 10 ];
-
-    shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback );
+    level.setWarningPercentage( 50.0 );
+    level.setErrorPercentage( 80.0 );
+    shell.beginScreen( &level );
 
 
 }
 
 // Infinite loop.
 void loop(){
+
+    level.setPercentage( ( ( millis() / 10 ) % 1000 ) / 1000.0 * 100.0 );
 
     // Process the new data.
     shell.update();

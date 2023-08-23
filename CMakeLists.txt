@@ -34,6 +34,7 @@ include_directories(
 
 set( SOURCES
     src/Shellminator-Browser-Response.hpp
+    src/Shellminator-VT100-Commands.hpp
     src/Shellminator-Screen.hpp
     src/Shellminator-BufferedPrinter.cpp
     src/Shellminator-BufferedPrinter.hpp
@@ -46,6 +47,10 @@ set( SOURCES
     src/GUI/Shellminator-Progress.cpp
     src/GUI/Shellminator-List.hpp
     src/GUI/Shellminator-List.cpp
+    src/GUI/Shellminator-List-Detailed.hpp
+    src/GUI/Shellminator-List-Detailed.cpp
+    src/GUI/Shellminator-Level-Meter.hpp
+    src/GUI/Shellminator-Level-Meter.cpp
     src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
@@ -142,6 +147,7 @@ endif()
 
 if( BUILD_EXAMPLES )
 	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
+	add_executable( Levelmeter ${SOURCES} extras/examples_desktop/Desktop/Levelmeter/Levelmeter.cpp )
 	add_executable( List ${SOURCES} extras/examples_desktop/Desktop/List/List.cpp )
 	add_executable( Password ${SOURCES} extras/examples_desktop/Desktop/Password/Password.cpp )
 	add_executable( Progress ${SOURCES} extras/examples_desktop/Desktop/Progress/Progress.cpp )
@@ -151,6 +157,9 @@ endif()
 if( BUILD_WEBASSEMBLY )
 	add_executable( Inputsimple ${SOURCES} extras/examples_emscripten/Emscripten/Inputsimple/Inputsimple.cpp )
 	target_link_options( Inputsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( Levelmeter ${SOURCES} extras/examples_emscripten/Emscripten/Levelmeter/Levelmeter.cpp )
+	target_link_options( Levelmeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( List ${SOURCES} extras/examples_emscripten/Emscripten/List/List.cpp )
 	target_link_options( List PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

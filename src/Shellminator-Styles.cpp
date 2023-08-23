@@ -35,10 +35,6 @@ SOFTWARE.
 
 void Shellminator::hideCursor(){
 
-    if( !enableFormatting ){
-        return;
-    }
-
     hideCursor( channel );
 
 }
@@ -54,10 +50,6 @@ void Shellminator::hideCursor( Stream *stream_p ){
 }
 
 void Shellminator::showCursor(){
-
-    if( !enableFormatting ){
-        return;
-    }
 
     showCursor( channel );
 
@@ -86,6 +78,11 @@ void Shellminator::setFormatFunc( Stream *stream_p, int firstArg, ... ){
     int next;
 
     if( stream_p == NULL ){
+        // Necessary to remove the data from the arg list.
+        next = va_arg( list, int );
+        while( next >= 0 ){
+            next = va_arg( list, int );
+        }
         return;
     }
 
@@ -107,13 +104,23 @@ void Shellminator::setFormatFunc( Stream *stream_p, int firstArg, ... ){
 
 }
 
-void Shellminator::formatFunc( int firstArg, ... ){
+void Shellminator::formatFunc( Stream *stream_p, int firstArg, ... ){
 
     va_list args;
+    int next;
 
     va_start( args, firstArg );
 
-    setFormatFunc( channel, firstArg, args );
+    if( enableFormatting ){
+        setFormatFunc( stream_p, firstArg, args );
+    }
+    
+    else{
+        next = va_arg( args, int );
+        while( next >= 0 ){
+            next = va_arg( args, int );
+        }
+    }
 
     va_end( args );
 

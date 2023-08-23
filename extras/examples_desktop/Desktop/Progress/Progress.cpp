@@ -56,6 +56,7 @@ int main(){
 
     // Clear the terminal
     shell.clear();
+    shell.enableFormatting = false;
 
     // Initialize shell object.
     shell.begin( "arnold" );

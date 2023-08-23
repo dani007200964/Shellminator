@@ -220,6 +220,7 @@ void setup(){
 
     // Clear the terminal
     shell.clear();
+    shell.enableFormatting = false;
 
     stdioChannel.println( "Program Start!" );
 
