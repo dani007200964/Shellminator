@@ -1,8 +1,0 @@
-<map id="ShellminatorButton" name="ShellminatorButton">
-<area shape="rect" id="node1" title="This class can create a simple plotter object." alt="" coords="75,331,207,356"/>
-<area shape="rect" id="node2" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="73,256,208,281"/>
-<area shape="rect" id="node3" href="$class_shellminator.html" title="Shellminator object." alt="" coords="93,168,188,193"/>
-<area shape="rect" id="node4" href="$struct_shellminator_1_1shell_event__t.html" title="Shell event structure." alt="" coords="5,80,177,105"/>
-<area shape="rect" id="node5" href="$classshellminator_default_channel.html" title="Shellminator channel class." alt="" coords="202,80,381,105"/>
-<area shape="rect" id="node6" title=" " alt="" coords="259,5,323,31"/>
-</map>

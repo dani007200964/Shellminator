@@ -702,15 +702,15 @@ void Shellminator::redrawLine(){
 
         for( i = 0; i < cmd_buff_cntr; i++ ){
 
-        // If a space character is found, we have to change
-        // back the color to white for the arguments.
-        if( cmd_buff[ 0 ][ i ] == ' ' ){
+            // If a space character is found, we have to change
+            // back the color to white for the arguments.
+            if( cmd_buff[ 0 ][ i ] == ' ' ){
 
-            j = i;
-            cmd_buff[ 0 ][ i ] = '\0';
-            break;
+                j = i;
+                cmd_buff[ 0 ][ i ] = '\0';
+                break;
 
-        }
+            }
 
         }
 

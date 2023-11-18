@@ -60,59 +60,61 @@ class ShellminatorBufferedPrinter : public Stream{
 
 public:
 
-  /// Empty constructor.
-  ///
-  /// This is a simple, empty constructor.
-  ShellminatorBufferedPrinter();
+    /// Empty constructor.
+    ///
+    /// This is a simple, empty constructor.
+    ShellminatorBufferedPrinter();
 
-  /// Stream specific constructor.
-  ///
-  /// With this constructor, you can specify the Stream object.
-  /// @param channel_p Pointer to a Stream object. This object will be used as output.
-  ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p );
+    /// Stream specific constructor.
+    ///
+    /// With this constructor, you can specify the Stream object.
+    /// @param channel_p Pointer to a Stream object. This object will be used as output.
+    ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p );
 
-  /// Available bytes in the channel.
-  ///
-  /// @returns The available bytes in the channel.
-  int    available() override;
+    /// Available bytes in the channel.
+    ///
+    /// @returns The available bytes in the channel.
+    int    available() override;
 
-  /// Read one byte form the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
-  int    read() override;
+    /// Read one byte form the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+    int    read() override;
 
-  /// Peek the firtst byte from the channel.
-  ///
-  /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
-  int    peek() override;
+    /// Peek the firtst byte from the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+    int    peek() override;
 
-  /// Flush the channel.
-  void   flush() override;
+    /// Flush the channel.
+    void   flush() override;
 
-  /// Write one byte to the channel.
-  ///
-  /// @param b The value that has to be written to the channel.
-  /// @returns The number of bytes that has been sucessfully written to the channel. Because it is the base class, it returns 0.
-  size_t write( uint8_t b ) override;
+    /// Write one byte to the channel.
+    ///
+    /// @param b The value that has to be written to the channel.
+    /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
+    size_t write( uint8_t b ) override;
 
-  size_t write(const uint8_t *data, size_t size) override;
+    size_t write(const uint8_t *data, size_t size) override;
 
 private:
 
-  /// Clear the internal buffer.
-  ///
-  /// This value sets all of the elements in the internal buffer to '\0'.
-  /// @note It only works, if the memory allocation is done.
-  void clearBuffer();
+    /// Clear the internal buffer.
+    ///
+    /// This value sets all of the elements in the internal buffer to '\0'.
+    /// @note It only works, if the memory allocation is done.
+    void clearBuffer();
 
-  // Pointer to the output Stream object.
-  Stream* channel = NULL;
+    // Pointer to the output Stream object.
+    Stream* channel = NULL;
 
-  uint8_t* buffer = NULL;
-  int bufferPointer = 0;
+    uint8_t* buffer = NULL;
+    int bufferPointer = 0;
 
-  int bufferSize = 0;
+    int bufferSize = 0;
 
+    // For unit testing.
+    friend class ShellminatorBufferedPrinterUT;
 };
 
 #endif

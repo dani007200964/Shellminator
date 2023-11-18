@@ -1,8 +1,0 @@
-<map id="Shellminator::printBanner" name="Shellminator::printBanner">
-<area shape="rect" id="node1" title="This function prints the banner text." alt="" coords="440,55,608,80"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a9321a7c84af143dc5c2540cfd3b02454" title="Shellminator initialization function." alt="" coords="243,5,377,31"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#a95945bd5860aaed1ac544da1b3800447" title="Abort Screen session." alt="" coords="228,55,392,80"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="239,128,381,153"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f" title="Start WiFi Server." alt="" coords="8,5,177,31"/>
-<area shape="rect" id="node6" href="$class_shellminator.html#a614043dd51087e5867950f5a52756681" title="Register Screen object to draw." alt="" coords="5,128,180,153"/>
-</map>

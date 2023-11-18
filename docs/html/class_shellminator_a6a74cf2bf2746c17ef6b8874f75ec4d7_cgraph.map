@@ -1,6 +1,0 @@
-<map id="Shellminator::printBanner" name="Shellminator::printBanner">
-<area shape="rect" id="node1" title="This function prints the banner text." alt="" coords="5,41,173,66"/>
-<area shape="rect" id="node2" href="$class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4" title="Flush function." alt="" coords="448,5,627,45"/>
-<area shape="rect" id="node3" href="$class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e" title="Regular printf like function." alt="" coords="221,33,400,73"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9" title="Bring some color into your code." alt="" coords="226,97,395,137"/>
-</map>

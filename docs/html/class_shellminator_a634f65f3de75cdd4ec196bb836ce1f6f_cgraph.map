@@ -1,7 +1,0 @@
-<map id="Shellminator::beginServer" name="Shellminator::beginServer">
-<area shape="rect" id="node1" title="Start WiFi Server." alt="" coords="5,55,175,80"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a9321a7c84af143dc5c2540cfd3b02454" title="Shellminator initialization function." alt="" coords="223,55,356,80"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="409,5,567,31"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8" title="Input prompt." alt="" coords="423,55,553,80"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="404,104,572,129"/>
-</map>

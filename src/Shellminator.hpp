@@ -1261,7 +1261,7 @@ private:
     /// is finished.
     void(*inputCallback)(char*, int, Shellminator*);
 
-    // For unit testin.
+    // For unit testing.
     friend class ShellminatorUT;
 };
 

@@ -1,9 +1,0 @@
-<map id="ShellminatorBufferedPrinter::printf" name="ShellminatorBufferedPrinter::printf">
-<area shape="rect" id="node1" title="Regular printf like function." alt="" coords="628,47,807,87"/>
-<area shape="rect" id="node2" href="$class_shellminator_plot.html#aea7616591a9cd44c546bed9ec33b2020" title=" " alt="" coords="420,5,572,31"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="412,55,580,80"/>
-<area shape="rect" id="node7" href="$class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682" title=" " alt="" coords="412,104,580,129"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="227,31,360,56"/>
-<area shape="rect" id="node6" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="223,80,364,105"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f" title="Start WiFi Server." alt="" coords="5,31,175,56"/>
-</map>
