@@ -136,7 +136,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
       // is implemented as a circular buffer. The incoming data
       // from the clients has to be pushed to this circular buffer
       // in the websocket event.
-      shell.webSocketPush( payload, length );
+      shell[ num ].webSocketPush( payload, length );
       break;
 
   }
