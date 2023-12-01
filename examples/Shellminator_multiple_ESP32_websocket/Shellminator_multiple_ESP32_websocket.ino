@@ -130,13 +130,13 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
     case WStype_TEXT:
 
       // Print to serial, just for debug.
-      Serial[ num ].printf("[%u] get Text: %s\n", num, payload);
+      Serial.printf("[%u] get Text: %s\n", num, payload);
 
       // In the Shellminator-IO files, the websocket channel
       // is implemented as a circular buffer. The incoming data
       // from the clients has to be pushed to this circular buffer
       // in the websocket event.
-      shell.webSocketPush( payload, length );
+      shell[ num ].webSocketPush( payload, length );
       break;
 
   }
