@@ -638,6 +638,8 @@ void Shellminator::redrawLine(){
         selectedChannel = &bufferedPrinter;
     }
 
+    colorizer -> reset( selectedChannel );
+
     // If reverse search mode is active,
     // we have to call redrawHistorySearch
     // function and than stop there.
@@ -691,7 +693,7 @@ void Shellminator::redrawLine(){
     // Clear the rest of the line to right.
     //selectedChannel -> print( __CONST_TXT__( "\033[0K" ) );
 
-
+    /*
     #ifdef COMMANDER_API_VERSION
 
     // If the command is found in Commander's API-tree
@@ -753,9 +755,17 @@ void Shellminator::redrawLine(){
         selectedChannel -> print( (char*) &cmd_buff[ 0 ][ j ] );
 
     }
+    */
+
+    colorizer -> reset( selectedChannel );
+    for( i = 0; i < cmd_buff_cntr; i++ ){
+
+        colorizer -> printChar( selectedChannel, cmd_buff[ 0 ][ i ] );
+
+    }
 
     // Clear the rest of the line to right.
-    selectedChannel -> print( __CONST_TXT__( "\033[0K" ) );
+    selectedChannel -> print( __CONST_TXT__( "\033[0m\033[0K" ) );
 
     // It is also a tricky part. We have to check if the cursor
     // is not at the end of the command. In this case, we have
@@ -1522,54 +1532,55 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
 
 void Shellminator::ShellminatorBackspaceState(){
 
-  // General counter variable
-  uint32_t i;
+    // General counter variable
+    uint32_t i;
 
-  // If we press a backspace we have to reset cmd_buff_dim to default value
-  cmd_buff_dim = 1;
+    // If we press a backspace we have to reset cmd_buff_dim to default value
+    cmd_buff_dim = 1;
 
-  // We have to check the number of the characters in the buffer.
-  // If the buffer is empty we must not do anything!
-  if ( cursor > 0 ) {
+    // We have to check the number of the characters in the buffer.
+    // If the buffer is empty we must not do anything!
+    if ( cursor > 0 ) {
 
-    // decrease the cmd buffer counter and the cursor position
-    cmd_buff_cntr--;
-    cursor--;
+        // decrease the cmd buffer counter and the cursor position
+        cmd_buff_cntr--;
+        cursor--;
 
-    // if we are at the end of the command buffer
-    if ( cursor == cmd_buff_cntr ) {
+        // if we are at the end of the command buffer
+        if ( cursor == cmd_buff_cntr ) {
 
-      if( inSearch ){
+            if( inSearch || ( colorizer != &defaultColorizer ) ){
 
-        cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
-        redrawLine();
+                cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+                redrawLine();
 
-      }
+            }
 
-      else{
+            else{
 
-      channel -> print( __CONST_TXT__( "\b \b" ) ); // just delete the last character from the terminal
-      cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+                channel -> print( __CONST_TXT__( "\b \b" ) ); // just delete the last character from the terminal
+                cmd_buff[ 0 ][ cursor + 1 ] = '\0'; // and from the cmd buffer
+                
 
-      }
+            }
+
+        }
+
+        else {
+
+            // if the cursor is somewhere in the middle of the cmd buffer
+            // rework the buffer and redraw the whole line
+            for( i = cursor; i < cmd_buff_cntr; i++ ) {
+
+                cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+
+            }
+
+            redrawLine();
+
+        }
 
     }
-
-    else {
-
-      // if the cursor is somewhere in the middle of the cmd buffer
-      // rework the buffer and redraw the whole line
-      for( i = cursor; i < cmd_buff_cntr; i++ ) {
-
-        cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
-
-      }
-
-      redrawLine();
-
-    }
-
-  }
 
 }
 
@@ -1586,14 +1597,16 @@ void Shellminator::ShellminatorEnterKeyState(){
         return;
     }
 
+    colorizer -> reset( channel );
+
     if( inSearch  ){
 
         if( searchMatch > 0 ){
 
-        inSearch = false;
-        strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
-        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-        redrawLine();
+            inSearch = false;
+            strncpy( cmd_buff[ 0 ], cmd_buff[ searchMatch ], SHELLMINATOR_BUFF_LEN + 1 );
+            cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+            redrawLine();
 
         }
 
@@ -2026,7 +2039,7 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
         if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
-            if( inSearch ){
+            if( inSearch || ( colorizer != &defaultColorizer ) ){
 
                 // Increment counters.
                 cmd_buff_cntr++;
@@ -2046,6 +2059,7 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
             else{
                 channel -> print( new_char );
+                //colorizer -> printChar( channel, new_char );
             }
 
         }
@@ -2279,4 +2293,8 @@ void Shellminator::endScreen(){
 void Shellminator::requestRedraw(){
     // Set the redraw flag.
     screenRedraw = true;
+}
+
+void Shellminator::attachColorizer( DefaultColorizer *colorizer_p ){
+    colorizer = colorizer_p;
 }

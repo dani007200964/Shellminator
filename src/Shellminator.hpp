@@ -39,6 +39,7 @@ SOFTWARE.
 #include "Shellminator-BufferedPrinter.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-VT100-Commands.hpp"
+#include "Shellminator-Colorizer.hpp"
 
 #ifdef ARDUINO
     #include "Arduino.h"
@@ -967,6 +968,8 @@ public:
     ///          In this case it is not usable. If it is not NULL, you can use it.
     ShellminatorBufferedPrinter* getBufferedPrinter();
 
+    void attachColorizer( DefaultColorizer *colorizer_p );
+
 #ifdef COMMANDER_API_VERSION
 
     void attachCommander(Commander *commander_p);
@@ -1002,6 +1005,9 @@ private:
     /// This flag shows if a request come from the Screen
     /// object to issue a draw function call.
     bool screenRedraw;
+
+    DefaultColorizer defaultColorizer;
+    DefaultColorizer *colorizer = &this->defaultColorizer;
 
     /// Stores the address of the password hash array.
     uint8_t* passwordHash = NULL;

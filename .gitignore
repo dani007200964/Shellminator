@@ -1,4 +1,4 @@
 build/*
+docs/*
 !build/README.md
 extras/simulator/Commander-API/*
-!extras/simulator/Commander-API/README.md

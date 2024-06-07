@@ -1,22 +1,48 @@
 #include "Shellminator-Colorizer.hpp"
 
-ShellminatorColorizer::ShellminatorColorizer(){
-    reset();
+DefaultColorizer::DefaultColorizer(){
+
 }
 
-void ShellminatorColorizer::reset(){
+
+bool DefaultColorizer::isCharacter( char c ){
+    if( ( c >= 'a' ) && ( c <= 'z' ) ){
+        return true;
+    }
+    if( ( c >= 'A' ) && ( c <= 'Z' ) ){
+        return true;
+    }
+    return false;
+}
+
+bool DefaultColorizer::isNumber( char c ){
+    if( ( c >= '0' ) && ( c <= '9' ) ){
+        return true;
+    }
+    return false;
+}
+
+
+CommanderColorizer::CommanderColorizer(){
+    reset( NULL );
+}
+
+void CommanderColorizer::reset( Stream* response ){
     int i;
 
     for( i = 0; i < ( SHELLMINATOR_BUFF_LEN + 1 ); i++ ){
-        buffer[ i ].c = '\0';
-        buffer[ i ].state = (uint8_t)DEFAULT_STATE;
+        stateBuffer[ i ] = DEFAULT_STATE;
     }
 
     bufferCntr = 0;
     currentState = DEFAULT_STATE;
+
+    if( response ){
+        response -> print( "\033[0m" );
+    }
 }
 
-void ShellminatorColorizer::printChar( Stream* response, char c ){
+void CommanderColorizer::printChar( Stream* response, char c ){
 
     if( bufferCntr > SHELLMINATOR_BUFF_LEN ){
         return; 
@@ -55,13 +81,12 @@ void ShellminatorColorizer::printChar( Stream* response, char c ){
 
     }
 
-    buffer[ bufferCntr ].state = currentState;
     bufferCntr++;
-
+    stateBuffer[ bufferCntr ] = currentState;
 
 }
 
-void ShellminatorColorizer::defaultStateFuncion( Stream* response, char c ){
+void CommanderColorizer::defaultStateFuncion( Stream* response, char c ){
 
     /*
     if( ( ( c >= 'A' ) && ( c <= 'Z' ) ) || ( ( c >= 'a' ) && ( c <= 'z' ) ) || ( ( c >= '0' ) && ( c <= '9' ) ) ){
@@ -101,7 +126,7 @@ void ShellminatorColorizer::defaultStateFuncion( Stream* response, char c ){
 
 }
 
-void ShellminatorColorizer::firstDashStateFuncion( Stream* response, char c ){
+void CommanderColorizer::firstDashStateFuncion( Stream* response, char c ){
     if( c == '-' ){
         response -> print( c );
         currentState = SECOND_DASH_STATE;
@@ -121,7 +146,7 @@ void ShellminatorColorizer::firstDashStateFuncion( Stream* response, char c ){
 
 }
 
-void ShellminatorColorizer::secondDashStateFuncion( Stream* response, char c ){
+void CommanderColorizer::secondDashStateFuncion( Stream* response, char c ){
     if( isCharacter( c ) || isNumber( c ) ){
         response -> print( c );
         currentState = WAIT_TOKEN_END;
@@ -135,7 +160,7 @@ void ShellminatorColorizer::secondDashStateFuncion( Stream* response, char c ){
 
 }
 
-void ShellminatorColorizer::waitTokenEndStateFunction( Stream* response, char c ){
+void CommanderColorizer::waitTokenEndStateFunction( Stream* response, char c ){
     if( ( c == ' ' ) || ( c == '\t' ) ){
         response -> print( "\033[0m" );
         response -> print( c );
@@ -147,7 +172,7 @@ void ShellminatorColorizer::waitTokenEndStateFunction( Stream* response, char c 
 
 }
 
-void ShellminatorColorizer::waitForWhitespaceStateFuncion( Stream* response, char c ){
+void CommanderColorizer::waitForWhitespaceStateFuncion( Stream* response, char c ){
     if( ( c == ' ' ) || ( c == '\t' ) ){
         response -> print( "\033[0m" );
         response -> print( c );
@@ -160,7 +185,7 @@ void ShellminatorColorizer::waitForWhitespaceStateFuncion( Stream* response, cha
 
 }
 
-void ShellminatorColorizer::waitStringEndStateFunction( Stream* response, char c ){
+void CommanderColorizer::waitStringEndStateFunction( Stream* response, char c ){
     if( c == '\"' ){
         response -> print( c );
         response -> print( "\033[0m" );
@@ -172,7 +197,7 @@ void ShellminatorColorizer::waitStringEndStateFunction( Stream* response, char c
 
 }
 
-void ShellminatorColorizer::envVarStartStateFunction( Stream* response, char c ){
+void CommanderColorizer::envVarStartStateFunction( Stream* response, char c ){
     if( isCharacter( c ) || isNumber( c ) ){
         response -> print( c );
         currentState = WAIT_TOKEN_END;
@@ -192,30 +217,8 @@ void ShellminatorColorizer::envVarStartStateFunction( Stream* response, char c )
     currentState = WAIT_TOKEN_END;
 }
 
-void ShellminatorColorizer::printBackwardError( Stream* response ){
+void CommanderColorizer::printBackwardError( Stream* response ){
     response -> print( "\033[1;37;41m" );
     response -> print( "\u219c" );
     response -> print( "\033[0m" );
-}
-
-bool ShellminatorColorizer::isCharacter( char c ){
-    if( ( c >= 'a' ) && ( c <= 'z' ) ){
-        return true;
-    }
-    if( ( c >= 'A' ) && ( c <= 'Z' ) ){
-        return true;
-    }
-    return false;
-}
-
-bool ShellminatorColorizer::isNumber( char c ){
-    if( ( c >= '0' ) && ( c <= '9' ) ){
-        return true;
-    }
-    return false;
-}
-
-
-void ShellminatorColorizer::backspace(){
-
 }

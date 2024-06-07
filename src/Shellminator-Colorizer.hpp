@@ -38,20 +38,28 @@ SOFTWARE.
 #include "Stream.h"
 #include "Shellminator-DefaultSettings.hpp"
 
-class ShellminatorColorizer{
+class DefaultColorizer{
 
 public:
-    ShellminatorColorizer();
-    void printChar( Stream* response, char c );
-    void backspace();
-    void reset();
+    DefaultColorizer();
+    virtual void printChar( Stream* response, char c ){ if( response ){ response -> print( c ); } }
+    virtual void reset( Stream* response ) {}
 
 protected:
 
-    typedef struct{
-        char c;
-        uint8_t state;
-    }characterData_t;
+    bool isCharacter( char c );
+    bool isNumber( char c );
+
+};
+
+class CommanderColorizer : public DefaultColorizer{
+
+public:
+    CommanderColorizer();
+    void printChar( Stream* response, char c ) override;
+    void reset( Stream* response ) override;
+
+protected:
 
     typedef enum{
         DEFAULT_STATE = 0,
@@ -63,7 +71,7 @@ protected:
         ENV_VAR_START
     }colorizerState_t;
 
-    characterData_t buffer[ SHELLMINATOR_BUFF_LEN + 1 ];
+    colorizerState_t stateBuffer[ SHELLMINATOR_BUFF_LEN + 1 ];
     int bufferCntr = 0;
 
     colorizerState_t currentState = DEFAULT_STATE;
@@ -77,9 +85,6 @@ protected:
     void envVarStartStateFunction( Stream* response, char c );
 
     void printBackwardError( Stream* response );
-
-    bool isCharacter( char c );
-    bool isNumber( char c );
 
 };
 

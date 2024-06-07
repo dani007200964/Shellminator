@@ -28,12 +28,34 @@
 
 #include "stdioStream.hpp"
 
-#include "Shellminator-Colorizer.hpp"
+#include "Shellminator.hpp"
 
 
 // Use stdio as Channel.
 stdioStream stdioChannel;
 
+// Create a Shellminator object, and initialize it to use stdioChannel
+Shellminator shell( &stdioChannel );
+
+CommanderColorizer colorizer;
+
+// Create a pretty logo for the terminal.
+const char logo[] =
+
+    "   _____ __         ____          _             __            \r\n"
+    "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
+    "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
+    " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
+    "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
+    "\r\n"
+    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
+
+;
+
+
+void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
+
+}
 
 
 // Main program.
@@ -46,88 +68,36 @@ int main(){
 
     }
 
-    int i;
-    ShellminatorColorizer defaultColorizer;
 
-    // Start with space
-    char msg1[] = " start with space";
-    defaultColorizer.reset();
-    stdioChannel.print( "\033[0m" );
+    // Clear the terminal
+    shell.clear();
+    shell.enableFormatting = false;
 
-    stdioChannel.print( "Input:  " );
-    stdioChannel.println( msg1 );
+    // Attach the logo.
+    shell.attachLogo( logo );
 
-    stdioChannel.print( "Result: " );
-    for( i = 0; i < strlen( msg1 ); i++ ){
-        defaultColorizer.printChar( &stdioChannel, msg1[ i ] );
+    colorizer = CommanderColorizer();
+    shell.attachColorizer( &colorizer );
+
+    // Initialize shell object.
+    shell.begin( "arnold" );
+
+    char inputBuffer[ 10 ];
+
+    shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback );
+
+
+
+    // Infinite loop.
+    while( 1 ){
+
+
+        // Process the new data.
+        shell.update();
+
+
+
     }
-    stdioChannel.println();
-    stdioChannel.println();
-
-    // argument short
-    char msg2[] = "cmd -a -b 10 -cat -!";
-    defaultColorizer.reset();
-    stdioChannel.print( "\033[0m" );
-
-    stdioChannel.print( "Input:  " );
-    stdioChannel.println( msg2 );
-
-    stdioChannel.print( "Result: " );
-    for( i = 0; i < strlen( msg2 ); i++ ){
-        defaultColorizer.printChar( &stdioChannel, msg2[ i ] );
-    }
-    stdioChannel.println();
-    stdioChannel.println();
-
-    stdioChannel.print( "\033[0m" );
-
-    // argument long
-    char msg3[] = "cmd --a --bo 1 --!a 1";
-    defaultColorizer.reset();
-    stdioChannel.print( "\033[0m" );
-
-    stdioChannel.print( "Input:  " );
-    stdioChannel.println( msg3 );
-
-    stdioChannel.print( "Result: " );
-    for( i = 0; i < strlen( msg3 ); i++ ){
-        defaultColorizer.printChar( &stdioChannel, msg3[ i ] );
-    }
-    stdioChannel.println();
-    stdioChannel.println();
-
-    // string argument
-    char msg4[] = "cmd \"cat 1\" dog";
-    defaultColorizer.reset();
-    stdioChannel.print( "\033[0m" );
-
-    stdioChannel.print( "Input:  " );
-    stdioChannel.println( msg4 );
-
-    stdioChannel.print( "Result: " );
-    for( i = 0; i < strlen( msg4 ); i++ ){
-        defaultColorizer.printChar( &stdioChannel, msg4[ i ] );
-    }
-    stdioChannel.println();
-    stdioChannel.println();
-
-    // env var argument
-    char msg5[] = "cmd $! $ $cat 10";
-    defaultColorizer.reset();
-    stdioChannel.print( "\033[0m" );
-
-    stdioChannel.print( "Input:  " );
-    stdioChannel.println( msg5 );
-
-    stdioChannel.print( "Result: " );
-    for( i = 0; i < strlen( msg5 ); i++ ){
-        defaultColorizer.printChar( &stdioChannel, msg5[ i ] );
-    }
-    stdioChannel.println();
-    stdioChannel.println();
-
-    stdioChannel.print( "\033[0m" );
-    stdioChannel.println();
 
     return 0;
 
