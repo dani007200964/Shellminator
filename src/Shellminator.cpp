@@ -431,6 +431,27 @@ void Shellminator::printHistory(){
 
 }
 
+void Shellminator::printCommandParserHelp( Stream* channel_p, bool formatting_p ){
+    // By default it is empty, because no command parser is available.
+}
+
+void Shellminator::checkCommandFraction(){
+    // By default it is empty, because no command parser is available.
+}
+
+void Shellminator::executeWithCommandParser(){
+    // By default it is empty, because no command parser is available.
+}
+
+void Shellminator::autoCompleteWithCommandParser(){
+    // By default it is empty, because no command parser is available.    
+}
+
+bool Shellminator::hasCommandParser(){
+    // By default it returns false, because no command parser is available.
+    return false;
+}
+
 void Shellminator::printHelp(){
 
     // Detect if the channel was configured incorrectly.
@@ -530,15 +551,7 @@ void Shellminator::printHelp(){
     format_m( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Execute command, or exit from screen." ) );
 
-    #ifdef COMMANDER_API_VERSION
-
-        if( commander != NULL ){
-
-            commander -> printHelp( selectedChannel, enableFormatting );
-
-        }
-
-    #endif
+    printCommandParserHelp( selectedChannel, enableFormatting );
 
     format_m( selectedChannel, REGULAR, WHITE );
 
@@ -690,74 +703,6 @@ void Shellminator::redrawLine(){
         selectedChannel -> print( inputInstuctionSize );  // Step cursor
         selectedChannel -> print( 'C' );  // Left.
     }
-
-    // I think it is unnecessary? Maybe?
-    // Clear the rest of the line to right.
-    //selectedChannel -> print( __CONST_TXT__( "\033[0K" ) );
-
-    /*
-    #ifdef COMMANDER_API_VERSION
-
-    // If the command is found in Commander's API-tree
-    // it will be highlighted.
-    if( commandFound ){
-
-        format_m( selectedChannel, BOLD, GREEN );
-
-        for( i = 0; i < cmd_buff_cntr; i++ ){
-
-            // If a space character is found, we have to change
-            // back the color to white for the arguments.
-            if( cmd_buff[ 0 ][ i ] == ' ' ){
-
-                j = i;
-                cmd_buff[ 0 ][ i ] = '\0';
-                break;
-
-            }
-
-        }
-
-    }
-
-    else{
-
-        format_m( selectedChannel, REGULAR, WHITE );
-
-    }
-
-    #endif
-
-    // If an input prompt is active with secret mode,
-    // we have to print '*' characters instead of echoing
-    // back the actually typed data.
-    if( inputActive && inputSecretMode ){
-        i = 0;
-        while( cmd_buff[ 0 ][ i ] ){
-            selectedChannel -> print( "\u2022" );
-            i++;
-        }
-    }
-
-    // Otherwise we can echo back the typed message as it is.
-    else{
-        selectedChannel -> print( (char*) &cmd_buff[ 0 ] );
-    }
-
-    // This is a tricky section.
-    // If the command was found in the Commander-API command tree
-    // it has been colorized until the first whitespace character.
-    // But printing is stopped there. We have to restore the buffer
-    // content to its original state and print the rest of the command.
-    if( ( j >= 0 ) ){
-
-        cmd_buff[ 0 ][ j ] = ' ';
-
-        format_m( selectedChannel, REGULAR, WHITE );
-        selectedChannel -> print( (char*) &cmd_buff[ 0 ][ j ] );
-
-    }
-    */
 
     colorizer -> reset( selectedChannel );
     for( i = 0; i < cmd_buff_cntr; i++ ){
@@ -997,12 +942,8 @@ void Shellminator::update() {
         // Process the new character.
         process( c );
 
-        // If Commander-API is used, we check the typed command
-        // periodically to highlight the available command.
-        #ifdef COMMANDER_API_VERSION
-            commandCheckTimerStart = millis();
-            commandChecked = false;
-        #endif
+        // Save the system time when the last keypress was executed.
+        lastKeyPressTime = millis();
 
     }
 
@@ -1075,72 +1016,7 @@ void Shellminator::update() {
 
     }
 
-    #ifdef COMMANDER_API_VERSION
-
-    // Command highlight section.
-    Commander::API_t *commandAddress;
-
-    // If Commander is available and we did not checked the
-    // typed command, we are trying to find and highlight it.
-    if( commander && !commandChecked ){
-        bool previousCommandFound = commandFound; // hold the previos flag
-
-        // We have to wait 100ms after the last keypress.
-        if( ( millis() - commandCheckTimerStart ) > 100 ){
-
-        // Generic counter variable.
-        uint32_t i = 0;
-
-        // Commander expects a null terminated string, so we
-        // have to terminate the string at the end, or at
-        // space character. But after the search we have to
-        // store bactk this character to it's original state.
-        char charCopy = 0; // initialize the variable
-
-        // Find the end of the input command, or the first space
-        // character in it, store it's value to charCopy, and
-        // replace it with null character.
-        for( i = 0; i <= cmd_buff_cntr; i++ ){
-
-            if( ( cmd_buff[ 0 ][ i ] == ' '  ) || ( i == cmd_buff_cntr ) ){
-
-            charCopy = cmd_buff[ 0 ][ i ];
-            cmd_buff[ 0 ][ i ] = '\0';
-            break;
-
-            }
-
-        }
-
-        // Try to find the command in Commander's API-tree.
-        commandAddress = commander -> operator[]( cmd_buff[0] );
-
-        // If Commander responds with a non-null pointer, it means
-        // that we have a mach.
-        if( commandAddress ){
-            commandFound = true;
-        } else {
-            commandFound = false;
-        }
-
-        // Restore the original state.
-        cmd_buff[ 0 ][ i ] = charCopy;
-
-        // Set the flag.
-        commandChecked = true;
-
-        // if the commandFound flag has changed, redraw the line
-        // to get the colors right
-        // If formatting disabled, we must not redraw the line.
-        if( ( previousCommandFound != commandFound ) && enableFormatting) {
-            redrawLine();
-        }
-
-        }
-
-    }
-
-    #endif
+    checkCommandFraction();
 
 }
 
@@ -1426,16 +1302,6 @@ void Shellminator::beep(){
 
 }
 
-#ifdef COMMANDER_API_VERSION
-
-void Shellminator::attachCommander( Commander* commander_p ){
-
-  commander = commander_p;
-
-}
-
-#endif
-
 void Shellminator::ShellminatorDefaultState( char new_char ){
 
     shellEvent_t event;
@@ -1714,13 +1580,9 @@ void Shellminator::ShellminatorEnterKeyState(){
             execution_fn( cmd_buff[ 0 ], this );
         }
 
-        #ifdef COMMANDER_API_VERSION
-            // If a Commander object is added, it can be used
-            // to execute the command without an execution_fn.
-            else if( commander != NULL ){
-                commander -> execute( cmd_buff[ 0 ], channel, this );
-            }
-        #endif
+        else if( hasCommandParser() ){
+            executeWithCommandParser();
+        }
 
         // If not, then just print it with Serial.
         else{
@@ -1799,109 +1661,8 @@ void Shellminator::ShellminatorClearScreenState(){
 }
 
 void Shellminator::ShellminatorAutoCompleteState(){
-
     // Auto complete section.
-    #ifdef COMMANDER_API_VERSION
-
-    // General counter variable
-    uint32_t i;
-
-    // Firstly, we have to set the cursor to the end of the input command.
-    // If the algorythm fills the missing characters, they have to placed
-    // at the end.
-    cursor = cmd_buff_cntr;
-
-    // Pointer to a Commander API-tree element.
-    Commander::API_t *commandAddress;
-
-    // The next auto filled character will be placed in this variable.
-    char nextChar;
-
-    // This flag holds an auto complete conflict event.
-    // Conflict event happens:
-    // - after the first character of mismatch( restart, reboot will trigger conflict at the third character )
-    // - if cmd_buff_cntr would overflow Commanders command tree.
-    // - if we found the end of the last command.
-    bool conflict = false;
-
-    // PROGMEM based tree is not supported for auto complete yet.
-    if( commander -> memoryType != Commander::MEMORY_REGULAR ){
-        return;
-    }
-
-    // If there is no conflict event, we are trying
-    // to fill as many characters as possible.
-    while( !conflict ){
-
-        // Reset the counter to the first Commander API-tree element.
-        i = 0;
-
-        // Get the address of the element indexed by i.
-        // If the indexed elment does not exists, Commander
-        // will return NULL.
-        commandAddress = commander -> operator[]( (int)i );
-
-        // Set to default state.
-        nextChar = '\0';
-
-        // Go through all elements in Commanders API-tree.
-        while( commandAddress ){
-
-        // We have to check that the typed command is exists within an existing command.
-        if( strncmp( (const char*)cmd_buff[ 0 ], commandAddress -> name, cmd_buff_cntr ) == 0 ){
-
-            // If it does, we have to check for conflict.
-            if( ( nextChar == '\0' ) && ( cmd_buff_cntr < COMMANDER_MAX_COMMAND_SIZE ) && ( commandAddress -> name[ cmd_buff_cntr ] != '\0' ) ){
-
-            // If there is no conflict we can set the next character from the command that we found.
-            nextChar = commandAddress -> name[ cmd_buff_cntr ];
-
-            }
-
-            else{
-
-            // We have to check that the next character in the command
-            // tree is not the same as the value in nextChar.
-            if( commandAddress -> name[ cmd_buff_cntr ] != nextChar ){
-
-                // Trigger conflict.
-                conflict = true;
-
-            }
-
-            }
-
-        }
-
-        // Increment i to get the next command's index.
-        i++;
-
-        // Get the address of the element indexed by i.
-        commandAddress = commander -> operator[]( (int)i );
-
-        }
-
-        // If nextChar does not changed since start, that means
-        // we did not found anything similar.
-        if( nextChar == '\0' ){
-
-        // We have to trigger conflict to abort the process.
-        conflict = true;
-
-        }
-
-        // If we does not had a conflict event, we have to process
-        // the foind character as a regular character.
-        if( !conflict ){
-
-        process( nextChar );
-
-        }
-
-    }
-
-    #endif
-
+    autoCompleteWithCommandParser();
 }
 
 void Shellminator::ShellminatorAbortState(){

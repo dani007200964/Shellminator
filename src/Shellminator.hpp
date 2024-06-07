@@ -81,11 +81,6 @@ SOFTWARE.
 // external libraries.
 #ifdef __has_include
 
-    // Check for Commander-API library.
-    #if __has_include ("Commander-API.hpp")
-        #include "Commander-API.hpp"
-    #endif
-
     // Check for WebSocketServer library
     #if __has_include ( "WebSocketsServer.h" )
         #include <WebSocketsServer.h>
@@ -970,15 +965,45 @@ public:
 
     void attachColorizer( DefaultColorizer *colorizer_p );
 
-#ifdef COMMANDER_API_VERSION
-
-    void attachCommander(Commander *commander_p);
-
-#endif
-
     void autoDetectTerminal();
 
     friend class ShellminatorProgress;
+
+protected:
+    /// Text buffer
+    ///
+    /// This array stores the incoming and the previous commands.
+    /// The 0th element always reserved to hold the incoming data.
+    /// All other elements are holds the previous commands. Every new command
+    /// shifts the elements towards the higher index, and removes the highest index element.
+    /// To navigate between the previous commands you can use the UP and DOWN arrows
+    /// on the keyboard. To specify the 'memory' of the interface you have to configure
+    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
+    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
+    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
+    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
+
+    /// This variable tracks the index of the previous command while you browsing the command history
+    uint32_t cmd_buff_dim = 1;
+
+    /// This variable tracks the end of the input message.
+    uint32_t cmd_buff_cntr = 0;
+
+    /// This flag must be set true in checkCommandFraction function
+    /// when the command parser contains the command.
+    bool commandFound = false;
+
+    /// Print command parser Help.
+    virtual void printCommandParserHelp( Stream* channel_p, bool formatting_p );
+
+    /// Check the command with the command parser to get some useful information.
+    virtual void checkCommandFraction();
+
+    virtual bool hasCommandParser();
+
+    virtual void executeWithCommandParser();
+
+    virtual void autoCompleteWithCommandParser();
 
 private:
     /// It can be used to accelerate the data sending process.
@@ -1095,25 +1120,6 @@ private:
     /// This function will be called when a command recives.
     void (*execution_fn)( char*, Shellminator* );
 
-    /// Text buffer
-    ///
-    /// This array stores the incoming and the previous commands.
-    /// The 0th element always reserved to hold the incoming data.
-    /// All other elements are holds the previous commands. Every new command
-    /// shifts the elements towards the higher index, and removes the highest index element.
-    /// To navigate between the previous commands you can use the UP and DOWN arrows
-    /// on the keyboard. To specify the 'memory' of the interface you have to configure
-    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
-    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
-    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
-
-    /// This variable tracks the index of the previous command while you browsing the command history
-    uint32_t cmd_buff_dim = 1;
-
-    /// This variable tracks the end of the input message.
-    uint32_t cmd_buff_cntr = 0;
-
     /// This variable tracks the location of the next character.
     uint32_t cursor = 0;
 
@@ -1202,24 +1208,6 @@ private:
 
 #endif
 
-//---- Commander-API support specific part ----//
-#ifdef COMMANDER_API_VERSION
-
-    /// Pointer to a Commander object.
-    Commander *commander = NULL;
-
-    /// Last time in ms when the input command was checked.
-    uint32_t commandCheckTimerStart = 0;
-
-    /// Flag that stores if the command was checked.
-    bool commandChecked = false;
-
-    /// Flag that stores that the command was
-    /// found in Commander API-tree.
-    bool commandFound = false;
-
-#endif
-
     /// This function is used to search the
     /// previous matching command in the history.
     void historySearchBackward();
@@ -1266,6 +1254,10 @@ private:
     /// This function will be called when an input
     /// is finished.
     void(*inputCallback)(char*, int, Shellminator*);
+
+    /// Last time in ms when a key was pressed.
+    uint32_t lastKeyPressTime = 0;
+
 
     // For unit testing.
     friend class ShellminatorUT;

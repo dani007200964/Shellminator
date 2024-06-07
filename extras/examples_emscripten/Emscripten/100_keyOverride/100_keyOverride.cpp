@@ -28,7 +28,6 @@
 #include <emscripten.h>
 
 #include "Shellminator.hpp"
-#include "Shellminator-QR-Code-Module.hpp"
 
 
 // Use stdio as Channel.
@@ -37,7 +36,6 @@ stdioStream stdioChannel;
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-ShellminatorQR qrCode;
 
 
 // Infinite Loop.
@@ -46,6 +44,30 @@ void loop();
 // Init Section.
 void setup();
 
+void upArrowCallback( Shellminator* caller ){
+    caller -> setBannerText( "up" );
+}
+
+void downArrowCallback( Shellminator* caller ){
+    caller -> setBannerText( "down" );
+}
+
+void leftArrowCallback( Shellminator* caller ){
+    caller -> setBannerText( "left" );
+}
+
+void rightArrowCallback( Shellminator* caller ){
+    caller -> setBannerText( "right" );
+}
+
+void searchKeyCallback( Shellminator* caller ){
+    caller -> freeSearchKey();
+    caller -> freeUpArrow();
+    caller -> freeDownArrow();
+    caller -> freeLeftArrow();
+    caller -> freeRightArrow();
+    caller -> setBannerText( "default" );
+}
 
 
 // Main program.
@@ -71,8 +93,19 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    // Generate a link to the Github repo.
-    qrCode.generate( &stdioChannel, "https://github.com/dani007200964/Shellminator" );
+    stdioChannel.println( "Use the arrow keys to change the banner text." );
+    stdioChannel.print( "To reset the functionality, press" );
+    Shellminator::setFormat_m( &stdioChannel, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+    stdioChannel.print( " Ctrl-R ");
+    Shellminator::setFormat_m( &stdioChannel, Shellminator::REGULAR, Shellminator::WHITE );
+    stdioChannel.println( "key." );
+    stdioChannel.println();
+
+    shell.overrideUpArrow( upArrowCallback );
+    shell.overrideDownArrow( downArrowCallback );
+    shell.overrideLeftArrow( leftArrowCallback );
+    shell.overrideRightArrow( rightArrowCallback );
+    shell.overrideSearchKey( searchKeyCallback );
 
     // Initialize shell object.
     shell.begin( "arnold" );

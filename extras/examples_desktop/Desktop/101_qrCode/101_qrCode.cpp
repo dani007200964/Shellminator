@@ -29,6 +29,7 @@
 #include "stdioStream.hpp"
 
 #include "Shellminator.hpp"
+#include "Shellminator-QR-Code-Module.hpp"
 
 
 // Use stdio as Channel.
@@ -37,23 +38,9 @@ stdioStream stdioChannel;
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-// Create a pretty logo for the terminal.
-const char logo[] =
-
-    "   _____ __         ____          _             __            \r\n"
-    "  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
-    "  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
-    " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
-    "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-    "\r\n"
-    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
-
-;
+ShellminatorQR qrCode;
 
 
-void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
-
-}
 
 
 // Main program.
@@ -69,17 +56,16 @@ int main(){
 
     // Clear the terminal
     shell.clear();
-    shell.enableFormatting = false;
 
-    // Attach the logo.
-    shell.attachLogo( logo );
+
+    stdioChannel.println( "Shellminator webpage:" );
+    stdioChannel.println();
+
+    // Generate a link to the Github repo.
+    qrCode.generate( &stdioChannel, "https://www.shellminator.org/html/index.html" );
 
     // Initialize shell object.
     shell.begin( "arnold" );
-
-    char inputBuffer[ 10 ];
-
-    shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback );
 
 
 

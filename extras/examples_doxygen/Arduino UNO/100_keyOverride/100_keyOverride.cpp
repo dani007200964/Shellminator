@@ -57,7 +57,7 @@ void setup(){
     shell.clear();
 
     Serial.println( "Use the arrow keys to change the banner text." );
-    Serial.println( "To reset the functionality, press" );
+    Serial.print( "To reset the functionality, press" );
     Shellminator::setFormat_m( &Serial, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
     Serial.print( " Ctrl-R ");
     Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );

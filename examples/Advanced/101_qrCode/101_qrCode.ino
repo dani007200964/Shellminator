@@ -34,8 +34,12 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
+
+    Serial.println( "Shellminator webpage:" );
+    Serial.println();
+
     // Generate a link to the Github repo.
-    qrCode.generate( &Serial, "https://github.com/dani007200964/Shellminator" );
+    qrCode.generate( &Serial, "https://www.shellminator.org/html/index.html" );
 
     // Initialize shell object.
     shell.begin( "arnold" );

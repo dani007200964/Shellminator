@@ -80,7 +80,7 @@ int main(){
     shell.clear();
 
     stdioChannel.println( "Use the arrow keys to change the banner text." );
-    stdioChannel.println( "To reset the functionality, press" );
+    stdioChannel.print( "To reset the functionality, press" );
     Shellminator::setFormat_m( &stdioChannel, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
     stdioChannel.print( " Ctrl-R ");
     Shellminator::setFormat_m( &stdioChannel, Shellminator::REGULAR, Shellminator::WHITE );

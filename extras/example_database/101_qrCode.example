@@ -36,8 +36,12 @@ ShellminatorQR qrCode;
 // Clear the terminal
 shell.clear();
 
+
+{{ channel }}.println( "Shellminator webpage:" );
+{{ channel }}.println();
+
 // Generate a link to the Github repo.
-qrCode.generate( &{{ channel }}, "https://github.com/dani007200964/Shellminator" );
+qrCode.generate( &{{ channel }}, "https://www.shellminator.org/html/index.html" );
 
 // Initialize shell object.
 shell.begin( "arnold" );

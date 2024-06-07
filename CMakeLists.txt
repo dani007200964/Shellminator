@@ -67,6 +67,8 @@ set( SOURCES
     src/Shellminator-QR-Code-Module.cpp
     src/Shellminator-Colorizer.hpp
     src/Shellminator-Colorizer.cpp
+    src/Shellminator-Commander-Interface.hpp
+    src/Shellminator-Commander-Interface.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -155,13 +157,13 @@ if( BUILD_EXAMPLES )
 	#add_executable( 008_input_number ${SOURCES} extras/examples_desktop/Desktop/008_input_number/008_input_number.cpp )
 	#add_executable( 009_beeeeep ${SOURCES} extras/examples_desktop/Desktop/009_beeeeep/009_beeeeep.cpp )
 	#add_executable( 010_bannerText ${SOURCES} extras/examples_desktop/Desktop/010_bannerText/010_bannerText.cpp )
-	add_executable( 101_keyOverride ${SOURCES} extras/examples_desktop/Desktop/101_keyOverride/101_keyOverride.cpp )
+	#add_executable( 100_keyOverride ${SOURCES} extras/examples_desktop/Desktop/100_keyOverride/100_keyOverride.cpp )
+	#add_executable( 101_qrCode ${SOURCES} extras/examples_desktop/Desktop/101_qrCode/101_qrCode.cpp )
+	add_executable( 200_commanderBasic ${SOURCES} extras/examples_desktop/Desktop/200_commanderBasic/200_commanderBasic.cpp )
 	#add_executable( colorizer ${SOURCES} extras/examples_desktop/Desktop/colorizer/colorizer.cpp )
-	#add_executable( inputSimple ${SOURCES} extras/examples_desktop/Desktop/inputSimple/inputSimple.cpp )
 	#add_executable( levelMeter ${SOURCES} extras/examples_desktop/Desktop/levelMeter/levelMeter.cpp )
 	#add_executable( list ${SOURCES} extras/examples_desktop/Desktop/list/list.cpp )
 	#add_executable( progress ${SOURCES} extras/examples_desktop/Desktop/progress/progress.cpp )
-	#add_executable( qrCode ${SOURCES} extras/examples_desktop/Desktop/qrCode/qrCode.cpp )
 	#add_executable( screenAdvanced ${SOURCES} extras/examples_desktop/Desktop/screenAdvanced/screenAdvanced.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
@@ -195,14 +197,17 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( 010_bannerText ${SOURCES} extras/examples_emscripten/Emscripten/010_bannerText/010_bannerText.cpp )
 	target_link_options( 010_bannerText PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 101_keyOverride ${SOURCES} extras/examples_emscripten/Emscripten/101_keyOverride/101_keyOverride.cpp )
-	target_link_options( 101_keyOverride PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 100_keyOverride ${SOURCES} extras/examples_emscripten/Emscripten/100_keyOverride/100_keyOverride.cpp )
+	target_link_options( 100_keyOverride PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 101_qrCode ${SOURCES} extras/examples_emscripten/Emscripten/101_qrCode/101_qrCode.cpp )
+	target_link_options( 101_qrCode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 200_commanderBasic ${SOURCES} extras/examples_emscripten/Emscripten/200_commanderBasic/200_commanderBasic.cpp )
+	target_link_options( 200_commanderBasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( colorizer ${SOURCES} extras/examples_emscripten/Emscripten/colorizer/colorizer.cpp )
 	target_link_options( colorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( inputSimple ${SOURCES} extras/examples_emscripten/Emscripten/inputSimple/inputSimple.cpp )
-	target_link_options( inputSimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( levelMeter ${SOURCES} extras/examples_emscripten/Emscripten/levelMeter/levelMeter.cpp )
 	target_link_options( levelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
@@ -212,9 +217,6 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( progress ${SOURCES} extras/examples_emscripten/Emscripten/progress/progress.cpp )
 	target_link_options( progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( qrCode ${SOURCES} extras/examples_emscripten/Emscripten/qrCode/qrCode.cpp )
-	target_link_options( qrCode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( screenAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/screenAdvanced/screenAdvanced.cpp )
 	target_link_options( screenAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
