@@ -11,7 +11,11 @@
         "xstring": "cpp",
         "xmemory": "cpp",
         "istream": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "xiosbase": "cpp",
+        "atomic": "cpp",
+        "ios": "cpp",
+        "system_error": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

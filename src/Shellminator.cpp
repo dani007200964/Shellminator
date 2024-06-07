@@ -246,6 +246,8 @@ void Shellminator::setBannerText( const char* banner_p ){
     // Just in case terminate the string
     banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
+    redrawLine();
+
 }
 
 void Shellminator::setBannerPathText( const char* bannerPath_p ){
@@ -1659,13 +1661,21 @@ void Shellminator::ShellminatorEnterKeyState(){
             // Just in case terminate the string.
             inputDestinationBuffer[ inputDestinationBufferSize - 1 ] = '\0';
 
+            // To empty the incoming string we have to zero it's counter.
+            cmd_buff_cntr = 0;
+            cursor = 0;
+
             if( inputCallback != NULL ){
                 inputCallback( inputDestinationBuffer, inputDestinationBufferSize, this );
             }
 
-            // To empty the incoming string we have to zero it's counter.
-            cmd_buff_cntr = 0;
-            cursor = 0;
+            // If the callback created a new input, we need to return here.
+            if( inputActive ){
+                return;
+            }
+
+            // If we doesn't has any more input prompts, close the prompt,
+            // and return to regular operation.
             channel -> println();
             printBanner();
             return;
@@ -1750,7 +1760,7 @@ void Shellminator::ShellminatorEndOfLineState(){
 void Shellminator::ShellminatorLogoutState(){
 
     if( logoutKeyFunc ){
-        logoutKeyFunc();
+        logoutKeyFunc( this );
         return;
     }
 
@@ -1773,7 +1783,7 @@ void Shellminator::ShellminatorLogoutState(){
 void Shellminator::ShellminatorReverseSearchState(){
 
     if( searchKeyFunc ){
-        searchKeyFunc();
+        searchKeyFunc( this );
         return;
     }
 
@@ -1897,7 +1907,7 @@ void Shellminator::ShellminatorAutoCompleteState(){
 void Shellminator::ShellminatorAbortState(){
 
     if( abortKeyFunc ){
-        abortKeyFunc();
+        abortKeyFunc( this );
     }
 
     inSearch = false;

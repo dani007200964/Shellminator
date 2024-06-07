@@ -380,10 +380,10 @@ if ( 'doc' in target ) or ( 'all' in target ):
     if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
         os.mkdir( rootDirectory + "/" + buildDirectoryName + "/report" )
 
-    shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
+    #shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
 
     # Run gcovr to evaluate coverage
-    command = "gcovr -r .. --html-details --html-css style.css -o report/report.html"
+    command = "gcovr -r .. --html-theme github.dark-blue --html-nested -o report/report.html"
 
     # Excluded stuff. Everything that is not part of the Shellminator library must be excluded.
     command += " --exclude .*/Unity/"
@@ -402,9 +402,9 @@ if ( 'doc' in target ) or ( 'all' in target ):
     print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/report/report.html" ) )
 
     # Copy report data to Doxygen source folder
-    reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
-    for reportFile in reportFiles:
-        shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
+    #reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
+    #for reportFile in reportFiles:
+    #    shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
 
     print()
     print( '---- Generate Coverage Badge ----' )

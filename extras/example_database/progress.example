@@ -1,4 +1,5 @@
 EXCLUDE=NONE
+CATEGORY=GUI
 
 ++--HEADER--++
 

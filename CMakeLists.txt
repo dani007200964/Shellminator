@@ -145,28 +145,78 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	add_executable( Inputsimple ${SOURCES} extras/examples_desktop/Desktop/Inputsimple/Inputsimple.cpp )
+	#add_executable( 001_basic ${SOURCES} extras/examples_desktop/Desktop/001_basic/001_basic.cpp )
+	#add_executable( 002_commandCallback ${SOURCES} extras/examples_desktop/Desktop/002_commandCallback/002_commandCallback.cpp )
+	#add_executable( 003_textFormatting ${SOURCES} extras/examples_desktop/Desktop/003_textFormatting/003_textFormatting.cpp )
+	#add_executable( 004_formatMatrix ${SOURCES} extras/examples_desktop/Desktop/004_formatMatrix/004_formatMatrix.cpp )
+	#add_executable( 005_logo ${SOURCES} extras/examples_desktop/Desktop/005_logo/005_logo.cpp )
+	#add_executable( 006_password ${SOURCES} extras/examples_desktop/Desktop/006_password/006_password.cpp )
+	#add_executable( 007_input ${SOURCES} extras/examples_desktop/Desktop/007_input/007_input.cpp )
+	#add_executable( 008_input_number ${SOURCES} extras/examples_desktop/Desktop/008_input_number/008_input_number.cpp )
+	#add_executable( 009_beeeeep ${SOURCES} extras/examples_desktop/Desktop/009_beeeeep/009_beeeeep.cpp )
+	#add_executable( 010_bannerText ${SOURCES} extras/examples_desktop/Desktop/010_bannerText/010_bannerText.cpp )
+	add_executable( 101_keyOverride ${SOURCES} extras/examples_desktop/Desktop/101_keyOverride/101_keyOverride.cpp )
+	#add_executable( colorizer ${SOURCES} extras/examples_desktop/Desktop/colorizer/colorizer.cpp )
+	#add_executable( inputSimple ${SOURCES} extras/examples_desktop/Desktop/inputSimple/inputSimple.cpp )
+	#add_executable( levelMeter ${SOURCES} extras/examples_desktop/Desktop/levelMeter/levelMeter.cpp )
+	#add_executable( list ${SOURCES} extras/examples_desktop/Desktop/list/list.cpp )
+	#add_executable( progress ${SOURCES} extras/examples_desktop/Desktop/progress/progress.cpp )
+	#add_executable( qrCode ${SOURCES} extras/examples_desktop/Desktop/qrCode/qrCode.cpp )
+	#add_executable( screenAdvanced ${SOURCES} extras/examples_desktop/Desktop/screenAdvanced/screenAdvanced.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
-	add_executable( Inputsimple ${SOURCES} extras/examples_emscripten/Emscripten/Inputsimple/Inputsimple.cpp )
-	target_link_options( Inputsimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 001_basic ${SOURCES} extras/examples_emscripten/Emscripten/001_basic/001_basic.cpp )
+	target_link_options( 001_basic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Levelmeter ${SOURCES} extras/examples_emscripten/Emscripten/Levelmeter/Levelmeter.cpp )
-	target_link_options( Levelmeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 002_commandCallback ${SOURCES} extras/examples_emscripten/Emscripten/002_commandCallback/002_commandCallback.cpp )
+	target_link_options( 002_commandCallback PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( List ${SOURCES} extras/examples_emscripten/Emscripten/List/List.cpp )
-	target_link_options( List PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 003_textFormatting ${SOURCES} extras/examples_emscripten/Emscripten/003_textFormatting/003_textFormatting.cpp )
+	target_link_options( 003_textFormatting PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Password ${SOURCES} extras/examples_emscripten/Emscripten/Password/Password.cpp )
-	target_link_options( Password PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 004_formatMatrix ${SOURCES} extras/examples_emscripten/Emscripten/004_formatMatrix/004_formatMatrix.cpp )
+	target_link_options( 004_formatMatrix PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Progress ${SOURCES} extras/examples_emscripten/Emscripten/Progress/Progress.cpp )
-	target_link_options( Progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 005_logo ${SOURCES} extras/examples_emscripten/Emscripten/005_logo/005_logo.cpp )
+	target_link_options( 005_logo PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Qrcode ${SOURCES} extras/examples_emscripten/Emscripten/Qrcode/Qrcode.cpp )
-	target_link_options( Qrcode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 006_password ${SOURCES} extras/examples_emscripten/Emscripten/006_password/006_password.cpp )
+	target_link_options( 006_password PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( Screenadvanced ${SOURCES} extras/examples_emscripten/Emscripten/Screenadvanced/Screenadvanced.cpp )
-	target_link_options( Screenadvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 007_input ${SOURCES} extras/examples_emscripten/Emscripten/007_input/007_input.cpp )
+	target_link_options( 007_input PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 008_input_number ${SOURCES} extras/examples_emscripten/Emscripten/008_input_number/008_input_number.cpp )
+	target_link_options( 008_input_number PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 009_beeeeep ${SOURCES} extras/examples_emscripten/Emscripten/009_beeeeep/009_beeeeep.cpp )
+	target_link_options( 009_beeeeep PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 010_bannerText ${SOURCES} extras/examples_emscripten/Emscripten/010_bannerText/010_bannerText.cpp )
+	target_link_options( 010_bannerText PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 101_keyOverride ${SOURCES} extras/examples_emscripten/Emscripten/101_keyOverride/101_keyOverride.cpp )
+	target_link_options( 101_keyOverride PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( colorizer ${SOURCES} extras/examples_emscripten/Emscripten/colorizer/colorizer.cpp )
+	target_link_options( colorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( inputSimple ${SOURCES} extras/examples_emscripten/Emscripten/inputSimple/inputSimple.cpp )
+	target_link_options( inputSimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( levelMeter ${SOURCES} extras/examples_emscripten/Emscripten/levelMeter/levelMeter.cpp )
+	target_link_options( levelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( list ${SOURCES} extras/examples_emscripten/Emscripten/list/list.cpp )
+	target_link_options( list PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( progress ${SOURCES} extras/examples_emscripten/Emscripten/progress/progress.cpp )
+	target_link_options( progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( qrCode ${SOURCES} extras/examples_emscripten/Emscripten/qrCode/qrCode.cpp )
+	target_link_options( qrCode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( screenAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/screenAdvanced/screenAdvanced.cpp )
+	target_link_options( screenAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

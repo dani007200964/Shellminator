@@ -37,8 +37,6 @@ stdioStream stdioChannel;
 // Create a Shellminator object, and initialize it to use stdioChannel
 Shellminator shell( &stdioChannel );
 
-CommanderColorizer colorizer;
-
 // Create a pretty logo for the terminal.
 const char logo[] =
 
@@ -75,9 +73,6 @@ int main(){
 
     // Attach the logo.
     shell.attachLogo( logo );
-
-    colorizer = CommanderColorizer();
-    shell.attachColorizer( &colorizer );
 
     // Initialize shell object.
     shell.begin( "arnold" );

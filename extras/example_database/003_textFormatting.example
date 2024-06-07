@@ -1,0 +1,63 @@
+EXCLUDE=NONE
+CATEGORY=Basic
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ *
+ * To test this example, you need a terminal emulator like PuTTY or Minicom.
+ * This example shows a simple setup for Shellminator. It will create an
+ * interactive interface, but it does not execute any command.
+ * See Shellminator_execute example for further information.
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// Create a Shellminator object, and initialize it to use {{ channel }}
+Shellminator shell( &{{ channel }} );
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+// Print some formatted text. Firstly, we need to specify the format,
+// then print the text as usual.
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::BOLD, Shellminator::YELLOW );
+{{ channel }}.println( "Is it bold? Is it yellow?");
+
+// Finally, we need to set back the format to default.
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+// Some other example.
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::BLINKING, Shellminator::CYAN );
+{{ channel }}.println( "Can it blink?");
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::UNDERLINE, Shellminator::RED );
+{{ channel }}.println( "Underline?");
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::ITALIC, Shellminator::GREEN );
+{{ channel }}.println( "Italic?");
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::ITALIC, Shellminator::BOLD, Shellminator::UNDERLINE, Shellminator::YELLOW );
+{{ channel }}.println( "Multiple?");
+Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+++--LOOP--++
+
+++--FUNCTION_IMPLEMENTATIONS--++

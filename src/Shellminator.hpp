@@ -518,7 +518,7 @@ public:
     /// will be called every time when the up arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideUpArrow(void (*func)(void));
+    void overrideUpArrow(void (*func)(Shellminator*));
 
     /// Override down arrow key behaviour.
     ///
@@ -526,7 +526,7 @@ public:
     /// will be called every time when the down arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideDownArrow(void (*func)(void));
+    void overrideDownArrow(void (*func)(Shellminator*));
 
     /// Override left arrow key behaviour.
     ///
@@ -534,7 +534,7 @@ public:
     /// will be called every time when the left arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLeftArrow(void (*func)(void));
+    void overrideLeftArrow(void (*func)(Shellminator*));
 
     /// Override right arrow key behaviour.
     ///
@@ -542,7 +542,7 @@ public:
     /// will be called every time when the right arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideRightArrow(void (*func)(void));
+    void overrideRightArrow(void (*func)(Shellminator*));
 
     /// Override abort key behaviour.
     ///
@@ -551,7 +551,7 @@ public:
     /// pressed. The default abort key is usually a Ctrl + C
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideAbortKey(void (*func)(void));
+    void overrideAbortKey(void (*func)(Shellminator*));
 
     /// Override Page-Up key behaviour.
     ///
@@ -559,7 +559,7 @@ public:
     /// will be called every time when the Page-Up key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageUpKey(void (*func)(void));
+    void overridePageUpKey(void (*func)(Shellminator*));
 
     /// Override Page-Down key behaviour.
     ///
@@ -567,7 +567,7 @@ public:
     /// will be called every time when the Page-Down key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageDownKey(void (*func)(void));
+    void overridePageDownKey(void (*func)(Shellminator*));
 
     /// Override Home key behaviour.
     ///
@@ -575,7 +575,7 @@ public:
     /// will be called every time when the Home key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideHomeKey(void (*func)(void));
+    void overrideHomeKey(void (*func)(Shellminator*));
 
     /// Override End key behaviour.
     ///
@@ -583,7 +583,7 @@ public:
     /// will be called every time when the End key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideEndKey(void (*func)(void));
+    void overrideEndKey(void (*func)(Shellminator*));
 
     /// Override Logout key behaviour.
     ///
@@ -592,7 +592,7 @@ public:
     /// pressed. The default Logout key is usually a Ctrl + D
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLogoutKey(void (*func)(void));
+    void overrideLogoutKey(void (*func)(Shellminator*));
 
     /// Override Search key behaviour.
     ///
@@ -601,7 +601,7 @@ public:
     /// pressed. The default Search key is usually a Ctrl + R
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideSearchKey(void (*func)(void));
+    void overrideSearchKey(void (*func)(Shellminator*));
 
     /// Reset up arrow key functionality to default.
     ///
@@ -1132,37 +1132,37 @@ private:
     uint8_t lastBannerSize = 0;
 
     /// Function pointer for up arrow behaviour override.
-    void (*upArrowOverrideFunc)(void) = NULL;
+    void (*upArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for down arrow behaviour override.
-    void (*downArrowOverrideFunc)(void) = NULL;
+    void (*downArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for left arrow behaviour override.
-    void (*leftArrowOverrideFunc)(void) = NULL;
+    void (*leftArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for right arrow behaviour override.
-    void (*rightArrowOverrideFunc)(void) = NULL;
+    void (*rightArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for abort key behaviour override.
-    void (*abortKeyFunc)(void) = NULL;
+    void (*abortKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Up key behaviour override.
-    void (*pageUpKeyFunc)(void) = NULL;
+    void (*pageUpKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Down key behaviour override.
-    void (*pageDownKeyFunc)(void) = NULL;
+    void (*pageDownKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Home key behaviour override.
-    void (*homeKeyFunc)(void) = NULL;
+    void (*homeKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for End key behaviour override.
-    void (*endKeyFunc)(void) = NULL;
+    void (*endKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Logout key behaviour override.
-    void (*logoutKeyFunc)(void) = NULL;
+    void (*logoutKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Search key behaviour override.
-    void (*searchKeyFunc)(void) = NULL;
+    void (*searchKeyFunc)(Shellminator*) = NULL;
 
     /// This function processes a new character
     ///
@@ -1172,7 +1172,7 @@ private:
     /// @param new_char This is the nex character that has to be processed.
     void process(char new_char);
 
-    /// This function insets a new character to the input buffer.
+    
     void redrawLine();
 
     //---- Communication channels ----//
