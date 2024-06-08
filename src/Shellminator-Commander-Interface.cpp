@@ -36,6 +36,39 @@ SOFTWARE.
 //---- Commander-API support specific part ----//
 #ifdef COMMANDER_API_VERSION
 
+ShellminatorCaller::ShellminatorCaller(){
+
+}
+
+void ShellminatorCaller::setShell( Shellminator* shell_p ){
+    shell = shell_p;
+}
+
+void ShellminatorCaller::beep(){
+    if( shell != NULL ){
+        shell -> beep();
+    }
+}
+
+void ShellminatorCaller::setBannerText( const char* text_p ){
+    if( shell != NULL ){
+        shell -> setBannerText( text_p );
+    }
+}
+
+void ShellminatorCaller::setPathText( const char* text_p ){
+    if( shell != NULL ){
+        shell -> setBannerPathText( text_p );
+    }
+}
+
+void ShellminatorCaller::clear(){
+    if( shell != NULL ){
+        shell -> clear();
+    }
+}
+
+
 void ShellminatorCommanderInterface::printCommandParserHelp( Stream* channel_p, bool formatting_p ){
     if( commander != NULL ){
         commander -> printHelp( channel_p, formatting_p );
@@ -51,7 +84,10 @@ void ShellminatorCommanderInterface::checkCommandFraction(){
 }
 
 void ShellminatorCommanderInterface::executeWithCommandParser(){
-    // By default it is empty, because no command parser is available.
+    if( commander != NULL ){
+        caller.setChannel( channel );
+        commander -> execute( cmd_buff[ 0 ], caller.getChannel(), &caller );
+    }
 }
 
 void ShellminatorCommanderInterface::autoCompleteWithCommandParser(){

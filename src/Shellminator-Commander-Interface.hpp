@@ -46,12 +46,27 @@ SOFTWARE.
 //---- Commander-API support specific part ----//
 #ifdef COMMANDER_API_VERSION
 
+#include "Commander-Caller-Interface.hpp"
 #include "Shellminator.hpp"
+
+class ShellminatorCaller : public CommandCaller{
+
+public:
+    ShellminatorCaller();
+    void beep() override;
+    void setBannerText( const char* text_p ) override;
+    void setPathText( const char* text_p ) override;
+    void clear() override;
+    void setShell( Shellminator* shell_p );
+
+private:
+    Shellminator* shell = NULL;
+};
 
 class ShellminatorCommanderInterface : public Shellminator{
 
 public:
-    ShellminatorCommanderInterface( Stream *stream_p ) : Shellminator{ stream_p }{}
+    ShellminatorCommanderInterface( Stream *stream_p ) : Shellminator{ stream_p }{ caller.setShell( this ); }
 
     void attachCommander( Commander* commander_p );
     void printCommandParserHelp( Stream* channel_p, bool formatting_p ) override;
@@ -68,6 +83,8 @@ public:
 private:
     /// Pointer to a Commander object.
     Commander* commander = NULL;
+
+    ShellminatorCaller caller;
 
 };
 

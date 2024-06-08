@@ -92,9 +92,12 @@ set( SOURCES
     extras/Commander-API/src/Commander-API.cpp
     extras/Commander-API/src/Commander-IO.hpp
     extras/Commander-API/src/Commander-IO.cpp
-    extras/Commander-API/src/Commander-Utils.hpp
-    extras/Commander-API/src/Commander-Utils.cpp
-    extras/Commander-API/src/Commander-Settings.hpp
+    extras/Commander-API/src/Commander-Arguments.hpp
+    extras/Commander-API/src/Commander-Arguments.cpp
+    extras/Commander-API/src/Commander-Database.hpp
+    extras/Commander-API/src/Commander-DefaultSettings.hpp
+    extras/Commander-API/src/Commander-Caller-Interface.hpp
+    extras/Commander-API/src/Commander-Caller-Interface.cpp
 
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.c
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.h
