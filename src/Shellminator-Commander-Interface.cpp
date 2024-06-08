@@ -86,6 +86,7 @@ void ShellminatorCommanderInterface::checkCommandFraction(){
 void ShellminatorCommanderInterface::executeWithCommandParser(){
     if( commander != NULL ){
         caller.setChannel( channel );
+        enableFormatting ? commander -> enableFormatting() : commander -> disableFormatting();
         commander -> execute( cmd_buff[ 0 ], caller.getChannel(), &caller );
     }
 }
