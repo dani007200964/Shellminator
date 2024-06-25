@@ -1,5 +1,5 @@
 EXCLUDE=NONE
-CATEGORY=GUI
+CATEGORY=Basic
 
 ++--HEADER--++
 
@@ -20,32 +20,46 @@ CATEGORY=GUI
 ++--INCLUDES--++
 
 #include "Shellminator.hpp"
-#include "Shellminator-GUI.hpp"
 
 ++--GLOBAL_VARIABLES--++
 
 // Create a Shellminator object, and initialize it to use {{ channel }}
 Shellminator shell( &{{ channel }} );
 
-ShellminatorLevelMeter level( "CPU Temp" );
+// We need a buffer to store the characters from the input.
+char inputBuffer[ 30 ];
 
 ++--FUNCTION_PROTOTYPES--++
 
+void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
+    // The input does not generate a new line before the callback,
+    // if it is required, it needs to be done manually.
+    parent -> channel -> println();
+
+    // Echo back the name.
+    parent -> channel -> print( "Your name is: " );
+    parent -> channel -> print( buffer );
+}
+
 ++--SETUP--++
 
-// Clear the terminal
+// Clear the terminal to remove the empty input prompt.
+// Uncomment the line below and try it, if it is not clear
+// why this is needed.
 shell.clear();
-//shell.enableFormatting = false;
+
+{{ channel }}.println( "Is it correct? 3 + 8 = 11 [ y - yes ]: " );
+if( Shellminator::waitForKey( &{{ channel }}, 'y' ) ){
+    {{ channel }}.println( "Very well!" );
+}
+else{
+    {{ channel }}.println( "I think it is correct anyway." );
+}
 
 // Initialize shell object.
 shell.begin( "arnold" );
-level.setWarningPercentage( 50.0 );
-level.setErrorPercentage( 80.0 );
-shell.beginScreen( &level );
 
 ++--LOOP--++
-
-level.setPercentage( ( ( millis() / 10 ) % 1000 ) / 1000.0 * 100.0 );
 
 // Process the new data.
 shell.update();

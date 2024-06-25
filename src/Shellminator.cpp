@@ -970,6 +970,8 @@ void Shellminator::update() {
                 // to adopt for the new screen size.
                 pushEvent( ( shellEvent_t ){ SHELL_EVENT_RESIZE } );
 
+                clear();
+
                 // Call the update function of the screen with the new
                 // dimensions to make it possible to adopt to the new
                 // screen size.
@@ -1333,10 +1335,18 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
                 // This way it can react to the return event.
                 screen -> update( terminalWidth, terminalHeight );
 
-                // In this case we have to end the drawing process.
-                endScreen();
-                // And set the state machine back to default state.
-                currentState = &Shellminator::ShellminatorDefaultState;
+                // We have to pop the EVENT_CODE_RETURN event from the event buffer.
+                popEvent();
+
+                // If a screen swap occured, we doesn't end the screen.
+                // Otherwise we stop rendering and return to regular terminal mode.
+                if( readEvent().type != SHELL_EVENT_SCREEN_SWAP ){
+                    // In this case we have to end the drawing process.
+                    endScreen();
+                    // And set the state machine back to default state.
+                    currentState = &Shellminator::ShellminatorDefaultState;
+                }
+
                 break;
             }
             ShellminatorEnterKeyState();
@@ -1984,7 +1994,7 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     // Turn off cursor. It would look ugly when drawing.
     hideCursor();
 
-    // Basically, we clear the screen i a funky way.
+    // Basically, we clear the screen in a funky way.
     // Instead of remove the previous data, we shift it upwards
     // to make it avaiable after the Screen finished.
     for( i = 0; i < terminalHeight; i++ ){
@@ -2011,6 +2021,49 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
     screen -> update( terminalWidth, terminalHeight );
 
 }
+
+void Shellminator::swapScreenAndClear( ShellminatorScreen* screen_p, int updatePeriod ){
+    
+    clear();
+    swapScreen( screen_p, updatePeriod );
+    
+}
+
+void Shellminator::swapScreen( ShellminatorScreen* screen_p, int updatePeriod ){
+
+    // If the Screen object pointer is invalid, we have to stop here.
+    if( screen_p == NULL ){
+        return;
+    }
+
+    // If channel is not specified, we have to stop here.
+    if( channel == NULL ){
+        return;
+    }
+
+    // Save Screen object pointer to internal variable.
+    screen = screen_p;
+
+    // Set the redraw flag to true, to force the redraw request.
+    screenRedraw = true;
+
+    // Save the redraw intervall to internal variable.
+    screenUpdatePeriod = updatePeriod;
+
+    // Save system time to the timers.
+    screenTimerStart = millis();
+    sizeTimerStart = millis();
+
+    // Call the Screens init function.
+    screen -> init( this, bufferMemoryAllocated ? &bufferedPrinter : channel );
+
+    // Call the Screens update function.
+    screen -> update( terminalWidth, terminalHeight );
+
+    pushEvent( ( shellEvent_t ){ SHELL_EVENT_SCREEN_SWAP, EVENT_CODE_EMPTY } );
+
+}
+
 
 void Shellminator::endScreen(){
     

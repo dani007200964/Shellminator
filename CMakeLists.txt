@@ -53,6 +53,8 @@ set( SOURCES
     src/GUI/Shellminator-List-Detailed.cpp
     src/GUI/Shellminator-Level-Meter.hpp
     src/GUI/Shellminator-Level-Meter.cpp
+    src/GUI/Shellminator-Notification.hpp
+    src/GUI/Shellminator-Notification.cpp
     src/Shellminator-DefaultSettings.hpp
     src/Shellminator.hpp
     src/Shellminator.cpp
@@ -98,6 +100,8 @@ set( SOURCES
     extras/Commander-API/src/Commander-DefaultSettings.hpp
     extras/Commander-API/src/Commander-Caller-Interface.hpp
     extras/Commander-API/src/Commander-Caller-Interface.cpp
+    extras/Commander-API/src/Commander-Autocomplete.hpp
+    extras/Commander-API/src/Commander-Autocomplete.cpp
 
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.c
     extras/nayuki-qrcodegen/QR-Code-generator/c/qrcodegen.h
@@ -160,9 +164,25 @@ if( BUILD_EXAMPLES )
 	#add_executable( 008_input_number ${SOURCES} extras/examples_desktop/Desktop/008_input_number/008_input_number.cpp )
 	#add_executable( 009_beeeeep ${SOURCES} extras/examples_desktop/Desktop/009_beeeeep/009_beeeeep.cpp )
 	#add_executable( 010_bannerText ${SOURCES} extras/examples_desktop/Desktop/010_bannerText/010_bannerText.cpp )
+	#add_executable( 011_waitForKey ${SOURCES} extras/examples_desktop/Desktop/011_waitForKey/011_waitForKey.cpp )
 	#add_executable( 100_keyOverride ${SOURCES} extras/examples_desktop/Desktop/100_keyOverride/100_keyOverride.cpp )
 	#add_executable( 101_qrCode ${SOURCES} extras/examples_desktop/Desktop/101_qrCode/101_qrCode.cpp )
-	add_executable( 200_commanderBasic ${SOURCES} extras/examples_desktop/Desktop/200_commanderBasic/200_commanderBasic.cpp )
+	#add_executable( 102_buffering ${SOURCES} extras/examples_desktop/Desktop/102_buffering/102_buffering.cpp )
+	#add_executable( 200_commanderBasic ${SOURCES} extras/examples_desktop/Desktop/200_commanderBasic/200_commanderBasic.cpp )
+	#add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_desktop/Desktop/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
+	#add_executable( 251_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/251_commanderColorizer/251_commanderColorizer.cpp )
+	#add_executable( 300_guiButton ${SOURCES} extras/examples_desktop/Desktop/300_guiButton/300_guiButton.cpp )
+	#add_executable( 301_guiProgress ${SOURCES} extras/examples_desktop/Desktop/301_guiProgress/301_guiProgress.cpp )
+	#add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_desktop/Desktop/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
+	#add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_desktop/Desktop/303_guiLevelMeter/303_guiLevelMeter.cpp )
+	#add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_desktop/Desktop/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
+	#add_executable( 305_guiNotification ${SOURCES} extras/examples_desktop/Desktop/305_guiNotification/305_guiNotification.cpp )
+	#add_executable( 306_guiList ${SOURCES} extras/examples_desktop/Desktop/306_guiList/306_guiList.cpp )
+	#add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_desktop/Desktop/307_guiListAdvanced/307_guiListAdvanced.cpp )
+	#add_executable( 308_guiPlot ${SOURCES} extras/examples_desktop/Desktop/308_guiPlot/308_guiPlot.cpp )
+	#add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_desktop/Desktop/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
+	#add_executable( 400_simpleScreen ${SOURCES} extras/examples_desktop/Desktop/400_simpleScreen/400_simpleScreen.cpp )
+	add_executable( 401_advancedScreen ${SOURCES} extras/examples_desktop/Desktop/401_advancedScreen/401_advancedScreen.cpp )
 	#add_executable( colorizer ${SOURCES} extras/examples_desktop/Desktop/colorizer/colorizer.cpp )
 	#add_executable( levelMeter ${SOURCES} extras/examples_desktop/Desktop/levelMeter/levelMeter.cpp )
 	#add_executable( list ${SOURCES} extras/examples_desktop/Desktop/list/list.cpp )
@@ -200,14 +220,62 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( 010_bannerText ${SOURCES} extras/examples_emscripten/Emscripten/010_bannerText/010_bannerText.cpp )
 	target_link_options( 010_bannerText PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
+	add_executable( 011_waitForKey ${SOURCES} extras/examples_emscripten/Emscripten/011_waitForKey/011_waitForKey.cpp )
+	target_link_options( 011_waitForKey PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
 	add_executable( 100_keyOverride ${SOURCES} extras/examples_emscripten/Emscripten/100_keyOverride/100_keyOverride.cpp )
 	target_link_options( 100_keyOverride PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( 101_qrCode ${SOURCES} extras/examples_emscripten/Emscripten/101_qrCode/101_qrCode.cpp )
 	target_link_options( 101_qrCode PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
+	add_executable( 102_buffering ${SOURCES} extras/examples_emscripten/Emscripten/102_buffering/102_buffering.cpp )
+	target_link_options( 102_buffering PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
 	add_executable( 200_commanderBasic ${SOURCES} extras/examples_emscripten/Emscripten/200_commanderBasic/200_commanderBasic.cpp )
 	target_link_options( 200_commanderBasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_emscripten/Emscripten/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
+	target_link_options( 250_commanderAutoComplete PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 251_commanderColorizer ${SOURCES} extras/examples_emscripten/Emscripten/251_commanderColorizer/251_commanderColorizer.cpp )
+	target_link_options( 251_commanderColorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 300_guiButton ${SOURCES} extras/examples_emscripten/Emscripten/300_guiButton/300_guiButton.cpp )
+	target_link_options( 300_guiButton PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 301_guiProgress ${SOURCES} extras/examples_emscripten/Emscripten/301_guiProgress/301_guiProgress.cpp )
+	target_link_options( 301_guiProgress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
+	target_link_options( 302_guiProgressAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_emscripten/Emscripten/303_guiLevelMeter/303_guiLevelMeter.cpp )
+	target_link_options( 303_guiLevelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
+	target_link_options( 304_guiLevelMeterAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 305_guiNotification ${SOURCES} extras/examples_emscripten/Emscripten/305_guiNotification/305_guiNotification.cpp )
+	target_link_options( 305_guiNotification PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 306_guiList ${SOURCES} extras/examples_emscripten/Emscripten/306_guiList/306_guiList.cpp )
+	target_link_options( 306_guiList PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/307_guiListAdvanced/307_guiListAdvanced.cpp )
+	target_link_options( 307_guiListAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 308_guiPlot ${SOURCES} extras/examples_emscripten/Emscripten/308_guiPlot/308_guiPlot.cpp )
+	target_link_options( 308_guiPlot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
+	target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
+	target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 401_advancedScreen ${SOURCES} extras/examples_emscripten/Emscripten/401_advancedScreen/401_advancedScreen.cpp )
+	target_link_options( 401_advancedScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( colorizer ${SOURCES} extras/examples_emscripten/Emscripten/colorizer/colorizer.cpp )
 	target_link_options( colorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

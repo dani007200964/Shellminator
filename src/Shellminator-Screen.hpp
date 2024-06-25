@@ -103,6 +103,8 @@ public:
 
     /// Return the coordinate of the lower row next to the object.
     int down(){ return originY + height; }
+    
+    Shellminator* getParent(){ return parent; }
 
 protected:
 

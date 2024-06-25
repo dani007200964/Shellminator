@@ -80,11 +80,53 @@ public:
 
     void autoCompleteWithCommandParser() override;
 
+    void attachAutoCompleteBuffer( char* buffer_p, int buffer_size_p );
+
 private:
+
+    char* autoCompleteBuffer = NULL;
+    int autoCompleteBufferSize = 0;
+
     /// Pointer to a Commander object.
     Commander* commander = NULL;
 
     ShellminatorCaller caller;
+
+};
+
+class CommanderColorizer : public DefaultColorizer{
+
+public:
+    CommanderColorizer();
+    void printChar( Stream* response, char c ) override;
+    void reset( Stream* response ) override;
+
+protected:
+
+    typedef enum{
+        DEFAULT_STATE = 0,
+        FIRST_DASH_STATE,
+        SECOND_DASH_STATE,
+        WAIT_FOR_WHITESPACE,
+        WAIT_TOKEN_END,
+        WAIT_STRING_END,
+        ENV_VAR_START
+    }colorizerState_t;
+
+    colorizerState_t stateBuffer[ SHELLMINATOR_BUFF_LEN + 1 ];
+    int bufferCntr = 0;
+
+    colorizerState_t currentState = DEFAULT_STATE;
+
+    void defaultStateFuncion( Stream* response, char c );
+    void firstDashStateFuncion( Stream* response, char c );
+    void secondDashStateFuncion( Stream* response, char c );
+    void waitForWhitespaceStateFuncion( Stream* response, char c );
+    void waitTokenEndStateFunction( Stream* response, char c );
+    void waitStringEndStateFunction( Stream* response, char c );
+    void envVarStartStateFunction( Stream* response, char c );
+
+    void printBackwardError( Stream* response );
 
 };
 

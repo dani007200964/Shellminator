@@ -22,16 +22,15 @@
 // We have to create an object from Commander class.
 Commander commander;
 
-bool cat_func( char *args, Stream *response, void* caller );
-bool dog_func( char *args, Stream *response, void* caller );
-bool sum_func( char *args, Stream *response, void* caller );
+bool cat_func( char *args, CommandCaller* caller );
+bool dog_func( char *args, CommandCaller* caller );
+bool sum_func( char *args, CommandCaller* caller );
 
-Commander::API_t API_tree[] = {
-    apiElement( "cat", "Description for cat command.", cat_func ),
-    apiElement( "dog", "Description for dog command.", dog_func ),
-    apiElement( "sum", "This function sums two number from the argument list.", sum_func )
+Commander::systemCommand_t API_tree[] = {
+    systemCommand( "cat", "Description for cat command.", cat_func ),
+    systemCommand( "dog", "Description for dog command.", dog_func ),
+    systemCommand( "sum", "This function sums two number from the argument list.", sum_func )
 };
-
 
 // Create a ShellminatorCommanderInterface object, and initialize it to use Serial
 ShellminatorCommanderInterface shell( &Serial );
@@ -69,23 +68,23 @@ void loop(){
 }
 
 /// This is an example function for the cat command
-bool cat_func(char *args, Stream *response, void* parrent ){
+bool cat_func(char *args, CommandCaller* caller ){
 
-  response -> print("Hello from cat function!\r\n");
+  caller -> print("Hello from cat function!\r\n");
   return true;
 
 }
 
 /// This is an example function for the dog command
-bool dog_func(char *args, Stream *response, void* parrent ){
+bool dog_func(char *args, CommandCaller* caller ){
 
-  response -> print("Hello from dog function!\r\n");
+  caller -> print("Hello from dog function!\r\n");
   return true;
 
 }
 
 /// This is an example function for the sum command
-bool sum_func(char *args, Stream *response, void* parrent ){
+bool sum_func(char *args, CommandCaller* caller ){
 
   // These variables will hold the value of the
   // two numbers, that has to be summed.
@@ -107,7 +106,7 @@ bool sum_func(char *args, Stream *response, void* parrent ){
 
     // If we could not parse two numbers, we have an argument problem.
     // We print out the problem to the response channel.
-    response -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
+    caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
 
     // Sadly we have to stop the command execution and return.
     return false;
@@ -118,10 +117,10 @@ bool sum_func(char *args, Stream *response, void* parrent ){
   sum = a + b;
 
   // Print out the result.
-  response -> print( a );
-  response -> print( " + " );
-  response -> print( b );
-  response -> print( " = " );
-  response -> println( sum );
+  caller -> print( a );
+  caller -> print( " + " );
+  caller -> print( b );
+  caller -> print( " = " );
+  caller -> println( sum );
     return true;
 }

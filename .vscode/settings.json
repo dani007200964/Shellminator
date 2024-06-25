@@ -15,7 +15,13 @@
         "xiosbase": "cpp",
         "atomic": "cpp",
         "ios": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "algorithm": "cpp",
+        "tuple": "cpp",
+        "memory": "cpp",
+        "sstream": "cpp",
+        "xlocnum": "cpp",
+        "streambuf": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

@@ -191,6 +191,9 @@ void ShellminatorPlot::draw(){
     // Draw the data points.
     drawPlot();
 
+    // Set the correct style.
+    parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+
 }
 
 void ShellminatorPlot::drawScale(){

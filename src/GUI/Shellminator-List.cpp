@@ -176,7 +176,7 @@ void ShellminatorList::draw(){
     redraw = false;
 
     // Set cursor to top left and print the instruction text.
-    Shellminator::setCursorPosition( channel, 1, 1 );
+    Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( instruction );
     channel -> print( "\033[0K" );
 
@@ -187,7 +187,7 @@ void ShellminatorList::draw(){
         index = ( i - 1 ) + drawOffset;
 
         // Set cursor to the current options location.
-        Shellminator::setCursorPosition( channel, 1, i + 1 );
+        Shellminator::setCursorPosition( channel, originX, originY + i );
 
         // Check if the current option is the selected one.
         if( index == selected ){

@@ -134,7 +134,7 @@ SOFTWARE.
 
 /// Definition of the maximum length of each command
 #ifndef SHELLMINATOR_BUFF_LEN
-  #define SHELLMINATOR_BUFF_LEN 20
+  #define SHELLMINATOR_BUFF_LEN 30
 #endif
 
 /// Definition of the maximum length of the previous command memory

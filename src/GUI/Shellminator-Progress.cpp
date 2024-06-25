@@ -301,10 +301,10 @@ void ShellminatorProgress::draw(){
 
         }
 
-        // Clear the rest of the line.
-        channel -> print( "\033[0K" );
-
     }
+
+    // Clear the rest of the line.
+    channel -> print( "\033[0K" );
 
 }
 

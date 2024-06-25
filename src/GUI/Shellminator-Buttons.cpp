@@ -116,6 +116,7 @@ void ShellminatorButton::attachTriggerFunction( void(*func_p)(ShellminatorScreen
 
 void ShellminatorButton::setColor( Shellminator::textColor_t color_p ){
     color = color_p;
+    redraw = true;
 }
 
 void ShellminatorButton::init( Shellminator* parent_p, Stream* channel_p ){

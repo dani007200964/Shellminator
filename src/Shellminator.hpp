@@ -755,6 +755,9 @@ public:
     /// With this function you can abort a registered Screen session.
     void endScreen();
 
+    void swapScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+    void swapScreenAndClear( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+
     /// Redraw request from a Screen object.
     ///
     /// This function is used by the attached Screen object. The Screen object can
@@ -769,7 +772,8 @@ public:
        SHELL_EVENT_RESIZE,      ///< If the object detects a resize event, it will be available to the Screen object with this flag.
        SHELL_EVENT_MOUSE,       ///< To identify mouse related events.
        SHELL_EVENT_KEY,         ///< To identify simple key events like: `A`, `b`... @note Case sensitive!
-       SHELL_EVENT_CODED_KEY    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
+       SHELL_EVENT_CODED_KEY,    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
+       SHELL_EVENT_SCREEN_SWAP
     }shellEventType_t;
 
     /// Coded event enumeration.
@@ -989,6 +993,9 @@ protected:
     /// This variable tracks the end of the input message.
     uint32_t cmd_buff_cntr = 0;
 
+    /// This variable tracks the location of the next character.
+    uint32_t cursor = 0;
+
     /// This flag must be set true in checkCommandFraction function
     /// when the command parser contains the command.
     bool commandFound = false;
@@ -1004,6 +1011,9 @@ protected:
     virtual void executeWithCommandParser();
 
     virtual void autoCompleteWithCommandParser();
+
+    void redrawLine();
+
 
 private:
     /// It can be used to accelerate the data sending process.
@@ -1120,9 +1130,6 @@ private:
     /// This function will be called when a command recives.
     void (*execution_fn)( char*, Shellminator* );
 
-    /// This variable tracks the location of the next character.
-    uint32_t cursor = 0;
-
     /// This variable tracks the state of the VT100 decoder state-machine.
     uint32_t escape_state = 0;
 
@@ -1178,8 +1185,6 @@ private:
     /// @param new_char This is the nex character that has to be processed.
     void process(char new_char);
 
-    
-    void redrawLine();
 
     //---- Communication channels ----//
 
