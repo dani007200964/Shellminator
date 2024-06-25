@@ -114,7 +114,7 @@ void ShellminatorProgress::draw(){
         limit = (float)( width - 9 ) * ratio + 9;
 
         // Set the color to the specified one.    
-        parent -> format_m( channel, color );
+        parent -> format( channel, color );
 
         // It has to start from 9 to avoid xTerm glitch.
         for( i = 9; i < limit; i++ ){
@@ -131,7 +131,7 @@ void ShellminatorProgress::draw(){
         }
 
         // Set back formatting to regular.
-        parent -> format_m( channel, Shellminator::WHITE );
+        parent -> format( channel, Shellminator::WHITE );
 
         // Draw progress bar end character.
         channel -> print( "\u2502" );
@@ -144,7 +144,7 @@ void ShellminatorProgress::draw(){
         limit = (float)( width / 2 - 10 ) * ratio + 10;
 
         // Set the color to the specified one.    
-        parent -> format_m( channel, color );
+        parent -> format( channel, color );
 
         // It has to start from 10 to avoid xTerm glitch.
         for( i = 10; i < ( width / 2 ); i++ ){
@@ -161,7 +161,7 @@ void ShellminatorProgress::draw(){
         }
 
         // Set back formatting to regular.
-        parent -> format_m( channel, Shellminator::WHITE );
+        parent -> format( channel, Shellminator::WHITE );
 
         // Draw progress bar end character.
         channel -> print( "\u2502 " );

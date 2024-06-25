@@ -72,58 +72,58 @@ void Shellminator::clear() {
 
 }
 
-void Shellminator::setFormatFunc( Stream *stream_p, int firstArg, ... ){
-
-    va_list list;
-    int next;
-
+void Shellminator::setFormat( Stream *stream_p, int firstArg ){
     if( stream_p == NULL ){
-        // Necessary to remove the data from the arg list.
-        next = va_arg( list, int );
-        while( next >= 0 ){
-            next = va_arg( list, int );
-        }
         return;
     }
 
     stream_p -> print( __CONST_TXT__( "\033[" ) );
     stream_p -> print( firstArg );
-
-    va_start( list, firstArg );
-    
-    next = va_arg( list, int );
-    while( next >= 0 ){
-        stream_p -> print( ';' );
-        stream_p -> print( next );
-        next = va_arg( list, int );
-    }
-
     stream_p -> print( 'm' );
-
-    va_end( list );
-
 }
 
-void Shellminator::formatFunc( Stream *stream_p, int firstArg, ... ){
+void Shellminator::setFormat( Stream *stream_p, int firstArg, int secondArg ){
+    if( stream_p == NULL ){
+        return;
+    }
 
-    va_list args;
-    int next;
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
+    stream_p -> print( firstArg );
+    stream_p -> print( ';' );
+    stream_p -> print( secondArg );
+    stream_p -> print( 'm' );
+}
 
-    va_start( args, firstArg );
+void Shellminator::setFormat( Stream *stream_p, int firstArg, int secondArg, int thirdArg ){
+    if( stream_p == NULL ){
+        return;
+    }
 
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
+    stream_p -> print( firstArg );
+    stream_p -> print( ';' );
+    stream_p -> print( secondArg );
+    stream_p -> print( ';' );
+    stream_p -> print( thirdArg );
+    stream_p -> print( 'm' );
+}
+
+void Shellminator::format( Stream *stream_p, int firstArg ){
     if( enableFormatting ){
-        setFormatFunc( stream_p, firstArg, args );
+        setFormat( stream_p, firstArg );
     }
-    
-    else{
-        next = va_arg( args, int );
-        while( next >= 0 ){
-            next = va_arg( args, int );
-        }
+}
+
+void Shellminator::format( Stream *stream_p, int firstArg, int secondArg ){
+    if( enableFormatting ){
+        setFormat( stream_p, firstArg, secondArg );
     }
+}
 
-    va_end( args );
-
+void Shellminator::format( Stream *stream_p, int firstArg, int secondArg, int thirdArg ){
+    if( enableFormatting ){
+        setFormat( stream_p, firstArg, secondArg, thirdArg );
+    }
 }
 
 

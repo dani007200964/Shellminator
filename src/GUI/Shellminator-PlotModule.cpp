@@ -126,7 +126,7 @@ void ShellminatorPlot::draw(){
     textWidth = strlen( name );
 
     // Set the name text color.
-    parent -> format_m( channel, Shellminator::BOLD, Shellminator::WHITE );
+    parent -> format( channel, Shellminator::BOLD, Shellminator::WHITE );
 
     // Set cursor to make the text appear on the top center.
     //Shellminator::setCursorPosition( channel, originX + width / 2 - j / 2, originY );
@@ -192,7 +192,7 @@ void ShellminatorPlot::draw(){
     drawPlot();
 
     // Set the correct style.
-    parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+    parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
 
 }
 
@@ -207,7 +207,7 @@ void ShellminatorPlot::drawScale(){
     char sign[2] = { '\0', '\0' };
 
     // Set the correct style.
-    parent -> format_m( channel, Shellminator::BOLD, Shellminator::WHITE );
+    parent -> format( channel, Shellminator::BOLD, Shellminator::WHITE );
 
     // Draw the scale.
     for( i = 0; i < ( height - 1 ); i++ ){
@@ -333,7 +333,7 @@ void ShellminatorPlot::drawPlot(){
 
     const char* nextChar;
 
-    parent -> format_m( channel, Shellminator::REGULAR, color );
+    parent -> format( channel, Shellminator::REGULAR, color );
 
     terminalWidth = width - ( valueTextSizeMax + 2 ) - ( resultTextSize + 2 );
 

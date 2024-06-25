@@ -304,25 +304,25 @@ void Shellminator::printBanner(){
     }
 
     // Sets the terminal style to bold and the color to green.
-    format_m( selectedChannel, BOLD, GREEN );
+    format( selectedChannel, BOLD, GREEN );
 
     // Print the banner text and save it's size.
     lastBannerSize += selectedChannel -> print( banner );
 
     // Sets the terminal style to regular and the color to white.
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
 
     // Print the separator.
     lastBannerSize += selectedChannel -> print( ':' );
 
     // Set color to blue.
-    format_m( selectedChannel, BLUE );
+    format( selectedChannel, BLUE );
 
     // Print banner path text.
     lastBannerSize += selectedChannel -> print( bannerPath );
 
     // Set formatting to default.
-    format_m( selectedChannel, REGULAR, WHITE );
+    format( selectedChannel, REGULAR, WHITE );
 
     // Print one space at the end to separate the banner from the user text.
     lastBannerSize += selectedChannel -> print( ' ' );
@@ -414,9 +414,9 @@ void Shellminator::printHistory(){
         }
 
         // Print the index and the command.
-        format_m( selectedChannel, BOLD, MAGENTA );
+        format( selectedChannel, BOLD, MAGENTA );
         selectedChannel -> print( index );
-        format_m( selectedChannel, REGULAR, WHITE );
+        format( selectedChannel, REGULAR, WHITE );
         selectedChannel -> print( ' ' );
         selectedChannel -> print( ' ' );
         selectedChannel -> println( cmd_buff[ i ] );
@@ -471,89 +471,89 @@ void Shellminator::printHelp(){
 
     // Header section
     selectedChannel -> println();
-    format_m( selectedChannel, BOLD, RED );
+    format( selectedChannel, BOLD, RED );
     selectedChannel -> print( __CONST_TXT__( "----" ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> print( __CONST_TXT__( " Shortcut Keys " ) );
-    format_m( selectedChannel, RED );
+    format( selectedChannel, RED );
     selectedChannel -> print( __CONST_TXT__( "----" ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
     selectedChannel -> println();
 
     // Ctrl-A / Home
     selectedChannel -> print( __CONST_TXT__( "Ctrl-A / Home " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u2196  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the beginning of the line." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Ctrl-E / End
     selectedChannel -> print( __CONST_TXT__( "Ctrl-E / End  " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u2198  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the end of the line." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Ctrl-D
     selectedChannel -> print( __CONST_TXT__( "Ctrl-D        " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u233D  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Log out." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Ctrl-R
     selectedChannel -> print( __CONST_TXT__( "Ctrl-R        " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u26D5  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Reverse-i-search." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Page Up
     selectedChannel -> print( __CONST_TXT__( "Page Up       " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u21DE  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search backwards and auto completion." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Page Down
     selectedChannel -> print( __CONST_TXT__( "Page Down     " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u21DF  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search forward and auto completion." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Arrow Up
     selectedChannel -> print( __CONST_TXT__( "Arrow Up      " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u2191  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history backward." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Arrow Down
     selectedChannel -> print( __CONST_TXT__( "Arrow Down    " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u2193  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history forward." ) );
-    format_m( selectedChannel, YELLOW );
+    format( selectedChannel, YELLOW );
 
     // Return / Enter
     selectedChannel -> print( __CONST_TXT__( "Return        " ) );
-    format_m( selectedChannel, GREEN );
+    format( selectedChannel, GREEN );
     selectedChannel -> print( __CONST_TXT__( "\u21A9  " ) );
-    format_m( selectedChannel, WHITE );
+    format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Execute command, or exit from screen." ) );
 
     printCommandParserHelp( selectedChannel, enableFormatting );
 
-    format_m( selectedChannel, REGULAR, WHITE );
+    format( selectedChannel, REGULAR, WHITE );
 
     // Check if buffering is enabled.
     // If so, we have to flush the buffer to the output stream.
@@ -577,7 +577,7 @@ void Shellminator::begin( const char* banner_p ) {
     banner[ SHELLMINATOR_BANNER_LEN - 1 ] = '\0';
 
     // Set the terminal color and style to the defined settings for the logo
-    format_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+    format( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
     // Draw the startup logo.
     drawLogo();
@@ -727,7 +727,7 @@ void Shellminator::redrawLine(){
     }
 
     // Restore the color and style for user text.
-    format_m( selectedChannel, REGULAR, WHITE );
+    format( selectedChannel, REGULAR, WHITE );
 
     // Check if buffering is enabled.
     // If so, we have to flush the buffer to the output stream.
@@ -805,7 +805,7 @@ void Shellminator::update() {
                 channel = &client;
 
                 // Set the terminal color and style to the defined settings for the logo
-                format_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+                format( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
                 drawLogo();
 
@@ -1259,13 +1259,13 @@ void Shellminator::drawLogo() {
     if( logo ){
 
         // Set the terminal color and style to the defined settings for the logo
-        format_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+        format( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
         // Draws the startup logo to the terminal interface.
         channel -> print( logo );
 
         // Set the terminal style to normal.
-        format_m( channel, REGULAR, WHITE );
+        format( channel, REGULAR, WHITE );
 
     }
 
@@ -1274,13 +1274,13 @@ void Shellminator::drawLogo() {
     else if( progmemLogo ){
 
         // Set the terminal color and style to the defined settings for the logo
-        format_m( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
+        format( channel, SHELLMINATOR_LOGO_FONT_STYLE, SHELLMINATOR_LOGO_COLOR );
 
         // Draws the startup logo to the terminal interface.
         channel -> print( progmemLogo );
 
         // Set the terminal style to normal.
-        format_m( channel, REGULAR, WHITE );
+        format( channel, REGULAR, WHITE );
 
     }
 

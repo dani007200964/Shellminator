@@ -143,11 +143,11 @@ void Shellminator::redrawHistorySearch(){
     cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
     selectedChannel -> print( '\r' );
-    format_m( selectedChannel, REGULAR, WHITE );
+    format( selectedChannel, REGULAR, WHITE );
     selectedChannel -> print( "(reverse-i-search)'" );  // 19 characters long.
-    format_m( selectedChannel, BOLD, YELLOW );
+    format( selectedChannel, BOLD, YELLOW );
     selectedChannel -> print( cmd_buff[ 0 ] );
-    format_m( selectedChannel, REGULAR, WHITE );
+    format( selectedChannel, REGULAR, WHITE );
     selectedChannel -> print( "': \033[0K" );
 
     if( cmd_buff_cntr == 0 ){
@@ -168,14 +168,14 @@ void Shellminator::redrawHistorySearch(){
 
                 if( !highlighted && ( j == searchResult ) ){
 
-                    format_m( selectedChannel, BOLD, YELLOW );
+                    format( selectedChannel, BOLD, YELLOW );
                     highlighted = true;
 
                 }
 
                 if( highlighted && ( j == ( searchResult + strlen( cmd_buff[ 0 ] ) ) ) ){
 
-                    format_m( selectedChannel, REGULAR, WHITE );
+                    format( selectedChannel, REGULAR, WHITE );
                     highlighted = false;
 
                 }
@@ -186,7 +186,7 @@ void Shellminator::redrawHistorySearch(){
 
             if( highlighted ){
 
-                format_m( selectedChannel, REGULAR, WHITE );
+                format( selectedChannel, REGULAR, WHITE );
 
             }
 

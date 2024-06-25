@@ -132,38 +132,6 @@ SOFTWARE.
 /// Buffer size for the mouse event parser.
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
 
-/// Basic text formatting.
-///
-/// You can use this macro to modify the style or color of the printed text.
-/// It can be used without a Shellminator object.
-/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
-///       monitor does not support these features.
-///
-/// This macro is made to make the usage of @ref setFormatFunc function safe.
-/// @note please use this macro instead of @ref setFormatFunc.
-/// @param streamObject Pointer to a Stream object.
-/// @param ... Format specifiers. You can give as many specifier as you like.
-///
-/// Example: @code{cpp} Shellminator::setFormat( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-#define setFormat_m( streamObject, ... ) setFormatFunc( (streamObject), __VA_ARGS__, -1 );
-
-/// Basic text formatting.
-///
-/// You can use this macro to modify the style or color of the printed text.
-/// It can only be used with a Shellminator object.
-/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
-///       monitor does not support these features.
-///
-/// This macro is made to make the usage of @ref formatFunc function safe.
-/// @note please use this macro instead of @ref formatFunc.
-/// @param streamObject Pointer to a Stream object.
-/// @param ... Format specifiers. You can give as many specifier as you like.
-///
-/// Example: @code{cpp} shell.format( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-///
-/// @note If formatting is disabled on the object, it won't do anything.
-#define format_m( streamObject, ... ) formatFunc( (streamObject), __VA_ARGS__, -1 );
-
 /// Shellminator object
 ///
 /// It can be used to interface with a <a href="https://en.wikipedia.org/wiki/VT100">VT100</a> compatible terminal like
@@ -345,7 +313,9 @@ public:
     ///          use this macro to avoid problems.
     ///
     /// @note If formatting is disabled on the object, it won't do anything.
-    static void setFormatFunc( Stream *stream_p, int firstArg, ... );
+    static void setFormat( Stream *stream_p, int firstArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
     /// Basic text formatting.
     ///
@@ -360,7 +330,9 @@ public:
     ///       Please check @ref enableFormatting for more information.
     /// @warning There is a dedicated macro for this function, called @ref format. Please
     ///          use this macro to avoid problems.
-    void formatFunc( Stream *stream_p, int firstArg, ... );
+    void format( Stream *stream_p, int firstArg );
+    void format( Stream *stream_p, int firstArg , int secondArg );
+    void format( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
     /// Hide the cursor.
     ///

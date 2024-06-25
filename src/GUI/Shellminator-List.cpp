@@ -194,7 +194,7 @@ void ShellminatorList::draw(){
             // If selected change the format to
             // background to highlight the selection.
             // Also print some graphics to the beginning.
-            parent -> format_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
             channel -> print( "\u2BA9 " );
         }
 
@@ -229,7 +229,7 @@ void ShellminatorList::draw(){
         // Check if the current option is the selected one.
         if( index == selected ){
             // If selected, we have to change back the formatting to regular.
-            parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
         }
 
         printExtra( index );

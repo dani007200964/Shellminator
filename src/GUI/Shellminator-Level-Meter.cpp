@@ -180,15 +180,15 @@ void ShellminatorLevelMeter::draw(){
 
         // Check for warning
         if( ( i > warningLimit ) && ( i <= errorLimit ) ){
-            parent -> format_m( channel, Shellminator::YELLOW );
+            parent -> format( channel, Shellminator::YELLOW );
         }
 
         else if( i >= errorLimit ){
-            parent -> format_m( channel, Shellminator::RED );
+            parent -> format( channel, Shellminator::RED );
         }
 
         else{
-            parent -> format_m( channel, Shellminator::GREEN );
+            parent -> format( channel, Shellminator::GREEN );
         }
 
         // Empty cell.
@@ -237,7 +237,7 @@ void ShellminatorLevelMeter::draw(){
             channel -> print( __CONST_TXT__( "\u2588" ) );
         }
 
-        parent -> format_m( channel, Shellminator::WHITE );
+        parent -> format( channel, Shellminator::WHITE );
 
         // Right border.
         if( drawName ){
@@ -250,10 +250,10 @@ void ShellminatorLevelMeter::draw(){
 
         if( drawName ){
             channel -> print( __CONST_TXT__( "\u2590" ) );
-            parent -> format_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
             channel -> print( name[ nameSize - i ] );
             channel -> print( ' ' );
-            parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
         }
 
         else{

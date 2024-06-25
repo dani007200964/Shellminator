@@ -115,7 +115,7 @@ void ShellminatorNotification::draw(){
     xStart = width / 2 - borderWidth / 2;
     yStart = height / 2 - borderHeight / 2;
 
-    parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+    parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
 
     // Set cursor to top left and print the instruction text.
     Shellminator::setCursorPosition( channel, xStart, yStart );
