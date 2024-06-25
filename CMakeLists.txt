@@ -271,25 +271,25 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
 	target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
-	target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
+	#target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 401_advancedScreen ${SOURCES} extras/examples_emscripten/Emscripten/401_advancedScreen/401_advancedScreen.cpp )
-	target_link_options( 401_advancedScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( 401_advancedScreen ${SOURCES} extras/examples_emscripten/Emscripten/401_advancedScreen/401_advancedScreen.cpp )
+	#target_link_options( 401_advancedScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( colorizer ${SOURCES} extras/examples_emscripten/Emscripten/colorizer/colorizer.cpp )
-	target_link_options( colorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( colorizer ${SOURCES} extras/examples_emscripten/Emscripten/colorizer/colorizer.cpp )
+	#target_link_options( colorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( levelMeter ${SOURCES} extras/examples_emscripten/Emscripten/levelMeter/levelMeter.cpp )
-	target_link_options( levelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( levelMeter ${SOURCES} extras/examples_emscripten/Emscripten/levelMeter/levelMeter.cpp )
+	#target_link_options( levelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( list ${SOURCES} extras/examples_emscripten/Emscripten/list/list.cpp )
-	target_link_options( list PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( list ${SOURCES} extras/examples_emscripten/Emscripten/list/list.cpp )
+	#target_link_options( list PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( progress ${SOURCES} extras/examples_emscripten/Emscripten/progress/progress.cpp )
-	target_link_options( progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( progress ${SOURCES} extras/examples_emscripten/Emscripten/progress/progress.cpp )
+	#target_link_options( progress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( screenAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/screenAdvanced/screenAdvanced.cpp )
-	target_link_options( screenAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	#add_executable( screenAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/screenAdvanced/screenAdvanced.cpp )
+	#target_link_options( screenAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 endif()

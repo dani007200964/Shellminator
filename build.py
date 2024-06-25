@@ -258,19 +258,22 @@ if ( 'web' in target ) or ( 'all' in target ):
     print( "Files in build folder:" )
     print( buildFiles )
 
+    webExamplesFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html/webExamples') )
+
     # Check if the webExamples directory exists. In this case delet its content.
-    if os.path.isdir( rootDirectory + "/docs/webExamples" ) == True:
-        shutil.rmtree( rootDirectory + "/docs/webExamples" )
+    if os.path.isdir( webExamplesFolder ) == True:
+        shutil.rmtree( webExamplesFolder )
     
-    os.mkdir( rootDirectory + "/docs/webExamples" )
+    os.mkdir( webExamplesFolder )
 
     for file in buildFiles:
         if file.endswith( ".js" ):
 
             fileName = file.split(".")[0]
             wasmFile = file.split(".")[0] + ".wasm"
-            shutil.copyfile( rootDirectory + "/build/" + file,      rootDirectory + "/docs/webExamples/" + file )
-            shutil.copyfile( rootDirectory + "/build/" + wasmFile,  rootDirectory + "/docs/webExamples/" + wasmFile )
+            print( rootDirectory + "/build/" + file,      webExamplesFolder + "/" + file  )
+            shutil.copyfile( rootDirectory + "/build/" + file,      webExamplesFolder + "/" + file )
+            shutil.copyfile( rootDirectory + "/build/" + wasmFile,  webExamplesFolder + "/" + wasmFile )
             
             # Read the next template file line-by-line.
             templateFile = open( rootDirectory + "/extras/emscripten_template_page.html" )
@@ -287,7 +290,7 @@ if ( 'web' in target ) or ( 'all' in target ):
             currentTemplate = Template(  templateData )
             webPageData  = currentTemplate.render( fields )
 
-            outputFile = open( rootDirectory + "/docs/webExamples/" + fileName + ".html", "w" )
+            outputFile = open( webExamplesFolder + "/" + fileName + ".html", "w" )
             outputFile.write( webPageData )
             outputFile.close()
 
