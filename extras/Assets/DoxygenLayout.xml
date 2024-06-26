@@ -3,7 +3,14 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <tab type="usergroup" visible="yes" url="@ref introduction_page" title="👋 Introduction" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref examples_page" title="📖 Examples" intro="">
+        <tab type="usergroup" visible="yes" url="@ref installation_page" title="📥 Installation" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 001_basic_page" title="001 Basic" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 002_commandCallback_page" title="002 Command Callback" intro=""/>
+    </tab>
+    <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref developer_zone_page" title="🚧 Developer Zone" intro=""/>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">
       <tab type="namespacelist" visible="yes" title="" intro=""/>

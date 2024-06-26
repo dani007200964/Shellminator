@@ -795,7 +795,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            = docs/Style/layout.xml
+LAYOUT_FILE            = extras/Assets/DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -909,7 +909,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = src \
-                         docs/markdown_pages
+                         extras/Assets/DocuPages \
+                         extras/Assets/DocuPages/ExamplePages
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1044,7 +1045,7 @@ EXCLUDE_SYMBOLS        =
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = extras/examples_doxygen
+EXAMPLE_PATH           =
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -1325,7 +1326,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            =
+HTML_HEADER            = extras/Assets/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1360,8 +1361,9 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = extras/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                         extras/doxygen-awesome-css/doxygen-awesome.css
+HTML_EXTRA_STYLESHEET  = extras/doxygen-awesome-css/doxygen-awesome.css \
+                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1371,7 +1373,28 @@ HTML_EXTRA_STYLESHEET  = extras/doxygen-awesome-css/doxygen-awesome-sidebar-only
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         extras/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         extras/Assets/Scripts/lottie-player.js \
+                         extras/Assets/DocuEmoji/Graduation-cap.json \
+                         extras/Assets/DocuEmoji/Rocket.json \
+                         extras/Assets/DocuEmoji/Thinking-face.json \
+                         extras/Assets/DocuEmoji/Comet.json \
+                         extras/Assets/DocuEmoji/Arm-mechanical.json \
+                         extras/Assets/DocuEmoji/Alien.json \
+                         extras/Assets/DocuEmoji/Bug.json \
+                         extras/Assets/DocuEmoji/Crystal-ball.json \
+                         extras/Assets/DocuEmoji/Lady-bug.json \
+                         extras/Assets/DocuEmoji/Constructio.json \
+                         extras/Assets/DocuEmoji/Gear.json \
+                         extras/Assets/supported_boards.html \
+                         extras/Assets/DocuImages/arduino_uno_r3.svg \
+                         extras/Assets/DocuImages/arduino_uno_r4.svg \
+                         extras/Assets/DocuImages/arduino_nano.svg \
+                         extras/Assets/DocuImages/arduino_nano_33.svg \
+                         extras/Assets/DocuImages/pi_pico.svg \
+                         extras/Assets/DocuImages/wemos_d1.svg \
+                         extras/Assets/DocuEmoji/Light-bulb.json
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

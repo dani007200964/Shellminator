@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Finder</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        input[type="text"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .image-container {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, orange, green);
+            height: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 50px;
+            height: 50px;
+            background: url('logo.svg') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 50px;
+            height: 50px;
+            background: url('logo.svg') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+        .description {
+            margin-top: 10px;
+            color: #666666;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chose your board</h1>
+        <input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Keresés...">
+        <select id="myDropdown" onchange="updateSelection()">
+            <option value="" selected disabled hidden>Válassz...</option>
+            <option value="atmega328" data-image="arduino_uno_r3.svg" >Arduino Uno R3</option>
+            <option value="ra4m1" data-image="arduino_uno_r4.svg" >Arduino Uno R4</option>
+            <option value="atmega328" data-image="arduino_nano.svg" >Arduino Nano</option>
+            <option value="nrf52840" data-image="arduino_nano_33.svg" >Arduino Nano33</option>
+            <option value="rp2040" data-image="pi_pico.svg" >Raspberry Pi Pico</option>
+            <option value="esp8266" data-image="wemos_d1.svg" >ESP8266</option>
+        </select>
+        <div class="image-container" id="imageContainer">
+            <img id="selectedImage" src="" alt="Választott kép">
+        </div>
+        <input type="range" id="slider" min="0" max="100" value="50" disabled>
+        <div class="description" id="description"></div>
+    </div>
+
+    <script>
+        function filterFunction() {
+            var input, filter, select, options, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            select = document.getElementById("myDropdown");
+            options = select.getElementsByTagName("option");
+            let hasVisibleOptions = false;
+            for (i = 0; i < options.length; i++) {
+                txtValue = options[i].textContent || options[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";
+                    hasVisibleOptions = true;
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+            if (filter === "") {
+                select.classList.remove("hidden");
+            } else if (!hasVisibleOptions) {
+                select.classList.add("hidden");
+            }
+        }
+
+        function updateSelection() {
+            var select = document.getElementById("myDropdown");
+            var selectedOption = select.options[select.selectedIndex];
+            var imageSrc = selectedOption.getAttribute("data-image");
+            // var description = selectedOption.getAttribute("data-description");
+            var slider = document.getElementById("slider");
+            var imageContainer = document.getElementById("imageContainer");
+
+            if (selectedOption.value !== "") {
+                imageContainer.style.display = "block";
+                document.getElementById("selectedImage").src = imageSrc;
+                // document.getElementById("description").innerText = description;
+
+                // Csúszka értékének beállítása a kiválasztott elem alapján (itt csak példa, testreszabható)
+                switch (selectedOption.value) {
+                    case "atmega328":
+                        slider.value = 10;
+                        document.getElementById("description").innerText = `
+                            The Atmega328 is a very popular microcontroller, but unfortunately, it's a bit outdated now.
+                            Its biggest issue is its limited dynamic memory compared to today's standards, and because its
+                            address bus isn't contiguous, long texts need to be fetched separately from EEPROM. Despite this,
+                            the basic functions of Shellminator work perfectly fine on it. However, it's worth noting to be
+                            mindful of using larger buffers and avoiding long strings on it.
+                        `;
+                        break;
+                    case "ra4m1":
+                        slider.value = 80;
+                        document.getElementById("description").innerText = `
+                            The RA4M1 is a relatively new microcontroller. It has enough memory to handle more serious tasks,
+                            and with its many peripherals, it fits almost anywhere. The new Arduino Uno R4 series also uses this
+                            processor and has won our favor. With the WiFi version, you can even create a wireless terminal, the
+                            sky's the limit. Its only downside is that it's a bit on the pricey side, but it's truly enjoyable to use.
+                        `;
+                        break;
+                    case "nrf52840":
+                        slider.value = 80;
+                        document.getElementById("description").innerText = `
+                            The nrf52840 is a versatile microcontroller that is perfect for IoT purposes. The Arduino Nano33 series
+                            also uses this microcontroller. Due to its excellent power consumption, it's suitable for battery-powered
+                            applications as well. Unfortunately, Shellminator currently does not support Bluetooth communication,
+                            but we hope this will be possible in the future.
+                        `;
+                        break;
+                    case "rp2040":
+                        slider.value = 80;
+                        document.getElementById("description").innerText = `
+                            The RP2040 is a very intriguing microcontroller. It was created by the Raspberry Pi team, and they really
+                            set the bar high with this one. Right off the bat, we get a dual-core microcontroller with an incredible
+                            amount of both flash and dynamic memory. Additionally, having native USB support is a huge advantage. The
+                            Raspberry Pi Pico series uses this microcontroller, and fortunately, there's also a WiFi-enabled version
+                            available, allowing us to communicate wirelessly.
+                        `;
+                        break;
+                    case "esp8266":
+                        slider.value = 80;
+                        document.getElementById("description").innerText = `
+                            The ESP8266 is a very intriguing microcontroller, suitable for almost anything. An added advantage is its
+                            built-in WiFi, allowing wireless communication. It has a relatively large amount of dynamic memory and,
+                            depending on the board, can even have several megabytes of Flash memory. However, it's important to note that
+                            when using WiFi, memory usage is non-deterministic, and random crashes can occur. It's perfect for IoT applications.
+                        `;
+                        break;
+                    default:
+                        slider.value = 50;
+                        break;
+                }
+            } else {
+                imageContainer.style.display = "none";
+                document.getElementById("selectedImage").src = "";
+                document.getElementById("description").innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
