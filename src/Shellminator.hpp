@@ -816,10 +816,10 @@ public:
     void popEvent();
 
     /// Stores the width of the terminal in characters.
-    int terminalWidth = 80;
+    int terminalWidth = 30;
 
     /// Stores the height of the terminal in characters.
-    int terminalHeight = 30;
+    int terminalHeight = 12;
 
     /// This buffer is used to parse the mouse coordinates form the
     /// host terminals answer.

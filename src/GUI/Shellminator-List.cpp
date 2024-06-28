@@ -62,6 +62,7 @@ void ShellminatorList::init( Shellminator* parent_p, Stream* channel_p ){
     channel = channel_p;
     selected = 0;
     drawOffset = 0;
+    redraw = true;
 }
 
 void ShellminatorList::update( int width_p, int  height_p ){
@@ -175,10 +176,13 @@ void ShellminatorList::draw(){
     }
     redraw = false;
 
+    parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
+
     // Set cursor to top left and print the instruction text.
     Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( instruction );
     channel -> print( "\033[0K" );
+
 
     // Print as many elements as high the remaining screen is.
     for( i = 1; i < height; i++ ){

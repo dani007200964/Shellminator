@@ -606,6 +606,13 @@ void Shellminator::begin( const char* banner_p ) {
 
     else{
 
+        // If we have an empty string as banner, it probably means that we need
+        // an initialised shell, but we still configuring it. It thats the case,
+        // we skip the banner printing here.
+        if( banner[ 0 ] == '\0' ){
+            return;
+        }
+
         // Print the banner message.
         printBanner();
 
@@ -704,11 +711,26 @@ void Shellminator::redrawLine(){
         selectedChannel -> print( 'C' );  // Left.
     }
 
-    colorizer -> reset( selectedChannel );
-    for( i = 0; i < cmd_buff_cntr; i++ ){
+    // If an input is not active, we print the user text according to
+    // the colorizers output.
+    if( !inputActive ){
+        colorizer -> reset( selectedChannel );
+        for( i = 0; i < cmd_buff_cntr; i++ ){
+            colorizer -> printChar( selectedChannel, cmd_buff[ 0 ][ i ] );
+        }
+    }
 
-        colorizer -> printChar( selectedChannel, cmd_buff[ 0 ][ i ] );
-
+    // If we an active input, we just print the characters without a colorizer.
+    // If the input is in secret mode, we replace the characters with a dot character.
+    else{
+        for( i = 0; i < cmd_buff_cntr; i++ ){
+            if( inputSecretMode ){
+                selectedChannel -> print( "\u2022" );
+            }
+            else{
+                selectedChannel -> print( cmd_buff[ i ] );
+            }
+        }
     }
 
     // Clear the rest of the line to right.
@@ -1631,6 +1653,10 @@ void Shellminator::ShellminatorEndOfLineState(){
 
 void Shellminator::ShellminatorLogoutState(){
 
+    if( !loggedIn ){
+        return;
+    }
+
     if( logoutKeyFunc ){
         logoutKeyFunc( this );
         return;
@@ -1653,6 +1679,10 @@ void Shellminator::ShellminatorLogoutState(){
 }
 
 void Shellminator::ShellminatorReverseSearchState(){
+
+    if( !loggedIn ){
+        return;
+    }
 
     if( searchKeyFunc ){
         searchKeyFunc( this );
@@ -1677,9 +1707,14 @@ void Shellminator::ShellminatorAutoCompleteState(){
 
 void Shellminator::ShellminatorAbortState(){
 
+    if( !loggedIn ){
+        return;
+    }
+
     if( abortKeyFunc ){
         abortKeyFunc( this );
     }
+
 
     inSearch = false;
 
@@ -1713,16 +1748,10 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
     switch( new_char ){
 
         case 'A':
-            if( inputActive ){
-                break;
-            }
             ShellminatorUpArrowKeyState();
             break;
 
         case 'B':
-            if( inputActive ){
-                break;
-            }
             ShellminatorDownArrowKeyState();
             break;
 
@@ -1755,16 +1784,10 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
             break;
 
         case '5':
-            if( inputActive ){
-                break;
-            }
             currentState = &Shellminator::ShellminatorPageUpKeyState;
             break;
 
         case '6':
-            if( inputActive ){
-                break;
-            }
             currentState = &Shellminator::ShellminatorPageDownKeyState;
             break;
 
@@ -1987,19 +2010,23 @@ void Shellminator::beginScreen( ShellminatorScreen* screen_p, int updatePeriod )
 
     // We need the terminal size for the initial run.
     getTerminalSize( &terminalWidth, &terminalHeight );
+    /*
+    else{
+        // Basically, we clear the screen in a funky way.
+        // Instead of remove the previous data, we shift it upwards
+        // to make it avaiable after the Screen finished.
+        for( i = 0; i < terminalHeight; i++ ){
+            channel -> println();
+        }
+    }
+    */
+   clear();
 
     // Save Screen object pointer to internal variable.
     screen = screen_p;
 
     // Turn off cursor. It would look ugly when drawing.
     hideCursor();
-
-    // Basically, we clear the screen in a funky way.
-    // Instead of remove the previous data, we shift it upwards
-    // to make it avaiable after the Screen finished.
-    for( i = 0; i < terminalHeight; i++ ){
-        channel -> println();
-    }
 
     // Request mouse reports form host.
     mouseBegin();

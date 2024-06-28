@@ -35,28 +35,34 @@ shell.clear();
 
 // Print some formatted text. Firstly, we need to specify the format,
 // then print the text as usual.
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::BOLD, Shellminator::YELLOW );
+shell.format( &{{ channel }}, Shellminator::BOLD, Shellminator::YELLOW );
 {{ channel }}.println( "Is it bold? Is it yellow?");
 
 // Finally, we need to set back the format to default.
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 
 // Some other example.
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::BLINKING, Shellminator::CYAN );
+shell.format( &{{ channel }}, Shellminator::BLINKING, Shellminator::CYAN );
 {{ channel }}.println( "Can it blink?");
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::UNDERLINE, Shellminator::RED );
+shell.format( &{{ channel }}, Shellminator::UNDERLINE, Shellminator::RED );
 {{ channel }}.println( "Underline?");
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::ITALIC, Shellminator::GREEN );
+shell.format( &{{ channel }}, Shellminator::ITALIC, Shellminator::GREEN );
 {{ channel }}.println( "Italic?");
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::ITALIC, Shellminator::BOLD, Shellminator::UNDERLINE, Shellminator::YELLOW );
+shell.format( &{{ channel }}, Shellminator::ITALIC, Shellminator::BOLD, Shellminator::YELLOW );
 {{ channel }}.println( "Multiple?");
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+
+// How to disable formatting?
+shell.enableFormatting = false;
+shell.format( &stdioChannel, Shellminator::ITALIC, Shellminator::GREEN );
+stdioChannel.println( "Disable formatting?");
+shell.format( &stdioChannel, Shellminator::REGULAR, Shellminator::WHITE );
 
 ++--LOOP--++
 

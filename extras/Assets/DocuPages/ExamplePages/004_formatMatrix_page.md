@@ -1,4 +1,26 @@
+@page 004_formatMatrix_page Example 004 Format Matrix
 
+\htmlonly
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Most modern terminal emulators support VT100 escape sequences. These sequences are special commands that allow you to manipulate various terminal elements, such as color, style, and cursor position. If you're interested in this topic, you can find a detailed explanation <a href='https://vt100.net/docs/vt100-ug/chapter3.html'>here</a>.
+        </p>
+    </div>
+</div>
+\endhtmlonly
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/004_formatMatrix.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
+\endhtmlonly
+
+This can be a very useful example if you want to test the capabilities of your terminal emulator. This clever little example simply tries out every combination of formatting settings so you can see what each one results in.
+
+## Whole Code
+
+```cpp
 /*
  * Created on Aug 10 2020
  *
@@ -13,9 +35,7 @@
  * See Shellminator_execute example for further information.
 */
 
-
 #include "Shellminator.hpp"
-
 
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
@@ -77,10 +97,6 @@ int background_color_table[] = {
     Shellminator::BG_WHITE 
 };
 
-
-
-
-
 // System init section.
 void setup(){
 
@@ -117,12 +133,10 @@ void setup(){
         Serial.println();
     }
 
-
 }
 
 // Infinite loop.
 void loop(){
 
-
-
 }
+```

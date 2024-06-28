@@ -171,6 +171,7 @@ void ShellminatorLevelMeter::draw(){
     // Draw Top side.
     Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( __CONST_TXT__( "\u250C\u2500\u2510  " ) );
+    channel -> print( "\033[0K" );
 
     for( i = 1; i < height - 1; i++ ){
         Shellminator::setCursorPosition( channel, originX, height - i );
@@ -259,12 +260,14 @@ void ShellminatorLevelMeter::draw(){
         else{
             channel -> print( __CONST_TXT__( "\u2502  " ) );
         }
+        channel -> print( "\033[0K" );
 
     }
 
     // Draw Bottom side.
     Shellminator::setCursorPosition( channel, originX, height );
     channel -> print( __CONST_TXT__( "\u2514\u2500\u2518  " ) );
+    channel -> print( "\033[0K" );
 
     if( name == NULL ){
         return;

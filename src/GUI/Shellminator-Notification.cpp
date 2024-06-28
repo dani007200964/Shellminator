@@ -40,6 +40,7 @@ void ShellminatorNotification::setText( const char* text_p ){
 void ShellminatorNotification::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
+    redraw = true;
 }
 
 void ShellminatorNotification::update( int width_p, int  height_p ){

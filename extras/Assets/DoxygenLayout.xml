@@ -7,9 +7,15 @@
         <tab type="usergroup" visible="yes" url="@ref installation_page" title="📥 Installation" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 001_basic_page" title="001 Basic" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 002_commandCallback_page" title="002 Command Callback" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 003_textFormatting_page" title="003 Text Formatting" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 004_formatMatrix_page" title="004 Format Matrix" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 005_logo_page" title="005 Logo" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 006_password_page" title="006 Password" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 007_input_page" title="007 Input" intro=""/>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref faq_page" title="❓ FAQ" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref developer_zone_page" title="🚧 Developer Zone" intro=""/>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">

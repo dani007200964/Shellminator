@@ -40,6 +40,7 @@ ShellminatorProgress::ShellminatorProgress(){
 void ShellminatorProgress::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
+    redraw = true;
 }
 
 void ShellminatorProgress::draw(){

@@ -122,6 +122,7 @@ void ShellminatorButton::setColor( Shellminator::textColor_t color_p ){
 void ShellminatorButton::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
+    redraw = true;
 }
 
 void ShellminatorButton::update( int width_p, int  height_p ){

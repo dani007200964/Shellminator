@@ -21,7 +21,12 @@
         "memory": "cpp",
         "sstream": "cpp",
         "xlocnum": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "iterator": "cpp",
+        "string": "cpp",
+        "cmath": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

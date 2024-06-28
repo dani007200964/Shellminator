@@ -34,15 +34,15 @@ void setup(){
     shell.clear();
 
     Serial.print( "What could be the password? Maybe " );
-    Shellminator::setFormat_m( &Serial, Shellminator::BOLD, Shellminator::YELLOW );
+    shell.format( &Serial, Shellminator::BOLD, Shellminator::YELLOW );
     Serial.print( "Passwod");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
     Serial.println( "?" );
 
     Serial.print( "Oh, and please log out after you finished with" );
-    Shellminator::setFormat_m( &Serial, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+    shell.format( &Serial, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
     Serial.print( " Ctrl-D ");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
     Serial.println( "key!" );
 
     // Enable password protection.

@@ -51,6 +51,7 @@ ShellminatorPlot::ShellminatorPlot(){
 void ShellminatorPlot::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
+    redraw = true;
 }
 
 void ShellminatorPlot::update( int width_p, int  height_p ){

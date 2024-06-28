@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRC32 Password Hash Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: Transparent;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+            font-size: 14px;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CRC32 Password Hash Generator</h1>
+        <input type="text" id="customInput" placeholder="Enter your password here" />
+        <button onclick="calculateCRC32()">Calculate CRC32 Hash</button>
+        <div id="message" class="message"></div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function crc32(str) {
+            const crcTable = [];
+            for (let i = 0; i < 256; i++) {
+                let c = i;
+                for (let j = 0; j < 8; j++) {
+                    c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
+                }
+                crcTable[i] = c;
+            }
+            let crc = 0 ^ (-1);
+            for (let i = 0; i < str.length; i++) {
+                crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xFF];
+            }
+            return (crc ^ (-1)) >>> 0;
+        }
+
+        function calculateCRC32() {
+            const input = document.getElementById('customInput').value;
+            const pattern = /^[a-zA-Z0-9+!%/=()<>#&@{};,?:.\-*_\\|[\]$]*$/;
+            const messageElement = document.getElementById('message');
+            const resultElement = document.getElementById('result');
+            const validCharacters = "letters, numbers, and the following symbols without whitespace: +!%/=()<>#&@{};,?:.-*_\\|[]$";
+
+            if (!pattern.test(input)) {
+                messageElement.innerHTML = `Invalid input. Please enter only allowed characters.<br>Valid characters are: ${validCharacters}`;
+                resultElement.textContent = "";
+            } else {
+                messageElement.textContent = "";
+                const crc32Hash = crc32(input).toString(16).padStart(8, '0').toUpperCase();
+                resultElement.textContent =  "CRC32 Password Hash:";
+                resultElement.textContent += " 0x" + crc32Hash.charAt( 0 ) + crc32Hash.charAt( 1 ) + ",";
+                resultElement.textContent += " 0x" + crc32Hash.charAt( 2 ) + crc32Hash.charAt( 3 ) + ",";
+                resultElement.textContent += " 0x" + crc32Hash.charAt( 4 ) + crc32Hash.charAt( 5 ) + ",";
+                resultElement.textContent += " 0x" + crc32Hash.charAt( 6 ) + crc32Hash.charAt( 7 ) ;
+            }
+        }
+    </script>
+</body>
+</html>

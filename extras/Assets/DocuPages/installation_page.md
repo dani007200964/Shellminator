@@ -5,7 +5,7 @@
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div style="width:150px; height:150px; margin-right: 20px;">
-        <lottie-player src="Gear.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+        <lottie-player src="Download.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
     </div>
     <div>
         <p>Before we get started with anything, we need to install this software package into our preferred development environment. We've gathered the most popular development environments and prepared a short guide for you to ensure a smooth start to this adventure.
@@ -13,6 +13,8 @@
     </div>
 </div>
 \endhtmlonly
+
+## Terminal Emulator Software
 
 ## Arduino Installation
 
@@ -26,6 +28,10 @@ If you're just getting acquainted with this software, we recommend choosing a sl
 Once you've installed the Arduino IDE, the next task is to install Shellminator. You can find detailed instructions
 [here](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-installing-a-library/).
 Please make sure to always strive for using the latest version to ensure you have the most stable version on your computer.
+
+## Arduino Installation Manually
+
+There are, unfortunately, times when the Library Manager is not available. This can happen for various reasons, such as wanting to install the library offline, or working in a corporate environment where the paths used by the Arduino IDE for installation are blocked. But don't worry! The libraries can still be installed in these situations, and we're here to help you through it.
 
 ## PlatformIO Installation
 

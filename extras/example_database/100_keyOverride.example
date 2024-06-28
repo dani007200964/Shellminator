@@ -61,9 +61,9 @@ shell.clear();
 
 {{ channel }}.println( "Use the arrow keys to change the banner text." );
 {{ channel }}.print( "To reset the functionality, press" );
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+shell.format( &{{ channel }}, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
 {{ channel }}.print( " Ctrl-R ");
-Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 {{ channel }}.println( "key." );
 {{ channel }}.println();
 

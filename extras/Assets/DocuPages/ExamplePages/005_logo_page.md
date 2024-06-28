@@ -1,4 +1,17 @@
+@page 005_logo_page Example 005 Logo
 
+\htmlonly
+<iframe id="demoFrame" src="webExamples/005_logo.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
+\endhtmlonly
+
+If you want to create something really awesome to show off to your colleagues or friends, you definitely need a super cool logo for your project. Online, there are plenty of free tools for this purpose, and we've put together a list of them for you:
+* [ChatGPT](https://chatgpt.com/)
+* [patorjk ASCII Text](http://patorjk.com/software/taag/#p=display&f=Slant&t=Shellminator)
+* [ASCII-Generator](https://ascii-generator.site/)
+
+## Whole Code
+
+```cpp
 /*
  * Created on Aug 10 2020
  *
@@ -13,15 +26,11 @@
  * See Shellminator_execute example for further information.
 */
 
-
 #include "Shellminator.hpp"
 #include "Shellminator-Colorizer.hpp"
 
-
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
-
-CommanderColorizer colorizer;
 
 // Create a pretty logo for the terminal.
 const char logo[] =
@@ -32,14 +41,9 @@ const char logo[] =
     " ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
     "/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
     "\r\n"
-    "Visit on GitHub: https://github.com/dani007200964/Shellminator\r\n\r\n"
+    "Visit on GitHub: https://www.shellminator.org/html/index.html\r\n\r\n"
 
 ;
-
-
-
-
-
 
 // System init section.
 void setup(){
@@ -55,8 +59,6 @@ void setup(){
     // Initialize shell object.
     shell.begin( "arnold" );
 
-    shell.attachColorizer( &colorizer );
-
 
 }
 
@@ -66,5 +68,6 @@ void loop(){
     // Process the new data.
     shell.update();
 
-
 }
+
+```

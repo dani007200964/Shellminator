@@ -33,28 +33,34 @@ void setup(){
 
     // Print some formatted text. Firstly, we need to specify the format,
     // then print the text as usual.
-    Shellminator::setFormat_m( &Serial, Shellminator::BOLD, Shellminator::YELLOW );
+    shell.format( &Serial, Shellminator::BOLD, Shellminator::YELLOW );
     Serial.println( "Is it bold? Is it yellow?");
 
     // Finally, we need to set back the format to default.
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
 
     // Some other example.
-    Shellminator::setFormat_m( &Serial, Shellminator::BLINKING, Shellminator::CYAN );
+    shell.format( &Serial, Shellminator::BLINKING, Shellminator::CYAN );
     Serial.println( "Can it blink?");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
 
-    Shellminator::setFormat_m( &Serial, Shellminator::UNDERLINE, Shellminator::RED );
+    shell.format( &Serial, Shellminator::UNDERLINE, Shellminator::RED );
     Serial.println( "Underline?");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
 
-    Shellminator::setFormat_m( &Serial, Shellminator::ITALIC, Shellminator::GREEN );
+    shell.format( &Serial, Shellminator::ITALIC, Shellminator::GREEN );
     Serial.println( "Italic?");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
 
-    Shellminator::setFormat_m( &Serial, Shellminator::ITALIC, Shellminator::BOLD, Shellminator::UNDERLINE, Shellminator::YELLOW );
+    shell.format( &Serial, Shellminator::ITALIC, Shellminator::BOLD, Shellminator::YELLOW );
     Serial.println( "Multiple?");
-    Shellminator::setFormat_m( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+    shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
+
+    // How to disable formatting?
+    shell.enableFormatting = false;
+    shell.format( &stdioChannel, Shellminator::ITALIC, Shellminator::GREEN );
+    stdioChannel.println( "Disable formatting?");
+    shell.format( &stdioChannel, Shellminator::REGULAR, Shellminator::WHITE );
 
 
 }

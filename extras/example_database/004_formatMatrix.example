@@ -98,9 +98,9 @@ shell.clear();
 
 for( y = 0; y < format_table_size; y++ ){
     for( x = 0; x < color_table_size; x++ ){
-        Shellminator::setFormat_m( &{{ channel }}, color_table[ x ], format_table[ y ] );
+        shell.format( &{{ channel }}, color_table[ x ], format_table[ y ] );
         {{ channel }}.print( "X");
-        Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+        shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
     }
     {{ channel }}.print( "  " );
     {{ channel }}.println( name_table[ y ] );
@@ -112,9 +112,9 @@ for( y = 0; y < format_table_size; y++ ){
 
 for( y = 0; y < color_table_size; y++ ){
     for( x = 0; x < color_table_size; x++ ){
-        Shellminator::setFormat_m( &{{ channel }}, color_table[ x ], background_color_table[ y ] );
+        shell.format( &{{ channel }}, color_table[ x ], background_color_table[ y ] );
         {{ channel }}.print( "X");
-        Shellminator::setFormat_m( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+        shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
     }
     {{ channel }}.println();
 }
