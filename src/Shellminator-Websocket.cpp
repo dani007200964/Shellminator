@@ -30,7 +30,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-# include "Shellminator-Websocket.hpp"
+#include "Shellminator-WebSocket.hpp"
 
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
@@ -47,35 +47,129 @@ ShellminatorWebSocket::ShellminatorWebSocket( int port_p ){
     port = port_p;
     server = new WiFiServer( port );
     dbg = NULL;
+    resetVariables();
 }
 
 ShellminatorWebSocket::ShellminatorWebSocket(){
     port = 443;
     server = new WiFiServer( port );
     dbg = NULL;
+    resetVariables();
 }
 
 void ShellminatorWebSocket::attachDebugChannel( Stream* dbg_p ){
     dbg = dbg_p;
 }
 
-void ShellminatorWebSocket::ShellminatorWebSocket::begin(){
+void ShellminatorWebSocket::begin(){
     server -> begin();
     //SHELLMINATOR_WS_DBGLN( "WS Server started." );
 }
 
+void ShellminatorWebSocket::appendToCircularBuffer( uint8_t data ){
+    streamBuffer[ streamBufferWritePointer ] = data;
+
+    // Increment the write pointer and handle wrapping.
+    streamBufferWritePointer++;
+    if( streamBufferWritePointer >= SHELLMINATOR_WS_STREAM_BUFFER_SIZE ){
+        streamBufferWritePointer = 0;
+    }
+
+    // Detect buffer overflow
+    if( streamBufferWritePointer == streamBufferReadPointer ){
+        SHELLMINATOR_WS_DBGLN( "WS Circular Buffer Overflow!" );
+        closeClient();
+    }
+
+}
+
+void ShellminatorWebSocket::appendToCircularBuffer( uint8_t* data, int dataSize ){
+    int i;
+    for( i = 0; i < dataSize; i++ ){
+        appendToCircularBuffer( data[ i ] );
+    }
+}
+
+bool ShellminatorWebSocket::sendFrame( ShellminatorWebSocket::wsDecodedHeaderType_t type, const uint8_t* data, uint32_t dataSize ){
+
+    int i;
+    bool ret;
+
+    if( data == NULL ){
+        return sendFrame125( type, data, dataSize );
+    }
+
+    for( i = 0; i < (int)( dataSize / 125 ); i++ ){
+        ret = sendFrame125( type, data, 125 );
+        if( !ret ){
+            return false;
+        }
+        data += 125;
+    }
+
+    return sendFrame125( type, data, dataSize % 125 );
+}
+
+bool ShellminatorWebSocket::sendFrame125( ShellminatorWebSocket::wsDecodedHeaderType_t type, const uint8_t* data, uint8_t dataSize ){
+    int i;
+    uint8_t maskBuffer[ 4 ] = { 0 };
+    uint8_t buffer[ WS_FRAMW_HEADER_SIZE ] = { 0 };
+
+    uint8_t headerSize = 2;
+
+    if( dataSize > 125 ){
+        return false;
+    }
+
+    // Byte 0
+    buffer[ 0 ] = 0;
+    buffer[ 0 ] |= 1UL << 7; // To set the Fin bit.
+    buffer[ 0 ] |= type;
+
+    // Byte 1
+    buffer[ 1 ] = 0x00;
+    buffer[ 1 ] |= dataSize;
+
+    SHELLMINATOR_WS_DBGLN( "---- Header To Send ----" );
+    for( i = 0; i < headerSize; i++ ){
+        SHELLMINATOR_WS_DBG( i );
+        SHELLMINATOR_WS_DBG( "\t0x" );
+        SHELLMINATOR_WS_DBG( buffer[ i ], HEX );
+        SHELLMINATOR_WS_DBG( "\t" );
+        SHELLMINATOR_WS_DBGLN( (int)buffer[ i ] );
+    }
+    client.write( (const uint8_t*)buffer, headerSize );
+
+    if( dataSize > 0 ){
+        SHELLMINATOR_WS_DBGLN( "---- Data To Send ----" );
+        for( i = 0; i < dataSize; i++ ){
+            SHELLMINATOR_WS_DBG( i );
+            SHELLMINATOR_WS_DBG( "\t0x" );
+            SHELLMINATOR_WS_DBG( data[ i ], HEX );
+            SHELLMINATOR_WS_DBG( "\t" );
+            SHELLMINATOR_WS_DBGLN( (int)data[ i ] );
+        }
+        client.write( (const uint8_t*)data, dataSize );
+    }
+    return true;
+}
+
 void ShellminatorWebSocket::update(){
     char newChar;
-    if( server -> hasClient() ){
+    WiFiClient newClient = server -> accept();
+
+    if( newClient ){
         if( CLIENT_STATE ){
             // Reject a new client, because another one is alredy in use.
-            server -> available().stop();
-            SHELLMINATOR_WS_DBGLN( "WS Client already in use. Rejecting new connection." );     
+            newClient.stop();
+            SHELLMINATOR_WS_DBGLN( "WS Client already in use. Rejecting new connection." );
         }
         else{
             // New connection.
-            client = server -> available();
-            client.setNoDelay( true );
+            client = newClient;
+            #ifndef ARDUINO_UNOWIFIR4
+                client.setNoDelay( true );
+            #endif
             clientConnected = true;
             wsState = WS_HEADER_STATE;
             SHELLMINATOR_WS_DBGLN( "New WS Client." );
@@ -85,6 +179,7 @@ void ShellminatorWebSocket::update(){
 
     // Check for disconnection event
     if( clientConnected && !CLIENT_STATE ){
+        SHELLMINATOR_WS_DBGLN( "Disconnect Event Detected!" );
         closeClient();
     }
 
@@ -115,6 +210,10 @@ void ShellminatorWebSocket::resetVariables(){
     upgradeWebsocketLineFound = false;
     clientKey[ 0 ] = '\0';
     clientVersion = 0;
+
+    memset( streamBuffer, 0, SHELLMINATOR_WS_STREAM_BUFFER_SIZE );
+    streamBufferWritePointer = 0;
+    streamBufferReadPointer = 0;
 }
 
 void ShellminatorWebSocket::resetDataVariables(){
@@ -143,10 +242,11 @@ void ShellminatorWebSocket::finishDecoding(){
             // Todo handle Pong stuff.
             break;
         case WS_PING:
-            // Todo handle Ping stuff.
+            SHELLMINATOR_WS_DBGLN( "Ping Event -> Sending Pong..." );
+            sendFrame( WS_PONG );
             break;
         case WS_TXT:
-            // Todo handle Text buffering stuff.
+            // The text handling is implemented before this function.
             break;
         case WS_CLOSE:
             closeClient( true );
@@ -160,6 +260,8 @@ void ShellminatorWebSocket::finishDecoding(){
 }
 
 void ShellminatorWebSocket::wsDataProcessing( char newChar ){
+
+    uint8_t currentPayload;
 
     // Firstly we need the first two bytes of the Websocket frame.
     // This will determinate the size of the frame. This implementation
@@ -267,28 +369,44 @@ void ShellminatorWebSocket::wsDataProcessing( char newChar ){
     else if( decodedHdrPayloadCntr > 0 ){
 
         if( decodedHdrMask ){
+            currentPayload = newChar ^ decodedHdrMaskKeys[ decodedDataXorCntr % 4 ];
+            /*
             clientBuffer[ clientBufferCounter ] = newChar ^ decodedHdrMaskKeys[ decodedDataXorCntr % 4 ];
             SHELLMINATOR_WS_DBG( "\t\t" );
             SHELLMINATOR_WS_DBG( (char)clientBuffer[ clientBufferCounter ] );
             SHELLMINATOR_WS_DBG( "\t" );
             SHELLMINATOR_WS_DBG( clientBuffer[ clientBufferCounter ], HEX );
             SHELLMINATOR_WS_DBGLN( "\tMASKED" );
+            */
             decodedDataXorCntr++;
         }
         else{
+            currentPayload = newChar;
+            /*
             clientBuffer[ clientBufferCounter ] = newChar;
             SHELLMINATOR_WS_DBG( "\t\t" );
             SHELLMINATOR_WS_DBG( (char)clientBuffer[ clientBufferCounter ] );
             SHELLMINATOR_WS_DBG( "\t" );
             SHELLMINATOR_WS_DBGLN( clientBuffer[ clientBufferCounter ], HEX );
+            */
         }
 
+        SHELLMINATOR_WS_DBG( "\t\t" );
+        SHELLMINATOR_WS_DBG( (char)currentPayload );
+        SHELLMINATOR_WS_DBG( "\t" );
+        SHELLMINATOR_WS_DBG( currentPayload, HEX );
+        SHELLMINATOR_WS_DBGLN( "\tMASKED" );
+
+        appendToCircularBuffer( currentPayload );
+
+        /*
         clientBufferCounter++;
         if( clientBufferCounter >= SHELLMINATOR_WS_CLIENT_BUFFER_SIZE ){
             SHELLMINATOR_WS_DBGLN( "Buffer Overflow!" );
             closeClient();
             return;
         }
+        */
 
         decodedHdrPayloadCntr--;
         if( decodedHdrPayloadCntr == 0 ){
@@ -323,7 +441,9 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
             if( valid ){
                 SHELLMINATOR_WS_DBGLN("WS Client header valid." );
                 if( !generateServerKey() ){
+                    SHELLMINATOR_WS_DBGLN("Server key generation failed!" );
                     closeClient();
+                    return;
                 }
 
                 SHELLMINATOR_WS_DBG( "WS Server key generated: " );
@@ -336,6 +456,8 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
                 // implementation does not support any subprotocols.
 
                 client.println();
+
+                client.flush();
 
                 // Switch state.
                 wsState = WS_CONNECTED_STATE;
@@ -560,9 +682,9 @@ void ShellminatorWebSocket::tailEnd( char* str ){
 
 bool ShellminatorWebSocket::generateServerKey(){
     int clientKeySize;
+    int i;
 
     uint8_t sha1HashBytes[ 20 ];
-    char sha1HashHexdigest[ 41 ];
 
     clientKeySize = strlen( clientKey );
     strncpy( clientKey + clientKeySize, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", SHELLMINATOR_WS_CLIENT_KEY_SIZE );
@@ -571,6 +693,13 @@ bool ShellminatorWebSocket::generateServerKey(){
     if( !ShellminatorSHA1( sha1HashBytes, (uint8_t*)clientKey, strlen( clientKey ) ) ){
         return false;
     }
+
+    SHELLMINATOR_WS_DBGLN( "---- SHA1 Hash Bytes ----" );
+    for( i = 0; i < sizeof( sha1HashBytes ); i++ ){
+        SHELLMINATOR_WS_DBG( sha1HashBytes[ i ], HEX );
+    }
+    SHELLMINATOR_WS_DBGLN( ' ' );
+
     if( 0 == ShellminatorBase64( sha1HashBytes, sizeof( sha1HashBytes ), serverKey, SHELLMINATOR_WS_SERVER_KEY_SIZE ) ){
         return false;
     }
@@ -581,7 +710,7 @@ bool ShellminatorWebSocket::generateServerKey(){
 
 void ShellminatorWebSocket::closeClient( bool sendCloseFrame ){
     if( sendCloseFrame ){
-        // todo sendWsFrame( WS_CLOSE );
+        sendFrame( WS_CLOSE );
     }
     client.flush();
     delay( 100 );
@@ -590,36 +719,75 @@ void ShellminatorWebSocket::closeClient( bool sendCloseFrame ){
     }
     client.stop();
     clientConnected = false;
-
     resetVariables();
-    if( dbg ){
-        dbg -> println( "WS Client Disconnected." );
-    }         
+    SHELLMINATOR_WS_DBGLN( "Disconnecting WS Client!" );
 
 }
 
 int ShellminatorWebSocket::available(){
-  return 0;
+    if( !clientConnected ){
+        return 0;
+    }
+    if( streamBufferWritePointer == streamBufferReadPointer ){
+        return 0;
+    }
+    else if( streamBufferWritePointer > streamBufferReadPointer ){
+        return streamBufferWritePointer - streamBufferReadPointer;
+    }
+    return SHELLMINATOR_WS_STREAM_BUFFER_SIZE - streamBufferReadPointer + streamBufferWritePointer;
 }
 
 int ShellminatorWebSocket::read(){
-  return -1;
+    int ret;
+    if( !clientConnected ){
+        return -1;
+    }
+    if( streamBufferWritePointer == streamBufferReadPointer ){
+        return -1;
+    }
+    ret = (uint8_t) streamBuffer[ streamBufferReadPointer ];
+    streamBufferReadPointer++;
+
+    if( streamBufferReadPointer >= SHELLMINATOR_WS_STREAM_BUFFER_SIZE ){
+        streamBufferReadPointer = 0;
+    }
+
+    return ret;
 }
 
 int ShellminatorWebSocket::peek(){
-  return -1;
+    if( !clientConnected ){
+        return -1;
+    }
+    if( streamBufferWritePointer == streamBufferReadPointer ){
+        return -1;
+    }
+    return (uint8_t) streamBuffer[ streamBufferReadPointer ];
 }
 
 void ShellminatorWebSocket::flush(){
-
+	// Hinestly I don't know what to do.
+	// Arduino flush methods are wierd.
 }
 
 size_t ShellminatorWebSocket::write( uint8_t b ){
-  return 0;
+    if( !clientConnected ){
+        return 0;
+    }
+    if( sendFrame( WS_TXT, &b, 1 ) ){
+        return 1;
+    }
+    return 0;
 }
 
 size_t ShellminatorWebSocket::write(const uint8_t *data, size_t size){
-  return 0;
+    if( !clientConnected ){
+        return 0;
+    }
+    if( sendFrame( WS_TXT, data, size ) ){
+        return size;
+    }
+    return 0;
 }
 
 #endif

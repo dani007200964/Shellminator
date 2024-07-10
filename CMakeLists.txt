@@ -62,7 +62,10 @@ set( SOURCES
     src/Shellminator-Styles.cpp
     src/Shellminator-SearchModule.cpp
     src/Shellminator-MouseInterface.cpp
+    src/Shellminator-Crypto.hpp
     src/Shellminator-Crypto.cpp
+    src/Shellminator-WebSocket.hpp
+    src/Shellminator-WebSocket.cpp
     src/Shellminator-Input.cpp
     src/Shellminator-Events.cpp
     src/Shellminator-QR-Code-Module.hpp
@@ -71,6 +74,8 @@ set( SOURCES
     src/Shellminator-Colorizer.cpp
     src/Shellminator-Commander-Interface.hpp
     src/Shellminator-Commander-Interface.cpp
+    src/Shellminator-TcpSocket.hpp
+    src/Shellminator-TcpSocket.cpp
 
     extras/simulator/Arduino.h
     extras/simulator/Print.cpp
@@ -154,32 +159,32 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	#add_executable( 001_basic ${SOURCES} extras/examples_desktop/Desktop/001_basic/001_basic.cpp )
-	#add_executable( 002_commandCallback ${SOURCES} extras/examples_desktop/Desktop/002_commandCallback/002_commandCallback.cpp )
-	#add_executable( 003_textFormatting ${SOURCES} extras/examples_desktop/Desktop/003_textFormatting/003_textFormatting.cpp )
-	#add_executable( 004_formatMatrix ${SOURCES} extras/examples_desktop/Desktop/004_formatMatrix/004_formatMatrix.cpp )
-	#add_executable( 005_logo ${SOURCES} extras/examples_desktop/Desktop/005_logo/005_logo.cpp )
-	#add_executable( 006_password ${SOURCES} extras/examples_desktop/Desktop/006_password/006_password.cpp )
-	#add_executable( 007_input ${SOURCES} extras/examples_desktop/Desktop/007_input/007_input.cpp )
-	#add_executable( 008_input_number ${SOURCES} extras/examples_desktop/Desktop/008_input_number/008_input_number.cpp )
-	#add_executable( 009_beeeeep ${SOURCES} extras/examples_desktop/Desktop/009_beeeeep/009_beeeeep.cpp )
-	#add_executable( 010_bannerText ${SOURCES} extras/examples_desktop/Desktop/010_bannerText/010_bannerText.cpp )
-	#add_executable( 100_keyOverride ${SOURCES} extras/examples_desktop/Desktop/100_keyOverride/100_keyOverride.cpp )
-	#add_executable( 101_qrCode ${SOURCES} extras/examples_desktop/Desktop/101_qrCode/101_qrCode.cpp )
-	#add_executable( 102_buffering ${SOURCES} extras/examples_desktop/Desktop/102_buffering/102_buffering.cpp )
-	#add_executable( 200_commanderBasic ${SOURCES} extras/examples_desktop/Desktop/200_commanderBasic/200_commanderBasic.cpp )
-	#add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_desktop/Desktop/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
-	#add_executable( 251_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/251_commanderColorizer/251_commanderColorizer.cpp )
-	#add_executable( 300_guiButton ${SOURCES} extras/examples_desktop/Desktop/300_guiButton/300_guiButton.cpp )
-	#add_executable( 301_guiProgress ${SOURCES} extras/examples_desktop/Desktop/301_guiProgress/301_guiProgress.cpp )
-	#add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_desktop/Desktop/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
-	#add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_desktop/Desktop/303_guiLevelMeter/303_guiLevelMeter.cpp )
-	#add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_desktop/Desktop/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
-	#add_executable( 305_guiNotification ${SOURCES} extras/examples_desktop/Desktop/305_guiNotification/305_guiNotification.cpp )
-	#add_executable( 306_guiList ${SOURCES} extras/examples_desktop/Desktop/306_guiList/306_guiList.cpp )
-	#add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_desktop/Desktop/307_guiListAdvanced/307_guiListAdvanced.cpp )
-	#add_executable( 308_guiPlot ${SOURCES} extras/examples_desktop/Desktop/308_guiPlot/308_guiPlot.cpp )
-	#add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_desktop/Desktop/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
+	add_executable( 001_basic ${SOURCES} extras/examples_desktop/Desktop/001_basic/001_basic.cpp )
+	add_executable( 002_commandCallback ${SOURCES} extras/examples_desktop/Desktop/002_commandCallback/002_commandCallback.cpp )
+	add_executable( 003_textFormatting ${SOURCES} extras/examples_desktop/Desktop/003_textFormatting/003_textFormatting.cpp )
+	add_executable( 004_formatMatrix ${SOURCES} extras/examples_desktop/Desktop/004_formatMatrix/004_formatMatrix.cpp )
+	add_executable( 005_logo ${SOURCES} extras/examples_desktop/Desktop/005_logo/005_logo.cpp )
+	add_executable( 006_password ${SOURCES} extras/examples_desktop/Desktop/006_password/006_password.cpp )
+	add_executable( 007_input ${SOURCES} extras/examples_desktop/Desktop/007_input/007_input.cpp )
+	add_executable( 008_input_number ${SOURCES} extras/examples_desktop/Desktop/008_input_number/008_input_number.cpp )
+	add_executable( 009_beeeeep ${SOURCES} extras/examples_desktop/Desktop/009_beeeeep/009_beeeeep.cpp )
+	add_executable( 010_bannerText ${SOURCES} extras/examples_desktop/Desktop/010_bannerText/010_bannerText.cpp )
+	add_executable( 100_keyOverride ${SOURCES} extras/examples_desktop/Desktop/100_keyOverride/100_keyOverride.cpp )
+	add_executable( 101_qrCode ${SOURCES} extras/examples_desktop/Desktop/101_qrCode/101_qrCode.cpp )
+	add_executable( 102_buffering ${SOURCES} extras/examples_desktop/Desktop/102_buffering/102_buffering.cpp )
+	add_executable( 200_commanderBasic ${SOURCES} extras/examples_desktop/Desktop/200_commanderBasic/200_commanderBasic.cpp )
+	add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_desktop/Desktop/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
+	add_executable( 251_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/251_commanderColorizer/251_commanderColorizer.cpp )
+	add_executable( 300_guiButton ${SOURCES} extras/examples_desktop/Desktop/300_guiButton/300_guiButton.cpp )
+	add_executable( 301_guiProgress ${SOURCES} extras/examples_desktop/Desktop/301_guiProgress/301_guiProgress.cpp )
+	add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_desktop/Desktop/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
+	add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_desktop/Desktop/303_guiLevelMeter/303_guiLevelMeter.cpp )
+	add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_desktop/Desktop/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
+	add_executable( 305_guiNotification ${SOURCES} extras/examples_desktop/Desktop/305_guiNotification/305_guiNotification.cpp )
+	add_executable( 306_guiList ${SOURCES} extras/examples_desktop/Desktop/306_guiList/306_guiList.cpp )
+	add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_desktop/Desktop/307_guiListAdvanced/307_guiListAdvanced.cpp )
+	add_executable( 308_guiPlot ${SOURCES} extras/examples_desktop/Desktop/308_guiPlot/308_guiPlot.cpp )
+	add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_desktop/Desktop/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
 	#add_executable( 400_simpleScreen ${SOURCES} extras/examples_desktop/Desktop/400_simpleScreen/400_simpleScreen.cpp )
 	#add_executable( 401_advancedScreen ${SOURCES} extras/examples_desktop/Desktop/401_advancedScreen/401_advancedScreen.cpp )
 	#add_executable( 999_techDemo ${SOURCES} extras/examples_desktop/Desktop/999_techDemo/999_techDemo.cpp )

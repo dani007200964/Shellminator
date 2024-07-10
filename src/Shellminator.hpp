@@ -36,6 +36,7 @@ SOFTWARE.
 
 //---- Shellminator related headers. ----//
 #include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
+#include "Shellminator-Helpers.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-VT100-Commands.hpp"
@@ -62,47 +63,6 @@ SOFTWARE.
 // This library is using the Stream class as communication channel.
 #include "Stream.h"
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-#ifdef ESP8266
-#include <ESP8266WiFi.h>
-#endif
-
-#ifdef ESP32
-#include <WiFi.h>
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-#include <WebSocketsServer.h>
-#endif
-
-#endif
-
-// 'Smart' macro to include the supported
-// external libraries.
-#ifdef __has_include
-
-    // Check for WebSocketServer library
-    #if __has_include ( "WebSocketsServer.h" )
-        #include <WebSocketsServer.h>
-        #ifndef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-            #define SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-        #endif
-    #endif
-
-    // Check for nayuki QR-Code-generator
-    // ( c implementation needed not c++ one )
-    #if __has_include ( "qrcodegen.h" )
-        #ifndef __AVR__
-            #include "qrcodegen.h"
-            #ifndef SHELLMINATOR_ENABLE_QR_SUPPORT
-                #define SHELLMINATOR_ENABLE_QR_SUPPORT
-            #endif
-        #endif
-    #endif
-
-    
-#endif
-
 // std library headers.
 #include <stdio.h>
 #include <stdint.h>
@@ -115,16 +75,6 @@ SOFTWARE.
 ///  |           your defines!            |
 ///  |                                    |
 ///  +------------------------------------+
-
-// Clever solution to handle constant string data.
-// Thank you ondras12345!
-#ifndef __CONST_TXT__
-    #if defined(ARDUINO) && defined(__AVR__)
-        #define __CONST_TXT__(s) F(s)
-    #else
-        #define __CONST_TXT__(s) (const char*)(s)
-    #endif
-#endif
 
 /// Version of the module
 #define SHELLMINATOR_VERSION "2.0.0"
@@ -191,42 +141,6 @@ public:
     /// String, that holds the version information
     static const char *version;
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    /// Constructor for WiFi Server
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    Shellminator(WiFiServer *server_p);
-
-    /// Start WiFi Server
-    ///
-    /// Use this function to start the WiFiServer object.
-    void beginServer();
-
-    /// Stop WiFi Server
-    ///
-    /// Use this function to stop the WiFiServer object.
-    void stopServer();
-
-    void setClientTimeout(uint16_t clientTimeout_p);
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    Shellminator(WebSocketsServer *wsServer_p);
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p);
-
-    void webSocketPush(uint8_t data);
-
-    void webSocketPush(uint8_t *data, size_t size);
-
-    void websocketDisconnect();
-
-#endif
 
     /// Shell object constructor
     ///
@@ -647,12 +561,6 @@ public:
     /// function for the key, you have to call this function.
     void freeSearchKey();
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    /// Disconnect WiFiClient telnet client
-    void clientDisconnect();
-
-#endif
 
     /// Enable login password.
     ///
@@ -1160,30 +1068,6 @@ private:
 
     //---- Communication channels ----//
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    WiFiServer *server = NULL;
-    WiFiClient client;
-    bool clientConnected = false;
-    uint8_t telnetNegotiationState = 0;
-    uint16_t clientTimeout = 1000;
-
-    // https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
-    static const uint8_t TELNET_IAC_DONT_LINEMODE[3];
-    static const uint8_t TELNET_IAC_WILL_ECHO[3];
-    static const uint8_t TELNET_IAC_DONT_ECHO[3];
-    static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[3];
-    static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[3];
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    WebSocketsServer *wsServer = NULL;
-    uint8_t serverID;
-    shellminatorWebSocketChannel webSocketChannel;
-
-#endif
 
     /// This function is used to search the
     /// previous matching command in the history.

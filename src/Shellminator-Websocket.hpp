@@ -33,165 +33,166 @@ SOFTWARE.
 #ifndef SHELLMINATOR_WEBSOCKET_HPP_
 #define SHELLMINATOR_WEBSOCKET_HPP_
 
-#include "Stream.h"
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-Crypto.hpp"
-#include <string.h>
+    #include "Stream.h"
+    #include "Shellminator-DefaultSettings.hpp"
+    #include "Shellminator-Helpers.hpp"
+    #include "Shellminator-Crypto.hpp"
+    #include <string.h>
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
+    // Todo add hooks to connection and disconnection events!
 
-#ifdef ESP8266
-#include <ESP8266WiFi.h>
-#endif
+    #ifdef ARDUINO
+        #include "Arduino.h"
+    #endif
 
-#ifdef ESP32
-#include <WiFi.h>
-#endif
+    #ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
-#ifdef ESP32
-    #define CLIENT_STATE client.connected()
-#endif
+        // Macro magic for macro overloading.
+        #define SHELLMINATOR_WS_DBG_OVERLOAD( _1, _2, NAME, ... ) NAME
 
-#ifdef ESP8266
-    #define CLIENT_STATE ( client.status() == ESTABLISHED )
-#endif
+        #define SHELLMINATOR_WS_DBG_ENABLE
 
-#define SHELLMINATOR_WS_DBG_OVERLOAD( _1, _2, NAME, ... ) NAME
+        #ifdef SHELLMINATOR_WS_DBG_ENABLE
+            #define SHELLMINATOR_WS_DBG_1(   x ) if( dbg ){ dbg -> print( x );   }
+            #define SHELLMINATOR_WS_DBGLN_1( x ) if( dbg ){ dbg -> println( x ); }
 
-#ifdef SHELLMINATOR_WS_DBG_ENABLE
-    #define SHELLMINATOR_WS_DBG_1(   x ) if( dbg ){ dbg -> print( x );   }
-    #define SHELLMINATOR_WS_DBGLN_1( x ) if( dbg ){ dbg -> println( x ); }
+            #define SHELLMINATOR_WS_DBG_2(   x, y ) if( dbg ){ dbg -> print( x, y );   }
+            #define SHELLMINATOR_WS_DBGLN_2( x, y ) if( dbg ){ dbg -> println( x, y ); }
+        #elif
+            #define SHELLMINATOR_WS_DBG_1(   x )
+            #define SHELLMINATOR_WS_DBGLN_1( x )
 
-    #define SHELLMINATOR_WS_DBG_2(   x, y ) if( dbg ){ dbg -> print( x, y );   }
-    #define SHELLMINATOR_WS_DBGLN_2( x, y ) if( dbg ){ dbg -> println( x, y ); }
-#elif
-    #define SHELLMINATOR_WS_DBG_1(   x )
-    #define SHELLMINATOR_WS_DBGLN_1( x )
+            #define SHELLMINATOR_WS_DBG_2(   x, y )
+            #define SHELLMINATOR_WS_DBGLN_2( x, y )
+        #endif
 
-    #define SHELLMINATOR_WS_DBG_2(   x, y )
-    #define SHELLMINATOR_WS_DBGLN_2( x, y )
-#endif
+        #define SHELLMINATOR_WS_DBG( ... )   SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBG_2,   SHELLMINATOR_WS_DBG_1   )( __VA_ARGS__ )
+        #define SHELLMINATOR_WS_DBGLN( ... ) SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBGLN_2, SHELLMINATOR_WS_DBGLN_1 )( __VA_ARGS__ )
 
-#define SHELLMINATOR_WS_DBG( ... )   SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBG_2,   SHELLMINATOR_WS_DBG_1   )( __VA_ARGS__ )
-#define SHELLMINATOR_WS_DBGLN( ... ) SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBGLN_2, SHELLMINATOR_WS_DBGLN_1 )( __VA_ARGS__ )
+        #define WS_FRAMW_HEADER_SIZE 6
 
-#define SHELLMINATOR_WS_CLIENT_BUFFER_SIZE      100
-#define SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE   30
-#define SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE  50
+        // We need to add 258EAFA5-E914-47DA-95CA-C5AB0DC85B11 to the end of the
+        // received key and this needs space in the buffer.
+        #define SHELLMINATOR_WS_CLIENT_KEY_SIZE         50 + 37
 
-// We need to add 258EAFA5-E914-47DA-95CA-C5AB0DC85B11 to the end of the
-// received key and this needs space in the buffer.
-#define SHELLMINATOR_WS_CLIENT_KEY_SIZE         50 + 37
+        // The Server key is generated from the result of an SH1 hash, which is 20
+        // bytes long. The Base64 encoded key size is 28 characters, but we need a
+        // termination character as well, so the minimum of required buffer size is
+        // 29 characters.
+        #define SHELLMINATOR_WS_SERVER_KEY_SIZE         30 
 
-// The Server key is generated from the result of an SH1 hash, which is 20
-// bytes long. The Base64 encoded key size is 28 characters, but we need a
-// termination character as well, so the minimum of required buffer size is
-// 29 characters.
-#define SHELLMINATOR_WS_SERVER_KEY_SIZE         30 
+        class ShellminatorWebSocket : public Stream{
 
-class ShellminatorWebSocket : public Stream{
+        public:
 
-public:
+            typedef enum{
+                WS_DISCONNECTED_STATE,
+                WS_HEADER_STATE,
+                WS_CONNECTED_STATE
+            } wsState_t;
 
-    typedef enum{
-        WS_DISCONNECTED_STATE,
-        WS_HEADER_STATE,
-        WS_CONNECTED_STATE
-    } wsState_t;
+            typedef enum{
+                WS_COMM = 0x00,
+                WS_TXT = 0x01,
+                WS_CLOSE = 0x08,
+                WS_PING = 0x09,
+                WS_PONG = 0x0A
+            } wsDecodedHeaderType_t;
 
-    typedef enum{
-        WS_COMM = 0x00,
-        WS_TXT = 0x01,
-        WS_CLOSE = 0x08,
-        WS_PING = 0x09,
-        WS_PONG = 0x0A
-    } wsDecodedHeaderType_t;
+            ShellminatorWebSocket();
+            ShellminatorWebSocket( int port_p );
 
-    ShellminatorWebSocket();
-    ShellminatorWebSocket( int port_p );
+            /// Available bytes in the channel.
+            ///
+            /// @returns The available bytes in the channel.
+            int    available() override;
 
-    /// Available bytes in the channel.
-    ///
-    /// @returns The available bytes in the channel.
-    int    available() override;
+            /// Read one byte form the channel.
+            ///
+            /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+            int    read() override;
 
-    /// Read one byte form the channel.
-    ///
-    /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
-    int    read() override;
+            /// Peek the firtst byte from the channel.
+            ///
+            /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+            int    peek() override;
 
-    /// Peek the firtst byte from the channel.
-    ///
-    /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
-    int    peek() override;
+            /// Flush the channel.
+            void   flush() override;
 
-    /// Flush the channel.
-    void   flush() override;
+            /// Write one byte to the channel.
+            ///
+            /// @param b The value that has to be written to the channel.
+            /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
+            size_t write( uint8_t b ) override;
 
-    /// Write one byte to the channel.
-    ///
-    /// @param b The value that has to be written to the channel.
-    /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
-    size_t write( uint8_t b ) override;
+            size_t write(const uint8_t *data, size_t size) override;
 
-    size_t write(const uint8_t *data, size_t size) override;
+            void begin();
+            void update();
+            void attachDebugChannel( Stream* dbg_p );
 
-    void begin();
-    void update();
-    void attachDebugChannel( Stream* dbg_p );
+        private:
+            int port = 443;
+            bool clientConnected = false;
+            Stream* dbg = NULL;
 
-private:
-    int port = 443;
-    bool clientConnected = false;
-     Stream* dbg = NULL;
+            WiFiServer* server;
+            WiFiClient client;
 
-    WiFiServer* server;
-    WiFiClient client;
+            uint8_t streamBuffer[ SHELLMINATOR_WS_STREAM_BUFFER_SIZE ];
+            uint32_t streamBufferWritePointer;
+            uint32_t streamBufferReadPointer;
 
-    char clientBuffer[ SHELLMINATOR_WS_CLIENT_BUFFER_SIZE + 1 ];
-    int clientBufferCounter = 0;
+            char clientBuffer[ SHELLMINATOR_WS_CLIENT_BUFFER_SIZE + 1 ];
+            int clientBufferCounter = 0;
 
-    char clientLineNameBuffer[ SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE ];
-    char clientLineValueBuffer[ SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE ];
-    char clientKey[ SHELLMINATOR_WS_CLIENT_KEY_SIZE ];
-    char serverKey[ SHELLMINATOR_WS_SERVER_KEY_SIZE ];
+            char clientLineNameBuffer[ SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE ];
+            char clientLineValueBuffer[ SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE ];
+            char clientKey[ SHELLMINATOR_WS_CLIENT_KEY_SIZE ];
+            char serverKey[ SHELLMINATOR_WS_SERVER_KEY_SIZE ];
 
-    static const char* serverHeader;
+            static const char* serverHeader;
 
-    void resetVariables();
-    void resetDataVariables();
-    void wsHeaderProcessing( char newChar );
-    void wsDataProcessing( char newChar );
+            void resetVariables();
+            void resetDataVariables();
+            void wsHeaderProcessing( char newChar );
+            void wsDataProcessing( char newChar );
 
-    void closeClient( bool sendCloseFrame = false );
+            void closeClient( bool sendCloseFrame = false );
 
-    bool generateServerKey();
-    void finishDecoding();
+            bool generateServerKey();
+            void finishDecoding();
+            bool sendFrame( wsDecodedHeaderType_t type, const uint8_t* data = NULL, uint32_t dataSize = 0 );
+            bool sendFrame125( wsDecodedHeaderType_t type, const uint8_t* data = NULL, uint8_t dataSize = 0 );
 
-    int indexOf( const char* data, const char x );
-    bool startsWith( const char* original, const char* key );
-    void shiftStringLeft( char* str );
-    int strcicmp( const char* p1, const char* p2 );
-    void tailEnd( char* str );
+            void appendToCircularBuffer( uint8_t data );
+            void appendToCircularBuffer( uint8_t* data, int dataSize );
 
-    bool httpGetLineFound;
-    bool connectionUpgradeLineFound;
-    bool upgradeWebsocketLineFound;
-    int clientVersion;
+            int indexOf( const char* data, const char x );
+            bool startsWith( const char* original, const char* key );
+            void shiftStringLeft( char* str );
+            int strcicmp( const char* p1, const char* p2 );
+            void tailEnd( char* str );
 
-    bool decodedHdrFin;
-    wsDecodedHeaderType_t decodedHdrType;
-    bool decodedHdrMask;
-    uint8_t decodedHdrPayloadLen;
-    uint8_t decodedHdrMaskKeys[ 4 ];
-    uint8_t decodedHdrPayloadCntr;
-    uint8_t decodedDataXorCntr;
+            bool httpGetLineFound;
+            bool connectionUpgradeLineFound;
+            bool upgradeWebsocketLineFound;
+            int clientVersion;
 
-    wsState_t wsState;
+            bool decodedHdrFin;
+            wsDecodedHeaderType_t decodedHdrType;
+            bool decodedHdrMask;
+            uint8_t decodedHdrPayloadLen;
+            uint8_t decodedHdrMaskKeys[ 4 ];
+            uint8_t decodedHdrPayloadCntr;
+            uint8_t decodedDataXorCntr;
+
+            wsState_t wsState;
 
 
-};
+        };
 
-#endif
+    #endif
 
 #endif
