@@ -33,204 +33,97 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 
-void Shellminator::setTerminalCharacterColor( uint8_t style, uint8_t color ) {
-
-  if( !enableFormatting ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  channel -> write( 27 );
-  channel -> print( '[' );
-  channel -> print( style );
-  channel -> print( ';' );
-  channel -> print( color );
-  channel -> print( 'm' );
-
-}
-
-void Shellminator::setTerminalCharacterColor( char* buff, uint8_t style, uint8_t color ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  if( !enableFormatting ){
-
-    *buff='\0';
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  sprintf( buff, "\033[%d;%dm", style, color );
-
-}
-
-void Shellminator::setTerminalCharacterColor( char* buff, uint8_t buffSize, uint8_t style, uint8_t color ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  snprintf( buff, buffSize, "\033[%d;%dm", style, color );
-
-}
-
-void Shellminator::setTerminalCharacterColor( Stream *stream_p, uint8_t style, uint8_t color ){
-
-  if( stream_p == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  stream_p -> write( 27 );
-  stream_p -> print( '[' );
-  stream_p -> print( style );
-  stream_p -> print( ';' );
-  stream_p -> print( color );
-  stream_p -> print( 'm' );
-
-}
-
-void Shellminator::setTerminalCharacterColor( ShellminatorBufferedPrinter *printer_p, uint8_t style, uint8_t color ){
-
-  if( printer_p == NULL ){
-
-    return;
-
-  }
-
-  if( style == 0 ){
-    style = REGULAR;
-  }
-
-  if( color == 0 ){
-    style = WHITE;
-  }
-
-  // The reference what I used can be found here: https://www.nayab.xyz/linux/escapecodes.html
-  printer_p -> printf( "\033[%d;%dm", style, color );
-
-}
-
 void Shellminator::hideCursor(){
 
-  if( !enableFormatting ){
-
-    return;
-
-  }
-
-  channel -> print( (const char*)"\033[?25l" );
-
-}
-
-void Shellminator::hideCursor( char* buff, uint8_t bufferSize ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  snprintf( buff, bufferSize, "\033[?25l" );
+    hideCursor( channel );
 
 }
 
 void Shellminator::hideCursor( Stream *stream_p ){
 
-  if( stream_p == NULL ){
+    if( stream_p == NULL ){
+        return;
+    }
 
-    return;
-
-  }
-
-  stream_p -> print( (const char*)"\033[?25l" );
+    stream_p -> print( __CONST_TXT__( "\033[?25l" ) );
 
 }
 
 void Shellminator::showCursor(){
 
-  if( !enableFormatting ){
-
-    return;
-
-  }
-
-  channel -> print( (const char*)"\033[?25h" );
-
-}
-
-void Shellminator::showCursor( char* buff, uint8_t buffSize ){
-
-  if( buff == NULL ){
-
-    return;
-
-  }
-
-  snprintf( buff, buffSize, "\033[?25h" );
+    showCursor( channel );
 
 }
 
 void Shellminator::showCursor( Stream *stream_p ){
 
-  if( stream_p == NULL ){
+    if( stream_p == NULL ){
+        return;
+    }
 
-    return;
-
-  }
-
-  stream_p -> print( (const char*)"\033[?25h" );
+    stream_p -> print( __CONST_TXT__( "\033[?25h" ) );
 
 }
 
 void Shellminator::clear() {
 
   // explanation can be found here: http://braun-home.net/michael/info/misc/VT100_commands.htm
-  channel -> write( 27 );    // ESC character( decimal 27 )
-  channel -> print( (const char*)"[H" );  // VT100 Home command
-  channel -> write( 27 );    // ESC character( decimal 27 )
-  channel -> print( (const char*)"[J" );  // VT100 screen erase command
+  channel -> print( __CONST_TXT__( "\033[H\033[J" ) );  // VT100 Home command
 
 }
+
+void Shellminator::setFormat( Stream *stream_p, int firstArg ){
+    if( stream_p == NULL ){
+        return;
+    }
+
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
+    stream_p -> print( firstArg );
+    stream_p -> print( 'm' );
+}
+
+void Shellminator::setFormat( Stream *stream_p, int firstArg, int secondArg ){
+    if( stream_p == NULL ){
+        return;
+    }
+
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
+    stream_p -> print( firstArg );
+    stream_p -> print( ';' );
+    stream_p -> print( secondArg );
+    stream_p -> print( 'm' );
+}
+
+void Shellminator::setFormat( Stream *stream_p, int firstArg, int secondArg, int thirdArg ){
+    if( stream_p == NULL ){
+        return;
+    }
+
+    stream_p -> print( __CONST_TXT__( "\033[" ) );
+    stream_p -> print( firstArg );
+    stream_p -> print( ';' );
+    stream_p -> print( secondArg );
+    stream_p -> print( ';' );
+    stream_p -> print( thirdArg );
+    stream_p -> print( 'm' );
+}
+
+void Shellminator::format( Stream *stream_p, int firstArg ){
+    if( enableFormatting ){
+        setFormat( stream_p, firstArg );
+    }
+}
+
+void Shellminator::format( Stream *stream_p, int firstArg, int secondArg ){
+    if( enableFormatting ){
+        setFormat( stream_p, firstArg, secondArg );
+    }
+}
+
+void Shellminator::format( Stream *stream_p, int firstArg, int secondArg, int thirdArg ){
+    if( enableFormatting ){
+        setFormat( stream_p, firstArg, secondArg, thirdArg );
+    }
+}
+
+

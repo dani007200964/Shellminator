@@ -35,7 +35,6 @@ SOFTWARE.
 #define SHELLMINATOR_BUFFERED_PRINTER_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
 
 #ifdef ARDUINO
 #include "Arduino.h"
@@ -57,99 +56,65 @@ SOFTWARE.
 /// Terminal emulators usually works faster, when the data arrives in one large piece.
 /// Otherwise some annoying effect can be observed like flickering or cursor jumping.
 /// This object aims to fix this problem. It is a simple buffered printer.
-class ShellminatorBufferedPrinter{
+class ShellminatorBufferedPrinter : public Stream{
 
 public:
 
-  /// Empty constructor.
-  ///
-  /// This is a simple, empty constructor.
-  ShellminatorBufferedPrinter();
+    /// Empty constructor.
+    ///
+    /// This is a simple, empty constructor.
+    ShellminatorBufferedPrinter();
 
-  /// Stream specific constructor.
-  ///
-  /// With this constructor, you can specify the Stream object.
-  /// @param channel_p Pointer to a Stream object. This object will be used as output.
-  ShellminatorBufferedPrinter( Stream* channel_p );
+    /// Stream specific constructor.
+    ///
+    /// With this constructor, you can specify the Stream object.
+    /// @param channel_p Pointer to a Stream object. This object will be used as output.
+    ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p );
 
-  /// Destructor.
-  ///
-  /// If any memory is allocated for the internal buffer, the
-  /// destructor will deallocate this memory.
-  ~ShellminatorBufferedPrinter();
+    /// Available bytes in the channel.
+    ///
+    /// @returns The available bytes in the channel.
+    int    available() override;
 
-  /// Allocate memory for the internal buffer.
-  ///
-  /// With this function, you can allocate memory for the internal buffer.
-  /// @param bufferSize Allocated memory in characters. It must be at least 30 characters!
-  /// @returns If the memory allocation is done it will return true. If it fails for some reason, it will return false.
-  /// @warning To use the object, this function must be called in the init section.
-  /// @note Usually 30-50 characters long buffer is enough for devices with small amount of memory.
-  bool allocate( int bufferSize );
+    /// Read one byte form the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will be removed from the channel.
+    int    read() override;
 
-  /// Deallocate memory.
-  ///
-  /// If any memory is allocated for the internal buffer, the
-  /// destructor will deallocate this memory.
-  void deallocate();
+    /// Peek the firtst byte from the channel.
+    ///
+    /// @returns Read and return one byte form the channel. The byte will NOT be removed from the channel.
+    int    peek() override;
 
-  /// Set the output Stream.
-  ///
-  /// This function can be used to specify the output Stream object.
-  /// @param channel_p Pointer to a Stream object. This object will be used as output.
-  void setChannel( Stream* channel_p );
+    /// Flush the channel.
+    void   flush() override;
 
-  /// Get the output Stream.
-  ///
-  /// This function can be used to get the address of the output Stream object.
-  /// @returns Pointer to the used Stream object.
-  Stream* getChannel();
+    /// Write one byte to the channel.
+    ///
+    /// @param b The value that has to be written to the channel.
+    /// @returns The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0.
+    size_t write( uint8_t b ) override;
 
-  /// Regular printf like function.
-  ///
-  /// To put data to the internal buffer, you can use this function.
-  /// It is a regular printf like function.
-  /// @param fmt Format specifier.
-  /// @param ... Variadic list.
-  /// @returns The number of printed characters.
-  /// @note If you finished printing, you need to use the flush function to put the data out to the specified Stream channel.
-  int printf( const char *fmt, ... );
-
-  /// Flush function.
-  ///
-  /// If you finished printing, you have to flush out the content in the internal buffer.
-  /// This function flushes out all of the accumulated data in the internal buffer.
-  void flush();
-
-  /// Get the allocated memory.
-  ///
-  /// @returns This function returns the size of the allocated memory.
-  /// @warning If it returns less than zero, that means the memory allocation failed or not done yet.
-  int getBufferSize();
+    size_t write(const uint8_t *data, size_t size) override;
 
 private:
 
-  /// Clear the internal buffer.
-  ///
-  /// This value sets all of the elements in the internal buffer to '\0'.
-  /// @note It only works, if the memory allocation is done.
-  void clearBuffer();
+    /// Clear the internal buffer.
+    ///
+    /// This value sets all of the elements in the internal buffer to '\0'.
+    /// @note It only works, if the memory allocation is done.
+    void clearBuffer();
 
-  // It tracks how much memory is allocated for characters.
-  int bufferSize = -1;
+    // Pointer to the output Stream object.
+    Stream* channel = NULL;
 
-  // Pointer to the buffer. Malloc will use this address.
-  char *acceleratorBuffer = NULL;
-  
-  // It points to the next free element's address in the buffer.
-  char *acceleratorBufferPointer;
+    uint8_t* buffer = NULL;
+    int bufferPointer = 0;
 
-  // It indicates how much free characters are available in the buffer.
-  uint32_t availableCharacters;
+    int bufferSize = 0;
 
-  // Pointer to the output Stream object.
-  Stream* channel = NULL;
-
+    // For unit testing.
+    friend class ShellminatorBufferedPrinterUT;
 };
 
 #endif

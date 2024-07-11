@@ -1,9 +1,0 @@
-<map id="Shellminator::beginServer" name="Shellminator::beginServer">
-<area shape="rect" id="node1" title="Start WiFi Server." alt="" coords="5,42,175,67"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="223,42,356,67"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="409,15,567,41"/>
-<area shape="rect" id="node5" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="404,66,572,91"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#acdbd56dfa0dfb9dd509420d25d9c5cd9" title="Bring some color into your code." alt="" coords="625,5,794,45"/>
-<area shape="rect" id="node6" href="$class_shellminator_buffered_printer.html#addd89bdf65afad80f3f2ce8372df2df4" title="Flush function." alt="" coords="847,92,1025,132"/>
-<area shape="rect" id="node7" href="$class_shellminator_buffered_printer.html#aadb670e69391ed2757391ec2ea64943e" title="Regular printf like function." alt="" coords="620,120,799,160"/>
-</map>

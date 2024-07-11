@@ -1,0 +1,13 @@
+[submodule "extras/nayuki-qrcodegen/QR-Code-generator"]
+	path = extras/nayuki-qrcodegen/QR-Code-generator
+	url = https://github.com/nayuki/QR-Code-generator.git
+[submodule "extras/Unity"]
+	path = extras/Unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
+[submodule "extras/Commander-API"]
+	path = extras/Commander-API
+	url = https://github.com/dani007200964/Commander-API.git
+	branch = dev
+[submodule "extras/doxygen-awesome-css"]
+	path = extras/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git

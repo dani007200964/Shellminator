@@ -36,198 +36,116 @@ SOFTWARE.
 ShellminatorBufferedPrinter::ShellminatorBufferedPrinter(){
 
   channel = NULL;
-  acceleratorBuffer = NULL;
-  bufferSize = -1;
+  buffer = NULL;
+  bufferSize = 0;
 
 }
 
-ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p ){
+ShellminatorBufferedPrinter::ShellminatorBufferedPrinter( Stream* channel_p, uint8_t* buffer_p, int bufferSize_p ){
 
-  channel = channel_p;
-  acceleratorBuffer = NULL;
-  bufferSize = -1;
+    channel = channel_p;
+    buffer = buffer_p;
+    bufferSize = bufferSize_p;
+    bufferPointer = 0;
 
-}
-
-bool ShellminatorBufferedPrinter::allocate( int bufferSize_p ){
-
-  // We need at least 30 characters to work properly.
-  if( bufferSize_p < 30 ){
-    bufferSize = -1;
-    return false;
-  }
-
-  bufferSize = bufferSize_p;
-
-  availableCharacters = bufferSize;
-  acceleratorBuffer = (char*)malloc( bufferSize * sizeof( char ) );
-  acceleratorBufferPointer = (char*)acceleratorBuffer;
-
-  /*
-  char buff[ 200 ];
-  snprintf( buff, sizeof( buff ), "allocated address: %p\r\n", acceleratorBuffer );
-  channel -> print( buff );
-  */
-
-  if( acceleratorBuffer == NULL ){
-    // Memory allocation failed!
-    bufferSize = -1;
-    return false;
-  }
-
-  clearBuffer();
-  return true;
+    clearBuffer();
 
 }
 
-void ShellminatorBufferedPrinter::deallocate(){
-
-  if( acceleratorBuffer != NULL ){
-
-    free( (void*)acceleratorBuffer );
-
-    /*
-    char buff[ 200 ];
-    snprintf( buff, sizeof( buff ), "free address: %p\r\n", acceleratorBuffer );
-    channel -> print( buff );
-    */
-
-    acceleratorBuffer = NULL;
-    bufferSize = -1;
-
-  }
-
-}
-
-ShellminatorBufferedPrinter::~ShellminatorBufferedPrinter(){
-
-  deallocate();
-
-}
-
-
-void ShellminatorBufferedPrinter::setChannel( Stream* channel_p ){
-
-  channel = channel_p;
-
-}
-
-Stream* ShellminatorBufferedPrinter::getChannel(){
-
-  return channel;
-
-}
-
-int ShellminatorBufferedPrinter::printf( const char *fmt, ... ){
-
-  va_list args;
-
-  int status;
-
-  char* pointerBeforePrint;
-
-  // Save the pointer position before any printing.
-  // If the buffer gets full, we have to protect the
-  // data already in the buffer.
-  pointerBeforePrint = acceleratorBufferPointer; 
-
-  // Start the variadic list.
-  va_start( args, fmt );
-
-  // If memory allocation failed with the constructor.
-  if( ( bufferSize < 0 ) || ( channel == NULL ) ){
-
-    // Close the variadic list and return.
-    va_end( args );
+int ShellminatorBufferedPrinter::available(){
     return 0;
-
-  }
-
-  // Try to print the whole data into the buffer.
-  status = vsnprintf( acceleratorBufferPointer, availableCharacters, fmt, args );
-  //wprintf( L"Available characters: %d\r\n", availableCharacters );
-
-  // Check if we ran out of memory.
-  if( status >= availableCharacters ){
-
-    // We possibly ran out of buffer.
-    // Flush the buffer and try again.
-    flush();
-
-    // Try again with empty buffer.
-    status = vsnprintf( acceleratorBufferPointer, availableCharacters, fmt, args );
-
-    // Check the memory again.
-    if( status >= availableCharacters ){
-
-      // If we got a problem with empty buffer, we can not print this data,
-      // because the buffer is too small.
-      
-      // Reset the pointer and the counter for the next transaction.
-      acceleratorBufferPointer = acceleratorBuffer;
-      availableCharacters = bufferSize;
-
-      va_end( args );
-      return 0;
-
-    }
-
-  }
-
-  acceleratorBufferPointer += status;
-  availableCharacters -= status;
-
-
-  va_end( args );
-
-  return status;
-
 }
 
-void ShellminatorBufferedPrinter::flush(){
+int ShellminatorBufferedPrinter::read(){
+    return -1;
+}
 
-  // If memory allocation failed with the constructor.
-  if( ( bufferSize < 0 ) || ( channel == NULL ) ){
-
-    return;
-
-  }
-
-  // Terminate the string.
-  *acceleratorBufferPointer = '\0';
-
-  // Print the data.
-  channel -> print( acceleratorBuffer );
-
-  // Reset the pointer and the counter.
-  acceleratorBufferPointer = acceleratorBuffer;
-  availableCharacters = bufferSize;
-
-  clearBuffer();
-
+int ShellminatorBufferedPrinter::peek(){
+    return -1;
 }
 
 void ShellminatorBufferedPrinter::clearBuffer(){
+    int i;
 
-  int i;
+    for( i = 0; i < bufferSize; i++ ){
+        buffer[ i ] = '\0';
+    }   
+}
 
-  // If memory allocation failed with the constructor.
-  if( ( bufferSize < 0 ) || ( channel == NULL ) ){
+void ShellminatorBufferedPrinter::flush(){
+    // Terminate the buffer.
+    //buffer[ bufferPointer ] = '\0';
+    //channel -> print( buffer );
+    //bufferPointer = 0;
+    /*
+    int i;
 
-    return;
+    for( i = 0; i < bufferPointer; i++ ){
+        channel -> write( buffer[ i ] );
+    }
+    */
 
-  }
-
-  for( i = 0; i < bufferSize; i++ ){
-
-    acceleratorBuffer[ i ] = '\0';
-
-  }
+    channel -> write( buffer, bufferPointer );
+    bufferPointer = 0;
 
 }
 
-int ShellminatorBufferedPrinter::getBufferSize(){
+size_t ShellminatorBufferedPrinter::write( uint8_t b ){
 
-  return bufferSize;
+    // Handle incorrect buffer size or channel.
+    if( ( bufferSize < 1 ) || ( channel == NULL ) ){
+
+        // This case we have to return.
+        return 0;
+
+    }
+
+    // Save the data to the next free slot in the buffer.
+    buffer[ bufferPointer ] = b;
+
+    // Increment the buffer pointer.
+    bufferPointer++;
+
+    // If the pointer reaches the last possible element,
+    // we have to flush the output buffer and reset the bufferPointer.
+    if( bufferPointer >= ( bufferSize - 1 ) ){
+
+        flush();
+
+    }
+
+    return 1;
+
+}
+
+size_t ShellminatorBufferedPrinter::write( const uint8_t *data, size_t size ){
+
+    int i;
+
+    // Handle incorrect buffer size or channel.
+    if( ( bufferSize < 1 ) || ( channel == NULL ) ){
+
+        // This case we have to return.
+        return 0;
+
+    }
+
+    for( i = 0; i < size; i++ ){
+        // Save the current character in the data to the next free slot in the buffer.
+        buffer[ bufferPointer ] = data[ i ];
+
+        // Increment the buffer pointer.
+        bufferPointer++;
+
+        if( bufferPointer >= ( bufferSize - 1 ) ){
+
+            flush();
+
+        }
+
+
+    }
+
+    return size;
 
 }

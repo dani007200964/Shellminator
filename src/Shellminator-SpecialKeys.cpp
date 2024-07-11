@@ -33,478 +33,440 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 
-void Shellminator::overrideUpArrow( void( *func )( void ) ){
-
-  upArrowOverrideFunc = func;
-
+void Shellminator::overrideUpArrow( void( *func )( Shellminator* ) ){
+    upArrowOverrideFunc = func;
 }
 
-void Shellminator::overrideDownArrow( void( *func )( void ) ){
-
-  downArrowOverrideFunc = func;
-
+void Shellminator::overrideDownArrow( void( *func )( Shellminator* ) ){
+    downArrowOverrideFunc = func;
 }
 
-void Shellminator::overrideLeftArrow( void( *func )( void ) ){
-
-  leftArrowOverrideFunc = func;
-
+void Shellminator::overrideLeftArrow( void( *func )( Shellminator* ) ){
+    leftArrowOverrideFunc = func;
 }
 
-void Shellminator::overrideRightArrow( void( *func )( void ) ){
-
-  rightArrowOverrideFunc = func;
-
+void Shellminator::overrideRightArrow( void( *func )( Shellminator* ) ){
+    rightArrowOverrideFunc = func;
 }
 
-void Shellminator::overrideAbortKey( void( *func )( void ) ){
-
-  abortKeyFunc = func;
-
+void Shellminator::overrideAbortKey( void( *func )( Shellminator* ) ){
+    abortKeyFunc = func;
 }
 
-void Shellminator::overridePageUpKey( void( *func )( void ) ){
-
-  pageUpKeyFunc = func;
-
+void Shellminator::overridePageUpKey( void( *func )( Shellminator* ) ){
+    pageUpKeyFunc = func;
 }
 
-void Shellminator::overridePageDownKey( void( *func )( void ) ){
-
-  pageDownKeyFunc = func;
-
+void Shellminator::overridePageDownKey( void( *func )( Shellminator* ) ){
+    pageDownKeyFunc = func;
 }
 
-void Shellminator::overrideHomeKey( void( *func )( void ) ){
-
-  homeKeyFunc = func;
-
+void Shellminator::overrideHomeKey( void( *func )( Shellminator* ) ){
+    homeKeyFunc = func;
 }
 
-void Shellminator::overrideEndKey( void( *func )( void ) ){
-
-  endKeyFunc = func;
-
+void Shellminator::overrideEndKey( void( *func )( Shellminator* ) ){
+    endKeyFunc = func;
 }
 
-void Shellminator::overrideLogoutKey( void( *func )( void ) ){
-
-  logoutKeyFunc = func;
-
+void Shellminator::overrideLogoutKey( void( *func )( Shellminator* ) ){
+    logoutKeyFunc = func;
 }
 
-void Shellminator::overrideSearchKey( void( *func )( void ) ){
-
-  searchKeyFunc = func;
-
+void Shellminator::overrideSearchKey( void( *func )( Shellminator* ) ){
+    searchKeyFunc = func;
 }
 
 void Shellminator::freeUpArrow(){
-
-  upArrowOverrideFunc = NULL;
-
+    upArrowOverrideFunc = NULL;
 }
 
 void Shellminator::freeDownArrow(){
-
-  downArrowOverrideFunc = NULL;
-
+    downArrowOverrideFunc = NULL;
 }
 
 void Shellminator::freeLeftArrow(){
-
-  leftArrowOverrideFunc = NULL;
-
+    leftArrowOverrideFunc = NULL;
 }
 
 void Shellminator::freeRightArrow(){
-
-  rightArrowOverrideFunc = NULL;
-
+    rightArrowOverrideFunc = NULL;
 }
 
 void Shellminator::freeAbortKey(){
-
-  abortKeyFunc = NULL;
-
+    abortKeyFunc = NULL;
 }
 
 void Shellminator::freePageUpKey(){
-
-  pageUpKeyFunc = NULL;
-
+    pageUpKeyFunc = NULL;
 }
 
 void Shellminator::freePageDownKey(){
-
-  pageDownKeyFunc = NULL;
-
+    pageDownKeyFunc = NULL;
 }
 
 void Shellminator::freeHomeKey(){
-
-  homeKeyFunc = NULL;
-
+    homeKeyFunc = NULL;
 }
 
 void Shellminator::freeEndKey(){
-
-  endKeyFunc = NULL;
-
+    endKeyFunc = NULL;
 }
 
 void Shellminator::freeLogoutKey(){
-
-  logoutKeyFunc = NULL;
-
+    logoutKeyFunc = NULL;
 }
 
 void Shellminator::freeSearchKey(){
-
-  searchKeyFunc = NULL;
-
+    searchKeyFunc = NULL;
 }
 
 void Shellminator::ShellminatorUpArrowKeyState(){
 
-  // Because we have finished the escape sequence interpretation we reset the state-machine.
-  currentState = &Shellminator::ShellminatorDefaultState;
-
-  // Check if the arrow function is overriden.
-  if( upArrowOverrideFunc ){
-
-    upArrowOverrideFunc();
-    return;
-
-  }
-
-  // We have to check that we can go upper in history
-  if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
-
-    // If we can, we have to check that the previous command was not empty.
-    if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
-
-      // If it was empty we can't do much with an empty command so we return.
-      return;
-
+    // Because we have finished the escape sequence interpretation we reset the state-machine.
+    currentState = &Shellminator::ShellminatorDefaultState;
+    
+    if( !loggedIn ){
+        return;
+    }
+    if( inputActive ){
+        return;
+    }
+    
+    if( screen != NULL ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_UP_ARROW } );
+        return;
     }
 
-    // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-    // Remember the 0th element is always reserved for the new data. If we browse the history the
-    // data in the history will overwrite the data in the 0th element so the historical data will be
-    // the new data. We use strncpy to prevent overflow.
-    strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
+    // Check if the arrow function is overriden.
+    if( upArrowOverrideFunc ){
+        upArrowOverrideFunc( this );
+        return;
+    }
 
-    // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-    // It is important to track the end of the loaded string.
-    cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-    cursor = cmd_buff_cntr;
+    // We have to check that we can go upper in history
+    if ( cmd_buff_dim < ( SHELLMINATOR_BUFF_DIM ) ) {
 
-    // We print the loaded command to the terminal interface.
-    //channel -> print( cmd_buff[ 0 ] );
+        // If we can, we have to check that the previous command was not empty.
+        if ( cmd_buff[ cmd_buff_dim ][0] == '\0' ) {
+            // If it was empty we can't do much with an empty command so we return.
+            return;
+        }
 
-    redrawLine();
+        // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+        // Remember the 0th element is always reserved for the new data. If we browse the history the
+        // data in the history will overwrite the data in the 0th element so the historical data will be
+        // the new data. We use strncpy to prevent overflow.
+        strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim ], SHELLMINATOR_BUFF_LEN + 1 );
 
-    // We have to increment the cmd_buff_dim variable, to track the history position.
-    // Greater number means older command!
-    cmd_buff_dim++;
+        // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+        // It is important to track the end of the loaded string.
+        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+        cursor = cmd_buff_cntr;
 
-  }
+        // We print the loaded command to the terminal interface.
+        //channel -> print( cmd_buff[ 0 ] );
+
+        redrawLine();
+
+        // We have to increment the cmd_buff_dim variable, to track the history position.
+        // Greater number means older command!
+        cmd_buff_dim++;
+
+    }
 
 }
 
 void Shellminator::ShellminatorDownArrowKeyState(){
 
-  // Because we have finished the escape sequence interpretation we reset the state-machine.
-  currentState = &Shellminator::ShellminatorDefaultState;
+    // Because we have finished the escape sequence interpretation we reset the state-machine.
+    currentState = &Shellminator::ShellminatorDefaultState;
+    
+    if( !loggedIn ){
+        return;
+    }
+    if( inputActive ){
+        return;
+    }    
+    // Check if the arrow function is overriden.
+    if( downArrowOverrideFunc ){
+        downArrowOverrideFunc( this );
+        return;
+    }
 
-  // Check if the arrow function is overriden.
-  if( downArrowOverrideFunc ){
+    if( screen != NULL ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_DOWN_ARROW } );
+        return;
+    }
 
-    downArrowOverrideFunc();
-    return;
+    // We have to check that we can go lover in history, and we are not in the first previous command.
+    if ( cmd_buff_dim > 2 ) {
 
-  }
+        // We have to decrement the cmd_buff_dim variable, to track the history position.
+        // Lower number means newer command!
+        cmd_buff_dim--;
 
+        // Now we have to copy the characters form the histoy to the 0th element in the buffer.
+        // Remember the 0th element is always reserved for the new data. If we browse the history the
+        // data in the history will overwrite the data in the 0th element so the historical data will be
+        // the new data. We use strncpy to prevent overflow.
+        strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN + 1 );
 
-  // We have to check that we can go lover in history, and we are not in the first previous command.
-  if ( cmd_buff_dim > 2 ) {
+        // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
+        // It is important to track the end of the loaded string.
+        cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
+        cursor = cmd_buff_cntr;
 
-    // We have to decrement the cmd_buff_dim variable, to track the history position.
-    // Lower number means newer command!
-    cmd_buff_dim--;
+        // We print the loaded command to the terminal interface.
+        //channel -> print( cmd_buff[ 0 ] );
+        redrawLine();
 
-    // Now we have to copy the characters form the histoy to the 0th element in the buffer.
-    // Remember the 0th element is always reserved for the new data. If we browse the history the
-    // data in the history will overwrite the data in the 0th element so the historical data will be
-    // the new data. We use strncpy to prevent overflow.
-    strncpy( cmd_buff[ 0 ], cmd_buff[ cmd_buff_dim - 1  ], SHELLMINATOR_BUFF_LEN + 1 );
+    }
 
-    // We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.
-    // It is important to track the end of the loaded string.
-    cmd_buff_cntr = strlen( cmd_buff[ 0 ] );
-    cursor = cmd_buff_cntr;
+    // Check that if we are in the first previous command.
+    else if ( cmd_buff_dim == 2 ) {
 
-    // We print the loaded command to the terminal interface.
-    //channel -> print( cmd_buff[ 0 ] );
-    redrawLine();
+        // To empty the incoming string we have to zero it's counter.
+        cmd_buff_cntr = 0;
+        cursor = 0;
 
-  }
+        // We have to reset the cmd_buff_dim variable to the default value.
+        cmd_buff_dim = 1;
 
-  // Check that if we are in the first previous command.
-  else if ( cmd_buff_dim == 2 ) {
+        redrawLine();
 
-    // To empty the incoming string we have to zero it's counter.
-    cmd_buff_cntr = 0;
-    cursor = 0;
+    }
 
-    // We have to reset the cmd_buff_dim variable to the default value.
-    cmd_buff_dim = 1;
-
-    redrawLine();
-
-  }
-
-  // We have finished so we can break from the switch.
+    // We have finished so we can break from the switch.
 
 }
 
 void Shellminator::ShellminatorLeftArrowKeyState(){
 
-  // We just simply reset the state-machine.
-  currentState = &Shellminator::ShellminatorDefaultState;
+    // We just simply reset the state-machine.
+    currentState = &Shellminator::ShellminatorDefaultState;
 
-  // Check if the arrow function is overriden.
-  if( leftArrowOverrideFunc ){
+    // Check if the arrow function is overriden.
+    if( leftArrowOverrideFunc && loggedIn ){
+        leftArrowOverrideFunc( this );
+        return;
+    }
 
-    leftArrowOverrideFunc();
-    return;
+    // Detect if the channel was configured incorrectly.
+    // In this case, we have to stop command execution.
+    if( channel == NULL ){
+        return;
+    }
 
-  }
+    // Check if we can move to left.
+    if( cursor > 0 ){
 
-  // Check if we can move to left.
-  if( cursor > 0 ){
+        channel -> write( 27 );   // ESC character( decimal 27 )
+        channel -> print( '[' );  // VT100 Cursor command.
+        channel -> print( '1' );  // 1 character movement.
+        channel -> print( 'D' );  // Left.
 
-    channel -> write( 27 );   // ESC character( decimal 27 )
-    channel -> print( '[' );  // VT100 Cursor command.
-    channel -> print( '1' );  // 1 character movement.
-    channel -> print( 'D' );  // Left.
+        // Decrement the cursor variable.
+        cursor--;
 
-    // Decrement the cursor variable.
-    cursor--;
-
-  }
+    }
 
 }
 
 void Shellminator::ShellminatorRightArrowKeyState(){
 
-  // We just simply reset the state-machine.
-  currentState = &Shellminator::ShellminatorDefaultState;
+    // We just simply reset the state-machine.
+    currentState = &Shellminator::ShellminatorDefaultState;
 
-  // Check if the arrow function is overriden.
-  if( rightArrowOverrideFunc ){
+    // Check if the arrow function is overriden.
+    if( rightArrowOverrideFunc && loggedIn ){
 
-    rightArrowOverrideFunc();
-    return;
+        rightArrowOverrideFunc( this );
+        return;
 
-  }
+    }
 
-  // Check if we can move to right.
-  if( cursor < cmd_buff_cntr ){
+    // Detect if the channel was configured incorrectly.
+    // In this case, we have to stop command execution.
+    if( channel == NULL ){
+        return;
+    }
 
-    channel -> write( 27 );   // ESC character( decimal 27 )
-    channel -> print( '[' );  // VT100 Cursor command.
-    channel -> print( '1' );  // 1 character movement.
-    channel -> print( 'C' );  // Left.
+    // Check if we can move to right.
+    if( cursor < cmd_buff_cntr ){
 
-    // Increment the cursor variavble.
-    cursor++;
+        channel -> write( 27 );   // ESC character( decimal 27 )
+        channel -> print( '[' );  // VT100 Cursor command.
+        channel -> print( '1' );  // 1 character movement.
+        channel -> print( 'C' );  // Left.
 
-  }
+        // Increment the cursor variavble.
+        cursor++;
+
+    }
 
 }
 
 void Shellminator::ShellminatorHomeKeyState(){
 
-  currentState = &Shellminator::ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
-  if( homeKeyFunc ){
+    if( homeKeyFunc && loggedIn ){
 
-    homeKeyFunc();
-    return;
+        homeKeyFunc( this );
+        return;
 
-  }
+    }
 
-  // send the cursor to the begining of the buffer
-  cursor = 0;
-  redrawLine();
+    // send the cursor to the begining of the buffer
+    cursor = 0;
+    redrawLine();
 
 }
 
 void Shellminator::ShellminatorHomeKeyState( char new_char ){
 
-  if( new_char == '~' ){
+    if( new_char == '~' ){
 
-    ShellminatorHomeKeyState();
+        ShellminatorHomeKeyState();
 
-  }
+    }
 
-  else{
+    else{
 
-    currentState = &Shellminator::ShellminatorDefaultState;
+        currentState = &Shellminator::ShellminatorDefaultState;
 
-  }
+    }
 
 }
 
 void Shellminator::ShellminatorEndKeyState(){
 
-  currentState = &Shellminator::ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
-  if( endKeyFunc ){
+    if( endKeyFunc && loggedIn ){
+        endKeyFunc( this );
+        return;
+    }
 
-    endKeyFunc();
-    return;
-
-  }
-
-  // send the cursor to the end of the buffer
-  cursor = cmd_buff_cntr;
-  redrawLine();
+    // send the cursor to the end of the buffer
+    cursor = cmd_buff_cntr;
+    redrawLine();
 
 }
 
 void Shellminator::ShellminatorEndKeyState( char new_char ){
 
-  if( new_char == '~' ){
+    if( new_char == '~' ){
+        ShellminatorEndKeyState();
+    }
 
-    ShellminatorEndKeyState();
-
-  }
-
-  else{
-
-    currentState = &Shellminator::ShellminatorDefaultState;
-
-  }
+    else{
+        currentState = &Shellminator::ShellminatorDefaultState;
+    }
 
 }
 
 void Shellminator::ShellminatorDelKeyState(){
 
-  // Del key detected.
-  // If we press a delet key we have to reset cmd_buff_dim to default value
-  cmd_buff_dim = 1;
+    // Del key detected.
+    // If we press a delet key we have to reset cmd_buff_dim to default value
+    cmd_buff_dim = 1;
 
-  // General counter variable
-  uint32_t i;
+    // General counter variable
+    uint32_t i;
 
-  currentState = &Shellminator::ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
 
-  // We have to check the number of the characters in the buffer.
-  // If the buffer is full we must not do anything!
-  if ( cursor != cmd_buff_cntr ) {
+    // We have to check the number of the characters in the buffer.
+    // If the buffer is full we must not do anything!
+    if ( cursor != cmd_buff_cntr ) {
 
-    for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
+        for( i = cursor; i < ( cmd_buff_cntr - 1 ); i++ ){
+            cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+        }
 
-      cmd_buff[ 0 ][ i ] = cmd_buff[ 0 ][ i + 1 ];
+        // If there is at least 1 character in the buffer we jus simply
+        // decrement the cmd_buff_cntr. This will result that the new character
+        // will be stored in the previous characters place in the buffer.
+        cmd_buff_cntr--;
+
+        redrawLine();
 
     }
-
-    // If there is at least 1 character in the buffer we jus simply
-    // decrement the cmd_buff_cntr. This will result that the new character
-    // will be stored in the previous characters place in the buffer.
-    cmd_buff_cntr--;
-
-    redrawLine();
-
-  }
 
 }
 
 void Shellminator::ShellminatorDelKeyState( char new_char ){
 
-  if( new_char == '~' ){
+    if( new_char == '~' ){
+        ShellminatorDelKeyState();
+    }
 
-    ShellminatorDelKeyState();
-
-  }
-
-  else{
-
-    currentState = &Shellminator::ShellminatorDefaultState;
-
-  }
+    else{
+        currentState = &Shellminator::ShellminatorDefaultState;
+    }
 
 }
 
 void Shellminator::ShellminatorPageUpKeyState(){
 
-  currentState = &Shellminator::ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
+    
+    if( !loggedIn ){
+        return;
+    }
+    if( inputActive ){
+        return;
+    }    
+    if( pageUpKeyFunc ){
+        pageUpKeyFunc( this );
+        return;
+    }
 
-  if( pageUpKeyFunc ){
-
-    pageUpKeyFunc();
-    return;
-
-  }
-
-  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-  historySearchBackward();
-
-  #endif
+    historySearchBackward();
 
 }
 
 void Shellminator::ShellminatorPageUpKeyState( char new_char ){
 
-  if( new_char == '~' ){
+    if( new_char == '~' ){
+        ShellminatorPageUpKeyState();
+    }
 
-    ShellminatorPageUpKeyState();
-
-  }
-
-  else{
-
-    currentState = &Shellminator::ShellminatorDefaultState;
-
-  }
+    else{
+        currentState = &Shellminator::ShellminatorDefaultState;
+    }
 
 }
 
 void Shellminator::ShellminatorPageDownKeyState(){
 
-  currentState = &Shellminator::ShellminatorDefaultState;
+    currentState = &Shellminator::ShellminatorDefaultState;
+    
+    if( !loggedIn ){
+        return;
+    }
+    if( inputActive ){
+        return;
+    }    
+    if( pageDownKeyFunc ){
+        pageDownKeyFunc( this );
+        return;
+    }
 
-  if( pageDownKeyFunc ){
-
-    pageDownKeyFunc();
-    return;
-
-  }
-
-  #ifdef SHELLMINATOR_ENABLE_SEARCH_MODULE
-
-  historySearchForward();
-
-  #endif
+    historySearchForward();
 
 }
 
 void Shellminator::ShellminatorPageDownKeyState( char new_char ){
 
-  if( new_char == '~' ){
+    if( new_char == '~' ){
+        ShellminatorPageDownKeyState();
+    }
 
-    ShellminatorPageDownKeyState();
-
-  }
-
-  else{
-
-    currentState = &Shellminator::ShellminatorDefaultState;
-
-  }
+    else{
+        currentState = &Shellminator::ShellminatorDefaultState;
+    }
 
 }

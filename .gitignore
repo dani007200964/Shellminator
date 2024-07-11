@@ -1,4 +1,8 @@
 build/*
+docs/*
 !build/README.md
 extras/simulator/Commander-API/*
-!extras/simulator/Commander-API/README.md
+extras/examples_desktop/*
+extras/examples_emscripten/*
+extras/examples_doxygen/*
+

@@ -1,6 +1,0 @@
-<map id="Shellminator::drawLogo" name="Shellminator::drawLogo">
-<area shape="rect" id="node1" title="Draws the startup logo." alt="" coords="412,31,569,56"/>
-<area shape="rect" id="node2" href="$class_shellminator.html#a0262b7bdcb0f22a7f0d17f8ca76fc35d" title="Shellminator initialization function." alt="" coords="227,5,360,31"/>
-<area shape="rect" id="node4" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="223,55,364,80"/>
-<area shape="rect" id="node3" href="$class_shellminator.html#a634f65f3de75cdd4ec196bb836ce1f6f" title="Start WiFi Server." alt="" coords="5,5,175,31"/>
-</map>

@@ -77,6 +77,7 @@ EM_JS( void, stdoutWriteChar, ( uint8_t c ), {
 EM_JS( void, stdoutWriteString, ( const char* str ), {
 
     term.write( UTF8ToString( str ) );
+    //console.log( UTF8ToString( str ) );
 
 } );
 
@@ -256,6 +257,83 @@ void stdioStream::flush(){
 
 }
 
+#ifdef EMSCRIPTEN
+
+void stdioStream::emscriptenWriteByte( uint8_t b ){
+
+    // Check for unicode character.
+    // Source: https://www.ibm.com/docs/en/db2/11.5?topic=support-unicode-character-encoding
+
+    // If the character is not a unicode one,
+    // we just pus it with stdoutWriteChar upwards.
+    if( ( b & 0b10000000 ) == 0 ){
+        stdoutWriteChar( (char)b );
+        return;
+    }
+
+    // If the first byte pattern is: 110yyyyy
+    if( ( b >> 5 ) == (uint8_t)6 ){
+        unicodeBuffer[ 0 ] = b;
+        unicodeBufferCounter = 1;
+        unicodeBytesLeft = 1;
+        return;
+    }
+
+    // If the first byte pattern is: 1110zzzz
+    if( ( b >> 4 ) == (uint8_t)14 ){
+        unicodeBuffer[ 0 ] = b;
+        unicodeBufferCounter = 1;
+        unicodeBytesLeft = 2;
+        return;
+    }
+
+    // If the first byte pattern is: 11110uuu
+    if( ( b >> 3 ) == (uint8_t)30 ){
+        unicodeBuffer[ 0 ] = b;
+        unicodeBufferCounter = 1;
+        unicodeBytesLeft = 3;
+        return;
+    }
+
+    // We have to check if there is any bytes left from this structure.
+    // If so, we have to check if the format is correct. Except the first byte,
+    // the remaining bytes always look like this: 10xxxxxx
+    if( ( unicodeBytesLeft > 0 ) && ( ( b >> 6 ) == (uint8_t)2 ) ){
+
+        // Store the next byte to the buffer and track positions.
+        unicodeBuffer[ unicodeBufferCounter ] = b;
+        unicodeBufferCounter++;
+        unicodeBytesLeft--;
+
+        // Protect against buffer overflow.
+        if( unicodeBufferCounter >=5 ){
+            unicodeBytesLeft = 0;
+            return;
+        }
+
+        // Check if we reached the last byte in the structure.
+        //if( ( unicodeBytesLeft == 0 ) && ( unicodeBufferCounter < 5 ) ){
+        if( unicodeBytesLeft == 0 ){
+
+            // Terminate the string and push it to the javascript layer.
+            unicodeBuffer[ unicodeBufferCounter ] = '\0';
+            stdoutWriteString( (const char*)unicodeBuffer );
+            //unicodeBufferCounter = 0;
+
+        }
+    }
+
+    // If we are here, that means something went wrong.
+    // This case reset the logic and return.
+    else{
+        unicodeBytesLeft = 0;
+        return;
+    }
+
+}
+
+#endif
+
 size_t stdioStream::write( uint8_t b ){
 
     #ifdef _WIN32
@@ -263,7 +341,7 @@ size_t stdioStream::write( uint8_t b ){
     #endif
     	
     #ifdef __EMSCRIPTEN__
-    stdoutWriteChar( (char)b );
+    emscriptenWriteByte( b );
     #endif
     	
     return 1;
@@ -281,7 +359,7 @@ size_t stdioStream::write( const uint8_t *buff, size_t size ){
         #endif
             
         #ifdef __EMSCRIPTEN__
-        stdoutWriteChar( (char)buff[ i ] );
+        emscriptenWriteByte( (uint8_t)buff[ i ] );
         #endif
 
     }

@@ -116,215 +116,128 @@ void Shellminator::historySearchForward(){
 
 void Shellminator::redrawHistorySearch(){
 
-  if( bufferMemoryAllocated ){
+    uint32_t i;
+    uint32_t j;
+    bool highlighted = false;
+    int32_t searchResult;
 
-    redrawHistorySearchBuffered();
+    searchMatch = -1;
 
-  }
+    // This will be redirected to the channel by default.
+    Stream* selectedChannel= channel;
 
-  else{
+    // If buffering is enabled, overwrite the
+    // selectedChannel to the buffered printer.
+    if( bufferMemoryAllocated ){
+        selectedChannel = &bufferedPrinter;
+    }
 
-    redrawHistorySearchSimple();
+    if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
 
-  }
-
-}
-
-void Shellminator::redrawHistorySearchSimple(){
-
-  uint32_t i;
-  uint32_t j;
-  bool highlighted = false;
-  int32_t searchResult;
-
-  searchMatch = -1;
-
-  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
-
-    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-  }
-
-  // Terminate the command at the cmd_buff_cntr
-  // to not print out the previous command's data.
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
-
-  channel -> print( '\r' );
-  setTerminalCharacterColor( REGULAR, WHITE );
-  channel -> print( "(reverse-i-search)'" );  // 19 characters long.
-  setTerminalCharacterColor( BOLD, YELLOW );
-  channel -> print( cmd_buff[ 0 ] );
-  setTerminalCharacterColor( REGULAR, WHITE );
-  channel -> print( "': \033[0K" );
-
-  if( cmd_buff_cntr == 0 ){
-
-    return;
-
-  }
-
-  for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
-
-    searchResult = substring( cmd_buff[ 0 ], cmd_buff[ i ] );
-
-    if( searchResult >= 0 ){
-
-      searchMatch = i;
-
-      for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
-
-        if( !highlighted && ( j == searchResult ) ){
-
-          setTerminalCharacterColor( BOLD, YELLOW );
-
-          highlighted = true;
-
-        }
-
-        if( highlighted && ( j == ( searchResult + strlen( cmd_buff[ 0 ] ) ) ) ){
-
-          setTerminalCharacterColor( REGULAR, WHITE );
-
-          highlighted = false;
-
-        }
-
-        channel -> print( cmd_buff[ i ][ j ] );
-
-      }
-
-      if( highlighted ){
-
-        setTerminalCharacterColor( REGULAR, WHITE );
-
-      }
-
-      channel -> print( '\r' );
-
-      channel -> write( 27 );
-      channel -> print( '[' );
-      channel -> print( uint8_t( 19 + cursor ) );
-      channel -> print( 'C' );
-
-      return;
+        cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
 
     }
 
-  }
+    // Terminate the command at the cmd_buff_cntr
+    // to not print out the previous command's data.
+    cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
 
-  channel -> print( '\r' );
+    selectedChannel -> print( '\r' );
+    format( selectedChannel, REGULAR, WHITE );
+    selectedChannel -> print( "(reverse-i-search)'" );  // 19 characters long.
+    format( selectedChannel, BOLD, YELLOW );
+    selectedChannel -> print( cmd_buff[ 0 ] );
+    format( selectedChannel, REGULAR, WHITE );
+    selectedChannel -> print( "': \033[0K" );
 
-  channel -> write( 27 );
-  channel -> print( '[' );
-  channel -> print( uint8_t( 19 + cursor ) );
-  channel -> print( 'C' );
+    if( cmd_buff_cntr == 0 ){
 
-}
-
-void Shellminator::redrawHistorySearchBuffered(){
-
-  uint32_t i;
-  uint32_t j;
-  bool highlighted = false;
-  int32_t searchResult;
-
-  searchMatch = -1;
-
-  if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ){
-
-    cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
-
-  }
-
-  // Terminate the command at the cmd_buff_cntr
-  // to not print out the previous command's data.
-  cmd_buff[ 0 ][ cmd_buff_cntr ] = '\0';
-
-  bufferedPrinter.printf( "\r\033[0;37m(reverse-i-search)'\033[1;33m%s\033[0;37m': \033[0K", cmd_buff[ 0 ] );
-
-  if( cmd_buff_cntr == 0 ){
-
-    bufferedPrinter.flush();
-    return;
-
-  }
-
-  for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
-
-    searchResult = substring( cmd_buff[ 0 ], cmd_buff[ i ] );
-    if( searchResult >= 0 ){
-
-      searchMatch = i;
-
-      for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
-
-        if( !highlighted && ( j == searchResult ) ){
-
-          setTerminalCharacterColor( &bufferedPrinter, BOLD, YELLOW );
-          highlighted = true;
-
-        }
-
-        if( highlighted && ( j == ( searchResult + strlen( cmd_buff[ 0 ] ) ) ) ){
-
-          setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
-          highlighted = false;
-
-        }
-
-        bufferedPrinter.printf( "%c", cmd_buff[ i ][ j ] );
-
-      }
-
-      if( highlighted ){
-
-        setTerminalCharacterColor( &bufferedPrinter, REGULAR, WHITE );
-
-      }
-
-      bufferedPrinter.printf( "\r\033[%dC", uint8_t( 19 + cursor ) );
-      bufferedPrinter.flush();
-
-      return;
+        return;
 
     }
 
-  }
+    for( i = 1; i < SHELLMINATOR_BUFF_DIM; i++ ){
 
-  bufferedPrinter.printf( "\r\033[%dC", uint8_t( 19 + cursor ) );
-  bufferedPrinter.flush();
+        searchResult = substring( cmd_buff[ 0 ], cmd_buff[ i ] );
+
+        if( searchResult >= 0 ){
+
+            searchMatch = i;
+
+            for( j = 0; j < strlen( cmd_buff[ i ] ); j++ ){
+
+                if( !highlighted && ( j == searchResult ) ){
+
+                    format( selectedChannel, BOLD, YELLOW );
+                    highlighted = true;
+
+                }
+
+                if( highlighted && ( j == ( searchResult + strlen( cmd_buff[ 0 ] ) ) ) ){
+
+                    format( selectedChannel, REGULAR, WHITE );
+                    highlighted = false;
+
+                }
+
+                selectedChannel -> print( cmd_buff[ i ][ j ] );
+
+            }
+
+            if( highlighted ){
+
+                format( selectedChannel, REGULAR, WHITE );
+
+            }
+
+            selectedChannel -> print( '\r' );
+
+            selectedChannel -> write( 27 );
+            selectedChannel -> print( '[' );
+            selectedChannel -> print( uint8_t( 19 + cursor ) );
+            selectedChannel -> print( 'C' );
+
+            return;
+
+        }
+
+    }
+
+    selectedChannel -> print( '\r' );
+
+    selectedChannel -> write( 27 );
+    selectedChannel -> print( '[' );
+    selectedChannel -> print( uint8_t( 19 + cursor ) );
+    selectedChannel -> print( 'C' );
 
 }
 
 int Shellminator::substring( char* str1, char* str2 ){
 
-  // https://www.geeksforgeeks.org/check-string-substring-another/
+    int i;
+    int j;
 
-  int i;
-  int j;
+    int m = strlen( str1 );
+    int n = strlen( str2 );
 
-  int m = strlen( str1 );
-  int n = strlen( str2 );
+    for( i = 0; i <= ( n - m ); i++ ){
 
-  for( i = 0; i <= ( n - m ); i++ ){
+        for( j = 0; j < m; j++ ){
 
-    for( j = 0; j < m; j++ ){
+        if( str2[ i + j ] != str1[ j ] ){
+            break;
+        }
 
-      if( str2[ i + j ] != str1[ j ] ){
-        break;
-      }
+        }
+
+        if( j == m ){
+
+        return i;
+
+        }
 
     }
 
-    if( j == m ){
-
-      return i;
-
-    }
-
-  }
-
-  return -1;
+    return -1;
 
 }
-

@@ -1,5 +1,0 @@
-<map id="ShellminatorPlot::begin" name="ShellminatorPlot::begin">
-<area shape="rect" id="node1" title=" " alt="" coords="5,45,161,70"/>
-<area shape="rect" id="node2" href="$class_shellminator_buffered_printer.html#a46408f05e6e75fa69bdc49de31cf41c6" title="Allocate memory for the internal buffer." alt="" coords="209,5,388,45"/>
-<area shape="rect" id="node3" href="$class_shellminator_buffered_printer.html#a88ef18839525432afccaad59f87944de" title="Get the allocated memory." alt="" coords="209,69,388,109"/>
-</map>

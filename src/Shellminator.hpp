@@ -34,56 +34,36 @@ SOFTWARE.
 #ifndef SHELLMINATOR_HPP_
 #define SHELLMINATOR_HPP_
 
-#include "Shellminator-DefaultSettings.hpp"
-#include "Shellminator-IO.hpp"
+//---- Shellminator related headers. ----//
+#include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
+#include "Shellminator-Helpers.hpp"
+#include "Shellminator-BufferedPrinter.hpp"
+#include "Shellminator-Screen.hpp"
+#include "Shellminator-VT100-Commands.hpp"
+#include "Shellminator-Colorizer.hpp"
 
 #ifdef ARDUINO
-#include "Arduino.h"
+    #include "Arduino.h"
 #else
-#include "System.h"
+    // For the simulator, I implemented the 
+    // required functions from the Arduino.h
+    // manually.
+    #include "System.h"
 #endif
 
 #ifdef __AVR__
 
-#include <avr/pgmspace.h>
+    // If we are using an AVR microcontroller,
+    // we need to store the constant texts
+    // in program memory.
+    #include <avr/pgmspace.h>
 
 #endif
 
+// This library is using the Stream class as communication channel.
 #include "Stream.h"
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-#ifdef ESP8266
-#include <ESP8266WiFi.h>
-#endif
-
-#ifdef ESP32
-#include <WiFi.h>
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-#include <WebSocketsServer.h>
-#endif
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
-
-#include "external/sha256/terminal_sha256.h"
-
-#endif
-
-#include "Shellminator-BufferedPrinter.hpp"
-
-#ifdef __has_include
-#if __has_include("Commander-API.hpp")
-#include "Commander-API.hpp"
-#endif
-#endif
-
-#ifdef COMMANDER_API_VERSION
-#include "Commander-API.hpp"
-#endif
-
+// std library headers.
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -96,16 +76,11 @@ SOFTWARE.
 ///  |                                    |
 ///  +------------------------------------+
 
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
-
-#include "external/nayuki-qrcodegen/qrcodegen.h"
-
-#endif
-
 /// Version of the module
-#define SHELLMINATOR_VERSION "1.1.2"
+#define SHELLMINATOR_VERSION "2.0.0"
 
-#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 12
+/// Buffer size for the mouse event parser.
+#define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
 
 /// Shellminator object
 ///
@@ -120,261 +95,241 @@ public:
     /// VT100 color codes
     ///
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color codes</a>.
-    enum
+    enum textColor_t
     {
-        BLACK = 30,
-        RED = 31,
-        GREEN = 32,
-        YELLOW = 33,
-        BLUE = 34,
-        MAGENTA = 35,
-        CYAN = 36,
-        WHITE = 37
+        BLACK = 30,     ///< Black text color
+        RED = 31,       ///< Red text color
+        GREEN = 32,     ///< Green text color
+        YELLOW = 33,    ///< Yellow text color
+        BLUE = 34,      ///< Blue text color
+        MAGENTA = 35,   ///< Magenta text color
+        CYAN = 36,      ///< Cyane text color
+        WHITE = 37      ///< White text color
+    };
+
+    /// VT100 color codes
+    ///
+    /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible background color codes</a>.
+    enum backgroundColor_t
+    {
+        BG_BLACK = 40,     ///< Black text color
+        BG_RED = 41,       ///< Red text color
+        BG_GREEN = 42,     ///< Green text color
+        BG_YELLOW = 43,    ///< Yellow text color
+        BG_BLUE = 44,      ///< Blue text color
+        BG_MAGENTA = 45,   ///< Magenta text color
+        BG_CYAN = 46,      ///< Cyane text color
+        BG_WHITE = 47      ///< White text color
     };
 
     /// VT100 font sytles
     ///
     /// This enum holds all of the <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>.
-    enum
+    enum textStyle_t
     {
-        REGULAR = 0,
-        BOLD = 1,
-        LOW_INTENSITY = 2,
-        ITALIC = 3,
-        UNDERLINE = 4,
-        BLINKING = 5,
-        REVERSE = 6,
-        BACKGROUND = 7,
-        INVISIBLE = 8
+        REGULAR = 0,        ///< Regular text style
+        BOLD = 1,           ///< Bold text style
+        LOW_INTENSITY = 2,  ///< Low intensity text style
+        ITALIC = 3,         ///< Italic text style
+        UNDERLINE = 4,      ///< Underline text style
+        BLINKING = 5,       ///< Blinking text style
+        REVERSE = 6,        ///< Reverse text style
+        BACKGROUND = 7,     ///< Background text style
+        INVISIBLE = 8       ///< Invisible text style
     };
 
     /// String, that holds the version information
     static const char *version;
 
-    /// String, that holds the help text data.
-    ///
-    /// @note on AVR it is stored in PROGMEM.
-    static const char helpText[];
-
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    /// Constructor for WiFi Server
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    Shellminator(WiFiServer *server_p);
-
-    /// Constructor for WiFi Server with execution function.
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-    Shellminator(WiFiServer *server_p, void (*execution_fn_p)(char *));
-
-    /// Constructor for WiFi Server with execution function.
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
-    /// 1. argument: is a char* type
-    /// 2. argument: is a Shellminator* type
-    Shellminator(WiFiServer *server_p, void (*execution_fn_p)(char *, Shellminator *));
-
-    /// Start WiFi Server
-    ///
-    /// Use this function to start the WiFiServer object.
-    void beginServer();
-
-    /// Stop WiFi Server
-    ///
-    /// Use this function to stop the WiFiServer object.
-    void stopServer();
-
-    void setClientTimeout(uint16_t clientTimeout_p);
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    Shellminator(WebSocketsServer *wsServer_p);
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p);
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p, void (*execution_fn_p)(char *));
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p, void (*execution_fn_p)(char *, Shellminator *));
-
-    void webSocketPush(uint8_t data);
-
-    void webSocketPush(uint8_t *data, size_t size);
-
-    void websocketDisconnect();
-
-#endif
 
     /// Shell object constructor
     ///
     /// This is a simple constructor for a Shellminator object.
     /// @param stream_p Pointer to a Stream object which will be used for communication.
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic Example"
     Shellminator(Stream *stream_p);
 
-    /// Shell object constructor with simple execution-function.
+    /// Enable buffering to gain speed.
     ///
-    /// This is a simple constructor for a Shellminator object.
-    /// This version allows to attach an execution-function with the constructor.
-    /// @param stream_p Pointer to a Stream object which will be used for communication.
-    /// @param execution_fn_p Function pointer to a simple execution-function[ void execFunc( char* cmd ) ]
-    /// @note This version works for legacy reasons, but the advanced version is recommended with caller shell access.
-    ///
-    /// __Example__
-    /// - @ref example_execute_constructor_simple "Example With Constructor - Simple"
-    Shellminator(Stream *stream_p, void (*execution_fn_p)(char *));
+    /// With this function, a buffer can be attached to the object.
+    /// It can be used to accelerate the printing process. Because this
+    /// library meant to work on low power devices, with limited amount of
+    /// dynamic memory, all rendering happens in place. It has one downside
+    /// tough. The printing not happens in one time. Small independent printing
+    /// actions renders the final result. The frontend on a PC can't handle this
+    /// very well, if the data is coming fast. A much better solution is to
+    /// collect the printed data into a buffer, and flush it, when we are finished.
+    /// You can achieve this functionality with this function.
+    /// @param buffer Pointer to a buffer. It has to be uint8_t type.
+    /// @param bufferSize The size of the buffer in elements.
+    /// @returns When the buffering is enabled successfully, it will return true.
+    /// @note On low-end devices like an AVR, it might be too much. I suggest to use this
+    ///       functionality on systems that has at least 10kBytes of dynamic memory.
+    bool enableBuffering( uint8_t* buffer, int bufferSize );
 
-    /// Shell object constructor with simple execution-function.
+    /// Register a function callback for command execution.
     ///
-    /// This is a simple constructor for a Shellminator object.
-    /// This version allows to attach an execution-function with the constructor.
-    /// @param stream_p Pointer to a Stream object which will be used for communication.
-    /// @param execution_fn_p Function pointer to an advanced execution-function[ void execFunc( char* cmd, Shellminator* shell ) ]
-    /// @note This version is recommended.
+    /// With this function you can attach an external function to the object
+    /// This function will be called when a command is typed and the return
+    /// key is pressed.
+    /// @param execution_fn_p Function pointer to the execution function.
     ///
-    /// __Example__
-    /// - @ref example_execute_constructor_advanced "Example With Constructor - Advanced"
-    Shellminator(Stream *stream_p, void (*execution_fn_p)(char *, Shellminator *));
-
-    bool enableBuffering(int bufferSize = 32);
-
-    /// Execution function attacher function
+    /// The execution function prototype must be like this:
+    /// @code{cpp} void myExecFunc( char* command, Shellminator* caller ); @endcode
     ///
-    /// This function allows you to add or replace the execution function after the constructor.
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with one argument, and that argument is a char*type.
-    void addExecFunc(void (*execution_fn_p)(char *));
-
-    /// Execution function attacher function
+    /// You can use any name you like, but the arguments and the return type has to
+    /// be the same. Practical example for impementation:
     ///
-    /// @param execution_fn_p Function pointer to the execution function. It has to be a void return type, with two argument:
-    /// 1. argument: is a char* type
-    /// 2. argument: is a Shellminator* type
-    ///
-    /// __Example__
-    /// - @ref example_execute "Execute"
-    void addExecFunc(void (*execution_fn_p)(char *, Shellminator *));
+    /// @code{cpp}
+    /// void myExecFunc( char* command, Shellminator* caller ){
+    ///     caller -> channel -> print( "Hurray! I got this: " );
+    ///     caller -> channel -> println( command );
+    /// }
+    /// @endcode
+    void attachExecFunc(void (*execution_fn_p)(char *, Shellminator *));
 
     /// Shellminator initialization function
     ///
     /// This function initializes the object and prints the startup logo.
-    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
+    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN.
+    /// Leftover characters are truncated!
     /// @warning You have to call this function before all other member functions!
     /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
-    ///
-    /// Tested in: __test_shellminator_begin.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
-    void begin(char *banner_p);
-
-    /// Shellminator initialization function
-    ///
-    /// This function initializes the object and prints the startup logo.
-    /// @note The length of this string has to be less, or equal than SHELLMINATOR_BANNER_LEN. Leftover characters are truncated!
-    /// @warning You have to call this function before all other member functions!
-    /// @param banner_p this is equivalent to a user name in linux like terminals. It is just a visual thing.
-    ///
-    /// Tested in: __test_shellminator_begin.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
     void begin(const char *banner_p);
 
     /// Sends a backspace
     ///
     /// This function makes a backspace in the terminal application. Basically it deletes the last character
     /// in the terminal screen.
-    ///
-    /// Tested in: __test_format_commands.cpp__
     void sendBackspace();
 
     /// Clear screen
     ///
     /// This function clears the terminal screen.
-    ///
-    /// Tested in: __test_format_commands.cpp__
-    ///
-    /// __Example__
-    /// - @ref example_basic "Basic"
     void clear();
 
     /// Update function
     ///
     /// This function handles all of the communication related stuff between the code and the terminal application.
     /// @warning This function has to be called periodically.
-    /// @warning If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
-    ///
-    /// Tested in: __test_update.cpp__
-    /// __Example__
-    /// - @ref example_basic "Basic"
+    ///          If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
     void update();
 
-    /// Bring some color into your code.
+    /// Basic text formatting.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    void setTerminalCharacterColor(uint8_t style, uint8_t color);
-
-    /// Bring some color into your code.
+    /// You can use this function to modify the style or color of the printed text. This function
+    /// can be accessed from outside of an object.
+    /// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+    ///       monitor does not support these features.
+    /// @param stream_p Pointer to a Stream object.
+    /// @param firstArg The first format specifier.
+    /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
+    /// @warning There is a dedicated macro for this function, called @ref setFormat. Please
+    ///          use this macro to avoid problems.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// The output goes to a buffer;
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    static void setTerminalCharacterColor(char *buff, uint8_t buffSize, uint8_t style, uint8_t color);
+    /// @note If formatting is disabled on the object, it won't do anything.
+    static void setFormat( Stream *stream_p, int firstArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
-    /// Bring some color into your code.
+    /// Basic text formatting.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// The output goes to a buffer;
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param buff The result is generated to this buffer. It will be terminated with '\0' character.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    /// @warning It is legacy code! The buffer is not protected against overflow! Please use protected version( it has 4 arguments ).
-    void setTerminalCharacterColor(char *buff, uint8_t style, uint8_t color);
+    /// You can use this function to modify the style or color of the printed text. This function
+    /// can only be accessed with an object.
+    /// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
+    ///       monitor does not support these features.
+    /// @param stream_p Pointer to a Stream object.
+    /// @param firstArg The first format specifier.
+    /// @param ... All other format specifiers. __The last argument must be a negative integer number!__
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
+    /// @warning There is a dedicated macro for this function, called @ref format. Please
+    ///          use this macro to avoid problems.
+    void format( Stream *stream_p, int firstArg );
+    void format( Stream *stream_p, int firstArg , int secondArg );
+    void format( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
-    /// Bring some color into your code.
+    /// Hide the cursor.
     ///
-    /// This function changes the color and style of the terminal application characters.
-    /// This function can be used outside of a Shellminator object.
-    /// @warning Please use the color and style enumeration table from this application as parameter.
-    /// @param style Arduino Serial object to print the style code.
-    /// @param style <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible font styles</a>
-    /// @param color <a href="https://www.nayab.xyz/linux/escapecodes.html">VT100 compatible color code</a>
-    static void setTerminalCharacterColor(Stream *stream_p, uint8_t style, uint8_t color);
-
-    /// @note ShellminatorBufferedPrinter object requires a flush() after this command.
-    static void setTerminalCharacterColor(ShellminatorBufferedPrinter *printer_p, uint8_t style, uint8_t color);
-
+    /// This function disables the cursor on the host terminal. This function can only be accessed
+    /// with an object.
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
     void hideCursor();
-    static void hideCursor(char *buff, uint8_t bufferSize);
+
+    /// Hide the cursor.
+    ///
+    /// This function disables the cursor on the host terminal. This function can be accessed
+    /// outside of the class.
+    /// @param stream_p Pointer to a Stream object.
     static void hideCursor(Stream *stream_p);
 
+    /// Show the cursor.
+    ///
+    /// This function enables the cursor on the host terminal. This function can only be accessed
+    /// with an object.
+    /// @note It will only do anything if the formatting is enabled on the corresponding object.
+    ///       Please check @ref enableFormatting for more information.
     void showCursor();
-    static void showCursor(char *buff, uint8_t buffSize);
+
+    /// Show the cursor.
+    ///
+    /// This function enables the cursor on the host terminal. This function can be accessed
+    /// outside of the class.
+    /// @param stream_p Pointer to a Stream object.
     static void showCursor(Stream *stream_p);
 
-    bool getCursorPosition(int *x, int *y, uint32_t timeout = 100);
-    void setCursorPosition(int x, int y);
+    /// Get the position of the cursor.
+    ///
+    /// This function can be used to query the current location
+    /// of the cursor. The result will be passed back on the arguments.
+    /// @param x Pointer to an integer. The horizontal coordinate will be
+    ///          written to the variable where this pointer points.
+    /// @param y Pointer to an integer. The horizontal coordinate will be
+    ///          written to the variable where this pointer points.
+    /// @param timeout You can specify a maximum time to wait for the answer
+    ///                in milliseconds. the default value is 100ms.
+    /// @returns If the query was successful it will return true. Otherwise
+    ///          the value in the variables corresponding to x and y is
+    ///          not usable.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
+    bool getCursorPosition( int *x, int *y, uint32_t timeout = 250 );
 
-    bool getTerminalSize(int *width, int *height);
+    /// Set the position of the cursor.
+    ///
+    /// This function can be used to set the cursor location to a specified
+    /// coordinate. This function can only be accessed with an object.
+    /// @param x New X-coordinate of the cursor.
+    /// @param y New Y-coordinate of the cursor.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
+    /// @note Setting an invalid cursor position is not possible, it is
+    ///       protected by the terminal interface and this function as well.
+    void setCursorPosition( int x, int y );
+
+    /// Set the position of the cursor.
+    ///
+    /// This function can be used to set the cursor location to a specified
+    /// coordinate. This function can be accessed outside of the class.
+    /// @param channel_p Pointer to a Stream object.
+    /// @param x New X-coordinate of the cursor.
+    /// @param y New Y-coordinate of the cursor.
+    ///
+    /// The screen coordinate system works like this:
+    /// ![Screen Coordinate System](screen_space.png)
+    /// The __origin__ is on the top left and it's coordinate is 1;1.
+    /// The screen size can vary.
+    /// @note Setting an invalid cursor position is not possible, it is
+    ///       protected by the terminal interface and this function as well.
+    static void setCursorPosition( Stream* channel_p, int x, int y );
+
+    bool getTerminalSize( int *width, int *height );
 
     /// This is a helper function for pointer casting.
     ///
@@ -383,7 +338,9 @@ public:
     /// @param ptr Pointer to a Shellminator object in void*.
     /// @warning The address stored in ptr has to be a valid addres for a Shellminator object.
     /// @returns Casted pointer.
-    static Shellminator *castVoidToShellminator(void *ptr);
+    /// @todo track the created objects in an internal static array and compare their pointer
+    ///       values with the given one.
+    static Shellminator *castVoidToShellminator( void *ptr );
 
     /// Draws the startup logo
     ///
@@ -393,33 +350,28 @@ public:
     /// This function prints the banner text.
     void printBanner();
 
+    /// Print command history.
     void printHistory();
 
+    /// Print help text.
     void printHelp();
 
     /// This function sets the banner text.
     ///
     /// It can be used when you want to change the banner text runtime.
     /// @param banner_p String that contains the new banner text.
-    void setBannerText(char *banner_p);
-
-    /// This function sets the banner text.
     ///
-    /// It can be used when you want to change the banner text runtime.
-    /// @param banner_p String that contains the new banner text.
+    /// ![Banner Text Elements](banner_text.png)
     void setBannerText(const char *banner_p);
 
-    void setBannerPathText(char *bannerPath_p);
-    void setBannerPathText(const char *bannerPath_p);
-
-    /// This function attaches a logo to the terminal.
+    /// This function sets the banner path text.
     ///
-    /// The logo is just a character array.
-    /// To create costum startup logo: https://patorjk.com/software/taag/#p=display&f=Slant&t=Arduino
-    /// To make it to a c-string: https://tomeko.net/online_tools/cpp_text_escape.php?lang=en
-    /// Add '\r' to all line end.
-    /// @param logo_p Pointer to the logo's address.
-    void attachLogo(char *logo_p);
+    /// It can be used when you want to change the banner path text runtime.
+    /// @param banner_p String that contains the new banner text.
+    /// @note the default banner path text is `$`
+    ///
+    /// ![Banner Text Elements](banner_text.png)
+    void setBannerPathText(const char *bannerPath_p);
 
     /// This function attaches a logo to the terminal.
     ///
@@ -447,7 +399,7 @@ public:
     /// will be called every time when the up arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideUpArrow(void (*func)(void));
+    void overrideUpArrow(void (*func)(Shellminator*));
 
     /// Override down arrow key behaviour.
     ///
@@ -455,7 +407,7 @@ public:
     /// will be called every time when the down arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideDownArrow(void (*func)(void));
+    void overrideDownArrow(void (*func)(Shellminator*));
 
     /// Override left arrow key behaviour.
     ///
@@ -463,7 +415,7 @@ public:
     /// will be called every time when the left arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLeftArrow(void (*func)(void));
+    void overrideLeftArrow(void (*func)(Shellminator*));
 
     /// Override right arrow key behaviour.
     ///
@@ -471,7 +423,7 @@ public:
     /// will be called every time when the right arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideRightArrow(void (*func)(void));
+    void overrideRightArrow(void (*func)(Shellminator*));
 
     /// Override abort key behaviour.
     ///
@@ -480,7 +432,7 @@ public:
     /// pressed. The default abort key is usually a Ctrl + C
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideAbortKey(void (*func)(void));
+    void overrideAbortKey(void (*func)(Shellminator*));
 
     /// Override Page-Up key behaviour.
     ///
@@ -488,7 +440,7 @@ public:
     /// will be called every time when the Page-Up key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageUpKey(void (*func)(void));
+    void overridePageUpKey(void (*func)(Shellminator*));
 
     /// Override Page-Down key behaviour.
     ///
@@ -496,7 +448,7 @@ public:
     /// will be called every time when the Page-Down key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageDownKey(void (*func)(void));
+    void overridePageDownKey(void (*func)(Shellminator*));
 
     /// Override Home key behaviour.
     ///
@@ -504,7 +456,7 @@ public:
     /// will be called every time when the Home key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideHomeKey(void (*func)(void));
+    void overrideHomeKey(void (*func)(Shellminator*));
 
     /// Override End key behaviour.
     ///
@@ -512,7 +464,7 @@ public:
     /// will be called every time when the End key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideEndKey(void (*func)(void));
+    void overrideEndKey(void (*func)(Shellminator*));
 
     /// Override Logout key behaviour.
     ///
@@ -521,7 +473,7 @@ public:
     /// pressed. The default Logout key is usually a Ctrl + D
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLogoutKey(void (*func)(void));
+    void overrideLogoutKey(void (*func)(Shellminator*));
 
     /// Override Search key behaviour.
     ///
@@ -530,7 +482,7 @@ public:
     /// pressed. The default Search key is usually a Ctrl + R
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideSearchKey(void (*func)(void));
+    void overrideSearchKey(void (*func)(Shellminator*));
 
     /// Reset up arrow key functionality to default.
     ///
@@ -609,56 +561,191 @@ public:
     /// function for the key, you have to call this function.
     void freeSearchKey();
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
-    /// Disconnect WiFiClient telnet client
-    void clientDisconnect();
+    /// Enable login password.
+    ///
+    /// With this function you can add a login password.
+    /// There is a twist in the story tough. Instead of storing
+    /// the password itself, we have to store a hash that is generated
+    /// from the password. The reason for this is simple. If you store
+    /// the password, it can be dumped from the compiled firmware and
+    /// it is easily hackable. If you store a hash, that is generated
+    /// from the password, it is much safer, because ideally, you can
+    /// not generate the original password back from its hash.
+    ///
+    /// The default implementation uses a crc32 hash generator. It
+    /// is not the safest, and not the prettiest, but it can be run on
+    /// low end hardware fairly well. You can replace this hash
+    /// algorithm to a custom one with the @ref setPasswordHashFunction.
+    ///
+    /// Using this is fairly simple, you need to generate a hash from
+    /// your password. You can find an online hash generator
+    /// [here](https://crccalc.com/). Set the input to __ASCII__ and the
+    /// output to __HEX__ with __CRC32__ mode. For this demo I will use
+    /// `Password` as password. The online tool calculated the result
+    /// which is __0xCCB42483__. This is all the information what we need.
+    ///
+    /// Example code:
+    /// @code{cpp}
+    /// // We have to split the hash to bytes. The default CRC32
+    /// // hash function produces a 32-bit( 4-byte ) hash, so
+    /// // we have to split the hash into 4-bytes. Splitting
+    /// // 0xCCB42483 is easy.
+    /// uint8_t passwordHash[] = { 0xCC, 0xB4, 0x24, 0x83 };
+    /// 
+    /// // Attach the hash to the terminal object in the init section.
+    /// shell.setPassword( passwordHash, sizeof( passwordHash ) );
+    /// @endcode
+    void setPassword( uint8_t* hashData, int hashSize );
 
-#endif
+    /// Replace the built-in CRC32 hash generator.
+    ///
+    /// If you want some more modern solution instead of the good old
+    /// CRC32, you can do this with this function. You need a hash 
+    /// function which looks like this:
+    /// @code{cpp}
+    /// void customHash( uint8_t* inputData, int inputDataSize, uint8_t* outputData, int outputDataSize );
+    /// @endcode
+    ///
+    /// The hash must be generated from the inputData, and it's must be generated to the outputData.
+    /// @warning It is very, very important to specify the correct hash size with the @ref setPassword
+    ///          function in the init section. This will determinate the allocated memory for the
+    ///          outputData buffer. If it not set correctly, it will cause buffer overflow!
+    ///
+    /// @note Hash functions usually produce a fixed length hash. For example CRC32 produces a 32-bit hash,
+    ///       SHA256 produces a 256-bit hash... Please select a hash function with fixed length result and
+    ///       use this length as the second argument for the @ref setPassword function.
+    void setPasswordHashFunction( void(*hashFunc_p)( uint8_t*, int, uint8_t*, int ) );
 
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+    /// Register Screen object to draw.
+    ///
+    /// This function can be used to register a Screen object to the terminal.
+    /// After the Screen object is registered, it will take over the control against
+    /// the terminal interface.
+    /// @param screen_p Pointer to a screen object.
+    /// @param updatePeriod Optionally, you can specify the screen refresh time in milliseconds.
+    //                      I recommend to don't go below 150ms.
+    /// @note To close the Screen, you have to press the return or the abort( ctrl+c ) key.
+    ///
+    /// @note To close the Screen session from code, you can use the @ref endScreen function.
+    void beginScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
 
-    void enablePasswordProtection(uint8_t *passwordHashAddress_p);
-    void enablePasswordProtection(const uint8_t *passwordHashAddress_p);
-    void enablePasswordProtection(char *passwordHashAddress_p);
-    void enablePasswordProtection(const char *passwordHashAddress_p);
-    void disablePasswordProtection();
-    bool checkPassword(uint8_t *pwStr);
-    bool checkPassword(const uint8_t *pwStr);
-    bool checkPassword(char *pwStr);
-    bool checkPassword(const char *pwStr);
+    /// Abort Screen session.
+    ///
+    /// With this function you can abort a registered Screen session.
+    void endScreen();
 
-#endif
+    void swapScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+    void swapScreenAndClear( ShellminatorScreen* screen_p, int updatePeriod = 250 );
 
-    enum{
-        MOUSE_INVALID,
-        MOUSE_LEFT_PRESSED,
-        MOUSE_LEFT_RELEASED,
-        MOUSE_RIGHT_PRESSED,
-        MOUSE_RIGHT_RELEASED,
-        MOUSE_MIDDLE_PRESSED,
-        MOUSE_MIDDLE_RELEASED,
-        MOUSE_WHEEL_UP,
-        MOUSE_WHEEL_DOWN
-    };
+    /// Redraw request from a Screen object.
+    ///
+    /// This function is used by the attached Screen object. The Screen object can
+    /// signal the terminal interface with this function, to call the draw function
+    /// in the next drawing session. The drawing only happens, when an event triggers it,
+    /// to save some CPU time. This way the Screen drawing is much efficient.
+    void requestRedraw();
 
+    /// Shell Event enumeration.
+    typedef enum{
+       SHELL_EVENT_EMPTY,       ///< This is used to handle default or empty values. If this value is assigned to an event, it won't do anything.
+       SHELL_EVENT_RESIZE,      ///< If the object detects a resize event, it will be available to the Screen object with this flag.
+       SHELL_EVENT_MOUSE,       ///< To identify mouse related events.
+       SHELL_EVENT_KEY,         ///< To identify simple key events like: `A`, `b`... @note Case sensitive!
+       SHELL_EVENT_CODED_KEY,    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
+       SHELL_EVENT_SCREEN_SWAP
+    }shellEventType_t;
+
+    /// Coded event enumeration.
+    typedef enum{
+        EVENT_CODE_EMPTY,                   ///< This is used to handle default or empty values. If this value is assigned to an event, it won't do anything.
+        EVENT_CODE_RETURN,                   ///< Return or Enter key is pressed.
+        EVENT_CODE_MOUSE_LEFT_PRESSED,      ///< Left Mouse Button Pressed
+        EVENT_CODE_MOUSE_LEFT_RELEASED,     ///< Left Mouse Button Released
+        EVENT_CODE_MOUSE_RIGHT_PRESSED,     ///< Right Mouse Button Pressed
+        EVENT_CODE_MOUSE_RIGHT_RELEASED,    ///< Right Mouse Button Released
+        EVENT_CODE_MOUSE_MIDDLE_PRESSED,    ///< Middle Mouse Button Pressed
+        EVENT_CODE_MOUSE_MIDDLE_RELEASED,   ///< Middle Mouse Button Released
+        EVENT_CODE_MOUSE_WHEEL_UP,          ///< Mouse Wheel Scrolled Up
+        EVENT_CODE_MOUSE_WHEEL_DOWN,        ///< Mouse Wheel Scrolled Down
+        EVENT_CODE_UP_ARROW,                ///< Up Arrow Pressed
+        EVENT_CODE_DOWN_ARROW,              ///< Down Arrow Pressed
+        EVENT_CODE_LEFT_ARROW,              ///< Left Arrow Pressed
+        EVENT_CODE_RIGHT_ARROW,             ///< Right Arrow Pressed
+        EVENT_CODE_HOME,                    ///< Home Button Pressed
+        EVENT_CODE_END                      ///< End Button Pressed
+    }eventCodes_t;
+
+    /// Shell event structure.
+    ///
+    /// This structure holds the necessary fields
+    /// to store and decode shell events. It is
+    /// used to communicate with the attached Screen
+    /// objects.
     typedef struct{
-        uint8_t x;
-        uint8_t y;
-        uint8_t event;
-    }mouseEvent_t;
+        shellEventType_t type;      ///< Identifies the type of the event.
+        eventCodes_t eventCode;     ///< Stores the event code in case of `SHELL_EVENT_CODED_KEY` or `SHELL_EVENT_MOUSE` type.
+        uint8_t data;               ///< In case of `SHELL_EVENT_KEY` type, stores the corresponding character to the pressed key. @note Case sensitive!
+        uint8_t x;                  ///< In case of `SHELL_EVENT_MOUSE` type, stores the X-coordinate of the mouse event.
+        uint8_t y;                  ///< In case of `SHELL_EVENT_MOUSE` type, stores the Y-coordinate of the mouse event.
+    }shellEvent_t;
 
-    mouseEvent_t mouseBuffer[ MOUSE_BUFFER_SIZE ];
-    uint8_t mouseBufferWritePtr;
-    uint8_t mouseBufferReadPtr;
+    /// The events are stored in this buffer.
+    ///
+    /// It uses a circular structure to store the events.
+    /// Usually this buffer should not has to be big.
+    shellEvent_t eventBuffer[ EVENT_BUFFER_SIZE ];
 
+    /// Write position for the eventBuffers circular structure.
+    uint8_t eventBufferWritePtr;
+
+    /// Read position for the eventBuffers circular structure.
+    uint8_t eventBufferReadPtr;
+
+    /// Get the number of events available for reading from the eventBuffer.
+    /// @return The number of events available to read.
+    int eventAvailable();
+
+    /// Read an event.
+    ///
+    /// With this function, you can read an event from the event buffer.
+    /// Unlike Arduino-like read methods, this won't pop the event from
+    /// the buffer after reading. This way a complex Screen layout is
+    /// much easier to make.
+    /// @return The next available event from the event buffer.
+    /// @note If there is no available event in the buffer, the returned
+    ///       event type will be `SHELL_EVENT_EMPTY`.
+    shellEvent_t readEvent();
+
+    /// Remove the current element from the buffer.
+    ///
+    /// It has to be used after calling the update function of the attached Screen object.
+    /// This way an event won't get parsed multiple times.
+    void popEvent();
+
+    /// Stores the width of the terminal in characters.
+    int terminalWidth = 30;
+
+    /// Stores the height of the terminal in characters.
+    int terminalHeight = 12;
+
+    /// This buffer is used to parse the mouse coordinates form the
+    /// host terminals answer.
     char mouseEventBuffer[ SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE ];
-    uint8_t mouseEventBufferCntr = 0;
 
+    /// This variable traks the next free characters location in the mouseEventBuffer.
+    uint8_t mouseEventBufferCounter = 0;
+
+    /// Enable mouse reports.
+    ///
+    /// With this function you can enable X-term like
+    /// mouse reporting on the host terminal.
+    /// @note Sadly it won't work on the Windows emulator @emoji :disappointed:.
+    ///       However it works with Xterm.js and PuTTY.
     void mouseBegin();
+
+    /// Disable mouse reports.
     void mouseEnd();
-    int mouseAvailable();
-    mouseEvent_t mouseRead();
 
     /// Wait for specific keypress
     ///
@@ -681,17 +768,33 @@ public:
 
     /// Input prompt.
     ///
-    /// It is a simple prompt for user input. It can handle backspace events.
-    /// @note Cursor manipulation is not implemented yet.
-    /// @param source Pointer to a source stream. The function will wait for a key to arrive on this channel.
-    /// @param bufferSize The size of the output buffer. If it is 20 characters lont, 19 character fits in it,
-    /// because of the termination '\0' character.
-    /// @param buffer Pointer to the output buffer.
-    /// @param lineText Character array. You can specify the prompt instructions here.
-    /// @param timeout Timeout in ms. If it is 0, that means no timeout.
-    /// @param secret If the prompt is used for a password( or something confidential ) it can be set to true.
-    /// in this case the echoed characters will be replaced with '*' characters. [ optional, false by default ]
-    static int input(Stream *source, int bufferSize, char *buffer, char *lineText, uint32_t timeout, bool secret = false);
+    /// It is a simple prompt for user input. You can create
+    /// simple queries with this function. This is a non-blocking
+    /// function, and this means, that the it will take over the
+    /// control from the terminal until the user finishes.
+    /// It can be interrupted with the abort key( ctrl-c ).
+    /// @param buffer Pointer to a buffer. The typed text will be copied to this buffer.
+    ///               The result will be always terminated to make it compatible with str
+    ///               functions.
+    /// @param bufferSize The size of the buffer.
+    /// @param instruction Instruction text for the prompt. It can be helpful to instruct
+    ///                    the user about what information is needed in this prompt.
+    /// @param callback When the input typed the data and the return key is pressed, this
+    ///                 function will be called. The typed text will be available on the
+    ///                 arguments.
+    /// @param secret If you has to request some sensitive data, you can set this flag to
+    ///               true. This way, the prompt will echo back `*` characters instead
+    ///               of the actual ones.
+    ///
+    /// Example callback function:
+    /// @code{cpp}
+    /// void inputCallback( char* text, int textSize, Shellminator* parent ){
+    ///     parent -> print( "Hurray! I got something: " );
+    ///     parent -> print( text );
+    /// }
+    /// @endcode
+    void input( char *buffer, int bufferSize, const char *instruction, void(*callback)(char*, int, Shellminator*), bool secret = false );
+    
 
     /// Select list.
     ///
@@ -719,7 +822,7 @@ public:
     /// @returns In single element mode, it will return the index of the selected element. In multiple element
     ///          mode, it will return the number of selected elements from the list. If timeout or abort event
     ///          occurs, it will return -1.
-    static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection = NULL);
+    //static int selectList(Stream *source, char *lineText, int numberOfElements, char *list[], uint32_t timeout, bool *selection = NULL);
 
     /// Generate a beep sound on the terminal device.
     void beep();
@@ -732,83 +835,116 @@ public:
     /// If set, the buzzer will be silent.
     bool mute = false;
 
-    /// Default communication channel;
-    shellminatorDefaultChannel defaultChannel;
-
     /// Pointer to the communication class. By default
     /// it points to the default response handler.
-    Stream *channel = &defaultChannel;
+    Stream *channel = NULL;
 
-#ifdef COMMANDER_API_VERSION
-
-    void attachCommander(Commander *commander_p);
-
-#endif
-
-// Configuration for QR code specific parts.
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
-
-    /// This function generates a QR-code from text
+    /// Get the buffered printer object address.
     ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @note The error correction is Medium by default.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(char *text);
+    /// With this function the bufferedPrinter object can be accessed
+    /// from outside.
+    /// @returns If it returns NULL that means, the buffered printer is not enabled, or the memory allocation for it is failed.
+    ///          In this case it is not usable. If it is not NULL, you can use it.
+    ShellminatorBufferedPrinter* getBufferedPrinter();
 
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @note The error correction is Medium by default.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(const char *text);
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @param ecc Error correction level.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(char *text, enum qrcodegen_Ecc ecc);
-
-    /// This function generates a QR-code from text
-    ///
-    /// With this function you can create QR-codes from text data( links as well ) and
-    /// show the QR-code in the terminal. It can be handy with links or error codes.
-    /// @param text The text or link that you want to compress into a QR-code.
-    /// @param ecc Error correction level.
-    /// @warning To enable the QR-code support, please uncomment SHELLMINATOR_ENABLE_QR_SUPPORT definition at the configuration section.
-    void generateQRText(const char *text, enum qrcodegen_Ecc ecc);
-
-#endif
+    void attachColorizer( DefaultColorizer *colorizer_p );
 
     void autoDetectTerminal();
 
     friend class ShellminatorProgress;
 
+protected:
+    /// Text buffer
+    ///
+    /// This array stores the incoming and the previous commands.
+    /// The 0th element always reserved to hold the incoming data.
+    /// All other elements are holds the previous commands. Every new command
+    /// shifts the elements towards the higher index, and removes the highest index element.
+    /// To navigate between the previous commands you can use the UP and DOWN arrows
+    /// on the keyboard. To specify the 'memory' of the interface you have to configure
+    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
+    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
+    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
+    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
+
+    /// This variable tracks the index of the previous command while you browsing the command history
+    uint32_t cmd_buff_dim = 1;
+
+    /// This variable tracks the end of the input message.
+    uint32_t cmd_buff_cntr = 0;
+
+    /// This variable tracks the location of the next character.
+    uint32_t cursor = 0;
+
+    /// This flag must be set true in checkCommandFraction function
+    /// when the command parser contains the command.
+    bool commandFound = false;
+
+    /// Print command parser Help.
+    virtual void printCommandParserHelp( Stream* channel_p, bool formatting_p );
+
+    /// Check the command with the command parser to get some useful information.
+    virtual void checkCommandFraction();
+
+    virtual bool hasCommandParser();
+
+    virtual void executeWithCommandParser();
+
+    virtual void autoCompleteWithCommandParser();
+
+    void redrawLine();
+
+
 private:
-    // It can be used to accelerate the data sending process.
-    // With this, the output will be rendered onec without flickering.
+    /// It can be used to accelerate the data sending process.
+    /// With this, the output will be rendered once without flickering.
     ShellminatorBufferedPrinter bufferedPrinter;
 
-    // If memory allocation is failed for the buffer, this flag will be false.
+    /// If memory is allocated, this will be true;
     bool bufferMemoryAllocated = false;
 
-    // Wrapper for the redrawLine without buffering.
-    void redrawLineSimple();
+    /// Pointer to a ShellminatorScreen object.
+    /// It will be used when Screen drawing is enabled.
+    ShellminatorScreen* screen = NULL;
 
-    // Wrapper for the redrawLine with buffering.
-    void redrawLineBuffered();
+    /// The screen is drawn within a pre-defined periods.
+    /// This variable stores the last time when a drawing
+    /// event occurred.
+    unsigned long screenTimerStart = 0;
 
-    // Wrapper for the redrawHistorySearch without buffering.
-    void redrawHistorySearchSimple();
+    unsigned long sizeTimerStart = 0;
 
-    // Wrapper for the redrawHistorySearch with buffering.
-    void redrawHistorySearchBuffered();
+    /// The time interval between two drawings.
+    int screenUpdatePeriod;
+
+    /// This flag shows if a request come from the Screen
+    /// object to issue a draw function call.
+    bool screenRedraw;
+
+    DefaultColorizer defaultColorizer;
+    DefaultColorizer *colorizer = &this->defaultColorizer;
+
+    /// Stores the address of the password hash array.
+    uint8_t* passwordHash = NULL;
+
+    /// Stores the password hash array size.
+    int passwordHashSize = 0;
+
+    /// If logging in is required this flag will be true.
+    bool loggedIn = false;
+
+    /// Pointer to the hash function.
+    void(*passwordHashFunc)( uint8_t*, int, uint8_t*, int ) = NULL;
+
+    /// Check the password.
+    ///
+    /// This function generates a hash from its argument string
+    /// and compares it with the hash stored in the passwordHash
+    /// array.
+    /// @param password Input text to compare.
+    /// @returns If the computed and the stored hash matches, it
+    ///          will return true.
+    bool checkPassword( const char* password );
 
     // State-machine functions.
     /// @todo Finish the documentation for state-machine part.
@@ -841,6 +977,7 @@ private:
     void ShellminatorProcessRegularCharacter(char new_char);
     void ShellminatorMouseEventParserState(char new_char);
 
+    /// Function pointer to the current state of the main state-machine.
     void (Shellminator::*currentState)(char) = &Shellminator::ShellminatorDefaultState;
 
     /// Pointer to a string that holds the startup logo
@@ -850,40 +987,28 @@ private:
     /// @warning Make sure that the generated string is c/c++ compatible!
     char *logo = NULL;
 
-    void pushMouseEvent( uint8_t x, uint8_t y, uint8_t event );
+    /// Push a new event to the event buffer.
+    void pushEvent( shellEvent_t event );
+
+    /// Parse mouse data.
+    ///
+    /// It is used by the main state machine.
+    /// Its main task is to parse the mouse string
+    /// and if it is parsed successfully, generate
+    /// a new event in the event buffer for it.
     void parseMouseData();
 
 #ifdef __AVR__
+    /// On AVR there is an oprion to store the
+    /// logo in the program memory.
+    /// @note I highly recommend using this on AVR
+    ///       to save some memory.
     __FlashStringHelper *progmemLogo = NULL;
 #endif
 
     /// This function-pointer stores the execution function pointer.
     /// This function will be called when a command recives.
-    void (*execution_fn)(char *);
-
-    void (*execution_fn_with_parrent)(char *, Shellminator *);
-
-    /// Text buffer
-    ///
-    /// This array stores the incoming and the previous commands.
-    /// The 0th element always reserved to hold the incoming data.
-    /// All other elements are holds the previous commands. Every new command
-    /// shifts the elements towards the higher index, and removes the highest index element.
-    /// To navigate between the previous commands you can use the UP and DOWN arrows
-    /// on the keyboard. To specify the 'memory' of the interface you have to configure
-    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
-    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
-    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-    char cmd_buff[SHELLMINATOR_BUFF_DIM][SHELLMINATOR_BUFF_LEN + 1] = {{0}};
-
-    /// This variable tracks the index of the previous command while you browsing the command history
-    uint32_t cmd_buff_dim = 1;
-
-    /// This variable tracks the end of the input message.
-    uint32_t cmd_buff_cntr = 0;
-
-    /// This variable tracks the location of the next character.
-    uint32_t cursor = 0;
+    void (*execution_fn)( char*, Shellminator* );
 
     /// This variable tracks the state of the VT100 decoder state-machine.
     uint32_t escape_state = 0;
@@ -891,6 +1016,8 @@ private:
     /// This character array stores the banner text.
     char banner[SHELLMINATOR_BANNER_LEN] = {'\0'};
 
+    /// This character array stores the banner path text.
+    /// default banner path text is `$`.
     char bannerPath[SHELLMINATOR_BANNER_PATH_LEN] = "$";
 
     /// Size of the last printed banner in characters.
@@ -898,37 +1025,37 @@ private:
     uint8_t lastBannerSize = 0;
 
     /// Function pointer for up arrow behaviour override.
-    void (*upArrowOverrideFunc)(void) = NULL;
+    void (*upArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for down arrow behaviour override.
-    void (*downArrowOverrideFunc)(void) = NULL;
+    void (*downArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for left arrow behaviour override.
-    void (*leftArrowOverrideFunc)(void) = NULL;
+    void (*leftArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for right arrow behaviour override.
-    void (*rightArrowOverrideFunc)(void) = NULL;
+    void (*rightArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for abort key behaviour override.
-    void (*abortKeyFunc)(void) = NULL;
+    void (*abortKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Up key behaviour override.
-    void (*pageUpKeyFunc)(void) = NULL;
+    void (*pageUpKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Down key behaviour override.
-    void (*pageDownKeyFunc)(void) = NULL;
+    void (*pageDownKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Home key behaviour override.
-    void (*homeKeyFunc)(void) = NULL;
+    void (*homeKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for End key behaviour override.
-    void (*endKeyFunc)(void) = NULL;
+    void (*endKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Logout key behaviour override.
-    void (*logoutKeyFunc)(void) = NULL;
+    void (*logoutKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Search key behaviour override.
-    void (*searchKeyFunc)(void) = NULL;
+    void (*searchKeyFunc)(Shellminator*) = NULL;
 
     /// This function processes a new character
     ///
@@ -938,77 +1065,63 @@ private:
     /// @param new_char This is the nex character that has to be processed.
     void process(char new_char);
 
-    /// This function insets a new character to the input buffer.
-    void redrawLine();
 
     //---- Communication channels ----//
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
 
-    WiFiServer *server = NULL;
-    WiFiClient client;
-    bool clientConnected = false;
-    uint8_t telnetNegotiationState = 0;
-    uint16_t clientTimeout = 1000;
-
-    // https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
-    static const uint8_t TELNET_IAC_DONT_LINEMODE[3];
-    static const uint8_t TELNET_IAC_WILL_ECHO[3];
-    static const uint8_t TELNET_IAC_DONT_ECHO[3];
-    static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[3];
-    static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[3];
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    WebSocketsServer *wsServer = NULL;
-    uint8_t serverID;
-    shellminatorWebSocketChannel webSocketChannel;
-
-#endif
-
-//---- Commander-API support specific part ----//
-#ifdef COMMANDER_API_VERSION
-
-    /// Pointer to a Commander object.
-    Commander *commander = NULL;
-
-    /// Last time in ms when the input command was checked.
-    uint32_t commandCheckTimerStart = 0;
-
-    /// Flag that stores if the command was checked.
-    bool commandChecked = false;
-
-    /// Flag that stores that the command was
-    /// found in Commander API-tree.
-    bool commandFound = false;
-
-#endif
-
+    /// This function is used to search the
+    /// previous matching command in the history.
     void historySearchBackward();
+
+    /// This function is used to search the
+    /// next matching command in the history.
     void historySearchForward();
+
+    /// If reverse search mode is active,
+    /// this function is used to print the
+    /// text correctly.
     void redrawHistorySearch();
+
+    /// Basic substring function.
+    ///
+    /// The original source can be found
+    /// [here](// https://www.geeksforgeeks.org/check-string-substring-another/)
     int substring(char *str1, char *str2);
 
+    /// If reverse search mode is active, this flag will be true.
     bool inSearch = false;
-    int32_t searchMatch;
 
-#ifdef SHELLMINATOR_ENABLE_PASSWORD_MODULE
+    /// Used to parse reverse search.
+    int searchMatch;
 
-    SHA256_CTX passwordHashCtx;
-    uint8_t passwordHashBuffer[SHA256_BLOCK_SIZE];
-    uint8_t *passwordHashAddress = NULL;
+    /// This flag will be true when an input prompt is active.
+    bool inputActive = false;
 
-#endif
+    /// This will store the length of the instruction text
+    /// size in an input.
+    int inputInstuctionSize = 0;
 
-// QR-code configuration specific parts.
-#ifdef SHELLMINATOR_ENABLE_QR_SUPPORT
+    /// Pointer to a buffer that will be used to store the
+    /// text, that is typed to an input.
+    char* inputDestinationBuffer;
 
-    uint8_t qr_data[qrcodegen_BUFFER_LEN_MAX];
-    uint8_t qr_tempBuff[qrcodegen_BUFFER_LEN_MAX];
+    /// Size of the buffer that is attached to an input.
+    int inputDestinationBufferSize;
 
-#endif
+    /// If secret mode is activated on an input, this
+    /// flag will be true.
+    bool inputSecretMode;
+
+    /// This function will be called when an input
+    /// is finished.
+    void(*inputCallback)(char*, int, Shellminator*);
+
+    /// Last time in ms when a key was pressed.
+    uint32_t lastKeyPressTime = 0;
+
+
+    // For unit testing.
+    friend class ShellminatorUT;
 };
 
 #endif

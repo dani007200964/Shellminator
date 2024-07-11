@@ -134,7 +134,7 @@ for template in templateFiles:
 
     # Generate folder for the template.
     if environmentInfo == 'Arduino':
-        os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo )
+        #os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo )
         os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo )
 
     if environmentInfo == 'Desktop':
@@ -160,6 +160,7 @@ for template in templateFiles:
 
         # Store additional example parameters.
         excludeData = exampleData[ 0 ]
+        exampleCategory = exampleData[ 1 ].split( '=' )[ 1 ].replace( '\n', '' )
 
         # Find the index of every section.
         headerStartIndex                  = findLine( exampleData, "++--HEADER--++\n" )
@@ -203,14 +204,17 @@ for template in templateFiles:
         secondRunData = currentTemplate.render( fields )
 
         # Generate a folder name from the example file name.
-        exampleFolderName = example.split( '.' )[ 0 ].replace( '_', ' ' ).capitalize()
+        #exampleFolderName = example.split( '.' )[ 0 ].replace( '_', ' ' ).capitalize()
+        exampleFolderName = example.split( '.' )[ 0 ]
 
         # Generate folder for the example and write the output.
         if environmentInfo == 'Arduino':
             
             # File for Arduino IDE
-            os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
-            outputFile = open( rootDirectory + arduinoExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".ino", "w" )
+            if not os.path.isdir( rootDirectory + arduinoExampleFolder + "\\" + exampleCategory ):
+                os.mkdir( rootDirectory + arduinoExampleFolder + "\\" + exampleCategory )
+            os.mkdir( rootDirectory + arduinoExampleFolder + "\\" + exampleCategory + "\\" + exampleFolderName )
+            outputFile = open( rootDirectory + arduinoExampleFolder + "\\" + exampleCategory + "\\" + exampleFolderName + "/" + exampleFolderName + ".ino", "w" )
             outputFile.write( secondRunData )
             outputFile.close()
 
@@ -226,7 +230,7 @@ for template in templateFiles:
             outputFile.write( secondRunData )
             outputFile.close()
 
-            CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+            CMakeContent.append( "\t#add_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
 
         if environmentInfo == 'Emscripten':
             os.mkdir( rootDirectory + emscriptenExampleFolder + "/" + boardInfo + "/" + exampleFolderName )

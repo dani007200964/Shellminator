@@ -97,9 +97,31 @@ public:
   size_t write( const char *str ) override;
 
 private:
-  wchar_t vOut[ 10000 ];
 
+    /// This buffer is required to print unicode characters to the console.
+    wchar_t vOut[ 10000 ];
 
+    #ifdef EMSCRIPTEN
+
+        /// In case of Enscripten build, this is required to print unicode character data.
+        ///
+        /// This is a strange animal. It turned out, that you can not pus
+        /// a unicode byte stream up to the javascript layer byte-by-byte.
+        /// The data has to be collected and pushed up to the JS interface
+        /// with the stdoutWriteString function. Every byte write method
+        /// should be pushed up to the JS layer with this function.
+        void emscriptenWriteByte( uint8_t b );
+
+        /// Tracks how many bytes left from the unicode dataset.
+        int unicodeBytesLeft = 0;
+
+        /// Tracks the next free slot in the unicode buffer.
+        int unicodeBufferCounter = 0;
+
+        /// This buffer collects the individual bytes of a unicode structure.
+        uint8_t unicodeBuffer[ 5 ];
+
+    #endif
 
 };
 
