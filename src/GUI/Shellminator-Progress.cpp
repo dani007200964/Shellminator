@@ -43,7 +43,7 @@ void ShellminatorProgress::init( Shellminator* parent_p, Stream* channel_p ){
     redraw = true;
 }
 
-void ShellminatorProgress::draw(){
+void ShellminatorProgress::draw( bool noClear ){
 
     // Ratio used to draw[ 0.0 -1.0 ].
     float ratio;
@@ -292,7 +292,9 @@ void ShellminatorProgress::draw(){
                 if( text[ i ] == '\0' ){
                     // If we reached string end, we clear the rest of
                     // of the line and return.
-                    channel -> print( "\033[0K" );
+                    if( !noClear ){
+                        channel -> print( "\033[0K" );
+                    }
                     return;
                 }
 
@@ -305,7 +307,9 @@ void ShellminatorProgress::draw(){
     }
 
     // Clear the rest of the line.
-    channel -> print( "\033[0K" );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
 }
 
@@ -345,6 +349,7 @@ void ShellminatorProgress::setFormat( const char* format_p ){
 }
 
 void ShellminatorProgress::setPercentage( float percentage_p ){
+    percentage = percentage_p;
 
     if( parent == NULL ){
         return;
@@ -354,8 +359,6 @@ void ShellminatorProgress::setPercentage( float percentage_p ){
         redraw = true;
         parent -> requestRedraw();
     }
-
-    percentage = percentage_p;
 }
 
 void ShellminatorProgress::setStep( int current, int total ){

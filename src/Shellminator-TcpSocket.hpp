@@ -136,8 +136,8 @@ SOFTWARE.
             static const uint8_t TELNET_IAC_DONT_LINEMODE[3];
             static const uint8_t TELNET_IAC_WILL_ECHO[3];
             static const uint8_t TELNET_IAC_DONT_ECHO[3];
-            static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[3];
-            static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[3];
+            static const uint8_t TELNET_IAC_WILL_SUPPRESS_GO_AHEAD[3];
+            static const uint8_t TELNET_IAC_DO_SUPPRESS_GO_AHEAD[3];
 
         };
 

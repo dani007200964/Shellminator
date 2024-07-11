@@ -73,7 +73,7 @@ public:
     ///       The logic behind the buffering and flushing is handled by the caller terminal.
     void init( Shellminator* parent_p, Stream* channel_p ) override;
 
-    void printExtra( int index ) override;
+    void printExtra( int index, bool noClear ) override;
 
 protected:
 

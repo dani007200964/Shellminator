@@ -66,10 +66,20 @@ SOFTWARE.
             #define SHELLMINATOR_WS_DBGLN_2( x, y )
         #endif
 
+        /// Macro to print debug message.
+        ///
+        /// The syntax is the same as a regular Stream.print() function.
+        /// It will check if a debug channel is attached and only then
+        /// will print the debug message.
         #define SHELLMINATOR_WS_DBG( ... )   SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBG_2,   SHELLMINATOR_WS_DBG_1   )( __VA_ARGS__ )
         #define SHELLMINATOR_WS_DBGLN( ... ) SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBGLN_2, SHELLMINATOR_WS_DBGLN_1 )( __VA_ARGS__ )
 
-        #define WS_FRAMW_HEADER_SIZE 6
+        /// Macro to print debug message with new line.
+        ///
+        /// The syntax is the same as a regular Stream.println() function.
+        /// It will check if a debug channel is attached and only then
+        /// will print the debug message.
+        #define WS_FRAME_HEADER_SIZE 6
 
         // We need to add 258EAFA5-E914-47DA-95CA-C5AB0DC85B11 to the end of the
         // received key and this needs space in the buffer.

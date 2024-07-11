@@ -52,13 +52,6 @@ ShellminatorButton::ShellminatorButton( const char* name_p ){
     // Save the parameters to internal variables.
     name = name_p;
 
-    // Set the origin to default.
-    originX = 1;
-    originY = 1;
-
-    width = 1;
-    height = 1;
-
     func = NULL;
 
     // Set the eventCode to empty. This means
@@ -189,7 +182,7 @@ void ShellminatorButton::update( int width_p, int  height_p ){
 
 }
 
-void ShellminatorButton::draw(){
+void ShellminatorButton::draw( bool noClear ){
 
     // Generic counter.
     int i;

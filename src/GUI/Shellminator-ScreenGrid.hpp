@@ -32,8 +32,8 @@ SOFTWARE.
 */
 
 
-#ifndef SHELLMINATOR_NOTIFICATION_HPP_
-#define SHELLMINATOR_NOTIFICATION_HPP_
+#ifndef SHELLMINATOR_SCREEN_GRID_HPP_
+#define SHELLMINATOR_SCREEN_GRID_HPP_
 
     #ifdef ARDUINO
         #include "Arduino.h"
@@ -50,14 +50,15 @@ SOFTWARE.
     #include <stdint.h>
     #include <string.h>
 
-    class ShellminatorNotification : public ShellminatorScreen{
+
+    class ShellminatorScreenGrid : public ShellminatorScreen{
 
     public:
 
         /// Empty constructor.
-        ShellminatorNotification();
+        ShellminatorScreenGrid();
 
-        ShellminatorNotification( const char* text_p );
+        ShellminatorScreenGrid( int numOfRows_p, int numOfColumns_p );
 
         /// Init function.
         ///
@@ -91,7 +92,7 @@ SOFTWARE.
         /// @param height_p The height of the screen area in characters.
         void update( int width_p, int  height_p ) override;
 
-        void setText( const char* text_p );
+        void addWidget( ShellminatorScreen* widget, int row, int column, int rowSpan = 1, int columnSpan = 1 );
 
     protected:
 
@@ -100,10 +101,13 @@ SOFTWARE.
         /// screen is resized.
         bool redraw = true;
 
-        const char* text = NULL;
-        int textWidth = 0;
-        int textHeight = 0;
+        int numOfRows = 0;
+        int numOfColumns = 0;
 
+        int cellWidth = 0;
+        int cellHeight = 0;
+
+        ShellminatorScreen* head = NULL;
 
     };
 

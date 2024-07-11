@@ -37,8 +37,8 @@ SOFTWARE.
     const uint8_t ShellminatorTcpSocket::TELNET_IAC_DONT_LINEMODE[]          = { 255, 254, 34 };
     const uint8_t ShellminatorTcpSocket::TELNET_IAC_WILL_ECHO[]              = { 255, 251, 1 };
     const uint8_t ShellminatorTcpSocket::TELNET_IAC_DONT_ECHO[]              = { 255, 254, 1 };
-    const uint8_t ShellminatorTcpSocket::TELNET_IAC_WILL_SUPRESS_GO_AHEAD[]  = { 255, 251, 3 };
-    const uint8_t ShellminatorTcpSocket::TELNET_IAC_DO_SUPRESS_GO_AHEAD[]    = { 255, 253, 3 };
+    const uint8_t ShellminatorTcpSocket::TELNET_IAC_WILL_SUPPRESS_GO_AHEAD[]  = { 255, 251, 3 };
+    const uint8_t ShellminatorTcpSocket::TELNET_IAC_DO_SUPPRESS_GO_AHEAD[]    = { 255, 253, 3 };
 
     ShellminatorTcpSocket::ShellminatorTcpSocket( int port_p ){
         port = port_p;
@@ -59,6 +59,10 @@ SOFTWARE.
     }
 
     void ShellminatorTcpSocket::begin(){
+        // todo check network module firmware on Uno R4 and Pico W
+        if( server == NULL ){
+            return;
+        }
         server -> begin();
     }
 
@@ -73,7 +77,7 @@ SOFTWARE.
 
         // Detect buffer overflow
         if( streamBufferWritePointer == streamBufferReadPointer ){
-            SHELLMINATOR_TCP_DBGLN( "TCP Circular Buffer Overflow!" );
+            SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "TCP Circular Buffer Overflow!" ) );
             closeClient();
         }
 
@@ -88,13 +92,19 @@ SOFTWARE.
 
     void ShellminatorTcpSocket::update(){
         char newChar;
-        WiFiClient newClient = server -> accept();
+        WiFiClient newClient;
+
+        if( server == NULL ){
+            reeturn;
+        }
+
+        newClient = server -> accept();
 
         if( newClient ){
             if( CLIENT_STATE ){
                 // Reject a new client, because another one is alredy in use.
                 newClient.stop();
-                SHELLMINATOR_TCP_DBGLN( "TCP Client already in use. Rejecting new connection." );
+                SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "TCP Client already in use. Rejecting new connection." ) );
             }
             else{
                 // New connection.
@@ -103,20 +113,20 @@ SOFTWARE.
                     client.setNoDelay( true );
                 #endif
                 clientConnected = true;
-                SHELLMINATOR_TCP_DBGLN( "New TCP Client." );
-                SHELLMINATOR_TCP_DBGLN( "---- Sending Telnet Configuration ----" );     
+                SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "New TCP Client." ) );
+                SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "---- Sending Telnet Configuration ----" ) );     
 
                 client.write( TELNET_IAC_DONT_LINEMODE, 3 );
                 client.write( TELNET_IAC_WILL_ECHO, 3 );
                 client.write( TELNET_IAC_DONT_ECHO, 3 );
-                client.write( TELNET_IAC_WILL_SUPRESS_GO_AHEAD, 3 );
-                client.write( TELNET_IAC_DO_SUPRESS_GO_AHEAD, 3 );
+                client.write( TELNET_IAC_WILL_SUPPRESS_GO_AHEAD, 3 );
+                client.write( TELNET_IAC_DO_SUPPRESS_GO_AHEAD, 3 );
             }
         }
 
         // Check for disconnection event
         if( clientConnected && !CLIENT_STATE ){
-            SHELLMINATOR_TCP_DBGLN( "TCP Disconnect Event Detected!" );
+            SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "TCP Disconnect Event Detected!" ) );
             closeClient();
         }
 
@@ -171,7 +181,7 @@ SOFTWARE.
         client.stop();
         clientConnected = false;
         resetVariables();
-        SHELLMINATOR_TCP_DBGLN( "Disconnecting TCP Client!" );
+        SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "Disconnecting TCP Client!" ) );
     }
 
     void ShellminatorTcpSocket::resetVariables(){
@@ -224,8 +234,8 @@ SOFTWARE.
     }
 
     void ShellminatorTcpSocket::flush(){
-        // Hinestly I don't know what to do.
-        // Arduino flush methods are wierd.
+        // Honestly I don't know what to do.
+        // Arduino flush methods are weird.
     }
 
     size_t ShellminatorTcpSocket::write( uint8_t b ){

@@ -92,7 +92,7 @@ void ShellminatorListDetailed::init( Shellminator* parent_p, Stream* channel_p )
 
 }
 
-void ShellminatorListDetailed::printExtra( int index ){
+void ShellminatorListDetailed::printExtra( int index, bool noClear ){
 
     // Generic counter.
     int i;
@@ -108,12 +108,16 @@ void ShellminatorListDetailed::printExtra( int index ){
     // Check if parameters are configured incorrectly.
     // This case, clear the line to the end.
     if( detailList == NULL ){
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
         return;
     }
 
     if( detailStart == 0 ){
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
         return;
     }
 
@@ -127,7 +131,10 @@ void ShellminatorListDetailed::printExtra( int index ){
     for( i = 1; i < height; i++ ){
 
         Shellminator::setCursorPosition( channel, originX + detailStart, originY + i );
-        channel -> print( "  \u2502\033[0K" );
+        channel -> print( "  \u2502\033" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
 
     }
 
@@ -166,7 +173,9 @@ void ShellminatorListDetailed::printExtra( int index ){
     // Clear every line remaining until the screen end.
     for( i = verticalOffset + 2; i <= height; i++ ){
         Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + i - 1 );
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
     }
 
 }

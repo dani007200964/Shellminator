@@ -62,8 +62,12 @@ void ShellminatorWebSocket::attachDebugChannel( Stream* dbg_p ){
 }
 
 void ShellminatorWebSocket::begin(){
+    // todo check network module firmware on Uno R4 and Pico W
+    if( server == NULL ){
+        return;
+    }
     server -> begin();
-    //SHELLMINATOR_WS_DBGLN( "WS Server started." );
+    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS Server started." ) );
 }
 
 void ShellminatorWebSocket::appendToCircularBuffer( uint8_t data ){
@@ -77,7 +81,7 @@ void ShellminatorWebSocket::appendToCircularBuffer( uint8_t data ){
 
     // Detect buffer overflow
     if( streamBufferWritePointer == streamBufferReadPointer ){
-        SHELLMINATOR_WS_DBGLN( "WS Circular Buffer Overflow!" );
+        SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS Circular Buffer Overflow!" ) );
         closeClient();
     }
 
@@ -113,7 +117,7 @@ bool ShellminatorWebSocket::sendFrame( ShellminatorWebSocket::wsDecodedHeaderTyp
 bool ShellminatorWebSocket::sendFrame125( ShellminatorWebSocket::wsDecodedHeaderType_t type, const uint8_t* data, uint8_t dataSize ){
     int i;
     uint8_t maskBuffer[ 4 ] = { 0 };
-    uint8_t buffer[ WS_FRAMW_HEADER_SIZE ] = { 0 };
+    uint8_t buffer[ WS_FRAME_HEADER_SIZE ] = { 0 };
 
     uint8_t headerSize = 2;
 
@@ -130,23 +134,23 @@ bool ShellminatorWebSocket::sendFrame125( ShellminatorWebSocket::wsDecodedHeader
     buffer[ 1 ] = 0x00;
     buffer[ 1 ] |= dataSize;
 
-    SHELLMINATOR_WS_DBGLN( "---- Header To Send ----" );
+    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- Header To Send ----" ) );
     for( i = 0; i < headerSize; i++ ){
         SHELLMINATOR_WS_DBG( i );
-        SHELLMINATOR_WS_DBG( "\t0x" );
+        SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t0x" ) );
         SHELLMINATOR_WS_DBG( buffer[ i ], HEX );
-        SHELLMINATOR_WS_DBG( "\t" );
+        SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t" ) );
         SHELLMINATOR_WS_DBGLN( (int)buffer[ i ] );
     }
     client.write( (const uint8_t*)buffer, headerSize );
 
     if( dataSize > 0 ){
-        SHELLMINATOR_WS_DBGLN( "---- Data To Send ----" );
+        SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- Data To Send ----" ) );
         for( i = 0; i < dataSize; i++ ){
             SHELLMINATOR_WS_DBG( i );
-            SHELLMINATOR_WS_DBG( "\t0x" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t0x" ) );
             SHELLMINATOR_WS_DBG( data[ i ], HEX );
-            SHELLMINATOR_WS_DBG( "\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t" ) );
             SHELLMINATOR_WS_DBGLN( (int)data[ i ] );
         }
         client.write( (const uint8_t*)data, dataSize );
@@ -156,13 +160,19 @@ bool ShellminatorWebSocket::sendFrame125( ShellminatorWebSocket::wsDecodedHeader
 
 void ShellminatorWebSocket::update(){
     char newChar;
-    WiFiClient newClient = server -> accept();
+    WiFiClient newClient;
+
+    if( server == NULL ){
+        return;
+    }
+
+    newClient = server -> accept();
 
     if( newClient ){
         if( CLIENT_STATE ){
             // Reject a new client, because another one is alredy in use.
             newClient.stop();
-            SHELLMINATOR_WS_DBGLN( "WS Client already in use. Rejecting new connection." );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS Client already in use. Rejecting new connection." ) );
         }
         else{
             // New connection.
@@ -172,14 +182,14 @@ void ShellminatorWebSocket::update(){
             #endif
             clientConnected = true;
             wsState = WS_HEADER_STATE;
-            SHELLMINATOR_WS_DBGLN( "New WS Client." );
-            SHELLMINATOR_WS_DBGLN( "---- Processing Client Header ----" );     
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "New WS Client." ) );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- Processing Client Header ----" ) );     
         }
     }
 
     // Check for disconnection event
     if( clientConnected && !CLIENT_STATE ){
-        SHELLMINATOR_WS_DBGLN( "Disconnect Event Detected!" );
+        SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Disconnect Event Detected!" ) );
         closeClient();
     }
 
@@ -235,14 +245,14 @@ void ShellminatorWebSocket::resetDataVariables(){
 void ShellminatorWebSocket::finishDecoding(){
     // Todo Put all the data to a circular buffer and bind it with Stream functions.
 
-    SHELLMINATOR_WS_DBGLN( "---- Data Reception Finished ----" );
+    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- Data Reception Finished ----" ) );
 
     switch( decodedHdrType ){
         case WS_PONG:
             // Todo handle Pong stuff.
             break;
         case WS_PING:
-            SHELLMINATOR_WS_DBGLN( "Ping Event -> Sending Pong..." );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Ping Event -> Sending Pong..." ) );
             sendFrame( WS_PONG );
             break;
         case WS_TXT:
@@ -252,7 +262,7 @@ void ShellminatorWebSocket::finishDecoding(){
             closeClient( true );
             break;
         default:
-            SHELLMINATOR_WS_DBGLN( "Unhandled type" );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Unhandled type" ) );
             break;
     }
 
@@ -281,38 +291,38 @@ void ShellminatorWebSocket::wsDataProcessing( char newChar ){
             decodedHdrMask = ( clientBuffer[ 1 ] >> 7 ) & 0x01;
             decodedHdrPayloadLen = ( clientBuffer[ 1 ] & 0x7F );
 
-            SHELLMINATOR_WS_DBGLN( "---- Data Header Summary ----" );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- Data Header Summary ----" ) );
 
-            SHELLMINATOR_WS_DBG( "\tFin:\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\tFin:\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrFin );
 
-            SHELLMINATOR_WS_DBG( "\tType:\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\tType:\t" ) );
             switch( decodedHdrType ){
                 case WS_COMM:
-                    SHELLMINATOR_WS_DBGLN( "COMMUNICATION" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "COMMUNICATION" ) );
                     break;
                 case WS_TXT:
-                    SHELLMINATOR_WS_DBGLN( "TEXT" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "TEXT" ) );
                     break;
                 case WS_CLOSE:
-                    SHELLMINATOR_WS_DBGLN( "CLOSE" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "CLOSE" ) );
                     break;
                 case WS_PING:
-                    SHELLMINATOR_WS_DBGLN( "PING" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "PING" ) );
                     break;
                 case WS_PONG:
-                    SHELLMINATOR_WS_DBGLN( "PONG" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "PONG" ) );
                     break;
                 default:
-                    SHELLMINATOR_WS_DBG( "UNKNOWN CODE: " );
+                    SHELLMINATOR_WS_DBG( __CONST_TXT__( "UNKNOWN CODE: " ) );
                     SHELLMINATOR_WS_DBGLN( (int)decodedHdrType );
                     break;
             }
 
-            SHELLMINATOR_WS_DBG( "\tMask:\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\tMask:\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrMask );
 
-            SHELLMINATOR_WS_DBG( "\tLen:\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\tLen:\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrPayloadLen );
 
             // The client MUST send mask and mask keys,
@@ -339,18 +349,18 @@ void ShellminatorWebSocket::wsDataProcessing( char newChar ){
             decodedHdrMaskKeys[ 2 ] = clientBuffer[ 4 ];
             decodedHdrMaskKeys[ 3 ] = clientBuffer[ 5 ];
 
-            SHELLMINATOR_WS_DBGLN( "\tMask Keys:" );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "\tMask Keys:" ) );
 
-            SHELLMINATOR_WS_DBG( "\t\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrMaskKeys[ 0 ], HEX );
 
-            SHELLMINATOR_WS_DBG( "\t\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrMaskKeys[ 1 ], HEX );
 
-            SHELLMINATOR_WS_DBG( "\t\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrMaskKeys[ 2 ], HEX );
 
-            SHELLMINATOR_WS_DBG( "\t\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
             SHELLMINATOR_WS_DBGLN( decodedHdrMaskKeys[ 3 ], HEX );
 
             decodedDataXorCntr = 0;
@@ -359,7 +369,7 @@ void ShellminatorWebSocket::wsDataProcessing( char newChar ){
                 finishDecoding();
             }
             else{
-                SHELLMINATOR_WS_DBGLN( "\tDecoded characters:" );
+                SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "\tDecoded characters:" ) );
             }
 
         }
@@ -370,43 +380,19 @@ void ShellminatorWebSocket::wsDataProcessing( char newChar ){
 
         if( decodedHdrMask ){
             currentPayload = newChar ^ decodedHdrMaskKeys[ decodedDataXorCntr % 4 ];
-            /*
-            clientBuffer[ clientBufferCounter ] = newChar ^ decodedHdrMaskKeys[ decodedDataXorCntr % 4 ];
-            SHELLMINATOR_WS_DBG( "\t\t" );
-            SHELLMINATOR_WS_DBG( (char)clientBuffer[ clientBufferCounter ] );
-            SHELLMINATOR_WS_DBG( "\t" );
-            SHELLMINATOR_WS_DBG( clientBuffer[ clientBufferCounter ], HEX );
-            SHELLMINATOR_WS_DBGLN( "\tMASKED" );
-            */
             decodedDataXorCntr++;
         }
         else{
             currentPayload = newChar;
-            /*
-            clientBuffer[ clientBufferCounter ] = newChar;
-            SHELLMINATOR_WS_DBG( "\t\t" );
-            SHELLMINATOR_WS_DBG( (char)clientBuffer[ clientBufferCounter ] );
-            SHELLMINATOR_WS_DBG( "\t" );
-            SHELLMINATOR_WS_DBGLN( clientBuffer[ clientBufferCounter ], HEX );
-            */
         }
 
-        SHELLMINATOR_WS_DBG( "\t\t" );
+        SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
         SHELLMINATOR_WS_DBG( (char)currentPayload );
-        SHELLMINATOR_WS_DBG( "\t" );
+        SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t" ) );
         SHELLMINATOR_WS_DBG( currentPayload, HEX );
-        SHELLMINATOR_WS_DBGLN( "\tMASKED" );
+        SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "\tMASKED" ) );
 
         appendToCircularBuffer( currentPayload );
-
-        /*
-        clientBufferCounter++;
-        if( clientBufferCounter >= SHELLMINATOR_WS_CLIENT_BUFFER_SIZE ){
-            SHELLMINATOR_WS_DBGLN( "Buffer Overflow!" );
-            closeClient();
-            return;
-        }
-        */
 
         decodedHdrPayloadCntr--;
         if( decodedHdrPayloadCntr == 0 ){
@@ -429,24 +415,24 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
 
         // Detect the end of the header. It consist of an empty line.
         if( clientBuffer[ 0 ] == '\0' ){
-            // If we found the end of the header, we have to chec if all
-            // parameters are presend and if theye are valid.
+            // If we found the end of the header, we have to check if all
+            // parameters are present and if they are valid.
 
-            SHELLMINATOR_WS_DBGLN( "WS Client header receieved." );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS Client header received." ) );
 
             valid = true;
             valid &= connectionUpgradeLineFound;
             valid &= upgradeWebsocketLineFound;
             valid &= clientVersion == 13;
             if( valid ){
-                SHELLMINATOR_WS_DBGLN("WS Client header valid." );
+                SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS Client Header Valid." ) );
                 if( !generateServerKey() ){
-                    SHELLMINATOR_WS_DBGLN("Server key generation failed!" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Server key generation failed!" ) );
                     closeClient();
                     return;
                 }
 
-                SHELLMINATOR_WS_DBG( "WS Server key generated: " );
+                SHELLMINATOR_WS_DBG( __CONST_TXT__( "WS Server key generated: " ) );
                 SHELLMINATOR_WS_DBGLN( serverKey );
 
                 client.print( serverHeader );
@@ -465,7 +451,7 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
                 // Reset Buffers for the new state.
                 resetDataVariables();
 
-                SHELLMINATOR_WS_DBG( "WS Connection Established!" );
+                SHELLMINATOR_WS_DBG( __CONST_TXT__( "WS Connection Established!" ) );
 
             }
             else{
@@ -476,17 +462,17 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
 
         else if( startsWith( clientBuffer, "GET " ) ){
             SHELLMINATOR_WS_DBG( clientBuffer );
-            SHELLMINATOR_WS_DBG( "\t\t" );
+            SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
 
             if( strstr( clientBuffer, "HTTP/1.1" ) != NULL ){
                 httpGetLineFound = true;
             }
 
             if( httpGetLineFound ){
-                SHELLMINATOR_WS_DBGLN( "[ OK ]" );
+                SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ OK ]" ) );
             }
             else{
-                SHELLMINATOR_WS_DBGLN( "[ NOK ]" );
+                SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ NOK ]" ) );
             }
         }
 
@@ -499,7 +485,7 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
             if( indexOfSeparator > SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE ){
                 return;
             }
-            // Terminate the string wehere the separator was.
+            // Terminate the string where the separator was.
             clientLineNameBuffer[ indexOfSeparator ] = '\0';
 
             // Extract the value of the parameter.
@@ -517,17 +503,17 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
             // Check for 'Connection: Upgrade' line.
             if( strcicmp( clientLineNameBuffer, "Connection" ) == 0 ){
                 SHELLMINATOR_WS_DBG( clientBuffer );
-                SHELLMINATOR_WS_DBG( "\t\t" );
+                SHELLMINATOR_WS_DBG( __CONST_TXT__( "\t\t" ) );
 
                 if( strcicmp( clientLineValueBuffer, "upgrade" ) == 0 ){
                     connectionUpgradeLineFound = true;
                 }
 
                 if( connectionUpgradeLineFound ){
-                    SHELLMINATOR_WS_DBGLN( "[ OK ]" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ OK ]" ) );
                 }
                 else{
-                    SHELLMINATOR_WS_DBGLN( "[ NOK ]" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ NOK ]" ) );
                 }
             }
 
@@ -541,10 +527,10 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
                 }
 
                 if( upgradeWebsocketLineFound ){
-                    SHELLMINATOR_WS_DBGLN( "[ OK ]" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ OK ]" ) );
                 }
                 else{
-                    SHELLMINATOR_WS_DBGLN( "[ NOK ]" );
+                    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "[ NOK ]" ) );
                 }
             }
 
@@ -561,7 +547,7 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
             }
 
             else{
-                SHELLMINATOR_WS_DBG( "Undhandled parameter: " );
+                SHELLMINATOR_WS_DBG( __CONST_TXT__( "Undhandled parameter: " ) );
                 SHELLMINATOR_WS_DBGLN( clientBuffer );
             }
 
@@ -573,7 +559,7 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
 
         }
         else{
-            SHELLMINATOR_WS_DBGLN( "WS parameter separator not found" );
+            SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "WS parameter separator not found" ) );
         }
 
     }
@@ -694,7 +680,7 @@ bool ShellminatorWebSocket::generateServerKey(){
         return false;
     }
 
-    SHELLMINATOR_WS_DBGLN( "---- SHA1 Hash Bytes ----" );
+    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "---- SHA1 Hash Bytes ----" ) );
     for( i = 0; i < sizeof( sha1HashBytes ); i++ ){
         SHELLMINATOR_WS_DBG( sha1HashBytes[ i ], HEX );
     }
@@ -720,7 +706,7 @@ void ShellminatorWebSocket::closeClient( bool sendCloseFrame ){
     client.stop();
     clientConnected = false;
     resetVariables();
-    SHELLMINATOR_WS_DBGLN( "Disconnecting WS Client!" );
+    SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Disconnecting WS Client!" ) );
 
 }
 
@@ -766,8 +752,8 @@ int ShellminatorWebSocket::peek(){
 }
 
 void ShellminatorWebSocket::flush(){
-	// Hinestly I don't know what to do.
-	// Arduino flush methods are wierd.
+	// Honestly I don't know what to do.
+	// Arduino flush methods are weird.
 }
 
 size_t ShellminatorWebSocket::write( uint8_t b ){

@@ -33,12 +33,6 @@ SOFTWARE.
 
 #include "Shellminator-Level-Meter.hpp"
 
-/*
-┌─┐
-│█┤
-├█│
-└─┘ █▇▆▅▄▃▂▁
-*/
 
 ShellminatorLevelMeter::ShellminatorLevelMeter(){
     redraw = true;
@@ -60,6 +54,7 @@ void ShellminatorLevelMeter::init( Shellminator* parent_p, Stream* channel_p ){
 }
 
 void ShellminatorLevelMeter::setPercentage( float percentage_p ){
+    percentage = percentage_p;
 
     if( parent == NULL ){
         return;
@@ -69,8 +64,6 @@ void ShellminatorLevelMeter::setPercentage( float percentage_p ){
         redraw = true;
         parent -> requestRedraw();
     }
-
-    percentage = percentage_p;
 }
 
 void ShellminatorLevelMeter::update( int width_p, int  height_p ){
@@ -107,7 +100,7 @@ void ShellminatorLevelMeter::setErrorPercentage( float percentage_p ){
 }
 
 
-void ShellminatorLevelMeter::draw(){
+void ShellminatorLevelMeter::draw( bool noClear ){
 
     // Ratio used to draw[ 0.0 -1.0 ].
     float ratio;
@@ -171,7 +164,9 @@ void ShellminatorLevelMeter::draw(){
     // Draw Top side.
     Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( __CONST_TXT__( "\u250C\u2500\u2510  " ) );
-    channel -> print( "\033[0K" );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     for( i = 1; i < height - 1; i++ ){
         Shellminator::setCursorPosition( channel, originX, height - i );
@@ -260,14 +255,18 @@ void ShellminatorLevelMeter::draw(){
         else{
             channel -> print( __CONST_TXT__( "\u2502  " ) );
         }
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
 
     }
 
     // Draw Bottom side.
     Shellminator::setCursorPosition( channel, originX, height );
     channel -> print( __CONST_TXT__( "\u2514\u2500\u2518  " ) );
-    channel -> print( "\033[0K" );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     if( name == NULL ){
         return;

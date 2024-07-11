@@ -136,12 +136,14 @@ void ShellminatorList::attachCallback( void(*func_p)(const char*[], int, int, Sh
     func = func_p;
 }
 
-void ShellminatorList::printExtra( int index ){
-    channel -> print( "\033[0K" );
+void ShellminatorList::printExtra( int index, bool noClear ){
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 }
 
 
-void ShellminatorList::draw(){
+void ShellminatorList::draw( bool noClear ){
 
     // Generic counter.
     int i;
@@ -181,8 +183,9 @@ void ShellminatorList::draw(){
     // Set cursor to top left and print the instruction text.
     Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( instruction );
-    channel -> print( "\033[0K" );
-
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     // Print as many elements as high the remaining screen is.
     for( i = 1; i < height; i++ ){
@@ -236,7 +239,7 @@ void ShellminatorList::draw(){
             parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
         }
 
-        printExtra( index );
+        printExtra( index, noClear );
 
     }
 

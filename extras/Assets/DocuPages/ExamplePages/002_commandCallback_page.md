@@ -1,24 +1,12 @@
 @page 002_commandCallback_page Example 002 Command Callback
 
-\htmlonly
-<div style="display:flex; align-items: center;">
-    <div style="width:100px; height:100px; margin-right: 20px;">
-        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
-    </div>
-    <div>
-        <p>In the previous example, you saw how easy it is to bring the terminal to life, but we haven't yet established any connection between the main program and the Shellminator object. To associate functionality with events occurring during terminal use, we need hooks. Fortunately, Shellminator provides several hooks to customize its behavior according to your needs.
-        </p>
-    </div>
-</div>
-\endhtmlonly
+@tableofcontents
 
-\htmlonly
-<iframe id="demoFrame" src="webExamples/002_commandCallback.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
-\endhtmlonly
+In the previous example, you saw how easy it is to bring the terminal to life, but we haven't yet established any connection between the main program and the Shellminator object. To associate functionality with events occurring during terminal use, we need hooks. Fortunately, Shellminator provides several hooks to customize its behavior according to your needs. We're making a slight modification to the code from the previous example by creating a function that we'll assign to the shell object in such a way that this function gets called every time a command arrives from the terminal.
 
-We're making a slight modification to the code from the previous example by creating a function that we'll assign to the shell object in such a way that this function gets called every time a command arrives from the terminal.
+<hr>
 
-First, you need to create this function. The return type is always `void`, and it must have two mandatory arguments: the first one `char* command` and the second `Shellminator* caller`. The name of the function is not critical; you can call it anything you like. In this case, its name will be execution_function.
+__1.__ First, you need to create this function. The return type is always `void`, and it must have two mandatory arguments: the first one `char* command` and the second `Shellminator* caller`. The name of the function is not critical; you can call it anything you like. In this case, its name will be execution_function.
 
 ```cpp
 // Create a function, that can be called every time when a command gets entered.
@@ -36,7 +24,7 @@ Inside the function, you can do anything with the information; for simplicity's 
 It's really important to note here that we're not using the `Serial.print` method, but rather the `caller -> channel -> print` method. This isn't by accident; it allows us to ensure that when there are multiple terminals in the system, the terminal that sent the command receives our response. The usage is the same as before, just replace `.` with `->`.
 
 
-We can add the functionality to our shell object by including the setup section with the attachExecFunc method.
+__2.__ We can add the functionality to our shell object by including the setup section with the attachExecFunc method.
 ```cpp
 // System init section.
 void setup(){
@@ -52,6 +40,24 @@ void setup(){
     shell.begin( "arnold" );
 }
 ```
+
+## Live Demo
+
+\htmlonly
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Unlike the previous example, now when we enter a command, the shell object will gracefully pass it to the execution_function where it will be processed. For the sake of simplicity, we'll still echo the command back, but with a slightly nicer explanatory message than before.
+        </p>
+    </div>
+</div>
+\endhtmlonly
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/002_commandCallback.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
+\endhtmlonly
 
 ## Whole Code
 

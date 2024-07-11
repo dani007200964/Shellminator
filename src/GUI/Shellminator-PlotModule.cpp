@@ -86,7 +86,7 @@ void ShellminatorPlot::update( int width_p, int  height_p ){
 
 }
 
-void ShellminatorPlot::draw(){
+void ShellminatorPlot::draw( bool noClear ){
 
     int i;
     int j;

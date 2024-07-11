@@ -1,3 +1,36 @@
+/*
+ * Created on June 23 2024
+ *
+ * Copyright (c) 2023 - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified 2024.06.23
+*/
+
+/*
+MIT License
+
+Copyright (c) 2023 Daniel Hajnal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "Shellminator-Notification.hpp"
 
 ShellminatorNotification::ShellminatorNotification(){
@@ -68,7 +101,7 @@ void ShellminatorNotification::update( int width_p, int  height_p ){
 
 }
 
-void ShellminatorNotification::draw(){
+void ShellminatorNotification::draw( bool noClear ){
 
     // Generic counter.
     int i;
@@ -113,8 +146,8 @@ void ShellminatorNotification::draw(){
         borderHeight = height;
     }
 
-    xStart = width / 2 - borderWidth / 2;
-    yStart = height / 2 - borderHeight / 2;
+    xStart = originX + width / 2 - borderWidth / 2;
+    yStart = originY + height / 2 - borderHeight / 2;
 
     parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
 
