@@ -105,3 +105,11 @@ void loop(){
 
 }
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Examples](@ref examples_page) | [Command Callback Example](@ref 002_commandCallback_page) |
+ 
+</div>

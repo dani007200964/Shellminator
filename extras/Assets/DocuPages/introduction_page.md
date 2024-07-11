@@ -81,7 +81,7 @@ void loop(){
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div>
-        <p>Right? It doesn't seem that complicated, does it? It was very important to us to keep things simple if that's what you prefer. We really wanted beginner programmer padawans to be able to create amazing things easily with Shellminator. That's why we made sure the API is as simple and straightforward as possible.
+        <p>Right? It doesn't seem that complicated, does it? It was very important to us to keep things simple. We really wanted beginner programmer padawans to be able to create amazing things easily with Shellminator. That's why we made sure the API is as simple and straightforward as possible.
         </p>
     </div>
     <div style="width:150px; height:150px; margin-right: 20px;">
@@ -124,6 +124,6 @@ void loop(){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|                   | [Examples](examples_page.md) |
+|                   | [Install](@ref installation_page) |
  
 </div>

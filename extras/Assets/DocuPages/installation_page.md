@@ -36,3 +36,13 @@ There are, unfortunately, times when the Library Manager is not available. This 
 ## PlatformIO Installation
 
 ## STM32 Cube IDE Installation
+
+todo
+
+<div class="section_buttons">
+
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|                   | [Examples](@ref examples_page) |
+
+</div>

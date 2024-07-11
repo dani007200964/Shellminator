@@ -28,8 +28,8 @@
 
 <div class="section_buttons">
  
-| Previous          |                                 Next |
-|:------------------|-------------------------------------:|
-|                   | [Installation](installation_page.md) |
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Install](@ref installation_page) | [Basic Example](@ref 001_basic_page) |
  
 </div>

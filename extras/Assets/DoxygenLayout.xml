@@ -3,8 +3,8 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
+    <tab type="usergroup" visible="yes" url="@ref installation_page" title="📥 Installation" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref examples_page" title="📖 Examples" intro="">
-        <tab type="usergroup" visible="yes" url="@ref installation_page" title="📥 Installation" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 001_basic_page" title="001 Basic" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 002_commandCallback_page" title="002 Command Callback" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 003_textFormatting_page" title="003 Text Formatting" intro=""/>

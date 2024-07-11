@@ -109,3 +109,11 @@ void loop(){
     shell.update();
 }
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Basic Example](@ref 001_basic_page) | [Text Formatting Example](@ref 003_textFormatting_page) |
+ 
+</div>
