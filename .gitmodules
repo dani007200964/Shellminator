@@ -8,3 +8,6 @@
 	path = extras/Commander-API
 	url = https://github.com/dani007200964/Commander-API.git
 	branch = dev
+[submodule "extras/doxygen-awesome-css"]
+	path = extras/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git

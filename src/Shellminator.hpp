@@ -36,9 +36,11 @@ SOFTWARE.
 
 //---- Shellminator related headers. ----//
 #include "Shellminator-DefaultSettings.hpp"     // Contains the default settings.
+#include "Shellminator-Helpers.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-VT100-Commands.hpp"
+#include "Shellminator-Colorizer.hpp"
 
 #ifdef ARDUINO
     #include "Arduino.h"
@@ -61,52 +63,6 @@ SOFTWARE.
 // This library is using the Stream class as communication channel.
 #include "Stream.h"
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-#ifdef ESP8266
-#include <ESP8266WiFi.h>
-#endif
-
-#ifdef ESP32
-#include <WiFi.h>
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-#include <WebSocketsServer.h>
-#endif
-
-#endif
-
-// 'Smart' macro to include the supported
-// external libraries.
-#ifdef __has_include
-
-    // Check for Commander-API library.
-    #if __has_include ("Commander-API.hpp")
-        #include "Commander-API.hpp"
-    #endif
-
-    // Check for WebSocketServer library
-    #if __has_include ( "WebSocketsServer.h" )
-        #include <WebSocketsServer.h>
-        #ifndef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-            #define SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-        #endif
-    #endif
-
-    // Check for nayuki QR-Code-generator
-    // ( c implementation needed not c++ one )
-    #if __has_include ( "qrcodegen.h" )
-        #ifndef __AVR__
-            #include "qrcodegen.h"
-            #ifndef SHELLMINATOR_ENABLE_QR_SUPPORT
-                #define SHELLMINATOR_ENABLE_QR_SUPPORT
-            #endif
-        #endif
-    #endif
-
-    
-#endif
-
 // std library headers.
 #include <stdio.h>
 #include <stdint.h>
@@ -120,53 +76,11 @@ SOFTWARE.
 ///  |                                    |
 ///  +------------------------------------+
 
-// Clever solution to handle constant string data.
-// Thank you ondras12345!
-#ifndef __CONST_TXT__
-    #if defined(ARDUINO) && defined(__AVR__)
-        #define __CONST_TXT__(s) F(s)
-    #else
-        #define __CONST_TXT__(s) (const char*)(s)
-    #endif
-#endif
-
 /// Version of the module
 #define SHELLMINATOR_VERSION "2.0.0"
 
 /// Buffer size for the mouse event parser.
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
-
-/// Basic text formatting.
-///
-/// You can use this macro to modify the style or color of the printed text.
-/// It can be used without a Shellminator object.
-/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
-///       monitor does not support these features.
-///
-/// This macro is made to make the usage of @ref setFormatFunc function safe.
-/// @note please use this macro instead of @ref setFormatFunc.
-/// @param streamObject Pointer to a Stream object.
-/// @param ... Format specifiers. You can give as many specifier as you like.
-///
-/// Example: @code{cpp} Shellminator::setFormat( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-#define setFormat_m( streamObject, ... ) setFormatFunc( (streamObject), __VA_ARGS__, -1 );
-
-/// Basic text formatting.
-///
-/// You can use this macro to modify the style or color of the printed text.
-/// It can only be used with a Shellminator object.
-/// @note It will only work with VT100 compatible terminal emulators. Sadly Arduino Serial
-///       monitor does not support these features.
-///
-/// This macro is made to make the usage of @ref formatFunc function safe.
-/// @note please use this macro instead of @ref formatFunc.
-/// @param streamObject Pointer to a Stream object.
-/// @param ... Format specifiers. You can give as many specifier as you like.
-///
-/// Example: @code{cpp} shell.format( &Serial, Shellminator::BOLD, Shellminator::BLINKING, Shellminator::YELLOW ); @endcode
-///
-/// @note If formatting is disabled on the object, it won't do anything.
-#define format_m( streamObject, ... ) formatFunc( (streamObject), __VA_ARGS__, -1 );
 
 /// Shellminator object
 ///
@@ -227,42 +141,6 @@ public:
     /// String, that holds the version information
     static const char *version;
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    /// Constructor for WiFi Server
-    ///
-    /// This constructor only works on ESP32, and ESP8266.
-    /// It is used to create a telnet based terminal.
-    /// @param server_p Pointer to a WiFiServer object.
-    Shellminator(WiFiServer *server_p);
-
-    /// Start WiFi Server
-    ///
-    /// Use this function to start the WiFiServer object.
-    void beginServer();
-
-    /// Stop WiFi Server
-    ///
-    /// Use this function to stop the WiFiServer object.
-    void stopServer();
-
-    void setClientTimeout(uint16_t clientTimeout_p);
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    Shellminator(WebSocketsServer *wsServer_p);
-
-    Shellminator(WebSocketsServer *wsServer_p, uint8_t serverID_p);
-
-    void webSocketPush(uint8_t data);
-
-    void webSocketPush(uint8_t *data, size_t size);
-
-    void websocketDisconnect();
-
-#endif
 
     /// Shell object constructor
     ///
@@ -349,7 +227,9 @@ public:
     ///          use this macro to avoid problems.
     ///
     /// @note If formatting is disabled on the object, it won't do anything.
-    static void setFormatFunc( Stream *stream_p, int firstArg, ... );
+    static void setFormat( Stream *stream_p, int firstArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg );
+    static void setFormat( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
     /// Basic text formatting.
     ///
@@ -364,7 +244,9 @@ public:
     ///       Please check @ref enableFormatting for more information.
     /// @warning There is a dedicated macro for this function, called @ref format. Please
     ///          use this macro to avoid problems.
-    void formatFunc( Stream *stream_p, int firstArg, ... );
+    void format( Stream *stream_p, int firstArg );
+    void format( Stream *stream_p, int firstArg , int secondArg );
+    void format( Stream *stream_p, int firstArg , int secondArg, int thirdArg );
 
     /// Hide the cursor.
     ///
@@ -517,7 +399,7 @@ public:
     /// will be called every time when the up arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideUpArrow(void (*func)(void));
+    void overrideUpArrow(void (*func)(Shellminator*));
 
     /// Override down arrow key behaviour.
     ///
@@ -525,7 +407,7 @@ public:
     /// will be called every time when the down arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideDownArrow(void (*func)(void));
+    void overrideDownArrow(void (*func)(Shellminator*));
 
     /// Override left arrow key behaviour.
     ///
@@ -533,7 +415,7 @@ public:
     /// will be called every time when the left arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLeftArrow(void (*func)(void));
+    void overrideLeftArrow(void (*func)(Shellminator*));
 
     /// Override right arrow key behaviour.
     ///
@@ -541,7 +423,7 @@ public:
     /// will be called every time when the right arrow key
     /// is pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideRightArrow(void (*func)(void));
+    void overrideRightArrow(void (*func)(Shellminator*));
 
     /// Override abort key behaviour.
     ///
@@ -550,7 +432,7 @@ public:
     /// pressed. The default abort key is usually a Ctrl + C
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideAbortKey(void (*func)(void));
+    void overrideAbortKey(void (*func)(Shellminator*));
 
     /// Override Page-Up key behaviour.
     ///
@@ -558,7 +440,7 @@ public:
     /// will be called every time when the Page-Up key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageUpKey(void (*func)(void));
+    void overridePageUpKey(void (*func)(Shellminator*));
 
     /// Override Page-Down key behaviour.
     ///
@@ -566,7 +448,7 @@ public:
     /// will be called every time when the Page-Down key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overridePageDownKey(void (*func)(void));
+    void overridePageDownKey(void (*func)(Shellminator*));
 
     /// Override Home key behaviour.
     ///
@@ -574,7 +456,7 @@ public:
     /// will be called every time when the Home key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideHomeKey(void (*func)(void));
+    void overrideHomeKey(void (*func)(Shellminator*));
 
     /// Override End key behaviour.
     ///
@@ -582,7 +464,7 @@ public:
     /// will be called every time when the End key is
     /// pressed.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideEndKey(void (*func)(void));
+    void overrideEndKey(void (*func)(Shellminator*));
 
     /// Override Logout key behaviour.
     ///
@@ -591,7 +473,7 @@ public:
     /// pressed. The default Logout key is usually a Ctrl + D
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideLogoutKey(void (*func)(void));
+    void overrideLogoutKey(void (*func)(Shellminator*));
 
     /// Override Search key behaviour.
     ///
@@ -600,7 +482,7 @@ public:
     /// pressed. The default Search key is usually a Ctrl + R
     /// combo.
     /// @param func Pointer to the function that will be called on keypress.
-    void overrideSearchKey(void (*func)(void));
+    void overrideSearchKey(void (*func)(Shellminator*));
 
     /// Reset up arrow key functionality to default.
     ///
@@ -679,12 +561,6 @@ public:
     /// function for the key, you have to call this function.
     void freeSearchKey();
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    /// Disconnect WiFiClient telnet client
-    void clientDisconnect();
-
-#endif
 
     /// Enable login password.
     ///
@@ -759,6 +635,9 @@ public:
     /// With this function you can abort a registered Screen session.
     void endScreen();
 
+    void swapScreen( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+    void swapScreenAndClear( ShellminatorScreen* screen_p, int updatePeriod = 250 );
+
     /// Redraw request from a Screen object.
     ///
     /// This function is used by the attached Screen object. The Screen object can
@@ -773,7 +652,8 @@ public:
        SHELL_EVENT_RESIZE,      ///< If the object detects a resize event, it will be available to the Screen object with this flag.
        SHELL_EVENT_MOUSE,       ///< To identify mouse related events.
        SHELL_EVENT_KEY,         ///< To identify simple key events like: `A`, `b`... @note Case sensitive!
-       SHELL_EVENT_CODED_KEY    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
+       SHELL_EVENT_CODED_KEY,    ///< To identify special, coded keys like: `Up Arrow`, `HOME`...
+       SHELL_EVENT_SCREEN_SWAP
     }shellEventType_t;
 
     /// Coded event enumeration.
@@ -844,10 +724,10 @@ public:
     void popEvent();
 
     /// Stores the width of the terminal in characters.
-    int terminalWidth = 80;
+    int terminalWidth = 30;
 
     /// Stores the height of the terminal in characters.
-    int terminalHeight = 30;
+    int terminalHeight = 12;
 
     /// This buffer is used to parse the mouse coordinates form the
     /// host terminals answer.
@@ -967,15 +847,53 @@ public:
     ///          In this case it is not usable. If it is not NULL, you can use it.
     ShellminatorBufferedPrinter* getBufferedPrinter();
 
-#ifdef COMMANDER_API_VERSION
-
-    void attachCommander(Commander *commander_p);
-
-#endif
+    void attachColorizer( DefaultColorizer *colorizer_p );
 
     void autoDetectTerminal();
 
     friend class ShellminatorProgress;
+
+protected:
+    /// Text buffer
+    ///
+    /// This array stores the incoming and the previous commands.
+    /// The 0th element always reserved to hold the incoming data.
+    /// All other elements are holds the previous commands. Every new command
+    /// shifts the elements towards the higher index, and removes the highest index element.
+    /// To navigate between the previous commands you can use the UP and DOWN arrows
+    /// on the keyboard. To specify the 'memory' of the interface you have to configure
+    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
+    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
+    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
+    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
+
+    /// This variable tracks the index of the previous command while you browsing the command history
+    uint32_t cmd_buff_dim = 1;
+
+    /// This variable tracks the end of the input message.
+    uint32_t cmd_buff_cntr = 0;
+
+    /// This variable tracks the location of the next character.
+    uint32_t cursor = 0;
+
+    /// This flag must be set true in checkCommandFraction function
+    /// when the command parser contains the command.
+    bool commandFound = false;
+
+    /// Print command parser Help.
+    virtual void printCommandParserHelp( Stream* channel_p, bool formatting_p );
+
+    /// Check the command with the command parser to get some useful information.
+    virtual void checkCommandFraction();
+
+    virtual bool hasCommandParser();
+
+    virtual void executeWithCommandParser();
+
+    virtual void autoCompleteWithCommandParser();
+
+    void redrawLine();
+
 
 private:
     /// It can be used to accelerate the data sending process.
@@ -1002,6 +920,9 @@ private:
     /// This flag shows if a request come from the Screen
     /// object to issue a draw function call.
     bool screenRedraw;
+
+    DefaultColorizer defaultColorizer;
+    DefaultColorizer *colorizer = &this->defaultColorizer;
 
     /// Stores the address of the password hash array.
     uint8_t* passwordHash = NULL;
@@ -1089,28 +1010,6 @@ private:
     /// This function will be called when a command recives.
     void (*execution_fn)( char*, Shellminator* );
 
-    /// Text buffer
-    ///
-    /// This array stores the incoming and the previous commands.
-    /// The 0th element always reserved to hold the incoming data.
-    /// All other elements are holds the previous commands. Every new command
-    /// shifts the elements towards the higher index, and removes the highest index element.
-    /// To navigate between the previous commands you can use the UP and DOWN arrows
-    /// on the keyboard. To specify the 'memory' of the interface you have to configure
-    /// the \link SHELLMINATOR_BUFF_DIM \endlink definition.
-    /// @warning The value of the \link SHELLMINATOR_BUFF_DIM \endlink definition has to be at least 2!
-    /// @note Be careful with the \link The value of the \endlink definition. If it is to high your RAM will be eaten!
-    char cmd_buff[ SHELLMINATOR_BUFF_DIM ][ SHELLMINATOR_BUFF_LEN + 1 ] = {{0}};
-
-    /// This variable tracks the index of the previous command while you browsing the command history
-    uint32_t cmd_buff_dim = 1;
-
-    /// This variable tracks the end of the input message.
-    uint32_t cmd_buff_cntr = 0;
-
-    /// This variable tracks the location of the next character.
-    uint32_t cursor = 0;
-
     /// This variable tracks the state of the VT100 decoder state-machine.
     uint32_t escape_state = 0;
 
@@ -1126,37 +1025,37 @@ private:
     uint8_t lastBannerSize = 0;
 
     /// Function pointer for up arrow behaviour override.
-    void (*upArrowOverrideFunc)(void) = NULL;
+    void (*upArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for down arrow behaviour override.
-    void (*downArrowOverrideFunc)(void) = NULL;
+    void (*downArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for left arrow behaviour override.
-    void (*leftArrowOverrideFunc)(void) = NULL;
+    void (*leftArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for right arrow behaviour override.
-    void (*rightArrowOverrideFunc)(void) = NULL;
+    void (*rightArrowOverrideFunc)(Shellminator*) = NULL;
 
     /// Function pointer for abort key behaviour override.
-    void (*abortKeyFunc)(void) = NULL;
+    void (*abortKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Up key behaviour override.
-    void (*pageUpKeyFunc)(void) = NULL;
+    void (*pageUpKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Page-Down key behaviour override.
-    void (*pageDownKeyFunc)(void) = NULL;
+    void (*pageDownKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Home key behaviour override.
-    void (*homeKeyFunc)(void) = NULL;
+    void (*homeKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for End key behaviour override.
-    void (*endKeyFunc)(void) = NULL;
+    void (*endKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Logout key behaviour override.
-    void (*logoutKeyFunc)(void) = NULL;
+    void (*logoutKeyFunc)(Shellminator*) = NULL;
 
     /// Function pointer for Search key behaviour override.
-    void (*searchKeyFunc)(void) = NULL;
+    void (*searchKeyFunc)(Shellminator*) = NULL;
 
     /// This function processes a new character
     ///
@@ -1166,53 +1065,9 @@ private:
     /// @param new_char This is the nex character that has to be processed.
     void process(char new_char);
 
-    /// This function insets a new character to the input buffer.
-    void redrawLine();
 
     //---- Communication channels ----//
 
-#ifdef SHELLMINATOR_USE_WIFI_CLIENT
-
-    WiFiServer *server = NULL;
-    WiFiClient client;
-    bool clientConnected = false;
-    uint8_t telnetNegotiationState = 0;
-    uint16_t clientTimeout = 1000;
-
-    // https://www.omnisecu.com/tcpip/telnet-commands-and-options.php
-    static const uint8_t TELNET_IAC_DONT_LINEMODE[3];
-    static const uint8_t TELNET_IAC_WILL_ECHO[3];
-    static const uint8_t TELNET_IAC_DONT_ECHO[3];
-    static const uint8_t TELNET_IAC_WILL_SUPRESS_GO_AHEAD[3];
-    static const uint8_t TELNET_IAC_DO_SUPRESS_GO_AHEAD[3];
-
-#endif
-
-#ifdef SHELLMINATOR_ENABLE_WEBSOCKET_MODULE
-
-    WebSocketsServer *wsServer = NULL;
-    uint8_t serverID;
-    shellminatorWebSocketChannel webSocketChannel;
-
-#endif
-
-//---- Commander-API support specific part ----//
-#ifdef COMMANDER_API_VERSION
-
-    /// Pointer to a Commander object.
-    Commander *commander = NULL;
-
-    /// Last time in ms when the input command was checked.
-    uint32_t commandCheckTimerStart = 0;
-
-    /// Flag that stores if the command was checked.
-    bool commandChecked = false;
-
-    /// Flag that stores that the command was
-    /// found in Commander API-tree.
-    bool commandFound = false;
-
-#endif
 
     /// This function is used to search the
     /// previous matching command in the history.
@@ -1260,6 +1115,10 @@ private:
     /// This function will be called when an input
     /// is finished.
     void(*inputCallback)(char*, int, Shellminator*);
+
+    /// Last time in ms when a key was pressed.
+    uint32_t lastKeyPressTime = 0;
+
 
     // For unit testing.
     friend class ShellminatorUT;

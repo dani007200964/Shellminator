@@ -52,13 +52,6 @@ ShellminatorButton::ShellminatorButton( const char* name_p ){
     // Save the parameters to internal variables.
     name = name_p;
 
-    // Set the origin to default.
-    originX = 1;
-    originY = 1;
-
-    width = 1;
-    height = 1;
-
     func = NULL;
 
     // Set the eventCode to empty. This means
@@ -116,11 +109,13 @@ void ShellminatorButton::attachTriggerFunction( void(*func_p)(ShellminatorScreen
 
 void ShellminatorButton::setColor( Shellminator::textColor_t color_p ){
     color = color_p;
+    redraw = true;
 }
 
 void ShellminatorButton::init( Shellminator* parent_p, Stream* channel_p ){
     parent = parent_p;
     channel = channel_p;
+    redraw = true;
 }
 
 void ShellminatorButton::update( int width_p, int  height_p ){
@@ -187,7 +182,7 @@ void ShellminatorButton::update( int width_p, int  height_p ){
 
 }
 
-void ShellminatorButton::draw(){
+void ShellminatorButton::draw( bool noClear ){
 
     // Generic counter.
     int i;
@@ -219,7 +214,7 @@ void ShellminatorButton::draw(){
     // Top line section.
     Shellminator::setCursorPosition( channel, originX, originY );
 
-    parent -> format_m( channel, Shellminator::REGULAR, color );
+    parent -> format( channel, Shellminator::REGULAR, color );
 
     channel -> print( __CONST_TXT__( "\u250C" ) );
 
@@ -242,7 +237,7 @@ void ShellminatorButton::draw(){
         channel -> print( ' ' );
     }
 
-    parent -> format_m( channel, Shellminator::BOLD, Shellminator::WHITE );
+    parent -> format( channel, Shellminator::BOLD, Shellminator::WHITE );
 
     channel -> print( __CONST_TXT__( "\u2BA9  " ) );
     channel -> print( name );
@@ -253,7 +248,7 @@ void ShellminatorButton::draw(){
         channel -> print( __CONST_TXT__( " ]" ) );
     }
 
-    parent -> format_m( channel, Shellminator::REGULAR, color );
+    parent -> format( channel, Shellminator::REGULAR, color );
 
     limit = width - ( limit + textWidth + 3 + printedEventTextSize );
     for( i = 1; i < limit; i++ ){

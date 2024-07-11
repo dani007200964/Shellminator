@@ -89,7 +89,7 @@ public:
     /// requestRedraw function must be called on the parent terminal
     /// object. The reason for this is to save some CPU time and do
     /// not waste it to draw something unnecessarily.
-    void draw() override;
+    void draw( bool noClear = false ) override;
     
     /// Update function.
     ///

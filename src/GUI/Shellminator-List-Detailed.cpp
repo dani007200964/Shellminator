@@ -84,7 +84,7 @@ void ShellminatorListDetailed::init( Shellminator* parent_p, Stream* channel_p )
 
     // Calculate the horizontal start position for the detail box.
     for( i = 0; i < listSize; i++ ){
-        tmp = strlen( optionsList[ i ] ) + 6;
+        tmp = strlen( optionsList[ i ] ) + 5;
         if( tmp > detailStart ){
             detailStart = tmp;
         }
@@ -92,7 +92,7 @@ void ShellminatorListDetailed::init( Shellminator* parent_p, Stream* channel_p )
 
 }
 
-void ShellminatorListDetailed::printExtra( int index ){
+void ShellminatorListDetailed::printExtra( int index, bool noClear ){
 
     // Generic counter.
     int i;
@@ -108,12 +108,16 @@ void ShellminatorListDetailed::printExtra( int index ){
     // Check if parameters are configured incorrectly.
     // This case, clear the line to the end.
     if( detailList == NULL ){
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
         return;
     }
 
     if( detailStart == 0 ){
-        channel -> print( "\033[0K" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
         return;
     }
 
@@ -126,14 +130,17 @@ void ShellminatorListDetailed::printExtra( int index ){
     // Print as many elements as high the remaining screen is.
     for( i = 1; i < height; i++ ){
 
-        Shellminator::setCursorPosition( channel, detailStart, i + 1 );
-        channel -> print( "  \u2502" );
+        Shellminator::setCursorPosition( channel, originX + detailStart, originY + i );
+        channel -> print( "  \u2502\033" );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
 
     }
 
     // Calculate text length and set the cursor to start position.
     detailLength = strlen( detailList[ index ] );
-    Shellminator::setCursorPosition( channel, detailStart + 4, 2 + verticalOffset );
+    Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + verticalOffset );
 
     // Print as many lines as possible in the current screen size.
     for( i = 0; i < detailLength; i++ ){
@@ -142,7 +149,7 @@ void ShellminatorListDetailed::printExtra( int index ){
         // clear the rest of the line and increment
         // the verticalOffset variable.
         if( detailList[ index ][ i ] == '\n' ){
-            channel -> print( "\033[0K" );
+            //channel -> print( "\033[0K" );
             verticalOffset++;
 
             // If we ran out of screen space, we can stop.
@@ -151,7 +158,7 @@ void ShellminatorListDetailed::printExtra( int index ){
             }
 
             // Set the cursor to the next line beginning.
-            Shellminator::setCursorPosition( channel, detailStart + 4, 2 + verticalOffset );
+            Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + verticalOffset );
             continue;
         }
 
@@ -165,8 +172,10 @@ void ShellminatorListDetailed::printExtra( int index ){
 
     // Clear every line remaining until the screen end.
     for( i = verticalOffset + 2; i <= height; i++ ){
-        Shellminator::setCursorPosition( channel, detailStart + 4, i );
-        channel -> print( "\033[0K" );
+        Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + i - 1 );
+        if( !noClear ){
+            channel -> print( "\033[0K" );
+        }
     }
 
 }

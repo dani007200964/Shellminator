@@ -258,19 +258,22 @@ if ( 'web' in target ) or ( 'all' in target ):
     print( "Files in build folder:" )
     print( buildFiles )
 
+    webExamplesFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html/webExamples') )
+
     # Check if the webExamples directory exists. In this case delet its content.
-    if os.path.isdir( rootDirectory + "/docs/webExamples" ) == True:
-        shutil.rmtree( rootDirectory + "/docs/webExamples" )
+    if os.path.isdir( webExamplesFolder ) == True:
+        shutil.rmtree( webExamplesFolder )
     
-    os.mkdir( rootDirectory + "/docs/webExamples" )
+    os.mkdir( webExamplesFolder )
 
     for file in buildFiles:
         if file.endswith( ".js" ):
 
             fileName = file.split(".")[0]
             wasmFile = file.split(".")[0] + ".wasm"
-            shutil.copyfile( rootDirectory + "/build/" + file,      rootDirectory + "/docs/webExamples/" + file )
-            shutil.copyfile( rootDirectory + "/build/" + wasmFile,  rootDirectory + "/docs/webExamples/" + wasmFile )
+            print( rootDirectory + "/build/" + file,      webExamplesFolder + "/" + file  )
+            shutil.copyfile( rootDirectory + "/build/" + file,      webExamplesFolder + "/" + file )
+            shutil.copyfile( rootDirectory + "/build/" + wasmFile,  webExamplesFolder + "/" + wasmFile )
             
             # Read the next template file line-by-line.
             templateFile = open( rootDirectory + "/extras/emscripten_template_page.html" )
@@ -287,7 +290,7 @@ if ( 'web' in target ) or ( 'all' in target ):
             currentTemplate = Template(  templateData )
             webPageData  = currentTemplate.render( fields )
 
-            outputFile = open( rootDirectory + "/docs/webExamples/" + fileName + ".html", "w" )
+            outputFile = open( webExamplesFolder + "/" + fileName + ".html", "w" )
             outputFile.write( webPageData )
             outputFile.close()
 
@@ -380,10 +383,10 @@ if ( 'doc' in target ) or ( 'all' in target ):
     if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
         os.mkdir( rootDirectory + "/" + buildDirectoryName + "/report" )
 
-    shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
+    #shutil.copyfile( rootDirectory + "/docs/Style/gcovr/style.css",  rootDirectory + "/" + buildDirectoryName + "/style.css" )
 
     # Run gcovr to evaluate coverage
-    command = "gcovr -r .. --html-details --html-css style.css -o report/report.html"
+    command = "gcovr -r .. --html-theme github.dark-blue --html-nested -o report/report.html"
 
     # Excluded stuff. Everything that is not part of the Shellminator library must be excluded.
     command += " --exclude .*/Unity/"
@@ -402,9 +405,9 @@ if ( 'doc' in target ) or ( 'all' in target ):
     print( 'Coverage report data generated here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "/report/report.html" ) )
 
     # Copy report data to Doxygen source folder
-    reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
-    for reportFile in reportFiles:
-        shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
+    #reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
+    #for reportFile in reportFiles:
+    #    shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
 
     print()
     print( '---- Generate Coverage Badge ----' )

@@ -54,7 +54,7 @@ public:
     /// requestRedraw function must be called on the parent terminal
     /// object. The reason for this is to save some CPU time and do
     /// not waste it to draw something unnecessarily.
-    virtual void draw(){ /* To make the linker happy... */ }
+    virtual void draw( bool noClear = false ){ /* To make the linker happy... */ }
 
     /// Init function.
     ///
@@ -103,6 +103,29 @@ public:
 
     /// Return the coordinate of the lower row next to the object.
     int down(){ return originY + height; }
+    
+    Shellminator* getParent(){ return parent; }
+
+    /// It is used by the grid layout. It specifies
+    /// the row of the widget.
+    int row = 1;
+
+    /// It is used by the grid layout. It specifies
+    /// the column of the widget.
+    int column = 1;
+
+    /// It is used by the grid layout. It specifies
+    /// how many columns widget occupies.
+    int columnSpan = 1;
+
+    /// It is used by the grid layout. It specifies
+    /// how many rows widget occupies.
+    int rowSpan = 1;
+
+    /// It is used by the grid layout. The purpose of this is
+    /// to create a 'chained' list of the used elements in the
+    // grid layout.
+    ShellminatorScreen* nextElement = NULL;
 
 protected:
 

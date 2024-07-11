@@ -33,12 +33,6 @@ SOFTWARE.
 
 #include "Shellminator-Level-Meter.hpp"
 
-/*
-┌─┐
-│█┤
-├█│
-└─┘ █▇▆▅▄▃▂▁
-*/
 
 ShellminatorLevelMeter::ShellminatorLevelMeter(){
     redraw = true;
@@ -60,6 +54,7 @@ void ShellminatorLevelMeter::init( Shellminator* parent_p, Stream* channel_p ){
 }
 
 void ShellminatorLevelMeter::setPercentage( float percentage_p ){
+    percentage = percentage_p;
 
     if( parent == NULL ){
         return;
@@ -69,8 +64,6 @@ void ShellminatorLevelMeter::setPercentage( float percentage_p ){
         redraw = true;
         parent -> requestRedraw();
     }
-
-    percentage = percentage_p;
 }
 
 void ShellminatorLevelMeter::update( int width_p, int  height_p ){
@@ -107,7 +100,7 @@ void ShellminatorLevelMeter::setErrorPercentage( float percentage_p ){
 }
 
 
-void ShellminatorLevelMeter::draw(){
+void ShellminatorLevelMeter::draw( bool noClear ){
 
     // Ratio used to draw[ 0.0 -1.0 ].
     float ratio;
@@ -171,6 +164,9 @@ void ShellminatorLevelMeter::draw(){
     // Draw Top side.
     Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( __CONST_TXT__( "\u250C\u2500\u2510  " ) );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     for( i = 1; i < height - 1; i++ ){
         Shellminator::setCursorPosition( channel, originX, height - i );
@@ -180,15 +176,15 @@ void ShellminatorLevelMeter::draw(){
 
         // Check for warning
         if( ( i > warningLimit ) && ( i <= errorLimit ) ){
-            parent -> format_m( channel, Shellminator::YELLOW );
+            parent -> format( channel, Shellminator::YELLOW );
         }
 
         else if( i >= errorLimit ){
-            parent -> format_m( channel, Shellminator::RED );
+            parent -> format( channel, Shellminator::RED );
         }
 
         else{
-            parent -> format_m( channel, Shellminator::GREEN );
+            parent -> format( channel, Shellminator::GREEN );
         }
 
         // Empty cell.
@@ -237,7 +233,7 @@ void ShellminatorLevelMeter::draw(){
             channel -> print( __CONST_TXT__( "\u2588" ) );
         }
 
-        parent -> format_m( channel, Shellminator::WHITE );
+        parent -> format( channel, Shellminator::WHITE );
 
         // Right border.
         if( drawName ){
@@ -250,14 +246,17 @@ void ShellminatorLevelMeter::draw(){
 
         if( drawName ){
             channel -> print( __CONST_TXT__( "\u2590" ) );
-            parent -> format_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
             channel -> print( name[ nameSize - i ] );
             channel -> print( ' ' );
-            parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
         }
 
         else{
             channel -> print( __CONST_TXT__( "\u2502  " ) );
+        }
+        if( !noClear ){
+            channel -> print( "\033[0K" );
         }
 
     }
@@ -265,6 +264,9 @@ void ShellminatorLevelMeter::draw(){
     // Draw Bottom side.
     Shellminator::setCursorPosition( channel, originX, height );
     channel -> print( __CONST_TXT__( "\u2514\u2500\u2518  " ) );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     if( name == NULL ){
         return;

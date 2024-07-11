@@ -62,6 +62,7 @@ void ShellminatorList::init( Shellminator* parent_p, Stream* channel_p ){
     channel = channel_p;
     selected = 0;
     drawOffset = 0;
+    redraw = true;
 }
 
 void ShellminatorList::update( int width_p, int  height_p ){
@@ -135,12 +136,14 @@ void ShellminatorList::attachCallback( void(*func_p)(const char*[], int, int, Sh
     func = func_p;
 }
 
-void ShellminatorList::printExtra( int index ){
-    channel -> print( "\033[0K" );
+void ShellminatorList::printExtra( int index, bool noClear ){
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 }
 
 
-void ShellminatorList::draw(){
+void ShellminatorList::draw( bool noClear ){
 
     // Generic counter.
     int i;
@@ -175,10 +178,14 @@ void ShellminatorList::draw(){
     }
     redraw = false;
 
+    parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
+
     // Set cursor to top left and print the instruction text.
-    Shellminator::setCursorPosition( channel, 1, 1 );
+    Shellminator::setCursorPosition( channel, originX, originY );
     channel -> print( instruction );
-    channel -> print( "\033[0K" );
+    if( !noClear ){
+        channel -> print( "\033[0K" );
+    }
 
     // Print as many elements as high the remaining screen is.
     for( i = 1; i < height; i++ ){
@@ -187,14 +194,14 @@ void ShellminatorList::draw(){
         index = ( i - 1 ) + drawOffset;
 
         // Set cursor to the current options location.
-        Shellminator::setCursorPosition( channel, 1, i + 1 );
+        Shellminator::setCursorPosition( channel, originX, originY + i );
 
         // Check if the current option is the selected one.
         if( index == selected ){
             // If selected change the format to
             // background to highlight the selection.
             // Also print some graphics to the beginning.
-            parent -> format_m( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::BACKGROUND, Shellminator::WHITE );
             channel -> print( "\u2BA9 " );
         }
 
@@ -229,10 +236,10 @@ void ShellminatorList::draw(){
         // Check if the current option is the selected one.
         if( index == selected ){
             // If selected, we have to change back the formatting to regular.
-            parent -> format_m( channel, Shellminator::REGULAR, Shellminator::WHITE );
+            parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
         }
 
-        printExtra( index );
+        printExtra( index, noClear );
 
     }
 

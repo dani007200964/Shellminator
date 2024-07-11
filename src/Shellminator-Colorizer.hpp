@@ -38,45 +38,14 @@ SOFTWARE.
 #include "Stream.h"
 #include "Shellminator-DefaultSettings.hpp"
 
-class ShellminatorColorizer{
+class DefaultColorizer{
 
 public:
-    ShellminatorColorizer();
-    void printChar( Stream* response, char c );
-    void backspace();
-    void reset();
+    DefaultColorizer();
+    virtual void printChar( Stream* response, char c ){ if( response ){ response -> print( c ); } }
+    virtual void reset( Stream* response ) {}
 
 protected:
-
-    typedef struct{
-        char c;
-        uint8_t state;
-    }characterData_t;
-
-    typedef enum{
-        DEFAULT_STATE = 0,
-        FIRST_DASH_STATE,
-        SECOND_DASH_STATE,
-        WAIT_FOR_WHITESPACE,
-        WAIT_TOKEN_END,
-        WAIT_STRING_END,
-        ENV_VAR_START
-    }colorizerState_t;
-
-    characterData_t buffer[ SHELLMINATOR_BUFF_LEN + 1 ];
-    int bufferCntr = 0;
-
-    colorizerState_t currentState = DEFAULT_STATE;
-
-    void defaultStateFuncion( Stream* response, char c );
-    void firstDashStateFuncion( Stream* response, char c );
-    void secondDashStateFuncion( Stream* response, char c );
-    void waitForWhitespaceStateFuncion( Stream* response, char c );
-    void waitTokenEndStateFunction( Stream* response, char c );
-    void waitStringEndStateFunction( Stream* response, char c );
-    void envVarStartStateFunction( Stream* response, char c );
-
-    void printBackwardError( Stream* response );
 
     bool isCharacter( char c );
     bool isNumber( char c );
