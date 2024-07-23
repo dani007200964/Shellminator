@@ -95,7 +95,7 @@ SOFTWARE.
         WiFiClient newClient;
 
         if( server == NULL ){
-            reeturn;
+            return;
         }
 
         newClient = server -> accept();

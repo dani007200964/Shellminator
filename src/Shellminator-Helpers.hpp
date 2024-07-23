@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_HELPERS_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
+#include <string.h>
 
 //---- Network Related Defines ----
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
@@ -70,5 +71,11 @@ SOFTWARE.
         #define __CONST_TXT__(s) (const char*)(s)
     #endif
 #endif
+
+int indexOf( const char* data, const char x );
+bool startsWith( const char* original, const char* key );
+void shiftStringLeft( char* str );
+int strcicmp( const char* p1, const char* p2 );
+void tailEnd( char* str );
 
 #endif

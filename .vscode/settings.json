@@ -26,7 +26,9 @@
         "concepts": "cpp",
         "iterator": "cpp",
         "string": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

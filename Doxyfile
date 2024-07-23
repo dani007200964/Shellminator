@@ -1398,7 +1398,9 @@ HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-tog
                          extras/Assets/DocuEmoji/Download.json \
                          extras/Assets/DocuEmoji/Tick.json \
                          extras/Assets/DocuEmoji/Lock.json \
-                         extras/Assets/pw_hash_generator.html
+                         extras/Assets/pw_hash_generator.html \
+                         extras/Assets/DocuEmoji/cpu.json \
+                         extras/Assets/DocuEmoji/cpu_fan.json
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

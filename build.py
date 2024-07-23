@@ -39,30 +39,37 @@ import sys
 import getopt
 import json
 from jinja2 import Template
+import minify_html
 
-# Badge generator
-import anybadge
+def convertToHeader( data, variable_name ):
+    data = data.encode('utf-8')
+    result = []
+    result.append( '#define ' + variable_name + ' {' )
+    line = [ data[i:i+12] for i in range(0, len(data), 12) ]
+    for i, x in enumerate( line ):
+        lineText = ', '.join( [ '0x{val:02x}'.format( val = c ) for c in x ] )
+        result.append('  {line}{end_comma}'.format( line=lineText, end_comma=',' if i < len( line ) - 1 else '' ) )
+    result.append( '}' )
+    result = '\\\n'.join( result )
+    result = result + '\n\n' + '#define ' + variable_name + '_SIZE ' + str( len( data ) ) + '\n'
+    return result
 
 # Collect input arguments
 argv = sys.argv[ 1: ]
 
 helpText =  """Arguments:
 -t or --target   : Can be: clean, all, simulator, test, doc, examples, web
--r or --rebuild  : Clear everything and start the build process from the beginning.
--i or --install  : Installs the necessary libraries for the build system.
 -h or --help     : Help message.
 -v or --version  : Prints the version info.
--c or --checkout : It have to be used before new release. It generates examples, badges and documentation data."""
+-c or --checkout : It has to be used before new release. It generates examples, badges and documentation data."""
 
 versionText = 'Shellminator Build Tools Version: 0.0.1'
 
 # Read the arguments
-opts, args = getopt.getopt( argv, "t:rcihvc", [ 'target', 'rebuild', 'install', 'help', 'version', 'checkout' ] )
+opts, args = getopt.getopt( argv, "t:hvc", [ 'target', 'help', 'version', 'checkout' ] )
 
 # Default argument values
-target = 'all'
-rebuild = False
-install = False
+target = 'none'
 checkout = False
 
 # Process the arguments
@@ -71,14 +78,6 @@ for opt, arg in opts:
     # Check for target options.
     if opt in [ '-t' , '--target' ]:
         target = arg
-
-    # Check for rebuild option.
-    if opt in [ '-r' , '--rebuild' ]:
-        rebuild = True
-    
-    # Check for install option.
-    if opt in [ '-i' , '--install' ]:
-        install = True
 
     # Check for help message.
     if opt in [ '-h' , '--help' ]:
@@ -121,65 +120,8 @@ if os.path.isdir( buildDirectoryName ):
 
 # ---- Install Python Modules Section ----
 
-# Check if we have to install the python packages.
-if install:
-
-    print()
-    print( '---- Install Python Modules ----' )
-    print()
-
-    # Install Python modules.
-    command = 'pip install -r pythonRequirements.txt'
-    terminalProcess = subprocess.Popen( command, shell=True )
-    terminalProcess.wait()
-
-    if( terminalProcess.returncode !=0 ):
-        print( "pip command failed!" )
-        print( "You probably need to install the necessary Python modules manually. You can find them in the pythonRequirements.txt file. It is located in the root folder." )
-        sys.exit( 5 )
-
-    quit()
-
-
 # We have to change directory to the build directory to make CMake happy.
 os.chdir( rootDirectory + "/" + buildDirectoryName )
-
-# ---- Simulator Build Section ----
-
-# Check if we have to build the simulator.
-if ( 'simulator' in target ) or ( 'all' in target ):
-
-    print()
-    print( '---- Generate CMake files for Simulator ----' )
-    print()
-
-    # Create CMake structure
-    command = 'cmake .. -G "MinGW Makefiles" -DBUILD_SIMULATOR=ON'
-    terminalProcess = subprocess.Popen( command, shell=True )
-    terminalProcess.wait()
-
-    if( terminalProcess.returncode !=0 ):
-        print( "CMake command failed!" )
-        print( "Probably, you have to clean the project and it will work next time :)" )
-        sys.exit( 1 )
-
-    print()
-    print( '---- Build target for Simulator ----' )
-    print()
-
-    # Build the project
-    command = 'cmake --build .'
-    terminalProcess = subprocess.Popen( command, shell=True )
-    terminalProcess.wait()
-
-    if( terminalProcess.returncode !=0 ):
-        print( "CMake build command failed!" )
-        print( "Probably, you have to clean the project and it will work next time :)" )
-        sys.exit( 2 )
-
-    print()
-    print( 'Simulator building finished! You can find the executable here: {:s}'.format( rootDirectory + "/" + buildDirectoryName + "report/Simulator.exe" ) )
-
 
 # ---- Examples Build Section ----
 
@@ -373,11 +315,81 @@ if ( 'test' in target ) or ( 'all' in target ):
 #os.chdir( rootDirectory )
 
 # Check if we have to build the documentation.
-if ( 'doc' in target ) or ( 'all' in target ):
+if checkout:
+    print()
+    print( '---- Minifying self hosted pages ----' )
+    print()
+
+    browserResponseFileData = ""
+
+    #---- Minifying index_themed.html page ----
+
+    htmlFile = open( rootDirectory + "/extras/webpage/index_themed.html" )
+    htmlData = htmlFile.read()
+    htmlFile.close()
+
+    minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED' ) + '\n'
+
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_mini.html", "w" )
+    outputFile.write( minified )
+    outputFile.close()
+
+    #---- Minifying index_themed_offline.html page ----
+
+    htmlFile = open( rootDirectory + "/extras/webpage/index_themed_offline.html" )
+    htmlData = htmlFile.read()
+    htmlFile.close()
+
+    minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED_OFFLINE' ) + '\n'
+
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_offline_mini.html", "w" )
+    outputFile.write( minified )
+    outputFile.close()
+
+    #---- Minifying 404.html page ----
+
+    htmlFile = open( rootDirectory + "/extras/webpage/404_themed.html" )
+    htmlData = htmlFile.read()
+    htmlFile.close()
+
+    minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_404_THEMED' ) + '\n'
+
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/404_themed_mini.html", "w" )
+    outputFile.write( minified )
+    outputFile.close()
+
+    #---- Converting xterm.min.js ----
+
+    htmlFile = open( rootDirectory + "/extras/webpage/xterm.min.js" )
+    htmlData = htmlFile.read()
+    htmlFile.close()
+
+    #minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
+    browserResponseFileData = browserResponseFileData + convertToHeader( htmlData, 'XTERM_MIN_JS' ) + '\n'
+
+    #---- Converting addon-web-links.min.js ----
+
+    htmlFile = open( rootDirectory + "/extras/webpage/addon-web-links.min.js" )
+    htmlData = htmlFile.read()
+    htmlFile.close()
+
+    #minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
+    browserResponseFileData = browserResponseFileData + convertToHeader( htmlData, 'XTERM_ADDON_WEB_LINKS_MIN_JS' ) + '\n'
+
+    #---- Generating Browser Response ----
+
+    outputFile = open( rootDirectory + "/src/Shellminator-Browser-Response.hpp", "w" )
+    outputFile.write( browserResponseFileData )
+    outputFile.close()
 
     print()
     print( '---- Generate HTML Coverage Report ----' )
     print()
+
+    os.chdir( rootDirectory + "/" + buildDirectoryName )
 
     # Check if the report directory not exists. In this case create a report folder.
     if os.path.isdir( rootDirectory + "/" + buildDirectoryName + "/report" ) == False:
@@ -408,33 +420,6 @@ if ( 'doc' in target ) or ( 'all' in target ):
     #reportFiles = os.listdir( rootDirectory + "/" + buildDirectoryName + "/report" )
     #for reportFile in reportFiles:
     #    shutil.copyfile( rootDirectory + "/" + buildDirectoryName + "/report/" + reportFile,  rootDirectory + "/docs/html/" + reportFile )
-
-    print()
-    print( '---- Generate Coverage Badge ----' )
-    print()
-
-    coverageSummaryFile = open( 'coverage_report.json' )
-    coverageSummary = json.load( coverageSummaryFile )
-    coverageSummaryFile.close()
-
-    linePercentage = coverageSummary[ 'line_percent' ]
-
-    badgeColor = 'crimson'
-
-    if linePercentage >= 75:
-        badgeColor = 'darkorange'
-
-    if linePercentage >= 90:
-        badgeColor = 'darkgreen'
-
-    badgeValue = "{:.1f}%".format( linePercentage )
-
-    coverageBadge = anybadge.Badge( label="Coverage", value=badgeValue, default_color=badgeColor )
-
-    if os.path.exists( rootDirectory + "/docs/images/coverage_badge.svg" ):
-        os.remove( rootDirectory + "/docs/images/coverage_badge.svg" )
-
-    coverageBadge.write_badge( rootDirectory + "/docs/images/coverage_badge.svg" )
 
 
 

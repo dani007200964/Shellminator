@@ -179,11 +179,6 @@ SOFTWARE.
             void appendToCircularBuffer( uint8_t data );
             void appendToCircularBuffer( uint8_t* data, int dataSize );
 
-            int indexOf( const char* data, const char x );
-            bool startsWith( const char* original, const char* key );
-            void shiftStringLeft( char* str );
-            int strcicmp( const char* p1, const char* p2 );
-            void tailEnd( char* str );
 
             bool httpGetLineFound;
             bool connectionUpgradeLineFound;
