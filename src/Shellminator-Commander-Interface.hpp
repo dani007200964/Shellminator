@@ -48,6 +48,7 @@ SOFTWARE.
 
 #include "Commander-Caller-Interface.hpp"
 #include "Shellminator.hpp"
+#include "Shellminator-Helpers.hpp"
 
 class ShellminatorCaller : public CommandCaller{
 

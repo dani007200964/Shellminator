@@ -82,6 +82,20 @@ SOFTWARE.
 /// Buffer size for the mouse event parser.
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
 
+
+#define SHELLMINATOR_TWO_BYTE_LONG_UNICODE_MASK         0b11100000
+#define SHELLMINATOR_TWO_BYTE_LONG_UNICODE_VALUE        0b11000000
+
+#define SHELLMINATOR_THREE_BYTE_LONG_UNICODE_MASK       0b11110000
+#define SHELLMINATOR_THREE_BYTE_LONG_UNICODE_VALUE      0b11100000
+
+#define SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_MASK        0b11111000
+#define SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_VALUE       0b11110000
+
+#define SHELLMINATOR_UNICODE_DATA_MASK                  0b11000000
+#define SHELLMINATOR_UNICODE_DATA_VALUE                 0b10000000
+
+
 /// Shellminator object
 ///
 /// It can be used to interface with a <a href="https://en.wikipedia.org/wiki/VT100">VT100</a> compatible terminal like
@@ -974,8 +988,15 @@ private:
     void ShellminatorPageUpKeyState(char new_char);
     void ShellminatorPageDownKeyState();
     void ShellminatorPageDownKeyState(char new_char);
-    void ShellminatorProcessRegularCharacter(char new_char);
+    void ShellminatorProcessRegularCharacter( char new_char, bool draw = true );
     void ShellminatorMouseEventParserState(char new_char);
+
+    void ShellminatorTwoByteUnicodeDataState(char new_char);
+    void ShellminatorThreeByteUnicodeFirstDataState(char new_char);
+    void ShellminatorThreeByteUnicodeSecondDataState(char new_char);
+    void ShellminatorFourByteUnicodeFirstDataState(char new_char);
+    void ShellminatorFourByteUnicodeSecondDataState(char new_char);
+    void ShellminatorFourByteUnicodeThirdDataState(char new_char);
 
     /// Function pointer to the current state of the main state-machine.
     void (Shellminator::*currentState)(char) = &Shellminator::ShellminatorDefaultState;

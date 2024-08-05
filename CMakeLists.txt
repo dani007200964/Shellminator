@@ -163,7 +163,7 @@ endif()
 #---- Examples Section ----#
 
 if( BUILD_EXAMPLES )
-	#add_executable( 001_basic ${SOURCES} extras/examples_desktop/Desktop/001_basic/001_basic.cpp )
+	add_executable( 001_basic ${SOURCES} extras/examples_desktop/Desktop/001_basic/001_basic.cpp )
 	#add_executable( 002_commandCallback ${SOURCES} extras/examples_desktop/Desktop/002_commandCallback/002_commandCallback.cpp )
 	#add_executable( 003_textFormatting ${SOURCES} extras/examples_desktop/Desktop/003_textFormatting/003_textFormatting.cpp )
 	#add_executable( 004_formatMatrix ${SOURCES} extras/examples_desktop/Desktop/004_formatMatrix/004_formatMatrix.cpp )

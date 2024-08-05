@@ -18,3 +18,8 @@ python .\exampleGenerator.py
 
 Build examples for PC
 python build.py -t "clean examples"
+
+BLUETOOTH
+
+chrome://flags/#enable-experimental-web-platform-features -> Enable Experimental Web Platform features
+https://reelyactive.github.io/web-ble-demo/ -> tutorial

@@ -30,6 +30,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 #ifndef SHELLMINATOR_WEBSOCKET_HPP_
 #define SHELLMINATOR_WEBSOCKET_HPP_
 
@@ -40,6 +41,7 @@ SOFTWARE.
     #include <string.h>
 
     // Todo add hooks to connection and disconnection events!
+    // Todo add SHELLMINATOR_WEBS_DBG_ENABLE to defaultSettings.
 
     #ifdef ARDUINO
         #include "Arduino.h"

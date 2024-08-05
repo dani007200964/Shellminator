@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_GUI_HPP_
 
 #include "Shellminator-Screen.hpp"
+#include "Shellminator-Helpers.hpp"
 
 #include "GUI/Shellminator-Buttons.hpp"
 #include "GUI/Shellminator-PlotModule.hpp"

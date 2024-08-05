@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_SCREEN_HPP__
 
 #include "Shellminator.hpp"
+#include "Shellminator-Helpers.hpp"
 #include "Stream.h"
 
 // Created for forward loading.

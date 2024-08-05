@@ -41,6 +41,7 @@ SOFTWARE.
     #include <string.h>
 
     // Todo add hooks to connection and disconnection events!
+    // Todo add SHELLMINATOR_WEBS_DBG_ENABLE to defaultSettings.
 
     #ifdef ARDUINO
         #include "Arduino.h"

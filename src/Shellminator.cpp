@@ -341,72 +341,72 @@ void Shellminator::printHelp(){
 
     // Ctrl-A / Home
     selectedChannel -> print( __CONST_TXT__( "Ctrl-A / Home " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2196  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2196  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the beginning of the line." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-E / End
     selectedChannel -> print( __CONST_TXT__( "Ctrl-E / End  " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2198  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2198  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the end of the line." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-D
     selectedChannel -> print( __CONST_TXT__( "Ctrl-D        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u233D  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u233D  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Log out." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-R
     selectedChannel -> print( __CONST_TXT__( "Ctrl-R        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u26D5  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u26D5  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Reverse-i-search." ) );
     format( selectedChannel, YELLOW );
 
     // Page Up
     selectedChannel -> print( __CONST_TXT__( "Page Up       " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21DE  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21DE  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search backwards and auto completion." ) );
     format( selectedChannel, YELLOW );
 
     // Page Down
     selectedChannel -> print( __CONST_TXT__( "Page Down     " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21DF  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21DF  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search forward and auto completion." ) );
     format( selectedChannel, YELLOW );
 
     // Arrow Up
     selectedChannel -> print( __CONST_TXT__( "Arrow Up      " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2191  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2191  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history backward." ) );
     format( selectedChannel, YELLOW );
 
     // Arrow Down
     selectedChannel -> print( __CONST_TXT__( "Arrow Down    " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2193  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2193  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history forward." ) );
     format( selectedChannel, YELLOW );
 
     // Return / Enter
     selectedChannel -> print( __CONST_TXT__( "Return        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21A9  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21A9  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Execute command, or exit from screen." ) );
 
@@ -1016,6 +1016,7 @@ void Shellminator::beep(){
 
 void Shellminator::ShellminatorDefaultState( char new_char ){
 
+    uint8_t maskedData;
     shellEvent_t event;
 
     switch( new_char ){
@@ -1104,6 +1105,31 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
             break;
 
         default:
+
+            // Check for two byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_TWO_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_TWO_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorTwoByteUnicodeDataState;
+                break;
+            }
+
+            // Check for three byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_THREE_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_THREE_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorThreeByteUnicodeFirstDataState;
+                break;
+            }
+
+            // Check for four byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorFourByteUnicodeFirstDataState;
+                break;
+            }
+
             currentState = &Shellminator::ShellminatorDefaultState;
             if( screen != NULL ){
                 event.type = SHELL_EVENT_KEY;
@@ -1116,6 +1142,42 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
 
     }
 
+}
+
+void Shellminator::ShellminatorTwoByteUnicodeDataState( char new_char ){
+    //channel -> println( "two byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
+}
+
+void Shellminator::ShellminatorThreeByteUnicodeFirstDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorThreeByteUnicodeSecondDataState;
+}
+
+void Shellminator::ShellminatorThreeByteUnicodeSecondDataState( char new_char ){
+    //channel -> println( "three byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeFirstDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorFourByteUnicodeSecondDataState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeSecondDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorFourByteUnicodeThirdDataState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeThirdDataState( char new_char ){
+    //channel -> println( "four byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
 }
 
 void Shellminator::ShellminatorBackspaceState(){
@@ -1482,7 +1544,7 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
 
 }
 
-void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
+void Shellminator::ShellminatorProcessRegularCharacter( char new_char, bool draw ){
 
     // General counter variable
     uint32_t i;
@@ -1515,34 +1577,38 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
     // In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
-    // If the cursor was at the end we have to print the
-    // new character if the cmd_buff had free space at
-    // the end.
-    if ( cursor == cmd_buff_cntr ) {
+    if( draw ){
 
-        if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
+        // If the cursor was at the end we have to print the
+        // new character if the cmd_buff had free space at
+        // the end.
+        if ( cursor == cmd_buff_cntr ) {
 
-            if( inSearch || ( colorizer != &defaultColorizer ) ){
+            if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
-                // Increment counters.
-                cmd_buff_cntr++;
-                cursor++;
+                if( inSearch || ( colorizer != &defaultColorizer ) ){
 
-                redrawLine();
+                    // Increment counters.
+                    cmd_buff_cntr++;
+                    cursor++;
 
-                // Decrement counters.
-                cmd_buff_cntr--;
-                cursor--;
+                    redrawLine();
 
-            }
+                    // Decrement counters.
+                    cmd_buff_cntr--;
+                    cursor--;
 
-            else if( inputActive && inputSecretMode ){
-                channel -> print( "\u2022" );
-            }
+                }
 
-            else{
-                channel -> print( new_char );
-                //colorizer -> printChar( channel, new_char );
+                else if( inputActive && inputSecretMode ){
+                    channel -> print( "\u2022" );
+                }
+
+                else{
+                    channel -> print( new_char );
+                    //colorizer -> printChar( channel, new_char );
+                }
+
             }
 
         }
@@ -1555,12 +1621,14 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
     if ( cursor != cmd_buff_cntr ) {
         // Redraw the command line.
-        redrawLine();
+        if( draw ){
+            redrawLine();
+        }
     }
 
     // Check if the counters are overloaded.
     // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
-    // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
+    // so it is safe to make the counters equal to SHELLMINATOR_BUFF_LEN
     if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
         cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
     }

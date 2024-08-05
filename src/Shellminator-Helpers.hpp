@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_HELPERS_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
+#include <ctype.h>
 #include <string.h>
 
 //---- Network Related Defines ----
@@ -66,7 +67,7 @@ SOFTWARE.
 // Thank you ondras12345!
 #ifndef __CONST_TXT__
     #if defined(ARDUINO) && defined(__AVR__)
-        #define v(s) F(s)
+        #define __CONST_TXT__(s) F(s)
     #else
         #define __CONST_TXT__(s) (const char*)(s)
     #endif

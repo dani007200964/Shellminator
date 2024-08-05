@@ -45,6 +45,7 @@ SOFTWARE.
 
     #include "Shellminator.hpp"
     #include "Shellminator-Screen.hpp"
+    #include "Shellminator-Helpers.hpp"
 
     #include <stdio.h>
     #include <stdint.h>
