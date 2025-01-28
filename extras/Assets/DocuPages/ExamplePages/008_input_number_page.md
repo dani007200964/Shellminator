@@ -1,15 +1,41 @@
-EXCLUDE=NONE
-CATEGORY=Basic
+@page 008_input_number_page Example 008 Input Number
 
-++--HEADER--++
+@tableofcontents
 
+\htmlonly
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Of course, there are times when you might want to ask the user for more than just text—like a number, for example. You might also need more than one input parameter. In this example, we’ll show how to ask the user for two numbers, one after the other, while also including error handling in the process.
+        </p>
+    </div>
+</div>
+\endhtmlonly
+
+## Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/008_input_number.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+\endhtmlonly
+
+This example is primarily focused on demonstrating how to process the C-style string provided by the input while incorporating error handling. A useful reference for this is the description of the 
+[scanf](https://cplusplus.com/reference/cstdio/scanf/) function.
+
+
+Another trick here is that once one input is completed, you can seamlessly start another. Using this approach, you can even create a list-like flow to collect various types of data from the user.
+
+## Whole Code
+
+```cpp
 /*
  * Created on Aug 10 2020
  *
- * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ * Modified 2023.05.13
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup for Shellminator. It will create an
@@ -17,14 +43,10 @@ CATEGORY=Basic
  * See Shellminator_execute example for further information.
 */
 
-++--INCLUDES--++
-
 #include "Shellminator.hpp"
 
-++--GLOBAL_VARIABLES--++
-
-// Create a Shellminator object, and initialize it to use {{ channel }}
-Shellminator shell( &{{ channel }} );
+// Create a Shellminator object, and initialize it to use Serial
+Shellminator shell( &Serial );
 
 // We need a buffer to store the characters from the input.
 char inputBuffer[ 30 ];
@@ -32,8 +54,6 @@ char inputBuffer[ 30 ];
 // These variables will store the numbers from the user input.
 int width = 0;
 int height = 0;
-
-++--FUNCTION_PROTOTYPES--++
 
 // This function will be called when the height input finishes.
 void heightCallback( char* buffer, int bufferSize, Shellminator* parent ){
@@ -128,22 +148,38 @@ void widthCallback( char* buffer, int bufferSize, Shellminator* parent ){
     parent -> input( inputBuffer, sizeof( inputBuffer ), "Plane height[ mm ]: ", heightCallback );
 }
 
-++--SETUP--++
 
-// Initialize shell object.
-shell.begin( "arnold" );
+// System init section.
+void setup(){
 
-// Clear the terminal to remove the empty input prompt.
-// Uncomment the line below and try it, if it is not clear
-// why this is needed.
-shell.clear();
+    Serial.begin(115200);
 
-// Generate an input prompt.
-shell.input( inputBuffer, sizeof( inputBuffer ), "Plane width[ mm ]: ", widthCallback );
+    // Initialize shell object.
+    shell.begin( "arnold" );
 
-++--LOOP--++
+    // Clear the terminal to remove the empty input prompt.
+    // Uncomment the line below and try it, if it is not clear
+    // why this is needed.
+    shell.clear();
 
-// Process the new data.
-shell.update();
+    // Generate an input prompt.
+    shell.input( inputBuffer, sizeof( inputBuffer ), "Plane width[ mm ]: ", widthCallback );
 
-++--FUNCTION_IMPLEMENTATIONS--++
+}
+
+// Infinite loop.
+void loop(){
+
+    // Process the new data.
+    shell.update();
+
+}
+```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Input Example](@ref 007_input_page) | [Beep Example](@ref 009_beep_page) |
+ 
+</div>

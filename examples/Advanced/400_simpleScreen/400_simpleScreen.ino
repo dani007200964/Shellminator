@@ -36,6 +36,9 @@ ShellminatorProgress progress_1;
 ShellminatorProgress progress_2;
 ShellminatorProgress progress_3;
 
+// Create a Shellminator object, and initialize it to use Serial
+Shellminator shell( &Serial );
+
 // Create a grid 3 rows and 6 columns
 ShellminatorScreenGrid grid( 3, 6 );
 

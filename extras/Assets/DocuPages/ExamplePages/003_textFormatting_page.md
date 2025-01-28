@@ -1,4 +1,6 @@
-@page 003_textFormatting_page Example 003 Text Formatting
+@page 003_textFormatting_page Example 003 Text Formattingggg
+
+@tableofcontents
 
 \htmlonly
 <div style="display:flex; align-items: center;">
@@ -11,6 +13,8 @@
     </div>
 </div>
 \endhtmlonly
+
+## Live Demo
 
 \htmlonly
 <iframe id="demoFrame" src="webExamples/003_textFormatting.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
@@ -105,3 +109,11 @@ void loop(){
 
 }
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Command Callback Example](@ref 002_commandCallback_page) | [Formatting Matrix Example](@ref 004_formatMatrix_page) |
+ 
+</div>

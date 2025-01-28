@@ -909,8 +909,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = src \
-                         extras/Assets/DocuPages \
-                         extras/Assets/DocuPages/ExamplePages
+                         extras/Assets/DocuPages/ExamplePages \
+                         extras/Assets/DocuPages
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1012,7 +1012,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                =
+EXCLUDE                = src/Shellminator-Browser-Response.hpp
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1067,7 +1067,7 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = docs/images
+IMAGE_PATH             =
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1400,7 +1400,9 @@ HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-tog
                          extras/Assets/DocuEmoji/Lock.json \
                          extras/Assets/pw_hash_generator.html \
                          extras/Assets/DocuEmoji/cpu.json \
-                         extras/Assets/DocuEmoji/cpu_fan.json
+                         extras/Assets/DocuEmoji/cpu_fan.json \
+                         extras/Assets/DocuEmoji/Speaker.json \
+                         extras/Assets/DocuImages/commander_logo.svg
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

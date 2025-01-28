@@ -201,6 +201,27 @@ public:
     /// @endcode
     void attachExecFunc(void (*execution_fn_p)(char *, Shellminator *));
 
+    /// Register a function callback for neofetch command.
+    ///
+    /// With this function you can attach an external function to the object
+    /// This function will be called when a command is typed and the return
+    /// key is pressed. You can find mor information about neofetch
+    /// [here](https://en.wikipedia.org/wiki/Neofetch).
+    /// @param neofetch_fn_p Function pointer to the neofetch callback function.
+    ///
+    /// The neofetch callback function prototype must be like this:
+    /// @code{cpp} void myNeofetch( Shellminator* caller ); @endcode
+    ///
+    /// You can use any name you like, but the arguments and the return type has to
+    /// be the same. Practical example for impementation:
+    ///
+    /// @code{cpp}
+    /// void myExecFunc( char* command, Shellminator* caller ){
+    ///     caller -> channel -> println( "The simplest neofetch in the world!" );
+    /// }
+    /// @endcode
+    void attachNeofetchFunc( void( *neofetch_fn_p )( Shellminator* ) );
+
     /// Shellminator initialization function
     ///
     /// This function initializes the object and prints the startup logo.
@@ -1028,8 +1049,12 @@ private:
 #endif
 
     /// This function-pointer stores the execution function pointer.
-    /// This function will be called when a command recives.
+    /// This function will be called when a command receives.
     void (*execution_fn)( char*, Shellminator* );
+
+    /// This function-pointer stores the neofetch function pointer.
+    /// This function will be called when the neofetch command receives.
+    void (*neofetch_fn)( Shellminator* );
 
     /// This variable tracks the state of the VT100 decoder state-machine.
     uint32_t escape_state = 0;

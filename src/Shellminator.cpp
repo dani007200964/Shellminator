@@ -54,6 +54,9 @@ Shellminator::Shellminator( Stream *stream_p ){
     // pointer to make it detectable.
     execution_fn = NULL;
 
+    // By default, clear the neofetch function callback pointer.
+    neofetch_fn = NULL;
+
     // Reset all the event pointers.
     eventBufferWritePtr = 0;
     eventBufferReadPtr = 0;
@@ -139,6 +142,13 @@ void Shellminator::attachExecFunc( void( *execution_fn_p )( char*, Shellminator*
 
     // Save the function pointer to internal variable.
     execution_fn = execution_fn_p;
+
+}
+
+void Shellminator::attachNeofetchFunc( void( *neofetch_fn_p )( Shellminator* ) ){
+
+    // Save the function pointer to internal variable.
+    neofetch_fn = neofetch_fn_p;
 
 }
 
@@ -1356,7 +1366,13 @@ void Shellminator::ShellminatorEnterKeyState(){
             printHistory();
         }
 
-        // We haveto check that execution_fn is not NULL.
+        else if( strcmp( cmd_buff[ 0 ], "neofetch" ) == 0 ){
+            if( neofetch_fn != NULL ){
+                neofetch_fn( this );
+            }
+        }
+
+        // We have to check that execution_fn is not NULL.
         else if( execution_fn != NULL ){
             // If it is a valid, then call it's function.
             execution_fn( cmd_buff[ 0 ], this );

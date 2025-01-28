@@ -12,6 +12,8 @@
 </div>
 \endhtmlonly
 
+## Live Demo
+
 \htmlonly
 <iframe id="demoFrame" src="webExamples/006_password.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
 \endhtmlonly
@@ -98,3 +100,11 @@ void loop(){
 
 }
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Logo Page Example](@ref 005_logo_page) | [Input Example](@ref 007_input_page) |
+ 
+</div>

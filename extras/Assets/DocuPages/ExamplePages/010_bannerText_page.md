@@ -1,15 +1,31 @@
-EXCLUDE=NONE
-CATEGORY=Basic
+@page 010_bannerText_page Example 010 Banner Text
 
-++--HEADER--++
+@tableofcontents
+
+Modern terminals often have a banner that can display useful information. For example, it might show which user is
+currently logged in or which directory is active in the file system.
+
+Unfortunately, Shellminator isn't quite advanced enough to manage users and file systems just yet. However, the good
+news is that you have the option to modify the banner text anytime during runtime to suit your needs.
+All you need to do is call the `setBannerText` or `setBannerPathText` functions with the desired text.
+
+## Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/010_bannerText.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+\endhtmlonly
+
+## Whole Code
+
+```cpp
 
 /*
  * Created on Aug 10 2020
  *
- * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ * Modified 2023.05.13
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup for Shellminator. It will create an
@@ -17,14 +33,10 @@ CATEGORY=Basic
  * See Shellminator_execute example for further information.
 */
 
-++--INCLUDES--++
-
 #include "Shellminator.hpp"
 
-++--GLOBAL_VARIABLES--++
-
-// Create a Shellminator object, and initialize it to use {{ channel }}
-Shellminator shell( &{{ channel }} );
+// Create a Shellminator object, and initialize it to use Serial
+Shellminator shell( &Serial );
 
 // We need a buffer to store the characters from the input.
 char nameBuffer[ SHELLMINATOR_BANNER_LEN ];
@@ -33,7 +45,6 @@ int nameBufferSize = SHELLMINATOR_BANNER_LEN;
 char pathBuffer[ SHELLMINATOR_BANNER_PATH_LEN ];
 int pathBufferSize = SHELLMINATOR_BANNER_PATH_LEN;
 
-++--FUNCTION_PROTOTYPES--++
 
 void pathCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
@@ -75,22 +86,38 @@ void nameCallback( char* buffer, int bufferSize, Shellminator* parent ){
     parent -> input( pathBuffer, pathBufferSize, "Please enter the path: ", pathCallback );
 }
 
-++--SETUP--++
 
-// Clear the terminal to remove the empty input prompt.
-// Uncomment the line below and try it, if it is not clear
-// why this is needed.
-shell.clear();
+// System init section.
+void setup(){
 
-// Initialize shell object.
-shell.begin( "default" );
+    Serial.begin(115200);
 
-// Generate an input prompt.
-shell.input( nameBuffer, nameBufferSize, "Please enter your name: ", nameCallback );
+    // Clear the terminal to remove the empty input prompt.
+    // Uncomment the line below and try it, if it is not clear
+    // why this is needed.
+    shell.clear();
 
-++--LOOP--++
+    // Initialize shell object.
+    shell.begin( "default" );
 
-// Process the new data.
-shell.update();
+    // Generate an input prompt.
+    shell.input( nameBuffer, nameBufferSize, "Please enter your name: ", nameCallback );
 
-++--FUNCTION_IMPLEMENTATIONS--++
+}
+
+// Infinite loop.
+void loop(){
+
+    // Process the new data.
+    shell.update();
+
+}
+```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Beep Example](@ref 009_beep_page) | [Key Override Example](@ref 100_keyOverride_page) |
+ 
+</div>
