@@ -19,6 +19,10 @@
         <tab type="usergroup" visible="yes" url="@ref 101_qrCode_page" title="🔗 101 QR Code" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 102_buffering_page" title="🫗 102 Buffering" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 200_commanderBasic_page" title="🎖️ 200 Commander Basic" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 201_commanderOptimizations_page" title="💾 201 Commander Optimizations" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 202_commanderSimpleArguments_page" title="🗣 202 Commander Simple Arguments" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 203_commanderArgumentTypes_page" title="🏷️ 203 Commander Argument Types" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 204_commanderPositionIndependentArg_page" title="📍 204 Position Independent Arguments" intro=""/>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>

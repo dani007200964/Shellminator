@@ -1,15 +1,11 @@
-EXCLUDE=NONE
-CATEGORY=Advanced
-
-++--HEADER--++
 
 /*
  * Created on Aug 10 2020
  *
- * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ * Modified 2023.05.13
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup for Shellminator. It will create an
@@ -17,13 +13,11 @@ CATEGORY=Advanced
  * See Shellminator_execute example for further information.
 */
 
-++--INCLUDES--++
 
 #include "Shellminator.hpp"
 #include "Shellminator-Commander-Interface.hpp"
 #include "Commander-API.hpp"
 
-++--GLOBAL_VARIABLES--++
 
 // We have to create an object from Commander class.
 Commander commander;
@@ -32,42 +26,53 @@ bool cat_func( char *args, CommandCaller* caller );
 bool dog_func( char *args, CommandCaller* caller );
 bool sum_func( char *args, CommandCaller* caller );
 
-Commander::systemCommand_t API_tree[] = {
-    systemCommand( "cat", "Description for cat command.", cat_func ),
-    systemCommand( "dog", "Description for dog command.", dog_func ),
-    systemCommand( "sum", "This function sums two number from the argument list.", sum_func )
-};
+// We have 3 commands, so create a 3 element long command tree.
+Commander::systemCommand_t API_tree[ 3 ];
 
-// Create a ShellminatorCommanderInterface object, and initialize it to use {{ channel }}
-ShellminatorCommanderInterface shell( &{{ channel }} );
+// Create a ShellminatorCommanderInterface object, and initialize it to use Serial
+ShellminatorCommanderInterface shell( &Serial );
 
-++--FUNCTION_PROTOTYPES--++
 
-++--SETUP--++
 
-// Clear the terminal
-shell.clear();
 
-commander.attachDebugChannel( &{{ channel }} );
-commander.attachTree( API_tree );
-commander.init();
+// System init section.
+void setup(){
 
-shell.attachCommander( &commander );
+    Serial.begin(115200);
 
-// Initialize shell object.
-shell.begin( "arnold" );
+    // Initialize Command Tree and place the description data in program memory.
+    systemCommand_P( API_tree[ 0 ], "cat", "Description for cat command.", cat_func );
+    systemCommand_P( API_tree[ 1 ], "dog", "Description for dog command.", dog_func );
+    systemCommand_P( API_tree[ 2 ], "sum", "This function sums two number from the argument list.", sum_func  );
 
-++--LOOP--++
+    // Clear the terminal
+    shell.clear();
 
-// Process the new data.
-shell.update();
+    commander.attachDebugChannel( &Serial );
+    commander.attachTree( API_tree );
+    commander.init();
 
-++--FUNCTION_IMPLEMENTATIONS--++
+    shell.attachCommander( &commander );
+
+    // Initialize shell object.
+    shell.begin( "arnold" );
+
+
+}
+
+// Infinite loop.
+void loop(){
+
+    // Process the new data.
+    shell.update();
+
+
+}
 
 /// This is an example function for the cat command
 bool cat_func(char *args, CommandCaller* caller ){
 
-    caller -> print("Hello from cat function!\r\n");
+    caller -> print( __CONST_TXT__(  "Hello from cat function!\r\n" ) );
     return true;
 
 }
@@ -75,7 +80,7 @@ bool cat_func(char *args, CommandCaller* caller ){
 /// This is an example function for the dog command
 bool dog_func(char *args, CommandCaller* caller ){
 
-    caller -> print("Hello from dog function!\r\n");
+    caller -> print( __CONST_TXT__( "Hello from dog function!\r\n" ) );
     return true;
 
 }
@@ -103,7 +108,7 @@ bool sum_func(char *args, CommandCaller* caller ){
 
         // If we could not parse two numbers, we have an argument problem.
         // We print out the problem to the response channel.
-        caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
+        caller -> print( __CONST_TXT__( "Argument error! Two numbers required, separated with a blank space.\r\n" ) );
 
         // Sadly we have to stop the command execution and return.
         return false;
@@ -115,9 +120,9 @@ bool sum_func(char *args, CommandCaller* caller ){
 
     // Print out the result.
     caller -> print( a );
-    caller -> print( " + " );
+    caller -> print( __CONST_TXT__( " + " ) );
     caller -> print( b );
-    caller -> print( " = " );
+    caller -> print( __CONST_TXT__( " = " ) );
     caller -> println( sum );
     return true;
 }

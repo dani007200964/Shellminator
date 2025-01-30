@@ -321,6 +321,6 @@ bool sum_func(char *args, CommandCaller* caller ){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[Buffering Example](@ref 102_buffering_page) | [Commander Basic Example](@ref 200_commanderBasic_page) |
+|[Buffering Example](@ref 102_buffering_page) | [Commander Optimizations Example](@ref 201_commanderOptimizations_page) |
  
 </div>

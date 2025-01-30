@@ -1,5 +1,7 @@
 @page 006_password_page Example 006 Password
 
+@tableofcontents
+
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div style="width:100px; height:100px; margin-right: 20px;">

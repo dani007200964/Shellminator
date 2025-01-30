@@ -1,15 +1,11 @@
-EXCLUDE=NONE
-CATEGORY=Advanced
-
-++--HEADER--++
 
 /*
  * Created on Aug 10 2020
  *
- * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * Copyright (c) 2023 - Daniel Hajnal
  * hajnal.daniel96@gmail.com
  * This file is part of the Shellminator project.
- * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ * Modified 2023.05.13
  *
  * To test this example, you need a terminal emulator like PuTTY or Minicom.
  * This example shows a simple setup for Shellminator. It will create an
@@ -17,13 +13,12 @@ CATEGORY=Advanced
  * See Shellminator_execute example for further information.
 */
 
-++--INCLUDES--++
 
 #include "Shellminator.hpp"
 #include "Shellminator-Commander-Interface.hpp"
 #include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
 
-++--GLOBAL_VARIABLES--++
 
 // We have to create an object from Commander class.
 Commander commander;
@@ -38,31 +33,40 @@ Commander::systemCommand_t API_tree[] = {
     systemCommand( "sum", "This function sums two number from the argument list.", sum_func )
 };
 
-// Create a ShellminatorCommanderInterface object, and initialize it to use {{ channel }}
-ShellminatorCommanderInterface shell( &{{ channel }} );
+// Create a ShellminatorCommanderInterface object, and initialize it to use Serial
+ShellminatorCommanderInterface shell( &Serial );
 
-++--FUNCTION_PROTOTYPES--++
 
-++--SETUP--++
 
-// Clear the terminal
-shell.clear();
 
-commander.attachDebugChannel( &{{ channel }} );
-commander.attachTree( API_tree );
-commander.init();
+// System init section.
+void setup(){
 
-shell.attachCommander( &commander );
+    Serial.begin(115200);
 
-// Initialize shell object.
-shell.begin( "arnold" );
+    // Clear the terminal
+    shell.clear();
 
-++--LOOP--++
+    commander.attachDebugChannel( &Serial );
+    commander.attachTree( API_tree );
+    commander.init();
 
-// Process the new data.
-shell.update();
+    shell.attachCommander( &commander );
 
-++--FUNCTION_IMPLEMENTATIONS--++
+    // Initialize shell object.
+    shell.begin( "arnold" );
+
+
+}
+
+// Infinite loop.
+void loop(){
+
+    // Process the new data.
+    shell.update();
+
+
+}
 
 /// This is an example function for the cat command
 bool cat_func(char *args, CommandCaller* caller ){
@@ -82,41 +86,22 @@ bool dog_func(char *args, CommandCaller* caller ){
 
 /// This is an example function for the sum command
 bool sum_func(char *args, CommandCaller* caller ){
+    int sum;
+    Argument a( args, 0 );
+    Argument b( args, 1 );
 
-    // These variables will hold the value of the
-    // two numbers, that has to be summed.
-    int a = 0;
-    int b = 0;
-
-    // This variable will hold the result of the
-    // argument parser.
-    int argResult;
-
-    // This variable will hold the sum result.
-    int sum = 0;
-
-    argResult = sscanf( args, "%d %d", &a, &b );
-
-    // We have to check that we parsed successfully the two
-    // numbers from the argument string.
-    if( argResult != 2 ){
-
-        // If we could not parse two numbers, we have an argument problem.
-        // We print out the problem to the response channel.
+    if( !( a.parseInt() && b.parseInt() ) ){
         caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
-
-        // Sadly we have to stop the command execution and return.
         return false;
-
     }
-
+    
     // Calculate the sum.
-    sum = a + b;
-
+    sum = (int)a + (int)b;
+    
     // Print out the result.
-    caller -> print( a );
+    caller -> print( (int)a );
     caller -> print( " + " );
-    caller -> print( b );
+    caller -> print( (int)b );
     caller -> print( " = " );
     caller -> println( sum );
     return true;
