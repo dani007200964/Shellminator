@@ -228,6 +228,6 @@ bool random_func(char *args, CommandCaller* caller ){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[Commander Argument Types Example](@ref 203_commanderArgumentTypes_page) | [Commander Position Independent Arguments Example](@ref 204_commanderPositionIndependentArg_page) |
+|[Commander Argument Types Example](@ref 203_commanderArgumentTypes_page) | [Commander Cowsay Example](@ref 205_commanderCowsay_page) |
  
 </div>

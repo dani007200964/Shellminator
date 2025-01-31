@@ -95,6 +95,7 @@ private:
 
 };
 
+/// Simple colorizer for Commander-API like syntax.
 class CommanderColorizer : public DefaultColorizer{
 
 public:

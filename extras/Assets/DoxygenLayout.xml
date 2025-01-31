@@ -23,6 +23,11 @@
         <tab type="usergroup" visible="yes" url="@ref 202_commanderSimpleArguments_page" title="🗣 202 Commander Simple Arguments" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 203_commanderArgumentTypes_page" title="🏷️ 203 Commander Argument Types" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 204_commanderPositionIndependentArg_page" title="📍 204 Position Independent Arguments" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 205_commanderCowsay_page" title="🐮 205 Commander Cowsay" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 206_commanderSystemVariables_page" title="💲 206 Commander System Variables" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 207_commanderSetSystemVariables_page" title="✏️ 207 Commander Set System Variables" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 208_commanderColorizer_page" title="🌈 208 Commander Colorizer" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 300_guiButton_page" title="👆 300 GUI Button" intro=""/>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>

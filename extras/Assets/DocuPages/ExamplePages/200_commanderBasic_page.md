@@ -122,6 +122,9 @@ commander.attachTree(API_tree);
 
 // Start the initialization phase
 commander.init();
+
+// Attach command parser object to the shell object.
+shell.attachCommander( &commander );
 ```
 
 ## Implementing the Callback Functions

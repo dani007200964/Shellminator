@@ -2404,7 +2404,8 @@ PREDEFINED             = ARDUINO \
                          ESP32 \
                          ESP8266 \
                          ARDUINO_AVR_LEONARDO \
-                         __AVR__
+                         __AVR__ \
+                         COMMANDER_API_VERSION
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
