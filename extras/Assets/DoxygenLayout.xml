@@ -37,8 +37,9 @@
         <tab type="usergroup" visible="yes" url="@ref 307_guiListAdvanced_page" title="📋 307 GUI List Advanced" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 308_guiPlot_page" title="📉 308 GUI Plot" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 309_guiPlotAdvanced_page" title="🎢 309 GUI Plot Advanced" intro=""/>
-        <tab type="usergroup" visible="yes" url="@ref 400_simpleScreen_page" title="📟 400 Simple Screen" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 400_simpleScreen_page" title="💻 400 Simple Screen" intro=""/>
     </tab>
+    <tab type="usergroup" visible="yes" url="@ref web_terminal_page" title="✅ Web Terminal" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref faq_page" title="❓ FAQ" intro=""/>

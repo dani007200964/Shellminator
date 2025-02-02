@@ -144,6 +144,9 @@ SOFTWARE.
             void update();
             void attachDebugChannel( Stream* dbg_p );
 
+            void attachConnectCallback( void(*connectCallback_p)(ShellminatorWebSocket* ) );
+            void attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorWebSocket* ) );
+
         private:
             int port = 443;
             bool clientConnected = false;
@@ -197,7 +200,8 @@ SOFTWARE.
 
             wsState_t wsState;
 
-
+            void(*connectCallback)(ShellminatorWebSocket* parent) = NULL;
+            void(*disconnectCallback)(ShellminatorWebSocket* parent) = NULL;
         };
 
     #endif

@@ -46,7 +46,7 @@ SOFTWARE.
         #endif
         
         #ifndef SHELLMINATOR_USE_BLE
-            #define SHELLMINATOR_USE_BLE
+            //#define SHELLMINATOR_USE_BLE
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN

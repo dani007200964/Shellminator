@@ -249,6 +249,8 @@ public:
     ///          If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
     void update();
 
+    void logOut();
+
     /// Basic text formatting.
     ///
     /// You can use this function to modify the style or color of the printed text. This function
@@ -861,6 +863,8 @@ public:
 
     /// Generate a beep sound on the terminal device.
     void beep();
+
+    void printLoginScreen();
 
     /// This flag enables or disables character formatting.
     /// It can be useful when VT100 format parser is not

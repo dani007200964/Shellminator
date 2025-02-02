@@ -322,29 +322,29 @@ if checkout:
 
     browserResponseFileData = ""
 
-    #---- Minifying index_themed.html page ----
+    #---- Minifying web_xterm_themed.html page ----
 
-    htmlFile = open( rootDirectory + "/extras/webpage/index_themed.html" )
+    htmlFile = open( rootDirectory + "/extras/webpage/web_xterm_themed.html" )
     htmlData = htmlFile.read()
     htmlFile.close()
 
     minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
-    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED' ) + '\n'
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_WEB_XTERM_THEMED' ) + '\n'
 
-    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_mini.html", "w" )
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/web_xterm_themed_mini.html", "w" )
     outputFile.write( minified )
     outputFile.close()
 
     #---- Minifying index_themed_offline.html page ----
 
-    htmlFile = open( rootDirectory + "/extras/webpage/index_themed_offline.html" )
+    htmlFile = open( rootDirectory + "/extras/webpage/web_xterm_themed_offline.html" )
     htmlData = htmlFile.read()
     htmlFile.close()
 
     minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
-    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED_OFFLINE' ) + '\n'
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE' ) + '\n'
 
-    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_offline_mini.html", "w" )
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/web_xterm_themed_offline_mini.html", "w" )
     outputFile.write( minified )
     outputFile.close()
 

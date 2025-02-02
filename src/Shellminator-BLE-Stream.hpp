@@ -47,10 +47,10 @@ SOFTWARE.
     #endif
 
     #ifdef ESP32
-        #include <BLEDevice.h>
-        #include <BLEServer.h>
-        #include <BLEUtils.h>
-        #include <BLE2902.h>
+        //#include <BLEDevice.h>
+        //#include <BLEServer.h>
+        //#include <BLEUtils.h>
+        //#include <BLE2902.h>
     #endif
 
     #ifdef ARDUINO_ARCH_NRF52840

@@ -1939,3 +1939,31 @@ void Shellminator::requestRedraw(){
 void Shellminator::attachColorizer( DefaultColorizer *colorizer_p ){
     colorizer = colorizer_p;
 }
+
+void Shellminator::logOut(){
+    if( !loggedIn ){
+        return;
+    }
+
+    if( screen ){
+        endScreen();
+    }
+
+    if( passwordHash != NULL ){
+        loggedIn = false;
+        input( NULL, SHELLMINATOR_BUFF_LEN, "Password:", NULL, true );
+    }
+}
+
+void Shellminator::printLoginScreen(){
+    clear();
+    drawLogo();
+    if( loggedIn ){
+        printBanner();
+    }
+    else{
+        channel -> print( "Password:" );
+        channel -> print( "\U0001F512  " );
+        redrawLine();
+    }
+}

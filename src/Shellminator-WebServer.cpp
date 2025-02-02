@@ -38,15 +38,15 @@ SOFTWARE.
     #ifdef ESP8266
         static const char xtermMinJsResponse[] PROGMEM = XTERM_MIN_JS;
         static const char xtermWeblinksJsResponse[] PROGMEM = XTERM_ADDON_WEB_LINKS_MIN_JS;
-        static const char indexThemedResponse[] PROGMEM = SHELLMINATOR_INDEX_THEMED;
-        static const char indexThemedOfflineResponse[] PROGMEM = SHELLMINATOR_INDEX_THEMED_OFFLINE;
+        static const char indexThemedResponse[] PROGMEM = SHELLMINATOR_WEB_XTERM_THEMED;
+        static const char indexThemedOfflineResponse[] PROGMEM = SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE;
         static const char notFoundThemedResponse[] PROGMEM = SHELLMINATOR_404_THEMED;
     #else
         // Tested on ESP32, Arduino UNO R4 and Pi Pico
         static const char xtermMinJsResponse[] = XTERM_MIN_JS;
         static const char xtermWeblinksJsResponse[] = XTERM_ADDON_WEB_LINKS_MIN_JS;
-        static const char indexThemedResponse[] = SHELLMINATOR_INDEX_THEMED;
-        static const char indexThemedOfflineResponse[] = SHELLMINATOR_INDEX_THEMED_OFFLINE;
+        static const char indexThemedResponse[] = SHELLMINATOR_WEB_XTERM_THEMED;
+        static const char indexThemedOfflineResponse[] = SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE;
         static const char notFoundThemedResponse[] = SHELLMINATOR_404_THEMED;
     #endif
 
@@ -208,9 +208,9 @@ SOFTWARE.
 
         // the content of the HTTP response follows the header:
         #ifdef ESP8266
-            client.write_P( indexThemedResponse, SHELLMINATOR_INDEX_THEMED_SIZE );
+            client.write_P( indexThemedResponse, SHELLMINATOR_WEB_XTERM_THEMED_SIZE );
         #else
-            client.write( indexThemedResponse, SHELLMINATOR_INDEX_THEMED_SIZE );
+            client.write( indexThemedResponse, SHELLMINATOR_WEB_XTERM_THEMED_SIZE );
         #endif
     }
 
@@ -261,9 +261,9 @@ SOFTWARE.
 
         // the content of the HTTP response follows the header:
         #ifdef ESP8266
-            client.write_P( indexThemedOfflineResponse, SHELLMINATOR_INDEX_THEMED_OFFLINE_SIZE );
+            client.write_P( indexThemedOfflineResponse, SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE_SIZE );
         #else
-            client.write( indexThemedOfflineResponse, SHELLMINATOR_INDEX_THEMED_OFFLINE_SIZE );
+            client.write( indexThemedOfflineResponse, SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE_SIZE );
         #endif
     }
 

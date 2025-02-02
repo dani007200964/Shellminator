@@ -453,6 +453,10 @@ void ShellminatorWebSocket::wsHeaderProcessing( char newChar ){
 
                 SHELLMINATOR_WS_DBG( __CONST_TXT__( "WS Connection Established!" ) );
 
+                if( connectCallback ){
+                    connectCallback( this );
+                }
+
             }
             else{
                 closeClient();
@@ -618,6 +622,10 @@ void ShellminatorWebSocket::closeClient( bool sendCloseFrame ){
     resetVariables();
     SHELLMINATOR_WS_DBGLN( __CONST_TXT__( "Disconnecting WS Client!" ) );
 
+    if( disconnectCallback ){
+        disconnectCallback( this );
+    }
+
 }
 
 int ShellminatorWebSocket::available(){
@@ -684,6 +692,14 @@ size_t ShellminatorWebSocket::write(const uint8_t *data, size_t size){
         return size;
     }
     return 0;
+}
+
+void ShellminatorWebSocket::attachConnectCallback( void(*connectCallback_p)(ShellminatorWebSocket* )){
+    connectCallback = connectCallback_p;
+}
+
+void ShellminatorWebSocket::attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorWebSocket* )){
+    disconnectCallback = disconnectCallback_p;
 }
 
 #endif
