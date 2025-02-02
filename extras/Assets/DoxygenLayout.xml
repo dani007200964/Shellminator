@@ -28,6 +28,15 @@
         <tab type="usergroup" visible="yes" url="@ref 207_commanderSetSystemVariables_page" title="✏️ 207 Commander Set System Variables" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 208_commanderColorizer_page" title="🌈 208 Commander Colorizer" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 300_guiButton_page" title="👆 300 GUI Button" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 301_guiProgress_page" title="⏳ 301 GUI Progress" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 302_guiProgressAdvanced_page" title="⏱️ 302 GUI Progress Advanced" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 303_guiLevelMeter_page" title="📈 303 GUI Level Meter" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 304_guiLevelMeterAdvanced_page" title="📊 304 GUI Level Meter Advanced" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 305_guiNotification_page" title="💬 305 GUI Notification" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 306_guiList_page" title="🩹 306 GUI List" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 307_guiListAdvanced_page" title="📋 307 GUI List Advanced" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 308_guiPlot_page" title="📉 308 GUI Plot" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 309_guiPlotAdvanced_page" title="🎢 309 GUI Plot Advanced" intro=""/>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>

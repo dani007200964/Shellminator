@@ -22,18 +22,22 @@
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 
+// This will be used to display the answer for the chosen answer.
 ShellminatorNotification notification;
 
+// These options are available for choose.
 const char* listOptions[] = {
     "Red Pill",
     "Blue Pill"
 };
 
-
+// Instructions for the list.
 const char* listText =  "Choose your destiny Neo";
 
+// Create a list.
 ShellminatorList neoList( listOptions, 2, listText );
 
+// Create a callback for the list.
 void listCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
 
 
@@ -47,7 +51,9 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    stdioChannel.println( "Program Start!" );
+    Serial.println( "Program Start!" );
+
+    // Attach the callback for the list.
     neoList.attachCallback( listCallback );
 
     shell.begin( "arnold" );
@@ -59,11 +65,7 @@ void setup(){
 // Infinite loop.
 void loop(){
 
-    while( 1 ){
-
-        shell.update();
-
-    }
+    shell.update();
 
 
 }
@@ -75,6 +77,7 @@ void listCallback( const char* optionsList[], int listSize, int selected, Shellm
         return;
     }
 
+    // Generate answer based on the selected answer.
     if( selected == 0 ){
         notification.setText( "You stay in Wonderland and I show\nyou how deep the rabbit hole goes." );
     }

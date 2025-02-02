@@ -27,9 +27,13 @@ CATEGORY=Advanced
 // Create a Shellminator object, and initialize it to use {{ channel }}
 Shellminator shell( &{{ channel }} );
 
+// Data points
 float plotData[] = { 10, 20, 30, 20, 10, 0, -10, -20, -30, -20 };
+
+// Number of points in the data
 int plotDataSize = sizeof( plotData ) / sizeof( plotData[ 0 ] );
 
+// Create a plot object
 ShellminatorPlot plot( plotData, plotDataSize, "My Plot" );
 
 ++--FUNCTION_PROTOTYPES--++
@@ -40,17 +44,13 @@ ShellminatorPlot plot( plotData, plotDataSize, "My Plot" );
 // Clear the terminal
 shell.clear();
 
-stdioChannel.println( "Program Start!" );
+{{ channel }}.println( "Program Start!" );
 
 shell.begin( "arnold" );
 shell.beginScreen( &plot );
 
 ++--LOOP--++
 
-while( 1 ){
-
-    shell.update();
-
-}
+shell.update();
 
 ++--FUNCTION_IMPLEMENTATIONS--++

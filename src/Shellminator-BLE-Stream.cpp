@@ -1,5 +1,3 @@
-#include "BLEDevice.h"
-#include "BLECharacteristic.h"
 /*
  * Created on July 20 2024
  *
@@ -34,6 +32,10 @@ SOFTWARE.
 */
 
 #include "Shellminator-BLE-Stream.hpp"
+
+//#include "BLEDevice.h"
+//#include "BLECharacteristic.h"
+
 
 #ifdef SHELLMINATOR_USE_BLE
 

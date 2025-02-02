@@ -176,6 +176,7 @@ void ShellminatorList::draw( bool noClear ){
     if( !redraw ){
         return;
     }
+    
     redraw = false;
 
     parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );

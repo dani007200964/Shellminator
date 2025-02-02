@@ -1,6 +1,3 @@
-#include "BLEProperty.h"
-#include "BLECharacteristic.h"
-#include "BLEService.h"
 /*
  * Created on July 20 2024
  *
@@ -60,7 +57,10 @@ SOFTWARE.
         #include <ArduinoBLE.h>
     #endif
 
-    #define SHELLMINATOR_USE_BLE
+    //#define SHELLMINATOR_USE_BLE
+    //#include "BLEProperty.h"
+    //#include "BLECharacteristic.h"
+    //#include "BLEService.h"
 
     #ifdef SHELLMINATOR_USE_BLE
         #define SHELLMINATOR_BLE_SERVICE_NAME "Shellminator BLE UART"

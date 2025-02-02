@@ -186,7 +186,6 @@ if( BUILD_EXAMPLES )
 	#add_executable( 207_commanderSetSystemVariables ${SOURCES} extras/examples_desktop/Desktop/207_commanderSetSystemVariables/207_commanderSetSystemVariables.cpp )
 	#add_executable( 208_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/208_commanderColorizer/208_commanderColorizer.cpp )
 	#add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_desktop/Desktop/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
-	#add_executable( 251_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/251_commanderColorizer/251_commanderColorizer.cpp )
 	#add_executable( 300_guiButton ${SOURCES} extras/examples_desktop/Desktop/300_guiButton/300_guiButton.cpp )
 	#add_executable( 301_guiProgress ${SOURCES} extras/examples_desktop/Desktop/301_guiProgress/301_guiProgress.cpp )
 	#add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_desktop/Desktop/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
@@ -246,65 +245,62 @@ if( BUILD_WEBASSEMBLY )
 	# add_executable( 200_commanderBasic ${SOURCES} extras/examples_emscripten/Emscripten/200_commanderBasic/200_commanderBasic.cpp )
 	# target_link_options( 200_commanderBasic PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 201_commanderOptimizations ${SOURCES} extras/examples_emscripten/Emscripten/201_commanderOptimizations/201_commanderOptimizations.cpp )
-	target_link_options( 201_commanderOptimizations PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 201_commanderOptimizations ${SOURCES} extras/examples_emscripten/Emscripten/201_commanderOptimizations/201_commanderOptimizations.cpp )
+	# target_link_options( 201_commanderOptimizations PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 202_commanderSimpleArguments ${SOURCES} extras/examples_emscripten/Emscripten/202_commanderSimpleArguments/202_commanderSimpleArguments.cpp )
-	target_link_options( 202_commanderSimpleArguments PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 202_commanderSimpleArguments ${SOURCES} extras/examples_emscripten/Emscripten/202_commanderSimpleArguments/202_commanderSimpleArguments.cpp )
+	# target_link_options( 202_commanderSimpleArguments PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 203_commanderArgumentTypes ${SOURCES} extras/examples_emscripten/Emscripten/203_commanderArgumentTypes/203_commanderArgumentTypes.cpp )
-	target_link_options( 203_commanderArgumentTypes PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 203_commanderArgumentTypes ${SOURCES} extras/examples_emscripten/Emscripten/203_commanderArgumentTypes/203_commanderArgumentTypes.cpp )
+	# target_link_options( 203_commanderArgumentTypes PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 204_commanderPositionIndependentArg ${SOURCES} extras/examples_emscripten/Emscripten/204_commanderPositionIndependentArg/204_commanderPositionIndependentArg.cpp )
-	target_link_options( 204_commanderPositionIndependentArg PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 204_commanderPositionIndependentArg ${SOURCES} extras/examples_emscripten/Emscripten/204_commanderPositionIndependentArg/204_commanderPositionIndependentArg.cpp )
+	# target_link_options( 204_commanderPositionIndependentArg PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 205_commanderCowsay ${SOURCES} extras/examples_emscripten/Emscripten/205_commanderCowsay/205_commanderCowsay.cpp )
-	target_link_options( 205_commanderCowsay PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 205_commanderCowsay ${SOURCES} extras/examples_emscripten/Emscripten/205_commanderCowsay/205_commanderCowsay.cpp )
+	# target_link_options( 205_commanderCowsay PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 206_commanderSystemVariables ${SOURCES} extras/examples_emscripten/Emscripten/206_commanderSystemVariables/206_commanderSystemVariables.cpp )
-	target_link_options( 206_commanderSystemVariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 206_commanderSystemVariables ${SOURCES} extras/examples_emscripten/Emscripten/206_commanderSystemVariables/206_commanderSystemVariables.cpp )
+	# target_link_options( 206_commanderSystemVariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 207_commanderSetSystemVariables ${SOURCES} extras/examples_emscripten/Emscripten/207_commanderSetSystemVariables/207_commanderSetSystemVariables.cpp )
-	target_link_options( 207_commanderSetSystemVariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 207_commanderSetSystemVariables ${SOURCES} extras/examples_emscripten/Emscripten/207_commanderSetSystemVariables/207_commanderSetSystemVariables.cpp )
+	# target_link_options( 207_commanderSetSystemVariables PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 208_commanderColorizer ${SOURCES} extras/examples_emscripten/Emscripten/208_commanderColorizer/208_commanderColorizer.cpp )
-	target_link_options( 208_commanderColorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 208_commanderColorizer ${SOURCES} extras/examples_emscripten/Emscripten/208_commanderColorizer/208_commanderColorizer.cpp )
+	# target_link_options( 208_commanderColorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	# add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_emscripten/Emscripten/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
 	# target_link_options( 250_commanderAutoComplete PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 251_commanderColorizer ${SOURCES} extras/examples_emscripten/Emscripten/251_commanderColorizer/251_commanderColorizer.cpp )
-	# target_link_options( 251_commanderColorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
 	add_executable( 300_guiButton ${SOURCES} extras/examples_emscripten/Emscripten/300_guiButton/300_guiButton.cpp )
 	target_link_options( 300_guiButton PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 301_guiProgress ${SOURCES} extras/examples_emscripten/Emscripten/301_guiProgress/301_guiProgress.cpp )
-	# target_link_options( 301_guiProgress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 301_guiProgress ${SOURCES} extras/examples_emscripten/Emscripten/301_guiProgress/301_guiProgress.cpp )
+	target_link_options( 301_guiProgress PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
-	# target_link_options( 302_guiProgressAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
+	target_link_options( 302_guiProgressAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_emscripten/Emscripten/303_guiLevelMeter/303_guiLevelMeter.cpp )
-	# target_link_options( 303_guiLevelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 303_guiLevelMeter ${SOURCES} extras/examples_emscripten/Emscripten/303_guiLevelMeter/303_guiLevelMeter.cpp )
+	target_link_options( 303_guiLevelMeter PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
-	# target_link_options( 304_guiLevelMeterAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 304_guiLevelMeterAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/304_guiLevelMeterAdvanced/304_guiLevelMeterAdvanced.cpp )
+	target_link_options( 304_guiLevelMeterAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 305_guiNotification ${SOURCES} extras/examples_emscripten/Emscripten/305_guiNotification/305_guiNotification.cpp )
-	# target_link_options( 305_guiNotification PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 305_guiNotification ${SOURCES} extras/examples_emscripten/Emscripten/305_guiNotification/305_guiNotification.cpp )
+	target_link_options( 305_guiNotification PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 306_guiList ${SOURCES} extras/examples_emscripten/Emscripten/306_guiList/306_guiList.cpp )
-	# target_link_options( 306_guiList PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 306_guiList ${SOURCES} extras/examples_emscripten/Emscripten/306_guiList/306_guiList.cpp )
+	target_link_options( 306_guiList PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/307_guiListAdvanced/307_guiListAdvanced.cpp )
-	# target_link_options( 307_guiListAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 307_guiListAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/307_guiListAdvanced/307_guiListAdvanced.cpp )
+	target_link_options( 307_guiListAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 308_guiPlot ${SOURCES} extras/examples_emscripten/Emscripten/308_guiPlot/308_guiPlot.cpp )
-	# target_link_options( 308_guiPlot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 308_guiPlot ${SOURCES} extras/examples_emscripten/Emscripten/308_guiPlot/308_guiPlot.cpp )
+	target_link_options( 308_guiPlot PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
-	# target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
+	target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	# add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
 	# target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

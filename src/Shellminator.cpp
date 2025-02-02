@@ -706,11 +706,6 @@ void Shellminator::update() {
             terminalWidth = w;
             terminalHeight = h;
 
-            // Check if we have a redraw request.
-            if( screenRedraw ){
-
-            }
-
         }
 
         if( screenRedraw && ( ( millis() - screenTimerStart ) > screenUpdatePeriod ) ){
@@ -1408,11 +1403,17 @@ void Shellminator::ShellminatorEnterKeyState(){
 }
 
 void Shellminator::ShellminatorBeginningOfLineState(){
+    if( screen ){
+        return;
+    }
     cursor = 0;
     redrawLine();
 }
 
 void Shellminator::ShellminatorEndOfLineState(){
+    if( screen ){
+        return;
+    }
     cursor = cmd_buff_cntr;
     redrawLine();
 }
@@ -1426,6 +1427,10 @@ void Shellminator::ShellminatorLogoutState(){
     if( logoutKeyFunc ){
         logoutKeyFunc( this );
         return;
+    }
+
+    if( screen ){
+        endScreen();
     }
 
     if( passwordHash != NULL ){
@@ -1446,6 +1451,10 @@ void Shellminator::ShellminatorReverseSearchState(){
         return;
     }
 
+    if( screen ){
+        return;
+    }
+
     inSearch = !inSearch;
     redrawLine();
 
@@ -1453,11 +1462,21 @@ void Shellminator::ShellminatorReverseSearchState(){
 
 void Shellminator::ShellminatorClearScreenState(){
 
+    if( screen ){
+        screen -> update( terminalWidth, terminalHeight );
+        return;
+    }
+
     clear();
     redrawLine();
 }
 
 void Shellminator::ShellminatorAutoCompleteState(){
+
+    if( screen ){
+        return;
+    }
+
     // Auto complete section.
     autoCompleteWithCommandParser();
 }
@@ -1477,6 +1496,11 @@ void Shellminator::ShellminatorAbortState(){
 
     // If the abort key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
+
+    if( screen != NULL ){
+        endScreen();
+        return;
+    }
 
     // We send a line break to the terminal to put the next data in new line
     channel -> println();

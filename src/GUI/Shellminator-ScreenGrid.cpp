@@ -132,9 +132,11 @@ void ShellminatorScreenGrid::update( int width_p, int  height_p ){
     }
 
     if( newEvent.type == Shellminator::SHELL_EVENT_RESIZE ){
-        redraw = true;
+        //redraw = true;
         return;
     }
+
+    
 
 }
 
@@ -163,13 +165,13 @@ void ShellminatorScreenGrid::draw( bool noClear ){
 
     // Only draw if resized event or timer event happened.
     if( !redraw ){
-        return;
+        //return;
     }
     redraw = false;
 
     for( i = 1; i < height; i++ ){
         Shellminator::setCursorPosition( channel, 1, i + 1 );
-        channel -> print( "\033[0K" );
+        //channel -> print( "\033[0K" );
     }
 
     currentElement = head;

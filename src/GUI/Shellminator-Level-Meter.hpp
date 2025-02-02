@@ -95,7 +95,19 @@ public:
     /// @param percentage_p Percentage value[ 0.0 - 100.0 ].
     void setPercentage( float percentage_p );
 
+    /// You can modify the color of the bar.
+    void setColor( Shellminator::textColor_t color_p );
+
+    /// You can modify the color of the bar.
+    void setWarningColor( Shellminator::textColor_t color_p );
+
+    /// You can modify the color of the bar.
+    void setErrorColor( Shellminator::textColor_t color_p );
+
+    /// You can set the percentage value for warning color.
     void setWarningPercentage( float percentage_p );
+
+    /// You can set the percentage value for error color.
     void setErrorPercentage( float percentage_p );
 
 private:
@@ -112,8 +124,16 @@ private:
 
     const char* name;
     int nameSize = 0;
-    
 
+    // Color of the bars.
+    Shellminator::textColor_t color = Shellminator::WHITE;
+    
+    // Color of the bars.
+    Shellminator::textColor_t warningColor = Shellminator::YELLOW;
+    
+    // Color of the bars.
+    Shellminator::textColor_t errorColor = Shellminator::RED;
+    
 };
 
 #endif

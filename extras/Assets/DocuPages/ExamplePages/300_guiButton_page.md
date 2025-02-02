@@ -156,6 +156,20 @@ void buttonClick(ShellminatorScreen* screen) {
 <iframe id="demoFrame" src="webExamples/300_guiButton.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
 \endhtmlonly
 
+\htmlonly
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>When it comes to the Shellminator GUI, one important thing to keep in mind is that Shellminator is, first and foremost, a terminal. This means that you should always be able to exit the GUI at any time. Usually, pressing <b>Ctrl+C</b> or just hitting <b>Enter</b> will do the trick.
+        </p>
+    </div>
+</div>
+\endhtmlonly
+
+In the example above, if you press Enter, the system will exit the GUI. This is intentional—it prevents a malfunctioning GUI from blocking access to the system. After all, it's incredibly frustrating if the only way to exit a dashboard is by restarting the entire system!
+
 ## Whole Code
 
 ```cpp
@@ -266,6 +280,6 @@ void buttonClick( ShellminatorScreen* screen ){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[Commander Set System Variables Example](@ref 207_commanderSetSystemVariables_page) | [GUI Button Example](@ref 300_guiButton_page) |
+|[Commander Colorizer Example](@ref 208_commanderColorizer_page) | [GUI Progress Example](@ref 301_guiProgress_page) |
  
 </div>

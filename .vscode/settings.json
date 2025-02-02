@@ -35,7 +35,9 @@
         "iosfwd": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

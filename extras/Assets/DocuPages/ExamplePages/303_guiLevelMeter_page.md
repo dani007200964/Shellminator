@@ -1,4 +1,18 @@
+@page 303_guiLevelMeter_page Example 303 GUI Level Meter
 
+@tableofcontents
+
+The **ShellminatorLevelMeter** class is very similar to the **ShellminatorProgress** class, with the main difference being in its visual representation. In terms of code, the basic usage is almost identical.
+
+## Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/303_guiLevelMeter.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+\endhtmlonly
+
+## Whole Code
+
+```cpp
 /*
  * Created on Aug 10 2020
  *
@@ -13,10 +27,8 @@
  * See Shellminator_execute example for further information.
 */
 
-
 #include "Shellminator.hpp"
 #include "GUI/Shellminator-Level-Meter.hpp"
-
 
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
@@ -27,9 +39,6 @@ uint32_t timerStart = 0;
 uint32_t period = 100;
 float percentage = 1.0;
 float step = 1.0;
-
-
-
 
 // System init section.
 void setup(){
@@ -43,7 +52,6 @@ void setup(){
 
     shell.begin( "arnold" );
     shell.beginScreen( &meter );
-
 
 }
 
@@ -70,5 +78,13 @@ void loop(){
 
     shell.update();
 
-
 }
+```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[GUI Progress Advanced Example](@ref 302_guiProgressAdvanced_page) | [GUI Level Meter Advanced Example](@ref 304_guiLevelMeterAdvanced_page) |
+ 
+</div>
