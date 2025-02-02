@@ -93,6 +93,8 @@ SOFTWARE.
         /// @param height_p The height of the screen area in characters.
         void update( int width_p, int  height_p ) override;
 
+        void forceRedraw() override;
+
         void addWidget( ShellminatorScreen* widget, int row, int column, int rowSpan = 1, int columnSpan = 1 );
 
     protected:

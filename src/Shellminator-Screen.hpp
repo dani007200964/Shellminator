@@ -93,6 +93,9 @@ public:
     /// @param height_p The height of the screen area in characters.
     virtual void update( int width_p, int  height_p ){ /* To make the linker happy... */ }
 
+
+    virtual void forceRedraw(){ /* To make the linker happy... */ }
+
     /// Return the coordinate of the left column next to the object.
     int left(){ return originX - 1; }
 
@@ -106,6 +109,7 @@ public:
     int down(){ return originY + height; }
     
     Shellminator* getParent(){ return parent; }
+
 
     /// It is used by the grid layout. It specifies
     /// the row of the widget.

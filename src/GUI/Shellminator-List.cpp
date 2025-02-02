@@ -245,3 +245,7 @@ void ShellminatorList::draw( bool noClear ){
     }
 
 }
+
+void ShellminatorList::forceRedraw(){
+    redraw = true;
+}

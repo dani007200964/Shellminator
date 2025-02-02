@@ -140,6 +140,6 @@ void capacitorSimulator(){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[GUI Plot Example](@ref 308_guiPlot_page) | [GUI Plot Advanced Example](@ref 309_guiPlotAdvanced_page) |
+|[GUI Plot Example](@ref 308_guiPlot_page) | [Simple Screen Example](@ref 400_simpleScreen_page) |
  
 </div>

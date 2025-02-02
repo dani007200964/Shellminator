@@ -95,6 +95,8 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
+    void forceRedraw() override;
+
     /// Set progress text.
     ///
     /// You can give some information about the current process step.

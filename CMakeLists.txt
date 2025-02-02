@@ -302,8 +302,8 @@ if( BUILD_WEBASSEMBLY )
 	add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
 	target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	# add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
-	# target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
+	target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	# add_executable( 500_webSocketSimple ${SOURCES} extras/examples_emscripten/Emscripten/500_webSocketSimple/500_webSocketSimple.cpp )
 	# target_link_options( 500_webSocketSimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

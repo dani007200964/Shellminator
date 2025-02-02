@@ -195,3 +195,6 @@ void ShellminatorNotification::draw( bool noClear ){
 
 }
 
+void ShellminatorNotification::forceRedraw(){
+    redraw = true;
+}

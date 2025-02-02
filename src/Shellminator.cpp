@@ -1930,6 +1930,9 @@ void Shellminator::endScreen(){
 
 void Shellminator::requestRedraw(){
     // Set the redraw flag.
+    if( screen ){
+        screen -> forceRedraw();
+    }
     screenRedraw = true;
 }
 

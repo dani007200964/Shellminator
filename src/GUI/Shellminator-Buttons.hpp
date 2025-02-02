@@ -138,6 +138,8 @@ public:
     /// You can modify the color of the frame.
     void setColor( Shellminator::textColor_t color_p );
 
+    void forceRedraw() override;
+
 private:
 
     /// This variable stores a pointer to the name text.

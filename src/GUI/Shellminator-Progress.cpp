@@ -371,3 +371,7 @@ void ShellminatorProgress::setColor( Shellminator::textColor_t color_p ){
 void ShellminatorProgress::start(){
     timerStart = millis();
 }
+
+void ShellminatorProgress::forceRedraw(){
+    redraw = true;
+}

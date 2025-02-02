@@ -92,6 +92,8 @@ SOFTWARE.
         /// @param height_p The height of the screen area in characters.
         void update( int width_p, int  height_p ) override;
 
+        void forceRedraw() override;
+
         void setText( const char* text_p );
 
     protected:

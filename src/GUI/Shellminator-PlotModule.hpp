@@ -112,6 +112,8 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
+    void forceRedraw() override;
+
     /// Set the color of the plot.
     ///
     /// With this function, you can set the color of the plot.

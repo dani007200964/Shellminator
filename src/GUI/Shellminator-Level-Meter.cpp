@@ -285,3 +285,8 @@ void ShellminatorLevelMeter::setWarningColor( Shellminator::textColor_t color_p 
 void ShellminatorLevelMeter::setErrorColor( Shellminator::textColor_t color_p ){
     errorColor = color_p;
 }
+
+void ShellminatorLevelMeter::forceRedraw(){
+    redraw = true;
+}
+

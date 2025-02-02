@@ -165,18 +165,22 @@ void ShellminatorScreenGrid::draw( bool noClear ){
 
     // Only draw if resized event or timer event happened.
     if( !redraw ){
-        //return;
+        return;
     }
     redraw = false;
 
+    // For some reason it is buggy.
+    
     for( i = 1; i < height; i++ ){
         Shellminator::setCursorPosition( channel, 1, i + 1 );
-        //channel -> print( "\033[0K" );
+        channel -> print( "\033[0K" );
     }
+    
 
     currentElement = head;
 
     while( currentElement != NULL ){
+        currentElement -> forceRedraw();
         currentElement -> draw( true );
         currentElement = currentElement -> nextElement;
     }
@@ -228,4 +232,6 @@ void ShellminatorScreenGrid::addWidget( ShellminatorScreen* widget, int row_p, i
 
 }
 
-
+void ShellminatorScreenGrid::forceRedraw(){
+    redraw = true;
+}

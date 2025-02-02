@@ -93,9 +93,12 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
+    void forceRedraw() override;
+
     void attachCallback( void(*func_p)(const char*[], int, int, ShellminatorScreen*) );
 
     virtual void printExtra( int index, bool noClear );
+
 
 protected:
 

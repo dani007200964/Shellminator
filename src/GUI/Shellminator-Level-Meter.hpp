@@ -91,6 +91,8 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
+    void forceRedraw() override;
+
     /// Set current percentage.
     /// @param percentage_p Percentage value[ 0.0 - 100.0 ].
     void setPercentage( float percentage_p );
