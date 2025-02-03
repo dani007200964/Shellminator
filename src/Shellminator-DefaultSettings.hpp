@@ -46,7 +46,7 @@ SOFTWARE.
         #endif
         
         #ifndef SHELLMINATOR_USE_BLE
-            //#define SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN
@@ -70,6 +70,32 @@ SOFTWARE.
     #ifdef ARDUINO_UNOWIFIR4
         #ifndef SHELLMINATOR_USE_WIFI_CLIENT
             #define SHELLMINATOR_USE_WIFI_CLIENT
+        #endif
+
+        #ifndef SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
+        #endif
+
+        #ifndef SHELLMINATOR_BUFF_LEN
+            #define SHELLMINATOR_BUFF_LEN 50
+        #endif
+
+        #ifndef SHELLMINATOR_BUFF_DIM
+            #define SHELLMINATOR_BUFF_DIM 20
+        #endif
+
+        #ifndef SHELLMINATOR_BANNER_LEN
+            #define SHELLMINATOR_BANNER_LEN 20
+        #endif
+
+        #ifndef SHELLMINATOR_BANNER_PATH_LEN
+            #define SHELLMINATOR_BANNER_PATH_LEN 20
+        #endif
+    #endif
+
+    #ifdef ARDUINO_ARCH_NRF52840
+        #ifndef SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN

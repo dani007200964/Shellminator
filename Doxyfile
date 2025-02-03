@@ -1067,7 +1067,7 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             =
+IMAGE_PATH             = extras/Assets/DocuImages
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1363,7 +1363,8 @@ HTML_STYLESHEET        =
 
 HTML_EXTRA_STYLESHEET  = extras/doxygen-awesome-css/doxygen-awesome.css \
                          extras/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                         extras/Assets/custom_header.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1402,7 +1403,10 @@ HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-tog
                          extras/Assets/DocuEmoji/cpu.json \
                          extras/Assets/DocuEmoji/cpu_fan.json \
                          extras/Assets/DocuEmoji/Speaker.json \
-                         extras/Assets/DocuImages/commander_logo.svg
+                         extras/Assets/DocuImages/commander_logo.svg \
+                         extras/webpage/web_xterm_themed.html \
+                         extras/webpage/ble_terminal.html \
+                         extras/Assets/web_bell.mp3
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

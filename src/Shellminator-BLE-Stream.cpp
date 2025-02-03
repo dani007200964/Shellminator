@@ -39,7 +39,7 @@ SOFTWARE.
 
 #ifdef SHELLMINATOR_USE_BLE
 
-    #ifdef ARDUINO_ARCH_NRF52840
+    #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
         ShellminatorBleStream* ShellminatorBleStream::instance = NULL;
     #endif
 
@@ -52,7 +52,7 @@ SOFTWARE.
 
             rxCallback.dbg = NULL;
             rxCallback.parent = this;
-        #elif ARDUINO_ARCH_NRF52840
+        #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
             if( ShellminatorBleStream::instance == NULL ){
                 ShellminatorBleStream::instance = this;
             }
@@ -97,7 +97,7 @@ SOFTWARE.
 
             SHELLMINATOR_BLE_DBGLN( "NUS service started with ESP32 BLE drivers." );
 
-        #elif ARDUINO_ARCH_NRF52840
+        #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
 
             if( !BLE.begin() ){
                 SHELLMINATOR_BLE_DBGLN( "BLE Init Error!" );
@@ -121,7 +121,17 @@ SOFTWARE.
     }
 
     void ShellminatorBleStream::update(){
-        #ifdef ARDUINO_ARCH_NRF52840
+        if( callbackDelayStart != 0 ){
+            if( ( millis() - callbackDelayStart ) > callbackDelayPeriod ){
+                callbackDelayStart = 0;
+                if( state == BLE_CONNECTED_STATE ){
+                    if( connectCallback ){
+                        connectCallback( this );
+                    }
+                }
+            }
+        }
+        #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
             BLE.poll();
         #endif
     }
@@ -138,6 +148,7 @@ SOFTWARE.
         void ShellminatorBleStream::ServerCallbacks::onConnect( BLEServer* serverPtr ){
             parent -> state = BLE_CONNECTED_STATE;
             SHELLMINATOR_BLE_DBGLN( "Client connected to BLE server." );
+            parent -> callbackDelayStart = millis();
         }
 
         void ShellminatorBleStream::ServerCallbacks::onDisconnect( BLEServer* serverPtr ){
@@ -146,6 +157,9 @@ SOFTWARE.
             SHELLMINATOR_BLE_DBGLN( "Client disconnected from BLE server." );
             parent -> bleServer -> startAdvertising();
             SHELLMINATOR_BLE_DBGLN( "Start advertising again." );
+            if( parent -> disconnectCallback ){
+                parent -> disconnectCallback( parent );
+            }
         }
 
         void ShellminatorBleStream::bleRxCallback::onWrite( BLECharacteristic *charPtr ){
@@ -170,13 +184,11 @@ SOFTWARE.
 
         }
 
-    #elif ARDUINO_ARCH_NRF52840
+    #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
         void ShellminatorBleStream::bleRxCallback( BLEDevice device, BLECharacteristic characteristics ){
             int i;
             int num;
             const uint8_t* dataStr;
-
-            Serial.println( "Hurray!" );
 
             num = characteristics.valueLength();
             dataStr = characteristics.value();
@@ -210,6 +222,8 @@ SOFTWARE.
 
             ShellminatorBleStream::instance -> state = BLE_CONNECTED_STATE;
 
+            ShellminatorBleStream::instance -> callbackDelayStart = millis();
+
             if( ( ShellminatorBleStream::instance-> dbg ) == NULL ){
                 return;
             }
@@ -224,6 +238,10 @@ SOFTWARE.
             ShellminatorBleStream::instance -> state = BLE_DISCONNECTED_STATE;
             ShellminatorBleStream::instance -> resetVariables();
             
+            if( ShellminatorBleStream::instance -> disconnectCallback ){
+                ShellminatorBleStream::instance -> disconnectCallback( ShellminatorBleStream::instance );
+            }
+
             if( ( ShellminatorBleStream::instance-> dbg ) == NULL ){
                 return;
             }
@@ -317,7 +335,7 @@ SOFTWARE.
             bleTxChar -> setValue( &b, 1 );
             bleTxChar -> notify();
             return 1;
-        #elif ARDUINO_ARCH_NRF52840
+        #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
             bleTxChar.writeValue( b );
             delay( 30 );
             return 1;
@@ -332,7 +350,7 @@ SOFTWARE.
             bleTxChar -> setValue( (uint8_t*) data, size );
             bleTxChar -> notify();
             return size;
-        #elif ARDUINO_ARCH_NRF52840
+        #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
             int i = 0;
             int cntr = 0;
             for( i = 0; i < size; i++ ){
@@ -349,6 +367,14 @@ SOFTWARE.
             
             return size;
         #endif
+    }
+
+    void ShellminatorBleStream::attachConnectCallback( void(*connectCallback_p)(ShellminatorBleStream* )){
+        connectCallback = connectCallback_p;
+    }
+
+    void ShellminatorBleStream::attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorBleStream* )){
+        disconnectCallback = disconnectCallback_p;
     }
 
 #endif

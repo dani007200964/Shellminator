@@ -38,8 +38,12 @@
         <tab type="usergroup" visible="yes" url="@ref 308_guiPlot_page" title="📉 308 GUI Plot" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 309_guiPlotAdvanced_page" title="🎢 309 GUI Plot Advanced" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 400_simpleScreen_page" title="💻 400 Simple Screen" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 500_webSocketSimple_page" title="🌐 500 WebSocket Simple" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 501_webSocketPretty_page" title="🦢 501 WebSocket Pretty" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 502_webSocketSelfHosted_page" title="🗄️ 502 WebSocket SelfHosted" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 510_bleSimple_page" title="📶 510 BLE Simple" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 520_tcpSimple_page" title="🔌 520 TCP Simple" intro=""/>
     </tab>
-    <tab type="usergroup" visible="yes" url="@ref web_terminal_page" title="✅ Web Terminal" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref faq_page" title="❓ FAQ" intro=""/>

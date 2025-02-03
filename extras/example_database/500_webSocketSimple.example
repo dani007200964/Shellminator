@@ -40,8 +40,6 @@ Shellminator shell( &ws );
 
 ++--SETUP--++
 
-{{ channel }}.begin(115200);
-
 WiFi.begin(ssid, pass);
 
 // Attempt to connect to WiFi network:

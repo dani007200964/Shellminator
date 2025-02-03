@@ -16,24 +16,27 @@
 
 #include "WiFi.h"
 #include "Shellminator.hpp"
-#include "Shellminator-WebServer.hpp"
 #include "Shellminator-Websocket.hpp"
 
 
 #define WEBSOCKET_PORT 443
 
-// Webserver port for webpage and contents.
-#define WEBSERVER_PORT 80
 
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = "Replace With Your SSID";        // your network SSID (name)
 char pass[] = "Replace With Your Password";    // your network password (use for WPA, or use as key for WEP)
 
-ShellminatorWebServerThemedOffline htmlServer( WEBSERVER_PORT );
 ShellminatorWebSocket ws( WEBSOCKET_PORT );
 
 // Create a Shellminator object, and initialize it to use WebSocketsServer
 Shellminator shell( &ws );
+
+// We will need a buffer to avoid flickering.
+uint8_t printBuffer[ 100 ];
+int printBufferSize = sizeof( printBuffer );
+
+// Hash for 'Password' as password. Obviously, replace it
+// when working on something sensitive.
+uint8_t passwordHash[] = { 0xCC, 0xb4, 0x24, 0x83 };
 
 // Shellminator logo.
 const char logo[] =
@@ -49,6 +52,9 @@ const char logo[] =
 ;
 
 
+// Callbacks for connect and disconnect events.
+void userConnectedCallback( ShellminatorWebSocket* socket );
+void userDisconnectedCallback( ShellminatorWebSocket* socket );
 
 
 // System init section.
@@ -64,19 +70,29 @@ void setup(){
         Serial.print( '.' );
         delay( 1000 );
     }
+    Serial.print("Connected!");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+
 
     // Attach the logo.
     shell.attachLogo( logo );
 
+    // Enable buffering.
+    shell.enableBuffering( printBuffer, printBufferSize );
+
+    // Enable password protection.
+    shell.setPassword( passwordHash, sizeof( passwordHash ) );
+
     // initialize shell object.
     shell.begin( "arnold" );
 
-    // Uncomment if you want to enable html server debug messages.
-    //htmlServer.attachDebugChannel( &Serial );
-    htmlServer.begin();
+    ws.attachDebugChannel( &Serial );
 
-    // Uncomment if you want to enable websocket server debug messages.
-    //ws.attachDebugChannel( &Serial );
+    // Attach connect and disconnect callbacks.
+    ws.attachConnectCallback( userConnectedCallback );
+    ws.attachDisconnectCallback( userDisconnectedCallback );
+
     ws.begin();
 
 
@@ -87,10 +103,19 @@ void loop(){
 
     ws.update();
     shell.update();
-    htmlServer.update();
 
     // Give some time to the other tasks on RTOS systems.
     delay( 2 );
 
 
+}
+
+void userConnectedCallback( ShellminatorWebSocket* socket ){
+    // Print 'welcome' screen after connection.
+    shell.printLoginScreen();
+}
+
+void userDisconnectedCallback( ShellminatorWebSocket* socket ){
+    // In case of disconnect event, close the terminal.
+    shell.logOut();
 }

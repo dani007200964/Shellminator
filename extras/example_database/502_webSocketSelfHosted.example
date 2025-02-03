@@ -31,7 +31,6 @@ CATEGORY=Wireless
 // Webserver port for webpage and contents.
 #define WEBSERVER_PORT 80
 
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = "Replace With Your SSID";        // your network SSID (name)
 char pass[] = "Replace With Your Password";    // your network password (use for WPA, or use as key for WEP)
 
@@ -40,6 +39,14 @@ ShellminatorWebSocket ws( WEBSOCKET_PORT );
 
 // Create a Shellminator object, and initialize it to use WebSocketsServer
 Shellminator shell( &ws );
+
+// We will need a buffer to avoid flickering.
+uint8_t printBuffer[ 100 ];
+int printBufferSize = sizeof( printBuffer );
+
+// Hash for 'Password' as password. Obviously, replace it
+// when working on something sensitive.
+uint8_t passwordHash[] = { 0xCC, 0xb4, 0x24, 0x83 };
 
 // Shellminator logo.
 const char logo[] =
@@ -56,6 +63,10 @@ const char logo[] =
 
 ++--FUNCTION_PROTOTYPES--++
 
+// Callbacks for connect and disconnect events.
+void userConnectedCallback( ShellminatorWebSocket* socket );
+void userDisconnectedCallback( ShellminatorWebSocket* socket );
+
 ++--SETUP--++
 
 WiFi.begin(ssid, pass);
@@ -66,19 +77,32 @@ while( WiFi.status() != WL_CONNECTED ){
     {{ channel }}.print( '.' );
     delay( 1000 );
 }
+{{ channel }}.print("Connected!");
+{{ channel }}.println("IP address: ");
+{{ channel }}.println(WiFi.localIP());
+
 
 // Attach the logo.
 shell.attachLogo( logo );
 
+// Enable buffering.
+shell.enableBuffering( printBuffer, printBufferSize );
+
+// Enable password protection.
+shell.setPassword( passwordHash, sizeof( passwordHash ) );
+
 // initialize shell object.
 shell.begin( "arnold" );
 
-// Uncomment if you want to enable html server debug messages.
-//htmlServer.attachDebugChannel( &{{ channel }} );
+htmlServer.attachDebugChannel( &{{ channel }} );
 htmlServer.begin();
 
-// Uncomment if you want to enable websocket server debug messages.
-//ws.attachDebugChannel( &{{ channel }} );
+ws.attachDebugChannel( &{{ channel }} );
+
+// Attach connect and disconnect callbacks.
+ws.attachConnectCallback( userConnectedCallback );
+ws.attachDisconnectCallback( userDisconnectedCallback );
+
 ws.begin();
 
 ++--LOOP--++
@@ -91,3 +115,13 @@ htmlServer.update();
 delay( 2 );
 
 ++--FUNCTION_IMPLEMENTATIONS--++
+
+void userConnectedCallback( ShellminatorWebSocket* socket ){
+    // Print 'welcome' screen after connection.
+    shell.printLoginScreen();
+}
+
+void userDisconnectedCallback( ShellminatorWebSocket* socket ){
+    // In case of disconnect event, close the terminal.
+    shell.logOut();
+}

@@ -121,6 +121,10 @@ SOFTWARE.
                 client.write( TELNET_IAC_DONT_ECHO, 3 );
                 client.write( TELNET_IAC_WILL_SUPPRESS_GO_AHEAD, 3 );
                 client.write( TELNET_IAC_DO_SUPPRESS_GO_AHEAD, 3 );
+
+                if( connectCallback ){
+                    connectCallback( this );
+                }
             }
         }
 
@@ -182,6 +186,10 @@ SOFTWARE.
         clientConnected = false;
         resetVariables();
         SHELLMINATOR_TCP_DBGLN( __CONST_TXT__( "Disconnecting TCP Client!" ) );
+        if( disconnectCallback ){
+            disconnectCallback( this );
+        }
+
     }
 
     void ShellminatorTcpSocket::resetVariables(){
@@ -250,6 +258,14 @@ SOFTWARE.
             return 0;
         }
         return client.write( data, size );
+    }
+
+    void ShellminatorTcpSocket::attachConnectCallback( void(*connectCallback_p)(ShellminatorTcpSocket* )){
+        connectCallback = connectCallback_p;
+    }
+
+    void ShellminatorTcpSocket::attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorTcpSocket* )){
+        disconnectCallback = disconnectCallback_p;
     }
 
 #endif

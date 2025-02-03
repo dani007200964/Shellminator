@@ -38,8 +38,6 @@ void setup(){
 
     Serial.begin(115200);
 
-    Serial.begin(115200);
-
     WiFi.begin(ssid, pass);
 
     // Attempt to connect to WiFi network:

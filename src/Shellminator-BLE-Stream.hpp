@@ -47,13 +47,13 @@ SOFTWARE.
     #endif
 
     #ifdef ESP32
-        //#include <BLEDevice.h>
-        //#include <BLEServer.h>
-        //#include <BLEUtils.h>
-        //#include <BLE2902.h>
+        #include <BLEDevice.h>
+        #include <BLEServer.h>
+        #include <BLEUtils.h>
+        #include <BLE2902.h>
     #endif
 
-    #ifdef ARDUINO_ARCH_NRF52840
+    #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
         #include <ArduinoBLE.h>
     #endif
 
@@ -102,7 +102,7 @@ SOFTWARE.
         class ShellminatorBleStream : public Stream{
             public:
 
-                #ifdef ARDUINO_ARCH_NRF52840
+                #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
                     static ShellminatorBleStream* instance;
                     static void bleRxCallback( BLEDevice device, BLECharacteristic characteristics );
                     static void onConnect( BLEDevice device );
@@ -147,6 +147,12 @@ SOFTWARE.
                 void attachDebugChannel( Stream* dbg_p );
 
                 bleState_t state;
+
+                uint32_t callbackDelayStart;
+                uint32_t callbackDelayPeriod = 3000;
+                void attachConnectCallback( void(*connectCallback_p)(ShellminatorBleStream* ) );
+                void attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorBleStream* ) );
+
             
             private:
 
@@ -155,6 +161,10 @@ SOFTWARE.
                 uint32_t streamBufferReadPointer;
 
                 Stream* dbg;
+
+                void(*connectCallback)(ShellminatorBleStream* parent) = NULL;
+                void(*disconnectCallback)(ShellminatorBleStream* parent) = NULL;
+
 
                 void resetVariables();
                 void appendToCircularBuffer( uint8_t data );
@@ -187,7 +197,7 @@ SOFTWARE.
                     ServerCallbacks serverCallbacks;
                     bleRxCallback rxCallback;
 
-                #elif ARDUINO_ARCH_NRF52840
+                #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
                     uint8_t bleTxBuffer[ SHELLMINATOR_BLE_STREAM_BUFFER_SIZE ];
                     BLEService bleService = BLEService( NUS_SERVICE_UUID );
                     BLECharacteristic bleTxChar = BLECharacteristic( NUS_TX_CHAR_UUID, BLENotify, SHELLMINATOR_BLE_STREAM_BUFFER_SIZE );
