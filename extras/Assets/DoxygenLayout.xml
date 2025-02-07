@@ -38,6 +38,8 @@
         <tab type="usergroup" visible="yes" url="@ref 308_guiPlot_page" title="📉 308 GUI Plot" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 309_guiPlotAdvanced_page" title="🎢 309 GUI Plot Advanced" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 400_simpleScreen_page" title="💻 400 Simple Screen" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 401_screenEndCallback_page" title="🤙 401 Screen End Callback" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 402_endlessScreen_page" title="♾️ 402 Endless Screen" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 500_webSocketSimple_page" title="🌐 500 WebSocket Simple" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 501_webSocketPretty_page" title="🦢 501 WebSocket Pretty" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 502_webSocketSelfHosted_page" title="🗄️ 502 WebSocket SelfHosted" intro=""/>

@@ -130,7 +130,7 @@ void ShellminatorListDetailed::printExtra( int index, bool noClear ){
     // Print as many elements as high the remaining screen is.
     for( i = 1; i < height; i++ ){
 
-        Shellminator::setCursorPosition( channel, originX + detailStart, originY + i );
+        Shellminator::setCursorPosition( channel, originX + detailStart, originY + i + instructionLines );
         channel -> print( "  \u2502\033" );
         if( !noClear ){
             channel -> print( "\033[0K" );
@@ -140,7 +140,7 @@ void ShellminatorListDetailed::printExtra( int index, bool noClear ){
 
     // Calculate text length and set the cursor to start position.
     detailLength = strlen( detailList[ index ] );
-    Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + verticalOffset );
+    Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + instructionLines + verticalOffset );
 
     // Print as many lines as possible in the current screen size.
     for( i = 0; i < detailLength; i++ ){
@@ -158,7 +158,7 @@ void ShellminatorListDetailed::printExtra( int index, bool noClear ){
             }
 
             // Set the cursor to the next line beginning.
-            Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + verticalOffset );
+            Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + 1 + instructionLines + verticalOffset );
             continue;
         }
 
@@ -172,7 +172,7 @@ void ShellminatorListDetailed::printExtra( int index, bool noClear ){
 
     // Clear every line remaining until the screen end.
     for( i = verticalOffset + 2; i <= height; i++ ){
-        Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + i - 1 );
+        Shellminator::setCursorPosition( channel, originX + detailStart + 4, originY + i - 1 + instructionLines );
         if( !noClear ){
             channel -> print( "\033[0K" );
         }

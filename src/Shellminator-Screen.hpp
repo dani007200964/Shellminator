@@ -132,6 +132,12 @@ public:
     // grid layout.
     ShellminatorScreen* nextElement = NULL;
 
+    void attachEndFunction( void(*end_func_p)(Shellminator*) ){ end_func = end_func_p; }
+    void removeEndFunction(){ end_func = NULL; }
+
+    void( *getEndFunction() )(Shellminator*) { return end_func; }
+
+
 protected:
 
     /// Pointer to the caller terminal object.
@@ -150,6 +156,8 @@ protected:
 
     /// Y coordinate of the origin.
     int originY = 1;
+
+    void(*end_func)(Shellminator*) = NULL;
 
 };
 

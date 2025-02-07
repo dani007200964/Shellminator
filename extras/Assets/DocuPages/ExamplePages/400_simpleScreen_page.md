@@ -2,6 +2,60 @@
 
 @tableofcontents
 
+In the previous examples, we explored basic GUI elements. Now, let's take things a step further and see how we can display multiple GUI elements on a single screen.  
+
+Our approach is very similar to the layout systems used in Tkinter, Matlab, and Matplotlib. The idea is simple: we divide the screen into a grid with both horizontal and vertical sections. Then, we place elements into specific grid positions. Optionally, we can also define how many grid cells wide and tall each element should be.  
+
+Let’s start with a simple grid!  
+
+In this example, we'll create a grid with **3 rows** and **3 columns**:  
+
+```cpp
+// Create a grid with 3 rows and 3 columns
+ShellminatorScreenGrid grid( 3, 3 );
+```  
+
+Each grid follows a structured **indexing system**. To keep things familiar, we follow the same logic as many popular APIs:  
+- The **first index** represents the row.  
+- The **second index** represents the column.  
+
+Here’s an illustration to help visualize how grid indexing works:  
+
+![Grid Indexing](screen_grid_addressing.svg)
+
+Indexing starts from **0**, meaning the first row is `0`, the second row is `1`, and so on. The same applies to columns. Since we’re working with a **3x3 grid**, the highest index value for both rows and columns is **2** (because indexing starts from 0).  
+
+To add elements to the grid, we use the `addWidget` method. Let’s see how it works:  
+
+```cpp
+// Place button_1 in the first row, second column
+grid.addWidget( &button_1, 0, 1 );
+
+// Place button_2 in the second row, second column
+grid.addWidget( &button_2, 1, 1 );
+
+// Place button_3 in the third row, second column
+grid.addWidget( &button_3, 2, 1 );
+```  
+
+By default, each element takes up **one cell** in width and height. But what if we want an element to span multiple cells?  
+
+To make an element **wider** or **taller**, we still use the `addWidget` method, but we pass two additional parameters:  
+
+```cpp
+// Place meter in the first row, first column
+// Make it three rows tall and one column wide
+grid.addWidget( &meter, 0, 0, 3, 1 );
+```  
+
+Finally, to start the GUI, we use the `beginScreen` method as usual. But this time, we pass our **grid** as the screen object to be drawn:  
+
+```cpp
+// Register the Screen object. The terminal will pass
+// control to it until the user presses the ESC button.
+shell.beginScreen( &grid );
+```  
+
 ## Live Demo
 
 \htmlonly
@@ -121,6 +175,6 @@ void loop(){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[GUI Plot Advanced Example](@ref 309_guiPlotAdvanced_page) | [Simple Screen Example](@ref 400_simpleScreen_page) |
+|[GUI Plot Advanced Example](@ref 309_guiPlotAdvanced_page) | [Screen End Callback Example](@ref 401_screenEndCallback_page) |
  
 </div>

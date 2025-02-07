@@ -690,8 +690,6 @@ void Shellminator::update() {
                 // to adopt for the new screen size.
                 pushEvent( ( shellEvent_t ){ SHELL_EVENT_RESIZE } );
 
-                clear();
-
                 // Call the update function of the screen with the new
                 // dimensions to make it possible to adopt to the new
                 // screen size.
@@ -714,6 +712,8 @@ void Shellminator::update() {
             // that the Screen object will generate a redraw
             // request in the draw function.
             screenRedraw = false;
+
+            screen -> forceRedraw();
 
             // Call the Screen objects draw function.
             screen -> draw();
@@ -1054,13 +1054,16 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
                 // We have to pop the EVENT_CODE_RETURN event from the event buffer.
                 popEvent();
 
-                // If a screen swap occured, we doesn't end the screen.
+                // If a screen swap occurred, we doesn't end the screen.
                 // Otherwise we stop rendering and return to regular terminal mode.
                 if( readEvent().type != SHELL_EVENT_SCREEN_SWAP ){
                     // In this case we have to end the drawing process.
                     endScreen();
                     // And set the state machine back to default state.
                     currentState = &Shellminator::ShellminatorDefaultState;
+                }
+                else{
+                    popEvent();
                 }
 
                 break;
@@ -1871,9 +1874,11 @@ void Shellminator::swapScreen( ShellminatorScreen* screen_p, int updatePeriod ){
     // Call the Screens init function.
     screen -> init( this, bufferMemoryAllocated ? &bufferedPrinter : channel );
 
+    //--- This code is pure evil ---
+    // It causes recursion. I left it to make a remainder!
+    //
     // Call the Screens update function.
-    screen -> update( terminalWidth, terminalHeight );
-
+    // screen -> update( terminalWidth, terminalHeight );
     pushEvent( ( shellEvent_t ){ SHELL_EVENT_SCREEN_SWAP, EVENT_CODE_EMPTY } );
 
 }
@@ -1888,6 +1893,12 @@ void Shellminator::endScreen(){
     // This variable will hold the vertical location of
     // the new banner.
     int bannerPos;
+
+    void( *endFunction )( Shellminator* ) = NULL;
+
+    if( screen == NULL ){
+        return;
+    }
 
     // Stop mouse reports on host.
     mouseEnd();
@@ -1908,8 +1919,16 @@ void Shellminator::endScreen(){
         channel -> println();
     }
 
+    // Get the end function if available.
+    endFunction = screen -> getEndFunction();
+
     // Clear the pointer to the screen object.
     screen = NULL;
+
+    if( endFunction ){
+        endFunction( this );
+        return;
+    }
 
     // Set the cursor to the last line.
     // setCursorPosition( 1, height );
@@ -1926,6 +1945,8 @@ void Shellminator::endScreen(){
     // Set the cursor and the counter to zero.
     cursor = 0;
     cmd_buff_cntr = 0;
+
+
 }
 
 void Shellminator::requestRedraw(){

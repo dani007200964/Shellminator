@@ -123,6 +123,8 @@ protected:
     /// Pointer to the instruction list.
     const char* instruction = NULL;
 
+    int instructionLines = 0;
+
 };
 
 #endif

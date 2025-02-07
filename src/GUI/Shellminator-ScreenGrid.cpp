@@ -110,13 +110,21 @@ void ShellminatorScreenGrid::update( int width_p, int  height_p ){
         calculatedHeight = currentElement -> rowSpan * cellHeight;
 
         if( ( calculatedOriginX + calculatedWidth ) > width ){
-            currentElement = currentElement -> nextElement;
-            continue;
+            calculatedWidth = width - calculatedOriginX;
+            if( calculatedWidth <= 0 ){
+                currentElement = currentElement -> nextElement;
+                continue;
+            }
         }
 
         if( ( calculatedOriginY + calculatedHeight ) > height ){
-            currentElement = currentElement -> nextElement;
-            continue;
+            //currentElement = currentElement -> nextElement;
+            //continue;
+            calculatedHeight = height - calculatedOriginY;
+            if( calculatedHeight <= 0 ){
+                currentElement = currentElement -> nextElement;
+                continue;
+            }
         }
 
         currentElement -> setOrigin( calculatedOriginX, calculatedOriginY );
@@ -168,8 +176,6 @@ void ShellminatorScreenGrid::draw( bool noClear ){
         return;
     }
     redraw = false;
-
-    // For some reason it is buggy.
     
     for( i = 1; i < height; i++ ){
         Shellminator::setCursorPosition( channel, 1, i + 1 );
