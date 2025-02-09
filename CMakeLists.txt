@@ -204,6 +204,7 @@ if( BUILD_EXAMPLES )
 	#add_executable( 502_webSocketSelfHosted ${SOURCES} extras/examples_desktop/Desktop/502_webSocketSelfHosted/502_webSocketSelfHosted.cpp )
 	#add_executable( 510_bleSimple ${SOURCES} extras/examples_desktop/Desktop/510_bleSimple/510_bleSimple.cpp )
 	#add_executable( 520_tcpSimple ${SOURCES} extras/examples_desktop/Desktop/520_tcpSimple/520_tcpSimple.cpp )
+	#add_executable( 800_debuggersAndDevelopers ${SOURCES} extras/examples_desktop/Desktop/800_debuggersAndDevelopers/800_debuggersAndDevelopers.cpp )
 	#add_executable( 999_techDemo ${SOURCES} extras/examples_desktop/Desktop/999_techDemo/999_techDemo.cpp )
 endif()
 if( BUILD_WEBASSEMBLY )
@@ -306,14 +307,14 @@ if( BUILD_WEBASSEMBLY )
 	# add_executable( 309_guiPlotAdvanced ${SOURCES} extras/examples_emscripten/Emscripten/309_guiPlotAdvanced/309_guiPlotAdvanced.cpp )
 	# target_link_options( 309_guiPlotAdvanced PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
-	target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 400_simpleScreen ${SOURCES} extras/examples_emscripten/Emscripten/400_simpleScreen/400_simpleScreen.cpp )
+	# target_link_options( 400_simpleScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 401_screenEndCallback ${SOURCES} extras/examples_emscripten/Emscripten/401_screenEndCallback/401_screenEndCallback.cpp )
-	target_link_options( 401_screenEndCallback PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 401_screenEndCallback ${SOURCES} extras/examples_emscripten/Emscripten/401_screenEndCallback/401_screenEndCallback.cpp )
+	# target_link_options( 401_screenEndCallback PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
-	add_executable( 402_endlessScreen ${SOURCES} extras/examples_emscripten/Emscripten/402_endlessScreen/402_endlessScreen.cpp )
-	target_link_options( 402_endlessScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+	# add_executable( 402_endlessScreen ${SOURCES} extras/examples_emscripten/Emscripten/402_endlessScreen/402_endlessScreen.cpp )
+	# target_link_options( 402_endlessScreen PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	# add_executable( 500_webSocketSimple ${SOURCES} extras/examples_emscripten/Emscripten/500_webSocketSimple/500_webSocketSimple.cpp )
 	# target_link_options( 500_webSocketSimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
@@ -329,6 +330,9 @@ if( BUILD_WEBASSEMBLY )
 
 	# add_executable( 520_tcpSimple ${SOURCES} extras/examples_emscripten/Emscripten/520_tcpSimple/520_tcpSimple.cpp )
 	# target_link_options( 520_tcpSimple PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
+
+	add_executable( 800_debuggersAndDevelopers ${SOURCES} extras/examples_emscripten/Emscripten/800_debuggersAndDevelopers/800_debuggersAndDevelopers.cpp )
+	target_link_options( 800_debuggersAndDevelopers PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	# add_executable( 999_techDemo ${SOURCES} extras/examples_emscripten/Emscripten/999_techDemo/999_techDemo.cpp )
 	# target_link_options( 999_techDemo PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

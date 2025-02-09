@@ -46,6 +46,9 @@
         <tab type="usergroup" visible="yes" url="@ref 510_bleSimple_page" title="📶 510 BLE Simple" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 520_tcpSimple_page" title="🔌 520 TCP Simple" intro=""/>
     </tab>
+    <tab type="usergroup" visible="yes" url="@ref 800_debuggersAndDevelopers_page" title="🎮 Games" intro="">
+        <tab type="usergroup" visible="yes" url="@ref 800_debuggersAndDevelopers_page" title="👾 800 Debuggers And Developers" intro=""/>
+    </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref faq_page" title="❓ FAQ" intro=""/>
