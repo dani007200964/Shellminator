@@ -77,7 +77,7 @@ SOFTWARE.
 ///  +------------------------------------+
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "2.0.0"
+#define SHELLMINATOR_VERSION "3.0.0"
 
 /// Buffer size for the mouse event parser.
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15

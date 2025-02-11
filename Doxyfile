@@ -1406,7 +1406,8 @@ HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-tog
                          extras/Assets/DocuImages/commander_logo.svg \
                          extras/webpage/web_xterm_themed.html \
                          extras/webpage/ble_terminal.html \
-                         extras/Assets/web_bell.mp3
+                         extras/Assets/web_bell.mp3 \
+                         extras/Assets/DocuImages/support_me_on_kofi_red.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT

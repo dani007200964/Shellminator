@@ -707,6 +707,8 @@ void Shellminator::update() {
         }
 
         if( screenRedraw && ( ( millis() - screenTimerStart ) > screenUpdatePeriod ) ){
+
+            screenTimerStart = millis();
             // In this case we have to clear the flag first.
             // The order is important, because it is possible
             // that the Screen object will generate a redraw
@@ -725,8 +727,12 @@ void Shellminator::update() {
             }
         }
 
-        // Call the Screen objects update function periodically.
-        screen -> update( terminalWidth, terminalHeight );
+        // We have to check screen again, because an endScreen was called
+        // in the draw callback, it results a crash.
+        if( screen ){
+            // Call the Screen objects update function periodically.
+            screen -> update( terminalWidth, terminalHeight );
+        }
 
         // Pop the current element from the event buffer.
         popEvent();

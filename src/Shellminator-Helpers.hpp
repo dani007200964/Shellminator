@@ -38,6 +38,16 @@ SOFTWARE.
 #include <ctype.h>
 #include <string.h>
 
+#ifndef __has_attribute
+    #define __has_attribute(x) 0
+#endif
+
+#if __has_attribute(weak) || defined(__GNUC__) || defined(__clang__)
+    #define SHELLMINATOR_WEAK __attribute__((weak))
+#else
+     #define SHELLMINATOR_WEAK
+#endif
+
 //---- Network Related Defines ----
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
     #ifdef ESP8266

@@ -2,6 +2,12 @@
 
 ## The most versatile terminal interface for your next robot
 
+#### Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/999_techDemo.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+\endhtmlonly
+
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div style="width:150px; height:150px; margin-right: 20px;">
@@ -102,11 +108,6 @@ void loop(){
     </div>
 </div>
 \endhtmlonly
-
-\htmlonly
-<iframe id="demoFrame" src="webExamples/999_techDemo.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
-\endhtmlonly
-
 
 \htmlonly
 <div style="display:flex; align-items: center;">

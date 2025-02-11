@@ -58,7 +58,7 @@ def convertToHeader( data, variable_name ):
 argv = sys.argv[ 1: ]
 
 helpText =  """Arguments:
--t or --target   : Can be: clean, all, simulator, test, doc, examples, web
+-t or --target   : Can be: clean, all, test, examples, web
 -h or --help     : Help message.
 -v or --version  : Prints the version info.
 -c or --checkout : It has to be used before new release. It generates examples, badges and documentation data."""
@@ -200,9 +200,25 @@ if ( 'web' in target ) or ( 'all' in target ):
     print( "Files in build folder:" )
     print( buildFiles )
 
+    ShellminatorDocsFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs') )
+
+    # Check if the ShellminatorDocs directory exists.
+    if os.path.isdir( ShellminatorDocsFolder ) == False:
+        os.mkdir( ShellminatorDocsFolder )
+    
+    print( os.path.abspath(os.path.join(os.path.dirname(__file__), 'run_server.py') ) )
+    shutil.copyfile( os.path.abspath(os.path.join(os.path.dirname(__file__), 'run_server.py') ), os.path.join( ShellminatorDocsFolder, 'run_server.py' ) )
+
+    ShellminatorDocsHtmlFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html') )
+
+    # Check if the ShellminatorDocs/html directory exists.
+    if os.path.isdir( ShellminatorDocsHtmlFolder ) == False:
+        os.mkdir( ShellminatorDocsHtmlFolder )
+    
+
     webExamplesFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html/webExamples') )
 
-    # Check if the webExamples directory exists. In this case delet its content.
+    # Check if the ShellminatorDocs/html/webExamples directory exists. In this case delete its content.
     if os.path.isdir( webExamplesFolder ) == True:
         shutil.rmtree( webExamplesFolder )
     

@@ -4,6 +4,7 @@
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
     <tab type="usergroup" visible="yes" url="@ref installation_page" title="📥 Installation" intro=""/>
+    <tab type="usergroup" visible="yes" url="@ref usage_page" title="👀 Usage" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref examples_page" title="📖 Examples" intro="">
         <tab type="usergroup" visible="yes" url="@ref 001_basic_page" title="👶 001 Basic" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 002_commandCallback_page" title="🪝 002 Command Callback" intro=""/>
@@ -48,6 +49,7 @@
     </tab>
     <tab type="usergroup" visible="yes" url="@ref 800_debuggersAndDevelopers_page" title="🎮 Games" intro="">
         <tab type="usergroup" visible="yes" url="@ref 800_debuggersAndDevelopers_page" title="👾 800 Debuggers And Developers" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 801_dinoCrysis_page" title="🦖 801 Dino Crysis" intro=""/>
     </tab>
     <tab type="usergroup" visible="yes" url="@ref supported_boards_page" title="✅ Supported Boards" intro=""/>
     <tab type="usergroup" visible="yes" url="@ref bug_report_page" title="🐛 Bug Report" intro=""/>
