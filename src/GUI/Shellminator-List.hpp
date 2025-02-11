@@ -45,6 +45,7 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
+#include "Shellminator-Helpers.hpp"
 
 #include <stdio.h>
 #include <stdint.h>
@@ -92,9 +93,12 @@ public:
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
 
+    void forceRedraw() override;
+
     void attachCallback( void(*func_p)(const char*[], int, int, ShellminatorScreen*) );
 
     virtual void printExtra( int index, bool noClear );
+
 
 protected:
 
@@ -118,6 +122,8 @@ protected:
 
     /// Pointer to the instruction list.
     const char* instruction = NULL;
+
+    int instructionLines = 0;
 
 };
 

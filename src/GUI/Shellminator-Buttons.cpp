@@ -268,6 +268,7 @@ void ShellminatorButton::draw( bool noClear ){
 
     channel -> print( __CONST_TXT__( "\u2518" ) );
 
+    parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
 }
 
 bool ShellminatorButton::isUpper( char c ){
@@ -284,5 +285,9 @@ char ShellminatorButton::toUpper( char c ){
         return c - ( 'a' - 'A' );
     }
     return c;
+}
+
+void ShellminatorButton::forceRedraw(){
+    redraw = true;
 }
 

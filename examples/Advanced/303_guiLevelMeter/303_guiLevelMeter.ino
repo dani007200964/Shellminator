@@ -39,7 +39,7 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    stdioChannel.println( "Program Start!" );
+    Serial.println( "Program Start!" );
 
     shell.begin( "arnold" );
     shell.beginScreen( &meter );
@@ -50,29 +50,25 @@ void setup(){
 // Infinite loop.
 void loop(){
 
-    while( 1 ){
+    if( ( millis() - timerStart ) > period ){
+        timerStart = millis();
+        percentage += step;
 
-        if( ( millis() - timerStart ) > period ){
-            timerStart = millis();
-            percentage += step;
-
-            if( percentage > 100.0 ){
-                step = -1.0;
-                percentage = 100.0;
-            }
-
-            if( percentage < 0.0 ){
-                step = 1.0;
-                percentage = 0.0;
-            }
-
-            meter.setPercentage( percentage );
-
+        if( percentage > 100.0 ){
+            step = -1.0;
+            percentage = 100.0;
         }
 
-        shell.update();
+        if( percentage < 0.0 ){
+            step = 1.0;
+            percentage = 0.0;
+        }
+
+        meter.setPercentage( percentage );
 
     }
+
+    shell.update();
 
 
 }

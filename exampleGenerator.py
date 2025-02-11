@@ -64,7 +64,6 @@ rootDirectory = os.getcwd()
 
 arduinoExampleFolder = "/examples"
 desktopExampleFolder = "/extras/examples_desktop"
-doxygenExampleFolder = "/extras/examples_doxygen"
 emscriptenExampleFolder = "/extras/examples_emscripten"
 
 # Clear the examples folders.
@@ -74,16 +73,12 @@ if os.path.isdir(  rootDirectory + arduinoExampleFolder ):
 if os.path.isdir(  rootDirectory + desktopExampleFolder ):
     shutil.rmtree( rootDirectory + desktopExampleFolder )
 
-if os.path.isdir(  rootDirectory + doxygenExampleFolder ):
-    shutil.rmtree( rootDirectory + doxygenExampleFolder )
-
 if os.path.isdir(  rootDirectory + emscriptenExampleFolder ):
     shutil.rmtree( rootDirectory + emscriptenExampleFolder )
 
 # Generate the example folders.
 os.mkdir( rootDirectory + arduinoExampleFolder )
 os.mkdir( rootDirectory + desktopExampleFolder )
-os.mkdir( rootDirectory + doxygenExampleFolder )
 os.mkdir( rootDirectory + emscriptenExampleFolder )
 
 # Load the content of the project CMakeLists file.
@@ -133,9 +128,9 @@ for template in templateFiles:
     templateData = templateData[ 3: ]
 
     # Generate folder for the template.
-    if environmentInfo == 'Arduino':
+    #if environmentInfo == 'Arduino':
         #os.mkdir( rootDirectory + arduinoExampleFolder + "/" + boardInfo )
-        os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo )
+        #os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo )
 
     if environmentInfo == 'Desktop':
         os.mkdir( rootDirectory + desktopExampleFolder + "/" + boardInfo )
@@ -218,19 +213,17 @@ for template in templateFiles:
             outputFile.write( secondRunData )
             outputFile.close()
 
-            # File for documentation. Doxygen only generates syntax highlight for c or cpp files, not for ino.
-            os.mkdir( rootDirectory + doxygenExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
-            outputFile = open( rootDirectory + doxygenExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp", "w" )
-            outputFile.write( secondRunData )
-            outputFile.close()
-
         if environmentInfo == 'Desktop':
             os.mkdir( rootDirectory + desktopExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
             outputFile = open( rootDirectory + desktopExampleFolder + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp", "w" )
             outputFile.write( secondRunData )
             outputFile.close()
+            if exampleCategory == 'Wireless':
+                 CMakeContent.append( "\t#" )
+            else:
+                 CMakeContent.append( "\t" )
 
-            CMakeContent.append( "\t#add_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+            CMakeContent.append( "add_executable( " + exampleFolderName + " ${SOURCES} " + desktopExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
 
         if environmentInfo == 'Emscripten':
             os.mkdir( rootDirectory + emscriptenExampleFolder + "/" + boardInfo + "/" + exampleFolderName )
@@ -238,8 +231,19 @@ for template in templateFiles:
             outputFile.write( secondRunData )
             outputFile.close()
 
-            CMakeContent.append( "\tadd_executable( " + exampleFolderName + " ${SOURCES} " + emscriptenExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
-            CMakeContent.append( "\ttarget_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )\n\n" )
+            if exampleCategory == 'Wireless':
+                 CMakeContent.append( "\t#" )
+            else:
+                 CMakeContent.append( "\t" )
+
+            CMakeContent.append( "add_executable( " + exampleFolderName + " ${SOURCES} " + emscriptenExampleFolder[ 1: ] + "/" + boardInfo + "/" + exampleFolderName + "/" + exampleFolderName + ".cpp )\n" )
+
+            if exampleCategory == 'Wireless':
+                 CMakeContent.append( "\t#" )
+            else:
+                 CMakeContent.append( "\t" )
+
+            CMakeContent.append( "target_link_options( " + exampleFolderName + " PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )\n\n" )
         #print( secondRunData )
 
     # We have to close an if statement at the end.

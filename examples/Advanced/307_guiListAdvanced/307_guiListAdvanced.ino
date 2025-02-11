@@ -24,23 +24,28 @@ Shellminator shell( &Serial );
 
 ShellminatorNotification notification;
 
+// Generate a list of options
 const char* listOptions[] = {
     "Aladdin",
     "The Iron Giant",
     "Treasure Planet"
 };
 
+// Generate a list of details
+// The order must match with the options
 const char* listDetails[] = {
     "1992. November 25.",
     "1999. June 31.",
     "2002. November 27."
 };
 
-
+// Simple instructions text.
 const char* listText =  "Choose a movie to watch:";
 
+// Create a detailed list.
 ShellminatorListDetailed movieList( listOptions, listDetails, 3, listText );
 
+// Callback for the list.
 void listCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
 
 
@@ -54,7 +59,7 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    stdioChannel.println( "Program Start!" );
+    Serial.println( "Program Start!" );
     movieList.attachCallback( listCallback );
 
     shell.begin( "arnold" );
@@ -66,11 +71,8 @@ void setup(){
 // Infinite loop.
 void loop(){
 
-    while( 1 ){
 
-        shell.update();
-
-    }
+    shell.update();
 
 
 }
@@ -82,6 +84,7 @@ void listCallback( const char* optionsList[], int listSize, int selected, Shellm
         return;
     }
 
+    // Generate a notification based on the answer.
     if( selected == 0 ){
         notification.setText( "Good choice, you can watch Aladdin here:\nhttps://www.imdb.com/title/tt0103639/" );
     }

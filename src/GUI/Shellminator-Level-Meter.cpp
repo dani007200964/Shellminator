@@ -54,13 +54,13 @@ void ShellminatorLevelMeter::init( Shellminator* parent_p, Stream* channel_p ){
 }
 
 void ShellminatorLevelMeter::setPercentage( float percentage_p ){
-    percentage = percentage_p;
 
     if( parent == NULL ){
         return;
     }
 
     if( ( (int)( percentage_p * 10.0 ) ) != ( (int)( percentage * 10.0 ) ) ){
+        percentage = percentage_p;
         redraw = true;
         parent -> requestRedraw();
     }
@@ -176,15 +176,15 @@ void ShellminatorLevelMeter::draw( bool noClear ){
 
         // Check for warning
         if( ( i > warningLimit ) && ( i <= errorLimit ) ){
-            parent -> format( channel, Shellminator::YELLOW );
+            parent -> format( channel, warningColor );
         }
 
         else if( i >= errorLimit ){
-            parent -> format( channel, Shellminator::RED );
+            parent -> format( channel, errorColor );
         }
 
         else{
-            parent -> format( channel, Shellminator::GREEN );
+            parent -> format( channel, color );
         }
 
         // Empty cell.
@@ -273,3 +273,20 @@ void ShellminatorLevelMeter::draw( bool noClear ){
     }
 
 }
+
+void ShellminatorLevelMeter::setColor( Shellminator::textColor_t color_p ){
+    color = color_p;
+}
+
+void ShellminatorLevelMeter::setWarningColor( Shellminator::textColor_t color_p ){
+    warningColor = color_p;
+}
+
+void ShellminatorLevelMeter::setErrorColor( Shellminator::textColor_t color_p ){
+    errorColor = color_p;
+}
+
+void ShellminatorLevelMeter::forceRedraw(){
+    redraw = true;
+}
+

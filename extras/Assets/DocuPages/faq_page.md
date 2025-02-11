@@ -23,3 +23,9 @@ shell.enableFormatting = false;
 ```
 
 We recommend using a terminal emulator that supports decoding VT100 sequences. You can find assistance for this at the beginning of the [install](installation_page.md) section.
+
+
+##Arduino BLE - ESP32
+
+Windows terminal emoji support: https://stackoverflow.com/questions/57131654/using-utf-8-encoding-chcp-65001-in-command-prompt-windows-powershell-window
+Linux terminal emoji support : https://oorkan.medium.com/emojifying-your-linux-terminal-9a5c1e8f6b3c

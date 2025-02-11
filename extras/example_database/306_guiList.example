@@ -28,18 +28,22 @@ CATEGORY=Advanced
 // Create a Shellminator object, and initialize it to use {{ channel }}
 Shellminator shell( &{{ channel }} );
 
+// This will be used to display the answer for the chosen answer.
 ShellminatorNotification notification;
 
+// These options are available for choose.
 const char* listOptions[] = {
     "Red Pill",
     "Blue Pill"
 };
 
-
+// Instructions for the list.
 const char* listText =  "Choose your destiny Neo";
 
+// Create a list.
 ShellminatorList neoList( listOptions, 2, listText );
 
+// Create a callback for the list.
 void listCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
 
 ++--FUNCTION_PROTOTYPES--++
@@ -50,7 +54,9 @@ void listCallback( const char* optionsList[], int listSize, int selected, Shellm
 // Clear the terminal
 shell.clear();
 
-stdioChannel.println( "Program Start!" );
+{{ channel }}.println( "Program Start!" );
+
+// Attach the callback for the list.
 neoList.attachCallback( listCallback );
 
 shell.begin( "arnold" );
@@ -58,11 +64,7 @@ shell.beginScreen( &neoList );
 
 ++--LOOP--++
 
-while( 1 ){
-
-    shell.update();
-
-}
+shell.update();
 
 ++--FUNCTION_IMPLEMENTATIONS--++
 
@@ -73,6 +75,7 @@ void listCallback( const char* optionsList[], int listSize, int selected, Shellm
         return;
     }
 
+    // Generate answer based on the selected answer.
     if( selected == 0 ){
         notification.setText( "You stay in Wonderland and I show\nyou how deep the rabbit hole goes." );
     }

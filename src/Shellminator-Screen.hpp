@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_SCREEN_HPP__
 
 #include "Shellminator.hpp"
+#include "Shellminator-Helpers.hpp"
 #include "Stream.h"
 
 // Created for forward loading.
@@ -92,6 +93,9 @@ public:
     /// @param height_p The height of the screen area in characters.
     virtual void update( int width_p, int  height_p ){ /* To make the linker happy... */ }
 
+
+    virtual void forceRedraw(){ /* To make the linker happy... */ }
+
     /// Return the coordinate of the left column next to the object.
     int left(){ return originX - 1; }
 
@@ -105,6 +109,7 @@ public:
     int down(){ return originY + height; }
     
     Shellminator* getParent(){ return parent; }
+
 
     /// It is used by the grid layout. It specifies
     /// the row of the widget.
@@ -127,6 +132,12 @@ public:
     // grid layout.
     ShellminatorScreen* nextElement = NULL;
 
+    void attachEndFunction( void(*end_func_p)(Shellminator*) ){ end_func = end_func_p; }
+    void removeEndFunction(){ end_func = NULL; }
+
+    void( *getEndFunction() )(Shellminator*) { return end_func; }
+
+
 protected:
 
     /// Pointer to the caller terminal object.
@@ -145,6 +156,8 @@ protected:
 
     /// Y coordinate of the origin.
     int originY = 1;
+
+    void(*end_func)(Shellminator*) = NULL;
 
 };
 

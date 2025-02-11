@@ -16,37 +16,19 @@
 
 #include "WiFi.h"
 #include "Shellminator.hpp"
-#include "Shellminator-WebServer.hpp"
 #include "Shellminator-Websocket.hpp"
 
 
 #define WEBSOCKET_PORT 443
 
-// Webserver port for webpage and contents.
-#define WEBSERVER_PORT 80
 
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = "Replace With Your SSID";        // your network SSID (name)
 char pass[] = "Replace With Your Password";    // your network password (use for WPA, or use as key for WEP)
 
-ShellminatorWebServerThemedOffline htmlServer( WEBSERVER_PORT );
 ShellminatorWebSocket ws( WEBSOCKET_PORT );
 
 // Create a Shellminator object, and initialize it to use WebSocketsServer
 Shellminator shell( &ws );
-
-// Shellminator logo.
-const char logo[] =
-
-"   _____ __         ____          _             __            \r\n"
-"  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n"
-"  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n"
-" ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n"
-"/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n"
-"\r\n\033[0;37m"
-"Visit on GitHub:\033[1;32m https://github.com/dani007200964/Shellminator\r\n\r\n"
-
-;
 
 
 
@@ -64,19 +46,14 @@ void setup(){
         Serial.print( '.' );
         delay( 1000 );
     }
-
-    // Attach the logo.
-    shell.attachLogo( logo );
+    Serial.print("Connected!");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
 
     // initialize shell object.
     shell.begin( "arnold" );
 
-    // Uncomment if you want to enable html server debug messages.
-    //htmlServer.attachDebugChannel( &Serial );
-    htmlServer.begin();
-
-    // Uncomment if you want to enable websocket server debug messages.
-    //ws.attachDebugChannel( &Serial );
+    ws.attachDebugChannel( &Serial );
     ws.begin();
 
 
@@ -87,7 +64,6 @@ void loop(){
 
     ws.update();
     shell.update();
-    htmlServer.update();
 
     // Give some time to the other tasks on RTOS systems.
     delay( 2 );

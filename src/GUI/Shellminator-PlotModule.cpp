@@ -409,5 +409,9 @@ void ShellminatorPlot::setColor( Shellminator::textColor_t color_p ){
     color = color_p;
 }
 
+void ShellminatorPlot::forceRedraw(){
+    redraw = true;
+}
+
 const char ShellminatorPlot::clearCell[2] = " ";
 const char ShellminatorPlot::dotCell[5] = "\u2022";

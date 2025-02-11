@@ -48,6 +48,7 @@ SOFTWARE.
 
 #include "Commander-Caller-Interface.hpp"
 #include "Shellminator.hpp"
+#include "Shellminator-Helpers.hpp"
 
 class ShellminatorCaller : public CommandCaller{
 
@@ -94,6 +95,7 @@ private:
 
 };
 
+/// Simple colorizer for Commander-API like syntax.
 class CommanderColorizer : public DefaultColorizer{
 
 public:

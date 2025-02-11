@@ -35,7 +35,18 @@ SOFTWARE.
 #define SHELLMINATOR_HELPERS_HPP_
 
 #include "Shellminator-DefaultSettings.hpp"
+#include <ctype.h>
 #include <string.h>
+
+#ifndef __has_attribute
+    #define __has_attribute(x) 0
+#endif
+
+#if __has_attribute(weak) || defined(__GNUC__) || defined(__clang__)
+    #define SHELLMINATOR_WEAK __attribute__((weak))
+#else
+     #define SHELLMINATOR_WEAK
+#endif
 
 //---- Network Related Defines ----
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
@@ -66,7 +77,7 @@ SOFTWARE.
 // Thank you ondras12345!
 #ifndef __CONST_TXT__
     #if defined(ARDUINO) && defined(__AVR__)
-        #define v(s) F(s)
+        #define __CONST_TXT__(s) F(s)
     #else
         #define __CONST_TXT__(s) (const char*)(s)
     #endif

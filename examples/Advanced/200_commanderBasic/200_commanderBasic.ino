@@ -70,57 +70,57 @@ void loop(){
 /// This is an example function for the cat command
 bool cat_func(char *args, CommandCaller* caller ){
 
-  caller -> print("Hello from cat function!\r\n");
-  return true;
+    caller -> print("Hello from cat function!\r\n");
+    return true;
 
 }
 
 /// This is an example function for the dog command
 bool dog_func(char *args, CommandCaller* caller ){
 
-  caller -> print("Hello from dog function!\r\n");
-  return true;
+    caller -> print("Hello from dog function!\r\n");
+    return true;
 
 }
 
 /// This is an example function for the sum command
 bool sum_func(char *args, CommandCaller* caller ){
 
-  // These variables will hold the value of the
-  // two numbers, that has to be summed.
-  int a = 0;
-  int b = 0;
+    // These variables will hold the value of the
+    // two numbers, that has to be summed.
+    int a = 0;
+    int b = 0;
 
-  // This variable will hold the result of the
-  // argument parser.
-  int argResult;
+    // This variable will hold the result of the
+    // argument parser.
+    int argResult;
 
-  // This variable will hold the sum result.
-  int sum = 0;
+    // This variable will hold the sum result.
+    int sum = 0;
 
-  argResult = sscanf( args, "%d %d", &a, &b );
+    argResult = sscanf( args, "%d %d", &a, &b );
 
-  // We have to check that we parsed successfully the two
-  // numbers from the argument string.
-  if( argResult != 2 ){
+    // We have to check that we parsed successfully the two
+    // numbers from the argument string.
+    if( argResult != 2 ){
 
-    // If we could not parse two numbers, we have an argument problem.
-    // We print out the problem to the response channel.
-    caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
+        // If we could not parse two numbers, we have an argument problem.
+        // We print out the problem to the response channel.
+        caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
 
-    // Sadly we have to stop the command execution and return.
-    return false;
+        // Sadly we have to stop the command execution and return.
+        return false;
 
-  }
+    }
 
-  // Calculate the sum.
-  sum = a + b;
+    // Calculate the sum.
+    sum = a + b;
 
-  // Print out the result.
-  caller -> print( a );
-  caller -> print( " + " );
-  caller -> print( b );
-  caller -> print( " = " );
-  caller -> println( sum );
+    // Print out the result.
+    caller -> print( a );
+    caller -> print( " + " );
+    caller -> print( b );
+    caller -> print( " = " );
+    caller -> println( sum );
     return true;
 }

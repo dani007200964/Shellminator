@@ -23,21 +23,39 @@
 #include "GUI/Shellminator-Progress.hpp"
 
 
-ShellminatorButton button_0( "BTN 0" );
+ShellminatorLevelMeter meter( "Audio" );
 ShellminatorButton button_1( "BTN 1" );
 ShellminatorButton button_2( "BTN 2" );
 ShellminatorButton button_3( "BTN 3" );
-ShellminatorButton button_enter( "Enter" );
-ShellminatorLevelMeter meter_1( "Audio L" );
-ShellminatorLevelMeter meter_2( "Audio R" );
 
-ShellminatorNotification notification;
 ShellminatorProgress progress_1;
 ShellminatorProgress progress_2;
 ShellminatorProgress progress_3;
 
-// Create a grid 3 rows and 6 columns
-ShellminatorScreenGrid grid( 3, 6 );
+ShellminatorNotification notification;
+
+// Create a grid 3 rows and 3 columns
+ShellminatorScreenGrid grid( 3, 3 );
+
+
+uint32_t timerStart = 0;
+uint32_t timerPeriod = 2000;
+
+float progress_1_percentage = 30;
+float progress_2_percentage = 40;
+float progress_3_percentage = 60;
+float meter_percentage = 10;
+
+// Create a Shellminator object, and initialize it to use Serial
+Shellminator shell( &Serial );
+
+Shellminator::shellEvent_t button_1_event;
+Shellminator::shellEvent_t button_2_event;
+Shellminator::shellEvent_t button_3_event;
+
+void button_1_click( ShellminatorScreen* screen );
+void button_2_click( ShellminatorScreen* screen );
+void button_3_click( ShellminatorScreen* screen );
 
 
 
@@ -50,46 +68,61 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    stdioChannel.println( "Program Start!" );
+    Serial.println( "Program Start!" );
 
-    notification.setText( "Hello!" );
-
-    meter_1.setPercentage( 35.0 );
-    meter_2.setPercentage( 73.0 );
-
-    progress_1.setPercentage( 30.0 );
-    progress_2.setPercentage( 80.0 );
-    progress_3.setPercentage( 21.0 );
-
-    // Place button_0 to the first row and the first column.
-    // If no span specified it defaults to one grid cell size.
-    grid.addWidget( &button_0, 0, 0 );
 
     // Place button_1 to the first row and the second column.
     grid.addWidget( &button_1, 0, 1 );
 
-    // Place button_2 to the second row and the first column.
-    grid.addWidget( &button_2, 1, 0 );
-
     // Place button_2 to the second row and the second column.
-    grid.addWidget( &button_3, 1, 1 );
+    grid.addWidget( &button_2, 1, 1 );
 
-    // Place button_enter to the third row and the first column.
-    // Make it one cells heigh and two cell wide.
-    grid.addWidget( &button_enter, 2, 0, 1, 2 );
+    // Place button_3 to the third row and the second column.
+    grid.addWidget( &button_3, 2, 1 );
 
-    // Place notification to the first row and the third column.
-    // Make it two cells high and one cell wide.
-    grid.addWidget( &notification, 0, 2, 2, 1 );
+    // Place meter to the first row and the first column.
+    // Make it three row heigh and one row wide.
+    grid.addWidget( &meter, 0, 0, 3, 1 );
 
+    // Place the progress bars in line with the buttons to the right side.
+    // Also make them two collumns wide.
+    grid.addWidget( &progress_1, 0, 2 );
+    grid.addWidget( &progress_2, 1, 2 );
+    grid.addWidget( &progress_3, 2, 2 );
 
-    grid.addWidget( &progress_1, 0, 5 );
-    grid.addWidget( &progress_2, 1, 5 );
-    grid.addWidget( &progress_3, 2, 5 );
+    progress_1.setText( "CPU" );
+    progress_2.setText( "RAM" );
+    progress_3.setText( "UPDATE" );
+    progress_3.setFormat( "t" );
 
-    grid.addWidget( &meter_1, 0, 3, 3, 1 );
-    grid.addWidget( &meter_2, 0, 4, 3, 1 );
+    progress_1.setColor( Shellminator::GREEN );
+    progress_2.setColor( Shellminator::YELLOW );
+    progress_3.setColor( Shellminator::RED );
 
+    button_1.setColor( Shellminator::GREEN );
+    button_2.setColor( Shellminator::YELLOW );
+    button_3.setColor( Shellminator::RED );
+
+    button_1_event.type = Shellminator::SHELL_EVENT_KEY;
+    button_1_event.data = (uint8_t)'a';
+    button_2_event.type = Shellminator::SHELL_EVENT_KEY;
+    button_2_event.data = (uint8_t)'b';
+    button_3_event.type = Shellminator::SHELL_EVENT_KEY;
+    button_3_event.data = (uint8_t)'c';
+
+    button_1.attachEvent( button_1_event );
+    button_1.attachTriggerFunction( button_1_click );
+    button_2.attachEvent( button_2_event );
+    button_2.attachTriggerFunction( button_2_click );
+    button_3.attachEvent( button_3_event );
+    button_3.attachTriggerFunction( button_3_click );
+
+    meter.setColor( Shellminator::CYAN );
+    meter.setWarningColor( Shellminator::YELLOW );
+    meter.setErrorColor( Shellminator::RED );
+
+    meter.setWarningPercentage( 50.0 );
+    meter.setErrorPercentage( 80.0 );
 
     // Initialize shell object.
     shell.begin( "arnold" );
@@ -104,8 +137,74 @@ void setup(){
 // Infinite loop.
 void loop(){
 
+    if( ( millis() - timerStart ) > timerPeriod ){
+        timerStart = millis();
+        progress_1_percentage += 15.0;
+        progress_2_percentage += 20.0;
+        progress_3_percentage += 10.0;
+        meter_percentage += 5;
+
+        if( progress_1_percentage > 100.0 ){
+            progress_1_percentage = 0;
+        }
+        if( progress_2_percentage > 100.0 ){
+            progress_2_percentage = 0;
+        }
+        if( progress_3_percentage > 100.0 ){
+            progress_3_percentage = 0;
+        }
+        if( meter_percentage > 100.0 ){
+            meter_percentage = 0;
+        }
+
+        progress_1.setPercentage( progress_1_percentage );
+        progress_2.setPercentage( progress_2_percentage );
+        progress_3.setPercentage( progress_3_percentage );
+        meter.setPercentage( meter_percentage );
+
+        // After calculation, we have to request the shell
+        // to redraw the plot.
+        shell.requestRedraw();
+    }
+
     // Process the new data.
     shell.update();
 
 
+}
+
+void button_1_click( ShellminatorScreen* screen ){
+    Shellminator* parent;
+    parent = screen -> getParent();
+    if( parent == NULL ){
+        return;
+    }
+    
+    notification.setText( "Button 1 pressed!" );
+ 
+    parent -> swapScreen( &notification );
+}
+
+void button_2_click( ShellminatorScreen* screen ){
+    Shellminator* parent;
+    parent = screen -> getParent();
+    if( parent == NULL ){
+        return;
+    }
+    
+    notification.setText( "Button 2 pressed!" );
+ 
+    parent -> swapScreen( &notification );
+}
+
+void button_3_click( ShellminatorScreen* screen ){
+    Shellminator* parent;
+    parent = screen -> getParent();
+    if( parent == NULL ){
+        return;
+    }
+    
+    notification.setText( "Button 3 pressed!" );
+ 
+    parent -> swapScreen( &notification );
 }

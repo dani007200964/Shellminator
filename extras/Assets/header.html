@@ -82,3 +82,60 @@ $extrastylesheet
 </div>
 <!--END TITLEAREA-->
 <!-- end header part -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+
+            navtree.appendChild(customDiv);
+
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+
+            navtree.appendChild(customDiv);
+
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+
+            navtree.appendChild(customDiv);
+
+        }
+    });
+</script>

@@ -133,7 +133,7 @@ void Shellminator::ShellminatorUpArrowKeyState(){
         return;
     }
     
-    if( screen != NULL ){
+    if( screen ){
         pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_UP_ARROW } );
         return;
     }
@@ -188,14 +188,15 @@ void Shellminator::ShellminatorDownArrowKeyState(){
     if( inputActive ){
         return;
     }    
-    // Check if the arrow function is overriden.
-    if( downArrowOverrideFunc ){
-        downArrowOverrideFunc( this );
+
+    if( screen ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_DOWN_ARROW } );
         return;
     }
 
-    if( screen != NULL ){
-        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_DOWN_ARROW } );
+    // Check if the arrow function is overriden.
+    if( downArrowOverrideFunc ){
+        downArrowOverrideFunc( this );
         return;
     }
 
@@ -246,6 +247,11 @@ void Shellminator::ShellminatorLeftArrowKeyState(){
     // We just simply reset the state-machine.
     currentState = &Shellminator::ShellminatorDefaultState;
 
+    if( screen ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_LEFT_ARROW } );
+        return;
+    }
+
     // Check if the arrow function is overriden.
     if( leftArrowOverrideFunc && loggedIn ){
         leftArrowOverrideFunc( this );
@@ -277,6 +283,11 @@ void Shellminator::ShellminatorRightArrowKeyState(){
 
     // We just simply reset the state-machine.
     currentState = &Shellminator::ShellminatorDefaultState;
+
+    if( screen ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_RIGHT_ARROW } );
+        return;
+    }
 
     // Check if the arrow function is overriden.
     if( rightArrowOverrideFunc && loggedIn ){
@@ -311,6 +322,11 @@ void Shellminator::ShellminatorHomeKeyState(){
 
     currentState = &Shellminator::ShellminatorDefaultState;
 
+    if( screen ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_HOME } );
+        return;
+    }
+
     if( homeKeyFunc && loggedIn ){
 
         homeKeyFunc( this );
@@ -343,6 +359,11 @@ void Shellminator::ShellminatorHomeKeyState( char new_char ){
 void Shellminator::ShellminatorEndKeyState(){
 
     currentState = &Shellminator::ShellminatorDefaultState;
+
+    if( screen ){
+        pushEvent( ( shellEvent_t ){ SHELL_EVENT_CODED_KEY, EVENT_CODE_END } );
+        return;
+    }
 
     if( endKeyFunc && loggedIn ){
         endKeyFunc( this );
@@ -377,6 +398,10 @@ void Shellminator::ShellminatorDelKeyState(){
     uint32_t i;
 
     currentState = &Shellminator::ShellminatorDefaultState;
+
+    if( screen != NULL ){
+        return;
+    }
 
     // We have to check the number of the characters in the buffer.
     // If the buffer is full we must not do anything!
@@ -413,6 +438,10 @@ void Shellminator::ShellminatorPageUpKeyState(){
 
     currentState = &Shellminator::ShellminatorDefaultState;
     
+    if( screen ){
+        return;
+    }
+
     if( !loggedIn ){
         return;
     }
@@ -444,6 +473,10 @@ void Shellminator::ShellminatorPageDownKeyState(){
 
     currentState = &Shellminator::ShellminatorDefaultState;
     
+    if( screen ){
+        return;
+    }
+
     if( !loggedIn ){
         return;
     }

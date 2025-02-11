@@ -37,6 +37,7 @@ SOFTWARE.
 #include <stdint.h>
 #include "Stream.h"
 #include "Shellminator-DefaultSettings.hpp"
+#include "Shellminator-Helpers.hpp"
 
 class DefaultColorizer{
 

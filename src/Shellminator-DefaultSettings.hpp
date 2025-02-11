@@ -35,9 +35,9 @@ SOFTWARE.
 #define SHELLMINATOR_DEFAULT_SETTINGS_HPP_
 
     #ifdef __has_include
-    #if __has_include ("Shellminator-Settings.hpp")
-        #include "Shellminator-DefaultSettings.hpp"
-    #endif
+        #if __has_include ("Shellminator-Settings.hpp")
+            #include "Shellminator-Settings.hpp"
+        #endif
     #endif
 
     #ifdef ESP32
@@ -45,6 +45,37 @@ SOFTWARE.
             #define SHELLMINATOR_USE_WIFI_CLIENT
         #endif
         
+        #ifndef SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
+        #endif
+
+        #ifndef SHELLMINATOR_BUFF_LEN
+            #define SHELLMINATOR_BUFF_LEN 50
+        #endif
+
+        #ifndef SHELLMINATOR_BUFF_DIM
+            #define SHELLMINATOR_BUFF_DIM 20
+        #endif
+
+        #ifndef SHELLMINATOR_BANNER_LEN
+            #define SHELLMINATOR_BANNER_LEN 20
+        #endif
+
+        #ifndef SHELLMINATOR_BANNER_PATH_LEN
+            #define SHELLMINATOR_BANNER_PATH_LEN 20
+        #endif
+
+    #endif
+
+    #ifdef ARDUINO_UNOWIFIR4
+        #ifndef SHELLMINATOR_USE_WIFI_CLIENT
+            #define SHELLMINATOR_USE_WIFI_CLIENT
+        #endif
+
+        #ifndef SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
+        #endif
+
         #ifndef SHELLMINATOR_BUFF_LEN
             #define SHELLMINATOR_BUFF_LEN 50
         #endif
@@ -62,9 +93,9 @@ SOFTWARE.
         #endif
     #endif
 
-    #ifdef ARDUINO_UNOWIFIR4
-        #ifndef SHELLMINATOR_USE_WIFI_CLIENT
-            #define SHELLMINATOR_USE_WIFI_CLIENT
+    #ifdef ARDUINO_ARCH_NRF52840
+        #ifndef SHELLMINATOR_USE_BLE
+            #define SHELLMINATOR_USE_BLE
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN

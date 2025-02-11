@@ -77,10 +77,24 @@ SOFTWARE.
 ///  +------------------------------------+
 
 /// Version of the module
-#define SHELLMINATOR_VERSION "2.0.0"
+#define SHELLMINATOR_VERSION "3.0.0"
 
 /// Buffer size for the mouse event parser.
 #define SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE 15
+
+
+#define SHELLMINATOR_TWO_BYTE_LONG_UNICODE_MASK         0b11100000
+#define SHELLMINATOR_TWO_BYTE_LONG_UNICODE_VALUE        0b11000000
+
+#define SHELLMINATOR_THREE_BYTE_LONG_UNICODE_MASK       0b11110000
+#define SHELLMINATOR_THREE_BYTE_LONG_UNICODE_VALUE      0b11100000
+
+#define SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_MASK        0b11111000
+#define SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_VALUE       0b11110000
+
+#define SHELLMINATOR_UNICODE_DATA_MASK                  0b11000000
+#define SHELLMINATOR_UNICODE_DATA_VALUE                 0b10000000
+
 
 /// Shellminator object
 ///
@@ -187,6 +201,27 @@ public:
     /// @endcode
     void attachExecFunc(void (*execution_fn_p)(char *, Shellminator *));
 
+    /// Register a function callback for neofetch command.
+    ///
+    /// With this function you can attach an external function to the object
+    /// This function will be called when a command is typed and the return
+    /// key is pressed. You can find mor information about neofetch
+    /// [here](https://en.wikipedia.org/wiki/Neofetch).
+    /// @param neofetch_fn_p Function pointer to the neofetch callback function.
+    ///
+    /// The neofetch callback function prototype must be like this:
+    /// @code{cpp} void myNeofetch( Shellminator* caller ); @endcode
+    ///
+    /// You can use any name you like, but the arguments and the return type has to
+    /// be the same. Practical example for impementation:
+    ///
+    /// @code{cpp}
+    /// void myExecFunc( char* command, Shellminator* caller ){
+    ///     caller -> channel -> println( "The simplest neofetch in the world!" );
+    /// }
+    /// @endcode
+    void attachNeofetchFunc( void( *neofetch_fn_p )( Shellminator* ) );
+
     /// Shellminator initialization function
     ///
     /// This function initializes the object and prints the startup logo.
@@ -213,6 +248,8 @@ public:
     /// @warning This function has to be called periodically.
     ///          If the calling of this function is not frequent enough it can cause buffer overflow in the Serial driver!
     void update();
+
+    void logOut();
 
     /// Basic text formatting.
     ///
@@ -827,6 +864,8 @@ public:
     /// Generate a beep sound on the terminal device.
     void beep();
 
+    void printLoginScreen();
+
     /// This flag enables or disables character formatting.
     /// It can be useful when VT100 format parser is not
     /// available on the host device.
@@ -974,8 +1013,15 @@ private:
     void ShellminatorPageUpKeyState(char new_char);
     void ShellminatorPageDownKeyState();
     void ShellminatorPageDownKeyState(char new_char);
-    void ShellminatorProcessRegularCharacter(char new_char);
+    void ShellminatorProcessRegularCharacter( char new_char, bool draw = true );
     void ShellminatorMouseEventParserState(char new_char);
+
+    void ShellminatorTwoByteUnicodeDataState(char new_char);
+    void ShellminatorThreeByteUnicodeFirstDataState(char new_char);
+    void ShellminatorThreeByteUnicodeSecondDataState(char new_char);
+    void ShellminatorFourByteUnicodeFirstDataState(char new_char);
+    void ShellminatorFourByteUnicodeSecondDataState(char new_char);
+    void ShellminatorFourByteUnicodeThirdDataState(char new_char);
 
     /// Function pointer to the current state of the main state-machine.
     void (Shellminator::*currentState)(char) = &Shellminator::ShellminatorDefaultState;
@@ -1007,8 +1053,12 @@ private:
 #endif
 
     /// This function-pointer stores the execution function pointer.
-    /// This function will be called when a command recives.
+    /// This function will be called when a command receives.
     void (*execution_fn)( char*, Shellminator* );
+
+    /// This function-pointer stores the neofetch function pointer.
+    /// This function will be called when the neofetch command receives.
+    void (*neofetch_fn)( Shellminator* );
 
     /// This variable tracks the state of the VT100 decoder state-machine.
     uint32_t escape_state = 0;

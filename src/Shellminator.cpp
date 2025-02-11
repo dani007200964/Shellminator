@@ -54,6 +54,9 @@ Shellminator::Shellminator( Stream *stream_p ){
     // pointer to make it detectable.
     execution_fn = NULL;
 
+    // By default, clear the neofetch function callback pointer.
+    neofetch_fn = NULL;
+
     // Reset all the event pointers.
     eventBufferWritePtr = 0;
     eventBufferReadPtr = 0;
@@ -139,6 +142,13 @@ void Shellminator::attachExecFunc( void( *execution_fn_p )( char*, Shellminator*
 
     // Save the function pointer to internal variable.
     execution_fn = execution_fn_p;
+
+}
+
+void Shellminator::attachNeofetchFunc( void( *neofetch_fn_p )( Shellminator* ) ){
+
+    // Save the function pointer to internal variable.
+    neofetch_fn = neofetch_fn_p;
 
 }
 
@@ -341,72 +351,72 @@ void Shellminator::printHelp(){
 
     // Ctrl-A / Home
     selectedChannel -> print( __CONST_TXT__( "Ctrl-A / Home " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2196  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2196  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the beginning of the line." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-E / End
     selectedChannel -> print( __CONST_TXT__( "Ctrl-E / End  " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2198  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2198  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Jumps the cursor to the end of the line." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-D
     selectedChannel -> print( __CONST_TXT__( "Ctrl-D        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u233D  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u233D  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Log out." ) );
     format( selectedChannel, YELLOW );
 
     // Ctrl-R
     selectedChannel -> print( __CONST_TXT__( "Ctrl-R        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u26D5  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u26D5  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Reverse-i-search." ) );
     format( selectedChannel, YELLOW );
 
     // Page Up
     selectedChannel -> print( __CONST_TXT__( "Page Up       " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21DE  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21DE  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search backwards and auto completion." ) );
     format( selectedChannel, YELLOW );
 
     // Page Down
     selectedChannel -> print( __CONST_TXT__( "Page Down     " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21DF  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21DF  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "History search forward and auto completion." ) );
     format( selectedChannel, YELLOW );
 
     // Arrow Up
     selectedChannel -> print( __CONST_TXT__( "Arrow Up      " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2191  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2191  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history backward." ) );
     format( selectedChannel, YELLOW );
 
     // Arrow Down
     selectedChannel -> print( __CONST_TXT__( "Arrow Down    " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u2193  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u2193  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Browse history forward." ) );
     format( selectedChannel, YELLOW );
 
     // Return / Enter
     selectedChannel -> print( __CONST_TXT__( "Return        " ) );
-    format( selectedChannel, GREEN );
-    selectedChannel -> print( __CONST_TXT__( "\u21A9  " ) );
+    //format( selectedChannel, GREEN );
+    //selectedChannel -> print( __CONST_TXT__( "\u21A9  " ) );
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Execute command, or exit from screen." ) );
 
@@ -680,8 +690,6 @@ void Shellminator::update() {
                 // to adopt for the new screen size.
                 pushEvent( ( shellEvent_t ){ SHELL_EVENT_RESIZE } );
 
-                clear();
-
                 // Call the update function of the screen with the new
                 // dimensions to make it possible to adopt to the new
                 // screen size.
@@ -696,19 +704,18 @@ void Shellminator::update() {
             terminalWidth = w;
             terminalHeight = h;
 
-            // Check if we have a redraw request.
-            if( screenRedraw ){
-
-            }
-
         }
 
         if( screenRedraw && ( ( millis() - screenTimerStart ) > screenUpdatePeriod ) ){
+
+            screenTimerStart = millis();
             // In this case we have to clear the flag first.
             // The order is important, because it is possible
             // that the Screen object will generate a redraw
             // request in the draw function.
             screenRedraw = false;
+
+            screen -> forceRedraw();
 
             // Call the Screen objects draw function.
             screen -> draw();
@@ -720,8 +727,12 @@ void Shellminator::update() {
             }
         }
 
-        // Call the Screen objects update function periodically.
-        screen -> update( terminalWidth, terminalHeight );
+        // We have to check screen again, because an endScreen was called
+        // in the draw callback, it results a crash.
+        if( screen ){
+            // Call the Screen objects update function periodically.
+            screen -> update( terminalWidth, terminalHeight );
+        }
 
         // Pop the current element from the event buffer.
         popEvent();
@@ -1016,6 +1027,7 @@ void Shellminator::beep(){
 
 void Shellminator::ShellminatorDefaultState( char new_char ){
 
+    uint8_t maskedData;
     shellEvent_t event;
 
     switch( new_char ){
@@ -1048,13 +1060,16 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
                 // We have to pop the EVENT_CODE_RETURN event from the event buffer.
                 popEvent();
 
-                // If a screen swap occured, we doesn't end the screen.
+                // If a screen swap occurred, we doesn't end the screen.
                 // Otherwise we stop rendering and return to regular terminal mode.
                 if( readEvent().type != SHELL_EVENT_SCREEN_SWAP ){
                     // In this case we have to end the drawing process.
                     endScreen();
                     // And set the state machine back to default state.
                     currentState = &Shellminator::ShellminatorDefaultState;
+                }
+                else{
+                    popEvent();
                 }
 
                 break;
@@ -1104,6 +1119,31 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
             break;
 
         default:
+
+            // Check for two byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_TWO_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_TWO_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorTwoByteUnicodeDataState;
+                break;
+            }
+
+            // Check for three byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_THREE_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_THREE_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorThreeByteUnicodeFirstDataState;
+                break;
+            }
+
+            // Check for four byte unicode character.
+            maskedData = (uint8_t)new_char & SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_MASK;
+            if( maskedData == SHELLMINATOR_FOUR_BYTE_LONG_UNICODE_VALUE ){
+                ShellminatorProcessRegularCharacter( new_char, false );
+                currentState = &Shellminator::ShellminatorFourByteUnicodeFirstDataState;
+                break;
+            }
+
             currentState = &Shellminator::ShellminatorDefaultState;
             if( screen != NULL ){
                 event.type = SHELL_EVENT_KEY;
@@ -1116,6 +1156,42 @@ void Shellminator::ShellminatorDefaultState( char new_char ){
 
     }
 
+}
+
+void Shellminator::ShellminatorTwoByteUnicodeDataState( char new_char ){
+    //channel -> println( "two byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
+}
+
+void Shellminator::ShellminatorThreeByteUnicodeFirstDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorThreeByteUnicodeSecondDataState;
+}
+
+void Shellminator::ShellminatorThreeByteUnicodeSecondDataState( char new_char ){
+    //channel -> println( "three byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeFirstDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorFourByteUnicodeSecondDataState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeSecondDataState( char new_char ){
+    ShellminatorProcessRegularCharacter( new_char, false );
+    currentState = &Shellminator::ShellminatorFourByteUnicodeThirdDataState;
+}
+
+void Shellminator::ShellminatorFourByteUnicodeThirdDataState( char new_char ){
+    //channel -> println( "four byte unicode" );
+    ShellminatorProcessRegularCharacter( new_char, false );
+    redrawLine();
+    currentState = &Shellminator::ShellminatorDefaultState;
 }
 
 void Shellminator::ShellminatorBackspaceState(){
@@ -1294,7 +1370,13 @@ void Shellminator::ShellminatorEnterKeyState(){
             printHistory();
         }
 
-        // We haveto check that execution_fn is not NULL.
+        else if( strcmp( cmd_buff[ 0 ], "neofetch" ) == 0 ){
+            if( neofetch_fn != NULL ){
+                neofetch_fn( this );
+            }
+        }
+
+        // We have to check that execution_fn is not NULL.
         else if( execution_fn != NULL ){
             // If it is a valid, then call it's function.
             execution_fn( cmd_buff[ 0 ], this );
@@ -1330,11 +1412,17 @@ void Shellminator::ShellminatorEnterKeyState(){
 }
 
 void Shellminator::ShellminatorBeginningOfLineState(){
+    if( screen ){
+        return;
+    }
     cursor = 0;
     redrawLine();
 }
 
 void Shellminator::ShellminatorEndOfLineState(){
+    if( screen ){
+        return;
+    }
     cursor = cmd_buff_cntr;
     redrawLine();
 }
@@ -1348,6 +1436,10 @@ void Shellminator::ShellminatorLogoutState(){
     if( logoutKeyFunc ){
         logoutKeyFunc( this );
         return;
+    }
+
+    if( screen ){
+        endScreen();
     }
 
     if( passwordHash != NULL ){
@@ -1368,6 +1460,10 @@ void Shellminator::ShellminatorReverseSearchState(){
         return;
     }
 
+    if( screen ){
+        return;
+    }
+
     inSearch = !inSearch;
     redrawLine();
 
@@ -1375,11 +1471,21 @@ void Shellminator::ShellminatorReverseSearchState(){
 
 void Shellminator::ShellminatorClearScreenState(){
 
+    if( screen ){
+        screen -> update( terminalWidth, terminalHeight );
+        return;
+    }
+
     clear();
     redrawLine();
 }
 
 void Shellminator::ShellminatorAutoCompleteState(){
+
+    if( screen ){
+        return;
+    }
+
     // Auto complete section.
     autoCompleteWithCommandParser();
 }
@@ -1399,6 +1505,11 @@ void Shellminator::ShellminatorAbortState(){
 
     // If the abort key is pressed cmd_buff_dim has to be reset to the default value
     cmd_buff_dim = 1;
+
+    if( screen != NULL ){
+        endScreen();
+        return;
+    }
 
     // We send a line break to the terminal to put the next data in new line
     channel -> println();
@@ -1482,7 +1593,7 @@ void Shellminator::ShellminatorEscapeBracketState( char new_char ){
 
 }
 
-void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
+void Shellminator::ShellminatorProcessRegularCharacter( char new_char, bool draw ){
 
     // General counter variable
     uint32_t i;
@@ -1515,34 +1626,38 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
     // In this case we have to reset the cmd_buff_dim variable to the default value.
     cmd_buff_dim = 1;
 
-    // If the cursor was at the end we have to print the
-    // new character if the cmd_buff had free space at
-    // the end.
-    if ( cursor == cmd_buff_cntr ) {
+    if( draw ){
 
-        if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
+        // If the cursor was at the end we have to print the
+        // new character if the cmd_buff had free space at
+        // the end.
+        if ( cursor == cmd_buff_cntr ) {
 
-            if( inSearch || ( colorizer != &defaultColorizer ) ){
+            if ( cmd_buff_cntr < SHELLMINATOR_BUFF_LEN ) {
 
-                // Increment counters.
-                cmd_buff_cntr++;
-                cursor++;
+                if( inSearch || ( colorizer != &defaultColorizer ) ){
 
-                redrawLine();
+                    // Increment counters.
+                    cmd_buff_cntr++;
+                    cursor++;
 
-                // Decrement counters.
-                cmd_buff_cntr--;
-                cursor--;
+                    redrawLine();
 
-            }
+                    // Decrement counters.
+                    cmd_buff_cntr--;
+                    cursor--;
 
-            else if( inputActive && inputSecretMode ){
-                channel -> print( "\u2022" );
-            }
+                }
 
-            else{
-                channel -> print( new_char );
-                //colorizer -> printChar( channel, new_char );
+                else if( inputActive && inputSecretMode ){
+                    channel -> print( "\u2022" );
+                }
+
+                else{
+                    channel -> print( new_char );
+                    //colorizer -> printChar( channel, new_char );
+                }
+
             }
 
         }
@@ -1555,12 +1670,14 @@ void Shellminator::ShellminatorProcessRegularCharacter( char new_char ){
 
     if ( cursor != cmd_buff_cntr ) {
         // Redraw the command line.
-        redrawLine();
+        if( draw ){
+            redrawLine();
+        }
     }
 
     // Check if the counters are overloaded.
     // the buffer storage is SHELLMINATOR_BUFF_LEN + 2,
-    // so it is safe to make the counters equeal to SHELLMINATOR_BUFF_LEN
+    // so it is safe to make the counters equal to SHELLMINATOR_BUFF_LEN
     if( cmd_buff_cntr > SHELLMINATOR_BUFF_LEN ) {
         cmd_buff_cntr = SHELLMINATOR_BUFF_LEN;
     }
@@ -1763,9 +1880,11 @@ void Shellminator::swapScreen( ShellminatorScreen* screen_p, int updatePeriod ){
     // Call the Screens init function.
     screen -> init( this, bufferMemoryAllocated ? &bufferedPrinter : channel );
 
+    //--- This code is pure evil ---
+    // It causes recursion. I left it to make a remainder!
+    //
     // Call the Screens update function.
-    screen -> update( terminalWidth, terminalHeight );
-
+    // screen -> update( terminalWidth, terminalHeight );
     pushEvent( ( shellEvent_t ){ SHELL_EVENT_SCREEN_SWAP, EVENT_CODE_EMPTY } );
 
 }
@@ -1780,6 +1899,12 @@ void Shellminator::endScreen(){
     // This variable will hold the vertical location of
     // the new banner.
     int bannerPos;
+
+    void( *endFunction )( Shellminator* ) = NULL;
+
+    if( screen == NULL ){
+        return;
+    }
 
     // Stop mouse reports on host.
     mouseEnd();
@@ -1800,8 +1925,16 @@ void Shellminator::endScreen(){
         channel -> println();
     }
 
+    // Get the end function if available.
+    endFunction = screen -> getEndFunction();
+
     // Clear the pointer to the screen object.
     screen = NULL;
+
+    if( endFunction ){
+        endFunction( this );
+        return;
+    }
 
     // Set the cursor to the last line.
     // setCursorPosition( 1, height );
@@ -1818,13 +1951,46 @@ void Shellminator::endScreen(){
     // Set the cursor and the counter to zero.
     cursor = 0;
     cmd_buff_cntr = 0;
+
+
 }
 
 void Shellminator::requestRedraw(){
     // Set the redraw flag.
+    if( screen ){
+        screen -> forceRedraw();
+    }
     screenRedraw = true;
 }
 
 void Shellminator::attachColorizer( DefaultColorizer *colorizer_p ){
     colorizer = colorizer_p;
+}
+
+void Shellminator::logOut(){
+    if( !loggedIn ){
+        return;
+    }
+
+    if( screen ){
+        endScreen();
+    }
+
+    if( passwordHash != NULL ){
+        loggedIn = false;
+        input( NULL, SHELLMINATOR_BUFF_LEN, "Password:", NULL, true );
+    }
+}
+
+void Shellminator::printLoginScreen(){
+    clear();
+    drawLogo();
+    if( loggedIn ){
+        printBanner();
+    }
+    else{
+        channel -> print( "Password:" );
+        channel -> print( "\U0001F512  " );
+        redrawLine();
+    }
 }

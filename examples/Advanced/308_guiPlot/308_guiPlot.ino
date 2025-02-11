@@ -21,9 +21,13 @@
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 
+// Data points
 float plotData[] = { 10, 20, 30, 20, 10, 0, -10, -20, -30, -20 };
+
+// Number of points in the data
 int plotDataSize = sizeof( plotData ) / sizeof( plotData[ 0 ] );
 
+// Create a plot object
 ShellminatorPlot plot( plotData, plotDataSize, "My Plot" );
 
 
@@ -37,7 +41,7 @@ void setup(){
     // Clear the terminal
     shell.clear();
 
-    stdioChannel.println( "Program Start!" );
+    Serial.println( "Program Start!" );
 
     shell.begin( "arnold" );
     shell.beginScreen( &plot );
@@ -48,11 +52,7 @@ void setup(){
 // Infinite loop.
 void loop(){
 
-    while( 1 ){
-
-        shell.update();
-
-    }
+    shell.update();
 
 
 }

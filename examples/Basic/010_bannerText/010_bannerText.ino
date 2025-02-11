@@ -41,6 +41,11 @@ void pathCallback( char* buffer, int bufferSize, Shellminator* parent ){
     // Just in case terminate the string in the buffer.
     buffer[ pathBufferSize - 1 ] = '\0';
 
+    // Clear the terminal to remove the empty input prompt.
+    // Uncomment the line below and try it, if it is not clear
+    // why this is needed.
+    shell.clear();
+
     // Create a new prompt for the height.
     parent -> setBannerText( nameBuffer );
     parent -> setBannerPathText( pathBuffer );
@@ -69,13 +74,13 @@ void setup(){
 
     Serial.begin(115200);
 
-    // Initialize shell object.
-    shell.begin( "" );
-
     // Clear the terminal to remove the empty input prompt.
     // Uncomment the line below and try it, if it is not clear
     // why this is needed.
     shell.clear();
+
+    // Initialize shell object.
+    shell.begin( "default" );
 
     // Generate an input prompt.
     shell.input( nameBuffer, nameBufferSize, "Please enter your name: ", nameCallback );

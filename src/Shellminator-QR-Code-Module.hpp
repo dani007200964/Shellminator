@@ -35,6 +35,7 @@ SOFTWARE.
 #define SHELLMINATOR_QR_CODE_MODULE_HPP_
 
     #include "Shellminator.hpp"
+    #include "Shellminator-Helpers.hpp"
 
     #ifdef ARDUINO
         #include "Arduino.h"

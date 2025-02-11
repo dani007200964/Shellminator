@@ -45,6 +45,7 @@ SOFTWARE.
 
     #include "Shellminator.hpp"
     #include "Shellminator-Screen.hpp"
+    #include "Shellminator-Helpers.hpp"
 
     #include <stdio.h>
     #include <stdint.h>
@@ -90,6 +91,8 @@ SOFTWARE.
         /// @param width_p The width of the screen area in characters.
         /// @param height_p The height of the screen area in characters.
         void update( int width_p, int  height_p ) override;
+
+        void forceRedraw() override;
 
         void setText( const char* text_p );
 

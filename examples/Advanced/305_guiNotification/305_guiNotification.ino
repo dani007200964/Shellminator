@@ -29,7 +29,7 @@ Shellminator shell( &Serial );
 ShellminatorNotification notification;
 
 // Create a plotter object.
-ShellminatorButton button( "Plot" );
+ShellminatorButton button( "Press" );
 
 Shellminator::shellEvent_t buttonEvent;
 

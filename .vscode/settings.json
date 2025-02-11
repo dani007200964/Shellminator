@@ -28,7 +28,16 @@
         "string": "cpp",
         "cmath": "cpp",
         "string_view": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "*.tcc": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "numeric": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp"
     },
     "cSpell.words": [
         "microcontroller"

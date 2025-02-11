@@ -108,6 +108,9 @@ SOFTWARE.
 
             size_t write(const uint8_t *data, size_t size) override;
 
+            void attachConnectCallback( void(*connectCallback_p)(ShellminatorTcpSocket* ) );
+            void attachDisconnectCallback( void(*disconnectCallback_p)(ShellminatorTcpSocket* ) );
+
             void begin();
             void update();
             void attachDebugChannel( Stream* dbg_p );
@@ -138,6 +141,9 @@ SOFTWARE.
             static const uint8_t TELNET_IAC_DONT_ECHO[3];
             static const uint8_t TELNET_IAC_WILL_SUPPRESS_GO_AHEAD[3];
             static const uint8_t TELNET_IAC_DO_SUPPRESS_GO_AHEAD[3];
+
+            void(*connectCallback)(ShellminatorTcpSocket* parent) = NULL;
+            void(*disconnectCallback)(ShellminatorTcpSocket* parent) = NULL;
 
         };
 

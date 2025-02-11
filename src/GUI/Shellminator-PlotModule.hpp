@@ -47,6 +47,7 @@ SOFTWARE.
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
 #include "Shellminator-BufferedPrinter.hpp"
+#include "Shellminator-Helpers.hpp"
 
 
 #include <stdio.h>
@@ -110,6 +111,8 @@ public:
     /// @param width_p The width of the screen area in characters.
     /// @param height_p The height of the screen area in characters.
     void update( int width_p, int  height_p ) override;
+
+    void forceRedraw() override;
 
     /// Set the color of the plot.
     ///

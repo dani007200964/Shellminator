@@ -1,0 +1,105 @@
+EXCLUDE=NONE
+CATEGORY=Advanced
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+ *
+ * To test this example, you need a terminal emulator like PuTTY or Minicom.
+ * This example shows a simple setup for Shellminator. It will create an
+ * interactive interface, but it does not execute any command.
+ * See Shellminator_execute example for further information.
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+#include "Shellminator-Commander-Interface.hpp"
+#include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// We have to create an object from Commander class.
+Commander commander;
+
+bool cat_func( char *args, CommandCaller* caller );
+bool dog_func( char *args, CommandCaller* caller );
+bool sum_func( char *args, CommandCaller* caller );
+
+Commander::systemCommand_t API_tree[] = {
+    systemCommand( "cat", "Description for cat command.", cat_func ),
+    systemCommand( "dog", "Description for dog command.", dog_func ),
+    systemCommand( "sum", "This function sums two number from the argument list.", sum_func )
+};
+
+// Create a ShellminatorCommanderInterface object, and initialize it to use {{ channel }}
+ShellminatorCommanderInterface shell( &{{ channel }} );
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+commander.attachDebugChannel( &{{ channel }} );
+commander.attachTree( API_tree );
+commander.init();
+
+shell.attachCommander( &commander );
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+++--LOOP--++
+
+// Process the new data.
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++
+
+/// This is an example function for the cat command
+bool cat_func(char *args, CommandCaller* caller ){
+
+    caller -> print("Hello from cat function!\r\n");
+    return true;
+
+}
+
+/// This is an example function for the dog command
+bool dog_func(char *args, CommandCaller* caller ){
+
+    caller -> print("Hello from dog function!\r\n");
+    return true;
+
+}
+
+/// This is an example function for the sum command
+bool sum_func(char *args, CommandCaller* caller ){
+    int sum;
+    Argument a( args, 0 );
+    Argument b( args, 1 );
+
+    if( !( a.parseInt() && b.parseInt() ) ){
+        caller -> print( "Argument error! Two numbers required, separated with a blank space.\r\n" );
+        return false;
+    }
+    
+    // Calculate the sum.
+    sum = (int)a + (int)b;
+    
+    // Print out the result.
+    caller -> print( (int)a );
+    caller -> print( " + " );
+    caller -> print( (int)b );
+    caller -> print( " = " );
+    caller -> println( sum );
+    return true;
+}

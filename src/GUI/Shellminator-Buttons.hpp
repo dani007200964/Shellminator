@@ -44,6 +44,7 @@ SOFTWARE.
 
 #include "Shellminator.hpp"
 #include "Shellminator-Screen.hpp"
+#include "Shellminator-Helpers.hpp"
 
 #include <stdio.h>
 #include <stdint.h>
@@ -136,6 +137,8 @@ public:
 
     /// You can modify the color of the frame.
     void setColor( Shellminator::textColor_t color_p );
+
+    void forceRedraw() override;
 
 private:
 

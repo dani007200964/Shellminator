@@ -1,5 +1,7 @@
 @page 004_formatMatrix_page Example 004 Format Matrix
 
+@tableofcontents
+
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div style="width:100px; height:100px; margin-right: 20px;">
@@ -11,6 +13,8 @@
     </div>
 </div>
 \endhtmlonly
+
+## Live Demo
 
 \htmlonly
 <iframe id="demoFrame" src="webExamples/004_formatMatrix.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
@@ -140,3 +144,11 @@ void loop(){
 
 }
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Text Formatting Example](@ref 003_textFormatting_page) | [Logo Page Example](@ref 005_logo_page) |
+ 
+</div>

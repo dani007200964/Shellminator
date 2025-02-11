@@ -176,15 +176,28 @@ void ShellminatorList::draw( bool noClear ){
     if( !redraw ){
         return;
     }
+    
     redraw = false;
 
     parent -> format( channel, Shellminator::REGULAR, Shellminator::WHITE );
 
     // Set cursor to top left and print the instruction text.
     Shellminator::setCursorPosition( channel, originX, originY );
-    channel -> print( instruction );
-    if( !noClear ){
-        channel -> print( "\033[0K" );
+
+    i = 0;
+    instructionLines = 0;
+    while( instruction[ i ] ){
+        if( instruction[ i ] == '\n' ){
+            instructionLines++;
+            Shellminator::setCursorPosition( channel, originX, originY + instructionLines );
+            if( !noClear ){
+                channel -> print( "\033[0K" );
+            }
+        }
+        else{
+            channel -> print( instruction[ i ] );
+        }
+        i++;
     }
 
     // Print as many elements as high the remaining screen is.
@@ -194,7 +207,7 @@ void ShellminatorList::draw( bool noClear ){
         index = ( i - 1 ) + drawOffset;
 
         // Set cursor to the current options location.
-        Shellminator::setCursorPosition( channel, originX, originY + i );
+        Shellminator::setCursorPosition( channel, originX, originY + i + instructionLines );
 
         // Check if the current option is the selected one.
         if( index == selected ){
@@ -243,4 +256,8 @@ void ShellminatorList::draw( bool noClear ){
 
     }
 
+}
+
+void ShellminatorList::forceRedraw(){
+    redraw = true;
 }

@@ -41,8 +41,6 @@ void setup(){
 }
 ```
 
-## Live Demo
-
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div style="width:100px; height:100px; margin-right: 20px;">
@@ -54,6 +52,8 @@ void setup(){
     </div>
 </div>
 \endhtmlonly
+
+## Live Demo
 
 \htmlonly
 <iframe id="demoFrame" src="webExamples/002_commandCallback.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>

@@ -1,13 +1,17 @@
 @page 005_logo_page Example 005 Logo
 
-\htmlonly
-<iframe id="demoFrame" src="webExamples/005_logo.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
-\endhtmlonly
+@tableofcontents
 
 If you want to create something really awesome to show off to your colleagues or friends, you definitely need a super cool logo for your project. Online, there are plenty of free tools for this purpose, and we've put together a list of them for you:
 * [ChatGPT](https://chatgpt.com/)
 * [patorjk ASCII Text](http://patorjk.com/software/taag/#p=display&f=Slant&t=Shellminator)
 * [ASCII-Generator](https://ascii-generator.site/)
+
+## Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/005_logo.html" style="height:500px;width:100%;border:none;display:block; margin-left:30px;"></iframe>
+\endhtmlonly
 
 ## Whole Code
 
@@ -71,3 +75,11 @@ void loop(){
 }
 
 ```
+
+<div class="section_buttons">
+ 
+| Previous          |                         Next |
+|:------------------|-----------------------------:|
+|[Formatting Matrix Example](@ref 004_formatMatrix_page) | [Password Example](@ref 006_password_page) |
+ 
+</div>

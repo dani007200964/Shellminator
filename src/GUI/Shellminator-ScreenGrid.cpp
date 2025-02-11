@@ -110,13 +110,21 @@ void ShellminatorScreenGrid::update( int width_p, int  height_p ){
         calculatedHeight = currentElement -> rowSpan * cellHeight;
 
         if( ( calculatedOriginX + calculatedWidth ) > width ){
-            currentElement = currentElement -> nextElement;
-            continue;
+            calculatedWidth = width - calculatedOriginX;
+            if( calculatedWidth <= 0 ){
+                currentElement = currentElement -> nextElement;
+                continue;
+            }
         }
 
         if( ( calculatedOriginY + calculatedHeight ) > height ){
-            currentElement = currentElement -> nextElement;
-            continue;
+            //currentElement = currentElement -> nextElement;
+            //continue;
+            calculatedHeight = height - calculatedOriginY;
+            if( calculatedHeight <= 0 ){
+                currentElement = currentElement -> nextElement;
+                continue;
+            }
         }
 
         currentElement -> setOrigin( calculatedOriginX, calculatedOriginY );
@@ -132,9 +140,11 @@ void ShellminatorScreenGrid::update( int width_p, int  height_p ){
     }
 
     if( newEvent.type == Shellminator::SHELL_EVENT_RESIZE ){
-        redraw = true;
+        //redraw = true;
         return;
     }
+
+    
 
 }
 
@@ -166,15 +176,17 @@ void ShellminatorScreenGrid::draw( bool noClear ){
         return;
     }
     redraw = false;
-
+    
     for( i = 1; i < height; i++ ){
         Shellminator::setCursorPosition( channel, 1, i + 1 );
         channel -> print( "\033[0K" );
     }
+    
 
     currentElement = head;
 
     while( currentElement != NULL ){
+        currentElement -> forceRedraw();
         currentElement -> draw( true );
         currentElement = currentElement -> nextElement;
     }
@@ -226,4 +238,6 @@ void ShellminatorScreenGrid::addWidget( ShellminatorScreen* widget, int row_p, i
 
 }
 
-
+void ShellminatorScreenGrid::forceRedraw(){
+    redraw = true;
+}

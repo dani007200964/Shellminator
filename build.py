@@ -58,7 +58,7 @@ def convertToHeader( data, variable_name ):
 argv = sys.argv[ 1: ]
 
 helpText =  """Arguments:
--t or --target   : Can be: clean, all, simulator, test, doc, examples, web
+-t or --target   : Can be: clean, all, test, examples, web
 -h or --help     : Help message.
 -v or --version  : Prints the version info.
 -c or --checkout : It has to be used before new release. It generates examples, badges and documentation data."""
@@ -200,9 +200,25 @@ if ( 'web' in target ) or ( 'all' in target ):
     print( "Files in build folder:" )
     print( buildFiles )
 
+    ShellminatorDocsFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs') )
+
+    # Check if the ShellminatorDocs directory exists.
+    if os.path.isdir( ShellminatorDocsFolder ) == False:
+        os.mkdir( ShellminatorDocsFolder )
+    
+    print( os.path.abspath(os.path.join(os.path.dirname(__file__), 'run_server.py') ) )
+    shutil.copyfile( os.path.abspath(os.path.join(os.path.dirname(__file__), 'run_server.py') ), os.path.join( ShellminatorDocsFolder, 'run_server.py' ) )
+
+    ShellminatorDocsHtmlFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html') )
+
+    # Check if the ShellminatorDocs/html directory exists.
+    if os.path.isdir( ShellminatorDocsHtmlFolder ) == False:
+        os.mkdir( ShellminatorDocsHtmlFolder )
+    
+
     webExamplesFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ShellminatorDocs/html/webExamples') )
 
-    # Check if the webExamples directory exists. In this case delet its content.
+    # Check if the ShellminatorDocs/html/webExamples directory exists. In this case delete its content.
     if os.path.isdir( webExamplesFolder ) == True:
         shutil.rmtree( webExamplesFolder )
     
@@ -322,29 +338,29 @@ if checkout:
 
     browserResponseFileData = ""
 
-    #---- Minifying index_themed.html page ----
+    #---- Minifying web_xterm_themed.html page ----
 
-    htmlFile = open( rootDirectory + "/extras/webpage/index_themed.html" )
+    htmlFile = open( rootDirectory + "/extras/webpage/web_xterm_themed.html" )
     htmlData = htmlFile.read()
     htmlFile.close()
 
     minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
-    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED' ) + '\n'
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_WEB_XTERM_THEMED' ) + '\n'
 
-    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_mini.html", "w" )
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/web_xterm_themed_mini.html", "w" )
     outputFile.write( minified )
     outputFile.close()
 
     #---- Minifying index_themed_offline.html page ----
 
-    htmlFile = open( rootDirectory + "/extras/webpage/index_themed_offline.html" )
+    htmlFile = open( rootDirectory + "/extras/webpage/web_xterm_themed_offline.html" )
     htmlData = htmlFile.read()
     htmlFile.close()
 
     minified = minify_html.minify( htmlData, minify_js=True, minify_css=True, keep_spaces_between_attributes=True, remove_processing_instructions=True )
-    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_INDEX_THEMED_OFFLINE' ) + '\n'
+    browserResponseFileData = browserResponseFileData + convertToHeader( minified, 'SHELLMINATOR_WEB_XTERM_THEMED_OFFLINE' ) + '\n'
 
-    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/index_themed_offline_mini.html", "w" )
+    outputFile = open( rootDirectory + "/extras/webpage/minified_pages/web_xterm_themed_offline_mini.html", "w" )
     outputFile.write( minified )
     outputFile.close()
 

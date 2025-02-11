@@ -349,13 +349,12 @@ void ShellminatorProgress::setFormat( const char* format_p ){
 }
 
 void ShellminatorProgress::setPercentage( float percentage_p ){
-    percentage = percentage_p;
-
     if( parent == NULL ){
         return;
     }
 
     if( ( (int)( percentage_p * 10.0 ) ) != ( (int)( percentage * 10.0 ) ) ){
+        percentage = percentage_p;
         redraw = true;
         parent -> requestRedraw();
     }
@@ -371,4 +370,8 @@ void ShellminatorProgress::setColor( Shellminator::textColor_t color_p ){
 
 void ShellminatorProgress::start(){
     timerStart = millis();
+}
+
+void ShellminatorProgress::forceRedraw(){
+    redraw = true;
 }
