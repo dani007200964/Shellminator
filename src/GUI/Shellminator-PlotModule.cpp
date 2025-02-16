@@ -121,6 +121,8 @@ void ShellminatorPlot::draw( bool noClear ){
         return;
     }
 
+    parent -> clear();
+
     redraw = false;
     
     // Calculate the length of the name.
@@ -250,6 +252,7 @@ void ShellminatorPlot::drawScale(){
         // number on the Y axes.
         if( currentTextSize > valueTextSizeMax ){
             valueTextSizeMax = currentTextSize;
+            redraw = true;
         }
 
         // Set the position of the current line.
@@ -410,6 +413,11 @@ void ShellminatorPlot::setColor( Shellminator::textColor_t color_p ){
 }
 
 void ShellminatorPlot::forceRedraw(){
+    redraw = true;
+}
+
+void ShellminatorPlot::setName( const char* name_p ){
+    name = name_p;
     redraw = true;
 }
 

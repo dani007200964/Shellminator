@@ -53,16 +53,17 @@ SOFTWARE.
         #include <BLE2902.h>
     #endif
 
-    #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
-        #include <ArduinoBLE.h>
-    #endif
-
     //#define SHELLMINATOR_USE_BLE
     //#include "BLEProperty.h"
     //#include "BLECharacteristic.h"
     //#include "BLEService.h"
 
     #ifdef SHELLMINATOR_USE_BLE
+
+        #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )
+            #include <ArduinoBLE.h>
+        #endif
+
         #define SHELLMINATOR_BLE_SERVICE_NAME "Shellminator BLE UART"
 
         // Using NUS - Nordic Uart Service

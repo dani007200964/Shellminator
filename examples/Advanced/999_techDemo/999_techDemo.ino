@@ -14,38 +14,116 @@
 */
 
 
+#include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
 #include "Shellminator.hpp"
 #include "Shellminator-Commander-Interface.hpp"
 #include "Shellminator-Screen.hpp"
 #include "GUI/Shellminator-Progress.hpp"
 #include "GUI/Shellminator-Buttons.hpp"
+#include "GUI/Shellminator-List.hpp"
 #include "GUI/Shellminator-List-Detailed.hpp"
 #include "GUI/Shellminator-PlotModule.hpp"
 #include "GUI/Shellminator-Notification.hpp"
 #include "GUI/Shellminator-Level-Meter.hpp"
-#include "Commander-API.hpp"
+#include "Shellminator-Neofetch.hpp"
 #include "math.h"
+
+#ifdef ARDUINO
+    #include "Wire.h"
+#endif
+
+// Simulation constants
+#define R 5100.0      // Resistor (Ohm)
+#define C 0.01    // Capacitance (Farad)
+#define U0 5.0        // Supply Voltage (Volt)
+
+#ifndef ARDUINO
+    #ifndef INPUT
+        #define INPUT 0
+    #endif
+    #ifndef INPUT_PULLUP
+        #define INPUT_PULLUP 0
+    #endif
+    #ifndef OUTPUT
+        #define OUTPUT 1
+    #endif
+    #ifndef MSBFIRST
+        #define MSBFIRST 0
+    #endif
+    #ifndef LSBFIRST
+        #define LSBFIRST 1
+    #endif
+    #ifndef LOW
+        #define LOW 0
+    #endif
+    #ifndef HIGH
+        #define HIGH 1
+    #endif
+    int digitalRead( int pin ){ return random( 0, 2 ); }
+    void digitalWrite( int pin, int state ){}
+    void analogWrite( int pin, int val ){}
+    int analogRead( int pin ){ return random( 5,40 ); }
+    void pinMode( int pin, int state ){}
+    void tone( int pin, int freq ){}
+    void noTone( int pin ){}
+    int shiftIn( int pin, int clock, int msb ){ return random( 0, 256 ); }
+    void shiftOut( int pin, int clock, int msb, int val ){}
+    class _Wire{
+        public:
+            void beginTransmission( int ch ){}
+            int endTransmission(){ return random( 0, 5 ); }
+    };
+    _Wire Wire;
+#endif
 
 
 // We have to create an object from Commander class.
 Commander commander;
 
-bool calcGolden_func( char *args, CommandCaller* caller );
+// Create a colorizer object.
+CommanderColorizer colorizer;
+
+// Command callbacks
 bool drawSine_func( char *args, CommandCaller* caller );
 bool selfDestruct_func( char *args, CommandCaller* caller );
 bool beep_func( char *args, CommandCaller* caller );
 bool mute_func( char *args, CommandCaller* caller );
 bool unmute_func( char *args, CommandCaller* caller );
-bool logBattery_func( char *args, CommandCaller* caller );
+bool battery_func( char *args, CommandCaller* caller );
+bool plotAdc_func( char *args, CommandCaller* caller );
+bool pinConfig_func( char *args, CommandCaller* caller );
+bool digitalRead_func( char *args, CommandCaller* caller );
+bool digitalWrite_func( char *args, CommandCaller* caller );
+bool uptime_func( char *args, CommandCaller* caller );
+bool analogWrite_func( char *args, CommandCaller* caller );
+bool tone_func( char *args, CommandCaller* caller );
+bool noTone_func( char *args, CommandCaller* caller );
+bool shiftIn_func( char *args, CommandCaller* caller );
+bool shiftOut_func( char *args, CommandCaller* caller );
+bool i2cScan_func( char *args, CommandCaller* caller );
+
+void capacitorSimulator();
+void adcPolotter();
 
 Commander::systemCommand_t API_tree[] = {
-    systemCommand( "calcGolden", "Calculates the golden ratio.", calcGolden_func ),
-    systemCommand( "drawSine", "Draw a sine wave.", drawSine_func ),
-    systemCommand( "selfDestruct", "Initiates the self-destruct protocol.", selfDestruct_func ),
-    systemCommand( "beep", "Generates a beep sound.", beep_func ),
-    systemCommand( "mute", "Disables beep functionality.", mute_func ),
-    systemCommand( "unmute", "Enables beep functionality.", unmute_func ),
-    systemCommand( "logBattery", "Prints the battery status.", logBattery_func )
+    systemCommand( "battery", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tShows battery charge.\r\n\r\n\tEXAMPLE\r\n\t\tbattery\033[0;37m", battery_func ),
+    systemCommand( "drawSine", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tDraw a sine wave.\r\n\r\n\tEXAMPLE\r\n\t\tdrawSine\033[0;37m", drawSine_func ),
+    systemCommand( "selfDestruct", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tInitiates the self-destruct protocol.\r\n\r\n\tEXAMPLE\r\n\t\tselfDestruct\033[0;37m", selfDestruct_func ),
+    systemCommand( "beep", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tGenerates a beep sound.\r\n\r\n\tEXAMPLE\r\n\t\tbeep\033[0;37m", beep_func ),
+    systemCommand( "mute", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tDisables beep functionality.\r\n\r\n\tEXAMPLE\r\n\t\tmute\033[0;37m", mute_func ),
+    systemCommand( "unmute", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tEnables beep functionality.\r\n\r\n\tEXAMPLE\r\n\t\tunmute\033[0;37m", unmute_func ),
+    systemCommand( "plotAdc", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tPlots an analog channel by time.\r\n\r\n\tSYNOPSIS\r\n\t\tplotAdc <adc pin>\r\n\r\n\tEXAMPLE\r\n\t\tplotAdc 1\r\n\t\tMonitor A1 pin.\033[0;37m", plotAdc_func ),
+    systemCommand( "pinConfig", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tConfigure a pin easily.\r\n\r\n\tSYNOPSIS\r\n\t\tpinConfig <pin>\r\n\r\n\tEXAMPLE\r\n\t\tpinConfig 13\r\n\t\tConfigure pin 13.\033[0;37m", pinConfig_func ),
+    systemCommand( "digitalRead", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tReads the state of a digital pin.\r\n\r\n\tSYNOPSIS\r\n\t\tdigitalRead <pin>\r\n\r\n\tEXAMPLE\r\n\t\tdigitalRead 12\r\n\t\tRead the state of pin 12.\033[0;37m", digitalRead_func ),
+    systemCommand( "digitalWrite", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tWrites a state to a digital pin.\r\n\r\n\tSYNOPSIS\r\n\t\tdigitalWrite [OPTIONS]\r\n\r\n\tOPTIONS\r\n\t\t-p, --pin\tthe Arduino pin number\r\n\t\t-s, --state\t0 means LOW, 1 means HIGH\r\n\r\n\tEXAMPLE\r\n\t\tdigitalWrite -p 13 -s 1\r\n\t\tSet pin 13 to output high state.\033[0;37m", digitalWrite_func ),
+    systemCommand( "uptime", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tReturns the time since program start.\r\n\r\n\tEXAMPLE\r\n\t\tuptime\033[0;37m", uptime_func ),
+    systemCommand( "analogWrite", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tWrites a value to a PWM supported pin in a 8-bit resolution\r\n\r\n\tSYNOPSIS\r\n\t\tanalogWrite [OPTIONS]\r\n\r\n\tOPTIONS\r\n\t\t-p, --pin\tthe Arduino pin number\r\n\t\t-v, --value\t0 - 255\r\n\r\n\tEXAMPLE\r\n\t\tanalogWrite -p 3 -v 128\r\n\t\tGenerate an 50% duty-cycle PWM signal on pin 3\033[0;37m", analogWrite_func ),
+    systemCommand( "tone", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tGenerates a square wave on specified pin, with 50% duty cycle.\r\n\r\n\tSYNOPSIS\r\n\t\ttone [OPTIONS]\r\n\r\n\tOPTIONS\r\n\t\t-p, --pin\tthe Arduino pin number\r\n\t\t-f, --frequency\ttone frequency\r\n\r\n\tEXAMPLE\r\n\t\ttone -p 3 -f 440\r\n\t\tGenerate a 440Hz tone on pin 3\033[0;37m", tone_func ),
+    systemCommand( "noTone", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tStops generation of square wave on the specified pin.\r\n\r\n\tSYNOPSIS\r\n\t\noTone <pin>\r\n\r\n\tEXAMPLE\r\n\t\tnoTone 3\r\n\t\tStops tone generation on pin 3\033[0;37m", noTone_func ),
+    systemCommand( "shiftIn", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tShifts in a byte of data one bit at a time, and returns\r\n\t\tthe value of the bit read.\r\n\r\n\tSYNOPSIS\r\n\t\tshiftIn [OPTIONS]\r\n\r\n\tOPTIONS\r\n\t\t-p, --pin\tthe Arduino pin number\r\n\t\t-c, --clock\tthe Arduino pin number\r\n\t\t-m, --msb\tFlag that indicates MSB first.\r\n\r\n\tEXAMPLE\r\n\t\tshiftIn -p 4 -c 5 -m\r\n\t\tShift data in with MSB format.\r\n\t\tpin 4 : data\r\n\t\tpin 5 : clock\033[0;37m", shiftIn_func ),
+    systemCommand( "shiftOut", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tShifts out a byte of data one bit at a time.\r\n\r\n\tSYNOPSIS\r\n\t\tshiftOut [OPTIONS]\r\n\r\n\tOPTIONS\r\n\t\t-p, --pin\tthe Arduino pin number\r\n\t\t-c, --clock\tthe Arduino pin number\r\n\t\t-m, --msb\tFlag that indicates MSB first\r\n\t\t-v, --value\tThis value will be shifted out.\r\n\r\n\tEXAMPLE\r\n\t\tshiftOut -p 4 -c 5 -m -v 138\r\n\t\tShift value 138 out with MSB format.\r\n\t\tpin 4 : data\r\n\t\tpin 5 : clock\033[0;37m", shiftOut_func ),
+    systemCommand( "i2cScan", "\r\n\t\033[1;31mDESCRIPTION\r\n\t\tScans all the 127 avaiable addresses\r\n\t\ton the I2C bus and generates a table.\r\n\t\tEach slave that responds will be marked.\r\n\r\n\tEXAMPLE\r\n\t\tuptime\033[0;37m", i2cScan_func )
 };
 
 const char* destructListOptions[] = {
@@ -60,9 +138,49 @@ const char* destructListText =  "Are you really want to initiate the self destru
 
 ShellminatorList destructList( destructListOptions, 4, destructListText );
 
-ShellminatorNotification notification;
+const char* pinModeListOptions[] = {
+    "Input",
+    "Output"
+};
 
-ShellminatorLevelMeter meter( "Battery Level" );
+const char* pinModeListDetails[] = {
+    "Pin can receive signals\nfrom outside( hi-Z )",
+    "Pin can send signals to\noutside( push-pull )"
+};
+
+const char* pinModeListText =  "Pin direction:";
+
+ShellminatorListDetailed pinModeList( pinModeListOptions, pinModeListDetails, 2, pinModeListText );
+
+const char* pinStateListOptions[] = {
+    "Low",
+    "High"
+};
+
+const char* pinStateListDetails[] = {
+    "Pin will output 0V",
+    "Pin will output I/O Voltage"
+};
+
+const char* pinStateListText =  "Pin state:";
+
+ShellminatorListDetailed pinStateList( pinStateListOptions, pinStateListDetails, 2, pinStateListText );
+
+const char* pinPullUpListOptions[] = {
+    "Disable",
+    "Pull-up"
+};
+
+const char* pinPullUpListDetails[] = {
+    "Internal pull-up resistor\ndisabled( hi-z )"
+    "Internal pull-up resistor\nwill be activated.",
+};
+
+const char* pinPullUpListText =  "Pull Up Resistor:";
+
+ShellminatorListDetailed pinPullUpList( pinPullUpListOptions, pinPullUpListDetails, 2, pinPullUpListText );
+
+ShellminatorNotification notification;
 
 // Create a plotter object.
 ShellminatorButton destructButton( "Initiate Self Destruct" );
@@ -72,8 +190,22 @@ Shellminator::shellEvent_t destructButtonEvent;
 // Create a progress bar object and connect it to the shell.
 ShellminatorProgress progress;
 
-float plotData[ 30 ] = { 0 };
+float plotData[ 100 ];
 int plotDataSize = sizeof( plotData ) / sizeof( plotData[ 0 ] );
+
+uint32_t timerStart = 0;
+uint32_t timerPeriod = 1000;
+uint32_t chargeTimerStart = 0;
+
+typedef enum{
+    PLOT_BATTERY,
+    PLOT_SINE,
+    PLOT_ADC
+} plotState_t;
+
+int adcPlotterPin = 0;
+
+plotState_t plotState;
 
 ShellminatorPlot plot( plotData, plotDataSize, "Plot" );
 
@@ -107,6 +239,72 @@ void destructButtonClick( ShellminatorScreen* screen );
 
 void destructListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
 
+
+int pinConfigPin;
+int pinConfigMode;
+int pinConfigState;
+void pinModeListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
+void pinPullUpListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
+void pinStateListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* );
+
+
+
+
+// System init section.
+void setup(){
+
+    Serial.begin(115200);
+
+    // Clear the terminal
+    shell.clear();
+    shell.enableFormatting = false;
+
+    Serial.println( "Program Start!" );
+
+
+    // Initialize shell object just enough to create a promt.
+    // Setting an empty string as argument to skip banner printing.
+    shell.begin( "" );
+
+    // Attach the colorizer to the shell.
+    shell.attachColorizer( &colorizer );
+
+    shell.input( nameBuffer, sizeof( nameBuffer ), "Would you like to enable formatting? [y/n] ", formattingCallback );
+
+
+}
+
+// Infinite loop.
+void loop(){
+
+    // In the timerPeriod defined intervals, recalculate the current
+    // state of the simulated capacitor.
+    if( ( millis() - timerStart ) > timerPeriod ){
+        timerStart = millis();
+
+        switch( plotState ){
+            case PLOT_BATTERY:
+                capacitorSimulator();
+                // After calculation, we have to request the shell
+                // to redraw the plot.
+                shell.requestRedraw();
+                break;
+            case PLOT_ADC:
+                adcPolotter();
+                shell.requestRedraw();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    // Process the new data.
+    shell.update();
+
+
+}
+
 void nameCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
     parent -> channel -> println();
@@ -137,9 +335,9 @@ void nameCallback( char* buffer, int bufferSize, Shellminator* parent ){
     destructButton.setColor( Shellminator::RED );
 
     destructList.attachCallback( destructListCallback );
-
-    meter.setWarningPercentage( 70.0 );
-    meter.setErrorPercentage( 90.0 );
+    pinModeList.attachCallback( pinModeListCallback );
+    pinPullUpList.attachCallback( pinPullUpListCallback );
+    pinStateList.attachCallback( pinStateListCallback );
 
     if( diagEnabled ){
         Serial.print( "[ " );
@@ -183,6 +381,8 @@ void nameCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
     // Attach the logo.
     shell.attachLogo( logo );
+
+    shell.attachNeofetchFunc( defaultShellminatorNeofetch );
 
     // Enable password protection.
     shell.setPassword( passwordHash, sizeof( passwordHash ) );
@@ -246,93 +446,335 @@ void formattingCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
 
 
-// System init section.
-void setup(){
+bool i2cScan_func( char *args, CommandCaller* caller ){
+    int i;
+    int ret;
+    int collumn_cntr;
+    int row_cntr;
 
-    Serial.begin(115200);
+    caller -> println( "     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f" );
 
-    // Clear the terminal
-    shell.clear();
-    shell.enableFormatting = false;
+    collumn_cntr = 0;
+    row_cntr = 0;
+    caller -> print( "00:" );
+    for( i = 0; i < 127; i++ ){
+        Wire.beginTransmission( i );
+        ret = Wire.endTransmission();
+        if( ret == 0 ){
+            Shellminator::setFormat( caller, Shellminator::GREEN, Shellminator::BOLD );
+            caller -> print( ' ' );
+            if( i < 16 ){
+                caller -> print( '0' );
+            }
+            caller -> print( i, HEX );
+        }
+        else{
+            Shellminator::setFormat( caller, Shellminator::RED, Shellminator::BOLD );
+            caller -> print( " --" );
+        }
+        Shellminator::setFormat( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        collumn_cntr++;
+        if( collumn_cntr >= 16 ){
+            collumn_cntr = 0;
+            row_cntr += 10;
+            caller -> println();
+            caller -> print( row_cntr );
+            caller -> print( ':' );
+        }
+    }
+    caller -> println();
+    return true;
+}
 
-    Serial.println( "Program Start!" );
+bool shiftIn_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 'p', "pin" );
+    Argument clock( args, 'c', "clock" );
+    Argument msbfirst_flag( args, 'm', "msb" );
+    Argument hex_flag( args, 'h', "hex" );
+    Argument bin_flag( args, 'b', "bin" );
 
+    int data;
 
-    // Initialize shell object just enough to create a promt.
-    // Setting an empty string as argument to skip banner printing.
-    shell.begin( "" );
-
-    shell.input( nameBuffer, sizeof( nameBuffer ), "Would you like to enable formatting? [y/n] ", formattingCallback );
-    //shell.input( nameBuffer, sizeof( nameBuffer ), "Please enter your name: ", nameCallback );
-
-    /*
-    shell.enableFormatting = false;
-    Serial.println( "Would you like to enable formatting?[ y/n ] " );
-    if( Shellminator::waitForKey( &Serial, 'y' ) ){
-        shell.enableFormatting = true;
+    if( !pin.parseInt() || !clock.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " shiftIn? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
     }
 
-    Serial.println( "Would you like to start the system with advanced logging enabled?[ y/n ] " );
-    if( Shellminator::waitForKey( &Serial, 'y' ) ){
-        diagEnabled = true;
-        commander.attachDebugChannel( &Serial );
-    }
-    */
+    msbfirst_flag.find();
+    hex_flag.find();
+    bin_flag.find();
 
+    pinMode( (int)clock, OUTPUT );
+    data = shiftIn( (int)pin, (int)clock, msbfirst_flag.isFound() ? MSBFIRST: LSBFIRST );
+
+    if( hex_flag.isFound() ){
+        caller -> print( "0x" );
+        caller -> println( data, HEX );
+    }
+    else if( bin_flag.isFound() ){
+        caller -> print( "0b" );
+        caller -> println( data, BIN );
+    }
+    else{
+        caller -> println( data );
+    }
+    
+    return true;
+}
+
+bool shiftOut_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 'p', "pin" );
+    Argument clock( args, 'c', "clock" );
+    Argument msbfirst_flag( args, 'm', "msb" );
+    Argument value( args, 'v', "value" );
+
+    if( !pin.parseInt() || !clock.parseInt() || !value.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " shiftOut? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    msbfirst_flag.find();
+
+    pinMode( (int)pin, OUTPUT );
+    pinMode( (int)clock, OUTPUT );
+
+    shiftOut( (int)pin, (int)clock, msbfirst_flag.isFound() ? MSBFIRST: LSBFIRST, (int)value );    
+    return true;
+}
+
+bool tone_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 'p', "pin" );
+    Argument frequency( args, 'f', "frequency" );
+
+    if( !pin.parseInt() || !frequency.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " tone? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    tone( (int)pin, (int)frequency );
+    
+    return true;
+}
+
+bool noTone_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 0 );
+
+    if( !pin.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " noTone? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    noTone( (int)pin );
+    
+    return true;
+}
+
+bool analogWrite_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 'p', "pin" );
+    Argument value( args, 'v', "value" );
+
+    if( !pin.parseInt() || !value.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " analogWrite? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    analogWrite( (int)pin, (int)value );
+    
+    return true;
+}
+
+bool uptime_func( char *args, CommandCaller* caller ){
+    char buffer[ 30 ];
+    uint32_t seconds = millis() / 1000;
+    uint32_t days = seconds / 86400;
+    seconds %= 86400;
+    uint32_t hours = seconds / 3600;
+    seconds %= 3600;
+    uint32_t minutes = seconds / 60;
+    seconds %= 60;
+
+    snprintf( buffer, sizeof( buffer ), "%d:%02d:%02d:%02d", days, hours, minutes, (int)seconds );
+    caller -> println( buffer );
+
+    return true;
+}
+
+bool digitalRead_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 0 );
+
+    if( !pin.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " digitalRead? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+   caller -> println( digitalRead( (int)pin ) );
+    
+    return true;
+}
+
+bool digitalWrite_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 'p', "pin" );
+    Argument state( args, 's', "state" );
+
+    if( !pin.parseInt() || !state.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " digitalWrite? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    pinMode( (int)pin, OUTPUT );
+    digitalWrite( (int)pin, (int)state );
+    
+    return true;
+}
+
+void pinStateListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* screen ){
+    
+    pinMode( pinConfigPin, OUTPUT );
+    if( selected == 0 ){
+        digitalWrite( pinConfigPin, LOW );
+        return;
+    }
+    digitalWrite( pinConfigPin, HIGH );
 
 }
 
-// Infinite loop.
-void loop(){
+void pinPullUpListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* screen ){
+    // Input
+    if( selected == 0 ){
+        pinMode( pinConfigPin, INPUT );
+        return;
+    }
+    pinMode( pinConfigPin, INPUT_PULLUP );
+}
 
-    // Process the new data.
-    shell.update();
+void pinModeListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* screen ){
+    Shellminator* parent;
+    parent = screen -> getParent();
+    if( parent == NULL ){
+        return;
+    }
+    
+    // Input
+    if( selected == 0 ){
+        parent -> swapScreenAndClear( &pinPullUpList );
+        return;
+    }
 
+    // Output
+    parent -> swapScreenAndClear( &pinStateList );
+}
 
+bool pinConfig_func( char *args, CommandCaller* caller ){
+    Argument pin( args, 0 );
+
+    if( !pin.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " pinConfig? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    pinConfigPin = (int)pin;
+
+    shell.beginScreen( &pinModeList );
+
+    return true;
 }
 
 /// This is an example function for the cat command
-bool calcGolden_func(char *args, CommandCaller* caller ){
-
-    double limit = 1.0;
+bool battery_func(char *args, CommandCaller* caller ){
     int i;
-    int end = 400;
-    uint32_t timerStart = 0;
-    uint32_t period = 10;
 
-    progress.setFormat( "t" );
-    progress.setText( "Calculating..." );
-    shell.beginScreen( &progress );
+    plotState = PLOT_BATTERY;
+    chargeTimerStart = millis();
 
-    i = 0;
-    while( i < end ){
-        if( ( millis() - timerStart ) > period ){
-            i++;
-            timerStart = millis();
-            limit =sqrt( 1 + limit);
-            progress.setPercentage( (float)i / (float)end * 100.0 );
-        }
-        shell.update();
+
+    for( i = 0; i < plotDataSize; i++ ){
+        plotData[ i ] = 0;
     }
 
-    caller -> print( "  golden-ratio: " );
-    caller -> println( limit );
+    plot.setName( "Battery Voltage[ V ]" );
+    shell.beginScreen( &plot );
+    return true;
+}
 
+bool plotAdc_func( char *args, CommandCaller* caller ){
+    int i;
+    Argument pin( args, 0 );
+    
+    if( !pin.parseInt() ){
+        caller -> print( "Wrong arguments! help:" );
+        shell.format( caller, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+        caller -> print( " plotAdc? " );
+        shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+        caller -> println();
+        return false;
+    }
+
+    plotState = PLOT_ADC;
+    adcPlotterPin = (int)pin;
+
+    for( i = 0; i < plotDataSize; i++ ){
+        plotData[ i ] = 0;
+    }
+
+    plot.setName( "ADC Value [ LSB ]" );
+    shell.beginScreen( &plot );
     return true;
 }
 
 /// This is an example function for the dog command
 bool drawSine_func(char *args, CommandCaller* caller ){
-
     int i;
 
     for( i = 0; i < plotDataSize; i++ ){
         plotData[ i ] = sin( (float)i / (float)plotDataSize * M_PI * 2.0 );
     }
 
+    plotState = PLOT_SINE;
+    plot.setName( "Sine Function" );
     shell.beginScreen( &plot );
     return true;
 
+}
+
+void adcPolotter(){
+    int i;
+    for( i = 0; i < plotDataSize; i++ ){
+        plotData[ i ] = plotData[ i + 1 ];
+    }
+
+    plotData[ plotDataSize - 1 ] = analogRead( adcPlotterPin );
 }
 
 /// This is an example function for the sum command
@@ -348,7 +790,7 @@ void destructButtonClick( ShellminatorScreen* screen ){
     if( parent == NULL ){
         return;
     }
-    parent -> swapScreen( &destructList );
+    parent -> swapScreenAndClear( &destructList );
 }
 
 void destructListCallback( const char* optionsList[], int listSize, int selected, ShellminatorScreen* screen ){
@@ -376,8 +818,21 @@ void destructListCallback( const char* optionsList[], int listSize, int selected
             break;
     }
 
-    parent -> swapScreen( &notification );
+    parent -> swapScreenAndClear( &notification );
 
+}
+
+void capacitorSimulator(){
+    int i;
+ 
+    // With the for loop, we shift every element in the plot to the left
+    for( i = 0; i < plotDataSize - 1; i++ ){
+        plotData[ i ] = plotData[ i + 1 ];
+    }
+ 
+    // To the last element, we calculate the new value based on system time.
+    plotData[ plotDataSize - 1 ] = U0 * ( 1.0 - exp( -( ( millis() - chargeTimerStart ) / 1000.0 ) *  ( 1.0 / ( R * C ) ) ) );
+ 
 }
 
 bool beep_func(char *args, CommandCaller* caller ){
@@ -397,11 +852,5 @@ bool mute_func(char *args, CommandCaller* caller ){
 
 bool unmute_func(char *args, CommandCaller* caller ){
     shell.mute = false;
-    return true;
-}
-
-bool logBattery_func(char *args, CommandCaller* caller ){
-    meter.setPercentage( ( (int)millis()/1000 ) % 100 );
-    shell.beginScreen( &meter );
     return true;
 }

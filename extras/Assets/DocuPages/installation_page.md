@@ -198,6 +198,118 @@ If you try to compile now, you’ll likely get an error because the project is *
 
 Right now, our STM32 environment doesn’t include this functionality. But don’t worry! We’ve **prepared everything for you**, and you can easily add the missing libraries as part of a simple **software package installation**.  
 
+Similar to how we set up Shellminator, you need to add the [SerialDriverForSTM32](https://github.com/dani007200964/SerialDriverForSTM32) package to your project. It’s best to download the [latest release](https://github.com/dani007200964/SerialDriverForSTM32/releases). Once downloaded, copy the software into your project’s `Drivers` folder.
+
+In the `SerialDriverForSTM32` folder, you’ll find two important directories: `src` and `extras`. You need to add these to your project separately using **Right Click -> Add/Remove include path…**. In the pop-up window, make sure to check all your targets.
+
+Now, if you try to build the project, it should compile without errors (though you might see some warnings—if you do, feel free to open an issue! Our goal is to get everything compiling warning-free too. 🙂)
+
+### Step 16: Including the Necessary Libraries
+In your `main.cpp`, you need to include the required headers:
+```cpp
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "Shellminator.hpp"
+#include "Serial.hpp"
+/* USER CODE END Includes */
+```
+
+### Step 17: Creating the Serial and Shellminator Objects
+First, you need to create a `Serial` object. Since we configured `USART3`, we’ll use `huart3` in the constructor and name the object `usart3`.
+
+Next, create a `Shellminator` object—let’s call it `shell` for now. The constructor will take the `usart3` object we just created.
+```cpp
+/* USER CODE BEGIN PV */
+Serial usart3( &huart3 );
+Shellminator shell( &usart3 );
+/* USER CODE END PV */
+```
+
+### Step 18: Initializing the Serial Interface
+You can initialize the `usart3` object using the `begin` method. Similar to the Arduino implementation, you need to specify the baud rate. We recommend **115200**, as it’s fast enough for modern terminals.
+
+Once initialized, it's a good idea to clear the terminal interface using `shell.clear()`. Then, start the shell using `shell.begin("stm32")`. (The string can be anything you like.)
+```cpp
+/* USER CODE BEGIN 2 */
+usart3.begin( 115200 );
+shell.clear();
+shell.begin( "stm32" );
+/* USER CODE END 2 */
+```
+
+### Step 18: Running the Shell
+Finally, inside the infinite loop, call `shell.update()` in every iteration.
+```cpp
+/* Infinite loop */
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+    shell.update();
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+}
+```
+
+### Running and Testing
+If everything is set up correctly, your project should compile without issues. Once it compiles, you can run the code on your **Nucleo** board using the **Run** button in the **Run** tab.
+
+To interact with your board, you’ll need a **terminal emulator**. If you’re not familiar with terminal emulators, don’t worry! We’ve detailed everything you need to know on the [Usage](usage_page.md) page. Since CubeIDE has a built-in terminal emulator, it’s worth checking out that section as well.
+
+If you need more information about how the Shellminator API works, and what can it do, please check the [Examples](examples_page.md).
+
+## Whole Code
+
+```cpp
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "Shellminator.hpp"
+#include "Serial.hpp"
+/* USER CODE END Includes */
+
+...
+
+/* USER CODE BEGIN PV */
+Serial usart3( &huart3 );
+Shellminator shell( &usart3 );
+/* USER CODE END PV */
+
+...
+
+int main(void){
+
+    ...
+
+    /* USER CODE BEGIN 2 */
+    usart3.begin( 115200 );
+    shell.clear();
+    shell.begin( "stm32" );
+    /* USER CODE END 2 */
+
+    ...
+
+    /* Infinite loop */
+    /* USER CODE BEGIN WHILE */
+    while (1)
+    {
+        shell.update();
+        /* USER CODE END WHILE */
+
+        /* USER CODE BEGIN 3 */
+    }
+    /* USER CODE END 3 */
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
 

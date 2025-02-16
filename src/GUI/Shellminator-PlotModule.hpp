@@ -73,8 +73,8 @@ public:
     /// user created dataset.
     /// @param data_p Pointer to a float array, which contains the data points to be printed.
     /// @param dataSize_p The size of the float array in elements( NOT IN BYTES! ).
-    /// @param color_p Optionally, you can specify the color of the plot. Available colors:
     /// @param name_p The name of the plot.
+    /// @param color_p Optionally, you can specify the color of the plot. Available colors:
     ///                *Shellminator::RED
     ///                *Shellminator::GREEN
     ///                *Shellminator::WHITE
@@ -119,6 +119,11 @@ public:
     /// With this function, you can set the color of the plot.
     /// @param color_p Specify a color from Shellminator::textColor_t enumeration.
     void setColor( Shellminator::textColor_t color_p );
+
+    /// Set the name of the plot.
+    ///
+    /// @param name_p The name of the plot.
+    void setName( const char* name_p );
 
 
 private:

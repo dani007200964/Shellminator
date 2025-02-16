@@ -72,8 +72,10 @@ SOFTWARE.
             #define SHELLMINATOR_USE_WIFI_CLIENT
         #endif
 
-        #ifndef SHELLMINATOR_USE_BLE
-            #define SHELLMINATOR_USE_BLE
+        #if __has_include ( "ArduinoBLE.h" )
+            #ifndef SHELLMINATOR_USE_BLE
+                #define SHELLMINATOR_USE_BLE
+            #endif
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN
@@ -94,8 +96,10 @@ SOFTWARE.
     #endif
 
     #ifdef ARDUINO_ARCH_NRF52840
-        #ifndef SHELLMINATOR_USE_BLE
-            #define SHELLMINATOR_USE_BLE
+        #if __has_include ( "ArduinoBLE.h" )
+            #ifndef SHELLMINATOR_USE_BLE
+                #define SHELLMINATOR_USE_BLE
+            #endif
         #endif
 
         #ifndef SHELLMINATOR_BUFF_LEN

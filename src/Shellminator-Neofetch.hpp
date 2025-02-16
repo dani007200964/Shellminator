@@ -51,9 +51,9 @@ SOFTWARE.
                                             " ##*                                            *##\r\n"  \
                                             " ##*                                            *##\r\n"  \
                                             " ##*\033[1;36m    .............::.     :::.............   \033[1;31m*##\r\n"  \
-                                            " ##*\033[1;36m  =%:\033[1;35m/=======>-\033[1;36m%%%%%#=-=#%%%%%%%%%%%%%%%%%: \033[1;31m*##\033[1;36m\r\n"  \
-                                            " ###==#-\033[1;35m||\033[1;36m++++++++*%%%%%*   #%%%%%%%\033[1;31m###\033[1;36m%%%%%%%*=###\r\n"  \
-                                            " =+#**#=\033[1;35m\\/\033[1;36m%%%%%%%%%%%%%%-   =%%%%%\033[1;31m+.-***\033[1;36m%%%%%%#*#+=\033[1;33m\r\n"  \
+                                            " ##*\033[1;36m  =%:/=======>-%%%%%#=-=#%%%%%%%%%%%%%%%%%: \033[1;31m*##\033[1;36m\r\n"  \
+                                            " ###==#-||++++++++*%%%%%*   #%%%%%%%\033[1;31m###\033[1;36m%%%%%%%*=###\r\n"  \
+                                            " =+#**#=\\/%%%%%%%%%%%%%%-   =%%%%%\033[1;31m+.-***\033[1;36m%%%%%%#*#+=\033[1;33m\r\n"  \
                                             "   .  \033[1;36m+%%%%%%%%%%%%%%%%#\033[1;33m.....\033[1;36m#%%%%\033[1;31m+  ::=#\033[1;36m%%%%%=\033[1;33m .\r\n"    \
                                             ":==-  \033[1;36m+%%%%%%%%%%%%%%%%=\033[1;33m.....\033[1;36m#%%%%%\033[1;31m#***#\033[1;36m%%%%%%=\033[1;33m -==:\r\n" \
                                             "===-  \033[1;36m-%%%%%%%%%%%%%%%#\033[1;33m ......\033[1;36m%%%%%%%%%%%%%%%%:\033[1;33m -===\r\n" \
@@ -102,8 +102,29 @@ extern const char*  SHELLMINATOR_WEAK neofetch_author_text;
 extern int          SHELLMINATOR_WEAK neofetch_author_text_color;
 extern int          SHELLMINATOR_WEAK neofetch_author_text_style;
 
-extern const char*  SHELLMINATOR_WEAK neofetch_license_text;
-extern int          SHELLMINATOR_WEAK neofetch_license_text_color;
-extern int          SHELLMINATOR_WEAK neofetch_license_text_style;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_1_label;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_1_text;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_1_text_color;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_1_text_style;
+
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_2_label;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_2_text;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_2_text_color;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_2_text_style;
+
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_3_label;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_3_text;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_3_text_color;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_3_text_style;
+
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_4_label;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_4_text;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_4_text_color;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_4_text_style;
+
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_5_label;
+extern const char*  SHELLMINATOR_WEAK neofetch_user_field_5_text;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_5_text_color;
+extern int          SHELLMINATOR_WEAK neofetch_user_field_5_text_style;
 
 #endif

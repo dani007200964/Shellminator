@@ -19,6 +19,8 @@
         <tab type="usergroup" visible="yes" url="@ref 100_keyOverride_page" title="🎹 100 Key Override" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 101_qrCode_page" title="🔗 101 QR Code" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 102_buffering_page" title="🫗 102 Buffering" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 120_neofetchBasic_page" title="👽 120 Neofetch Basic" intro=""/>
+        <tab type="usergroup" visible="yes" url="@ref 121_neofetchAdvanced_page" title="🏄 121 Neofetch Advanced" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 200_commanderBasic_page" title="🎖️ 200 Commander Basic" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 201_commanderOptimizations_page" title="💾 201 Commander Optimizations" intro=""/>
         <tab type="usergroup" visible="yes" url="@ref 202_commanderSimpleArguments_page" title="🗣 202 Commander Simple Arguments" intro=""/>

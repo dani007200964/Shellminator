@@ -48,6 +48,18 @@ SOFTWARE.
      #define SHELLMINATOR_WEAK
 #endif
 
+#if defined(__clang__)
+    #define SHELLMINATOR_COMPILER "CLANG"
+#elif defined(__GNUC__)
+    #define SHELLMINATOR_COMPILER "GCC"
+#elif defined(_MSC_VER)
+    #define SHELLMINATOR_COMPILER "MSVC"
+#elif defined(__INTEL_COMPILER)
+    #define SHELLMINATOR_COMPILER "INTEL"
+#else
+    #define SHELLMINATOR_COMPILER "UNKNOWN"
+#endif
+
 //---- Network Related Defines ----
 #ifdef SHELLMINATOR_USE_WIFI_CLIENT
     #ifdef ESP8266

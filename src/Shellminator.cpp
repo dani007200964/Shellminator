@@ -420,6 +420,8 @@ void Shellminator::printHelp(){
     format( selectedChannel, WHITE );
     selectedChannel -> println( __CONST_TXT__( "Execute command, or exit from screen." ) );
 
+    format( selectedChannel, REGULAR, WHITE );
+
     printCommandParserHelp( selectedChannel, enableFormatting );
 
     format( selectedChannel, REGULAR, WHITE );

@@ -19,7 +19,7 @@ const char* SHELLMINATOR_WEAK neofetch_cpu_text = "T-800";
 int         SHELLMINATOR_WEAK neofetch_cpu_text_color = Shellminator::WHITE;
 int         SHELLMINATOR_WEAK neofetch_cpu_text_style = Shellminator::BOLD;
 
-const char* SHELLMINATOR_WEAK neofetch_compiler_text = __VERSION__;
+const char* SHELLMINATOR_WEAK neofetch_compiler_text = SHELLMINATOR_COMPILER;
 int         SHELLMINATOR_WEAK neofetch_compiler_text_color = Shellminator::WHITE;
 int         SHELLMINATOR_WEAK neofetch_compiler_text_style = Shellminator::BOLD;
 
@@ -31,9 +31,30 @@ const char* SHELLMINATOR_WEAK neofetch_author_text = "Daniel Hajnal";
 int         SHELLMINATOR_WEAK neofetch_author_text_color = Shellminator::WHITE;
 int         SHELLMINATOR_WEAK neofetch_author_text_style = Shellminator::BOLD;
 
-const char* SHELLMINATOR_WEAK neofetch_license_text = "MIT";
-int         SHELLMINATOR_WEAK neofetch_license_text_color = Shellminator::WHITE;
-int         SHELLMINATOR_WEAK neofetch_license_text_style = Shellminator::BOLD;
+const char* SHELLMINATOR_WEAK neofetch_user_field_1_label = NULL;
+const char* SHELLMINATOR_WEAK neofetch_user_field_1_text = NULL;
+int         SHELLMINATOR_WEAK neofetch_user_field_1_text_color = Shellminator::WHITE;
+int         SHELLMINATOR_WEAK neofetch_user_field_1_text_style = Shellminator::BOLD;
+
+const char* SHELLMINATOR_WEAK neofetch_user_field_2_label = NULL;
+const char* SHELLMINATOR_WEAK neofetch_user_field_2_text = NULL;
+int         SHELLMINATOR_WEAK neofetch_user_field_2_text_color = Shellminator::WHITE;
+int         SHELLMINATOR_WEAK neofetch_user_field_2_text_style = Shellminator::BOLD;
+
+const char* SHELLMINATOR_WEAK neofetch_user_field_3_label = NULL;
+const char* SHELLMINATOR_WEAK neofetch_user_field_3_text = NULL;
+int         SHELLMINATOR_WEAK neofetch_user_field_3_text_color = Shellminator::WHITE;
+int         SHELLMINATOR_WEAK neofetch_user_field_3_text_style = Shellminator::BOLD;
+
+const char* SHELLMINATOR_WEAK neofetch_user_field_4_label = NULL;
+const char* SHELLMINATOR_WEAK neofetch_user_field_4_text = NULL;
+int         SHELLMINATOR_WEAK neofetch_user_field_4_text_color = Shellminator::WHITE;
+int         SHELLMINATOR_WEAK neofetch_user_field_4_text_style = Shellminator::BOLD;
+
+const char* SHELLMINATOR_WEAK neofetch_user_field_5_label = NULL;
+const char* SHELLMINATOR_WEAK neofetch_user_field_5_text = NULL;
+int         SHELLMINATOR_WEAK neofetch_user_field_5_text_color = Shellminator::WHITE;
+int         SHELLMINATOR_WEAK neofetch_user_field_5_text_style = Shellminator::BOLD;
 
 void defaultShellminatorNeofetch( Shellminator* parent ){
     int i;
@@ -126,15 +147,65 @@ void defaultShellminatorNeofetch( Shellminator* parent ){
     parent -> channel -> print( __CONST_TXT__( "C" ) );
     rowCounter++;
 
-    // License text
-    parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
-    parent -> channel -> print( __CONST_TXT__( "License: " ) );
-    parent -> format( parent -> channel, neofetch_license_text_style, neofetch_license_text_color );
-    parent -> channel -> print( neofetch_license_text );
-    parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
-    parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
-    parent -> channel -> print( __CONST_TXT__( "C" ) );
-    rowCounter++;
+    // User Field 1
+    if( neofetch_user_field_1_label ){
+        parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
+        parent -> channel -> print( neofetch_user_field_1_label );
+        parent -> format( parent -> channel, neofetch_user_field_1_text_style, neofetch_user_field_1_text_color );
+        parent -> channel -> print( neofetch_user_field_1_text );
+        parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
+        parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
+        parent -> channel -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;    
+    }
+
+    // User Field 2
+    if( neofetch_user_field_2_label ){
+        parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
+        parent -> channel -> print( neofetch_user_field_2_label );
+        parent -> format( parent -> channel, neofetch_user_field_2_text_style, neofetch_user_field_2_text_color );
+        parent -> channel -> print( neofetch_user_field_2_text );
+        parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
+        parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
+        parent -> channel -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;    
+    }
+
+    // User Field 3
+    if( neofetch_user_field_3_label ){
+        parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
+        parent -> channel -> print( neofetch_user_field_3_label );
+        parent -> format( parent -> channel, neofetch_user_field_3_text_style, neofetch_user_field_3_text_color );
+        parent -> channel -> print( neofetch_user_field_3_text );
+        parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
+        parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
+        parent -> channel -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;    
+    }
+
+    // User Field 4
+    if( neofetch_user_field_4_label ){
+        parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
+        parent -> channel -> print( neofetch_user_field_4_label );
+        parent -> format( parent -> channel, neofetch_user_field_4_text_style, neofetch_user_field_4_text_color );
+        parent -> channel -> print( neofetch_user_field_4_text );
+        parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
+        parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
+        parent -> channel -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;    
+    }
+
+    // User Field 5
+    if( neofetch_user_field_5_label ){
+        parent -> format( parent -> channel, neofetch_field_text_style, neofetch_field_text_color );
+        parent -> channel -> print( neofetch_user_field_5_label );
+        parent -> format( parent -> channel, neofetch_user_field_5_text_style, neofetch_user_field_5_text_color );
+        parent -> channel -> print( neofetch_user_field_5_text );
+        parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
+        parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
+        parent -> channel -> print( __CONST_TXT__( "C" ) );
+        rowCounter++;    
+    }
 
     // Dimmed colors
     for( i = 30; i < 38; i++ ){
