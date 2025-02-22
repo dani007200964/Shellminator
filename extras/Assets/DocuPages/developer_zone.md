@@ -15,15 +15,14 @@ To ensure that this shared adventure is a fun and productive challenge for every
 
 ### Necessary Tools
 
-Now that we’ve got that covered, let’s dive in! To start developing, you’ll need a few extra tools:  
+Now that we’ve got that covered, let’s dive in! To start developing, you’ll need a few extra tools:
+- [Git](https://git-scm.com/) - Any Git client works, but we recommend [GitHub Desktop](https://desktop.github.com/download/)
 - [Visual Studio Code](https://code.visualstudio.com/) - We love this code editor
 - [Anaconda](https://www.anaconda.com/download) - Helps with Python environments, you will need at least __version 4.12.0__
 - [CMake](https://cmake.org/) - Helps building web examples, and desktop versions. You will need at least __version 3.24__
 - [emscripten](https://emscripten.org/) - This builds the web examples. You will need at least __version 3.1.40__
 - [Doxygen](https://www.doxygen.nl/) - This builds the whole html documentation. You will need at least __version 1.9.5__
 
-
-Here’s the translated and slightly adapted version to keep it beginner-friendly and approachable:  
 
 ### Setting Up the Project Build & Documentation  
 
@@ -42,8 +41,6 @@ Next, in **Visual Studio Code’s terminal**, you need to activate the **shellmi
 ```sh
 conda activate shellminator
 ```  
-
-Finally, if everything is set up correctly, you should be able to run the **build.py** script without issues:  
 
 ```sh
 python build.py -t 'clean web'
