@@ -16,7 +16,7 @@ Let’s dive in!
 
 ## Step 1: Creating a Button  
 
-In almost every GUI framework, the **"Hello, World!"** example involves creating a **button**. This makes sense because a button is both an **input and output element**—you can display text on it, and it can trigger actions when pressed.  
+In almost every GUI framework, the **'Hello, World!'** example involves creating a **button**. This makes sense because a button is both an **input and output element** —you can display text on it, and it can trigger actions when pressed.  
 
 To get started, include the necessary GUI library from the **Shellminator** source folder:  
 

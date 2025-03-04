@@ -209,9 +209,9 @@ void defaultShellminatorNeofetch( Shellminator* parent ){
 
     // Dimmed colors
     for( i = 30; i < 38; i++ ){
-        parent -> channel -> print( __CONST_TXT__( "\33[2;" ) );
-        parent -> channel -> print( i );
-        parent -> channel -> print( __CONST_TXT__( "m\u2588\u2588" ) );
+		parent -> format( parent -> channel, Shellminator::LOW_INTENSITY );
+		parent -> format( parent -> channel, i );
+        parent -> channel -> print( __CONST_TXT__( "\u2588\u2588" ) );
     }
     parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
     parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );
@@ -220,9 +220,9 @@ void defaultShellminatorNeofetch( Shellminator* parent ){
 
     // Bright colors
     for( i = 30; i < 38; i++ ){
-        parent -> channel -> print( __CONST_TXT__( "\33[1;" ) );
-        parent -> channel -> print( i );
-        parent -> channel -> print( __CONST_TXT__( "m\u2588\u2588" ) );
+		parent -> format( parent -> channel, Shellminator::REGULAR );
+		parent -> format( parent -> channel, i );
+        parent -> channel -> print( __CONST_TXT__( "\u2588\u2588" ) );
     }
     parent -> channel -> print( __CONST_TXT__( "\r\n\033[" ) );
     parent -> channel -> print( SHELLMINATOR_DEFAULT_NEOFETCH_ART_WIDTH );

@@ -18,7 +18,7 @@ export $VARIABLE_NAME VARIABLE_VALUE
 <iframe id="demoFrame" src="webExamples/207_commanderSetSystemVariables.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
 \endhtmlonly
 
-**Try these steps firs** 
+**Try these steps first** 
 
 | **Command**             | **Expected Output / Behavior**                                         | **Explanation** |
 |-------------------------|------------------------------------------------------------------------|----------------|
@@ -208,8 +208,8 @@ Argument variable_object(args, 0);
 Argument variable_value(args, 1);
 ```
 - The function expects **two arguments**:  
-  - **The first argument (`variable_object`)** is the name of the system variable.  
-  - **The second argument (`variable_value`)** is the new value we want to assign.  
+  - **The first argument (** `variable_object` **)** is the name of the system variable.  
+  - **The second argument (** `variable_value` **)** is the new value we want to assign.  
 
 ### 2️⃣ Declare a Variable to Hold the System Variable Reference
 ```cpp
@@ -227,7 +227,7 @@ variable_object.parseFloat();
 variable_value.parseFloat();
 ```
 - The function **parses both arguments as floats**, because:  
-  - **Floats can be easily converted to integers.**  
+  - Floats can be easily converted to integers.
   - If the arguments **aren't numbers**, this won't break anything.  
 
 ### 4️⃣ Retrieve System Variable Reference

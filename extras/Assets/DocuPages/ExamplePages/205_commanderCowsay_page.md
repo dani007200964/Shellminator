@@ -4,7 +4,7 @@
 
 ## Getting Started with Flags in Command-Line Arguments  
 
-In this example, we’ll explore **flags**—a special type of command-line argument. Flags are **position-independent** and don’t require a value. At first, this might seem a little strange, but not all arguments need to have an associated value. Sometimes, simply **including the flag** in the command is enough to change how the program behaves.  
+In this example, we’ll explore **flags** —a special type of command-line argument. Flags are **position-independent** and don’t require a value. At first, this might seem a little strange, but not all arguments need to have an associated value. Sometimes, simply **including the flag** in the command is enough to change how the program behaves.  
 
 A great example of this is the [cowsay](https://en.wikipedia.org/wiki/Cowsay) command in Linux, which is actually a fun little *easter egg*! We’ll be implementing a simplified version of it to see flags in action.  
 

@@ -54,9 +54,14 @@ void searchKeyCallback( Shellminator* caller ){
 // Clear the terminal
 shell.clear();
 
-{{ channel }}.println( "Use the arrow keys to change the banner text." );
-{{ channel }}.print( "To reset the functionality, press" );
+{{ channel }}.print( "Use the " );
 shell.format( &{{ channel }}, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
+{{ channel }}.print( "arrow keys" );
+shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
+{{ channel }}.println( " to change the banner text." );
+
+{{ channel }}.print( "To reset the functionality, press" );
+shell.format( &{{ channel }}, Shellminator::BOLD, Shellminator::BG_YELLOW, Shellminator::BLACK );
 {{ channel }}.print( " Ctrl-R ");
 shell.format( &{{ channel }}, Shellminator::REGULAR, Shellminator::WHITE );
 {{ channel }}.println( "key." );

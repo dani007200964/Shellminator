@@ -53,6 +53,8 @@ void setup(){
 </div>
 \endhtmlonly
 
+In the demo below, no matter what command you type into the terminal, once you hit **Enter**, the `execution_function` gets called with the exact text you entered. The `execution_function` then simply **echoes it back** nicely.
+
 ## Live Demo
 
 \htmlonly

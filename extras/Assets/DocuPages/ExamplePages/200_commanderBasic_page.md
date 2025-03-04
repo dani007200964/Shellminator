@@ -23,13 +23,6 @@ Of course, you could take a simple approach and use a massive `if-else` chain in
 
 In the following examples, we’ll show you how to connect Shellminator with the Commander API to take your command-line functionality to the next level. Let’s get started!
 
-## Live Demo
-
-\htmlonly
-<iframe id="demoFrame" src="webExamples/200_commanderBasic.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
-\endhtmlonly
-
-
 First, we need to install the **Commander API**, just like we did with Shellminator. If you need extra guidance, the
 [Commander API website](https://www.commanderapi.org/html/index.html) provides detailed instructions for installation.
 
@@ -196,6 +189,35 @@ bool sum_func(char *args, CommandCaller* caller) {
 - **Use `caller->print()` and `caller->println()`:** When writing output in Commander callbacks, always use these methods. They ensure the output is correctly routed to the response channel.
 - **Robust Error Handling:** This function gracefully handles errors, like missing or invalid arguments, by providing helpful feedback to the user.
 - Every command callback must return `true`, when the command was executed without problem. When any problem occurs, it must return with `false`.
+
+\htmlonly
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Here are a few things you might want to try out in the demo below:
+        </p>
+    </div>
+</div>
+\endhtmlonly
+
+- `cat` → Executes the `cat` command, and you'll see the response from the `cat_func` callback.  
+- `Cat` → You'll get a `Command "Cat" not found!` error because the system is **case-sensitive**.  
+- `dog` → Executes the `dog` command, and you'll see the response from the `dog_func` callback.  
+- `help` → The `help` command still works as expected.  
+- `?` → Does the same thing as `help`, just a shortcut.  
+- `sum` → Error message: _"Executes the cat command, and you'll see the response from the cat_func callback."_  
+  This happens because the arguments weren’t provided correctly. Let’s help ourselves out and check how to use the `sum` command.  
+- `sum?` → Displays information on how to use the `sum` command.  
+- `sum 10 20` → Adds the two numbers and prints the result: **30**.
+
+## Live Demo
+
+\htmlonly
+<iframe id="demoFrame" src="webExamples/200_commanderBasic.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+\endhtmlonly
+
 
 ## Whole Code
 

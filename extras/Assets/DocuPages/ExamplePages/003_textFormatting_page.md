@@ -14,6 +14,8 @@
 </div>
 \endhtmlonly
 
+The demo below isn’t interactive—it simply showcases how you can format the **Serial output**.
+
 ## Live Demo
 
 \htmlonly

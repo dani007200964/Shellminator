@@ -38,18 +38,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        .image-container {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: none;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+
         input[type="range"] {
             width: 100%;
             margin-top: 30px;
@@ -90,16 +79,14 @@
         <input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Keresés...">
         <select id="myDropdown" onchange="updateSelection()">
             <option value="" selected disabled hidden>Válassz...</option>
-            <option value="atmega328" data-image="arduino_uno_r3.svg" >Arduino Uno R3</option>
-            <option value="ra4m1" data-image="arduino_uno_r4.svg" >Arduino Uno R4</option>
-            <option value="atmega328" data-image="arduino_nano.svg" >Arduino Nano</option>
-            <option value="nrf52840" data-image="arduino_nano_33.svg" >Arduino Nano33</option>
-            <option value="rp2040" data-image="pi_pico.svg" >Raspberry Pi Pico</option>
-            <option value="esp8266" data-image="wemos_d1.svg" >ESP8266</option>
+            <option value="atmega328" >Arduino Uno R3</option>
+            <option value="ra4m1" >Arduino Uno R4</option>
+            <option value="atmega328" >Arduino Nano</option>
+            <option value="nrf52840" >Arduino Nano33</option>
+            <option value="rp2040" >Raspberry Pi Pico</option>
+            <option value="esp8266" >ESP8266</option>
+            <option value="esp32" >ESP32</option>
         </select>
-        <div class="image-container" id="imageContainer">
-            <img id="selectedImage" src="" alt="Választott kép">
-        </div>
         <input type="range" id="slider" min="0" max="100" value="50" disabled>
         <div class="description" id="description"></div>
     </div>
@@ -131,14 +118,14 @@
         function updateSelection() {
             var select = document.getElementById("myDropdown");
             var selectedOption = select.options[select.selectedIndex];
-            var imageSrc = selectedOption.getAttribute("data-image");
+            // var imageSrc = selectedOption.getAttribute("data-image");
             // var description = selectedOption.getAttribute("data-description");
             var slider = document.getElementById("slider");
-            var imageContainer = document.getElementById("imageContainer");
+            // var imageContainer = document.getElementById("imageContainer");
 
             if (selectedOption.value !== "") {
-                imageContainer.style.display = "block";
-                document.getElementById("selectedImage").src = imageSrc;
+                // imageContainer.style.display = "block";
+                // document.getElementById("selectedImage").src = imageSrc;
                 // document.getElementById("description").innerText = description;
 
                 // Csúszka értékének beállítása a kiválasztott elem alapján (itt csak példa, testreszabható)
@@ -158,36 +145,46 @@
                         document.getElementById("description").innerText = `
                             The RA4M1 is a relatively new microcontroller. It has enough memory to handle more serious tasks,
                             and with its many peripherals, it fits almost anywhere. The new Arduino Uno R4 series also uses this
-                            processor and has won our favor. With the WiFi version, you can even create a wireless terminal, the
-                            sky's the limit. Its only downside is that it's a bit on the pricey side, but it's truly enjoyable to use.
+                            processor and has won our favor. With the WiFi version, you can even create a wireless terminal over WiFi, or BLE, the
+                            sky's the limit. During testing we noticed that the wireless functionality is slower than a regular ESP32 or a Pi Pico.
+                            Its only downside is that it's a bit on the pricey side, but it's truly enjoyable to use.
                         `;
                         break;
                     case "nrf52840":
-                        slider.value = 80;
+                        slider.value = 100;
                         document.getElementById("description").innerText = `
                             The nrf52840 is a versatile microcontroller that is perfect for IoT purposes. The Arduino Nano33 series
                             also uses this microcontroller. Due to its excellent power consumption, it's suitable for battery-powered
-                            applications as well. Unfortunately, Shellminator currently does not support Bluetooth communication,
-                            but we hope this will be possible in the future.
+                            applications as well. Luckily, Shellminator has BLE support out of the box, so you can use it with BLE terminal as well!
                         `;
                         break;
                     case "rp2040":
-                        slider.value = 80;
+                        slider.value = 100;
                         document.getElementById("description").innerText = `
                             The RP2040 is a very intriguing microcontroller. It was created by the Raspberry Pi team, and they really
                             set the bar high with this one. Right off the bat, we get a dual-core microcontroller with an incredible
                             amount of both flash and dynamic memory. Additionally, having native USB support is a huge advantage. The
                             Raspberry Pi Pico series uses this microcontroller, and fortunately, there's also a WiFi-enabled version
-                            available, allowing us to communicate wirelessly.
+                            available, allowing us to communicate wirelessly out of the box. So far the WiFi performance is the best
+                            on this device according to our tests.
                         `;
                         break;
                     case "esp8266":
-                        slider.value = 80;
+                        slider.value = 100;
                         document.getElementById("description").innerText = `
                             The ESP8266 is a very intriguing microcontroller, suitable for almost anything. An added advantage is its
                             built-in WiFi, allowing wireless communication. It has a relatively large amount of dynamic memory and,
-                            depending on the board, can even have several megabytes of Flash memory. However, it's important to note that
-                            when using WiFi, memory usage is non-deterministic, and random crashes can occur. It's perfect for IoT applications.
+                            depending on the board, can even have several megabytes of Flash memory. Fortunately Shellminator supports
+                            WiFi out of the box for this device.
+                        `;
+                        break;
+                    case "esp32":
+                        slider.value = 100;
+                        document.getElementById("description").innerText = `
+                            The ESP32 is a very intriguing microcontroller, suitable for almost anything. It has a dual core architecture, with
+                            built-in WiFi, allowing wireless communication. It has a relatively large amount of dynamic memory and,
+                            depending on the board, can even have several megabytes of Flash memory. Fortunately Shellminator supports
+                            WiFi out of the box for this device.
                         `;
                         break;
                     default:
@@ -195,8 +192,8 @@
                         break;
                 }
             } else {
-                imageContainer.style.display = "none";
-                document.getElementById("selectedImage").src = "";
+                // imageContainer.style.display = "none";
+                // document.getElementById("selectedImage").src = "";
                 document.getElementById("description").innerText = "";
             }
         }

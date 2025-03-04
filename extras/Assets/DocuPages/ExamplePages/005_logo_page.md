@@ -7,6 +7,8 @@ If you want to create something really awesome to show off to your colleagues or
 * [patorjk ASCII Text](http://patorjk.com/software/taag/#p=display&f=Slant&t=Shellminator)
 * [ASCII-Generator](https://ascii-generator.site/)
 
+In the demo below, you’ll see that the logo **nicely appears above the prompt** after startup. Everything else works just the same as before.
+
 ## Live Demo
 
 \htmlonly

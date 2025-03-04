@@ -4,7 +4,7 @@
 
 When working with embedded systems, one of the most critical aspects to consider is memory usage. Unlike personal computers, these devices have very limited memory resources.  
 
-Take, for example, the good old **Arduino Uno R3**—one of the most popular microcontrollers on the market even today. It has only **32KB of Flash** for program storage and a mere **2KB of dynamic (RAM) memory**. To make things even trickier, the **AVR core** inside the Uno doesn't allow direct access to program memory.  
+Take, for example, the good old **Arduino Uno R3** —one of the most popular microcontrollers on the market even today. It has only **32KB of Flash** for program storage and a mere **2KB of dynamic (RAM) memory**. To make things even trickier, the **AVR core** inside the Uno doesn't allow direct access to program memory.  
 
 This means that even if you declare a string as `const char*`, it will still be stored in **dynamic memory**, not in Flash. The same applies to the **ESP8266**. While the ESP8266 has significantly more RAM than the Uno R3, it’s still useful to have a way to store long strings (such as those used in terminal outputs) in **program memory** instead of consuming precious RAM.  
 
@@ -21,7 +21,7 @@ Commander::systemCommand_t API_tree[3];
 
 Next, at the **beginning of the initialization section**, we need to manually fill each array element with the corresponding command data. **The order doesn’t matter**, but be extra careful with **indexing errors** (accidental copy-paste mistakes can shift the indices and break things).  
 
-Additionally, instead of using the `systemCommand` macro, we must use **`systemCommand_P`**. This macro is designed to work across different platforms, but this method introduces more potential issues compared to the approach described in **Example 200**.  
+Additionally, instead of using the `systemCommand` macro, we must use `systemCommand_P`. This macro is designed to work across different platforms, but this method introduces more potential issues compared to the approach described in **Example 200**.  
 
 ```cpp
 // Initialize the Command Tree and store descriptions in program memory.

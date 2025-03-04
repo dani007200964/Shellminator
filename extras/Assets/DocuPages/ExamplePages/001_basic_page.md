@@ -16,9 +16,9 @@ __2.__ Next, we need to instantiate an object from the Shellminator class. Durin
 // Create a Shellminator object, and initialize it to use Serial
 Shellminator shell( &Serial );
 ```
-It's not necessary to have only one shell object in a project. For example, if we want to make a terminal interface available both wirelessly and via UART, it's advisable to instantiate as many of these objects as we have channels. We'll delve into this further in a later example.
+It's not necessary to have only one shell object in a project. For example, if we want to make a terminal interface available both **wirelessly** and via **UART**, it's advisable to instantiate as many of these objects as we have channels. We'll delve into this further in a later example.
 
-__3.__ Next, we need to initialize the system. First, we initialize the channel. For Serial, we must specify a baud rate. In general, 115200 is fast enough and a widely used value. After that, we clear the console. This can be useful if, for example, after a reset, we don't want to see remnants of the previous session. Typically, most terminal emulators handle this by scrolling up as many lines as the window height, preserving the previous information. Finally, we start the terminal with a name of our choice. It's advisable to use a short, concise name that does not exceed the length specified in the @ref SHELLMINATOR_BANNER_LEN define.
+__3.__ Next, we need to initialize the system. First, we initialize the channel. For **Serial**, we must specify a baud rate. In general, **115200** is fast enough and a widely used value. After that, we clear the console. This can be useful if, for example, after a reset, we don't want to see remnants of the previous session. Typically, most terminal emulators handle this by scrolling up as many lines as the window height, preserving the previous information. Finally, we start the terminal with a name of our choice. It's advisable to use a short, concise name that does not exceed the length specified in the @ref SHELLMINATOR_BANNER_LEN define.
 ```cpp
 void setup(){
 

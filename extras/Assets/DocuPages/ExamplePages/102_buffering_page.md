@@ -18,6 +18,8 @@
 </div>
 \endhtmlonly
 
+In the demo below, the speed improvement might not be super noticeable since it's running on a fast computer. You'll really see the difference when typing quickly on a **slower microcontroller**.
+
 ## Live Demo
 
 \htmlonly
@@ -100,6 +102,6 @@ void loop(){
  
 | Previous          |                         Next |
 |:------------------|-----------------------------:|
-|[QR Code Example](@ref 101_qrCode_page) | [Commander Basic Example](@ref 200_commanderBasic_page) |
+|[QR Code Example](@ref 101_qrCode_page) | [Neofetch Basic Example](@ref 120_neofetchBasic_page) |
  
 </div>

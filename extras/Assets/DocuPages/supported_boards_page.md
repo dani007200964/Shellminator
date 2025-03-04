@@ -19,5 +19,5 @@
 
 
 \htmlonly
-<iframe id="supportList" src="supported_boards.html" style="height:100vh;width:100%;border:none;display:block;"></iframe>
+<iframe id="supportList" src="supported_boards.html" style="height:600px;width:100%;border:none;display:block;"></iframe>
 \endhtmlonly

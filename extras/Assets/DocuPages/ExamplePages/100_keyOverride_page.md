@@ -15,6 +15,12 @@
 </div>
 \endhtmlonly
 
+In the demo below, you should see that when you press the **arrow keys**, the banner text changes to the name of the arrow you just pressed.  
+
+If you want to reset the arrow key behavior back to normal, just press **CTRL + R**.  
+
+⚠️ Important note: After pressing **CTRL + R**, this shortcut will also return to its default function, which is **reverse-i-search**. The only way to fully reset the demo is to **reload the page**.
+
 ## Live Demo
 
 \htmlonly

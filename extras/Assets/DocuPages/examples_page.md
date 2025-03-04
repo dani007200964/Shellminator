@@ -17,7 +17,7 @@
 \htmlonly
 <div style="display:flex; align-items: center;">
     <div>
-        <p>Before you dive into this rabbit hole, we just want to let you know that although we are a small team, we try to compensate with a lot of motivation. If you happen to find any bugs along the way, please don't hesitate to let us know. We will do our best to fix them as soon as possible, and you can proudly say that you helped improve this project. We just ask that you adhere to ethical standards. We've also prepared a little guide to help you navigate things more smoothly, which you can find in the Bug Report section.
+        <p>Before you dive into this rabbit hole, we just want to let you know that although we are a small team, we try to compensate with a lot of motivation. If you happen to find any bugs along the way, please don't hesitate to let us know. We will do our best to fix them as soon as possible, and you can proudly say that you helped improve this project. We just ask that you adhere to ethical standards.
         </p>
     </div>
     <div style="width:250px; height:250px; margin-right: 20px;">
@@ -25,6 +25,8 @@
     </div>
 </div>
 \endhtmlonly
+
+We've also prepared a little guide to help you navigate things more smoothly, which you can find in the [Bug Report](@ref bug_report_page) section.
 
 <div class="section_buttons">
  
