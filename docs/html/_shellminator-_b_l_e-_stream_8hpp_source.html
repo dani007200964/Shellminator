@@ -1,0 +1,410 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/Shellminator-BLE-Stream.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_b_l_e-_stream_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Shellminator-BLE-Stream.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_shellminator-_b_l_e-_stream_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Created on July 20 2024</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright (c) 2020 - Daniel Hajnal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Modified July 20 2024</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">MIT License</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">Copyright (c) 2020 Daniel Hajnal</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">SOFTWARE.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#ifndef SHELLMINATOR_BLE_STREAM_HPP_</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define SHELLMINATOR_BLE_STREAM_HPP_</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">    #include &quot;Stream.h&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">    #include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// Todo add hooks to connection and disconnection events!</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Todo add SHELLMINATOR_BLE_DBG_ENABLE to defaultSettings.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">    #ifdef ARDUINO</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">        #include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">    #ifdef ESP32</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">        #include &lt;BLEDevice.h&gt;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">        #include &lt;BLEServer.h&gt;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">        #include &lt;BLEUtils.h&gt;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">        #include &lt;BLE2902.h&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">//#define SHELLMINATOR_USE_BLE</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="comment">//#include &quot;BLEProperty.h&quot;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">//#include &quot;BLECharacteristic.h&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">//#include &quot;BLEService.h&quot;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">    #ifdef SHELLMINATOR_USE_BLE</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">        #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">            #include &lt;ArduinoBLE.h&gt;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">        #endif</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#aaec9e4c32c182dfa6633a66cb0a2c98c">   67</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_SERVICE_NAME &quot;Shellminator BLE UART&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="comment">// Using NUS - Nordic Uart Service</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#ac07b0f3ac6b58087f558ff75bb4f50a2">   70</a></span><span class="preprocessor">        #define NUS_SERVICE_UUID        &quot;6E400001-B5A3-F393-E0A9-E50E24DCCA9E&quot;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a9da7ca841dbed272785373fd6d30b47f">   71</a></span><span class="preprocessor">        #define NUS_RX_CHAR_UUID        &quot;6E400002-B5A3-F393-E0A9-E50E24DCCA9E&quot;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a03434794e25bd707546903998c71f719">   72</a></span><span class="preprocessor">        #define NUS_TX_CHAR_UUID        &quot;6E400003-B5A3-F393-E0A9-E50E24DCCA9E&quot;</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="comment">// Macro magic for macro overloading.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#afb12410af754cf54cc0899393d1b0616">   75</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_DBG_OVERLOAD( _1, _2, NAME, ... ) NAME</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a7e5331d8d5c69d51bf680730e0d7a5e9">   77</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_DBG_ENABLE</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">        #ifdef SHELLMINATOR_BLE_DBG_ENABLE</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBG_1(   x ) if( dbg ){ dbg -&gt; print( x );   }</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBGLN_1( x ) if( dbg ){ dbg -&gt; println( x ); }</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBG_2(   x, y ) if( dbg ){ dbg -&gt; print( x, y );   }</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBGLN_2( x, y ) if( dbg ){ dbg -&gt; println( x, y ); }</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">        #elif</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#ad78f207cf4487e0f645e3778228c2d0d">   86</a></span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBG_1(   x )</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a1e19f292193a7148ff63f3fa88e34b9f">   87</a></span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBGLN_1( x )</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a9e03c6edbef85e405386d7887f2cdd96">   89</a></span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBG_2(   x, y )</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#abf6404e3474abd6c242a0750ce375790">   90</a></span><span class="preprocessor">            #define SHELLMINATOR_BLE_DBGLN_2( x, y )</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">        #endif</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a374c95756f743d862e2f1c76c95d8669">   98</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_DBG( ... )   SHELLMINATOR_BLE_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_BLE_DBG_2,   SHELLMINATOR_BLE_DBG_1   )( __VA_ARGS__ )</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a099448d4faf52f8d73587dd898d696bf">   99</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_DBGLN( ... ) SHELLMINATOR_BLE_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_BLE_DBGLN_2, SHELLMINATOR_BLE_DBGLN_1 )( __VA_ARGS__ )</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">  101</a></span><span class="preprocessor">        #define SHELLMINATOR_BLE_STREAM_BUFFER_SIZE 200</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html">  103</a></span>        <span class="keyword">class </span><a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a> : <span class="keyword">public</span> Stream{</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">                #if defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    <span class="keyword">static</span> <a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* instance;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_class" href="class_shellminator_ble_stream_1_1ble_rx_callback.html">bleRxCallback</a>( BLEDevice device, BLECharacteristic characteristics );</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keyword">static</span> <span class="keywordtype">void</span> onConnect( BLEDevice device );</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <span class="keyword">static</span> <span class="keywordtype">void</span> onDisconnect( BLEDevice device );</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">                #endif</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21">  113</a></span>                <span class="keyword">typedef</span> <span class="keyword">enum</span>{</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21a9c4caa7214e2e7ff90d304d4be5c10d1">  114</a></span>                    <a class="code hl_enumvalue" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21a9c4caa7214e2e7ff90d304d4be5c10d1">BLE_DISCONNECTED_STATE</a>,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    <a class="code hl_enumvalue" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21ad9493295d807e14dea64eaf5019dabd6">BLE_CONNECTED_STATE</a></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21ad9493295d807e14dea64eaf5019dabd6">  116</a></span>                } <a class="code hl_enumeration" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21">bleState_t</a>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <a class="code hl_function" href="class_shellminator_ble_stream.html#a7d3d57ec3806ea38c694068bda528cf4">ShellminatorBleStream</a>();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_ble_stream.html#a9eb5a496e1385a40d4dc43b578388fb2">available</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_ble_stream.html#aa89bc3e84f86768c172276f7018636d3">read</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_ble_stream.html#ab940a4f55ac9cac6b040c28747c7657b">peek</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                <span class="keywordtype">void</span>   <a class="code hl_function" href="class_shellminator_ble_stream.html#aedb164b196b4de077a4352946fa7672a">flush</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#aa98c876332f679f739228e62303ab661">write</a>( uint8_t b ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#aa98c876332f679f739228e62303ab661">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#ad7073be58140e14aa8ecf2bf4c7cb889">begin</a>();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#a9bc723d021aede586485514a6d0633ec">update</a>();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#aed0c68bff981a0e83d734b8abacc797e">attachDebugChannel</a>( Stream* dbg_p );</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#ac5481783a9f2f47191a15dc24aa5ac50">  150</a></span>                <a class="code hl_enumeration" href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21">bleState_t</a> <a class="code hl_variable" href="class_shellminator_ble_stream.html#ac5481783a9f2f47191a15dc24aa5ac50">state</a>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#ade3edf074835b1b1a17b48b32c18e7f4">  152</a></span>                uint32_t <a class="code hl_variable" href="class_shellminator_ble_stream.html#ade3edf074835b1b1a17b48b32c18e7f4">callbackDelayStart</a>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#ab82476c19c6f22268a70326548b4feba">  153</a></span>                uint32_t <a class="code hl_variable" href="class_shellminator_ble_stream.html#ab82476c19c6f22268a70326548b4feba">callbackDelayPeriod</a> = 3000;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#a51047a6cd46aa500fcb1a0d08835402c">attachConnectCallback</a>( <span class="keywordtype">void</span>(*connectCallback_p)(<a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* ) );</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#a1b005bb305d6bb74bb842b70899416b6">attachDisconnectCallback</a>( <span class="keywordtype">void</span>(*disconnectCallback_p)(<a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* ) );</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a85bbab2bee0da5baceda6ff95746416c">  160</a></span>                uint8_t <a class="code hl_variable" href="class_shellminator_ble_stream.html#a85bbab2bee0da5baceda6ff95746416c">streamBuffer</a>[ <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</a> ];</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#aff7f92ec77e36f2eeb3aa4c7ee3e7b43">  161</a></span>                uint32_t <a class="code hl_variable" href="class_shellminator_ble_stream.html#aff7f92ec77e36f2eeb3aa4c7ee3e7b43">streamBufferWritePointer</a>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a6f2a68ed6446f5dd3309ee809f4e314f">  162</a></span>                uint32_t <a class="code hl_variable" href="class_shellminator_ble_stream.html#a6f2a68ed6446f5dd3309ee809f4e314f">streamBufferReadPointer</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#acc5c0b65e313e612abc34a7268d8042a">  164</a></span>                Stream* <a class="code hl_variable" href="class_shellminator_ble_stream.html#acc5c0b65e313e612abc34a7268d8042a">dbg</a>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a40980e9d70d0c75e9e57bf89128a76fc">  166</a></span>                void(*<a class="code hl_variable" href="class_shellminator_ble_stream.html#a40980e9d70d0c75e9e57bf89128a76fc">connectCallback</a>)(<a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* parent) = NULL;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#adaa6a1aba75ec85d413972007b4f57c1">  167</a></span>                void(*<a class="code hl_variable" href="class_shellminator_ble_stream.html#adaa6a1aba75ec85d413972007b4f57c1">disconnectCallback</a>)(<a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* parent) = NULL;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#a1414db267dcad1e12ba395e187eadde7">resetVariables</a>();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#af67627dc3cba25853abe3241c2979d42">appendToCircularBuffer</a>( uint8_t data );</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream.html#af67627dc3cba25853abe3241c2979d42">appendToCircularBuffer</a>( uint8_t* data, <span class="keywordtype">int</span> dataSize );</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="preprocessor">                #ifdef ESP32</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#ada2bb1cc5ab95bba733b140101dc544d">  175</a></span>                    BLEServer *<a class="code hl_variable" href="class_shellminator_ble_stream.html#ada2bb1cc5ab95bba733b140101dc544d">bleServer</a> = NULL;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a23819b453097028b99d1146775c20df1">  176</a></span>                    BLEService *<a class="code hl_variable" href="class_shellminator_ble_stream.html#a23819b453097028b99d1146775c20df1">bleService</a> = NULL;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a64bcf4502737ec0442940294433c6540">  177</a></span>                    BLECharacteristic *<a class="code hl_variable" href="class_shellminator_ble_stream.html#a64bcf4502737ec0442940294433c6540">bleTxChar</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a3852201dc3d7bac3c029dbe6f44277a1">  178</a></span>                    BLECharacteristic *<a class="code hl_variable" href="class_shellminator_ble_stream.html#a3852201dc3d7bac3c029dbe6f44277a1">bleRxChar</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                    </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1_server_callbacks.html">  181</a></span>                    <span class="keyword">class </span><a class="code hl_class" href="class_shellminator_ble_stream_1_1_server_callbacks.html">ServerCallbacks</a>: <span class="keyword">public</span> BLEServerCallbacks {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream_1_1_server_callbacks.html#ae8ce1f3946181ebec37372d8e1f45189">onConnect</a>( BLEServer* serverPtr ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream_1_1_server_callbacks.html#a760256912e3c1148d157c4f6a8e39561">onDisconnect</a>( BLEServer* serverPtr ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1_server_callbacks.html#aef7ac7f1a36f94afef40e2918bbb0b27">  185</a></span>                            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream_1_1_server_callbacks.html#aef7ac7f1a36f94afef40e2918bbb0b27">attachDebugChannel</a>( Stream* dbg_p );</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1_server_callbacks.html#a28c3ea9b5d4a2f105be46763a76b203c">  186</a></span>                            <a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* <a class="code hl_variable" href="class_shellminator_ble_stream_1_1_server_callbacks.html#a28c3ea9b5d4a2f105be46763a76b203c">parent</a> = NULL;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1_server_callbacks.html#a96392a3dfad250d064b2cc95e3ed121d">  187</a></span>                            Stream* <a class="code hl_variable" href="class_shellminator_ble_stream_1_1_server_callbacks.html#a96392a3dfad250d064b2cc95e3ed121d">dbg</a> = NULL;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                    };</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1ble_rx_callback.html">  190</a></span>                    <span class="keyword">class </span><a class="code hl_class" href="class_shellminator_ble_stream_1_1ble_rx_callback.html">bleRxCallback</a>: <span class="keyword">public</span> BLECharacteristicCallbacks {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ad4927269c33f4663c436a2b2299c1b2f">onWrite</a>( BLECharacteristic *charPtr ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab39b539c93dbb40fea2590d08d5e251d">  193</a></span>                            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab39b539c93dbb40fea2590d08d5e251d">attachDebugChannel</a>( Stream* dbg_p );</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#a991ef6c013ec5299c8ef194ffa985b44">  194</a></span>                            <a class="code hl_class" href="class_shellminator_ble_stream.html">ShellminatorBleStream</a>* <a class="code hl_variable" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#a991ef6c013ec5299c8ef194ffa985b44">parent</a> = NULL;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab4d9c857e7174aa1f4edd0623c147689">  195</a></span>                            Stream* <a class="code hl_variable" href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab4d9c857e7174aa1f4edd0623c147689">dbg</a> = NULL;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                    };</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#adb40f4243701f48fcbe187db1f6f0b08">  198</a></span>                    <a class="code hl_class" href="class_shellminator_ble_stream_1_1_server_callbacks.html">ServerCallbacks</a> <a class="code hl_variable" href="class_shellminator_ble_stream.html#adb40f4243701f48fcbe187db1f6f0b08">serverCallbacks</a>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="class_shellminator_ble_stream.html#a287a22dd1beb7fa3021daa81045cb7cf">  199</a></span>                    <a class="code hl_class" href="class_shellminator_ble_stream_1_1ble_rx_callback.html">bleRxCallback</a> <a class="code hl_variable" href="class_shellminator_ble_stream.html#a287a22dd1beb7fa3021daa81045cb7cf">rxCallback</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="preprocessor">                #elif defined( ARDUINO_ARCH_NRF52840 ) || defined( ARDUINO_UNOWIFIR4 )</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                    uint8_t bleTxBuffer[ <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</a> ];</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                    BLEService <a class="code hl_variable" href="class_shellminator_ble_stream.html#a23819b453097028b99d1146775c20df1">bleService</a> = BLEService( <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#ac07b0f3ac6b58087f558ff75bb4f50a2">NUS_SERVICE_UUID</a> );</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                    BLECharacteristic <a class="code hl_variable" href="class_shellminator_ble_stream.html#a64bcf4502737ec0442940294433c6540">bleTxChar</a> = BLECharacteristic( <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a03434794e25bd707546903998c71f719">NUS_TX_CHAR_UUID</a>, BLENotify, <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</a> );</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                    BLECharacteristic <a class="code hl_variable" href="class_shellminator_ble_stream.html#a3852201dc3d7bac3c029dbe6f44277a1">bleRxChar</a> = BLECharacteristic( <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a9da7ca841dbed272785373fd6d30b47f">NUS_RX_CHAR_UUID</a>, BLEWrite, <a class="code hl_define" href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</a> );</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="preprocessor">                #endif</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        };</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_shellminator-_b_l_e-_stream_8hpp_html_a03434794e25bd707546903998c71f719"><div class="ttname"><a href="_shellminator-_b_l_e-_stream_8hpp.html#a03434794e25bd707546903998c71f719">NUS_TX_CHAR_UUID</a></div><div class="ttdeci">#define NUS_TX_CHAR_UUID</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00072">Shellminator-BLE-Stream.hpp:72</a></div></div>
+<div class="ttc" id="a_shellminator-_b_l_e-_stream_8hpp_html_a4108dc0dada48688a02c84f6a6bbc1e7"><div class="ttname"><a href="_shellminator-_b_l_e-_stream_8hpp.html#a4108dc0dada48688a02c84f6a6bbc1e7">SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_BLE_STREAM_BUFFER_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00101">Shellminator-BLE-Stream.hpp:101</a></div></div>
+<div class="ttc" id="a_shellminator-_b_l_e-_stream_8hpp_html_a9da7ca841dbed272785373fd6d30b47f"><div class="ttname"><a href="_shellminator-_b_l_e-_stream_8hpp.html#a9da7ca841dbed272785373fd6d30b47f">NUS_RX_CHAR_UUID</a></div><div class="ttdeci">#define NUS_RX_CHAR_UUID</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00071">Shellminator-BLE-Stream.hpp:71</a></div></div>
+<div class="ttc" id="a_shellminator-_b_l_e-_stream_8hpp_html_ac07b0f3ac6b58087f558ff75bb4f50a2"><div class="ttname"><a href="_shellminator-_b_l_e-_stream_8hpp.html#ac07b0f3ac6b58087f558ff75bb4f50a2">NUS_SERVICE_UUID</a></div><div class="ttdeci">#define NUS_SERVICE_UUID</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00070">Shellminator-BLE-Stream.hpp:70</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_helpers_8hpp_html"><div class="ttname"><a href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html">ShellminatorBleStream::ServerCallbacks</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00181">Shellminator-BLE-Stream.hpp:181</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html_a28c3ea9b5d4a2f105be46763a76b203c"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html#a28c3ea9b5d4a2f105be46763a76b203c">ShellminatorBleStream::ServerCallbacks::parent</a></div><div class="ttdeci">ShellminatorBleStream * parent</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00186">Shellminator-BLE-Stream.hpp:186</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html_a760256912e3c1148d157c4f6a8e39561"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html#a760256912e3c1148d157c4f6a8e39561">ShellminatorBleStream::ServerCallbacks::onDisconnect</a></div><div class="ttdeci">void onDisconnect(BLEServer *serverPtr) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00154">Shellminator-BLE-Stream.cpp:154</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html_a96392a3dfad250d064b2cc95e3ed121d"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html#a96392a3dfad250d064b2cc95e3ed121d">ShellminatorBleStream::ServerCallbacks::dbg</a></div><div class="ttdeci">Stream * dbg</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00187">Shellminator-BLE-Stream.hpp:187</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html_ae8ce1f3946181ebec37372d8e1f45189"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html#ae8ce1f3946181ebec37372d8e1f45189">ShellminatorBleStream::ServerCallbacks::onConnect</a></div><div class="ttdeci">void onConnect(BLEServer *serverPtr) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00148">Shellminator-BLE-Stream.cpp:148</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1_server_callbacks_html_aef7ac7f1a36f94afef40e2918bbb0b27"><div class="ttname"><a href="class_shellminator_ble_stream_1_1_server_callbacks.html#aef7ac7f1a36f94afef40e2918bbb0b27">ShellminatorBleStream::ServerCallbacks::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *dbg_p)</div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1ble_rx_callback_html"><div class="ttname"><a href="class_shellminator_ble_stream_1_1ble_rx_callback.html">ShellminatorBleStream::bleRxCallback</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00190">Shellminator-BLE-Stream.hpp:190</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1ble_rx_callback_html_a991ef6c013ec5299c8ef194ffa985b44"><div class="ttname"><a href="class_shellminator_ble_stream_1_1ble_rx_callback.html#a991ef6c013ec5299c8ef194ffa985b44">ShellminatorBleStream::bleRxCallback::parent</a></div><div class="ttdeci">ShellminatorBleStream * parent</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00194">Shellminator-BLE-Stream.hpp:194</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1ble_rx_callback_html_ab39b539c93dbb40fea2590d08d5e251d"><div class="ttname"><a href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab39b539c93dbb40fea2590d08d5e251d">ShellminatorBleStream::bleRxCallback::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *dbg_p)</div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1ble_rx_callback_html_ab4d9c857e7174aa1f4edd0623c147689"><div class="ttname"><a href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ab4d9c857e7174aa1f4edd0623c147689">ShellminatorBleStream::bleRxCallback::dbg</a></div><div class="ttdeci">Stream * dbg</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00195">Shellminator-BLE-Stream.hpp:195</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_1_1ble_rx_callback_html_ad4927269c33f4663c436a2b2299c1b2f"><div class="ttname"><a href="class_shellminator_ble_stream_1_1ble_rx_callback.html#ad4927269c33f4663c436a2b2299c1b2f">ShellminatorBleStream::bleRxCallback::onWrite</a></div><div class="ttdeci">void onWrite(BLECharacteristic *charPtr) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00165">Shellminator-BLE-Stream.cpp:165</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html"><div class="ttname"><a href="class_shellminator_ble_stream.html">ShellminatorBleStream</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00103">Shellminator-BLE-Stream.hpp:103</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a1414db267dcad1e12ba395e187eadde7"><div class="ttname"><a href="class_shellminator_ble_stream.html#a1414db267dcad1e12ba395e187eadde7">ShellminatorBleStream::resetVariables</a></div><div class="ttdeci">void resetVariables()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00064">Shellminator-BLE-Stream.cpp:64</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a1b005bb305d6bb74bb842b70899416b6"><div class="ttname"><a href="class_shellminator_ble_stream.html#a1b005bb305d6bb74bb842b70899416b6">ShellminatorBleStream::attachDisconnectCallback</a></div><div class="ttdeci">void attachDisconnectCallback(void(*disconnectCallback_p)(ShellminatorBleStream *))</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00376">Shellminator-BLE-Stream.cpp:376</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a23819b453097028b99d1146775c20df1"><div class="ttname"><a href="class_shellminator_ble_stream.html#a23819b453097028b99d1146775c20df1">ShellminatorBleStream::bleService</a></div><div class="ttdeci">BLEService * bleService</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00176">Shellminator-BLE-Stream.hpp:176</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a287a22dd1beb7fa3021daa81045cb7cf"><div class="ttname"><a href="class_shellminator_ble_stream.html#a287a22dd1beb7fa3021daa81045cb7cf">ShellminatorBleStream::rxCallback</a></div><div class="ttdeci">bleRxCallback rxCallback</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00199">Shellminator-BLE-Stream.hpp:199</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a3852201dc3d7bac3c029dbe6f44277a1"><div class="ttname"><a href="class_shellminator_ble_stream.html#a3852201dc3d7bac3c029dbe6f44277a1">ShellminatorBleStream::bleRxChar</a></div><div class="ttdeci">BLECharacteristic * bleRxChar</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00178">Shellminator-BLE-Stream.hpp:178</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a40980e9d70d0c75e9e57bf89128a76fc"><div class="ttname"><a href="class_shellminator_ble_stream.html#a40980e9d70d0c75e9e57bf89128a76fc">ShellminatorBleStream::connectCallback</a></div><div class="ttdeci">void(* connectCallback)(ShellminatorBleStream *parent)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00166">Shellminator-BLE-Stream.hpp:166</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a51047a6cd46aa500fcb1a0d08835402c"><div class="ttname"><a href="class_shellminator_ble_stream.html#a51047a6cd46aa500fcb1a0d08835402c">ShellminatorBleStream::attachConnectCallback</a></div><div class="ttdeci">void attachConnectCallback(void(*connectCallback_p)(ShellminatorBleStream *))</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00372">Shellminator-BLE-Stream.cpp:372</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a52b804e8d9ebe02e468c448e5d9d9d21"><div class="ttname"><a href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21">ShellminatorBleStream::bleState_t</a></div><div class="ttdeci">bleState_t</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00113">Shellminator-BLE-Stream.hpp:113</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a52b804e8d9ebe02e468c448e5d9d9d21a9c4caa7214e2e7ff90d304d4be5c10d1"><div class="ttname"><a href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21a9c4caa7214e2e7ff90d304d4be5c10d1">ShellminatorBleStream::BLE_DISCONNECTED_STATE</a></div><div class="ttdeci">@ BLE_DISCONNECTED_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00114">Shellminator-BLE-Stream.hpp:114</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a52b804e8d9ebe02e468c448e5d9d9d21ad9493295d807e14dea64eaf5019dabd6"><div class="ttname"><a href="class_shellminator_ble_stream.html#a52b804e8d9ebe02e468c448e5d9d9d21ad9493295d807e14dea64eaf5019dabd6">ShellminatorBleStream::BLE_CONNECTED_STATE</a></div><div class="ttdeci">@ BLE_CONNECTED_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00116">Shellminator-BLE-Stream.hpp:115</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a64bcf4502737ec0442940294433c6540"><div class="ttname"><a href="class_shellminator_ble_stream.html#a64bcf4502737ec0442940294433c6540">ShellminatorBleStream::bleTxChar</a></div><div class="ttdeci">BLECharacteristic * bleTxChar</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00177">Shellminator-BLE-Stream.hpp:177</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a6f2a68ed6446f5dd3309ee809f4e314f"><div class="ttname"><a href="class_shellminator_ble_stream.html#a6f2a68ed6446f5dd3309ee809f4e314f">ShellminatorBleStream::streamBufferReadPointer</a></div><div class="ttdeci">uint32_t streamBufferReadPointer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00162">Shellminator-BLE-Stream.hpp:162</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a7d3d57ec3806ea38c694068bda528cf4"><div class="ttname"><a href="class_shellminator_ble_stream.html#a7d3d57ec3806ea38c694068bda528cf4">ShellminatorBleStream::ShellminatorBleStream</a></div><div class="ttdeci">ShellminatorBleStream()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00046">Shellminator-BLE-Stream.cpp:46</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a85bbab2bee0da5baceda6ff95746416c"><div class="ttname"><a href="class_shellminator_ble_stream.html#a85bbab2bee0da5baceda6ff95746416c">ShellminatorBleStream::streamBuffer</a></div><div class="ttdeci">uint8_t streamBuffer[SHELLMINATOR_BLE_STREAM_BUFFER_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00160">Shellminator-BLE-Stream.hpp:160</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a9bc723d021aede586485514a6d0633ec"><div class="ttname"><a href="class_shellminator_ble_stream.html#a9bc723d021aede586485514a6d0633ec">ShellminatorBleStream::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00123">Shellminator-BLE-Stream.cpp:123</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_a9eb5a496e1385a40d4dc43b578388fb2"><div class="ttname"><a href="class_shellminator_ble_stream.html#a9eb5a496e1385a40d4dc43b578388fb2">ShellminatorBleStream::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Available bytes in the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00279">Shellminator-BLE-Stream.cpp:279</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_aa89bc3e84f86768c172276f7018636d3"><div class="ttname"><a href="class_shellminator_ble_stream.html#aa89bc3e84f86768c172276f7018636d3">ShellminatorBleStream::read</a></div><div class="ttdeci">int read() override</div><div class="ttdoc">Read one byte form the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00293">Shellminator-BLE-Stream.cpp:293</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_aa98c876332f679f739228e62303ab661"><div class="ttname"><a href="class_shellminator_ble_stream.html#aa98c876332f679f739228e62303ab661">ShellminatorBleStream::write</a></div><div class="ttdeci">size_t write(uint8_t b) override</div><div class="ttdoc">Write one byte to the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00329">Shellminator-BLE-Stream.cpp:329</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ab82476c19c6f22268a70326548b4feba"><div class="ttname"><a href="class_shellminator_ble_stream.html#ab82476c19c6f22268a70326548b4feba">ShellminatorBleStream::callbackDelayPeriod</a></div><div class="ttdeci">uint32_t callbackDelayPeriod</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00153">Shellminator-BLE-Stream.hpp:153</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ab940a4f55ac9cac6b040c28747c7657b"><div class="ttname"><a href="class_shellminator_ble_stream.html#ab940a4f55ac9cac6b040c28747c7657b">ShellminatorBleStream::peek</a></div><div class="ttdeci">int peek() override</div><div class="ttdoc">Peek the firtst byte from the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00313">Shellminator-BLE-Stream.cpp:313</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ac5481783a9f2f47191a15dc24aa5ac50"><div class="ttname"><a href="class_shellminator_ble_stream.html#ac5481783a9f2f47191a15dc24aa5ac50">ShellminatorBleStream::state</a></div><div class="ttdeci">bleState_t state</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00150">Shellminator-BLE-Stream.hpp:150</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_acc5c0b65e313e612abc34a7268d8042a"><div class="ttname"><a href="class_shellminator_ble_stream.html#acc5c0b65e313e612abc34a7268d8042a">ShellminatorBleStream::dbg</a></div><div class="ttdeci">Stream * dbg</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00164">Shellminator-BLE-Stream.hpp:164</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ad7073be58140e14aa8ecf2bf4c7cb889"><div class="ttname"><a href="class_shellminator_ble_stream.html#ad7073be58140e14aa8ecf2bf4c7cb889">ShellminatorBleStream::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00071">Shellminator-BLE-Stream.cpp:71</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ada2bb1cc5ab95bba733b140101dc544d"><div class="ttname"><a href="class_shellminator_ble_stream.html#ada2bb1cc5ab95bba733b140101dc544d">ShellminatorBleStream::bleServer</a></div><div class="ttdeci">BLEServer * bleServer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00175">Shellminator-BLE-Stream.hpp:175</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_adaa6a1aba75ec85d413972007b4f57c1"><div class="ttname"><a href="class_shellminator_ble_stream.html#adaa6a1aba75ec85d413972007b4f57c1">ShellminatorBleStream::disconnectCallback</a></div><div class="ttdeci">void(* disconnectCallback)(ShellminatorBleStream *parent)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00167">Shellminator-BLE-Stream.hpp:167</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_adb40f4243701f48fcbe187db1f6f0b08"><div class="ttname"><a href="class_shellminator_ble_stream.html#adb40f4243701f48fcbe187db1f6f0b08">ShellminatorBleStream::serverCallbacks</a></div><div class="ttdeci">ServerCallbacks serverCallbacks</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00198">Shellminator-BLE-Stream.hpp:198</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_ade3edf074835b1b1a17b48b32c18e7f4"><div class="ttname"><a href="class_shellminator_ble_stream.html#ade3edf074835b1b1a17b48b32c18e7f4">ShellminatorBleStream::callbackDelayStart</a></div><div class="ttdeci">uint32_t callbackDelayStart</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00152">Shellminator-BLE-Stream.hpp:152</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_aed0c68bff981a0e83d734b8abacc797e"><div class="ttname"><a href="class_shellminator_ble_stream.html#aed0c68bff981a0e83d734b8abacc797e">ShellminatorBleStream::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *dbg_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00139">Shellminator-BLE-Stream.cpp:139</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_aedb164b196b4de077a4352946fa7672a"><div class="ttname"><a href="class_shellminator_ble_stream.html#aedb164b196b4de077a4352946fa7672a">ShellminatorBleStream::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Flush the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00324">Shellminator-BLE-Stream.cpp:324</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_af67627dc3cba25853abe3241c2979d42"><div class="ttname"><a href="class_shellminator_ble_stream.html#af67627dc3cba25853abe3241c2979d42">ShellminatorBleStream::appendToCircularBuffer</a></div><div class="ttdeci">void appendToCircularBuffer(uint8_t data)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8cpp_source.html#l00254">Shellminator-BLE-Stream.cpp:254</a></div></div>
+<div class="ttc" id="aclass_shellminator_ble_stream_html_aff7f92ec77e36f2eeb3aa4c7ee3e7b43"><div class="ttname"><a href="class_shellminator_ble_stream.html#aff7f92ec77e36f2eeb3aa4c7ee3e7b43">ShellminatorBleStream::streamBufferWritePointer</a></div><div class="ttdeci">uint32_t streamBufferWritePointer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_b_l_e-_stream_8hpp_source.html#l00161">Shellminator-BLE-Stream.hpp:161</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_b_l_e-_stream_8hpp.html">Shellminator-BLE-Stream.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

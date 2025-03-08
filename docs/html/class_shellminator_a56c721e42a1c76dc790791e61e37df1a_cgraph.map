@@ -1,0 +1,6 @@
+<map id="Shellminator::redrawHistorySearch" name="Shellminator::redrawHistorySearch">
+<area shape="rect" id="node1" title="If reverse search mode is active, this function is used to print the text correctly." alt="" coords="5,23,187,63"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e" title="Basic text formatting." alt="" coords="243,5,381,31"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123" title="Basic substring function." alt="" coords="235,55,389,80"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#af30816610bf82e63cccc0690991a7210" title="Basic text formatting." alt="" coords="437,5,599,31"/>
+</map>

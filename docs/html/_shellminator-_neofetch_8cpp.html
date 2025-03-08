@@ -1,0 +1,980 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/Shellminator-Neofetch.cpp File Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_neofetch_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Shellminator-Neofetch.cpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_shellminator-_neofetch_8hpp_source.html">Shellminator-Neofetch.hpp</a>&quot;</code><br />
+</div>
+<p><a href="_shellminator-_neofetch_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a99ce34ab2f31f57f7edafdc7dc126c93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a99ce34ab2f31f57f7edafdc7dc126c93">defaultShellminatorNeofetch</a> (<a class="el" href="class_shellminator.html">Shellminator</a> *parent)</td></tr>
+<tr class="separator:a99ce34ab2f31f57f7edafdc7dc126c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a88950ce825c8ea688dfcb207cfa5e055"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a88950ce825c8ea688dfcb207cfa5e055">neofetch_header_text</a> = &quot;Shellminator&quot;</td></tr>
+<tr class="separator:a88950ce825c8ea688dfcb207cfa5e055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bb431e094669aa65f9616f77b880fc2"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a4bb431e094669aa65f9616f77b880fc2">neofetch_header_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></td></tr>
+<tr class="separator:a4bb431e094669aa65f9616f77b880fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e0915ad69f667d2c0dda6c5076d5fa"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a16e0915ad69f667d2c0dda6c5076d5fa">neofetch_header_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a16e0915ad69f667d2c0dda6c5076d5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735fecc36d95067b86b9cec50ecd8bf1"><td class="memItemLeft" align="right" valign="top">char <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a735fecc36d95067b86b9cec50ecd8bf1">neofetch_header_line_char</a> = '-'</td></tr>
+<tr class="separator:a735fecc36d95067b86b9cec50ecd8bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af744108f7b00966ef5cffec3911900b2"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#af744108f7b00966ef5cffec3911900b2">neofetch_header_line_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:af744108f7b00966ef5cffec3911900b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dd342e6884190ceb62e51528bd48957"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a5dd342e6884190ceb62e51528bd48957">neofetch_header_line_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a5dd342e6884190ceb62e51528bd48957"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8b84dfbbe5494b1c975c4918e2b41b"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#acb8b84dfbbe5494b1c975c4918e2b41b">neofetch_field_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></td></tr>
+<tr class="separator:acb8b84dfbbe5494b1c975c4918e2b41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea6edfc71cb6190f67b0e4c61b2ee3b"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a7ea6edfc71cb6190f67b0e4c61b2ee3b">neofetch_field_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a7ea6edfc71cb6190f67b0e4c61b2ee3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97f519a89ea0793167660e980c304ce3"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a97f519a89ea0793167660e980c304ce3">neofetch_fw_text</a> = <a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a></td></tr>
+<tr class="separator:a97f519a89ea0793167660e980c304ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66972d949baea8d3f227b57290c08f1c"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a66972d949baea8d3f227b57290c08f1c">neofetch_fw_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a66972d949baea8d3f227b57290c08f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357411491f77320ee4ce03600646a279"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a357411491f77320ee4ce03600646a279">neofetch_fw_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a357411491f77320ee4ce03600646a279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc51f817e7f23e7d3c526d5b136755b"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a5fc51f817e7f23e7d3c526d5b136755b">neofetch_cpu_text</a> = &quot;T-800&quot;</td></tr>
+<tr class="separator:a5fc51f817e7f23e7d3c526d5b136755b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed3a53a74d5174e4cb8459a2e08acd44"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#aed3a53a74d5174e4cb8459a2e08acd44">neofetch_cpu_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:aed3a53a74d5174e4cb8459a2e08acd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b516f4f0c98ddc33df0d21f2ea2c169"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a8b516f4f0c98ddc33df0d21f2ea2c169">neofetch_cpu_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a8b516f4f0c98ddc33df0d21f2ea2c169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d047c9d29275504595931d2a6b7f1b4"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a9d047c9d29275504595931d2a6b7f1b4">neofetch_compiler_text</a> = <a class="el" href="_shellminator-_helpers_8hpp.html#aef0559724e75a27d35a8f871a5c57d1e">SHELLMINATOR_COMPILER</a></td></tr>
+<tr class="separator:a9d047c9d29275504595931d2a6b7f1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73d720715c6b0481cd3a9074010e31b"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#af73d720715c6b0481cd3a9074010e31b">neofetch_compiler_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:af73d720715c6b0481cd3a9074010e31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a9282ac27a1181e233687a8a452a00"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a84a9282ac27a1181e233687a8a452a00">neofetch_compiler_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a84a9282ac27a1181e233687a8a452a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e59d3a5c261d59584b0df84f9d9caa"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a38e59d3a5c261d59584b0df84f9d9caa">neofetch_compile_date_text</a> = __DATE__</td></tr>
+<tr class="separator:a38e59d3a5c261d59584b0df84f9d9caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20657b0d1885657fabdce22f7a3707b2"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a20657b0d1885657fabdce22f7a3707b2">neofetch_compile_date_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a20657b0d1885657fabdce22f7a3707b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17849efbbcf0fce4200c630ce6791557"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a17849efbbcf0fce4200c630ce6791557">neofetch_compile_date_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a17849efbbcf0fce4200c630ce6791557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073f5105caf6f6df452e1c362fa1ff32"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a073f5105caf6f6df452e1c362fa1ff32">neofetch_author_text</a> = &quot;Daniel Hajnal&quot;</td></tr>
+<tr class="separator:a073f5105caf6f6df452e1c362fa1ff32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee367a1c6f6eaed2e8937720c543c563"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#aee367a1c6f6eaed2e8937720c543c563">neofetch_author_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:aee367a1c6f6eaed2e8937720c543c563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c845d0289d97363d98f5ce8f76efec8"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a1c845d0289d97363d98f5ce8f76efec8">neofetch_author_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a1c845d0289d97363d98f5ce8f76efec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dc4f89c8250e63ac14de0e5fa043ac4"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a5dc4f89c8250e63ac14de0e5fa043ac4">neofetch_user_field_1_label</a> = NULL</td></tr>
+<tr class="separator:a5dc4f89c8250e63ac14de0e5fa043ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d47842da9d9539e949a9dcd0d9aedd"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a85d47842da9d9539e949a9dcd0d9aedd">neofetch_user_field_1_text</a> = NULL</td></tr>
+<tr class="separator:a85d47842da9d9539e949a9dcd0d9aedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b761e2eb5fa5ceb28065753a181054e"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a0b761e2eb5fa5ceb28065753a181054e">neofetch_user_field_1_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a0b761e2eb5fa5ceb28065753a181054e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8557b81121c4ea8bfc36ae26d19a8c"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a9a8557b81121c4ea8bfc36ae26d19a8c">neofetch_user_field_1_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a9a8557b81121c4ea8bfc36ae26d19a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34744bd021e8db36d184ccda9e620a8d"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a34744bd021e8db36d184ccda9e620a8d">neofetch_user_field_2_label</a> = NULL</td></tr>
+<tr class="separator:a34744bd021e8db36d184ccda9e620a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd2eb6b880571de56d36c5ef3c832c6"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#acbd2eb6b880571de56d36c5ef3c832c6">neofetch_user_field_2_text</a> = NULL</td></tr>
+<tr class="separator:acbd2eb6b880571de56d36c5ef3c832c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92c75868555f7c6942f1238294e83cb"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#ab92c75868555f7c6942f1238294e83cb">neofetch_user_field_2_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:ab92c75868555f7c6942f1238294e83cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23a3709d413cc547cf64504d148c233e"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a23a3709d413cc547cf64504d148c233e">neofetch_user_field_2_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a23a3709d413cc547cf64504d148c233e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4589d5ec65541c8180c0277688c8fc76"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a4589d5ec65541c8180c0277688c8fc76">neofetch_user_field_3_label</a> = NULL</td></tr>
+<tr class="separator:a4589d5ec65541c8180c0277688c8fc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4eca15cbd4445e9196dfeedc279a67a"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#ac4eca15cbd4445e9196dfeedc279a67a">neofetch_user_field_3_text</a> = NULL</td></tr>
+<tr class="separator:ac4eca15cbd4445e9196dfeedc279a67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb89b418aa102d1de92f89d6699d835"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a0fb89b418aa102d1de92f89d6699d835">neofetch_user_field_3_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a0fb89b418aa102d1de92f89d6699d835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf11d4df1df45a85dbd3862e45ecfd1e"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#acf11d4df1df45a85dbd3862e45ecfd1e">neofetch_user_field_3_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:acf11d4df1df45a85dbd3862e45ecfd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f99da2cc5a7ca23a50f884c7f237cf"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#aa0f99da2cc5a7ca23a50f884c7f237cf">neofetch_user_field_4_label</a> = NULL</td></tr>
+<tr class="separator:aa0f99da2cc5a7ca23a50f884c7f237cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4f7b700c24ce0fbdf0fced138f9880"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a9e4f7b700c24ce0fbdf0fced138f9880">neofetch_user_field_4_text</a> = NULL</td></tr>
+<tr class="separator:a9e4f7b700c24ce0fbdf0fced138f9880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9459e9d729c9cac1f1d58b2d64a05f96"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a9459e9d729c9cac1f1d58b2d64a05f96">neofetch_user_field_4_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a9459e9d729c9cac1f1d58b2d64a05f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e302e51f07ac4fc0d1f669b5e801ad"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#ab2e302e51f07ac4fc0d1f669b5e801ad">neofetch_user_field_4_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:ab2e302e51f07ac4fc0d1f669b5e801ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7926bdf9c5568d7fee421e7d0713c355"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a7926bdf9c5568d7fee421e7d0713c355">neofetch_user_field_5_label</a> = NULL</td></tr>
+<tr class="separator:a7926bdf9c5568d7fee421e7d0713c355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d13b8168b6f151f9d534fc784df1044"><td class="memItemLeft" align="right" valign="top">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a7d13b8168b6f151f9d534fc784df1044">neofetch_user_field_5_text</a> = NULL</td></tr>
+<tr class="separator:a7d13b8168b6f151f9d534fc784df1044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a047a5424c427c95645a8eaa924727ce5"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a047a5424c427c95645a8eaa924727ce5">neofetch_user_field_5_text_color</a> = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td></tr>
+<tr class="separator:a047a5424c427c95645a8eaa924727ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41d2414d861025bec928a8a4f17ff998"><td class="memItemLeft" align="right" valign="top">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_shellminator-_neofetch_8cpp.html#a41d2414d861025bec928a8a4f17ff998">neofetch_user_field_5_text_style</a> = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td></tr>
+<tr class="separator:a41d2414d861025bec928a8a4f17ff998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a99ce34ab2f31f57f7edafdc7dc126c93" name="a99ce34ab2f31f57f7edafdc7dc126c93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99ce34ab2f31f57f7edafdc7dc126c93">&#9670;&#160;</a></span>defaultShellminatorNeofetch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void defaultShellminatorNeofetch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_shellminator.html">Shellminator</a> *&#160;</td>
+          <td class="paramname"><em>parent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00059">59</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a073f5105caf6f6df452e1c362fa1ff32" name="a073f5105caf6f6df452e1c362fa1ff32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073f5105caf6f6df452e1c362fa1ff32">&#9670;&#160;</a></span>neofetch_author_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_author_text = &quot;Daniel Hajnal&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00030">30</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aee367a1c6f6eaed2e8937720c543c563" name="aee367a1c6f6eaed2e8937720c543c563"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee367a1c6f6eaed2e8937720c543c563">&#9670;&#160;</a></span>neofetch_author_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_author_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00031">31</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1c845d0289d97363d98f5ce8f76efec8" name="a1c845d0289d97363d98f5ce8f76efec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c845d0289d97363d98f5ce8f76efec8">&#9670;&#160;</a></span>neofetch_author_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_author_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00032">32</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a38e59d3a5c261d59584b0df84f9d9caa" name="a38e59d3a5c261d59584b0df84f9d9caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e59d3a5c261d59584b0df84f9d9caa">&#9670;&#160;</a></span>neofetch_compile_date_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compile_date_text = __DATE__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00026">26</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a20657b0d1885657fabdce22f7a3707b2" name="a20657b0d1885657fabdce22f7a3707b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20657b0d1885657fabdce22f7a3707b2">&#9670;&#160;</a></span>neofetch_compile_date_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compile_date_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00027">27</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a17849efbbcf0fce4200c630ce6791557" name="a17849efbbcf0fce4200c630ce6791557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17849efbbcf0fce4200c630ce6791557">&#9670;&#160;</a></span>neofetch_compile_date_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compile_date_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00028">28</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9d047c9d29275504595931d2a6b7f1b4" name="a9d047c9d29275504595931d2a6b7f1b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d047c9d29275504595931d2a6b7f1b4">&#9670;&#160;</a></span>neofetch_compiler_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compiler_text = <a class="el" href="_shellminator-_helpers_8hpp.html#aef0559724e75a27d35a8f871a5c57d1e">SHELLMINATOR_COMPILER</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00022">22</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af73d720715c6b0481cd3a9074010e31b" name="af73d720715c6b0481cd3a9074010e31b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73d720715c6b0481cd3a9074010e31b">&#9670;&#160;</a></span>neofetch_compiler_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compiler_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00023">23</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a84a9282ac27a1181e233687a8a452a00" name="a84a9282ac27a1181e233687a8a452a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a9282ac27a1181e233687a8a452a00">&#9670;&#160;</a></span>neofetch_compiler_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_compiler_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00024">24</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5fc51f817e7f23e7d3c526d5b136755b" name="a5fc51f817e7f23e7d3c526d5b136755b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc51f817e7f23e7d3c526d5b136755b">&#9670;&#160;</a></span>neofetch_cpu_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char *<a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_cpu_text = &quot;T-800&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00018">18</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aed3a53a74d5174e4cb8459a2e08acd44" name="aed3a53a74d5174e4cb8459a2e08acd44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed3a53a74d5174e4cb8459a2e08acd44">&#9670;&#160;</a></span>neofetch_cpu_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_cpu_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00019">19</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b516f4f0c98ddc33df0d21f2ea2c169" name="a8b516f4f0c98ddc33df0d21f2ea2c169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b516f4f0c98ddc33df0d21f2ea2c169">&#9670;&#160;</a></span>neofetch_cpu_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_cpu_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00020">20</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acb8b84dfbbe5494b1c975c4918e2b41b" name="acb8b84dfbbe5494b1c975c4918e2b41b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8b84dfbbe5494b1c975c4918e2b41b">&#9670;&#160;</a></span>neofetch_field_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_field_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00011">11</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7ea6edfc71cb6190f67b0e4c61b2ee3b" name="a7ea6edfc71cb6190f67b0e4c61b2ee3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ea6edfc71cb6190f67b0e4c61b2ee3b">&#9670;&#160;</a></span>neofetch_field_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_field_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00012">12</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a97f519a89ea0793167660e980c304ce3" name="a97f519a89ea0793167660e980c304ce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f519a89ea0793167660e980c304ce3">&#9670;&#160;</a></span>neofetch_fw_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_fw_text = <a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00014">14</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a66972d949baea8d3f227b57290c08f1c" name="a66972d949baea8d3f227b57290c08f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66972d949baea8d3f227b57290c08f1c">&#9670;&#160;</a></span>neofetch_fw_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_fw_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00015">15</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a357411491f77320ee4ce03600646a279" name="a357411491f77320ee4ce03600646a279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a357411491f77320ee4ce03600646a279">&#9670;&#160;</a></span>neofetch_fw_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_fw_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00016">16</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a735fecc36d95067b86b9cec50ecd8bf1" name="a735fecc36d95067b86b9cec50ecd8bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735fecc36d95067b86b9cec50ecd8bf1">&#9670;&#160;</a></span>neofetch_header_line_char</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_line_char = '-'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00007">7</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af744108f7b00966ef5cffec3911900b2" name="af744108f7b00966ef5cffec3911900b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af744108f7b00966ef5cffec3911900b2">&#9670;&#160;</a></span>neofetch_header_line_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_line_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00008">8</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5dd342e6884190ceb62e51528bd48957" name="a5dd342e6884190ceb62e51528bd48957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dd342e6884190ceb62e51528bd48957">&#9670;&#160;</a></span>neofetch_header_line_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_line_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00009">9</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a88950ce825c8ea688dfcb207cfa5e055" name="a88950ce825c8ea688dfcb207cfa5e055"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88950ce825c8ea688dfcb207cfa5e055">&#9670;&#160;</a></span>neofetch_header_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_text = &quot;Shellminator&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00003">3</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4bb431e094669aa65f9616f77b880fc2" name="a4bb431e094669aa65f9616f77b880fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bb431e094669aa65f9616f77b880fc2">&#9670;&#160;</a></span>neofetch_header_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00004">4</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a16e0915ad69f667d2c0dda6c5076d5fa" name="a16e0915ad69f667d2c0dda6c5076d5fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16e0915ad69f667d2c0dda6c5076d5fa">&#9670;&#160;</a></span>neofetch_header_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_header_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00005">5</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5dc4f89c8250e63ac14de0e5fa043ac4" name="a5dc4f89c8250e63ac14de0e5fa043ac4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dc4f89c8250e63ac14de0e5fa043ac4">&#9670;&#160;</a></span>neofetch_user_field_1_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_1_label = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00034">34</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a85d47842da9d9539e949a9dcd0d9aedd" name="a85d47842da9d9539e949a9dcd0d9aedd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85d47842da9d9539e949a9dcd0d9aedd">&#9670;&#160;</a></span>neofetch_user_field_1_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_1_text = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00035">35</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b761e2eb5fa5ceb28065753a181054e" name="a0b761e2eb5fa5ceb28065753a181054e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b761e2eb5fa5ceb28065753a181054e">&#9670;&#160;</a></span>neofetch_user_field_1_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_1_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00036">36</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9a8557b81121c4ea8bfc36ae26d19a8c" name="a9a8557b81121c4ea8bfc36ae26d19a8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a8557b81121c4ea8bfc36ae26d19a8c">&#9670;&#160;</a></span>neofetch_user_field_1_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_1_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00037">37</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a34744bd021e8db36d184ccda9e620a8d" name="a34744bd021e8db36d184ccda9e620a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34744bd021e8db36d184ccda9e620a8d">&#9670;&#160;</a></span>neofetch_user_field_2_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_2_label = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00039">39</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acbd2eb6b880571de56d36c5ef3c832c6" name="acbd2eb6b880571de56d36c5ef3c832c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd2eb6b880571de56d36c5ef3c832c6">&#9670;&#160;</a></span>neofetch_user_field_2_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_2_text = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00040">40</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab92c75868555f7c6942f1238294e83cb" name="ab92c75868555f7c6942f1238294e83cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92c75868555f7c6942f1238294e83cb">&#9670;&#160;</a></span>neofetch_user_field_2_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_2_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00041">41</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a23a3709d413cc547cf64504d148c233e" name="a23a3709d413cc547cf64504d148c233e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23a3709d413cc547cf64504d148c233e">&#9670;&#160;</a></span>neofetch_user_field_2_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_2_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00042">42</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4589d5ec65541c8180c0277688c8fc76" name="a4589d5ec65541c8180c0277688c8fc76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4589d5ec65541c8180c0277688c8fc76">&#9670;&#160;</a></span>neofetch_user_field_3_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_3_label = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00044">44</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac4eca15cbd4445e9196dfeedc279a67a" name="ac4eca15cbd4445e9196dfeedc279a67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4eca15cbd4445e9196dfeedc279a67a">&#9670;&#160;</a></span>neofetch_user_field_3_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_3_text = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00045">45</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0fb89b418aa102d1de92f89d6699d835" name="a0fb89b418aa102d1de92f89d6699d835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fb89b418aa102d1de92f89d6699d835">&#9670;&#160;</a></span>neofetch_user_field_3_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_3_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00046">46</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acf11d4df1df45a85dbd3862e45ecfd1e" name="acf11d4df1df45a85dbd3862e45ecfd1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf11d4df1df45a85dbd3862e45ecfd1e">&#9670;&#160;</a></span>neofetch_user_field_3_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_3_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00047">47</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa0f99da2cc5a7ca23a50f884c7f237cf" name="aa0f99da2cc5a7ca23a50f884c7f237cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0f99da2cc5a7ca23a50f884c7f237cf">&#9670;&#160;</a></span>neofetch_user_field_4_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_4_label = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00049">49</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9e4f7b700c24ce0fbdf0fced138f9880" name="a9e4f7b700c24ce0fbdf0fced138f9880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4f7b700c24ce0fbdf0fced138f9880">&#9670;&#160;</a></span>neofetch_user_field_4_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_4_text = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00050">50</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9459e9d729c9cac1f1d58b2d64a05f96" name="a9459e9d729c9cac1f1d58b2d64a05f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9459e9d729c9cac1f1d58b2d64a05f96">&#9670;&#160;</a></span>neofetch_user_field_4_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_4_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00051">51</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab2e302e51f07ac4fc0d1f669b5e801ad" name="ab2e302e51f07ac4fc0d1f669b5e801ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2e302e51f07ac4fc0d1f669b5e801ad">&#9670;&#160;</a></span>neofetch_user_field_4_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_4_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00052">52</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7926bdf9c5568d7fee421e7d0713c355" name="a7926bdf9c5568d7fee421e7d0713c355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7926bdf9c5568d7fee421e7d0713c355">&#9670;&#160;</a></span>neofetch_user_field_5_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_5_label = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00054">54</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7d13b8168b6f151f9d534fc784df1044" name="a7d13b8168b6f151f9d534fc784df1044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d13b8168b6f151f9d534fc784df1044">&#9670;&#160;</a></span>neofetch_user_field_5_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_5_text = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00055">55</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a047a5424c427c95645a8eaa924727ce5" name="a047a5424c427c95645a8eaa924727ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a047a5424c427c95645a8eaa924727ce5">&#9670;&#160;</a></span>neofetch_user_field_5_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_5_text_color = <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00056">56</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a41d2414d861025bec928a8a4f17ff998" name="a41d2414d861025bec928a8a4f17ff998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41d2414d861025bec928a8a4f17ff998">&#9670;&#160;</a></span>neofetch_user_field_5_text_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="_shellminator-_helpers_8hpp.html#aa1d394e41460f0eb40d0a8bcc33159bb">SHELLMINATOR_WEAK</a> neofetch_user_field_5_text_style = <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_neofetch_8cpp_source.html#l00057">57</a> of file <a class="el" href="_shellminator-_neofetch_8cpp_source.html">Shellminator-Neofetch.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_neofetch_8cpp.html">Shellminator-Neofetch.cpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

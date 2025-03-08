@@ -1,0 +1,11 @@
+<map id="Shellminator::endScreen" name="Shellminator::endScreen">
+<area shape="rect" id="node1" title="Abort Screen session." alt="" coords="5,129,169,155"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="217,28,412,53"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="460,79,665,104"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a35be74e46ad7eac24a03411cc9139668" title="Disable mouse reports." alt="" coords="233,129,397,155"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="231,179,399,204"/>
+<area shape="rect" id="node9" href="$class_shellminator.html#a2494d3a395b52ea6017948472a535940" title="Show the cursor." alt="" coords="229,252,400,277"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="460,5,665,31"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e" title="Basic text formatting." alt="" coords="493,179,632,204"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#af30816610bf82e63cccc0690991a7210" title="Basic text formatting." alt="" coords="713,179,875,204"/>
+</map>

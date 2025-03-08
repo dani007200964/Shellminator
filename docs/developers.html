@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers - Shellminator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body bgcolor="#1c1d1f">
+    <header>
+        <a href="index.html" class="logo">
+            <img class="logo-img" src="logo.svg"></img>
+            Shellminator
+        </a>
+            <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="features.html">Features</a></li>
+                <li><a href="https://github.com/dani007200964/Shellminator/releases" target="_blank">Download</a></li>
+                <li><a href="./html/md_extras__assets__docu_pages_examples_page.html">Examples</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="./html/index.html" target="_blank">Docs</a></li>
+                <li>
+                    <a href="https://discord.gg/dGNgBrSt" target="_blank">
+                        <?xml version="1.0" encoding="UTF-8"?><svg id="Discord-Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.644 96" height="20"><defs><style>.cls-1{fill:#fff;}</style></defs><path id="Discord-Symbol-White" class="cls-1" d="M81.15,0c-1.2376,2.1973-2.3489,4.4704-3.3591,6.794-9.5975-1.4396-19.3718-1.4396-28.9945,0-.985-2.3236-2.1216-4.5967-3.3591-6.794-9.0166,1.5407-17.8059,4.2431-26.1405,8.0568C2.779,32.5304-1.6914,56.3725.5312,79.8863c9.6732,7.1476,20.5083,12.603,32.0505,16.0884,2.6014-3.4854,4.8998-7.1981,6.8698-11.0623-3.738-1.3891-7.3497-3.1318-10.8098-5.1523.9092-.6567,1.7932-1.3386,2.6519-1.9953,20.281,9.547,43.7696,9.547,64.0758,0,.8587.7072,1.7427,1.3891,2.6519,1.9953-3.4601,2.0457-7.0718,3.7632-10.835,5.1776,1.97,3.8642,4.2683,7.5769,6.8698,11.0623,11.5419-3.4854,22.3769-8.9156,32.0509-16.0631,2.626-27.2771-4.496-50.9172-18.817-71.8548C98.9811,4.2684,90.1918,1.5659,81.1752.0505l-.0252-.0505ZM42.2802,65.4144c-6.2383,0-11.4159-5.6575-11.4159-12.6535s4.9755-12.6788,11.3907-12.6788,11.5169,5.708,11.4159,12.6788c-.101,6.9708-5.026,12.6535-11.3907,12.6535ZM84.3576,65.4144c-6.2637,0-11.3907-5.6575-11.3907-12.6535s4.9755-12.6788,11.3907-12.6788,11.4917,5.708,11.3906,12.6788c-.101,6.9708-5.026,12.6535-11.3906,12.6535Z"/></svg>
+                    </a>
+                </li>
+                <div class="donate">
+                    <li><a href="https://ko-fi.com/danielhajnal" target="_blank">♡&nbsp;Donation</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <div class="content-title">            
+            <h1>From a School Project to a Community Effort</h1>
+        </div>
+        <div class="content-text">
+            <p> This project started as a simple school homework assignment and quickly grew into something much bigger.
+                At first, it was a one-man show, but over time, classmates, friends, colleagues, and eventually, the brave folks of the internet joined in.
+                <b class="feature-text">This amazing little community has contributed tons of great ideas and bug fixes to Shellminator.</b>
+            </p>
+            
+            <p> However, we've now reached a critical mass where releasing a new version has become quite a challenge for our small team.
+                <br><b class="feature-text">--Not impossible, of course—but the V3 release took us three years!--</b>
+            </p>
+        </div>
+
+        <div class="content-title">            
+            <h1>Want to Help? Join Us!</h1>
+        </div>
+        <div class="content-text">
+            <p> If you’d like to contribute and help us out, we’d love to have you on board! There’s plenty of work to go around:
+            </p>
+            <ul>
+                <li>Board support</li>
+                <li>Unit testing</li>
+                <li>Documentation</li>
+                <li>Code optimization</li>
+                <li>Architecture & platform support</li>
+            </ul>
+            <p> If you're motivated and ready to contribute, feel free to send in your pull requests!
+                And if you're unsure where to start, need guidance, or just want to discuss your ideas,
+                come chat with us on <a href="https://github.com/dani007200964/Shellminator/discussions">GitHub Discussions</a>—we’re happy to help!
+            </p>
+        </div>
+        
+        <div class="content-title">            
+            <h1>Thank you in advance! 🚀</h1>
+        </div>
+        
+    </div>
+
+
+    <footer>
+        <p>&copy; <span id="year"></span> Shellminator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
+
+        // Mobile menu toggle
+        document.getElementById("mobile-menu").addEventListener("click", function() {
+            document.querySelector("nav ul").classList.toggle("show");
+        });
+        
+        // Set the current year in the footer
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="ShellminatorPlot::drawScale" name="ShellminatorPlot::drawScale">
+<area shape="rect" id="node1" title="Draw the scale for the plot." alt="" coords="5,43,191,68"/>
+<area shape="rect" id="node2" href="$class_shellminator_plot.html#a64b1c1e4f9a22374884f859764424754" title="Linear interpolation." alt="" coords="268,5,415,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="239,79,444,104"/>
+</map>

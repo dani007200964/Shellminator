@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Shellminator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body bgcolor="#1c1d1f">
+    <header>
+        <a href="index.html" class="logo">
+            <img class="logo-img" src="logo.svg"></img>
+            Shellminator
+        </a>
+            <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="features.html">Features</a></li>
+                <li><a href="https://github.com/dani007200964/Shellminator/releases" target="_blank">Download</a></li>
+                <li><a href="./html/md_extras__assets__docu_pages_examples_page.html">Examples</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="./html/index.html" target="_blank">Docs</a></li>
+                <li>
+                    <a href="https://discord.gg/dGNgBrSt" target="_blank">
+                        <?xml version="1.0" encoding="UTF-8"?><svg id="Discord-Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.644 96" height="20"><defs><style>.cls-1{fill:#fff;}</style></defs><path id="Discord-Symbol-White" class="cls-1" d="M81.15,0c-1.2376,2.1973-2.3489,4.4704-3.3591,6.794-9.5975-1.4396-19.3718-1.4396-28.9945,0-.985-2.3236-2.1216-4.5967-3.3591-6.794-9.0166,1.5407-17.8059,4.2431-26.1405,8.0568C2.779,32.5304-1.6914,56.3725.5312,79.8863c9.6732,7.1476,20.5083,12.603,32.0505,16.0884,2.6014-3.4854,4.8998-7.1981,6.8698-11.0623-3.738-1.3891-7.3497-3.1318-10.8098-5.1523.9092-.6567,1.7932-1.3386,2.6519-1.9953,20.281,9.547,43.7696,9.547,64.0758,0,.8587.7072,1.7427,1.3891,2.6519,1.9953-3.4601,2.0457-7.0718,3.7632-10.835,5.1776,1.97,3.8642,4.2683,7.5769,6.8698,11.0623,11.5419-3.4854,22.3769-8.9156,32.0509-16.0631,2.626-27.2771-4.496-50.9172-18.817-71.8548C98.9811,4.2684,90.1918,1.5659,81.1752.0505l-.0252-.0505ZM42.2802,65.4144c-6.2383,0-11.4159-5.6575-11.4159-12.6535s4.9755-12.6788,11.3907-12.6788,11.5169,5.708,11.4159,12.6788c-.101,6.9708-5.026,12.6535-11.3907,12.6535ZM84.3576,65.4144c-6.2637,0-11.3907-5.6575-11.3907-12.6535s4.9755-12.6788,11.3907-12.6788,11.4917,5.708,11.3906,12.6788c-.101,6.9708-5.026,12.6535-11.3906,12.6535Z"/></svg>
+                    </a>
+                </li>
+                <div class="donate">
+                    <li><a href="https://ko-fi.com/danielhajnal" target="_blank">♡&nbsp;Donation</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <div class="content-title">            
+            <h1>What is Shellminator?</h1>
+        </div>
+        <div class="content-text">
+            <p> At its core, it's a terminal designed for microcontrollers. But let me tell you how it all started…
+            </p>
+        </div>
+
+        <div class="content-title">            
+            <h1>The Origin Story</h1>
+        </div>
+        <div class="content-text">
+            <p> Back in 2013, during technical high school, I wanted to upgrade one of my RC cars as a home hobby project.
+                The goal was to make simple automations, like following a red ball, stopping before hitting a wall, or moving a set distance forward.
+                This was the first time I got interested in remote control and diagnostics. Around this time, I also discovered the Arduino ecosystem.
+            </p>
+
+            <p> After school, our math teacher held programming sessions, and over two years, I managed to put together something that actually worked!
+                At the time, I was super proud of it. The system understood about 10 commands, was a bit buggy, but it really motivated me to dive deeper into the topic.    
+            </p>
+                
+
+            <p> In 2015, during my final year in technical high school, I had a project to redesign the control system of a disco light.
+                This thing had four stepper motors, a few relays, and an RS-232 interface.
+                Unfortunately, its mainboard died, and my task was to build a new one and control it via RS-232.
+            </p>
+
+            <p> I spent a few months designing the hardware, which was relatively straightforward. But when it came to software, I figured:
+                <br><b class="feature-text">Hey, I’ll just write it in C, so I could easily add a command line interface to it. It’ll be a piece of cake!</b>
+                <br>(Since, before that, we had to do everything in assembly, C felt like a luxury.)
+            </p>
+
+            <p> Like any good programmer, the first thing I did was search for an existing Arduino library.
+                But to my surprise, there were no proper solutions for adding a terminal to a microcontroller.
+                I checked forums and quickly realized:
+                <br>💡 <b class="feature-text">Nobody really puts a command-line interface on microcontrollers!</b>
+                <br>Instead, most people just reflash their firmware every time they need to make a change.
+                <br>💡 <b class="feature-text">I thought making this easier to use would also be easy to implement.</b>
+                <br>Spoiler alert: I couldn’t have been more wrong. 😅
+            </p>
+        </div>
+        
+        <div class="content-title">
+            <h1>My First Attempt (a.k.a. "The Else-If Nightmare")</h1>
+        </div>
+        <div class="content-text">
+            <p> Building a maintainable command processor turned out to be way harder than I expected.
+                At first, my command parser was just a giant else-if chain. But hey—it worked!
+                <br>The project was completed, and while I was proud of the hardware, the software felt... clunky.
+            </p>
+            <ul>
+                <li>No delete function on the interface</li>
+                <li>No proper argument handling</li>
+                <li>If you made a typo? Game over.</li>
+            </ul>
+            <p> I decided to fix this by creating a portable terminal interface—one that was interactive,
+                had command history, supported deletion, and could be formatted properly.
+            </p>
+        </div>
+    
+        <div class="content-title">
+            <h1>The Real Work Begins</h1>
+        </div>
+        <div class="content-text">
+            <p> For two years, I studied how terminal interfaces worked.
+                After many prototypes, I finally had a system that supported:
+            </p>
+
+            <ul>
+                <li>Deletion</li>
+                <li>Text editing( yep, with cursor and arrow keys, like a gentleman )</li>
+                <li>VT100 formatting</li>
+            </ul>
+
+            <p> But… the command processor still sucked. It wasn’t flexible enough.
+            </p>
+
+            <p> When I got to university, I finally learned about function pointers in C and C++.
+                At first, they seemed exotic, but since I had assembly experience, I quickly realized they were actually pretty familiar.
+            </p>
+
+            <p> This was also when I had a realization:
+                <br>💡 <b class="feature-text">I don’t just need a terminal—I need a proper command processor with a configurable command-database too!</b>
+            </p>
+
+            <p> But the command processor turned out to be a much bigger challenge than I expected.
+                So, I had to split the project into two:
+            </p>
+
+            <ul>
+                <li>Shellminator (the terminal interface)</li>
+                <li>Commander-API (the command processor)</li>
+            </ul>
+
+            <p> For about 1.5 years, I put Shellminator on hold and focused entirely on Commander. My goal?
+                <br>⚡ Make it fast and resource-efficient ⚡
+            </p>
+
+            <p> At one point, Commander even had recursion and dynamic memory allocation (yes, I know—that’s a crime on AVR and any other microcontrollers).
+                But once initialized, it ran efficiently and could find commands in log₂N steps.
+            </p>
+
+            <p> Eventually, I built a working interface between Commander and Shellminator, and I happily used them for all my university projects—including my thesis,
+                where I designed a cocktail-making machine.
+            </p>
+        </div>
+
+
+        <div class="content-title">
+            <h1>Taking It to the Real World</h1>
+        </div>
+        <div class="content-text">
+            <p> I was already working in a small prototype development offices alongside my studies in the second half of university.
+                Since I didn’t had much work experience back then, getting into a larger company wasn’t really an option,
+                so I started working at smaller companies instead. There was even one semester when I had two jobs at the same time,
+                which gave me a pretty good overview of how local small businesses develop automated systems.
+                I was shocked to see that nothing had changed in the world of microcontroller terminals.
+            </p>
+
+            <p> Everywhere I went, I saw engineers avoiding interactive interfaces. In most cases, these systems weren’t even capable of any real-time diagnostics.
+                Occasionally, some solutions had logs generated via printf, which was at least somewhat useful. However, these logs had no structure whatsoever,
+                meaning you had to sift through an overwhelming amount of data to find the relevant information (if it was logged at all).
+                <br>I don’t mean to offend anyone, but my personal experience was:
+            </p>
+
+            <ul>
+                <li>No diagnostics</li>
+                <li>No proper error handling</li>
+                <li>Hardcoded, cryptic command codes</li>
+            </ul>
+
+            <p> For example, one industrial machine I worked on had a motor speed command like this:
+                <br><code>x1 10</code> where <code>x</code> means motor (obviously), <code>1</code> means motor ID (obviously), <code>10</code> means speed (of course not in RPM...)
+            </p>
+            
+            <p> Now, what happens if the operator accidentally types a wrong key?
+                <br>💀 Because <b class="feature-text">no delete, backspace and cursor handling</b>, the system executes the broken command anyway! And the only way to recover?
+                Restarting the microcontroller—which isn’t exactly an option if the device is in motion.
+                Let’s just say I’ve seen more than one motor burn out because of this... 😬
+            </p>
+
+            <p> I even worked on a 5m-high machine with no built-in diagnostics.
+                Every time something failed, we had to climb up with a laptop just to check what went wrong.
+                One day, I spent more time on a ladder than writing code. That was my breaking point.
+            </p>
+
+            <p> So I told my boss:
+                <b class="feature-text">I have a solution. It’s not perfect, but it’s way better than this.</b>
+            </p>
+
+            <p> Due to the project's state and the tight deadlines, we quickly came to an agreement:
+                <br>The company, where I worked at the time, can use my libraries( they were on GitHub with MIT license anyway )
+                and I get some feedback about how it works, and more importantly, how it broke.
+                For legal reasons, I wasn’t allowed to develop either library during work hours—but I didn’t mind.
+                At that stage, I needed real-world tests, the kind you can only get out in the field.
+            </p>
+
+            <p> And guess what? It worked great! 🚀 We used Shellminator + Commander to build tons of prototypes and mini-projects.
+                I got the test results I needed, and my boss was able to sell the prototypes quickly— which was essential for the company’s business.
+            </p>
+        </div>
+
+        <div class="content-title">
+            <h1>The Community Grows</h1>
+        </div>
+        <div class="content-text">
+            <p> This was when my colleagues started contributing. At first, they just reported bugs, then they started requesting features.
+                Eventually, my hobbyist co-workers told me:
+                <br><b class="feature-text">Dude, you need to publish these libraries! I want to use them at home too!</b>
+            </p>
+
+            <p> Then I told them:
+                <br><b class="feature-text">Hey, I already done that years ago! Have you tried to search for it?</b>
+            </p>
+
+            <p> That’s when I realized:
+                <br>💡 <b class="feature-text">Maybe I actually found an open-source niche that matters!</b>
+            </p>
+
+
+            <p> Even though the project was already on GitHub, nobody really found it. (No surprise—I suck at marketing 😅).
+            </p>
+
+            <p> So, I decided to make it <b class="feature-text">Arduino-compatible</b> to attract more developers. And guess what?
+                <br>📢 The internet finally noticed!
+                <br>People started using it, reporting bugs, and sending feedback.
+            </p>
+        </div>
+
+        <div class="content-title">
+            <h1>Where We Are Today</h1>
+        </div>
+        <div class="content-text">
+            <ul>
+                <li>Over time, I kept improving both the project and my C++ skills.</li>
+                <li>We added tons of features</li>
+                <li>We put huge effort into documentation</li>
+                <li>More and more people tested it on different platforms</li>
+            </ul>
+
+            <p> <b class="feature-text">And finally, here we are at the V3 release!</b> 🎉
+            </p>
+        </div>
+
+        <div class="content-title">
+            <h1>A Huge Thank You!</h1>
+        </div>
+        <div class="content-text">
+            <p> I just want to say a huge <b class="feature-text">THANK YOU</b> to everyone who has helped bring this project to where it is today.
+                To everyone who contributed bug fixes, feedback, ideas, and documentation—<b class="feature-text">I truly appreciate it.</b>
+                <br><br>So… what’s next? Well, let’s keep pushing forward and see how far we can take this—together! 🚀
+            </p>
+        </div>
+
+        <div class="content-title">
+            <h1>Daniel Hajnal 2025</h1>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <p>&copy; <span id="year"></span> Shellminator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
+
+        // Mobile menu toggle
+        document.getElementById("mobile-menu").addEventListener("click", function() {
+            document.querySelector("nav ul").classList.toggle("show");
+        });
+        
+        // Set the current year in the footer
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+    </script>
+</body>
+</html>

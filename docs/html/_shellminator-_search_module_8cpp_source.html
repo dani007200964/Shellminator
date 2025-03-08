@@ -1,0 +1,434 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/Shellminator-SearchModule.cpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_search_module_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Shellminator-SearchModule.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_shellminator-_search_module_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Created on May 14 2023</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Modified 2022.04.16</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">MIT License</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">Copyright (c) 2023 Daniel Hajnal</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">SOFTWARE.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_shellminator.html#a28a58ae386dce242f9d8f8cf1d12ae31">   36</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator.html#a28a58ae386dce242f9d8f8cf1d12ae31">Shellminator::historySearchBackward</a>(){</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">// Store a copy of the cmd_buff_dim variable.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="comment">// It is necessary, because it can be only changed</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">// when we find a command. Other case it has to be intact.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  uint32_t cmd_buff_dim_save;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// Create a copy of cmd_buff_dim.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  cmd_buff_dim_save = <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="comment">// We search upward the history until the end of the history memory, or match.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordflow">while</span>( cmd_buff_dim_save &lt; ( <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a> ) ){</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// Check for match.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span>( strncmp( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ cmd_buff_dim_save ], <a class="code hl_variable" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a> ) == 0 ){</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="comment">// If we found a command we have to save the actual position to cmd_buff_dim.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a> = cmd_buff_dim_save;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <span class="comment">// Copy the found data to the 0-th element.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      strncpy( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a> ], <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> + 1 );</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="comment">// We have to calculate the historical data length to pass it to the cmd_buff_cntr variable.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      <span class="comment">// It is important to track the end of the loaded string.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      <span class="comment">// In this case the cursor does not move!</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> = strlen( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ] );</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <span class="comment">// We print the loaded command to the terminal interface.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <a class="code hl_function" href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">redrawLine</a>();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      <span class="comment">// Increment the buffer before return.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      <span class="comment">// If we don&#39;t do this we can not search further.</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a>++;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="comment">// Return because we have found the command.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="comment">// Incrememnt the position to test another command in history.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    cmd_buff_dim_save++;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="comment">// We did not found a command in the history.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">// Generate a beep to notify that.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_function" href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">beep</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="class_shellminator.html#a6e142e1f18fcbfb7f1a3eb21d76882e0">   86</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator.html#a6e142e1f18fcbfb7f1a3eb21d76882e0">Shellminator::historySearchForward</a>(){</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  uint32_t cmd_buff_dim_save;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  cmd_buff_dim_save = <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordflow">while</span>( cmd_buff_dim_save &gt; 2 ){</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    cmd_buff_dim_save--;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span>( strncmp( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ cmd_buff_dim_save - 1 ], <a class="code hl_variable" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a> ) == 0 ){</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a> = cmd_buff_dim_save;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      strncpy( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ <a class="code hl_variable" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a> - 1 ], <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> + 1 );</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> = strlen( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ] );</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      <span class="comment">// We print the loaded command to the terminal interface.</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      <a class="code hl_function" href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">redrawLine</a>();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  <a class="code hl_function" href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">beep</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a">  117</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a">Shellminator::redrawHistorySearch</a>(){</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    uint32_t i;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    uint32_t j;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">bool</span> highlighted = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    int32_t searchResult;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_variable" href="class_shellminator.html#a65ac6e23459b9fce1bb73dc7f409a6d9">searchMatch</a> = -1;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="comment">// This will be redirected to the channel by default.</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    Stream* selectedChannel= <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// If buffering is enabled, overwrite the</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// selectedChannel to the buffered printer.</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator.html#abffeb8c4754eead7221355700d6578b9">bufferMemoryAllocated</a> ){</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        selectedChannel = &amp;<a class="code hl_variable" href="class_shellminator.html#ae68121de96148ba88ed4fafc1cc42e88">bufferedPrinter</a>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ){</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> = <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="comment">// Terminate the command at the cmd_buff_cntr</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="comment">// to not print out the previous command&#39;s data.</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ][ <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    selectedChannel -&gt; print( <span class="charliteral">&#39;\r&#39;</span> );</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">WHITE</a> );</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    selectedChannel -&gt; print( <span class="stringliteral">&quot;(reverse-i-search)&#39;&quot;</span> );  <span class="comment">// 19 characters long.</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">BOLD</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">YELLOW</a> );</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    selectedChannel -&gt; print( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ] );</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">WHITE</a> );</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    selectedChannel -&gt; print( <span class="stringliteral">&quot;&#39;: \033[0K&quot;</span> );</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> == 0 ){</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">for</span>( i = 1; i &lt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a>; i++ ){</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        searchResult = <a class="code hl_function" href="class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123">substring</a>( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ i ] );</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordflow">if</span>( searchResult &gt;= 0 ){</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <a class="code hl_variable" href="class_shellminator.html#a65ac6e23459b9fce1bb73dc7f409a6d9">searchMatch</a> = i;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <span class="keywordflow">for</span>( j = 0; j &lt; strlen( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ i ] ); j++ ){</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                <span class="keywordflow">if</span>( !highlighted &amp;&amp; ( j == searchResult ) ){</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                    <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">BOLD</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">YELLOW</a> );</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    highlighted = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                <span class="keywordflow">if</span>( highlighted &amp;&amp; ( j == ( searchResult + strlen( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ] ) ) ) ){</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                    <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">WHITE</a> );</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                    highlighted = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                selectedChannel -&gt; print( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ i ][ j ] );</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            }</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordflow">if</span>( highlighted ){</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                <a class="code hl_function" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a>( selectedChannel, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">WHITE</a> );</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            selectedChannel -&gt; print( <span class="charliteral">&#39;\r&#39;</span> );</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            selectedChannel -&gt; write( 27 );</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            selectedChannel -&gt; print( <span class="charliteral">&#39;[&#39;</span> );</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            selectedChannel -&gt; print( uint8_t( 19 + <a class="code hl_variable" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a> ) );</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            selectedChannel -&gt; print( <span class="charliteral">&#39;C&#39;</span> );</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    selectedChannel -&gt; print( <span class="charliteral">&#39;\r&#39;</span> );</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    selectedChannel -&gt; write( 27 );</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    selectedChannel -&gt; print( <span class="charliteral">&#39;[&#39;</span> );</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    selectedChannel -&gt; print( uint8_t( 19 + <a class="code hl_variable" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a> ) );</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    selectedChannel -&gt; print( <span class="charliteral">&#39;C&#39;</span> );</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>}</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123">  215</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123">Shellminator::substring</a>( <span class="keywordtype">char</span>* str1, <span class="keywordtype">char</span>* str2 ){</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">int</span> j;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordtype">int</span> m = strlen( str1 );</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">int</span> n = strlen( str2 );</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">for</span>( i = 0; i &lt;= ( n - m ); i++ ){</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">for</span>( j = 0; j &lt; m; j++ ){</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">if</span>( str2[ i + j ] != str1[ j ] ){</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        }</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">if</span>( j == m ){</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">return</span> i;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>}</div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a3ddabc8c441626dba3679faf61863c5f"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_LEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00053">Shellminator-DefaultSettings.hpp:53</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_ac999ba5b43c5bb3a64cdfea63b279561"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_DIM</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00057">Shellminator-DefaultSettings.hpp:57</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a10a1c3a6f35fee22c495e0d7d8b43123"><div class="ttname"><a href="class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123">Shellminator::substring</a></div><div class="ttdeci">int substring(char *str1, char *str2)</div><div class="ttdoc">Basic substring function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_search_module_8cpp_source.html#l00215">Shellminator-SearchModule.cpp:215</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a244a8b972c2bb5e9305475c4f0ff52ef"><div class="ttname"><a href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">Shellminator::cursor</a></div><div class="ttdeci">uint32_t cursor</div><div class="ttdoc">This variable tracks the location of the next character.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00916">Shellminator.hpp:916</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a28a58ae386dce242f9d8f8cf1d12ae31"><div class="ttname"><a href="class_shellminator.html#a28a58ae386dce242f9d8f8cf1d12ae31">Shellminator::historySearchBackward</a></div><div class="ttdeci">void historySearchBackward()</div><div class="ttdoc">This function is used to search the previous matching command in the history.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_search_module_8cpp_source.html#l00036">Shellminator-SearchModule.cpp:36</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a56c721e42a1c76dc790791e61e37df1a"><div class="ttname"><a href="class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a">Shellminator::redrawHistorySearch</a></div><div class="ttdeci">void redrawHistorySearch()</div><div class="ttdoc">If reverse search mode is active, this function is used to print the text correctly.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_search_module_8cpp_source.html#l00117">Shellminator-SearchModule.cpp:117</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a59c990ce7819ba8809da3da347d96171"><div class="ttname"><a href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">Shellminator::cmd_buff_cntr</a></div><div class="ttdeci">uint32_t cmd_buff_cntr</div><div class="ttdoc">This variable tracks the end of the input message.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00913">Shellminator.hpp:913</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a65ac6e23459b9fce1bb73dc7f409a6d9"><div class="ttname"><a href="class_shellminator.html#a65ac6e23459b9fce1bb73dc7f409a6d9">Shellminator::searchMatch</a></div><div class="ttdeci">int searchMatch</div><div class="ttdoc">Used to parse reverse search.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l01145">Shellminator.hpp:1145</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a6e142e1f18fcbfb7f1a3eb21d76882e0"><div class="ttname"><a href="class_shellminator.html#a6e142e1f18fcbfb7f1a3eb21d76882e0">Shellminator::historySearchForward</a></div><div class="ttdeci">void historySearchForward()</div><div class="ttdoc">This function is used to search the next matching command in the history.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_search_module_8cpp_source.html#l00086">Shellminator-SearchModule.cpp:86</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a842e1ef0e5cadd739ef87ae559cbbb16"><div class="ttname"><a href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">Shellminator::redrawLine</a></div><div class="ttdeci">void redrawLine()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00506">Shellminator.cpp:506</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00879">Shellminator.hpp:879</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a89e86946143cf1051a8047f56432e409"><div class="ttname"><a href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">Shellminator::beep</a></div><div class="ttdeci">void beep()</div><div class="ttdoc">Select list.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01014">Shellminator.cpp:1014</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a99c7572eee48f38eeeac937c3d3e0b6e"><div class="ttname"><a href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">Shellminator::format</a></div><div class="ttdeci">void format(Stream *stream_p, int firstArg)</div><div class="ttdoc">Basic text formatting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_styles_8cpp_source.html#l00111">Shellminator-Styles.cpp:111</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ab376f95d8641285b9a73ff6142082b72"><div class="ttname"><a href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">Shellminator::cmd_buff</a></div><div class="ttdeci">char cmd_buff[SHELLMINATOR_BUFF_DIM][SHELLMINATOR_BUFF_LEN+1]</div><div class="ttdoc">Text buffer.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00907">Shellminator.hpp:907</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">Shellminator::BOLD</a></div><div class="ttdeci">@ BOLD</div><div class="ttdoc">Bold text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00145">Shellminator.hpp:145</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdoc">Regular text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00144">Shellminator.hpp:144</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abffeb8c4754eead7221355700d6578b9"><div class="ttname"><a href="class_shellminator.html#abffeb8c4754eead7221355700d6578b9">Shellminator::bufferMemoryAllocated</a></div><div class="ttdeci">bool bufferMemoryAllocated</div><div class="ttdoc">If memory is allocated, this will be true;.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00943">Shellminator.hpp:943</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_addef1c9e397e68c0bcf11156a652f447"><div class="ttname"><a href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">Shellminator::cmd_buff_dim</a></div><div class="ttdeci">uint32_t cmd_buff_dim</div><div class="ttdoc">This variable tracks the index of the previous command while you browsing the command history.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00910">Shellminator.hpp:910</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">Shellminator::YELLOW</a></div><div class="ttdeci">@ YELLOW</div><div class="ttdoc">Yellow text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00117">Shellminator.hpp:117</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdoc">White text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00122">Shellminator.hpp:121</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae68121de96148ba88ed4fafc1cc42e88"><div class="ttname"><a href="class_shellminator.html#ae68121de96148ba88ed4fafc1cc42e88">Shellminator::bufferedPrinter</a></div><div class="ttdeci">ShellminatorBufferedPrinter bufferedPrinter</div><div class="ttdoc">It can be used to accelerate the data sending process.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00940">Shellminator.hpp:940</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_search_module_8cpp.html">Shellminator-SearchModule.cpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,1198 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: ShellminatorTcpSocket Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('class_shellminator_tcp_socket.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="class_shellminator_tcp_socket-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ShellminatorTcpSocket Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ShellminatorTcpSocket:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Collaboration diagram for ShellminatorTcpSocket:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:adc38d59ff291c093586806caf4d6ac0f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0f">TelnetNegotiationState_t</a> { <a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0fa546cc208e866bba6a2730f918ed16423">TELNET_FIRST_BYTE_STATE</a>
+, <a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0faabbc4a92d2df7554707a99b9a0c5bb3a">TELNET_COMMAND_BYTE_STATE</a>
+, <a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0fa093eaa670ecc8738cbf888e353542554">TELNET_OPTION_BYTE_STATE</a>
+ }</td></tr>
+<tr class="separator:adc38d59ff291c093586806caf4d6ac0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae3d47edb24f256b3ee81b546da29c91c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ae3d47edb24f256b3ee81b546da29c91c">ShellminatorTcpSocket</a> ()</td></tr>
+<tr class="separator:ae3d47edb24f256b3ee81b546da29c91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4cd3391fdffad4a26e54e0dd13eb52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a3f4cd3391fdffad4a26e54e0dd13eb52">ShellminatorTcpSocket</a> (int port_p)</td></tr>
+<tr class="separator:a3f4cd3391fdffad4a26e54e0dd13eb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64f85ed865a9ab519c32a472aae415e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ab64f85ed865a9ab519c32a472aae415e">available</a> () override</td></tr>
+<tr class="memdesc:ab64f85ed865a9ab519c32a472aae415e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="class_shellminator_tcp_socket.html#ab64f85ed865a9ab519c32a472aae415e">More...</a><br /></td></tr>
+<tr class="separator:ab64f85ed865a9ab519c32a472aae415e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63f1d30decd7aa3eb931d8c242ffa18"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ad63f1d30decd7aa3eb931d8c242ffa18">read</a> () override</td></tr>
+<tr class="memdesc:ad63f1d30decd7aa3eb931d8c242ffa18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one byte form the channel.  <a href="class_shellminator_tcp_socket.html#ad63f1d30decd7aa3eb931d8c242ffa18">More...</a><br /></td></tr>
+<tr class="separator:ad63f1d30decd7aa3eb931d8c242ffa18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59f5237405c348ef7e7df4aa5e49cecc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a59f5237405c348ef7e7df4aa5e49cecc">peek</a> () override</td></tr>
+<tr class="memdesc:a59f5237405c348ef7e7df4aa5e49cecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek the firtst byte from the channel.  <a href="class_shellminator_tcp_socket.html#a59f5237405c348ef7e7df4aa5e49cecc">More...</a><br /></td></tr>
+<tr class="separator:a59f5237405c348ef7e7df4aa5e49cecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0599fc2b7457fce6b14e39cda215ae04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a0599fc2b7457fce6b14e39cda215ae04">flush</a> () override</td></tr>
+<tr class="memdesc:a0599fc2b7457fce6b14e39cda215ae04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the channel.  <a href="class_shellminator_tcp_socket.html#a0599fc2b7457fce6b14e39cda215ae04">More...</a><br /></td></tr>
+<tr class="separator:a0599fc2b7457fce6b14e39cda215ae04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf6056ae871c4cdf5569387a30cdd2ac"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#abf6056ae871c4cdf5569387a30cdd2ac">write</a> (uint8_t b) override</td></tr>
+<tr class="memdesc:abf6056ae871c4cdf5569387a30cdd2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte to the channel.  <a href="class_shellminator_tcp_socket.html#abf6056ae871c4cdf5569387a30cdd2ac">More...</a><br /></td></tr>
+<tr class="separator:abf6056ae871c4cdf5569387a30cdd2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a3e39a6b4953a65419a9a610d4af8dc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a9a3e39a6b4953a65419a9a610d4af8dc">write</a> (const uint8_t *data, size_t size) override</td></tr>
+<tr class="separator:a9a3e39a6b4953a65419a9a610d4af8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af19ab90fc3990d9a93bdbdfff57d5346"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#af19ab90fc3990d9a93bdbdfff57d5346">attachConnectCallback</a> (void(*connectCallback_p)(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *))</td></tr>
+<tr class="separator:af19ab90fc3990d9a93bdbdfff57d5346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c1f0ca1e239d10af4070d49ad802a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ad3c1f0ca1e239d10af4070d49ad802a1">attachDisconnectCallback</a> (void(*disconnectCallback_p)(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *))</td></tr>
+<tr class="separator:ad3c1f0ca1e239d10af4070d49ad802a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a390403a207883ce04782d3773fb0e246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a390403a207883ce04782d3773fb0e246">begin</a> ()</td></tr>
+<tr class="separator:a390403a207883ce04782d3773fb0e246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4db50925e3e606ed37692a48f6c7894"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ac4db50925e3e606ed37692a48f6c7894">update</a> ()</td></tr>
+<tr class="separator:ac4db50925e3e606ed37692a48f6c7894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc3bc96b93dbae7f45148492621b9c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a0bc3bc96b93dbae7f45148492621b9c3">attachDebugChannel</a> (Stream *dbg_p)</td></tr>
+<tr class="separator:a0bc3bc96b93dbae7f45148492621b9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aac47afdbb5010740bd47584ca548f716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#aac47afdbb5010740bd47584ca548f716">resetVariables</a> ()</td></tr>
+<tr class="separator:aac47afdbb5010740bd47584ca548f716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bfdda0c5f48e24504b77f9e9c0f6782"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a0bfdda0c5f48e24504b77f9e9c0f6782">closeClient</a> ()</td></tr>
+<tr class="separator:a0bfdda0c5f48e24504b77f9e9c0f6782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9f5ee24451f4aaa7f7e8a35e73a010"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#aca9f5ee24451f4aaa7f7e8a35e73a010">appendToCircularBuffer</a> (uint8_t data)</td></tr>
+<tr class="separator:aca9f5ee24451f4aaa7f7e8a35e73a010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc26798619765e5bbbd57be737dc413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#afbc26798619765e5bbbd57be737dc413">appendToCircularBuffer</a> (uint8_t *data, int dataSize)</td></tr>
+<tr class="separator:afbc26798619765e5bbbd57be737dc413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a7c60fe7a242d3f794252a8b8b4cd58b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a7c60fe7a242d3f794252a8b8b4cd58b0">port</a> = 23</td></tr>
+<tr class="separator:a7c60fe7a242d3f794252a8b8b4cd58b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73bcde006cc170cd5ff8056fd115ec8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a73bcde006cc170cd5ff8056fd115ec8a">clientConnected</a> = false</td></tr>
+<tr class="separator:a73bcde006cc170cd5ff8056fd115ec8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affdec31c44583bb5f18095d7e305f150"><td class="memItemLeft" align="right" valign="top">Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#affdec31c44583bb5f18095d7e305f150">dbg</a> = NULL</td></tr>
+<tr class="separator:affdec31c44583bb5f18095d7e305f150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e667cd968ad8e9c376b8cb534ed11b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0f">TelnetNegotiationState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a02e667cd968ad8e9c376b8cb534ed11b">negotiationState</a></td></tr>
+<tr class="separator:a02e667cd968ad8e9c376b8cb534ed11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0f81b2752dea42a3f7fce3ce0a7e4c"><td class="memItemLeft" align="right" valign="top">WiFiServer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#adb0f81b2752dea42a3f7fce3ce0a7e4c">server</a></td></tr>
+<tr class="separator:adb0f81b2752dea42a3f7fce3ce0a7e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ed9772d5ea9a2aa1d8450509f982f2"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a24ed9772d5ea9a2aa1d8450509f982f2">client</a></td></tr>
+<tr class="separator:a24ed9772d5ea9a2aa1d8450509f982f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8334f90ffc16a4f47cce6403f783e529"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a8334f90ffc16a4f47cce6403f783e529">streamBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:a8334f90ffc16a4f47cce6403f783e529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10bdf9f8ed568188ea0622306945285e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a10bdf9f8ed568188ea0622306945285e">streamBufferWritePointer</a></td></tr>
+<tr class="separator:a10bdf9f8ed568188ea0622306945285e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf4e6bc8027f2e159c66614837910663"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#aaf4e6bc8027f2e159c66614837910663">streamBufferReadPointer</a></td></tr>
+<tr class="separator:aaf4e6bc8027f2e159c66614837910663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab235de99f8cc5a443477988a92b0fd48"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#ab235de99f8cc5a443477988a92b0fd48">connectCallback</a> )(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *parent) = NULL</td></tr>
+<tr class="separator:ab235de99f8cc5a443477988a92b0fd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8058313cddba4b9d92f68d32ef300b8"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#aa8058313cddba4b9d92f68d32ef300b8">disconnectCallback</a> )(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *parent) = NULL</td></tr>
+<tr class="separator:aa8058313cddba4b9d92f68d32ef300b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a81caf29aecb0140a1dd7f483108a75b5"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a81caf29aecb0140a1dd7f483108a75b5">TELNET_IAC_DONT_LINEMODE</a> [3] = { 255, 254, 34 }</td></tr>
+<tr class="separator:a81caf29aecb0140a1dd7f483108a75b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb2ab357e244da1f82b11f6faf45bbb"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#abcb2ab357e244da1f82b11f6faf45bbb">TELNET_IAC_WILL_ECHO</a> [3] = { 255, 251, 1 }</td></tr>
+<tr class="separator:abcb2ab357e244da1f82b11f6faf45bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f37aa37f3fdd2a2ea44a204d7a9eed0"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a7f37aa37f3fdd2a2ea44a204d7a9eed0">TELNET_IAC_DONT_ECHO</a> [3] = { 255, 254, 1 }</td></tr>
+<tr class="separator:a7f37aa37f3fdd2a2ea44a204d7a9eed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5139a46d476dff78196f035e58cdce"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#acc5139a46d476dff78196f035e58cdce">TELNET_IAC_WILL_SUPPRESS_GO_AHEAD</a> [3] = { 255, 251, 3 }</td></tr>
+<tr class="separator:acc5139a46d476dff78196f035e58cdce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ff1f65a8203b77c0c0090adbc98c8db"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_tcp_socket.html#a2ff1f65a8203b77c0c0090adbc98c8db">TELNET_IAC_DO_SUPPRESS_GO_AHEAD</a> [3] = { 255, 253, 3 }</td></tr>
+<tr class="separator:a2ff1f65a8203b77c0c0090adbc98c8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00072">72</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="adc38d59ff291c093586806caf4d6ac0f" name="adc38d59ff291c093586806caf4d6ac0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc38d59ff291c093586806caf4d6ac0f">&#9670;&#160;</a></span>TelnetNegotiationState_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0f">ShellminatorTcpSocket::TelnetNegotiationState_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adc38d59ff291c093586806caf4d6ac0fa546cc208e866bba6a2730f918ed16423" name="adc38d59ff291c093586806caf4d6ac0fa546cc208e866bba6a2730f918ed16423"></a>TELNET_FIRST_BYTE_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="adc38d59ff291c093586806caf4d6ac0faabbc4a92d2df7554707a99b9a0c5bb3a" name="adc38d59ff291c093586806caf4d6ac0faabbc4a92d2df7554707a99b9a0c5bb3a"></a>TELNET_COMMAND_BYTE_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="adc38d59ff291c093586806caf4d6ac0fa093eaa670ecc8738cbf888e353542554" name="adc38d59ff291c093586806caf4d6ac0fa093eaa670ecc8738cbf888e353542554"></a>TELNET_OPTION_BYTE_STATE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00076">76</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae3d47edb24f256b3ee81b546da29c91c" name="ae3d47edb24f256b3ee81b546da29c91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d47edb24f256b3ee81b546da29c91c">&#9670;&#160;</a></span>ShellminatorTcpSocket() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ShellminatorTcpSocket::ShellminatorTcpSocket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00050">50</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_ae3d47edb24f256b3ee81b546da29c91c_cgraph.svg" width="379" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3f4cd3391fdffad4a26e54e0dd13eb52" name="a3f4cd3391fdffad4a26e54e0dd13eb52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4cd3391fdffad4a26e54e0dd13eb52">&#9670;&#160;</a></span>ShellminatorTcpSocket() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ShellminatorTcpSocket::ShellminatorTcpSocket </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00043">43</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_a3f4cd3391fdffad4a26e54e0dd13eb52_cgraph.svg" width="379" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afbc26798619765e5bbbd57be737dc413" name="afbc26798619765e5bbbd57be737dc413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc26798619765e5bbbd57be737dc413">&#9670;&#160;</a></span>appendToCircularBuffer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::appendToCircularBuffer </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dataSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00086">86</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_afbc26798619765e5bbbd57be737dc413_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aca9f5ee24451f4aaa7f7e8a35e73a010" name="aca9f5ee24451f4aaa7f7e8a35e73a010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9f5ee24451f4aaa7f7e8a35e73a010">&#9670;&#160;</a></span>appendToCircularBuffer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::appendToCircularBuffer </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00069">69</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_aca9f5ee24451f4aaa7f7e8a35e73a010_cgraph.svg" width="582" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_aca9f5ee24451f4aaa7f7e8a35e73a010_icgraph.svg" width="384" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="af19ab90fc3990d9a93bdbdfff57d5346" name="af19ab90fc3990d9a93bdbdfff57d5346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af19ab90fc3990d9a93bdbdfff57d5346">&#9670;&#160;</a></span>attachConnectCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::attachConnectCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *)&#160;</td>
+          <td class="paramname"><em>connectCallback_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00263">263</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0bc3bc96b93dbae7f45148492621b9c3" name="a0bc3bc96b93dbae7f45148492621b9c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc3bc96b93dbae7f45148492621b9c3">&#9670;&#160;</a></span>attachDebugChannel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::attachDebugChannel </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>dbg_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00057">57</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3c1f0ca1e239d10af4070d49ad802a1" name="ad3c1f0ca1e239d10af4070d49ad802a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3c1f0ca1e239d10af4070d49ad802a1">&#9670;&#160;</a></span>attachDisconnectCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::attachDisconnectCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *)&#160;</td>
+          <td class="paramname"><em>disconnectCallback_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00267">267</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab64f85ed865a9ab519c32a472aae415e" name="ab64f85ed865a9ab519c32a472aae415e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64f85ed865a9ab519c32a472aae415e">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorTcpSocket::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Available bytes in the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00203">203</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a390403a207883ce04782d3773fb0e246" name="a390403a207883ce04782d3773fb0e246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a390403a207883ce04782d3773fb0e246">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00061">61</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_a390403a207883ce04782d3773fb0e246_cgraph.svg" width="167" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_a390403a207883ce04782d3773fb0e246_icgraph.svg" width="167" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a0bfdda0c5f48e24504b77f9e9c0f6782" name="a0bfdda0c5f48e24504b77f9e9c0f6782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bfdda0c5f48e24504b77f9e9c0f6782">&#9670;&#160;</a></span>closeClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::closeClient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00179">179</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_a0bfdda0c5f48e24504b77f9e9c0f6782_cgraph.svg" width="371" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_a0bfdda0c5f48e24504b77f9e9c0f6782_icgraph.svg" width="588" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a0599fc2b7457fce6b14e39cda215ae04" name="a0599fc2b7457fce6b14e39cda215ae04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0599fc2b7457fce6b14e39cda215ae04">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flush the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00244">244</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a59f5237405c348ef7e7df4aa5e49cecc" name="a59f5237405c348ef7e7df4aa5e49cecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59f5237405c348ef7e7df4aa5e49cecc">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorTcpSocket::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Peek the firtst byte from the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00234">234</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad63f1d30decd7aa3eb931d8c242ffa18" name="ad63f1d30decd7aa3eb931d8c242ffa18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63f1d30decd7aa3eb931d8c242ffa18">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorTcpSocket::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read one byte form the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00216">216</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aac47afdbb5010740bd47584ca548f716" name="aac47afdbb5010740bd47584ca548f716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac47afdbb5010740bd47584ca548f716">&#9670;&#160;</a></span>resetVariables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::resetVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00195">195</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_aac47afdbb5010740bd47584ca548f716_icgraph.svg" width="100%" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ac4db50925e3e606ed37692a48f6c7894" name="ac4db50925e3e606ed37692a48f6c7894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4db50925e3e606ed37692a48f6c7894">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorTcpSocket::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00093">93</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_tcp_socket_ac4db50925e3e606ed37692a48f6c7894_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a9a3e39a6b4953a65419a9a610d4af8dc" name="a9a3e39a6b4953a65419a9a610d4af8dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a3e39a6b4953a65419a9a610d4af8dc">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ShellminatorTcpSocket::write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00256">256</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abf6056ae871c4cdf5569387a30cdd2ac" name="abf6056ae871c4cdf5569387a30cdd2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf6056ae871c4cdf5569387a30cdd2ac">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ShellminatorTcpSocket::write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write one byte to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>The value that has to be written to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html#l00249">249</a> of file <a class="el" href="_shellminator-_tcp_socket_8cpp_source.html">Shellminator-TcpSocket.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a24ed9772d5ea9a2aa1d8450509f982f2" name="a24ed9772d5ea9a2aa1d8450509f982f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24ed9772d5ea9a2aa1d8450509f982f2">&#9670;&#160;</a></span>client</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiClient ShellminatorTcpSocket::client</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00126">126</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a73bcde006cc170cd5ff8056fd115ec8a" name="a73bcde006cc170cd5ff8056fd115ec8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73bcde006cc170cd5ff8056fd115ec8a">&#9670;&#160;</a></span>clientConnected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorTcpSocket::clientConnected = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00120">120</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab235de99f8cc5a443477988a92b0fd48" name="ab235de99f8cc5a443477988a92b0fd48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab235de99f8cc5a443477988a92b0fd48">&#9670;&#160;</a></span>connectCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* ShellminatorTcpSocket::connectCallback) (<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *parent) = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00145">145</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="affdec31c44583bb5f18095d7e305f150" name="affdec31c44583bb5f18095d7e305f150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affdec31c44583bb5f18095d7e305f150">&#9670;&#160;</a></span>dbg</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Stream* ShellminatorTcpSocket::dbg = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00121">121</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa8058313cddba4b9d92f68d32ef300b8" name="aa8058313cddba4b9d92f68d32ef300b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8058313cddba4b9d92f68d32ef300b8">&#9670;&#160;</a></span>disconnectCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* ShellminatorTcpSocket::disconnectCallback) (<a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a> *parent) = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00146">146</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a02e667cd968ad8e9c376b8cb534ed11b" name="a02e667cd968ad8e9c376b8cb534ed11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e667cd968ad8e9c376b8cb534ed11b">&#9670;&#160;</a></span>negotiationState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator_tcp_socket.html#adc38d59ff291c093586806caf4d6ac0f">TelnetNegotiationState_t</a> ShellminatorTcpSocket::negotiationState</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00123">123</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7c60fe7a242d3f794252a8b8b4cd58b0" name="a7c60fe7a242d3f794252a8b8b4cd58b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c60fe7a242d3f794252a8b8b4cd58b0">&#9670;&#160;</a></span>port</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorTcpSocket::port = 23</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00119">119</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="adb0f81b2752dea42a3f7fce3ce0a7e4c" name="adb0f81b2752dea42a3f7fce3ce0a7e4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb0f81b2752dea42a3f7fce3ce0a7e4c">&#9670;&#160;</a></span>server</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiServer* ShellminatorTcpSocket::server</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00125">125</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8334f90ffc16a4f47cce6403f783e529" name="a8334f90ffc16a4f47cce6403f783e529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8334f90ffc16a4f47cce6403f783e529">&#9670;&#160;</a></span>streamBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorTcpSocket::streamBuffer[<a class="el" href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00128">128</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf4e6bc8027f2e159c66614837910663" name="aaf4e6bc8027f2e159c66614837910663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf4e6bc8027f2e159c66614837910663">&#9670;&#160;</a></span>streamBufferReadPointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ShellminatorTcpSocket::streamBufferReadPointer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00130">130</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a10bdf9f8ed568188ea0622306945285e" name="a10bdf9f8ed568188ea0622306945285e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10bdf9f8ed568188ea0622306945285e">&#9670;&#160;</a></span>streamBufferWritePointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ShellminatorTcpSocket::streamBufferWritePointer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00129">129</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2ff1f65a8203b77c0c0090adbc98c8db" name="a2ff1f65a8203b77c0c0090adbc98c8db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff1f65a8203b77c0c0090adbc98c8db">&#9670;&#160;</a></span>TELNET_IAC_DO_SUPPRESS_GO_AHEAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ShellminatorTcpSocket::TELNET_IAC_DO_SUPPRESS_GO_AHEAD = { 255, 253, 3 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00143">143</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7f37aa37f3fdd2a2ea44a204d7a9eed0" name="a7f37aa37f3fdd2a2ea44a204d7a9eed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f37aa37f3fdd2a2ea44a204d7a9eed0">&#9670;&#160;</a></span>TELNET_IAC_DONT_ECHO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ShellminatorTcpSocket::TELNET_IAC_DONT_ECHO = { 255, 254, 1 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00141">141</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a81caf29aecb0140a1dd7f483108a75b5" name="a81caf29aecb0140a1dd7f483108a75b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81caf29aecb0140a1dd7f483108a75b5">&#9670;&#160;</a></span>TELNET_IAC_DONT_LINEMODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ShellminatorTcpSocket::TELNET_IAC_DONT_LINEMODE = { 255, 254, 34 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00139">139</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abcb2ab357e244da1f82b11f6faf45bbb" name="abcb2ab357e244da1f82b11f6faf45bbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcb2ab357e244da1f82b11f6faf45bbb">&#9670;&#160;</a></span>TELNET_IAC_WILL_ECHO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ShellminatorTcpSocket::TELNET_IAC_WILL_ECHO = { 255, 251, 1 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00140">140</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acc5139a46d476dff78196f035e58cdce" name="acc5139a46d476dff78196f035e58cdce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5139a46d476dff78196f035e58cdce">&#9670;&#160;</a></span>TELNET_IAC_WILL_SUPPRESS_GO_AHEAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ShellminatorTcpSocket::TELNET_IAC_WILL_SUPPRESS_GO_AHEAD = { 255, 251, 3 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html#l00142">142</a> of file <a class="el" href="_shellminator-_tcp_socket_8hpp_source.html">Shellminator-TcpSocket.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shellminator_tcp_socket.html">ShellminatorTcpSocket</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

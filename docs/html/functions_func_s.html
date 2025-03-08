@@ -1,0 +1,243 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Class Members - Functions</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('functions_func_s.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="contents">
+&#160;
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>secondDashStateFuncion()&#160;:&#160;<a class="el" href="class_commander_colorizer.html#a3461c3a6dfbbcff6bdccf48dca720220">CommanderColorizer</a></li>
+<li>sendBackspace()&#160;:&#160;<a class="el" href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">Shellminator</a></li>
+<li>sendFrame()&#160;:&#160;<a class="el" href="class_shellminator_web_socket.html#a57a3830ace2b89be2cece489b0a2cd7f">ShellminatorWebSocket</a></li>
+<li>sendFrame125()&#160;:&#160;<a class="el" href="class_shellminator_web_socket.html#a1ce6e2a47abf5c4801842965d3315283">ShellminatorWebSocket</a></li>
+<li>setBannerPathText()&#160;:&#160;<a class="el" href="class_shellminator.html#a9518889e784bdc825a3eb323f8586aad">Shellminator</a></li>
+<li>setBannerText()&#160;:&#160;<a class="el" href="class_shellminator.html#af2556de309666dc8031be866b9b3ef6d">Shellminator</a>, <a class="el" href="class_shellminator_caller.html#a4a67e78353e119f5ee7500c5e09490ed">ShellminatorCaller</a></li>
+<li>setColor()&#160;:&#160;<a class="el" href="class_shellminator_button.html#abb7c782a7a30a60ff25927b01d8c8c3d">ShellminatorButton</a>, <a class="el" href="class_shellminator_level_meter.html#a483f262c5a5f21fd5654647b49b4c2f1">ShellminatorLevelMeter</a>, <a class="el" href="class_shellminator_plot.html#a15f441185ded0dbab5e14bbd9640afbc">ShellminatorPlot</a>, <a class="el" href="class_shellminator_progress.html#ac4770f67d7f465037d1ab944c8d380f0">ShellminatorProgress</a></li>
+<li>setCursorPosition()&#160;:&#160;<a class="el" href="class_shellminator.html#a148b57cedf698acd67209daaeb525c9c">Shellminator</a></li>
+<li>setErrorColor()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#a24365b36742730e503b1ca9b066da2c7">ShellminatorLevelMeter</a></li>
+<li>setErrorPercentage()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#ae0de63a7f49e88846d0e5f843aa09c98">ShellminatorLevelMeter</a></li>
+<li>setFormat()&#160;:&#160;<a class="el" href="class_shellminator.html#af30816610bf82e63cccc0690991a7210">Shellminator</a>, <a class="el" href="class_shellminator_progress.html#a7f64d6d757301c7cfc58892460922d63">ShellminatorProgress</a></li>
+<li>setName()&#160;:&#160;<a class="el" href="class_shellminator_plot.html#a61db915a9ff294839c7aa195854b1da7">ShellminatorPlot</a></li>
+<li>setOrigin()&#160;:&#160;<a class="el" href="class_shellminator_screen.html#a60fb1d0c5c484288241119e66b601951">ShellminatorScreen</a></li>
+<li>setPassword()&#160;:&#160;<a class="el" href="class_shellminator.html#a5dcad723ae1dc2339d60da75ffb45c74">Shellminator</a></li>
+<li>setPasswordHashFunction()&#160;:&#160;<a class="el" href="class_shellminator.html#a50a9eff4262af36bfe238c8f1f262807">Shellminator</a></li>
+<li>setPathText()&#160;:&#160;<a class="el" href="class_shellminator_caller.html#a41733fa84a19fe03bd047366437a952d">ShellminatorCaller</a></li>
+<li>setPercentage()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#ad801bef94d37cfa627fc79d99c55d79f">ShellminatorLevelMeter</a>, <a class="el" href="class_shellminator_progress.html#a454ea800ceac5227fc8bff8ea8b44c31">ShellminatorProgress</a></li>
+<li>setShell()&#160;:&#160;<a class="el" href="class_shellminator_caller.html#a85a82da4c3d2d0b341db546ce3b28abd">ShellminatorCaller</a></li>
+<li>setStep()&#160;:&#160;<a class="el" href="class_shellminator_progress.html#a7e046a6238812bb6282d1ff14f7c4f78">ShellminatorProgress</a></li>
+<li>setText()&#160;:&#160;<a class="el" href="class_shellminator_notification.html#a5c64562c443cfe6dcf305b2c9ca2fd75">ShellminatorNotification</a>, <a class="el" href="class_shellminator_progress.html#a7dcf83179b701ea47547040b1df771a4">ShellminatorProgress</a></li>
+<li>setWarningColor()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#a0d5efc9bb448b19de60cf7dd513ef50b">ShellminatorLevelMeter</a></li>
+<li>setWarningPercentage()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#acc8cc32d3c777748b5eb8fcd4e23249d">ShellminatorLevelMeter</a></li>
+<li>Shellminator()&#160;:&#160;<a class="el" href="class_shellminator.html#a1b14e80f75aca0c3c7a93c886dadab89">Shellminator</a></li>
+<li>ShellminatorAbortState()&#160;:&#160;<a class="el" href="class_shellminator.html#acdd5ac4f6a2c952b23b1644b9f726028">Shellminator</a></li>
+<li>ShellminatorAutoCompleteState()&#160;:&#160;<a class="el" href="class_shellminator.html#a3096f53676f333f46a4d8abe108ac8ef">Shellminator</a></li>
+<li>ShellminatorBackspaceState()&#160;:&#160;<a class="el" href="class_shellminator.html#a7c74b6fae216e4667b31bc758bcc8dd8">Shellminator</a></li>
+<li>ShellminatorBeginningOfLineState()&#160;:&#160;<a class="el" href="class_shellminator.html#a5f7a12ccc4ade091fd274363b23c7658">Shellminator</a></li>
+<li>ShellminatorBleStream()&#160;:&#160;<a class="el" href="class_shellminator_ble_stream.html#a7d3d57ec3806ea38c694068bda528cf4">ShellminatorBleStream</a></li>
+<li>ShellminatorBufferedPrinter()&#160;:&#160;<a class="el" href="class_shellminator_buffered_printer.html#a3b45ccc1571bd9312e2964e301f30b3a">ShellminatorBufferedPrinter</a></li>
+<li>ShellminatorButton()&#160;:&#160;<a class="el" href="class_shellminator_button.html#aebea8e997caf74f9b8d47a7ab2c4d05a">ShellminatorButton</a></li>
+<li>ShellminatorCaller()&#160;:&#160;<a class="el" href="class_shellminator_caller.html#aa469468f84d73323c4c5667214169636">ShellminatorCaller</a></li>
+<li>ShellminatorClearScreenState()&#160;:&#160;<a class="el" href="class_shellminator.html#a64050ee8fa7552da5ee925d298e684fe">Shellminator</a></li>
+<li>ShellminatorCommanderInterface()&#160;:&#160;<a class="el" href="class_shellminator_commander_interface.html#a41086e44e2d2cdf8fbb53dbbd9c9b7f3">ShellminatorCommanderInterface</a></li>
+<li>ShellminatorDefaultState()&#160;:&#160;<a class="el" href="class_shellminator.html#a3a78b761d9e9cbcc142b849f528e893d">Shellminator</a></li>
+<li>ShellminatorDelKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a10e2da5f1c297a54c23560c72528802d">Shellminator</a></li>
+<li>ShellminatorDownArrowKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a04d734ad39f00fff63bc95ad6093f419">Shellminator</a></li>
+<li>ShellminatorEndKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a71d33dbaf9c484acc5e0112e29871712">Shellminator</a></li>
+<li>ShellminatorEndOfLineState()&#160;:&#160;<a class="el" href="class_shellminator.html#a64925b8278809b7020a67846ae736856">Shellminator</a></li>
+<li>ShellminatorEnterKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a83972ae85e0cc1c614dc9501f1042c15">Shellminator</a></li>
+<li>ShellminatorEscapeBracketState()&#160;:&#160;<a class="el" href="class_shellminator.html#a65c0d31507731e8c89434c2660130615">Shellminator</a></li>
+<li>ShellminatorEscapeCharacterState()&#160;:&#160;<a class="el" href="class_shellminator.html#ae20ee865034dfee7f34843437ab5a43a">Shellminator</a></li>
+<li>ShellminatorFourByteUnicodeFirstDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#ad2d7fc8e7c39f74712a57d6a094fe148">Shellminator</a></li>
+<li>ShellminatorFourByteUnicodeSecondDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#a55fcb917d720476ff4142b1f265ae3ab">Shellminator</a></li>
+<li>ShellminatorFourByteUnicodeThirdDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#aa835b331bac3a79b05004008d7eba0da">Shellminator</a></li>
+<li>ShellminatorHomeKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#ae4794a092c3cf1cbf24919d2338646de">Shellminator</a></li>
+<li>ShellminatorLeftArrowKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a55cb08177f83dd96c9fc51498ad0cb2c">Shellminator</a></li>
+<li>ShellminatorLevelMeter()&#160;:&#160;<a class="el" href="class_shellminator_level_meter.html#ae1c421532f36660a288ce8ca7540512a">ShellminatorLevelMeter</a></li>
+<li>ShellminatorList()&#160;:&#160;<a class="el" href="class_shellminator_list.html#a38c8ab82050cea60e6b871c0cf13d8ea">ShellminatorList</a></li>
+<li>ShellminatorListDetailed()&#160;:&#160;<a class="el" href="class_shellminator_list_detailed.html#ad7ddeaed8df9867284c80f4fb3b43fb2">ShellminatorListDetailed</a></li>
+<li>ShellminatorLogoutState()&#160;:&#160;<a class="el" href="class_shellminator.html#ad8a613112e24de6c8456c819d5c1687c">Shellminator</a></li>
+<li>ShellminatorMouseEventParserState()&#160;:&#160;<a class="el" href="class_shellminator.html#a11bcb05cd0199ea25d7097580f6d83a7">Shellminator</a></li>
+<li>ShellminatorNotification()&#160;:&#160;<a class="el" href="class_shellminator_notification.html#aaa186e075a1db9627a75147c314537c1">ShellminatorNotification</a></li>
+<li>ShellminatorPageDownKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a30129e8753e65d9b785d92c4c19b01a1">Shellminator</a></li>
+<li>ShellminatorPageUpKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a16cf25ec794b24c3c0fc5ad7599edefc">Shellminator</a></li>
+<li>ShellminatorPlot()&#160;:&#160;<a class="el" href="class_shellminator_plot.html#a884bc7f179be465f7cef5e59da6a1237">ShellminatorPlot</a></li>
+<li>ShellminatorProcessRegularCharacter()&#160;:&#160;<a class="el" href="class_shellminator.html#a9fdfce956450678c8a7e7c528261d5d2">Shellminator</a></li>
+<li>ShellminatorProgress()&#160;:&#160;<a class="el" href="class_shellminator_progress.html#ad3be5fe7f6904226bb45a0c2379adb19">ShellminatorProgress</a></li>
+<li>ShellminatorReverseSearchState()&#160;:&#160;<a class="el" href="class_shellminator.html#a604bcc9845aade4c69ddef15f5c845fe">Shellminator</a></li>
+<li>ShellminatorRightArrowKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a97698130855c5a0808eb5d934faea5ba">Shellminator</a></li>
+<li>ShellminatorScreenGrid()&#160;:&#160;<a class="el" href="class_shellminator_screen_grid.html#a453801348536c70d1ae597cbd5bc8ab6">ShellminatorScreenGrid</a></li>
+<li>ShellminatorTcpSocket()&#160;:&#160;<a class="el" href="class_shellminator_tcp_socket.html#ae3d47edb24f256b3ee81b546da29c91c">ShellminatorTcpSocket</a></li>
+<li>ShellminatorThreeByteUnicodeFirstDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#aacb12569e3fd2bdf3e891532ac710bdf">Shellminator</a></li>
+<li>ShellminatorThreeByteUnicodeSecondDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#a657d96e75ffeacaa5af52be8c903f5d3">Shellminator</a></li>
+<li>ShellminatorTwoByteUnicodeDataState()&#160;:&#160;<a class="el" href="class_shellminator.html#a54e6adf62d9ee65bc5cb564687ec2ce8">Shellminator</a></li>
+<li>ShellminatorUpArrowKeyState()&#160;:&#160;<a class="el" href="class_shellminator.html#a3db696fd6496f6ad3d44044c48201c8c">Shellminator</a></li>
+<li>ShellminatorWebServer()&#160;:&#160;<a class="el" href="class_shellminator_web_server.html#aae5a087409ca37ef00ac620935bba1a7">ShellminatorWebServer</a></li>
+<li>ShellminatorWebServerThemed()&#160;:&#160;<a class="el" href="class_shellminator_web_server_themed.html#a9e22cde5b899e2028c769eb5b8aa06fe">ShellminatorWebServerThemed</a></li>
+<li>ShellminatorWebServerThemedOffline()&#160;:&#160;<a class="el" href="class_shellminator_web_server_themed_offline.html#a6debf1d59f283e8871969b754cc9a534">ShellminatorWebServerThemedOffline</a></li>
+<li>ShellminatorWebSocket()&#160;:&#160;<a class="el" href="class_shellminator_web_socket.html#a97549a7f73b7cd811913f6dd9278a23f">ShellminatorWebSocket</a></li>
+<li>showCursor()&#160;:&#160;<a class="el" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">Shellminator</a></li>
+<li>start()&#160;:&#160;<a class="el" href="class_shellminator_progress.html#a597e2b074171742bad604d0cb2f5ce11">ShellminatorProgress</a></li>
+<li>substring()&#160;:&#160;<a class="el" href="class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123">Shellminator</a></li>
+<li>swapScreen()&#160;:&#160;<a class="el" href="class_shellminator.html#ab7d5430fbaece4216c42d703bac6f36a">Shellminator</a></li>
+<li>swapScreenAndClear()&#160;:&#160;<a class="el" href="class_shellminator.html#ade30463e00f03bf01ed27e7d1d664620">Shellminator</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Example 204 Commander Position Independent Arguments</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('204_commander_position_independent_arg_page.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example 204 Commander Position Independent Arguments </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md53">Handling Position-Independent Arguments</a></li>
+<li class="level2"><a href="#autotoc_md55">Example: Implementing a &quot;random&quot; Command</a></li>
+<li class="level2"><a href="#autotoc_md56">Defining Arguments</a></li>
+<li class="level2"><a href="#autotoc_md57">Handling Different Cases</a></li>
+<li class="level2"><a href="#autotoc_md58">Optimizing Performance</a></li>
+<li class="level2"><a href="#autotoc_md59">Live Demo</a></li>
+<li class="level2"><a href="#autotoc_md60">Whole Code</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md53"></a>
+Handling Position-Independent Arguments</h2>
+<p >Now, let’s talk about <b>position-independent arguments</b>. <br  />
+</p>
+<p >Have you ever compiled a program using <b>GCC from the command line</b>? If so, you might already be familiar with this concept! Position-independent arguments <b>always come in key-value pairs</b>. <br  />
+</p>
+<p >In the past, argument names were often a <b>single letter preceded by a dash</b>, like <code>-h</code> for help. However, modern applications allow <b>more human-friendly</b> argument names that can be <b>full words</b>, as long as they don’t contain spaces. These longer names are usually <b>prefixed with two dashes</b> (<code>--</code>). <br  />
+</p>
+<p >For example: <br  />
+</p><ul>
+<li>The old-school way: <code>-h</code></li>
+<li>The modern way: <code>--help</code> <br  />
+</li>
+</ul>
+<p >The <b>argument value</b> follows the argument name, separated by at least one <b>space</b>. <br  />
+</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md55"></a>
+Example: Implementing a "random" Command</h2>
+<p >Let's say we need to implement a command called <code>random</code>. As the name suggests, its job is to <b>generate a random number</b>. <br  />
+</p>
+<p >In the syntax used by GCC, the order of function parameters is fixed and cannot be changed, as swapping them could alter the result. In contrast, higher-level languages like Python and Matlab allow parameters to be specified using name-value pairs. This makes it clear which argument is assigned to which value, reducing potential confusion—although this approach requires a bit more typing.</p>
+<p >Additionally, modern programming languages often implement <code>random</code> in <b>two ways</b>:</p><ol type="1">
+<li><b>One argument</b> → This is treated as the <b>upper limit</b>, with <code>0</code> as the default lower limit.</li>
+<li><b>Two arguments</b> → Both a <b>lower and an upper limit</b> are specified. <br  />
+</li>
+</ol>
+<p >We'll build a command that supports <b>both</b> approaches. <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md56"></a>
+Defining Arguments</h2>
+<p >Each argument needs a <b>short name</b> (required) and an optional <b>long name</b>. <br  />
+ To keep things consistent, either <b>use short names for all arguments or enable long names support for all arguments</b>. <br  />
+</p>
+<p >For simplicity: <br  />
+</p><ul>
+<li>The <b>lower limit</b> argument will have a <b>short name</b> <code>-l</code> and a <b>long name</b> <code>--low</code>.</li>
+<li>The <b>upper limit</b> argument will have a <b>short name</b> <code>-h</code> and a <b>long name</b> <code>--high</code>. <br  />
+</li>
+</ul>
+<p >Here’s how we define these arguments: <br  />
+</p>
+<div class="fragment"><div class="line">Argument min_number( args, <span class="charliteral">&#39;l&#39;</span>, <span class="stringliteral">&quot;low&quot;</span> );</div>
+<div class="line">Argument max_number( args, <span class="charliteral">&#39;h&#39;</span>, <span class="stringliteral">&quot;high&quot;</span> );</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md57"></a>
+Handling Different Cases</h2>
+<p >We need to check <b>four scenarios</b>: <br  />
+</p>
+<ol type="1">
+<li>Both arguments are provided → ✅ Perfect! We can generate a random number within the range. <br  />
+</li>
+<li>Only the <code>high</code> argument is provided → ✅ No problem! We assume the <b>lower limit is 0</b>. <br  />
+</li>
+<li>Only the <code>low</code> argument is provided → ❌ This doesn't make sense—we should <b>inform the user</b> that something went wrong. <br  />
+</li>
+<li>Neither argument is provided → ❌ The user probably doesn’t understand how the command works, so we should <b>display usage instructions</b>. <br  />
+</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md58"></a>
+Optimizing Performance</h2>
+<p >Previously, we used <code>parseInt()</code> to check if an argument was parsed correctly. However, if you <b>call it multiple times</b>, your command might run <b>hundreds of times slower than necessary</b>! <br  />
+</p>
+<p >Instead, once <code>parseInt()</code>, <code>parseFloat()</code>, or <code>parseString()</code> has been <b>successfully called</b>, the argument object <b>remembers its parsed value</b>. <br  />
+</p>
+<p >To quickly check if an argument was successfully parsed, you can <b>cast the argument object to a</b> <code>bool</code>. <br  />
+</p>
+<p >Example: <br  />
+</p>
+<div class="fragment"><div class="line">min_number.parseInt();</div>
+<div class="line">max_number.parseInt();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check if both parameters are found</span></div>
+<div class="line"><span class="keywordflow">if</span> ((<span class="keywordtype">bool</span>)min_number &amp;&amp; (<span class="keywordtype">bool</span>)max_number) {</div>
+<div class="line">    caller-&gt;print(random((<span class="keywordtype">int</span>)min_number, (<span class="keywordtype">int</span>)max_number));</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >To make things a bit more <b>visually appealing</b>, we can also <b>add colors to error messages</b>! This helps <b>draw the user’s attention</b> to the important part of the message—which might even be the <b>solution itself</b>. <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Format the error message to guide the user in the right direction.</span></div>
+<div class="line">caller-&gt;print(<span class="stringliteral">&quot;Argument error! Please check &quot;</span>);</div>
+<div class="line">shell.format(caller, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644">Shellminator::UNDERLINE</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>);</div>
+<div class="line">caller-&gt;print(<span class="stringliteral">&quot;random?&quot;</span>);</div>
+<div class="line">shell.format(caller, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a>);</div>
+<div class="line">caller-&gt;println(<span class="stringliteral">&quot; for help!&quot;</span>);</div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644">Shellminator::UNDERLINE</a></div><div class="ttdeci">@ UNDERLINE</div><div class="ttdoc">Underline text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00148">Shellminator.hpp:148</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67"><div class="ttname"><a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a></div><div class="ttdeci">@ REGULAR</div><div class="ttdoc">Regular text style.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00144">Shellminator.hpp:144</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a></div><div class="ttdeci">@ WHITE</div><div class="ttdoc">White text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00122">Shellminator.hpp:121</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdoc">Red text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00115">Shellminator.hpp:115</a></div></div>
+</div><!-- fragment --><p >The <code>shell.format()</code> method works <b>seamlessly</b> with the <code>caller</code> argument, so you can <b>mix and match them</b> without any issues!</p>
+<h2><a class="anchor" id="autotoc_md59"></a>
+Live Demo</h2>
+<p > 
+<iframe id="demoFrame" src="webExamples/204_commanderPositionIndependentArg.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+</p>
+<p > 
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Here are a few <b>suggested commands</b> you might want to try in the demo above:
+        </p>
+    </div>
+</div>
+</p>
+<p >✅ <b>Basic Usage</b> <br  />
+</p><ul>
+<li><code>random?</code> – Displays a help message explaining how to use the command. <br  />
+</li>
+<li><code>random -h 10</code> – Generates a random number between <b>0 and 10</b>. <br  />
+</li>
+<li><code>random --high 10</code> – Does the same as the previous command. <br  />
+</li>
+</ul>
+<p >✅ <b>Custom Range</b> <br  />
+</p><ul>
+<li><code>random -h 10 -l 5</code> – Generates a random number between <b>5 and 10</b>. <br  />
+</li>
+<li><code>random -h 10 --low 5</code> – Same as above. <br  />
+</li>
+<li><code>random -l 5 -h 10</code> – Again, generates a number between <b>5 and 10</b>. This shows that <b>argument order doesn’t matter</b>! <br  />
+</li>
+</ul>
+<p >❌ <b>Error Cases</b> <br  />
+</p><ul>
+<li><code>random</code> – <b>Error:</b> No arguments provided. <br  />
+</li>
+<li><code>random -l 5</code> – <b>Error:</b> Only the lower limit is given; missing the upper limit. <br  />
+</li>
+<li><code>random -l tz5 -h 10</code> – This is an interesting case! 🤔 <br  />
+</li>
+</ul>
+<p >You <b>won't get an error</b>, but the lower limit won't be parsed because it's not a valid number. The code will treat it as if only the upper limit was provided, meaning the lower limit defaults to <b>0</b>.</p>
+<p >Give them a try and see what happens!</p>
+<h2><a class="anchor" id="autotoc_md60"></a>
+Whole Code</h2>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
+<div class="line"><span class="comment">*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Commander-API.hpp&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Commander-Arguments.hpp&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// We have to create an object from Commander class.</span></div>
+<div class="line">Commander commander;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> random_func( <span class="keywordtype">char</span> *args, CommandCaller* caller );</div>
+<div class="line"> </div>
+<div class="line">Commander::systemCommand_t API_tree[] = {</div>
+<div class="line">    systemCommand( <span class="stringliteral">&quot;random&quot;</span>, <span class="stringliteral">&quot;Generates a random number.\r\n\targs: --low:Minimum number\r\n\t      --high: Maximum number&quot;</span>, random_func )</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a ShellminatorCommanderInterface object, and initialize it to use Serial</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_commander_interface.html">ShellminatorCommanderInterface</a> shell( &amp;Serial );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System init section.</span></div>
+<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Clear the terminal</span></div>
+<div class="line">    shell.clear();</div>
+<div class="line"> </div>
+<div class="line">    commander.attachDebugChannel( &amp;Serial );</div>
+<div class="line">    commander.attachTree( API_tree );</div>
+<div class="line">    commander.init();</div>
+<div class="line"> </div>
+<div class="line">    shell.attachCommander( &amp;commander );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Initialize shell object.</span></div>
+<div class="line">    shell.begin( <span class="stringliteral">&quot;arnold&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Infinite loop.</span></div>
+<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Process the new data.</span></div>
+<div class="line">    shell.update();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> random_func(<span class="keywordtype">char</span> *args, CommandCaller* caller ){</div>
+<div class="line">    Argument min_number( args, <span class="charliteral">&#39;l&#39;</span>, <span class="stringliteral">&quot;low&quot;</span> );</div>
+<div class="line">    Argument max_number( args, <span class="charliteral">&#39;h&#39;</span>, <span class="stringliteral">&quot;high&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    min_number.parseInt();</div>
+<div class="line">    max_number.parseInt();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Check if both parameters are found</span></div>
+<div class="line">    <span class="keywordflow">if</span>( (<span class="keywordtype">bool</span>)min_number &amp;&amp; (<span class="keywordtype">bool</span>)max_number ){</div>
+<div class="line">        caller -&gt; print( random( (<span class="keywordtype">int</span>)min_number, (<span class="keywordtype">int</span>)max_number ) );</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Check if only high bound is given</span></div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( (<span class="keywordtype">bool</span>)max_number &amp;&amp; !(<span class="keywordtype">bool</span>)min_number ){</div>
+<div class="line">        caller -&gt; print( random( (<span class="keywordtype">int</span>)max_number ) );</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Check if only low bound is given. Because this doesn&#39;t</span></div>
+<div class="line">    <span class="comment">// makes much sense generate an error.</span></div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( !(<span class="keywordtype">bool</span>)max_number &amp;&amp; (<span class="keywordtype">bool</span>)min_number ){</div>
+<div class="line">        caller -&gt; println( <span class="stringliteral">&quot;Only low bound is given. Low bound is also neccesary!&quot;</span> );</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Create some formatting on the error message to navigate</span></div>
+<div class="line">    <span class="comment">// the user to the right direction.</span></div>
+<div class="line">    caller -&gt; print( <span class="stringliteral">&quot;Argument error! Please check &quot;</span> );</div>
+<div class="line">    shell.format( caller, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644">Shellminator::UNDERLINE</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
+<div class="line">    caller -&gt; print( <span class="stringliteral">&quot;random?&quot;</span>);</div>
+<div class="line">    shell.format( caller, <a class="code hl_enumvalue" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">Shellminator::REGULAR</a>, <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">Shellminator::WHITE</a> );</div>
+<div class="line">    caller -&gt; println( <span class="stringliteral">&quot; for help!&quot;</span> );</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_shellminator-_commander-_interface_8hpp_html"><div class="ttname"><a href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html"><div class="ttname"><a href="class_shellminator_commander_interface.html">ShellminatorCommanderInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00067">Shellminator-Commander-Interface.hpp:67</a></div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous   </th><th class="markdownTableHeadRight">Next    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="203_commander_argument_types_page.html">Commander Argument Types Example</a>   </td><td class="markdownTableBodyRight"><a class="el" href="205_commander_cowsay_page.html">Commander Cowsay Example</a>   </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

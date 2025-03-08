@@ -1,0 +1,939 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: ShellminatorCommanderInterface Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('class_shellminator_commander_interface.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="class_shellminator_commander_interface-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ShellminatorCommanderInterface Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ShellminatorCommanderInterface:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_commander_interface__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Collaboration diagram for ShellminatorCommanderInterface:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_commander_interface__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a41086e44e2d2cdf8fbb53dbbd9c9b7f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a41086e44e2d2cdf8fbb53dbbd9c9b7f3">ShellminatorCommanderInterface</a> (Stream *stream_p)</td></tr>
+<tr class="separator:a41086e44e2d2cdf8fbb53dbbd9c9b7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeabeb0ce937fd0fd3489b1b660d682c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#afeabeb0ce937fd0fd3489b1b660d682c">attachCommander</a> (Commander *commander_p)</td></tr>
+<tr class="separator:afeabeb0ce937fd0fd3489b1b660d682c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf5e13a04aeb5137fb297fcafd63604"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#adcf5e13a04aeb5137fb297fcafd63604">printCommandParserHelp</a> (Stream *channel_p, bool formatting_p) override</td></tr>
+<tr class="memdesc:adcf5e13a04aeb5137fb297fcafd63604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print command parser Help.  <a href="class_shellminator_commander_interface.html#adcf5e13a04aeb5137fb297fcafd63604">More...</a><br /></td></tr>
+<tr class="separator:adcf5e13a04aeb5137fb297fcafd63604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d945867aeeaee4cfd051e94741c813e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a1d945867aeeaee4cfd051e94741c813e">checkCommandFraction</a> () override</td></tr>
+<tr class="memdesc:a1d945867aeeaee4cfd051e94741c813e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the command with the command parser to get some useful information.  <a href="class_shellminator_commander_interface.html#a1d945867aeeaee4cfd051e94741c813e">More...</a><br /></td></tr>
+<tr class="separator:a1d945867aeeaee4cfd051e94741c813e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc91330543791d8c4160eb45571f749"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#afbc91330543791d8c4160eb45571f749">hasCommandParser</a> () override</td></tr>
+<tr class="separator:afbc91330543791d8c4160eb45571f749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6732fa3473f7c83286880524a38a4917"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a6732fa3473f7c83286880524a38a4917">executeWithCommandParser</a> () override</td></tr>
+<tr class="separator:a6732fa3473f7c83286880524a38a4917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada9809ba0745c19d43b2befe1ad9489"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#aada9809ba0745c19d43b2befe1ad9489">autoCompleteWithCommandParser</a> () override</td></tr>
+<tr class="separator:aada9809ba0745c19d43b2befe1ad9489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a122e94adfd6ece02780a298ba4497e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a4a122e94adfd6ece02780a298ba4497e">attachAutoCompleteBuffer</a> (char *buffer_p, int buffer_size_p)</td></tr>
+<tr class="separator:a4a122e94adfd6ece02780a298ba4497e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:a1b14e80f75aca0c3c7a93c886dadab89 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1b14e80f75aca0c3c7a93c886dadab89">Shellminator</a> (Stream *stream_p)</td></tr>
+<tr class="memdesc:a1b14e80f75aca0c3c7a93c886dadab89 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shell object constructor.  <a href="class_shellminator.html#a1b14e80f75aca0c3c7a93c886dadab89">More...</a><br /></td></tr>
+<tr class="separator:a1b14e80f75aca0c3c7a93c886dadab89 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accaf1036fb2f1c4dfffa88da4116fe82 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#accaf1036fb2f1c4dfffa88da4116fe82">enableBuffering</a> (uint8_t *buffer, int bufferSize)</td></tr>
+<tr class="memdesc:accaf1036fb2f1c4dfffa88da4116fe82 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable buffering to gain speed.  <a href="class_shellminator.html#accaf1036fb2f1c4dfffa88da4116fe82">More...</a><br /></td></tr>
+<tr class="separator:accaf1036fb2f1c4dfffa88da4116fe82 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd684a9a1953d51de2e571b59900a49 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#abbd684a9a1953d51de2e571b59900a49">attachExecFunc</a> (void(*execution_fn_p)(char *, <a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:abbd684a9a1953d51de2e571b59900a49 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a function callback for command execution.  <a href="class_shellminator.html#abbd684a9a1953d51de2e571b59900a49">More...</a><br /></td></tr>
+<tr class="separator:abbd684a9a1953d51de2e571b59900a49 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645c9365a0e82f589256b1f146174112 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a645c9365a0e82f589256b1f146174112">attachNeofetchFunc</a> (void(*neofetch_fn_p)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a645c9365a0e82f589256b1f146174112 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a function callback for neofetch command.  <a href="class_shellminator.html#a645c9365a0e82f589256b1f146174112">More...</a><br /></td></tr>
+<tr class="separator:a645c9365a0e82f589256b1f146174112 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9321a7c84af143dc5c2540cfd3b02454 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9321a7c84af143dc5c2540cfd3b02454">begin</a> (const char *banner_p)</td></tr>
+<tr class="memdesc:a9321a7c84af143dc5c2540cfd3b02454 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> initialization function.  <a href="class_shellminator.html#a9321a7c84af143dc5c2540cfd3b02454">More...</a><br /></td></tr>
+<tr class="separator:a9321a7c84af143dc5c2540cfd3b02454 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f76bb962817d2a5fbbe626036dfbda1 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">sendBackspace</a> ()</td></tr>
+<tr class="memdesc:a5f76bb962817d2a5fbbe626036dfbda1 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a backspace.  <a href="class_shellminator.html#a5f76bb962817d2a5fbbe626036dfbda1">More...</a><br /></td></tr>
+<tr class="separator:a5f76bb962817d2a5fbbe626036dfbda1 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a274ba9dece047e5d4b3c23cae6c91317 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317">clear</a> ()</td></tr>
+<tr class="memdesc:a274ba9dece047e5d4b3c23cae6c91317 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear screen.  <a href="class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317">More...</a><br /></td></tr>
+<tr class="separator:a274ba9dece047e5d4b3c23cae6c91317 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8933d5b0360a3f4b3bff32e12a77d1 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">update</a> ()</td></tr>
+<tr class="memdesc:a3f8933d5b0360a3f4b3bff32e12a77d1 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update function.  <a href="class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1">More...</a><br /></td></tr>
+<tr class="separator:a3f8933d5b0360a3f4b3bff32e12a77d1 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b18c3af9ba4d7ed847ac092f5d92e14 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a5b18c3af9ba4d7ed847ac092f5d92e14">logOut</a> ()</td></tr>
+<tr class="separator:a5b18c3af9ba4d7ed847ac092f5d92e14 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c7572eee48f38eeeac937c3d3e0b6e inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">format</a> (Stream *stream_p, int firstArg)</td></tr>
+<tr class="memdesc:a99c7572eee48f38eeeac937c3d3e0b6e inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic text formatting.  <a href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">More...</a><br /></td></tr>
+<tr class="separator:a99c7572eee48f38eeeac937c3d3e0b6e inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456efe7340152f232dd1efc295bb7f18 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a456efe7340152f232dd1efc295bb7f18">format</a> (Stream *stream_p, int firstArg, int secondArg)</td></tr>
+<tr class="separator:a456efe7340152f232dd1efc295bb7f18 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a9db999c9ba6e6725a58ea7941050b3 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9a9db999c9ba6e6725a58ea7941050b3">format</a> (Stream *stream_p, int firstArg, int secondArg, int thirdArg)</td></tr>
+<tr class="separator:a9a9db999c9ba6e6725a58ea7941050b3 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403ea48c3312851979108855989e71ce inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a403ea48c3312851979108855989e71ce">hideCursor</a> ()</td></tr>
+<tr class="memdesc:a403ea48c3312851979108855989e71ce inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide the cursor.  <a href="class_shellminator.html#a403ea48c3312851979108855989e71ce">More...</a><br /></td></tr>
+<tr class="separator:a403ea48c3312851979108855989e71ce inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2494d3a395b52ea6017948472a535940 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">showCursor</a> ()</td></tr>
+<tr class="memdesc:a2494d3a395b52ea6017948472a535940 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the cursor.  <a href="class_shellminator.html#a2494d3a395b52ea6017948472a535940">More...</a><br /></td></tr>
+<tr class="separator:a2494d3a395b52ea6017948472a535940 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbb745ff1da8944983276e361cbc830 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aecbb745ff1da8944983276e361cbc830">getCursorPosition</a> (int *x, int *y, uint32_t timeout=250)</td></tr>
+<tr class="memdesc:aecbb745ff1da8944983276e361cbc830 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the position of the cursor.  <a href="class_shellminator.html#aecbb745ff1da8944983276e361cbc830">More...</a><br /></td></tr>
+<tr class="separator:aecbb745ff1da8944983276e361cbc830 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a148b57cedf698acd67209daaeb525c9c inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a148b57cedf698acd67209daaeb525c9c">setCursorPosition</a> (int x, int y)</td></tr>
+<tr class="memdesc:a148b57cedf698acd67209daaeb525c9c inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the cursor.  <a href="class_shellminator.html#a148b57cedf698acd67209daaeb525c9c">More...</a><br /></td></tr>
+<tr class="separator:a148b57cedf698acd67209daaeb525c9c inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a51aad4620e2253ccec92b0d208043e inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e">getTerminalSize</a> (int *width, int *height)</td></tr>
+<tr class="separator:a1a51aad4620e2253ccec92b0d208043e inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adab0caaef03f45fdba6dde0d5e0f9a6e inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e">drawLogo</a> ()</td></tr>
+<tr class="memdesc:adab0caaef03f45fdba6dde0d5e0f9a6e inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the startup logo.  <a href="class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e">More...</a><br /></td></tr>
+<tr class="separator:adab0caaef03f45fdba6dde0d5e0f9a6e inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a74cf2bf2746c17ef6b8874f75ec4d7 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7">printBanner</a> ()</td></tr>
+<tr class="memdesc:a6a74cf2bf2746c17ef6b8874f75ec4d7 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function prints the banner text.  <a href="class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7">More...</a><br /></td></tr>
+<tr class="separator:a6a74cf2bf2746c17ef6b8874f75ec4d7 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd33cc9433d6d575a7c6e6e0019b682 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682">printHistory</a> ()</td></tr>
+<tr class="memdesc:a2fd33cc9433d6d575a7c6e6e0019b682 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print command history.  <a href="class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682">More...</a><br /></td></tr>
+<tr class="separator:a2fd33cc9433d6d575a7c6e6e0019b682 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2c421ddc842d8f0f2769b0e391ab5c inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c">printHelp</a> ()</td></tr>
+<tr class="memdesc:acd2c421ddc842d8f0f2769b0e391ab5c inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help text.  <a href="class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c">More...</a><br /></td></tr>
+<tr class="separator:acd2c421ddc842d8f0f2769b0e391ab5c inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2556de309666dc8031be866b9b3ef6d inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#af2556de309666dc8031be866b9b3ef6d">setBannerText</a> (const char *banner_p)</td></tr>
+<tr class="memdesc:af2556de309666dc8031be866b9b3ef6d inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the banner text.  <a href="class_shellminator.html#af2556de309666dc8031be866b9b3ef6d">More...</a><br /></td></tr>
+<tr class="separator:af2556de309666dc8031be866b9b3ef6d inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9518889e784bdc825a3eb323f8586aad inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9518889e784bdc825a3eb323f8586aad">setBannerPathText</a> (const char *bannerPath_p)</td></tr>
+<tr class="memdesc:a9518889e784bdc825a3eb323f8586aad inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function sets the banner path text.  <a href="class_shellminator.html#a9518889e784bdc825a3eb323f8586aad">More...</a><br /></td></tr>
+<tr class="separator:a9518889e784bdc825a3eb323f8586aad inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb986fa66295b49c0a540fa2f287d0e2 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#acb986fa66295b49c0a540fa2f287d0e2">attachLogo</a> (const char *logo_p)</td></tr>
+<tr class="memdesc:acb986fa66295b49c0a540fa2f287d0e2 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function attaches a logo to the terminal.  <a href="class_shellminator.html#acb986fa66295b49c0a540fa2f287d0e2">More...</a><br /></td></tr>
+<tr class="separator:acb986fa66295b49c0a540fa2f287d0e2 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b1c1dba7998763b9aa3507197104f4 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab2b1c1dba7998763b9aa3507197104f4">attachLogo</a> (__FlashStringHelper *progmemLogo_p)</td></tr>
+<tr class="memdesc:ab2b1c1dba7998763b9aa3507197104f4 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function attaches a logo to the terminal.  <a href="class_shellminator.html#ab2b1c1dba7998763b9aa3507197104f4">More...</a><br /></td></tr>
+<tr class="separator:ab2b1c1dba7998763b9aa3507197104f4 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663611aa23a3a82e2903fdaa2e43d37b inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a663611aa23a3a82e2903fdaa2e43d37b">overrideUpArrow</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a663611aa23a3a82e2903fdaa2e43d37b inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override up arrow key behaviour.  <a href="class_shellminator.html#a663611aa23a3a82e2903fdaa2e43d37b">More...</a><br /></td></tr>
+<tr class="separator:a663611aa23a3a82e2903fdaa2e43d37b inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ac920c33e94d48be2cfbe2847e351f inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a50ac920c33e94d48be2cfbe2847e351f">overrideDownArrow</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a50ac920c33e94d48be2cfbe2847e351f inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override down arrow key behaviour.  <a href="class_shellminator.html#a50ac920c33e94d48be2cfbe2847e351f">More...</a><br /></td></tr>
+<tr class="separator:a50ac920c33e94d48be2cfbe2847e351f inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ca9b3ee923ecb01bd2f92e863847a6 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a90ca9b3ee923ecb01bd2f92e863847a6">overrideLeftArrow</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a90ca9b3ee923ecb01bd2f92e863847a6 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override left arrow key behaviour.  <a href="class_shellminator.html#a90ca9b3ee923ecb01bd2f92e863847a6">More...</a><br /></td></tr>
+<tr class="separator:a90ca9b3ee923ecb01bd2f92e863847a6 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71448ab27fa6efde7aec9b2782c26351 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a71448ab27fa6efde7aec9b2782c26351">overrideRightArrow</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a71448ab27fa6efde7aec9b2782c26351 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override right arrow key behaviour.  <a href="class_shellminator.html#a71448ab27fa6efde7aec9b2782c26351">More...</a><br /></td></tr>
+<tr class="separator:a71448ab27fa6efde7aec9b2782c26351 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d96cc5df873978580f235515325777 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#af8d96cc5df873978580f235515325777">overrideAbortKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:af8d96cc5df873978580f235515325777 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override abort key behaviour.  <a href="class_shellminator.html#af8d96cc5df873978580f235515325777">More...</a><br /></td></tr>
+<tr class="separator:af8d96cc5df873978580f235515325777 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4bf7cf59710d5f91f8bdfb3af451dc inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a0f4bf7cf59710d5f91f8bdfb3af451dc">overridePageUpKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a0f4bf7cf59710d5f91f8bdfb3af451dc inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override Page-Up key behaviour.  <a href="class_shellminator.html#a0f4bf7cf59710d5f91f8bdfb3af451dc">More...</a><br /></td></tr>
+<tr class="separator:a0f4bf7cf59710d5f91f8bdfb3af451dc inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae537d42ecbfc63156d9a3b290a3fec3b inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae537d42ecbfc63156d9a3b290a3fec3b">overridePageDownKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:ae537d42ecbfc63156d9a3b290a3fec3b inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override Page-Down key behaviour.  <a href="class_shellminator.html#ae537d42ecbfc63156d9a3b290a3fec3b">More...</a><br /></td></tr>
+<tr class="separator:ae537d42ecbfc63156d9a3b290a3fec3b inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b223eb56c35b99cb8505f7e6cda9f7 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a04b223eb56c35b99cb8505f7e6cda9f7">overrideHomeKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a04b223eb56c35b99cb8505f7e6cda9f7 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override Home key behaviour.  <a href="class_shellminator.html#a04b223eb56c35b99cb8505f7e6cda9f7">More...</a><br /></td></tr>
+<tr class="separator:a04b223eb56c35b99cb8505f7e6cda9f7 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d222ae1ededbe81fce96d8311499b9 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a91d222ae1ededbe81fce96d8311499b9">overrideEndKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a91d222ae1ededbe81fce96d8311499b9 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override End key behaviour.  <a href="class_shellminator.html#a91d222ae1ededbe81fce96d8311499b9">More...</a><br /></td></tr>
+<tr class="separator:a91d222ae1ededbe81fce96d8311499b9 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26908f3e34335f62968f38d8f60cf6e6 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a26908f3e34335f62968f38d8f60cf6e6">overrideLogoutKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:a26908f3e34335f62968f38d8f60cf6e6 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override Logout key behaviour.  <a href="class_shellminator.html#a26908f3e34335f62968f38d8f60cf6e6">More...</a><br /></td></tr>
+<tr class="separator:a26908f3e34335f62968f38d8f60cf6e6 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ce94d0f63b540bac326c40e1c78b5e inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ad2ce94d0f63b540bac326c40e1c78b5e">overrideSearchKey</a> (void(*func)(<a class="el" href="class_shellminator.html">Shellminator</a> *))</td></tr>
+<tr class="memdesc:ad2ce94d0f63b540bac326c40e1c78b5e inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override Search key behaviour.  <a href="class_shellminator.html#ad2ce94d0f63b540bac326c40e1c78b5e">More...</a><br /></td></tr>
+<tr class="separator:ad2ce94d0f63b540bac326c40e1c78b5e inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7861294e2b29a3880a89566415fd2e18 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">freeUpArrow</a> ()</td></tr>
+<tr class="memdesc:a7861294e2b29a3880a89566415fd2e18 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset up arrow key functionality to default.  <a href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">More...</a><br /></td></tr>
+<tr class="separator:a7861294e2b29a3880a89566415fd2e18 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d4f4df39fb1f5197e3f07f83eac6bd inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">freeDownArrow</a> ()</td></tr>
+<tr class="memdesc:ae3d4f4df39fb1f5197e3f07f83eac6bd inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset down arrow key functionality to default.  <a href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">More...</a><br /></td></tr>
+<tr class="separator:ae3d4f4df39fb1f5197e3f07f83eac6bd inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce305a096b98ecd88c2f8c82aa248ba inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">freeLeftArrow</a> ()</td></tr>
+<tr class="memdesc:a2ce305a096b98ecd88c2f8c82aa248ba inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset left arrow key functionality to default.  <a href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">More...</a><br /></td></tr>
+<tr class="separator:a2ce305a096b98ecd88c2f8c82aa248ba inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50683035772f117ffd9f9f05563397c inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">freeRightArrow</a> ()</td></tr>
+<tr class="memdesc:ad50683035772f117ffd9f9f05563397c inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset right arrow key functionality to default.  <a href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">More...</a><br /></td></tr>
+<tr class="separator:ad50683035772f117ffd9f9f05563397c inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2f5c4c94e62ce7d833eac3cf1fd05a inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">freeAbortKey</a> ()</td></tr>
+<tr class="memdesc:a4b2f5c4c94e62ce7d833eac3cf1fd05a inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset abort key functionality to default.  <a href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">More...</a><br /></td></tr>
+<tr class="separator:a4b2f5c4c94e62ce7d833eac3cf1fd05a inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c99af6abdb140e9597e06c83ad3ba5f inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a4c99af6abdb140e9597e06c83ad3ba5f">freePageUpKey</a> ()</td></tr>
+<tr class="memdesc:a4c99af6abdb140e9597e06c83ad3ba5f inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Page-Up key functionality to default.  <a href="class_shellminator.html#a4c99af6abdb140e9597e06c83ad3ba5f">More...</a><br /></td></tr>
+<tr class="separator:a4c99af6abdb140e9597e06c83ad3ba5f inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae67011c2743ea955d9254b4127ec17f4 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae67011c2743ea955d9254b4127ec17f4">freePageDownKey</a> ()</td></tr>
+<tr class="memdesc:ae67011c2743ea955d9254b4127ec17f4 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Page-Down key functionality to default.  <a href="class_shellminator.html#ae67011c2743ea955d9254b4127ec17f4">More...</a><br /></td></tr>
+<tr class="separator:ae67011c2743ea955d9254b4127ec17f4 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80626856ef833b0b77cb25c26e5b931f inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a80626856ef833b0b77cb25c26e5b931f">freeHomeKey</a> ()</td></tr>
+<tr class="memdesc:a80626856ef833b0b77cb25c26e5b931f inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Home key functionality to default.  <a href="class_shellminator.html#a80626856ef833b0b77cb25c26e5b931f">More...</a><br /></td></tr>
+<tr class="separator:a80626856ef833b0b77cb25c26e5b931f inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56313495a30f28e95b303097e7d182c6 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a56313495a30f28e95b303097e7d182c6">freeEndKey</a> ()</td></tr>
+<tr class="memdesc:a56313495a30f28e95b303097e7d182c6 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset End key functionality to default.  <a href="class_shellminator.html#a56313495a30f28e95b303097e7d182c6">More...</a><br /></td></tr>
+<tr class="separator:a56313495a30f28e95b303097e7d182c6 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55bbe4187c59a4dea529e668c7b8f956 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a55bbe4187c59a4dea529e668c7b8f956">freeLogoutKey</a> ()</td></tr>
+<tr class="memdesc:a55bbe4187c59a4dea529e668c7b8f956 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Logout key functionality to default.  <a href="class_shellminator.html#a55bbe4187c59a4dea529e668c7b8f956">More...</a><br /></td></tr>
+<tr class="separator:a55bbe4187c59a4dea529e668c7b8f956 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae156fe5bcfa0c6961b37eb2d39719d04 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae156fe5bcfa0c6961b37eb2d39719d04">freeSearchKey</a> ()</td></tr>
+<tr class="memdesc:ae156fe5bcfa0c6961b37eb2d39719d04 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Search key functionality to default.  <a href="class_shellminator.html#ae156fe5bcfa0c6961b37eb2d39719d04">More...</a><br /></td></tr>
+<tr class="separator:ae156fe5bcfa0c6961b37eb2d39719d04 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dcad723ae1dc2339d60da75ffb45c74 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a5dcad723ae1dc2339d60da75ffb45c74">setPassword</a> (uint8_t *hashData, int hashSize)</td></tr>
+<tr class="memdesc:a5dcad723ae1dc2339d60da75ffb45c74 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable login password.  <a href="class_shellminator.html#a5dcad723ae1dc2339d60da75ffb45c74">More...</a><br /></td></tr>
+<tr class="separator:a5dcad723ae1dc2339d60da75ffb45c74 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50a9eff4262af36bfe238c8f1f262807 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a50a9eff4262af36bfe238c8f1f262807">setPasswordHashFunction</a> (void(*hashFunc_p)(uint8_t *, int, uint8_t *, int))</td></tr>
+<tr class="memdesc:a50a9eff4262af36bfe238c8f1f262807 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the built-in CRC32 hash generator.  <a href="class_shellminator.html#a50a9eff4262af36bfe238c8f1f262807">More...</a><br /></td></tr>
+<tr class="separator:a50a9eff4262af36bfe238c8f1f262807 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614043dd51087e5867950f5a52756681 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a614043dd51087e5867950f5a52756681">beginScreen</a> (<a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a> *screen_p, int updatePeriod=250)</td></tr>
+<tr class="memdesc:a614043dd51087e5867950f5a52756681 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register Screen object to draw.  <a href="class_shellminator.html#a614043dd51087e5867950f5a52756681">More...</a><br /></td></tr>
+<tr class="separator:a614043dd51087e5867950f5a52756681 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95945bd5860aaed1ac544da1b3800447 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a95945bd5860aaed1ac544da1b3800447">endScreen</a> ()</td></tr>
+<tr class="memdesc:a95945bd5860aaed1ac544da1b3800447 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort Screen session.  <a href="class_shellminator.html#a95945bd5860aaed1ac544da1b3800447">More...</a><br /></td></tr>
+<tr class="separator:a95945bd5860aaed1ac544da1b3800447 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7d5430fbaece4216c42d703bac6f36a inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab7d5430fbaece4216c42d703bac6f36a">swapScreen</a> (<a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a> *screen_p, int updatePeriod=250)</td></tr>
+<tr class="separator:ab7d5430fbaece4216c42d703bac6f36a inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade30463e00f03bf01ed27e7d1d664620 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ade30463e00f03bf01ed27e7d1d664620">swapScreenAndClear</a> (<a class="el" href="class_shellminator_screen.html">ShellminatorScreen</a> *screen_p, int updatePeriod=250)</td></tr>
+<tr class="separator:ade30463e00f03bf01ed27e7d1d664620 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea5eda741b93c65d767e1e48d41f7cf inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf">requestRedraw</a> ()</td></tr>
+<tr class="memdesc:a7ea5eda741b93c65d767e1e48d41f7cf inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redraw request from a Screen object.  <a href="class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf">More...</a><br /></td></tr>
+<tr class="separator:a7ea5eda741b93c65d767e1e48d41f7cf inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb1c4efda2abf2782ba50488d942bc2 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a6cb1c4efda2abf2782ba50488d942bc2">eventAvailable</a> ()</td></tr>
+<tr class="memdesc:a6cb1c4efda2abf2782ba50488d942bc2 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of events available for reading from the eventBuffer.  <a href="class_shellminator.html#a6cb1c4efda2abf2782ba50488d942bc2">More...</a><br /></td></tr>
+<tr class="separator:a6cb1c4efda2abf2782ba50488d942bc2 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3814e6fd6e4294c10ab242cf58a6290 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_shellminator_1_1shell_event__t.html">shellEvent_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ad3814e6fd6e4294c10ab242cf58a6290">readEvent</a> ()</td></tr>
+<tr class="memdesc:ad3814e6fd6e4294c10ab242cf58a6290 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an event.  <a href="class_shellminator.html#ad3814e6fd6e4294c10ab242cf58a6290">More...</a><br /></td></tr>
+<tr class="separator:ad3814e6fd6e4294c10ab242cf58a6290 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa06eec48be6c382f33bb465746993883 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aa06eec48be6c382f33bb465746993883">popEvent</a> ()</td></tr>
+<tr class="memdesc:aa06eec48be6c382f33bb465746993883 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the current element from the buffer.  <a href="class_shellminator.html#aa06eec48be6c382f33bb465746993883">More...</a><br /></td></tr>
+<tr class="separator:aa06eec48be6c382f33bb465746993883 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e702e81eae5fcb5901c56c039d75b4 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a55e702e81eae5fcb5901c56c039d75b4">mouseBegin</a> ()</td></tr>
+<tr class="memdesc:a55e702e81eae5fcb5901c56c039d75b4 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable mouse reports.  <a href="class_shellminator.html#a55e702e81eae5fcb5901c56c039d75b4">More...</a><br /></td></tr>
+<tr class="separator:a55e702e81eae5fcb5901c56c039d75b4 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35be74e46ad7eac24a03411cc9139668 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a35be74e46ad7eac24a03411cc9139668">mouseEnd</a> ()</td></tr>
+<tr class="memdesc:a35be74e46ad7eac24a03411cc9139668 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable mouse reports.  <a href="class_shellminator.html#a35be74e46ad7eac24a03411cc9139668">More...</a><br /></td></tr>
+<tr class="separator:a35be74e46ad7eac24a03411cc9139668 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e3aa85da50286d27c0f0fbbb0cee5a8 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8">input</a> (char *buffer, int bufferSize, const char *instruction, void(*callback)(char *, int, <a class="el" href="class_shellminator.html">Shellminator</a> *), bool secret=false)</td></tr>
+<tr class="memdesc:a1e3aa85da50286d27c0f0fbbb0cee5a8 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input prompt.  <a href="class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8">More...</a><br /></td></tr>
+<tr class="separator:a1e3aa85da50286d27c0f0fbbb0cee5a8 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89e86946143cf1051a8047f56432e409 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">beep</a> ()</td></tr>
+<tr class="memdesc:a89e86946143cf1051a8047f56432e409 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select list.  <a href="class_shellminator.html#a89e86946143cf1051a8047f56432e409">More...</a><br /></td></tr>
+<tr class="separator:a89e86946143cf1051a8047f56432e409 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54b7dddae3bd1ec14d5f5d39d626807 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab54b7dddae3bd1ec14d5f5d39d626807">printLoginScreen</a> ()</td></tr>
+<tr class="separator:ab54b7dddae3bd1ec14d5f5d39d626807 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a374f8091a017ba6fb911c3ff98666 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator_buffered_printer.html">ShellminatorBufferedPrinter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#af0a374f8091a017ba6fb911c3ff98666">getBufferedPrinter</a> ()</td></tr>
+<tr class="memdesc:af0a374f8091a017ba6fb911c3ff98666 inherit pub_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the buffered printer object address.  <a href="class_shellminator.html#af0a374f8091a017ba6fb911c3ff98666">More...</a><br /></td></tr>
+<tr class="separator:af0a374f8091a017ba6fb911c3ff98666 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37cd443388c5ea2c3c4d1e905bebc73 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae37cd443388c5ea2c3c4d1e905bebc73">attachColorizer</a> (<a class="el" href="class_default_colorizer.html">DefaultColorizer</a> *colorizer_p)</td></tr>
+<tr class="separator:ae37cd443388c5ea2c3c4d1e905bebc73 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa42838fa5ba17810bf06ea201000d05 inherit pub_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aaa42838fa5ba17810bf06ea201000d05">autoDetectTerminal</a> ()</td></tr>
+<tr class="separator:aaa42838fa5ba17810bf06ea201000d05 inherit pub_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a44471e638cbfa5870bc2e3fa5ae09c12"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a44471e638cbfa5870bc2e3fa5ae09c12">autoCompleteBuffer</a> = NULL</td></tr>
+<tr class="separator:a44471e638cbfa5870bc2e3fa5ae09c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b077796f177a1c12a75122d3d8affb9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#a9b077796f177a1c12a75122d3d8affb9">autoCompleteBufferSize</a> = 0</td></tr>
+<tr class="separator:a9b077796f177a1c12a75122d3d8affb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa948c125e35f2eb189f9d1e4dcb1337"><td class="memItemLeft" align="right" valign="top">Commander *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> = NULL</td></tr>
+<tr class="memdesc:afa948c125e35f2eb189f9d1e4dcb1337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a Commander object.  <a href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">More...</a><br /></td></tr>
+<tr class="separator:afa948c125e35f2eb189f9d1e4dcb1337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affaaf61f46e4f7a29af86a7c7d226e82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator_caller.html">ShellminatorCaller</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_commander_interface.html#affaaf61f46e4f7a29af86a7c7d226e82">caller</a></td></tr>
+<tr class="separator:affaaf61f46e4f7a29af86a7c7d226e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:ae4b01c47b1a9a3d30f802863b3d123b2 inherit pub_types_class_shellminator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">textColor_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a335a4232137a196bf2f2aec2359ac6ed">BLACK</a> = 30
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">RED</a> = 31
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">GREEN</a> = 32
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a06f87b7120b76f108b0c1526f1d68731">YELLOW</a> = 33
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2af95ebb6a78871306269588a3fe74ad43">BLUE</a> = 34
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2ad06d3a3c3f700f97ce14f1d1fd6d2630">MAGENTA</a> = 35
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2af20b5605d832c2de91cddc2922eacc36">CYAN</a> = 36
+, <a class="el" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a62b45018b699ec91423a076427c5ac33">WHITE</a> = 37
+<br />
+ }</td></tr>
+<tr class="memdesc:ae4b01c47b1a9a3d30f802863b3d123b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">VT100 color codes.  <a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2">More...</a><br /></td></tr>
+<tr class="separator:ae4b01c47b1a9a3d30f802863b3d123b2 inherit pub_types_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae116bb8aa278d39111b6bf4126e13f99 inherit pub_types_class_shellminator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99">backgroundColor_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a31734e58e72b83ce6e217bf3cbfde72b">BG_BLACK</a> = 40
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a90b3629161a2d93419408b41058f519f">BG_RED</a> = 41
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99ab45977702c51083a26ec5299d943a742">BG_GREEN</a> = 42
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a200482aafdbbb39fb3d479226893de1d">BG_YELLOW</a> = 43
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aab7043c2ec9d0950ac3c4f80588d87c8">BG_BLUE</a> = 44
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a256bd84d4fe51270e068b539a087aa40">BG_MAGENTA</a> = 45
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99aa2d784418308c40ff3bba2428659cb0f">BG_CYAN</a> = 46
+, <a class="el" href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99a8b89748894b82d8a988f176ad00f2b08">BG_WHITE</a> = 47
+<br />
+ }</td></tr>
+<tr class="memdesc:ae116bb8aa278d39111b6bf4126e13f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">VT100 color codes.  <a href="class_shellminator.html#ae116bb8aa278d39111b6bf4126e13f99">More...</a><br /></td></tr>
+<tr class="separator:ae116bb8aa278d39111b6bf4126e13f99 inherit pub_types_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc95c4d61e5ade5ded52128907ed163 inherit pub_types_class_shellminator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163">textStyle_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67">REGULAR</a> = 0
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a395dc532fbbb72a53d1737a38d4e1b99">BOLD</a> = 1
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a741832c6120f84a0f677fcde2cbb4929">LOW_INTENSITY</a> = 2
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ab50fc9f0a5ea4e96ce3011f2f67a6258">ITALIC</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a95d8941aa686aa5242ef94236aea8644">UNDERLINE</a> = 4
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a25296a5c448684556d23c18c8da1017c">BLINKING</a> = 5
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163abd42c47d8515509b138a757070d80a61">REVERSE</a> = 6
+, <a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163a55effcd5c733baa0218508d7148803f9">BACKGROUND</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163af0744c45736b598d6b94546344f5e2f9">INVISIBLE</a> = 8
+<br />
+ }</td></tr>
+<tr class="memdesc:abbc95c4d61e5ade5ded52128907ed163"><td class="mdescLeft">&#160;</td><td class="mdescRight">VT100 font sytles.  <a href="class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163">More...</a><br /></td></tr>
+<tr class="separator:abbc95c4d61e5ade5ded52128907ed163 inherit pub_types_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc322ed067ab7377aa9914445c8a235d inherit pub_types_class_shellminator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235d">shellEventType_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235daf2f82c3ddeadf306560dba7a305137dd">SHELL_EVENT_EMPTY</a>
+, <a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da7b64b1402a4866241ce91c912d0221cc">SHELL_EVENT_RESIZE</a>
+, <a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da1cb571e06bdd8a547bfe02fcfb6186a0">SHELL_EVENT_MOUSE</a>
+, <a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da113e58d524cb874bd13e4a11d140dc49">SHELL_EVENT_KEY</a>
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235dafe5446b11f5951ae7423522ac785b7d6">SHELL_EVENT_CODED_KEY</a>
+, <a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da60f96d003ae838dbc5af342dd45d81e8">SHELL_EVENT_SCREEN_SWAP</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:acc322ed067ab7377aa9914445c8a235d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shell Event enumeration.  <a href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235d">More...</a><br /></td></tr>
+<tr class="separator:acc322ed067ab7377aa9914445c8a235d inherit pub_types_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e98da6f684005b068021140d077b18 inherit pub_types_class_shellminator"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18">eventCodes_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18af4212847241a913a896f598c10714e53">EVENT_CODE_EMPTY</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a6a920fd6c09ad04344b45afaa7999433">EVENT_CODE_RETURN</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a0d8daa79eb5ece4b218ff6c86192ee8e">EVENT_CODE_MOUSE_LEFT_PRESSED</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a6a277faa429f83a5c74f86c7957d0973">EVENT_CODE_MOUSE_LEFT_RELEASED</a>
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a77931db84f86bc98d162ec3daabc8b52">EVENT_CODE_MOUSE_RIGHT_PRESSED</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a3bfcb234c560a8f90e352c42e79b407f">EVENT_CODE_MOUSE_RIGHT_RELEASED</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18aef7062557d096b114e9a9e889035e0c2">EVENT_CODE_MOUSE_MIDDLE_PRESSED</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a43610fee63e09c094cb447d05e0a73ad">EVENT_CODE_MOUSE_MIDDLE_RELEASED</a>
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18ae22d5a7328006fcb193f47feab4b53e9">EVENT_CODE_MOUSE_WHEEL_UP</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18aba77bc8e2c9224643a5d731c713b7f00">EVENT_CODE_MOUSE_WHEEL_DOWN</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a74e83f90d6fd2df986ba4a38550d53ba">EVENT_CODE_UP_ARROW</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a81f28cc50cd029e61adfb21bfa2636d6">EVENT_CODE_DOWN_ARROW</a>
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a8627e7cddf8ae125da3cfc5285423520">EVENT_CODE_LEFT_ARROW</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a070be6e98ba34dc75b8567db0bd55c43">EVENT_CODE_RIGHT_ARROW</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a921a5d3d05afe0163eaa6ddb578d137d">EVENT_CODE_HOME</a>
+, <a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18a8fed8402287330f37c61089f5d71d688">EVENT_CODE_END</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a12e98da6f684005b068021140d077b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coded event enumeration.  <a href="class_shellminator.html#a12e98da6f684005b068021140d077b18">More...</a><br /></td></tr>
+<tr class="separator:a12e98da6f684005b068021140d077b18 inherit pub_types_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:af30816610bf82e63cccc0690991a7210 inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#af30816610bf82e63cccc0690991a7210">setFormat</a> (Stream *stream_p, int firstArg)</td></tr>
+<tr class="memdesc:af30816610bf82e63cccc0690991a7210 inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic text formatting.  <a href="class_shellminator.html#af30816610bf82e63cccc0690991a7210">More...</a><br /></td></tr>
+<tr class="separator:af30816610bf82e63cccc0690991a7210 inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe37efbdf1315cce873f3b6ea407671b inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#abe37efbdf1315cce873f3b6ea407671b">setFormat</a> (Stream *stream_p, int firstArg, int secondArg)</td></tr>
+<tr class="separator:abe37efbdf1315cce873f3b6ea407671b inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebbf06a9f48bb8aec24d424446066c1a inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aebbf06a9f48bb8aec24d424446066c1a">setFormat</a> (Stream *stream_p, int firstArg, int secondArg, int thirdArg)</td></tr>
+<tr class="separator:aebbf06a9f48bb8aec24d424446066c1a inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dcc734097cac062eed070da1ab27c9b inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1dcc734097cac062eed070da1ab27c9b">hideCursor</a> (Stream *stream_p)</td></tr>
+<tr class="memdesc:a1dcc734097cac062eed070da1ab27c9b inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide the cursor.  <a href="class_shellminator.html#a1dcc734097cac062eed070da1ab27c9b">More...</a><br /></td></tr>
+<tr class="separator:a1dcc734097cac062eed070da1ab27c9b inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd0b99c81b90759d644cada9f474ed5d inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#afd0b99c81b90759d644cada9f474ed5d">showCursor</a> (Stream *stream_p)</td></tr>
+<tr class="memdesc:afd0b99c81b90759d644cada9f474ed5d inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the cursor.  <a href="class_shellminator.html#afd0b99c81b90759d644cada9f474ed5d">More...</a><br /></td></tr>
+<tr class="separator:afd0b99c81b90759d644cada9f474ed5d inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaccb61da17479a1829438ceed05421ce inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aaccb61da17479a1829438ceed05421ce">setCursorPosition</a> (Stream *channel_p, int x, int y)</td></tr>
+<tr class="memdesc:aaccb61da17479a1829438ceed05421ce inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the cursor.  <a href="class_shellminator.html#aaccb61da17479a1829438ceed05421ce">More...</a><br /></td></tr>
+<tr class="separator:aaccb61da17479a1829438ceed05421ce inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20473a985306d512d56901da3b32c8e7 inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_shellminator.html">Shellminator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">castVoidToShellminator</a> (void *ptr)</td></tr>
+<tr class="memdesc:a20473a985306d512d56901da3b32c8e7 inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a helper function for pointer casting.  <a href="class_shellminator.html#a20473a985306d512d56901da3b32c8e7">More...</a><br /></td></tr>
+<tr class="separator:a20473a985306d512d56901da3b32c8e7 inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2337f24347bbe8dcc0c02ebf55ffc2 inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">waitForKey</a> (Stream *source, char key, uint32_t timeout=0)</td></tr>
+<tr class="memdesc:a2b2337f24347bbe8dcc0c02ebf55ffc2 inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for specific keypress.  <a href="class_shellminator.html#a2b2337f24347bbe8dcc0c02ebf55ffc2">More...</a><br /></td></tr>
+<tr class="separator:a2b2337f24347bbe8dcc0c02ebf55ffc2 inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a370fe2d58a32cd595d76e709f63a5 inherit pub_static_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab1a370fe2d58a32cd595d76e709f63a5">waitForKey</a> (Stream *source, char *keys, uint32_t timeout=0)</td></tr>
+<tr class="memdesc:ab1a370fe2d58a32cd595d76e709f63a5 inherit pub_static_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for specific keypress.  <a href="class_shellminator.html#ab1a370fe2d58a32cd595d76e709f63a5">More...</a><br /></td></tr>
+<tr class="separator:ab1a370fe2d58a32cd595d76e709f63a5 inherit pub_static_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:a320f9ac3d148ed0c4344ed69bdd0d90d inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_shellminator_1_1shell_event__t.html">shellEvent_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a320f9ac3d148ed0c4344ed69bdd0d90d">eventBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#acc4dda1aaabc9862fe79fd94e0b722bf">EVENT_BUFFER_SIZE</a>]</td></tr>
+<tr class="memdesc:a320f9ac3d148ed0c4344ed69bdd0d90d inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">The events are stored in this buffer.  <a href="class_shellminator.html#a320f9ac3d148ed0c4344ed69bdd0d90d">More...</a><br /></td></tr>
+<tr class="separator:a320f9ac3d148ed0c4344ed69bdd0d90d inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af87a7d0f222a1b15d055bc3d86cef53f inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#af87a7d0f222a1b15d055bc3d86cef53f">eventBufferWritePtr</a></td></tr>
+<tr class="memdesc:af87a7d0f222a1b15d055bc3d86cef53f inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write position for the eventBuffers circular structure.  <a href="class_shellminator.html#af87a7d0f222a1b15d055bc3d86cef53f">More...</a><br /></td></tr>
+<tr class="separator:af87a7d0f222a1b15d055bc3d86cef53f inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9735882b57418e8fb9d62b77afb25a29 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a9735882b57418e8fb9d62b77afb25a29">eventBufferReadPtr</a></td></tr>
+<tr class="memdesc:a9735882b57418e8fb9d62b77afb25a29 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read position for the eventBuffers circular structure.  <a href="class_shellminator.html#a9735882b57418e8fb9d62b77afb25a29">More...</a><br /></td></tr>
+<tr class="separator:a9735882b57418e8fb9d62b77afb25a29 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8621934bb93a13846da931110e7a3f80 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a8621934bb93a13846da931110e7a3f80">terminalWidth</a> = 30</td></tr>
+<tr class="memdesc:a8621934bb93a13846da931110e7a3f80 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the width of the terminal in characters.  <a href="class_shellminator.html#a8621934bb93a13846da931110e7a3f80">More...</a><br /></td></tr>
+<tr class="separator:a8621934bb93a13846da931110e7a3f80 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc21997f25dd19743f40433c7ea1ed74 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74">terminalHeight</a> = 12</td></tr>
+<tr class="memdesc:adc21997f25dd19743f40433c7ea1ed74 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the height of the terminal in characters.  <a href="class_shellminator.html#adc21997f25dd19743f40433c7ea1ed74">More...</a><br /></td></tr>
+<tr class="separator:adc21997f25dd19743f40433c7ea1ed74 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ae26127b755c987b4047f18167142c3 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a6ae26127b755c987b4047f18167142c3">mouseEventBuffer</a> [<a class="el" href="_shellminator_8hpp.html#ad7cd2cf6d8a593f481109d0f26565472">SHELLMINATOR_MOUSE_PARSER_BUFFER_SIZE</a>]</td></tr>
+<tr class="memdesc:a6ae26127b755c987b4047f18167142c3 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This buffer is used to parse the mouse coordinates form the host terminals answer.  <a href="class_shellminator.html#a6ae26127b755c987b4047f18167142c3">More...</a><br /></td></tr>
+<tr class="separator:a6ae26127b755c987b4047f18167142c3 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3e69b0fb8f2b85c6a86fb485f5f871 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a4f3e69b0fb8f2b85c6a86fb485f5f871">mouseEventBufferCounter</a> = 0</td></tr>
+<tr class="memdesc:a4f3e69b0fb8f2b85c6a86fb485f5f871 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This variable traks the next free characters location in the mouseEventBuffer.  <a href="class_shellminator.html#a4f3e69b0fb8f2b85c6a86fb485f5f871">More...</a><br /></td></tr>
+<tr class="separator:a4f3e69b0fb8f2b85c6a86fb485f5f871 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47aef4e6e8cb630be8799c5b982205d2 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">enableFormatting</a> = true</td></tr>
+<tr class="memdesc:a47aef4e6e8cb630be8799c5b982205d2 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This flag enables or disables character formatting.  <a href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">More...</a><br /></td></tr>
+<tr class="separator:a47aef4e6e8cb630be8799c5b982205d2 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7190607c86f67ccc4522c3362d6c29d inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d">mute</a> = false</td></tr>
+<tr class="memdesc:ab7190607c86f67ccc4522c3362d6c29d inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">If set, the buzzer will be silent.  <a href="class_shellminator.html#ab7190607c86f67ccc4522c3362d6c29d">More...</a><br /></td></tr>
+<tr class="separator:ab7190607c86f67ccc4522c3362d6c29d inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8809064de36b67ba2e9800b7e1481f88 inherit pub_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> = NULL</td></tr>
+<tr class="memdesc:a8809064de36b67ba2e9800b7e1481f88 inherit pub_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the communication class.  <a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">More...</a><br /></td></tr>
+<tr class="separator:a8809064de36b67ba2e9800b7e1481f88 inherit pub_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:ae6331836254886ef6cd4293fc5572b3c inherit pub_static_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c">version</a> = <a class="el" href="_shellminator_8hpp.html#a41bdbfb8b733755c31f674b077e6fe58">SHELLMINATOR_VERSION</a></td></tr>
+<tr class="memdesc:ae6331836254886ef6cd4293fc5572b3c inherit pub_static_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">String, that holds the version information.  <a href="class_shellminator.html#ae6331836254886ef6cd4293fc5572b3c">More...</a><br /></td></tr>
+<tr class="separator:ae6331836254886ef6cd4293fc5572b3c inherit pub_static_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:ad10edbdfcbab791f95fe9df79c142590 inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ad10edbdfcbab791f95fe9df79c142590">printCommandParserHelp</a> (Stream *channel_p, bool formatting_p)</td></tr>
+<tr class="memdesc:ad10edbdfcbab791f95fe9df79c142590 inherit pro_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print command parser Help.  <a href="class_shellminator.html#ad10edbdfcbab791f95fe9df79c142590">More...</a><br /></td></tr>
+<tr class="separator:ad10edbdfcbab791f95fe9df79c142590 inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add2164e4b46594e10301b88abc287a1b inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#add2164e4b46594e10301b88abc287a1b">checkCommandFraction</a> ()</td></tr>
+<tr class="memdesc:add2164e4b46594e10301b88abc287a1b inherit pro_methods_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the command with the command parser to get some useful information.  <a href="class_shellminator.html#add2164e4b46594e10301b88abc287a1b">More...</a><br /></td></tr>
+<tr class="separator:add2164e4b46594e10301b88abc287a1b inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb9f9d79ce88cc1374a91863bb12fe9 inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a1fb9f9d79ce88cc1374a91863bb12fe9">hasCommandParser</a> ()</td></tr>
+<tr class="separator:a1fb9f9d79ce88cc1374a91863bb12fe9 inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add04d457831267ad6bd9cf8457967073 inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#add04d457831267ad6bd9cf8457967073">executeWithCommandParser</a> ()</td></tr>
+<tr class="separator:add04d457831267ad6bd9cf8457967073 inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaefdf61392128e3ed43d7b3ae18584a1 inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#aaefdf61392128e3ed43d7b3ae18584a1">autoCompleteWithCommandParser</a> ()</td></tr>
+<tr class="separator:aaefdf61392128e3ed43d7b3ae18584a1 inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a842e1ef0e5cadd739ef87ae559cbbb16 inherit pro_methods_class_shellminator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">redrawLine</a> ()</td></tr>
+<tr class="separator:a842e1ef0e5cadd739ef87ae559cbbb16 inherit pro_methods_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_shellminator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_shellminator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_shellminator.html">Shellminator</a></td></tr>
+<tr class="memitem:ab376f95d8641285b9a73ff6142082b72 inherit pro_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#ac999ba5b43c5bb3a64cdfea63b279561">SHELLMINATOR_BUFF_DIM</a>][<a class="el" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a>+1] = {{0}}</td></tr>
+<tr class="memdesc:ab376f95d8641285b9a73ff6142082b72 inherit pro_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text buffer.  <a href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">More...</a><br /></td></tr>
+<tr class="separator:ab376f95d8641285b9a73ff6142082b72 inherit pro_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addef1c9e397e68c0bcf11156a652f447 inherit pro_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">cmd_buff_dim</a> = 1</td></tr>
+<tr class="memdesc:addef1c9e397e68c0bcf11156a652f447 inherit pro_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This variable tracks the index of the previous command while you browsing the command history.  <a href="class_shellminator.html#addef1c9e397e68c0bcf11156a652f447">More...</a><br /></td></tr>
+<tr class="separator:addef1c9e397e68c0bcf11156a652f447 inherit pro_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59c990ce7819ba8809da3da347d96171 inherit pro_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> = 0</td></tr>
+<tr class="memdesc:a59c990ce7819ba8809da3da347d96171 inherit pro_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This variable tracks the end of the input message.  <a href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">More...</a><br /></td></tr>
+<tr class="separator:a59c990ce7819ba8809da3da347d96171 inherit pro_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244a8b972c2bb5e9305475c4f0ff52ef inherit pro_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a> = 0</td></tr>
+<tr class="memdesc:a244a8b972c2bb5e9305475c4f0ff52ef inherit pro_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This variable tracks the location of the next character.  <a href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">More...</a><br /></td></tr>
+<tr class="separator:a244a8b972c2bb5e9305475c4f0ff52ef inherit pro_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9a3e063ec40aa8f957092fb8f764cd inherit pro_attribs_class_shellminator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator.html#a3e9a3e063ec40aa8f957092fb8f764cd">commandFound</a> = false</td></tr>
+<tr class="memdesc:a3e9a3e063ec40aa8f957092fb8f764cd inherit pro_attribs_class_shellminator"><td class="mdescLeft">&#160;</td><td class="mdescRight">This flag must be set true in checkCommandFraction function when the command parser contains the command.  <a href="class_shellminator.html#a3e9a3e063ec40aa8f957092fb8f764cd">More...</a><br /></td></tr>
+<tr class="separator:a3e9a3e063ec40aa8f957092fb8f764cd inherit pro_attribs_class_shellminator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00067">67</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a41086e44e2d2cdf8fbb53dbbd9c9b7f3" name="a41086e44e2d2cdf8fbb53dbbd9c9b7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41086e44e2d2cdf8fbb53dbbd9c9b7f3">&#9670;&#160;</a></span>ShellminatorCommanderInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ShellminatorCommanderInterface::ShellminatorCommanderInterface </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>stream_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00070">70</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_commander_interface_a41086e44e2d2cdf8fbb53dbbd9c9b7f3_cgraph.svg" width="407" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4a122e94adfd6ece02780a298ba4497e" name="a4a122e94adfd6ece02780a298ba4497e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a122e94adfd6ece02780a298ba4497e">&#9670;&#160;</a></span>attachAutoCompleteBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::attachAutoCompleteBuffer </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buffer_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>buffer_size_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00094">94</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afeabeb0ce937fd0fd3489b1b660d682c" name="afeabeb0ce937fd0fd3489b1b660d682c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeabeb0ce937fd0fd3489b1b660d682c">&#9670;&#160;</a></span>attachCommander()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::attachCommander </td>
+          <td>(</td>
+          <td class="paramtype">Commander *&#160;</td>
+          <td class="paramname"><em>commander_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00078">78</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aada9809ba0745c19d43b2befe1ad9489" name="aada9809ba0745c19d43b2befe1ad9489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada9809ba0745c19d43b2befe1ad9489">&#9670;&#160;</a></span>autoCompleteWithCommandParser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::autoCompleteWithCommandParser </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_shellminator.html#aaefdf61392128e3ed43d7b3ae18584a1">Shellminator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00100">100</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_commander_interface_aada9809ba0745c19d43b2befe1ad9489_cgraph.svg" width="100%" height="390"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1d945867aeeaee4cfd051e94741c813e" name="a1d945867aeeaee4cfd051e94741c813e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d945867aeeaee4cfd051e94741c813e">&#9670;&#160;</a></span>checkCommandFraction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::checkCommandFraction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check the command with the command parser to get some useful information. </p>
+
+<p>Reimplemented from <a class="el" href="class_shellminator.html#add2164e4b46594e10301b88abc287a1b">Shellminator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00082">82</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6732fa3473f7c83286880524a38a4917" name="a6732fa3473f7c83286880524a38a4917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6732fa3473f7c83286880524a38a4917">&#9670;&#160;</a></span>executeWithCommandParser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::executeWithCommandParser </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_shellminator.html#add04d457831267ad6bd9cf8457967073">Shellminator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00086">86</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afbc91330543791d8c4160eb45571f749" name="afbc91330543791d8c4160eb45571f749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc91330543791d8c4160eb45571f749">&#9670;&#160;</a></span>hasCommandParser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorCommanderInterface::hasCommandParser </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_shellminator.html#a1fb9f9d79ce88cc1374a91863bb12fe9">Shellminator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00148">148</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adcf5e13a04aeb5137fb297fcafd63604" name="adcf5e13a04aeb5137fb297fcafd63604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcf5e13a04aeb5137fb297fcafd63604">&#9670;&#160;</a></span>printCommandParserHelp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorCommanderInterface::printCommandParserHelp </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>channel_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>formatting_p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print command parser Help. </p>
+
+<p>Reimplemented from <a class="el" href="class_shellminator.html#ad10edbdfcbab791f95fe9df79c142590">Shellminator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html#l00072">72</a> of file <a class="el" href="_shellminator-_commander-_interface_8cpp_source.html">Shellminator-Commander-Interface.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_commander_interface_adcf5e13a04aeb5137fb297fcafd63604_cgraph.svg" width="100%" height="376"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a44471e638cbfa5870bc2e3fa5ae09c12" name="a44471e638cbfa5870bc2e3fa5ae09c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44471e638cbfa5870bc2e3fa5ae09c12">&#9670;&#160;</a></span>autoCompleteBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* ShellminatorCommanderInterface::autoCompleteBuffer = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00088">88</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9b077796f177a1c12a75122d3d8affb9" name="a9b077796f177a1c12a75122d3d8affb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b077796f177a1c12a75122d3d8affb9">&#9670;&#160;</a></span>autoCompleteBufferSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorCommanderInterface::autoCompleteBufferSize = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00089">89</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+
+</div>
+</div>
+<a id="affaaf61f46e4f7a29af86a7c7d226e82" name="affaaf61f46e4f7a29af86a7c7d226e82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affaaf61f46e4f7a29af86a7c7d226e82">&#9670;&#160;</a></span>caller</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator_caller.html">ShellminatorCaller</a> ShellminatorCommanderInterface::caller</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00094">94</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afa948c125e35f2eb189f9d1e4dcb1337" name="afa948c125e35f2eb189f9d1e4dcb1337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa948c125e35f2eb189f9d1e4dcb1337">&#9670;&#160;</a></span>commander</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Commander* ShellminatorCommanderInterface::commander = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a Commander object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html#l00092">92</a> of file <a class="el" href="_shellminator-_commander-_interface_8hpp_source.html">Shellminator-Commander-Interface.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shellminator_commander_interface.html">ShellminatorCommanderInterface</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

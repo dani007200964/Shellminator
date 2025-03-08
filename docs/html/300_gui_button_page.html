@@ -1,0 +1,445 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Example 300 GUI Button</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('300_gui_button_page.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example 300 GUI Button </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md88">Creating a GUI in the Terminal</a></li>
+<li class="level2"><a href="#autotoc_md89">How Does It Work?</a></li>
+<li class="level2"><a href="#autotoc_md90">Step 1: Creating a Button</a></li>
+<li class="level2"><a href="#autotoc_md91">Step 2: Handling User Interaction</a></li>
+<li class="level2"><a href="#autotoc_md92">Step 3: Setting Up the Event</a></li>
+<li class="level2"><a href="#autotoc_md93">Step 4: Customizing the Button</a></li>
+<li class="level2"><a href="#autotoc_md94">Step 5: Switching to GUI Mode</a></li>
+<li class="level2"><a href="#autotoc_md95">Step 6: Writing the Button Click Callback</a></li>
+<li class="level2"><a href="#autotoc_md96">Summary</a></li>
+<li class="level2"><a href="#autotoc_md97">Live Demo</a></li>
+<li class="level2"><a href="#autotoc_md98">Whole Code</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md88"></a>
+Creating a GUI in the Terminal</h2>
+<p >Building a graphical user interface (GUI) is never an easy task, and things get even trickier when working in a <b>terminal</b>, which uses characters instead of pixels. But don’t worry—we have a few tricks up our sleeve! With the right approach, you can create a <b>surprisingly functional</b> user interface from scratch, and the best part? It all runs inside a <b>terminal emulator</b>. <br  />
+</p>
+<p >Of course, this method won’t offer the same level of polish as something like <b>Qt</b> or <b>LVGL</b>, but hey—you don’t need to develop a full PC application and port it to a million platforms. All you need is a <b>terminal emulator</b>, and you’re good to go! <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md89"></a>
+How Does It Work?</h2>
+<p >Every GUI is built from <b>basic building blocks (primitives)</b> that can be freely positioned on the screen. The <b><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> GUI libraries</b> follow this exact approach. <br  />
+</p>
+<p >Let’s dive in! <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md90"></a>
+Step 1: Creating a Button</h2>
+<p >In almost every GUI framework, the **'Hello, World!'** example involves creating a <b>button</b>. This makes sense because a button is both an <b>input and output element</b> —you can display text on it, and it can trigger actions when pressed. <br  />
+</p>
+<p >To get started, include the necessary GUI library from the <b><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a></b> source folder: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_buttons_8hpp.html">GUI/Shellminator-Buttons.hpp</a>&quot;</span></div>
+<div class="ttc" id="a_shellminator-_buttons_8hpp_html"><div class="ttname"><a href="_shellminator-_buttons_8hpp.html">Shellminator-Buttons.hpp</a></div></div>
+</div><!-- fragment --><p >Next, create a <b>button object</b> and define the text that should appear on it: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Create a button object and specify its label.</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_button.html">ShellminatorButton</a> button(<span class="stringliteral">&quot;This is a button&quot;</span>);</div>
+<div class="ttc" id="aclass_shellminator_button_html"><div class="ttname"><a href="class_shellminator_button.html">ShellminatorButton</a></div><div class="ttdoc">This class can create a simple plotter object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_buttons_8hpp_source.html#l00060">Shellminator-Buttons.hpp:60</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md91"></a>
+Step 2: Handling User Interaction</h2>
+<p >Buttons in <b><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> GUI</b> can respond to <b>two types of interactions</b>: <br  />
+</p>
+<ol type="1">
+<li><b>Keyboard input</b> (hotkeys or direct key presses). <br  />
+</li>
+<li><b>Mouse clicks</b> (yes, really!). <br  />
+</li>
+</ol>
+<p >If you're using <b>PuTTY</b> or the <b>browser-based demo</b>, mouse clicks will work. However, not all terminal emulators support this feature. Because of this, it’s a good idea to <b>assign a keyboard shortcut</b> to every button. <br  />
+</p>
+<p >First, define an <b>event configuration</b> that tells the button which key should trigger it: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Create an event configuration for the button.</span></div>
+<div class="line"><a class="code hl_struct" href="struct_shellminator_1_1shell_event__t.html">Shellminator::shellEvent_t</a> buttonEvent;</div>
+<div class="ttc" id="astruct_shellminator_1_1shell_event__t_html"><div class="ttname"><a href="struct_shellminator_1_1shell_event__t.html">Shellminator::shellEvent_t</a></div><div class="ttdoc">Shell event structure.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00722">Shellminator.hpp:722</a></div></div>
+</div><!-- fragment --><p >Next, we’ll define a **callback function**—this is the function that will be executed when the button is pressed: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// This function will be called when the button is pressed.</span></div>
+<div class="line"><span class="keywordtype">void</span> buttonClick(<a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* screen);</div>
+<div class="ttc" id="aclass_shellminator_screen_html"><div class="ttname"><a href="class_shellminator_screen.html">ShellminatorScreen</a></div><div class="ttdoc">This is an abstract object for graphics element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00047">Shellminator-Screen.hpp:47</a></div></div>
+</div><!-- fragment --><p >The <b>callback function</b> must: <br  />
+</p><ul>
+<li><b>Return</b> <code>void</code>. <br  />
+</li>
+<li><b>Accept</b> a single argument: <code>ShellminatorScreen* screen</code>. <br  />
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md92"></a>
+Step 3: Setting Up the Event</h2>
+<p >Now, let’s configure the event to trigger when the user presses the 'x' <b>key</b> (or clicks the button, if mouse support is available): <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Configure the event for the &#39;x&#39; key on the keyboard.</span></div>
+<div class="line">buttonEvent.<a class="code hl_variable" href="struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54">type</a> = <a class="code hl_enumvalue" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da113e58d524cb874bd13e4a11d140dc49">Shellminator::SHELL_EVENT_KEY</a>;</div>
+<div class="line">buttonEvent.<a class="code hl_variable" href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">data</a> = (uint8_t)<span class="charliteral">&#39;x&#39;</span>;</div>
+<div class="ttc" id="aclass_shellminator_html_acc322ed067ab7377aa9914445c8a235da113e58d524cb874bd13e4a11d140dc49"><div class="ttname"><a href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da113e58d524cb874bd13e4a11d140dc49">Shellminator::SHELL_EVENT_KEY</a></div><div class="ttdeci">@ SHELL_EVENT_KEY</div><div class="ttdoc">To identify simple key events like: A, b...</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00691">Shellminator.hpp:691</a></div></div>
+<div class="ttc" id="astruct_shellminator_1_1shell_event__t_html_a07c2c2b0b568f86766d8604c67e0ef54"><div class="ttname"><a href="struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54">Shellminator::shellEvent_t::type</a></div><div class="ttdeci">shellEventType_t type</div><div class="ttdoc">Identifies the type of the event.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00723">Shellminator.hpp:723</a></div></div>
+<div class="ttc" id="astruct_shellminator_1_1shell_event__t_html_af22c306ca0b45ce7e25470791f48cbd7"><div class="ttname"><a href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">Shellminator::shellEvent_t::data</a></div><div class="ttdeci">uint8_t data</div><div class="ttdoc">In case of SHELL_EVENT_KEY type, stores the corresponding character to the pressed key.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00725">Shellminator.hpp:725</a></div></div>
+</div><!-- fragment --><p >Attach this event to the <b>button object</b>: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Attach the event to the button.</span></div>
+<div class="line">button.attachEvent(buttonEvent);</div>
+</div><!-- fragment --><p >And don’t forget to assign the <b>callback function</b>: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Attach the callback function to the button.</span></div>
+<div class="line">button.attachTriggerFunction(buttonClick);</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md93"></a>
+Step 4: Customizing the Button</h2>
+<p >You can also <b>change the button’s color</b>: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Set the default color of the button to red.</span></div>
+<div class="line">button.setColor(<a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>);</div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a></div><div class="ttdeci">@ RED</div><div class="ttdoc">Red text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00115">Shellminator.hpp:115</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md94"></a>
+Step 5: Switching to GUI Mode</h2>
+<p >To switch <b><a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a></b> from <b>terminal mode</b> to <b>GUI mode</b>, we need a <b>screen</b> object. Luckily, <b>every GUI element</b> can act as a screen, so we can start with just our button: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Start a new screen with the button and set a 100ms refresh rate.</span></div>
+<div class="line">shell.beginScreen(&amp;button, 100);</div>
+</div><!-- fragment --><p > 
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>The <b>refresh rate</b> (100ms in this case) determines how often the GUI updates.
+            A <b>low value</b> might cause flickering, while a <b>high value</b> could make the interface feel sluggish. <b>100ms works well for most cases.</b>  
+        </p>
+    </div>
+</div>
+</p>
+<h2><a class="anchor" id="autotoc_md95"></a>
+Step 6: Writing the Button Click Callback</h2>
+<p >Here’s the <b>full callback function</b> that toggles the button color between <b>red and green</b> each time it’s clicked: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> buttonClick(<a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* screen) {</div>
+<div class="line">    <span class="comment">// Get the parent terminal for redraw requests.</span></div>
+<div class="line">    <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent = screen-&gt;<a class="code hl_function" href="class_shellminator_screen.html#aa9e0fa5bd6c01d4167fee5c30f4486df">getParent</a>();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// If no parent found, exit.</span></div>
+<div class="line">    <span class="keywordflow">if</span> (parent == NULL) {</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Toggle the button color.</span></div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">bool</span> toggle = <span class="keyword">false</span>;</div>
+<div class="line">    toggle = !toggle;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (toggle) {</div>
+<div class="line">        button.setColor(<a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a>);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">        button.setColor(<a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// IMPORTANT: Always request a redraw after modifying the GUI!</span></div>
+<div class="line">    parent-&gt;<a class="code hl_function" href="class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf">requestRedraw</a>();</div>
+<div class="line">}</div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00105">Shellminator.hpp:106</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a7ea5eda741b93c65d767e1e48d41f7cf"><div class="ttname"><a href="class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf">Shellminator::requestRedraw</a></div><div class="ttdeci">void requestRedraw()</div><div class="ttdoc">Redraw request from a Screen object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l01960">Shellminator.cpp:1960</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77"><div class="ttname"><a href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a></div><div class="ttdeci">@ GREEN</div><div class="ttdoc">Green text color.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00116">Shellminator.hpp:116</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html_aa9e0fa5bd6c01d4167fee5c30f4486df"><div class="ttname"><a href="class_shellminator_screen.html#aa9e0fa5bd6c01d4167fee5c30f4486df">ShellminatorScreen::getParent</a></div><div class="ttdeci">Shellminator * getParent()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00111">Shellminator-Screen.hpp:111</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md96"></a>
+Summary</h2>
+<ul>
+<li>We <b>created a button</b> and attached an event. <br  />
+</li>
+<li>We <b>assigned a keyboard shortcut ('x')</b> and a <b>mouse click event</b> (if supported works automatically, no config needed in the code). <br  />
+</li>
+<li>We <b>wrote a callback function</b> to toggle the button's color. <br  />
+</li>
+<li>We <b>requested a screen refresh</b> to update the GUI properly. <br  />
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md97"></a>
+Live Demo</h2>
+<p > 
+<iframe id="demoFrame" src="webExamples/300_guiButton.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+</p>
+<p > 
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>When it comes to the Shellminator GUI, one important thing to keep in mind is that Shellminator is, first and foremost, a terminal. This means that you should always be able to exit the GUI at any time. Usually, pressing <b>Ctrl+C</b> or just hitting <b>Enter</b> will do the trick.
+        </p>
+    </div>
+</div>
+</p>
+<p >In the example above, if you press Enter, the system will exit the GUI. This is intentional—it prevents a malfunctioning GUI from blocking access to the system. After all, it's incredibly frustrating if the only way to exit a dashboard is by restarting the entire system!</p>
+<h2><a class="anchor" id="autotoc_md98"></a>
+Whole Code</h2>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
+<div class="line"><span class="comment">*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;math.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_buttons_8hpp.html">GUI/Shellminator-Buttons.hpp</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Shellminator object, and initialize it to use Serial</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;Serial );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a button object and specify the text for it.</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_button.html">ShellminatorButton</a> button( <span class="stringliteral">&quot;This is a button&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create an event handler for the button.</span></div>
+<div class="line"><a class="code hl_struct" href="struct_shellminator_1_1shell_event__t.html">Shellminator::shellEvent_t</a> buttonEvent;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// It will be used later when pressing the button.</span></div>
+<div class="line"><span class="keywordtype">bool</span> toggle = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// This function will be called, when the button is pressed.</span></div>
+<div class="line"><span class="keywordtype">void</span> buttonClick( <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* screen );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System init section.</span></div>
+<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Clear the terminal</span></div>
+<div class="line">    shell.clear();</div>
+<div class="line"> </div>
+<div class="line">    Serial.println( <span class="stringliteral">&quot;Program Start!&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Configure the event for the x key on the keyboard.</span></div>
+<div class="line">    buttonEvent.<a class="code hl_variable" href="struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54">type</a> = <a class="code hl_enumvalue" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235da113e58d524cb874bd13e4a11d140dc49">Shellminator::SHELL_EVENT_KEY</a>;</div>
+<div class="line">    buttonEvent.<a class="code hl_variable" href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">data</a> = (uint8_t)<span class="charliteral">&#39;x&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attach the event to the button.</span></div>
+<div class="line">    button.attachEvent( buttonEvent );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attach the callback function for the button.</span></div>
+<div class="line">    <span class="comment">// It will be called, when the button gets pressed.</span></div>
+<div class="line">    button.attachTriggerFunction( buttonClick );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the default color for the button to red.</span></div>
+<div class="line">    button.setColor( <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Start as usual but...</span></div>
+<div class="line">    shell.begin( <span class="stringliteral">&quot;arnold&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Start a screen right after to hide the console.</span></div>
+<div class="line">    shell.beginScreen( &amp;button, 100 );</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Infinite loop.</span></div>
+<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Process the new data.</span></div>
+<div class="line">    shell.update();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> buttonClick( <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* screen ){</div>
+<div class="line">    <span class="comment">// We need the parent terminal later for redraw request.</span></div>
+<div class="line">    <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Extract the parent terminal&#39;s reference from the screen object.</span></div>
+<div class="line">    parent = screen -&gt; getParent();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// If no parent found, we have to return.</span></div>
+<div class="line">    <span class="keywordflow">if</span>( parent == NULL ){</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Toggling the toggle variable</span></div>
+<div class="line">    toggle = !toggle;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Change color according to toggle.</span></div>
+<div class="line">    <span class="keywordflow">if</span>( toggle ){</div>
+<div class="line">        button.setColor( <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a2d794b8c9da571b5b4341783369f9b77">Shellminator::GREEN</a> );</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span>{</div>
+<div class="line">        button.setColor( <a class="code hl_enumvalue" href="class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e">Shellminator::RED</a> );</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// This is very important! We have to request a redraw</span></div>
+<div class="line">    <span class="comment">// each time, when we modified something on the GUI!</span></div>
+<div class="line">    parent -&gt; requestRedraw();</div>
+<div class="line">}</div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous   </th><th class="markdownTableHeadRight">Next    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="208_commander_colorizer_page.html">Commander Colorizer Example</a>   </td><td class="markdownTableBodyRight"><a class="el" href="301_gui_progress_page.html">GUI Progress Example</a>   </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Support - Shellminator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body bgcolor="#1c1d1f">
+    <header>
+        <a href="index.html" class="logo">
+            <img class="logo-img" src="logo.svg"></img>
+            Shellminator
+        </a>
+            <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="features.html">Features</a></li>
+                <li><a href="https://github.com/dani007200964/Shellminator/releases" target="_blank">Download</a></li>
+                <li><a href="./html/md_extras__assets__docu_pages_examples_page.html">Examples</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="./html/index.html" target="_blank">Docs</a></li>
+                <li>
+                    <a href="https://discord.gg/dGNgBrSt" target="_blank">
+                        <?xml version="1.0" encoding="UTF-8"?><svg id="Discord-Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.644 96" height="20"><defs><style>.cls-1{fill:#fff;}</style></defs><path id="Discord-Symbol-White" class="cls-1" d="M81.15,0c-1.2376,2.1973-2.3489,4.4704-3.3591,6.794-9.5975-1.4396-19.3718-1.4396-28.9945,0-.985-2.3236-2.1216-4.5967-3.3591-6.794-9.0166,1.5407-17.8059,4.2431-26.1405,8.0568C2.779,32.5304-1.6914,56.3725.5312,79.8863c9.6732,7.1476,20.5083,12.603,32.0505,16.0884,2.6014-3.4854,4.8998-7.1981,6.8698-11.0623-3.738-1.3891-7.3497-3.1318-10.8098-5.1523.9092-.6567,1.7932-1.3386,2.6519-1.9953,20.281,9.547,43.7696,9.547,64.0758,0,.8587.7072,1.7427,1.3891,2.6519,1.9953-3.4601,2.0457-7.0718,3.7632-10.835,5.1776,1.97,3.8642,4.2683,7.5769,6.8698,11.0623,11.5419-3.4854,22.3769-8.9156,32.0509-16.0631,2.626-27.2771-4.496-50.9172-18.817-71.8548C98.9811,4.2684,90.1918,1.5659,81.1752.0505l-.0252-.0505ZM42.2802,65.4144c-6.2383,0-11.4159-5.6575-11.4159-12.6535s4.9755-12.6788,11.3907-12.6788,11.5169,5.708,11.4159,12.6788c-.101,6.9708-5.026,12.6535-11.3907,12.6535ZM84.3576,65.4144c-6.2637,0-11.3907-5.6575-11.3907-12.6535s4.9755-12.6788,11.3907-12.6788,11.4917,5.708,11.3906,12.6788c-.101,6.9708-5.026,12.6535-11.3906,12.6535Z"/></svg>
+                    </a>
+                </li>
+                <div class="donate">
+                    <li><a href="https://ko-fi.com/danielhajnal" target="_blank">♡&nbsp;Donation</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Shellminator 3</h1>
+            <p>The most versatile terminal interface for embedded devices.</p>
+            <div class="buttons">
+                <button onclick="openDownloads()">Download</button>
+                <button onclick="openNews()">What's New</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="topics">
+        <div class="topic-wide-inside" style="background-image: url('board_support.png');" id="boardSupport">
+            <div class="topic-wide-inside-content">
+                <h2>It runs on everything</h2>
+                <p>Shellminator can run on almost any microcontroller.</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="topic-image" style="background-image: url('arduino_platformio.png');" id="ideSupport"></div>
+                <div class="topic-content">
+                    <h2>Arduino / PlatformIO</h2>
+                    <p>The library is compatible with the most popular IDEs in the maker community.</p>
+                </div>
+        </div>
+        <div class="topic">
+            <div class="topic-image" style="background-image: url('beginner.png');" id="examples"></div>
+            <div class="topic-content">
+                    <h2>Beginner friendly</h2>
+                    <p>Shellminator does the heavy lifting, so you can concentrate on making something awesome!</p>
+                </div>
+        </div>
+        <div class="topic">
+            <div class="topic-image" style="background-image: url('target_support.png');" id="deviceSupport"></div>
+            <div class="topic-content">
+                    <h2>Communicate with everything</h2>
+                    <p>It not just runs on everything, it can be connected to everything!</p>
+                </div>
+        </div>
+        <div class="topic">
+            <div class="topic-image" style="background-image: url('neofetch.png');" id="guiSupport"></div>
+            <div class="topic-content">
+                    <h2>GUI</h2>
+                    <p>Creating ASCII graphics has never been easier.</p>
+                </div>
+        </div>
+    </section>
+
+    <section class="topics-text">
+        <div class="topic">            
+            <h1>Shipped With Interesting Examples</h1>
+        </div>
+    </section>
+
+    <section class="topics">
+        <div class="topic-small">
+            <div class="topic-image" style="background-image: url('password.png');" id="password"></div>
+                <div>
+                    <h2>Password</h2>
+                    <p>Protect your device</p>
+                </div>
+        </div>
+    
+        <div class="topic-small">
+            <div class="topic-image" style="background-image: url('wireless.png');" id="wireless"></div>
+                <div>
+                    <h2>Wireless</h2>
+                    <p>Where we’re going, we don’t need wires.</p>
+                </div>
+        </div>
+    
+        <div class="topic-small">
+            <div class="topic-image" style="background-image: url('games.png');" id="games"></div>
+                <div>
+                    <h2>Mini Games</h2>
+                    <p>Who said that it can't be used to create retro games?</p>
+                </div>
+        </div>
+    
+    </section>
+
+    <section class="topics-text">
+        <div class="topic">            
+            <h1>Try it right here, right now</h1>
+        </div>
+    </section>
+
+    <section class="topics">
+        <div class="topic-wide">
+            <div class="topic-image" style="background-image: url('team.png');" id="openSource"></div>
+                <div>
+                    <h2>Open mind</h2>
+                    <p>It is created by a small team, who loves to share their work with other people.</p>
+                </div>
+        </div>
+
+        <div class="topic-wide-inside" style="background-image: url('join.png');" id="developers">
+            <div class="topic-wide-inside-content">
+                <h2>Join the developement</h2>
+                <p>We are open to every terminal ninja who wants to be a part of this journey.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>&copy; <span id="year"></span> Shellminator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
+
+        // Mobile menu toggle
+        document.getElementById("mobile-menu").addEventListener("click", function() {
+            document.querySelector("nav ul").classList.toggle("show");
+        });
+        
+        // Set the current year in the footer
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Board support button
+        var boardSupport = document.getElementById( 'boardSupport' );
+
+        function boardSupportClick(evt) {
+            window.location.replace( "board_support.html" );
+        }
+
+        boardSupport.addEventListener( "click", boardSupportClick, false );
+
+        // Ide support button
+        var ideSupport = document.getElementById( 'ideSupport' );
+
+        function ideSupportClick(evt) {
+            window.location.replace( "ide_support.html" );
+        }
+
+        ideSupport.addEventListener( "click", ideSupportClick, false );
+
+        // Examples button
+        var examples = document.getElementById( 'examples' );
+
+        function examplesClick(evt) {
+            window.location.replace( "examples.html" );
+        }
+
+        examples.addEventListener( "click", examplesClick, false );
+
+        // Device Support button
+        var deviceSupport = document.getElementById( 'deviceSupport' );
+
+        function deviceSupportClick(evt) {
+            window.location.replace( "device_support.html" );
+        }
+
+        deviceSupport.addEventListener( "click", deviceSupportClick, false );
+
+        // GUI Support button
+        var guiSupport = document.getElementById( 'guiSupport' );
+
+        function guiSupportClick(evt) {
+            window.location.replace( "gui_support.html" );
+        }
+
+        guiSupport.addEventListener( "click", guiSupportClick, false );
+
+        // Open Source button
+        var openSource = document.getElementById( 'openSource' );
+
+        function openSourceClick(evt) {
+            window.location.replace( "open_source.html" );
+        }
+
+        openSource.addEventListener( "click", openSourceClick, false );
+
+        // Developers button
+        var developers = document.getElementById( 'developers' );
+
+        function developersClick(evt) {
+            window.location.replace( "developers.html" );
+        }
+
+        developers.addEventListener( "click", developersClick, false );
+
+        // Password demo button
+        var password = document.getElementById( 'password' );
+
+        function passwordClick(evt) {
+            window.open( "./html/006_password_page.html", '_blank' ).focus;
+        }
+
+        password.addEventListener( "click", passwordClick, false );
+        
+        // Wireless demo button
+        var wireless = document.getElementById( 'wireless' );
+
+        function wirelessClick(evt) {
+            window.open( "./html/500_web_socket_simple_page.html", '_blank' ).focus;
+        }
+
+        wireless.addEventListener( "click", wirelessClick, false );
+
+        // Games demo button
+        var games = document.getElementById( 'games' );
+
+        function gamesClick(evt) {
+            window.open( "./html/800_debuggers_and_developers_page.html", '_blank' ).focus;
+        }
+
+        games.addEventListener( "click", gamesClick, false );
+
+        
+
+        // Download button
+        function openDownloads() {
+            window.open( 'https://github.com/dani007200964/Shellminator/releases', '_blank' ).focus();
+        }
+
+        // News Button
+        function openNews() {
+            window.location.replace( 'features.html' );
+        }
+
+</script>
+</body>
+</html>

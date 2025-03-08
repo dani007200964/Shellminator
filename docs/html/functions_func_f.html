@@ -1,0 +1,185 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Class Members - Functions</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('functions_func_f.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="contents">
+&#160;
+
+<h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>finishDecoding()&#160;:&#160;<a class="el" href="class_shellminator_web_socket.html#a3512d0e570fd43cd625308c4c71a4183">ShellminatorWebSocket</a></li>
+<li>firstDashStateFuncion()&#160;:&#160;<a class="el" href="class_commander_colorizer.html#a6fdc4fe9999ed419a4f6609f96be864e">CommanderColorizer</a></li>
+<li>flush()&#160;:&#160;<a class="el" href="class_shellminator_ble_stream.html#aedb164b196b4de077a4352946fa7672a">ShellminatorBleStream</a>, <a class="el" href="class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d">ShellminatorBufferedPrinter</a>, <a class="el" href="class_shellminator_tcp_socket.html#a0599fc2b7457fce6b14e39cda215ae04">ShellminatorTcpSocket</a>, <a class="el" href="class_shellminator_web_socket.html#a3566fba1399eba8a2dcea9912d2970a9">ShellminatorWebSocket</a></li>
+<li>forceRedraw()&#160;:&#160;<a class="el" href="class_shellminator_button.html#abc55460465160a326e535143732a68e8">ShellminatorButton</a>, <a class="el" href="class_shellminator_level_meter.html#a3c7e9562983eaa84d2aafb2fe889b1df">ShellminatorLevelMeter</a>, <a class="el" href="class_shellminator_list.html#a7af01a781ccac592e86aea817facc536">ShellminatorList</a>, <a class="el" href="class_shellminator_notification.html#a079f85e036d0159b5860344eccf90589">ShellminatorNotification</a>, <a class="el" href="class_shellminator_plot.html#a22b3f039ea55804cd57fb993bbd81e7e">ShellminatorPlot</a>, <a class="el" href="class_shellminator_progress.html#af67b3d231e2011dbc7a23a6a70ec6bd1">ShellminatorProgress</a>, <a class="el" href="class_shellminator_screen.html#a2d289706ebc24d9dc86fa008b5ae82cf">ShellminatorScreen</a>, <a class="el" href="class_shellminator_screen_grid.html#a6a68563b43a2ef0c431e1cc9460ccc41">ShellminatorScreenGrid</a></li>
+<li>format()&#160;:&#160;<a class="el" href="class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e">Shellminator</a></li>
+<li>freeAbortKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a4b2f5c4c94e62ce7d833eac3cf1fd05a">Shellminator</a></li>
+<li>freeDownArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#ae3d4f4df39fb1f5197e3f07f83eac6bd">Shellminator</a></li>
+<li>freeEndKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a56313495a30f28e95b303097e7d182c6">Shellminator</a></li>
+<li>freeHomeKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a80626856ef833b0b77cb25c26e5b931f">Shellminator</a></li>
+<li>freeLeftArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a2ce305a096b98ecd88c2f8c82aa248ba">Shellminator</a></li>
+<li>freeLogoutKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a55bbe4187c59a4dea529e668c7b8f956">Shellminator</a></li>
+<li>freePageDownKey()&#160;:&#160;<a class="el" href="class_shellminator.html#ae67011c2743ea955d9254b4127ec17f4">Shellminator</a></li>
+<li>freePageUpKey()&#160;:&#160;<a class="el" href="class_shellminator.html#a4c99af6abdb140e9597e06c83ad3ba5f">Shellminator</a></li>
+<li>freeRightArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#ad50683035772f117ffd9f9f05563397c">Shellminator</a></li>
+<li>freeSearchKey()&#160;:&#160;<a class="el" href="class_shellminator.html#ae156fe5bcfa0c6961b37eb2d39719d04">Shellminator</a></li>
+<li>freeUpArrow()&#160;:&#160;<a class="el" href="class_shellminator.html#a7861294e2b29a3880a89566415fd2e18">Shellminator</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

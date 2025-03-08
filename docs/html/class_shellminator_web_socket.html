@@ -1,0 +1,1886 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: ShellminatorWebSocket Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('class_shellminator_web_socket.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="class_shellminator_web_socket-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ShellminatorWebSocket Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ShellminatorWebSocket:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Collaboration diagram for ShellminatorWebSocket:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a3857abcf6845f95da81dc75e0e565043"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">wsState_t</a> { <a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9">WS_DISCONNECTED_STATE</a>
+, <a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71">WS_HEADER_STATE</a>
+, <a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5">WS_CONNECTED_STATE</a>
+ }</td></tr>
+<tr class="separator:a3857abcf6845f95da81dc75e0e565043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea53e1ec3f1b87dfd7691debc6ec87c1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> { <br />
+&#160;&#160;<a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075">WS_COMM</a> = 0x00
+, <a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0">WS_TXT</a> = 0x01
+, <a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67">WS_CLOSE</a> = 0x08
+, <a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836">WS_PING</a> = 0x09
+, <br />
+&#160;&#160;<a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45">WS_PONG</a> = 0x0A
+<br />
+ }</td></tr>
+<tr class="separator:aea53e1ec3f1b87dfd7691debc6ec87c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a97549a7f73b7cd811913f6dd9278a23f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a97549a7f73b7cd811913f6dd9278a23f">ShellminatorWebSocket</a> ()</td></tr>
+<tr class="separator:a97549a7f73b7cd811913f6dd9278a23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1f8641b685c03930e1f6c68e15b520f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ac1f8641b685c03930e1f6c68e15b520f">ShellminatorWebSocket</a> (int port_p)</td></tr>
+<tr class="separator:ac1f8641b685c03930e1f6c68e15b520f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9742586cac4b992f69e22d24397a4fac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a9742586cac4b992f69e22d24397a4fac">available</a> () override</td></tr>
+<tr class="memdesc:a9742586cac4b992f69e22d24397a4fac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available bytes in the channel.  <a href="class_shellminator_web_socket.html#a9742586cac4b992f69e22d24397a4fac">More...</a><br /></td></tr>
+<tr class="separator:a9742586cac4b992f69e22d24397a4fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aefa0b7ccd2ca14821cd8977dba2d21"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a3aefa0b7ccd2ca14821cd8977dba2d21">read</a> () override</td></tr>
+<tr class="memdesc:a3aefa0b7ccd2ca14821cd8977dba2d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one byte form the channel.  <a href="class_shellminator_web_socket.html#a3aefa0b7ccd2ca14821cd8977dba2d21">More...</a><br /></td></tr>
+<tr class="separator:a3aefa0b7ccd2ca14821cd8977dba2d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfc873b3b07de4297e60ead96fb406aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#adfc873b3b07de4297e60ead96fb406aa">peek</a> () override</td></tr>
+<tr class="memdesc:adfc873b3b07de4297e60ead96fb406aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek the firtst byte from the channel.  <a href="class_shellminator_web_socket.html#adfc873b3b07de4297e60ead96fb406aa">More...</a><br /></td></tr>
+<tr class="separator:adfc873b3b07de4297e60ead96fb406aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3566fba1399eba8a2dcea9912d2970a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a3566fba1399eba8a2dcea9912d2970a9">flush</a> () override</td></tr>
+<tr class="memdesc:a3566fba1399eba8a2dcea9912d2970a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the channel.  <a href="class_shellminator_web_socket.html#a3566fba1399eba8a2dcea9912d2970a9">More...</a><br /></td></tr>
+<tr class="separator:a3566fba1399eba8a2dcea9912d2970a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c1f48cd925ac1dce0dc7a09235e6fc9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a0c1f48cd925ac1dce0dc7a09235e6fc9">write</a> (uint8_t b) override</td></tr>
+<tr class="memdesc:a0c1f48cd925ac1dce0dc7a09235e6fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write one byte to the channel.  <a href="class_shellminator_web_socket.html#a0c1f48cd925ac1dce0dc7a09235e6fc9">More...</a><br /></td></tr>
+<tr class="separator:a0c1f48cd925ac1dce0dc7a09235e6fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f375e3cb00d4df10bf0e5e0a523b72"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a26f375e3cb00d4df10bf0e5e0a523b72">write</a> (const uint8_t *data, size_t size) override</td></tr>
+<tr class="separator:a26f375e3cb00d4df10bf0e5e0a523b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46cea168de75e6e7acfbf3ed729bf4c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a46cea168de75e6e7acfbf3ed729bf4c3">begin</a> ()</td></tr>
+<tr class="separator:a46cea168de75e6e7acfbf3ed729bf4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15751fad5c0989a871b476023989c662"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a15751fad5c0989a871b476023989c662">update</a> ()</td></tr>
+<tr class="separator:a15751fad5c0989a871b476023989c662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c4ac250b1421e877714d5663545afd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aa5c4ac250b1421e877714d5663545afd">attachDebugChannel</a> (Stream *dbg_p)</td></tr>
+<tr class="separator:aa5c4ac250b1421e877714d5663545afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6753664126b275067e403ba7346b6fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#af6753664126b275067e403ba7346b6fe">attachConnectCallback</a> (void(*connectCallback_p)(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *))</td></tr>
+<tr class="separator:af6753664126b275067e403ba7346b6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9617c58005fead7812cb5c1ca11f195a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a9617c58005fead7812cb5c1ca11f195a">attachDisconnectCallback</a> (void(*disconnectCallback_p)(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *))</td></tr>
+<tr class="separator:a9617c58005fead7812cb5c1ca11f195a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8405994923dacc4971117eaf70eeeee1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a8405994923dacc4971117eaf70eeeee1">resetVariables</a> ()</td></tr>
+<tr class="separator:a8405994923dacc4971117eaf70eeeee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e9d106ad8b542f1274cb898edb08015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a2e9d106ad8b542f1274cb898edb08015">resetDataVariables</a> ()</td></tr>
+<tr class="separator:a2e9d106ad8b542f1274cb898edb08015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6074063bd0d8c24c53d28974ef1e43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a8e6074063bd0d8c24c53d28974ef1e43">wsHeaderProcessing</a> (char newChar)</td></tr>
+<tr class="separator:a8e6074063bd0d8c24c53d28974ef1e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add1dfe8fd8900f985e28b005cc3162a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#add1dfe8fd8900f985e28b005cc3162a8">wsDataProcessing</a> (char newChar)</td></tr>
+<tr class="separator:add1dfe8fd8900f985e28b005cc3162a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b0cd6cc48e5243f9b9e74e2055862a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aa1b0cd6cc48e5243f9b9e74e2055862a">closeClient</a> (bool sendCloseFrame=false)</td></tr>
+<tr class="separator:aa1b0cd6cc48e5243f9b9e74e2055862a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4cdbce1b52ed0a02a7736538ff05ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a0d4cdbce1b52ed0a02a7736538ff05ec">generateServerKey</a> ()</td></tr>
+<tr class="separator:a0d4cdbce1b52ed0a02a7736538ff05ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3512d0e570fd43cd625308c4c71a4183"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a3512d0e570fd43cd625308c4c71a4183">finishDecoding</a> ()</td></tr>
+<tr class="separator:a3512d0e570fd43cd625308c4c71a4183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a3830ace2b89be2cece489b0a2cd7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a57a3830ace2b89be2cece489b0a2cd7f">sendFrame</a> (<a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> type, const uint8_t *data=NULL, uint32_t dataSize=0)</td></tr>
+<tr class="separator:a57a3830ace2b89be2cece489b0a2cd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce6e2a47abf5c4801842965d3315283"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a1ce6e2a47abf5c4801842965d3315283">sendFrame125</a> (<a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> type, const uint8_t *data=NULL, uint8_t dataSize=0)</td></tr>
+<tr class="separator:a1ce6e2a47abf5c4801842965d3315283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9919f01b29916476d0dd5c334e84135"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ae9919f01b29916476d0dd5c334e84135">appendToCircularBuffer</a> (uint8_t data)</td></tr>
+<tr class="separator:ae9919f01b29916476d0dd5c334e84135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0262163821e2fdc77b2879c9cb630d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a7d0262163821e2fdc77b2879c9cb630d">appendToCircularBuffer</a> (uint8_t *data, int dataSize)</td></tr>
+<tr class="separator:a7d0262163821e2fdc77b2879c9cb630d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa9c82f874c96c641cfb33b67e4b03aed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aa9c82f874c96c641cfb33b67e4b03aed">port</a> = 443</td></tr>
+<tr class="separator:aa9c82f874c96c641cfb33b67e4b03aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c6c5178f98570311f229d5c29fe6599"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a7c6c5178f98570311f229d5c29fe6599">clientConnected</a> = false</td></tr>
+<tr class="separator:a7c6c5178f98570311f229d5c29fe6599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bdb7a26653fb6713652eba80288c17"><td class="memItemLeft" align="right" valign="top">Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a27bdb7a26653fb6713652eba80288c17">dbg</a> = NULL</td></tr>
+<tr class="separator:a27bdb7a26653fb6713652eba80288c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab077b7608e754a877a43a40bbf1e2137"><td class="memItemLeft" align="right" valign="top">WiFiServer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ab077b7608e754a877a43a40bbf1e2137">server</a></td></tr>
+<tr class="separator:ab077b7608e754a877a43a40bbf1e2137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a654f33a50f17a3c4e8abe12c71f41236"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a654f33a50f17a3c4e8abe12c71f41236">client</a></td></tr>
+<tr class="separator:a654f33a50f17a3c4e8abe12c71f41236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf781e3e1ded076ae8ff8eab205e4fb2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aaf781e3e1ded076ae8ff8eab205e4fb2">streamBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a>]</td></tr>
+<tr class="separator:aaf781e3e1ded076ae8ff8eab205e4fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f0219eff48939eaae326310e32cfbb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a93f0219eff48939eaae326310e32cfbb">streamBufferWritePointer</a></td></tr>
+<tr class="separator:a93f0219eff48939eaae326310e32cfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae69f69ee41fcdfb8ee7251607d79e324"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ae69f69ee41fcdfb8ee7251607d79e324">streamBufferReadPointer</a></td></tr>
+<tr class="separator:ae69f69ee41fcdfb8ee7251607d79e324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb50076c775a9a82a336766df4c99e3"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aacb50076c775a9a82a336766df4c99e3">clientBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#a597dbfcbabb3fd34d96ce637e0d95243">SHELLMINATOR_WS_CLIENT_BUFFER_SIZE</a>+1]</td></tr>
+<tr class="separator:aacb50076c775a9a82a336766df4c99e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35cc9b06fcf3a3b5854a8e4b8326fc5d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a35cc9b06fcf3a3b5854a8e4b8326fc5d">clientBufferCounter</a> = 0</td></tr>
+<tr class="separator:a35cc9b06fcf3a3b5854a8e4b8326fc5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45625a89813360673106b15edf006007"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a45625a89813360673106b15edf006007">clientLineNameBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#aaf7e9c31168be5caf2dd0c4333c3be5c">SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE</a>]</td></tr>
+<tr class="separator:a45625a89813360673106b15edf006007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107532ac43f2e2707d9bee8d57176d6d"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a107532ac43f2e2707d9bee8d57176d6d">clientLineValueBuffer</a> [<a class="el" href="_shellminator-_default_settings_8hpp.html#ab55854960a21ac09dedf78e0ef917252">SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE</a>]</td></tr>
+<tr class="separator:a107532ac43f2e2707d9bee8d57176d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108c772ab0cd7011c7571ef57b6928b8"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a108c772ab0cd7011c7571ef57b6928b8">clientKey</a> [<a class="el" href="_shellminator-_websocket_8hpp.html#a8d290eef9058be8056d3614b7c0a1fe9">SHELLMINATOR_WS_CLIENT_KEY_SIZE</a>]</td></tr>
+<tr class="separator:a108c772ab0cd7011c7571ef57b6928b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8404a5e68c74474b71dbf45564b63c3"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ac8404a5e68c74474b71dbf45564b63c3">serverKey</a> [<a class="el" href="_shellminator-_websocket_8hpp.html#a48f1156f1e542f9ddb51459874d5a576">SHELLMINATOR_WS_SERVER_KEY_SIZE</a>]</td></tr>
+<tr class="separator:ac8404a5e68c74474b71dbf45564b63c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9ae1ee932e284f3fad3b9bad0964390"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ad9ae1ee932e284f3fad3b9bad0964390">httpGetLineFound</a></td></tr>
+<tr class="separator:ad9ae1ee932e284f3fad3b9bad0964390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46c7dc161127c784f42b5244005a73fb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a46c7dc161127c784f42b5244005a73fb">connectionUpgradeLineFound</a></td></tr>
+<tr class="separator:a46c7dc161127c784f42b5244005a73fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb75b28b36b998bda7f305419680b78"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a7fb75b28b36b998bda7f305419680b78">upgradeWebsocketLineFound</a></td></tr>
+<tr class="separator:a7fb75b28b36b998bda7f305419680b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208e64d7f0d9c6a5ab19b9ab234751f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a208e64d7f0d9c6a5ab19b9ab234751f8">clientVersion</a></td></tr>
+<tr class="separator:a208e64d7f0d9c6a5ab19b9ab234751f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ed8493917e85f7478d255179a861a0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a8ed8493917e85f7478d255179a861a0d">decodedHdrFin</a></td></tr>
+<tr class="separator:a8ed8493917e85f7478d255179a861a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f10b70c21b2107b226c451d27d92eb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a2f10b70c21b2107b226c451d27d92eb9">decodedHdrType</a></td></tr>
+<tr class="separator:a2f10b70c21b2107b226c451d27d92eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec42801e2fa99d3750ffa3979cd71296"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#aec42801e2fa99d3750ffa3979cd71296">decodedHdrMask</a></td></tr>
+<tr class="separator:aec42801e2fa99d3750ffa3979cd71296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac317baa772874b63a86939ba4debde74"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#ac317baa772874b63a86939ba4debde74">decodedHdrPayloadLen</a></td></tr>
+<tr class="separator:ac317baa772874b63a86939ba4debde74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd3739628ffbf7d1db23ec94e8a838ad"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#afd3739628ffbf7d1db23ec94e8a838ad">decodedHdrMaskKeys</a> [4]</td></tr>
+<tr class="separator:afd3739628ffbf7d1db23ec94e8a838ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a62bf56e9663c8e8aea2fd7e4201e99"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a9a62bf56e9663c8e8aea2fd7e4201e99">decodedHdrPayloadCntr</a></td></tr>
+<tr class="separator:a9a62bf56e9663c8e8aea2fd7e4201e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707ad4e0a6fda3e807383832bfa9f02d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a707ad4e0a6fda3e807383832bfa9f02d">decodedDataXorCntr</a></td></tr>
+<tr class="separator:a707ad4e0a6fda3e807383832bfa9f02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa4e7210cd4fbc024770bb182908d21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">wsState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a9fa4e7210cd4fbc024770bb182908d21">wsState</a></td></tr>
+<tr class="separator:a9fa4e7210cd4fbc024770bb182908d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9be8dfc14960adf0b15ee055bf57fd5e"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a9be8dfc14960adf0b15ee055bf57fd5e">connectCallback</a> )(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *parent) = NULL</td></tr>
+<tr class="separator:a9be8dfc14960adf0b15ee055bf57fd5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ae0bc68cf0d57f8be6bea518296c75"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#a34ae0bc68cf0d57f8be6bea518296c75">disconnectCallback</a> )(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *parent) = NULL</td></tr>
+<tr class="separator:a34ae0bc68cf0d57f8be6bea518296c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:af7eb29f6caf50f671a9e61a5a0482639"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shellminator_web_socket.html#af7eb29f6caf50f671a9e61a5a0482639">serverHeader</a></td></tr>
+<tr class="separator:af7eb29f6caf50f671a9e61a5a0482639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00096">96</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aea53e1ec3f1b87dfd7691debc6ec87c1" name="aea53e1ec3f1b87dfd7691debc6ec87c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea53e1ec3f1b87dfd7691debc6ec87c1">&#9670;&#160;</a></span>wsDecodedHeaderType_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">ShellminatorWebSocket::wsDecodedHeaderType_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075" name="aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075"></a>WS_COMM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0" name="aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0"></a>WS_TXT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67" name="aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67"></a>WS_CLOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836" name="aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836"></a>WS_PING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45" name="aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45"></a>WS_PONG&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00106">106</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3857abcf6845f95da81dc75e0e565043" name="a3857abcf6845f95da81dc75e0e565043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3857abcf6845f95da81dc75e0e565043">&#9670;&#160;</a></span>wsState_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">ShellminatorWebSocket::wsState_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9" name="a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9"></a>WS_DISCONNECTED_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71" name="a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71"></a>WS_HEADER_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5" name="a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5"></a>WS_CONNECTED_STATE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00100">100</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a97549a7f73b7cd811913f6dd9278a23f" name="a97549a7f73b7cd811913f6dd9278a23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97549a7f73b7cd811913f6dd9278a23f">&#9670;&#160;</a></span>ShellminatorWebSocket() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ShellminatorWebSocket::ShellminatorWebSocket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00053">53</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a97549a7f73b7cd811913f6dd9278a23f_cgraph.svg" width="392" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac1f8641b685c03930e1f6c68e15b520f" name="ac1f8641b685c03930e1f6c68e15b520f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1f8641b685c03930e1f6c68e15b520f">&#9670;&#160;</a></span>ShellminatorWebSocket() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ShellminatorWebSocket::ShellminatorWebSocket </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00046">46</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_ac1f8641b685c03930e1f6c68e15b520f_cgraph.svg" width="392" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7d0262163821e2fdc77b2879c9cb630d" name="a7d0262163821e2fdc77b2879c9cb630d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d0262163821e2fdc77b2879c9cb630d">&#9670;&#160;</a></span>appendToCircularBuffer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::appendToCircularBuffer </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dataSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00090">90</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a7d0262163821e2fdc77b2879c9cb630d_cgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ae9919f01b29916476d0dd5c334e84135" name="ae9919f01b29916476d0dd5c334e84135"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9919f01b29916476d0dd5c334e84135">&#9670;&#160;</a></span>appendToCircularBuffer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::appendToCircularBuffer </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00073">73</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_ae9919f01b29916476d0dd5c334e84135_cgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_ae9919f01b29916476d0dd5c334e84135_icgraph.svg" width="595" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="af6753664126b275067e403ba7346b6fe" name="af6753664126b275067e403ba7346b6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6753664126b275067e403ba7346b6fe">&#9670;&#160;</a></span>attachConnectCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::attachConnectCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *)&#160;</td>
+          <td class="paramname"><em>connectCallback_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00697">697</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa5c4ac250b1421e877714d5663545afd" name="aa5c4ac250b1421e877714d5663545afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c4ac250b1421e877714d5663545afd">&#9670;&#160;</a></span>attachDebugChannel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::attachDebugChannel </td>
+          <td>(</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>dbg_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00060">60</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9617c58005fead7812cb5c1ca11f195a" name="a9617c58005fead7812cb5c1ca11f195a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9617c58005fead7812cb5c1ca11f195a">&#9670;&#160;</a></span>attachDisconnectCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::attachDisconnectCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *)&#160;</td>
+          <td class="paramname"><em>disconnectCallback_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00701">701</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9742586cac4b992f69e22d24397a4fac" name="a9742586cac4b992f69e22d24397a4fac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9742586cac4b992f69e22d24397a4fac">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Available bytes in the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>The available bytes in the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00631">631</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a46cea168de75e6e7acfbf3ed729bf4c3" name="a46cea168de75e6e7acfbf3ed729bf4c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46cea168de75e6e7acfbf3ed729bf4c3">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00064">64</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a46cea168de75e6e7acfbf3ed729bf4c3_cgraph.svg" width="174" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a46cea168de75e6e7acfbf3ed729bf4c3_icgraph.svg" width="174" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa1b0cd6cc48e5243f9b9e74e2055862a" name="aa1b0cd6cc48e5243f9b9e74e2055862a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b0cd6cc48e5243f9b9e74e2055862a">&#9670;&#160;</a></span>closeClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::closeClient </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>sendCloseFrame</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00611">611</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_aa1b0cd6cc48e5243f9b9e74e2055862a_cgraph.svg" width="595" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_aa1b0cd6cc48e5243f9b9e74e2055862a_icgraph.svg" width="100%" height="510"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a3512d0e570fd43cd625308c4c71a4183" name="a3512d0e570fd43cd625308c4c71a4183"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3512d0e570fd43cd625308c4c71a4183">&#9670;&#160;</a></span>finishDecoding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::finishDecoding </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00245">245</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a3512d0e570fd43cd625308c4c71a4183_cgraph.svg" width="100%" height="429"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a3512d0e570fd43cd625308c4c71a4183_icgraph.svg" width="595" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3566fba1399eba8a2dcea9912d2970a9" name="a3566fba1399eba8a2dcea9912d2970a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3566fba1399eba8a2dcea9912d2970a9">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flush the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00672">672</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0d4cdbce1b52ed0a02a7736538ff05ec" name="a0d4cdbce1b52ed0a02a7736538ff05ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4cdbce1b52ed0a02a7736538ff05ec">&#9670;&#160;</a></span>generateServerKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::generateServerKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00583">583</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a0d4cdbce1b52ed0a02a7736538ff05ec_cgraph.svg" width="360" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a0d4cdbce1b52ed0a02a7736538ff05ec_icgraph.svg" width="595" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="adfc873b3b07de4297e60ead96fb406aa" name="adfc873b3b07de4297e60ead96fb406aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc873b3b07de4297e60ead96fb406aa">&#9670;&#160;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Peek the firtst byte from the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will NOT be removed from the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00662">662</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3aefa0b7ccd2ca14821cd8977dba2d21" name="a3aefa0b7ccd2ca14821cd8977dba2d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aefa0b7ccd2ca14821cd8977dba2d21">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read one byte form the channel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Read and return one byte form the channel. The byte will be removed from the channel. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00644">644</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2e9d106ad8b542f1274cb898edb08015" name="a2e9d106ad8b542f1274cb898edb08015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e9d106ad8b542f1274cb898edb08015">&#9670;&#160;</a></span>resetDataVariables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::resetDataVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00229">229</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a2e9d106ad8b542f1274cb898edb08015_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a8405994923dacc4971117eaf70eeeee1" name="a8405994923dacc4971117eaf70eeeee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8405994923dacc4971117eaf70eeeee1">&#9670;&#160;</a></span>resetVariables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::resetVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00213">213</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a8405994923dacc4971117eaf70eeeee1_icgraph.svg" width="100%" height="510"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a57a3830ace2b89be2cece489b0a2cd7f" name="a57a3830ace2b89be2cece489b0a2cd7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a3830ace2b89be2cece489b0a2cd7f">&#9670;&#160;</a></span>sendFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::sendFrame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">ShellminatorWebSocket::wsDecodedHeaderType_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>dataSize</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00097">97</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a57a3830ace2b89be2cece489b0a2cd7f_cgraph.svg" width="384" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a57a3830ace2b89be2cece489b0a2cd7f_icgraph.svg" width="100%" height="524"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1ce6e2a47abf5c4801842965d3315283" name="a1ce6e2a47abf5c4801842965d3315283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce6e2a47abf5c4801842965d3315283">&#9670;&#160;</a></span>sendFrame125()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::sendFrame125 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">ShellminatorWebSocket::wsDecodedHeaderType_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>dataSize</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00117">117</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a1ce6e2a47abf5c4801842965d3315283_icgraph.svg" width="100%" height="524"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a15751fad5c0989a871b476023989c662" name="a15751fad5c0989a871b476023989c662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15751fad5c0989a871b476023989c662">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00161">161</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a15751fad5c0989a871b476023989c662_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a26f375e3cb00d4df10bf0e5e0a523b72" name="a26f375e3cb00d4df10bf0e5e0a523b72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f375e3cb00d4df10bf0e5e0a523b72">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ShellminatorWebSocket::write </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00687">687</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a26f375e3cb00d4df10bf0e5e0a523b72_cgraph.svg" width="595" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a0c1f48cd925ac1dce0dc7a09235e6fc9" name="a0c1f48cd925ac1dce0dc7a09235e6fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c1f48cd925ac1dce0dc7a09235e6fc9">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ShellminatorWebSocket::write </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write one byte to the channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>The value that has to be written to the channel. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that has been successfully written to the channel. Because it is the base class, it returns 0. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00677">677</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a0c1f48cd925ac1dce0dc7a09235e6fc9_cgraph.svg" width="595" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="add1dfe8fd8900f985e28b005cc3162a8" name="add1dfe8fd8900f985e28b005cc3162a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add1dfe8fd8900f985e28b005cc3162a8">&#9670;&#160;</a></span>wsDataProcessing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::wsDataProcessing </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>newChar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00272">272</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_add1dfe8fd8900f985e28b005cc3162a8_cgraph.svg" width="100%" height="467"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_add1dfe8fd8900f985e28b005cc3162a8_icgraph.svg" width="384" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a8e6074063bd0d8c24c53d28974ef1e43" name="a8e6074063bd0d8c24c53d28974ef1e43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e6074063bd0d8c24c53d28974ef1e43">&#9670;&#160;</a></span>wsHeaderProcessing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShellminatorWebSocket::wsHeaderProcessing </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>newChar</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8cpp_source.html#l00406">406</a> of file <a class="el" href="_shellminator-_websocket_8cpp_source.html">Shellminator-Websocket.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a8e6074063bd0d8c24c53d28974ef1e43_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_shellminator_web_socket_a8e6074063bd0d8c24c53d28974ef1e43_icgraph.svg" width="384" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a654f33a50f17a3c4e8abe12c71f41236" name="a654f33a50f17a3c4e8abe12c71f41236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a654f33a50f17a3c4e8abe12c71f41236">&#9670;&#160;</a></span>client</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiClient ShellminatorWebSocket::client</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00156">156</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aacb50076c775a9a82a336766df4c99e3" name="aacb50076c775a9a82a336766df4c99e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacb50076c775a9a82a336766df4c99e3">&#9670;&#160;</a></span>clientBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ShellminatorWebSocket::clientBuffer[<a class="el" href="_shellminator-_default_settings_8hpp.html#a597dbfcbabb3fd34d96ce637e0d95243">SHELLMINATOR_WS_CLIENT_BUFFER_SIZE</a>+1]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00162">162</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a35cc9b06fcf3a3b5854a8e4b8326fc5d" name="a35cc9b06fcf3a3b5854a8e4b8326fc5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35cc9b06fcf3a3b5854a8e4b8326fc5d">&#9670;&#160;</a></span>clientBufferCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::clientBufferCounter = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00163">163</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7c6c5178f98570311f229d5c29fe6599" name="a7c6c5178f98570311f229d5c29fe6599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c6c5178f98570311f229d5c29fe6599">&#9670;&#160;</a></span>clientConnected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::clientConnected = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00152">152</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a108c772ab0cd7011c7571ef57b6928b8" name="a108c772ab0cd7011c7571ef57b6928b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a108c772ab0cd7011c7571ef57b6928b8">&#9670;&#160;</a></span>clientKey</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ShellminatorWebSocket::clientKey[<a class="el" href="_shellminator-_websocket_8hpp.html#a8d290eef9058be8056d3614b7c0a1fe9">SHELLMINATOR_WS_CLIENT_KEY_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00167">167</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a45625a89813360673106b15edf006007" name="a45625a89813360673106b15edf006007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45625a89813360673106b15edf006007">&#9670;&#160;</a></span>clientLineNameBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ShellminatorWebSocket::clientLineNameBuffer[<a class="el" href="_shellminator-_default_settings_8hpp.html#aaf7e9c31168be5caf2dd0c4333c3be5c">SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00165">165</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a107532ac43f2e2707d9bee8d57176d6d" name="a107532ac43f2e2707d9bee8d57176d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107532ac43f2e2707d9bee8d57176d6d">&#9670;&#160;</a></span>clientLineValueBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ShellminatorWebSocket::clientLineValueBuffer[<a class="el" href="_shellminator-_default_settings_8hpp.html#ab55854960a21ac09dedf78e0ef917252">SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00166">166</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a208e64d7f0d9c6a5ab19b9ab234751f8" name="a208e64d7f0d9c6a5ab19b9ab234751f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208e64d7f0d9c6a5ab19b9ab234751f8">&#9670;&#160;</a></span>clientVersion</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::clientVersion</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00191">191</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9be8dfc14960adf0b15ee055bf57fd5e" name="a9be8dfc14960adf0b15ee055bf57fd5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9be8dfc14960adf0b15ee055bf57fd5e">&#9670;&#160;</a></span>connectCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* ShellminatorWebSocket::connectCallback) (<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *parent) = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00203">203</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a46c7dc161127c784f42b5244005a73fb" name="a46c7dc161127c784f42b5244005a73fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c7dc161127c784f42b5244005a73fb">&#9670;&#160;</a></span>connectionUpgradeLineFound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::connectionUpgradeLineFound</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00189">189</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a27bdb7a26653fb6713652eba80288c17" name="a27bdb7a26653fb6713652eba80288c17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27bdb7a26653fb6713652eba80288c17">&#9670;&#160;</a></span>dbg</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Stream* ShellminatorWebSocket::dbg = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00153">153</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a707ad4e0a6fda3e807383832bfa9f02d" name="a707ad4e0a6fda3e807383832bfa9f02d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707ad4e0a6fda3e807383832bfa9f02d">&#9670;&#160;</a></span>decodedDataXorCntr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorWebSocket::decodedDataXorCntr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00199">199</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8ed8493917e85f7478d255179a861a0d" name="a8ed8493917e85f7478d255179a861a0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ed8493917e85f7478d255179a861a0d">&#9670;&#160;</a></span>decodedHdrFin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::decodedHdrFin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00193">193</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aec42801e2fa99d3750ffa3979cd71296" name="aec42801e2fa99d3750ffa3979cd71296"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec42801e2fa99d3750ffa3979cd71296">&#9670;&#160;</a></span>decodedHdrMask</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::decodedHdrMask</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00195">195</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afd3739628ffbf7d1db23ec94e8a838ad" name="afd3739628ffbf7d1db23ec94e8a838ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd3739628ffbf7d1db23ec94e8a838ad">&#9670;&#160;</a></span>decodedHdrMaskKeys</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorWebSocket::decodedHdrMaskKeys[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00197">197</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9a62bf56e9663c8e8aea2fd7e4201e99" name="a9a62bf56e9663c8e8aea2fd7e4201e99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a62bf56e9663c8e8aea2fd7e4201e99">&#9670;&#160;</a></span>decodedHdrPayloadCntr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorWebSocket::decodedHdrPayloadCntr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00198">198</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac317baa772874b63a86939ba4debde74" name="ac317baa772874b63a86939ba4debde74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac317baa772874b63a86939ba4debde74">&#9670;&#160;</a></span>decodedHdrPayloadLen</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorWebSocket::decodedHdrPayloadLen</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00196">196</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f10b70c21b2107b226c451d27d92eb9" name="a2f10b70c21b2107b226c451d27d92eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f10b70c21b2107b226c451d27d92eb9">&#9670;&#160;</a></span>decodedHdrType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> ShellminatorWebSocket::decodedHdrType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00194">194</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a34ae0bc68cf0d57f8be6bea518296c75" name="a34ae0bc68cf0d57f8be6bea518296c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ae0bc68cf0d57f8be6bea518296c75">&#9670;&#160;</a></span>disconnectCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* ShellminatorWebSocket::disconnectCallback) (<a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> *parent) = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00204">204</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad9ae1ee932e284f3fad3b9bad0964390" name="ad9ae1ee932e284f3fad3b9bad0964390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ae1ee932e284f3fad3b9bad0964390">&#9670;&#160;</a></span>httpGetLineFound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::httpGetLineFound</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00188">188</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa9c82f874c96c641cfb33b67e4b03aed" name="aa9c82f874c96c641cfb33b67e4b03aed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c82f874c96c641cfb33b67e4b03aed">&#9670;&#160;</a></span>port</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShellminatorWebSocket::port = 443</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00151">151</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab077b7608e754a877a43a40bbf1e2137" name="ab077b7608e754a877a43a40bbf1e2137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab077b7608e754a877a43a40bbf1e2137">&#9670;&#160;</a></span>server</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiServer* ShellminatorWebSocket::server</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00155">155</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af7eb29f6caf50f671a9e61a5a0482639" name="af7eb29f6caf50f671a9e61a5a0482639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7eb29f6caf50f671a9e61a5a0482639">&#9670;&#160;</a></span>serverHeader</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * ShellminatorWebSocket::serverHeader</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">  <span class="stringliteral">&quot;HTTP/1.1 101 Switching Protocols\r\n&quot;</span></div>
+<div class="line">  <span class="stringliteral">&quot;Server: Shellminator\r\n&quot;</span></div>
+<div class="line">  <span class="stringliteral">&quot;Upgrade: websocket\r\n&quot;</span></div>
+<div class="line">  <span class="stringliteral">&quot;Connection: Upgrade\r\n&quot;</span></div>
+<div class="line">  <span class="stringliteral">&quot;Sec-WebSocket-Version: 13\r\n&quot;</span></div>
+<div class="line">  <span class="stringliteral">&quot;Sec-WebSocket-Accept: &quot;</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00170">170</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac8404a5e68c74474b71dbf45564b63c3" name="ac8404a5e68c74474b71dbf45564b63c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8404a5e68c74474b71dbf45564b63c3">&#9670;&#160;</a></span>serverKey</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ShellminatorWebSocket::serverKey[<a class="el" href="_shellminator-_websocket_8hpp.html#a48f1156f1e542f9ddb51459874d5a576">SHELLMINATOR_WS_SERVER_KEY_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00168">168</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf781e3e1ded076ae8ff8eab205e4fb2" name="aaf781e3e1ded076ae8ff8eab205e4fb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf781e3e1ded076ae8ff8eab205e4fb2">&#9670;&#160;</a></span>streamBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t ShellminatorWebSocket::streamBuffer[<a class="el" href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00158">158</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae69f69ee41fcdfb8ee7251607d79e324" name="ae69f69ee41fcdfb8ee7251607d79e324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69f69ee41fcdfb8ee7251607d79e324">&#9670;&#160;</a></span>streamBufferReadPointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ShellminatorWebSocket::streamBufferReadPointer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00160">160</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a93f0219eff48939eaae326310e32cfbb" name="a93f0219eff48939eaae326310e32cfbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f0219eff48939eaae326310e32cfbb">&#9670;&#160;</a></span>streamBufferWritePointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t ShellminatorWebSocket::streamBufferWritePointer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00159">159</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7fb75b28b36b998bda7f305419680b78" name="a7fb75b28b36b998bda7f305419680b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb75b28b36b998bda7f305419680b78">&#9670;&#160;</a></span>upgradeWebsocketLineFound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShellminatorWebSocket::upgradeWebsocketLineFound</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00190">190</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9fa4e7210cd4fbc024770bb182908d21" name="a9fa4e7210cd4fbc024770bb182908d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fa4e7210cd4fbc024770bb182908d21">&#9670;&#160;</a></span>wsState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">wsState_t</a> ShellminatorWebSocket::wsState</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_shellminator-_websocket_8hpp_source.html#l00201">201</a> of file <a class="el" href="_shellminator-_websocket_8hpp_source.html">Shellminator-Websocket.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

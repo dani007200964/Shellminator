@@ -1,0 +1,6 @@
+<map id="ShellminatorPlot::drawPlot" name="ShellminatorPlot::drawPlot">
+<area shape="rect" id="node1" title="Draw the plot data." alt="" coords="5,55,180,80"/>
+<area shape="rect" id="node2" href="$class_shellminator_plot.html#a64b1c1e4f9a22374884f859764424754" title="Linear interpolation." alt="" coords="257,5,404,31"/>
+<area shape="rect" id="node3" href="$class_shellminator_plot.html#af41b760d97c3d7f802734d0a123d1c2e" title="Floating point implementation of the map function." alt="" coords="241,55,420,80"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="228,128,433,153"/>
+</map>

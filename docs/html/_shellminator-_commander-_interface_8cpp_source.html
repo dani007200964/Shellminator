@@ -1,0 +1,581 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/Shellminator-Commander-Interface.cpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_commander-_interface_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Shellminator-Commander-Interface.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_shellminator-_commander-_interface_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright (c) 2020 - Daniel Hajnal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Modified 2024.06.10</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">MIT License</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">Copyright (c) 2020 Daniel Hajnal</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">SOFTWARE.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">//---- Commander-API support specific part ----//</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#ifdef COMMANDER_API_VERSION</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#aa469468f84d73323c4c5667214169636">   39</a></span><a class="code hl_function" href="class_shellminator_caller.html#aa469468f84d73323c4c5667214169636">ShellminatorCaller::ShellminatorCaller</a>(){</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#a85a82da4c3d2d0b341db546ce3b28abd">   43</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_caller.html#a85a82da4c3d2d0b341db546ce3b28abd">ShellminatorCaller::setShell</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* shell_p ){</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> = shell_p;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#a36c63ee5ceefad0fb486cf8a32354379">   47</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_caller.html#a36c63ee5ceefad0fb486cf8a32354379">ShellminatorCaller::beep</a>(){</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> != NULL ){</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> -&gt; <a class="code hl_function" href="class_shellminator_caller.html#a36c63ee5ceefad0fb486cf8a32354379">beep</a>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#a4a67e78353e119f5ee7500c5e09490ed">   53</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_caller.html#a4a67e78353e119f5ee7500c5e09490ed">ShellminatorCaller::setBannerText</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* text_p ){</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> != NULL ){</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> -&gt; <a class="code hl_function" href="class_shellminator_caller.html#a4a67e78353e119f5ee7500c5e09490ed">setBannerText</a>( text_p );</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#a41733fa84a19fe03bd047366437a952d">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_caller.html#a41733fa84a19fe03bd047366437a952d">ShellminatorCaller::setPathText</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* text_p ){</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> != NULL ){</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> -&gt; setBannerPathText( text_p );</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_shellminator_caller.html#ae1825c2a2983631824768f4482dabeb0">   65</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_caller.html#ae1825c2a2983631824768f4482dabeb0">ShellminatorCaller::clear</a>(){</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> != NULL ){</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_variable" href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">shell</a> -&gt; <a class="code hl_function" href="class_shellminator_caller.html#ae1825c2a2983631824768f4482dabeb0">clear</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#adcf5e13a04aeb5137fb297fcafd63604">   72</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#adcf5e13a04aeb5137fb297fcafd63604">ShellminatorCommanderInterface::printCommandParserHelp</a>( Stream* channel_p, <span class="keywordtype">bool</span> formatting_p ){</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> != NULL ){</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; <a class="code hl_function" href="class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c">printHelp</a>( channel_p, formatting_p );</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#afeabeb0ce937fd0fd3489b1b660d682c">   78</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#afeabeb0ce937fd0fd3489b1b660d682c">ShellminatorCommanderInterface::attachCommander</a>( Commander* commander_p ){</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> = commander_p;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#a1d945867aeeaee4cfd051e94741c813e">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#a1d945867aeeaee4cfd051e94741c813e">ShellminatorCommanderInterface::checkCommandFraction</a>(){</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="comment">// By default it is empty, because no command parser is available.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#a6732fa3473f7c83286880524a38a4917">   86</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#a6732fa3473f7c83286880524a38a4917">ShellminatorCommanderInterface::executeWithCommandParser</a>(){</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> != NULL ){</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_variable" href="class_shellminator_commander_interface.html#affaaf61f46e4f7a29af86a7c7d226e82">caller</a>.setChannel( <a class="code hl_variable" href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">channel</a> );</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_variable" href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">enableFormatting</a> ? <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; <a class="code hl_variable" href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">enableFormatting</a>() : <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; disableFormatting();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; execute( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator_commander_interface.html#affaaf61f46e4f7a29af86a7c7d226e82">caller</a>.getChannel(), &amp;<a class="code hl_variable" href="class_shellminator_commander_interface.html#affaaf61f46e4f7a29af86a7c7d226e82">caller</a> );</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#a4a122e94adfd6ece02780a298ba4497e">   94</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#a4a122e94adfd6ece02780a298ba4497e">ShellminatorCommanderInterface::attachAutoCompleteBuffer</a>( <span class="keywordtype">char</span>* buffer_p, <span class="keywordtype">int</span> buffer_size_p ){</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_variable" href="class_shellminator_commander_interface.html#a44471e638cbfa5870bc2e3fa5ae09c12">autoCompleteBuffer</a> = buffer_p;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_variable" href="class_shellminator_commander_interface.html#a9b077796f177a1c12a75122d3d8affb9">autoCompleteBufferSize</a> = buffer_size_p;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#aada9809ba0745c19d43b2befe1ad9489">  100</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#aada9809ba0745c19d43b2befe1ad9489">ShellminatorCommanderInterface::autoCompleteWithCommandParser</a>(){</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">int</span> num_of_hints;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* hint_text;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">int</span> hint_text_size;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// By default it is empty, because no command parser is available.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> == NULL ){</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#a44471e638cbfa5870bc2e3fa5ae09c12">autoCompleteBuffer</a> == NULL ){</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#a9b077796f177a1c12a75122d3d8affb9">autoCompleteBufferSize</a> &lt; 10 ){</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> &gt;= <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ){</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ][ <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> ] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    num_of_hints = <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; generateHint( <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ], <a class="code hl_variable" href="class_shellminator_commander_interface.html#a44471e638cbfa5870bc2e3fa5ae09c12">autoCompleteBuffer</a>, <a class="code hl_variable" href="class_shellminator_commander_interface.html#a9b077796f177a1c12a75122d3d8affb9">autoCompleteBufferSize</a> );</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">if</span>( num_of_hints &lt; 1 ){</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    hint_text = <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> -&gt; getHint( 0, <span class="keyword">true</span> );</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    hint_text_size = strlen( hint_text );</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">for</span>( i = 0; i &lt; hint_text_size; i++ ){</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <a class="code hl_variable" href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">cmd_buff</a>[ 0 ][ <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> ] = hint_text[ i ];</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a>++;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <a class="code hl_variable" href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">cursor</a>++;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">cmd_buff_cntr</a> &gt;= <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ){</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <a class="code hl_function" href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">redrawLine</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="class_shellminator_commander_interface.html#afbc91330543791d8c4160eb45571f749">  148</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_commander_interface.html#afbc91330543791d8c4160eb45571f749">ShellminatorCommanderInterface::hasCommandParser</a>(){</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="comment">// By default it returns false, because no command parser is available.</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">commander</a> != NULL ){</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a8a320c699f54f21b20a3ef40c5f189ef">  161</a></span><a class="code hl_function" href="class_commander_colorizer.html#a8a320c699f54f21b20a3ef40c5f189ef">CommanderColorizer::CommanderColorizer</a>(){</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <a class="code hl_function" href="class_commander_colorizer.html#ad0809ab85f05643fa6b66e57a8402c3a">reset</a>( NULL );</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#ad0809ab85f05643fa6b66e57a8402c3a">  165</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#ad0809ab85f05643fa6b66e57a8402c3a">CommanderColorizer::reset</a>( Stream* response ){</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">for</span>( i = 0; i &lt; ( <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> + 1 ); i++ ){</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <a class="code hl_variable" href="class_commander_colorizer.html#aacbbd871301a51e47fc68f6acc5ed6b0">stateBuffer</a>[ i ] = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">bufferCntr</a> = 0;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordflow">if</span>( response ){</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#aedf9fa88052fbfec3452fa57b9200396">  180</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#aedf9fa88052fbfec3452fa57b9200396">CommanderColorizer::printChar</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">if</span>( <a class="code hl_variable" href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">bufferCntr</a> &gt; <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a> ){</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordflow">return</span>; </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">switch</span>( <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> ){</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>:</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <a class="code hl_function" href="class_commander_colorizer.html#a68405cfefd5dde300e3dbcba05409b5e">defaultStateFuncion</a>( response, c );</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a97c34f7bceca433731b84bf89086a523">FIRST_DASH_STATE</a>:</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <a class="code hl_function" href="class_commander_colorizer.html#a6fdc4fe9999ed419a4f6609f96be864e">firstDashStateFuncion</a>( response, c );</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a54678c7bcae2e3f571caaf368b2a72be">WAIT_FOR_WHITESPACE</a>:</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <a class="code hl_function" href="class_commander_colorizer.html#a2f4b094579f51d3e1b643c8cedd97eb1">waitForWhitespaceStateFuncion</a>( response, c );</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a8aa4fc0ab111a1876610205932f4a314">SECOND_DASH_STATE</a>:</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <a class="code hl_function" href="class_commander_colorizer.html#a3461c3a6dfbbcff6bdccf48dca720220">secondDashStateFuncion</a>( response, c );</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">WAIT_TOKEN_END</a>:</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <a class="code hl_function" href="class_commander_colorizer.html#a28b4ef68cd3542b36967280dbd9273b2">waitTokenEndStateFunction</a>( response, c );</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a4f3edb3fc16ac0ec91958c880c2040ae">WAIT_STRING_END</a>:</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <a class="code hl_function" href="class_commander_colorizer.html#af9f754bacda219a7bf4e3d1525571f29">waitStringEndStateFunction</a>( response, c );</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a2786c35c9b63f84ef9c24f0b65fb6c94">ENV_VAR_START</a>:</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <a class="code hl_function" href="class_commander_colorizer.html#a43e86729c1d6e5a48522f33d06ac4f5d">envVarStartStateFunction</a>( response, c );</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    }</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">bufferCntr</a>++;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <a class="code hl_variable" href="class_commander_colorizer.html#aacbbd871301a51e47fc68f6acc5ed6b0">stateBuffer</a>[ <a class="code hl_variable" href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">bufferCntr</a> ] = <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>}</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a68405cfefd5dde300e3dbcba05409b5e">  224</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a68405cfefd5dde300e3dbcba05409b5e">CommanderColorizer::defaultStateFuncion</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">    if( ( ( c &gt;= &#39;A&#39; ) &amp;&amp; ( c &lt;= &#39;Z&#39; ) ) || ( ( c &gt;= &#39;a&#39; ) &amp;&amp; ( c &lt;= &#39;z&#39; ) ) || ( ( c &gt;= &#39;0&#39; ) &amp;&amp; ( c &lt;= &#39;9&#39; ) ) ){</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">        response -&gt; print( c );</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">    }</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">if</span>( ( ( c == <span class="charliteral">&#39; &#39;</span> ) || ( c == <span class="charliteral">&#39;\t&#39;</span> ) ) &amp;&amp; <a class="code hl_variable" href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">bufferCntr</a> == 0 ){</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        response -&gt; print( <span class="stringliteral">&quot;\u00b7&quot;</span> );</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    }</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;-&#39;</span> ){</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        response -&gt; print( <span class="stringliteral">&quot;\033[1;35m&quot;</span> );</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a97c34f7bceca433731b84bf89086a523">FIRST_DASH_STATE</a>;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;\&quot;&#39;</span> ){</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        response -&gt; print( <span class="stringliteral">&quot;\033[1;36m&quot;</span> );</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a4f3edb3fc16ac0ec91958c880c2040ae">WAIT_STRING_END</a>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    }</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;$&#39;</span> ){</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        response -&gt; print( <span class="stringliteral">&quot;\033[1;33m&quot;</span> );</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a2786c35c9b63f84ef9c24f0b65fb6c94">ENV_VAR_START</a>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>}</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a6fdc4fe9999ed419a4f6609f96be864e">  264</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a6fdc4fe9999ed419a4f6609f96be864e">CommanderColorizer::firstDashStateFuncion</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;-&#39;</span> ){</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a8aa4fc0ab111a1876610205932f4a314">SECOND_DASH_STATE</a>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    }</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordflow">if</span>( <a class="code hl_function" href="class_default_colorizer.html#af2afbb8228e5d1a4660c1d8c6fc8fd9e">isCharacter</a>( c ) || <a class="code hl_function" href="class_default_colorizer.html#a868b34e8cfe29d7240f1ddfd92f5e726">isNumber</a>( c ) ){</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a54678c7bcae2e3f571caaf368b2a72be">WAIT_FOR_WHITESPACE</a>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>}</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a3461c3a6dfbbcff6bdccf48dca720220">  284</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a3461c3a6dfbbcff6bdccf48dca720220">CommanderColorizer::secondDashStateFuncion</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">if</span>( <a class="code hl_function" href="class_default_colorizer.html#af2afbb8228e5d1a4660c1d8c6fc8fd9e">isCharacter</a>( c ) || <a class="code hl_function" href="class_default_colorizer.html#a868b34e8cfe29d7240f1ddfd92f5e726">isNumber</a>( c ) ){</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">WAIT_TOKEN_END</a>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">WAIT_TOKEN_END</a>;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>}</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a28b4ef68cd3542b36967280dbd9273b2">  298</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a28b4ef68cd3542b36967280dbd9273b2">CommanderColorizer::waitTokenEndStateFunction</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39; &#39;</span> ) || ( c == <span class="charliteral">&#39;\t&#39;</span> ) ){</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    }</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>}</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a2f4b094579f51d3e1b643c8cedd97eb1">  310</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a2f4b094579f51d3e1b643c8cedd97eb1">CommanderColorizer::waitForWhitespaceStateFuncion</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39; &#39;</span> ) || ( c == <span class="charliteral">&#39;\t&#39;</span> ) ){</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>}</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#af9f754bacda219a7bf4e3d1525571f29">  323</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#af9f754bacda219a7bf4e3d1525571f29">CommanderColorizer::waitStringEndStateFunction</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordflow">if</span>( c == <span class="charliteral">&#39;\&quot;&#39;</span> ){</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    }</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span> </div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>}</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a43e86729c1d6e5a48522f33d06ac4f5d">  335</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a43e86729c1d6e5a48522f33d06ac4f5d">CommanderColorizer::envVarStartStateFunction</a>( Stream* response, <span class="keywordtype">char</span> c ){</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordflow">if</span>( <a class="code hl_function" href="class_default_colorizer.html#af2afbb8228e5d1a4660c1d8c6fc8fd9e">isCharacter</a>( c ) || <a class="code hl_function" href="class_default_colorizer.html#a868b34e8cfe29d7240f1ddfd92f5e726">isNumber</a>( c ) ){</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        response -&gt; print( c );</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">WAIT_TOKEN_END</a>;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    }</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    <span class="keywordflow">if</span>( ( c == <span class="charliteral">&#39; &#39;</span> ) || ( c == <span class="charliteral">&#39;\t&#39;</span> ) ){</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        response -&gt; print( <span class="stringliteral">&quot;\u00b7&quot;</span> );</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">DEFAULT_STATE</a>;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    response -&gt; print( c );</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <a class="code hl_variable" href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">currentState</a> = <a class="code hl_enumvalue" href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">WAIT_TOKEN_END</a>;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>}</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span> </div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="class_commander_colorizer.html#a7bfb737dc71c7276ba1ce53dc3fd9b72">  355</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_commander_colorizer.html#a7bfb737dc71c7276ba1ce53dc3fd9b72">CommanderColorizer::printBackwardError</a>( Stream* response ){</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    response -&gt; print( <span class="stringliteral">&quot;\033[1;37;41m&quot;</span> );</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    response -&gt; print( <span class="stringliteral">&quot;\u219c&quot;</span> );</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    response -&gt; print( <span class="stringliteral">&quot;\033[0m&quot;</span> );</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>}</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_shellminator-_commander-_interface_8hpp_html"><div class="ttname"><a href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a3ddabc8c441626dba3679faf61863c5f"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a3ddabc8c441626dba3679faf61863c5f">SHELLMINATOR_BUFF_LEN</a></div><div class="ttdeci">#define SHELLMINATOR_BUFF_LEN</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00053">Shellminator-DefaultSettings.hpp:53</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321a2786c35c9b63f84ef9c24f0b65fb6c94"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a2786c35c9b63f84ef9c24f0b65fb6c94">CommanderColorizer::ENV_VAR_START</a></div><div class="ttdeci">@ ENV_VAR_START</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00116">Shellminator-Commander-Interface.hpp:115</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321a4f3edb3fc16ac0ec91958c880c2040ae"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a4f3edb3fc16ac0ec91958c880c2040ae">CommanderColorizer::WAIT_STRING_END</a></div><div class="ttdeci">@ WAIT_STRING_END</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00114">Shellminator-Commander-Interface.hpp:114</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321a54678c7bcae2e3f571caaf368b2a72be"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a54678c7bcae2e3f571caaf368b2a72be">CommanderColorizer::WAIT_FOR_WHITESPACE</a></div><div class="ttdeci">@ WAIT_FOR_WHITESPACE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00112">Shellminator-Commander-Interface.hpp:112</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321a8aa4fc0ab111a1876610205932f4a314"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a8aa4fc0ab111a1876610205932f4a314">CommanderColorizer::SECOND_DASH_STATE</a></div><div class="ttdeci">@ SECOND_DASH_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00111">Shellminator-Commander-Interface.hpp:111</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321a97c34f7bceca433731b84bf89086a523"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321a97c34f7bceca433731b84bf89086a523">CommanderColorizer::FIRST_DASH_STATE</a></div><div class="ttdeci">@ FIRST_DASH_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00110">Shellminator-Commander-Interface.hpp:110</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321aa133f6226c36f723e3afac6b8d8fc94c">CommanderColorizer::DEFAULT_STATE</a></div><div class="ttdeci">@ DEFAULT_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00109">Shellminator-Commander-Interface.hpp:109</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd"><div class="ttname"><a href="class_commander_colorizer.html#a13a0f1ce7e456aca9b2880dbac412321afee790cd8daeba368bf3c51fea9ec4cd">CommanderColorizer::WAIT_TOKEN_END</a></div><div class="ttdeci">@ WAIT_TOKEN_END</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00113">Shellminator-Commander-Interface.hpp:113</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a28b4ef68cd3542b36967280dbd9273b2"><div class="ttname"><a href="class_commander_colorizer.html#a28b4ef68cd3542b36967280dbd9273b2">CommanderColorizer::waitTokenEndStateFunction</a></div><div class="ttdeci">void waitTokenEndStateFunction(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00298">Shellminator-Commander-Interface.cpp:298</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a2f4b094579f51d3e1b643c8cedd97eb1"><div class="ttname"><a href="class_commander_colorizer.html#a2f4b094579f51d3e1b643c8cedd97eb1">CommanderColorizer::waitForWhitespaceStateFuncion</a></div><div class="ttdeci">void waitForWhitespaceStateFuncion(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00310">Shellminator-Commander-Interface.cpp:310</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a3461c3a6dfbbcff6bdccf48dca720220"><div class="ttname"><a href="class_commander_colorizer.html#a3461c3a6dfbbcff6bdccf48dca720220">CommanderColorizer::secondDashStateFuncion</a></div><div class="ttdeci">void secondDashStateFuncion(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00284">Shellminator-Commander-Interface.cpp:284</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a43e86729c1d6e5a48522f33d06ac4f5d"><div class="ttname"><a href="class_commander_colorizer.html#a43e86729c1d6e5a48522f33d06ac4f5d">CommanderColorizer::envVarStartStateFunction</a></div><div class="ttdeci">void envVarStartStateFunction(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00335">Shellminator-Commander-Interface.cpp:335</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a5e5a8fefa39efdead8c1fc9293c0fb12"><div class="ttname"><a href="class_commander_colorizer.html#a5e5a8fefa39efdead8c1fc9293c0fb12">CommanderColorizer::currentState</a></div><div class="ttdeci">colorizerState_t currentState</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00121">Shellminator-Commander-Interface.hpp:121</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a68405cfefd5dde300e3dbcba05409b5e"><div class="ttname"><a href="class_commander_colorizer.html#a68405cfefd5dde300e3dbcba05409b5e">CommanderColorizer::defaultStateFuncion</a></div><div class="ttdeci">void defaultStateFuncion(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00224">Shellminator-Commander-Interface.cpp:224</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a6fdc4fe9999ed419a4f6609f96be864e"><div class="ttname"><a href="class_commander_colorizer.html#a6fdc4fe9999ed419a4f6609f96be864e">CommanderColorizer::firstDashStateFuncion</a></div><div class="ttdeci">void firstDashStateFuncion(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00264">Shellminator-Commander-Interface.cpp:264</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a7bfb737dc71c7276ba1ce53dc3fd9b72"><div class="ttname"><a href="class_commander_colorizer.html#a7bfb737dc71c7276ba1ce53dc3fd9b72">CommanderColorizer::printBackwardError</a></div><div class="ttdeci">void printBackwardError(Stream *response)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00355">Shellminator-Commander-Interface.cpp:355</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a7cad12d2ec055532cfe3ea954148682a"><div class="ttname"><a href="class_commander_colorizer.html#a7cad12d2ec055532cfe3ea954148682a">CommanderColorizer::bufferCntr</a></div><div class="ttdeci">int bufferCntr</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00119">Shellminator-Commander-Interface.hpp:119</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_a8a320c699f54f21b20a3ef40c5f189ef"><div class="ttname"><a href="class_commander_colorizer.html#a8a320c699f54f21b20a3ef40c5f189ef">CommanderColorizer::CommanderColorizer</a></div><div class="ttdeci">CommanderColorizer()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00161">Shellminator-Commander-Interface.cpp:161</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_aacbbd871301a51e47fc68f6acc5ed6b0"><div class="ttname"><a href="class_commander_colorizer.html#aacbbd871301a51e47fc68f6acc5ed6b0">CommanderColorizer::stateBuffer</a></div><div class="ttdeci">colorizerState_t stateBuffer[SHELLMINATOR_BUFF_LEN+1]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00118">Shellminator-Commander-Interface.hpp:118</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_ad0809ab85f05643fa6b66e57a8402c3a"><div class="ttname"><a href="class_commander_colorizer.html#ad0809ab85f05643fa6b66e57a8402c3a">CommanderColorizer::reset</a></div><div class="ttdeci">void reset(Stream *response) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00165">Shellminator-Commander-Interface.cpp:165</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_aedf9fa88052fbfec3452fa57b9200396"><div class="ttname"><a href="class_commander_colorizer.html#aedf9fa88052fbfec3452fa57b9200396">CommanderColorizer::printChar</a></div><div class="ttdeci">void printChar(Stream *response, char c) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00180">Shellminator-Commander-Interface.cpp:180</a></div></div>
+<div class="ttc" id="aclass_commander_colorizer_html_af9f754bacda219a7bf4e3d1525571f29"><div class="ttname"><a href="class_commander_colorizer.html#af9f754bacda219a7bf4e3d1525571f29">CommanderColorizer::waitStringEndStateFunction</a></div><div class="ttdeci">void waitStringEndStateFunction(Stream *response, char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00323">Shellminator-Commander-Interface.cpp:323</a></div></div>
+<div class="ttc" id="aclass_default_colorizer_html_a868b34e8cfe29d7240f1ddfd92f5e726"><div class="ttname"><a href="class_default_colorizer.html#a868b34e8cfe29d7240f1ddfd92f5e726">DefaultColorizer::isNumber</a></div><div class="ttdeci">bool isNumber(char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_colorizer_8cpp_source.html#l00018">Shellminator-Colorizer.cpp:18</a></div></div>
+<div class="ttc" id="aclass_default_colorizer_html_af2afbb8228e5d1a4660c1d8c6fc8fd9e"><div class="ttname"><a href="class_default_colorizer.html#af2afbb8228e5d1a4660c1d8c6fc8fd9e">DefaultColorizer::isCharacter</a></div><div class="ttdeci">bool isCharacter(char c)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_colorizer_8cpp_source.html#l00008">Shellminator-Colorizer.cpp:8</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_a36c63ee5ceefad0fb486cf8a32354379"><div class="ttname"><a href="class_shellminator_caller.html#a36c63ee5ceefad0fb486cf8a32354379">ShellminatorCaller::beep</a></div><div class="ttdeci">void beep() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00047">Shellminator-Commander-Interface.cpp:47</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_a41733fa84a19fe03bd047366437a952d"><div class="ttname"><a href="class_shellminator_caller.html#a41733fa84a19fe03bd047366437a952d">ShellminatorCaller::setPathText</a></div><div class="ttdeci">void setPathText(const char *text_p) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00059">Shellminator-Commander-Interface.cpp:59</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_a4a67e78353e119f5ee7500c5e09490ed"><div class="ttname"><a href="class_shellminator_caller.html#a4a67e78353e119f5ee7500c5e09490ed">ShellminatorCaller::setBannerText</a></div><div class="ttdeci">void setBannerText(const char *text_p) override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00053">Shellminator-Commander-Interface.cpp:53</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_a85a82da4c3d2d0b341db546ce3b28abd"><div class="ttname"><a href="class_shellminator_caller.html#a85a82da4c3d2d0b341db546ce3b28abd">ShellminatorCaller::setShell</a></div><div class="ttdeci">void setShell(Shellminator *shell_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00043">Shellminator-Commander-Interface.cpp:43</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_aa469468f84d73323c4c5667214169636"><div class="ttname"><a href="class_shellminator_caller.html#aa469468f84d73323c4c5667214169636">ShellminatorCaller::ShellminatorCaller</a></div><div class="ttdeci">ShellminatorCaller()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00039">Shellminator-Commander-Interface.cpp:39</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_ae1825c2a2983631824768f4482dabeb0"><div class="ttname"><a href="class_shellminator_caller.html#ae1825c2a2983631824768f4482dabeb0">ShellminatorCaller::clear</a></div><div class="ttdeci">void clear() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00065">Shellminator-Commander-Interface.cpp:65</a></div></div>
+<div class="ttc" id="aclass_shellminator_caller_html_ae182aa18748159624f4ef2cbf1412fcb"><div class="ttname"><a href="class_shellminator_caller.html#ae182aa18748159624f4ef2cbf1412fcb">ShellminatorCaller::shell</a></div><div class="ttdeci">Shellminator * shell</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00064">Shellminator-Commander-Interface.hpp:64</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_a1d945867aeeaee4cfd051e94741c813e"><div class="ttname"><a href="class_shellminator_commander_interface.html#a1d945867aeeaee4cfd051e94741c813e">ShellminatorCommanderInterface::checkCommandFraction</a></div><div class="ttdeci">void checkCommandFraction() override</div><div class="ttdoc">Check the command with the command parser to get some useful information.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00082">Shellminator-Commander-Interface.cpp:82</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_a44471e638cbfa5870bc2e3fa5ae09c12"><div class="ttname"><a href="class_shellminator_commander_interface.html#a44471e638cbfa5870bc2e3fa5ae09c12">ShellminatorCommanderInterface::autoCompleteBuffer</a></div><div class="ttdeci">char * autoCompleteBuffer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00088">Shellminator-Commander-Interface.hpp:88</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_a4a122e94adfd6ece02780a298ba4497e"><div class="ttname"><a href="class_shellminator_commander_interface.html#a4a122e94adfd6ece02780a298ba4497e">ShellminatorCommanderInterface::attachAutoCompleteBuffer</a></div><div class="ttdeci">void attachAutoCompleteBuffer(char *buffer_p, int buffer_size_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00094">Shellminator-Commander-Interface.cpp:94</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_a6732fa3473f7c83286880524a38a4917"><div class="ttname"><a href="class_shellminator_commander_interface.html#a6732fa3473f7c83286880524a38a4917">ShellminatorCommanderInterface::executeWithCommandParser</a></div><div class="ttdeci">void executeWithCommandParser() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00086">Shellminator-Commander-Interface.cpp:86</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_a9b077796f177a1c12a75122d3d8affb9"><div class="ttname"><a href="class_shellminator_commander_interface.html#a9b077796f177a1c12a75122d3d8affb9">ShellminatorCommanderInterface::autoCompleteBufferSize</a></div><div class="ttdeci">int autoCompleteBufferSize</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00089">Shellminator-Commander-Interface.hpp:89</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_aada9809ba0745c19d43b2befe1ad9489"><div class="ttname"><a href="class_shellminator_commander_interface.html#aada9809ba0745c19d43b2befe1ad9489">ShellminatorCommanderInterface::autoCompleteWithCommandParser</a></div><div class="ttdeci">void autoCompleteWithCommandParser() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00100">Shellminator-Commander-Interface.cpp:100</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_adcf5e13a04aeb5137fb297fcafd63604"><div class="ttname"><a href="class_shellminator_commander_interface.html#adcf5e13a04aeb5137fb297fcafd63604">ShellminatorCommanderInterface::printCommandParserHelp</a></div><div class="ttdeci">void printCommandParserHelp(Stream *channel_p, bool formatting_p) override</div><div class="ttdoc">Print command parser Help.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00072">Shellminator-Commander-Interface.cpp:72</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_afa948c125e35f2eb189f9d1e4dcb1337"><div class="ttname"><a href="class_shellminator_commander_interface.html#afa948c125e35f2eb189f9d1e4dcb1337">ShellminatorCommanderInterface::commander</a></div><div class="ttdeci">Commander * commander</div><div class="ttdoc">Pointer to a Commander object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00092">Shellminator-Commander-Interface.hpp:92</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_afbc91330543791d8c4160eb45571f749"><div class="ttname"><a href="class_shellminator_commander_interface.html#afbc91330543791d8c4160eb45571f749">ShellminatorCommanderInterface::hasCommandParser</a></div><div class="ttdeci">bool hasCommandParser() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00148">Shellminator-Commander-Interface.cpp:148</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_afeabeb0ce937fd0fd3489b1b660d682c"><div class="ttname"><a href="class_shellminator_commander_interface.html#afeabeb0ce937fd0fd3489b1b660d682c">ShellminatorCommanderInterface::attachCommander</a></div><div class="ttdeci">void attachCommander(Commander *commander_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8cpp_source.html#l00078">Shellminator-Commander-Interface.cpp:78</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html_affaaf61f46e4f7a29af86a7c7d226e82"><div class="ttname"><a href="class_shellminator_commander_interface.html#affaaf61f46e4f7a29af86a7c7d226e82">ShellminatorCommanderInterface::caller</a></div><div class="ttdeci">ShellminatorCaller caller</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00094">Shellminator-Commander-Interface.hpp:94</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00105">Shellminator.hpp:106</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a244a8b972c2bb5e9305475c4f0ff52ef"><div class="ttname"><a href="class_shellminator.html#a244a8b972c2bb5e9305475c4f0ff52ef">Shellminator::cursor</a></div><div class="ttdeci">uint32_t cursor</div><div class="ttdoc">This variable tracks the location of the next character.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00916">Shellminator.hpp:916</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a47aef4e6e8cb630be8799c5b982205d2"><div class="ttname"><a href="class_shellminator.html#a47aef4e6e8cb630be8799c5b982205d2">Shellminator::enableFormatting</a></div><div class="ttdeci">bool enableFormatting</div><div class="ttdoc">This flag enables or disables character formatting.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00872">Shellminator.hpp:872</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a59c990ce7819ba8809da3da347d96171"><div class="ttname"><a href="class_shellminator.html#a59c990ce7819ba8809da3da347d96171">Shellminator::cmd_buff_cntr</a></div><div class="ttdeci">uint32_t cmd_buff_cntr</div><div class="ttdoc">This variable tracks the end of the input message.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00913">Shellminator.hpp:913</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a842e1ef0e5cadd739ef87ae559cbbb16"><div class="ttname"><a href="class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16">Shellminator::redrawLine</a></div><div class="ttdeci">void redrawLine()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00506">Shellminator.cpp:506</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_a8809064de36b67ba2e9800b7e1481f88"><div class="ttname"><a href="class_shellminator.html#a8809064de36b67ba2e9800b7e1481f88">Shellminator::channel</a></div><div class="ttdeci">Stream * channel</div><div class="ttdoc">Pointer to the communication class.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00879">Shellminator.hpp:879</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_ab376f95d8641285b9a73ff6142082b72"><div class="ttname"><a href="class_shellminator.html#ab376f95d8641285b9a73ff6142082b72">Shellminator::cmd_buff</a></div><div class="ttdeci">char cmd_buff[SHELLMINATOR_BUFF_DIM][SHELLMINATOR_BUFF_LEN+1]</div><div class="ttdoc">Text buffer.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00907">Shellminator.hpp:907</a></div></div>
+<div class="ttc" id="aclass_shellminator_html_acd2c421ddc842d8f0f2769b0e391ab5c"><div class="ttname"><a href="class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c">Shellminator::printHelp</a></div><div class="ttdeci">void printHelp()</div><div class="ttdoc">Print help text.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8cpp_source.html#l00324">Shellminator.cpp:324</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_commander-_interface_8cpp.html">Shellminator-Commander-Interface.cpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Example 500 WebSocket Simple</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('500_web_socket_simple_page.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example 500 WebSocket Simple </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md123">Step 1: Import the required libraries</a></li>
+<li class="level2"><a href="#autotoc_md124">Step 2: Choose a port for the server</a></li>
+<li class="level2"><a href="#autotoc_md125">Step 3: Create the Shellminator object and link it with the WebSocket</a></li>
+<li class="level2"><a href="#autotoc_md126">Step 4: Start the WebSocket server</a></li>
+<li class="level2"><a href="#autotoc_md127">Step 5: Process WebSocket messages in the loop</a></li>
+<li class="level2"><a href="#autotoc_md128">Some tips for using the demo:</a></li>
+<li class="level2"><a href="#autotoc_md129">Live Demo</a></li>
+<li class="level2"><a href="#autotoc_md130">Whole Code</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><p >These days, wireless solutions are becoming more and more popular, and this trend has also made its way into the affordable embedded systems sector over the years. It all started with the ESP8266, but today we have a variety of microcontrollers and development boards available with WiFi connectivity options, such as the Raspberry Pi Pico W, ESP32, and Arduino. The <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> currently offers three solutions for this: WebSocket, TCP, and Bluetooth Low Energy.</p>
+<p >Let’s start by looking at the WebSocket implementation, as it’s the easiest of the three and all you’ll need is a browser. First, you’ll need a microcontroller that supports WiFi communication. We tested the Raspberry Pi Pico W, ESP32, ESP8266, and the Arduino Uno R4 in-house, and with these, we were able to create a working terminal.</p>
+<h2><a class="anchor" id="autotoc_md123"></a>
+Step 1: Import the required libraries</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;WiFi.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a>&quot;</span></div>
+<div class="ttc" id="a_shellminator-_websocket_8hpp_html"><div class="ttname"><a href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+</div><!-- fragment --><p >Since we wanted the system to be available across multiple platforms, we implemented our own WebSocket driver. This is basically a WebSocket server optimized for message sending and working as a Stream, which makes it easy to integrate into the <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> ecosystem.</p>
+<h2><a class="anchor" id="autotoc_md124"></a>
+Step 2: Choose a port for the server</h2>
+<p >You’ll need to specify a port for the server to run on. The commonly accepted WebSocket default port is 443, but it can be anything else if your requirements differ. Once you’ve chosen a port, create an object of the <code><a class="el" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a></code> class and specify the port in the constructor. </p><div class="fragment"><div class="line"><span class="preprocessor">#define WEBSOCKET_PORT 443</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> ws( WEBSOCKET_PORT );</div>
+<div class="ttc" id="aclass_shellminator_web_socket_html"><div class="ttname"><a href="class_shellminator_web_socket.html">ShellminatorWebSocket</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00096">Shellminator-Websocket.hpp:96</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md125"></a>
+Step 3: Create the Shellminator object and link it with the WebSocket</h2>
+<p >Now, in the constructor of the <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> object, you can easily link the WebSocket object as the communication channel. </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;ws );</div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00105">Shellminator.hpp:106</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md126"></a>
+Step 4: Start the WebSocket server</h2>
+<p >At the end of the <code>init</code> section, it’s a good idea to start the WebSocket server. It’s enough to start it after everything else is initialized. Additionally, if you want, you can enable debug messages with the <code>attachDebugChannel</code> method (but be careful with this, especially in security-critical products, since it will print encryption keys). </p><div class="fragment"><div class="line">ws.attachDebugChannel( &amp;Serial );</div>
+<div class="line">ws.begin();</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md127"></a>
+Step 5: Process WebSocket messages in the loop</h2>
+<p >Finally, the only thing left is to continuously process the WebSocket messages in the <code>loop</code> section. For devices managing networks, it's good practice to add at least a 2ms delay at the end of the <code>loop</code>, so the microkernel running on these devices has time to handle networking tasks. </p><div class="fragment"><div class="line">ws.update();</div>
+<div class="line">delay( 2 );</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md128"></a>
+Some tips for using the demo:</h2>
+<p >Once the example code is uploaded to the desired platform, it will print a few useful messages to the Serial after boot, such as the device’s IP address. You’ll need this to use the demo. The demo window will load the WebTerminal app, which we’ve included for convenience, but you can always access it separately from the flashing WebTerminal menu at the bottom of the left-side list.</p>
+<p >For the WebTerminal to connect to your device, you need to enter the WebSocket server’s address in the <b>TargetIP</b> text field at the top right corner, in the format: <code>ws://DEVICE-IP:WS-PORT</code>. For example, in our case, it looks like this: <code>ws://192.168.0.223:443</code>.</p>
+<h2><a class="anchor" id="autotoc_md129"></a>
+Live Demo</h2>
+<p > 
+    <iframe id="demoFrame" src="web_xterm_themed.html" style="height:650px;width:100%;border:none;display:block;"></iframe>
+</p>
+<p > 
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>It’s a bit slow and flickering, right? In this example, we just wanted to showcase the basic functionality and the framework, but don't worry, in the next example we’ll fix those aesthetic issues 😉
+        </p>
+    </div>
+</div>
+</p>
+<h2><a class="anchor" id="autotoc_md130"></a>
+Whole Code</h2>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
+<div class="line"><span class="comment">*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;WiFi.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define WEBSOCKET_PORT 443</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">char</span> ssid[] = <span class="stringliteral">&quot;Replace With Your SSID&quot;</span>;        <span class="comment">// your network SSID (name)</span></div>
+<div class="line"><span class="keywordtype">char</span> pass[] = <span class="stringliteral">&quot;Replace With Your Password&quot;</span>;    <span class="comment">// your network password (use for WPA, or use as key for WEP)</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> ws( WEBSOCKET_PORT );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Shellminator object, and initialize it to use WebSocketsServer</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;ws );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System init section.</span></div>
+<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    WiFi.begin(ssid, pass);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attempt to connect to WiFi network:</span></div>
+<div class="line">    Serial.print(<span class="stringliteral">&quot;Attempting to connect to Network&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">while</span>( WiFi.status() != WL_CONNECTED ){</div>
+<div class="line">        Serial.print( <span class="charliteral">&#39;.&#39;</span> );</div>
+<div class="line">        delay( 1000 );</div>
+<div class="line">    }</div>
+<div class="line">    Serial.print(<span class="stringliteral">&quot;Connected!&quot;</span>);</div>
+<div class="line">    Serial.println(<span class="stringliteral">&quot;IP address: &quot;</span>);</div>
+<div class="line">    Serial.println(WiFi.localIP());</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// initialize shell object.</span></div>
+<div class="line">    shell.begin( <span class="stringliteral">&quot;arnold&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    ws.attachDebugChannel( &amp;Serial );</div>
+<div class="line">    ws.begin();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Infinite loop.</span></div>
+<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"> </div>
+<div class="line">    ws.update();</div>
+<div class="line">    shell.update();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Give some time to the other tasks on RTOS systems.</span></div>
+<div class="line">    delay( 2 );</div>
+<div class="line"> </div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous   </th><th class="markdownTableHeadRight">Next    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="309_gui_plot_advanced_page.html">GUI Plot Advanced Example</a>   </td><td class="markdownTableBodyRight"><a class="el" href="501_web_socket_pretty_page.html">WebSocket Pretty Example</a>   </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

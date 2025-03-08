@@ -1,0 +1,11 @@
+<map id="Shellminator::begin" name="Shellminator::begin">
+<area shape="rect" id="node1" title="Shellminator initialization function." alt="" coords="5,81,139,107"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#adab0caaef03f45fdba6dde0d5e0f9a6e" title="Draws the startup logo." alt="" coords="369,5,526,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e" title="Basic text formatting." alt="" coords="815,107,953,132"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8" title="Input prompt." alt="" coords="187,157,317,183"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="584,107,752,132"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#af30816610bf82e63cccc0690991a7210" title="Basic text formatting." alt="" coords="1009,107,1171,132"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16" title=" " alt="" coords="365,157,529,183"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a" title="If reverse search mode is active, this function is used to print the text correctly." alt="" coords="577,207,759,247"/>
+<area shape="rect" id="node9" href="$class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123" title="Basic substring function." alt="" coords="807,215,961,240"/>
+</map>

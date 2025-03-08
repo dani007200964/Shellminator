@@ -1,0 +1,4 @@
+<map id="ShellminatorLevelMeter::draw" name="ShellminatorLevelMeter::draw">
+<area shape="rect" id="node1" title="Draw function." alt="" coords="5,22,161,62"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="209,29,415,55"/>
+</map>

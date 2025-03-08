@@ -1,0 +1,413 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Example 205 Commander Cowsay</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('205_commander_cowsay_page.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example 205 Commander Cowsay </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md61">Getting Started with Flags in Command-Line Arguments</a></li>
+<li class="level2"><a href="#autotoc_md62">What Should Our cowsay Command Do?</a></li>
+<li class="level2"><a href="#autotoc_md63">Implementing the Argument Handling</a></li>
+<li class="level2"><a href="#autotoc_md64">Live Demo</a></li>
+<li class="level2"><a href="#autotoc_md65">Whole Code</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><h2><a class="anchor" id="autotoc_md61"></a>
+Getting Started with Flags in Command-Line Arguments</h2>
+<p >In this example, we’ll explore <b>flags</b> —a special type of command-line argument. Flags are <b>position-independent</b> and don’t require a value. At first, this might seem a little strange, but not all arguments need to have an associated value. Sometimes, simply <b>including the flag</b> in the command is enough to change how the program behaves. <br  />
+</p>
+<p >A great example of this is the <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</a> command in Linux, which is actually a fun little <em>easter egg</em>! We’ll be implementing a simplified version of it to see flags in action. <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md62"></a>
+What Should Our cowsay Command Do?</h2>
+<p >The <code>cowsay</code> command is quite flexible. Here’s how it works: <br  />
+</p><ul>
+<li>If no arguments are provided, it simply prints a cow saying <em>booo</em>. <br  />
+</li>
+<li>If the user provides a text argument, the cow will say that instead. <br  />
+</li>
+<li>Additionally, we can change the <b>eyes</b> of the cow using <b>flags</b>: <br  />
+<ul>
+<li><code>--tired</code> or <code>-t</code> → gives the cow tired eyes. <br  />
+</li>
+<li><code>--wink</code> or <code>-w</code> → makes the cow wink. <br  />
+</li>
+<li><code>--greedy</code> or <code>-g</code> → gives the cow money-shaped eyes. <br  />
+</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md63"></a>
+Implementing the Argument Handling</h2>
+<p >We won’t dive into the graphics rendering here—you can check the full implementation below. Instead, let’s focus on how we handle command-line arguments using <b>flag detection</b>. <br  />
+</p>
+<p >First, we define our arguments: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// The text argument is optional but must be the first argument if provided.</span></div>
+<div class="line">Argument text(args, 0);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// These are the optional flags for modifying the cow’s eyes.</span></div>
+<div class="line">Argument tired_flag(args, <span class="charliteral">&#39;t&#39;</span>, <span class="stringliteral">&quot;tired&quot;</span>);</div>
+<div class="line">Argument wink_flag(args, <span class="charliteral">&#39;w&#39;</span>, <span class="stringliteral">&quot;wink&quot;</span>);</div>
+<div class="line">Argument greedy_flag(args, <span class="charliteral">&#39;g&#39;</span>, <span class="stringliteral">&quot;greedy&quot;</span>);</div>
+</div><!-- fragment --><p >For flags, the only thing that matters is **whether they are present or not**—we don’t parse values for them, we just check if they exist. That’s why we use the <code>find()</code> method: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// Check if the flags exist in the command.</span></div>
+<div class="line">tired_flag.find();</div>
+<div class="line">wink_flag.find();</div>
+<div class="line">greedy_flag.find();</div>
+</div><!-- fragment --><p >When we need to determine <b>which flag was provided</b>, we use the <code>isFound()</code> method. Since multiple flags can be given at once, we should establish a <b>priority order</b> to avoid unpredictable behavior. In our case, the priority (from highest to lowest) is: <br  />
+</p>
+<ol type="1">
+<li><b>Tired</b> (<code>-t</code>)</li>
+<li><b>Wink</b> (<code>-w</code>)</li>
+<li><b>Greedy</b> (<code>-g</code>) <br  />
+</li>
+<li><b>Default (normal eyes, if no flag is given)</b> <br  />
+</li>
+</ol>
+<p >Now, let’s apply this logic in our implementation: <br  />
+</p>
+<div class="fragment"><div class="line"><span class="comment">// The eye type is determined based on priority.</span></div>
+<div class="line"><span class="keywordflow">if</span> (tired_flag.isFound()) {</div>
+<div class="line">    caller-&gt;print(tired_eyes);</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (wink_flag.isFound()) {</div>
+<div class="line">    caller-&gt;print(wink_eyes);</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (greedy_flag.isFound()) {</div>
+<div class="line">    caller-&gt;print(greedy_eyes);</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// If no flags are present, use the default eyes.</span></div>
+<div class="line"><span class="keywordflow">else</span> {</div>
+<div class="line">    caller-&gt;print(default_eyes);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Flags are <b>a simple yet powerful way</b> to modify a program’s behavior without requiring additional values. In this example, we used them to change our cow’s eye expression dynamically.</p>
+<h2><a class="anchor" id="autotoc_md64"></a>
+Live Demo</h2>
+<p > 
+<iframe id="demoFrame" src="webExamples/205_commanderCowsay.html" style="height:500px;width:100%;border:none;display:block;"></iframe>
+</p>
+<p > 
+<div style="display:flex; align-items: center;">
+    <div style="width:100px; height:100px; margin-right: 20px;">
+        <lottie-player src="Light-bulb.json" background="transparent" speed="1" style="width: 100%; height: 100%;" direction="1" playMode="normal" loop autoplay></lottie-player>
+    </div>
+    <div>
+        <p>Here are a few <b>suggested commands</b> you might want to try in the demo above:
+        </p>
+    </div>
+</div>
+</p>
+<ul>
+<li><code>cowsay "hello bello" --tired</code> → Displays "hello bello" with tired eyes. <br  />
+</li>
+<li><code>cowsay --tired --wink</code> → Shows the default text with tired eyes (not winking), since the <code>tired</code> flag has higher priority. <br  />
+</li>
+<li><code>cowsay --wink --tired</code> → Same as the previous one, proving that flag order doesn’t matter. <br  />
+</li>
+<li><code>cowsay -g</code> → Displays the cow with money-shaped eyes. <br  />
+</li>
+<li><code>cowsay 10</code> → The text will be "10" because the first argument is treated as a string, not a number. <br  />
+</li>
+<li><code>cowsay 10.5</code> → Same as above, but with a decimal number. <br  />
+</li>
+<li><code>cowsay</code> → Runs with the default behavior. <br  />
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md65"></a>
+Whole Code</h2>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
+<div class="line"><span class="comment">*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Commander-API.hpp&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Commander-Arguments.hpp&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Not an average looking cow for sure</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* cow_top =    <span class="stringliteral">&quot;        \\   ^__^\r\n         \\  &quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* cow_bottom = <span class="stringliteral">&quot;\\_______\r\n            (__)\\       )\\/\\\r\n                ||----w |\r\n                ||     ||\r\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Eye configurations</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* default_eyes = <span class="stringliteral">&quot;(oo)&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* tired_eyes = <span class="stringliteral">&quot;(--)&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* wink_eyes = <span class="stringliteral">&quot;(-O)&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* greedy_eyes = <span class="stringliteral">&quot;($$)&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// We have to create an object from Commander class.</span></div>
+<div class="line">Commander commander;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> cowsay_func( <span class="keywordtype">char</span> *args, CommandCaller* caller );</div>
+<div class="line"> </div>
+<div class="line">Commander::systemCommand_t API_tree[] = {</div>
+<div class="line">    systemCommand( <span class="stringliteral">&quot;cowsay&quot;</span>, <span class="stringliteral">&quot;Like the Linux command. Just give it a string.\r\n\tflags: --greedy\r\n\t         --tired&quot;</span>, cowsay_func )</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a ShellminatorCommanderInterface object, and initialize it to use Serial</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_commander_interface.html">ShellminatorCommanderInterface</a> shell( &amp;Serial );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System init section.</span></div>
+<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Clear the terminal</span></div>
+<div class="line">    shell.clear();</div>
+<div class="line"> </div>
+<div class="line">    commander.attachDebugChannel( &amp;Serial );</div>
+<div class="line">    commander.attachTree( API_tree );</div>
+<div class="line">    commander.init();</div>
+<div class="line"> </div>
+<div class="line">    shell.attachCommander( &amp;commander );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Initialize shell object.</span></div>
+<div class="line">    shell.begin( <span class="stringliteral">&quot;arnold&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Infinite loop.</span></div>
+<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Process the new data.</span></div>
+<div class="line">    shell.update();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> cowsay_func(<span class="keywordtype">char</span> *args, CommandCaller* caller ){</div>
+<div class="line">    <span class="keywordtype">char</span> textBuffer[ 30 ];</div>
+<div class="line">    <span class="keywordtype">int</span> i;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// The text argument is place dependent but optional.</span></div>
+<div class="line">    <span class="comment">// It has to be the first argument when it is given.</span></div>
+<div class="line">    Argument text( args, 0 );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// These are the optional flags for the command.</span></div>
+<div class="line">    Argument tired_flag( args, <span class="charliteral">&#39;t&#39;</span>, <span class="stringliteral">&quot;tired&quot;</span> );</div>
+<div class="line">    Argument wink_flag( args, <span class="charliteral">&#39;w&#39;</span>, <span class="stringliteral">&quot;wink&quot;</span> );</div>
+<div class="line">    Argument greedy_flag( args, <span class="charliteral">&#39;g&#39;</span>, <span class="stringliteral">&quot;greedy&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Try to find if these flags can be found in the command.</span></div>
+<div class="line">    tired_flag.find();</div>
+<div class="line">    wink_flag.find();</div>
+<div class="line">    greedy_flag.find();</div>
+<div class="line"> </div>
+<div class="line">    caller -&gt; print( <span class="stringliteral">&quot;&lt; &quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Draw the user text when it is given.</span></div>
+<div class="line">    <span class="keywordflow">if</span>( text.parseString( textBuffer ) ){</div>
+<div class="line">        caller -&gt; print( textBuffer );</div>
+<div class="line">        caller -&gt; println( <span class="stringliteral">&quot; &gt;&quot;</span> );</div>
+<div class="line">        caller -&gt; print( <span class="charliteral">&#39; &#39;</span> );</div>
+<div class="line">        <span class="keywordflow">for</span>( i = strlen( textBuffer ) + 2; i &gt; 0 ; i-- ){</div>
+<div class="line">            caller -&gt; print( <span class="charliteral">&#39;-&#39;</span> );</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Draw the default text.</span></div>
+<div class="line">    <span class="keywordflow">else</span>{</div>
+<div class="line">        caller -&gt; print( <span class="stringliteral">&quot;booo &gt;\r\n ------&quot;</span> );</div>
+<div class="line">    }</div>
+<div class="line">    caller -&gt; println();</div>
+<div class="line">    </div>
+<div class="line"> </div>
+<div class="line">    caller -&gt; print( cow_top );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// The eye drawing has a priority in case multiple flags are given.</span></div>
+<div class="line">    <span class="comment">// Check each flag from top priority and draw the corresponding eyes.</span></div>
+<div class="line">    <span class="keywordflow">if</span>( tired_flag.isFound() ){</div>
+<div class="line">        caller -&gt; print( tired_eyes );</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( wink_flag.isFound() ){</div>
+<div class="line">        caller -&gt; print( wink_eyes );</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( greedy_flag.isFound() ){</div>
+<div class="line">        caller -&gt; print( greedy_eyes );</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// If no flags are given, draw dhe default eyes.</span></div>
+<div class="line">    <span class="keywordflow">else</span>{</div>
+<div class="line">        caller -&gt; print( default_eyes );</div>
+<div class="line">    }</div>
+<div class="line">    caller -&gt; print( cow_bottom );</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="a_shellminator-_commander-_interface_8hpp_html"><div class="ttname"><a href="_shellminator-_commander-_interface_8hpp.html">Shellminator-Commander-Interface.hpp</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_commander_interface_html"><div class="ttname"><a href="class_shellminator_commander_interface.html">ShellminatorCommanderInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_commander-_interface_8hpp_source.html#l00067">Shellminator-Commander-Interface.hpp:67</a></div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous   </th><th class="markdownTableHeadRight">Next    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="204_commander_position_independent_arg_page.html">Commander Position Independent Arguments Example</a>   </td><td class="markdownTableBodyRight"><a class="el" href="206_commander_system_variables_page.html">Commander System Variables Example</a>   </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

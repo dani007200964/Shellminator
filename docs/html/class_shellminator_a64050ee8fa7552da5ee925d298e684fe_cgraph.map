@@ -1,0 +1,20 @@
+<map id="Shellminator::ShellminatorClearScreenState" name="Shellminator::ShellminatorClearScreenState">
+<area shape="rect" id="node1" title=" " alt="" coords="5,54,180,94"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317" title="Clear screen." alt="" coords="245,12,375,38"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16" title=" " alt="" coords="228,62,392,87"/>
+<area shape="rect" id="node9" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="239,275,381,300"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e" title="Basic text formatting." alt="" coords="717,32,856,58"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="454,32,622,58"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a" title="If reverse search mode is active, this function is used to print the text correctly." alt="" coords="447,82,629,122"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#af30816610bf82e63cccc0690991a7210" title="Basic text formatting." alt="" coords="937,32,1099,58"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123" title="Basic substring function." alt="" coords="709,90,864,115"/>
+<area shape="rect" id="node10" href="$class_shellminator.html#add2164e4b46594e10301b88abc287a1b" title="Check the command with the command parser to get some useful information." alt="" coords="440,146,636,186"/>
+<area shape="rect" id="node11" href="$class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d" title="Flush the channel." alt="" coords="449,210,627,250"/>
+<area shape="rect" id="node13" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="441,275,635,300"/>
+<area shape="rect" id="node16" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="461,324,615,350"/>
+<area shape="rect" id="node17" href="$class_shellminator.html#adab2f5b22050432e42cfdbd2c3cb8194" title="This function processes a new character." alt="" coords="464,374,612,399"/>
+<area shape="rect" id="node18" href="$class_shellminator.html#a5921f047dc98bdbb288856eddbc84d3e" title="Push a new event to the event buffer." alt="" coords="457,423,619,448"/>
+<area shape="rect" id="node12" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="697,210,876,250"/>
+<area shape="rect" id="node14" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="684,275,889,300"/>
+<area shape="rect" id="node15" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="684,348,889,374"/>
+</map>

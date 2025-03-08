@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="5,153,140,179"/>
+<area shape="rect" id="node2" href="$class_shellminator_button.html" title="This class can create a simple plotter object." alt="" coords="201,5,333,31"/>
+<area shape="rect" id="node3" href="$class_shellminator_level_meter.html" title=" " alt="" coords="189,55,345,80"/>
+<area shape="rect" id="node4" href="$class_shellminator_list.html" title=" " alt="" coords="210,104,325,129"/>
+<area shape="rect" id="node6" href="$class_shellminator_notification.html" title=" " alt="" coords="188,153,347,179"/>
+<area shape="rect" id="node7" href="$class_shellminator_plot.html" title="This class can create a simple plotter object." alt="" coords="209,203,326,228"/>
+<area shape="rect" id="node8" href="$class_shellminator_progress.html" title="This class can create a simple plotter object." alt="" coords="194,252,341,277"/>
+<area shape="rect" id="node9" href="$class_shellminator_screen_grid.html" title=" " alt="" coords="188,301,347,327"/>
+<area shape="rect" id="node5" href="$class_shellminator_list_detailed.html" title=" " alt="" coords="395,104,557,129"/>
+</map>

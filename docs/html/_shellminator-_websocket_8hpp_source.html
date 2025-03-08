@@ -1,0 +1,424 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/Shellminator-Websocket.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_websocket_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Shellminator-Websocket.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_shellminator-_websocket_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Created on July 07 2024</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright (c) 2020 - Daniel Hajnal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Modified July 07 2024</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">MIT License</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">Copyright (c) 2020 Daniel Hajnal</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">SOFTWARE.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#ifndef SHELLMINATOR_WEBSOCKET_HPP_</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define SHELLMINATOR_WEBSOCKET_HPP_</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">    #include &quot;Stream.h&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_crypto_8hpp.html">Shellminator-Crypto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">    #include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Todo add hooks to connection and disconnection events!</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// Todo add SHELLMINATOR_WEBS_DBG_ENABLE to defaultSettings.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">    #ifdef ARDUINO</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">        #include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">    #ifdef SHELLMINATOR_USE_WIFI_CLIENT</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="comment">// Macro magic for macro overloading.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#aa8c51d93d32a3e396858259dc751f124">   53</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_DBG_OVERLOAD( _1, _2, NAME, ... ) NAME</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#ae062af58bcb706d86b17c8ecb68ec1fe">   55</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_DBG_ENABLE</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">        #ifdef SHELLMINATOR_WS_DBG_ENABLE</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">            #define SHELLMINATOR_WS_DBG_1(   x ) if( dbg ){ dbg -&gt; print( x );   }</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">            #define SHELLMINATOR_WS_DBGLN_1( x ) if( dbg ){ dbg -&gt; println( x ); }</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">            #define SHELLMINATOR_WS_DBG_2(   x, y ) if( dbg ){ dbg -&gt; print( x, y );   }</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">            #define SHELLMINATOR_WS_DBGLN_2( x, y ) if( dbg ){ dbg -&gt; println( x, y ); }</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">        #elif</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a4f98e034d20a820ce5d6579674fdde2e">   64</a></span><span class="preprocessor">            #define SHELLMINATOR_WS_DBG_1(   x )</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a38e47b94c1fd5c6b9eed52b38b8fc1d6">   65</a></span><span class="preprocessor">            #define SHELLMINATOR_WS_DBGLN_1( x )</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a8757cd3b904f8943c30e15800622257f">   67</a></span><span class="preprocessor">            #define SHELLMINATOR_WS_DBG_2(   x, y )</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a7fe5bf0d56f1e228c64c957c6fbb7b77">   68</a></span><span class="preprocessor">            #define SHELLMINATOR_WS_DBGLN_2( x, y )</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">        #endif</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#abd4ea144e4e052edc3f92e3f82f10c3b">   76</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_DBG( ... )   SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBG_2,   SHELLMINATOR_WS_DBG_1   )( __VA_ARGS__ )</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a667b722a25b22c5e562df643bdd400bd">   77</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_DBGLN( ... ) SHELLMINATOR_WS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WS_DBGLN_2, SHELLMINATOR_WS_DBGLN_1 )( __VA_ARGS__ )</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#add9421982130af6fa39acd164bb092ea">   84</a></span><span class="preprocessor">        #define WS_FRAME_HEADER_SIZE 6</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="comment">// We need to add 258EAFA5-E914-47DA-95CA-C5AB0DC85B11 to the end of the</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="comment">// received key and this needs space in the buffer.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a8d290eef9058be8056d3614b7c0a1fe9">   88</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_CLIENT_KEY_SIZE         50 + 37</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="comment">// The Server key is generated from the result of an SH1 hash, which is 20</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="comment">// bytes long. The Base64 encoded key size is 28 characters, but we need a</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="comment">// termination character as well, so the minimum of required buffer size is</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="comment">// 29 characters.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="_shellminator-_websocket_8hpp.html#a48f1156f1e542f9ddb51459874d5a576">   94</a></span><span class="preprocessor">        #define SHELLMINATOR_WS_SERVER_KEY_SIZE         30 </span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html">   96</a></span>        <span class="keyword">class </span><a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> : <span class="keyword">public</span> Stream{</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">  100</a></span>            <span class="keyword">typedef</span> <span class="keyword">enum</span>{</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9">  101</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9">WS_DISCONNECTED_STATE</a>,</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71">  102</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71">WS_HEADER_STATE</a>,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5">WS_CONNECTED_STATE</a></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5">  104</a></span>            } <a class="code hl_enumeration" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">wsState_t</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">  106</a></span>            <span class="keyword">typedef</span> <span class="keyword">enum</span>{</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075">  107</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075">WS_COMM</a> = 0x00,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0">  108</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0">WS_TXT</a> = 0x01,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67">  109</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67">WS_CLOSE</a> = 0x08,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836">  110</a></span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836">WS_PING</a> = 0x09,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <a class="code hl_enumvalue" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45">WS_PONG</a> = 0x0A</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45">  112</a></span>            } <a class="code hl_enumeration" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <a class="code hl_function" href="class_shellminator_web_socket.html#a97549a7f73b7cd811913f6dd9278a23f">ShellminatorWebSocket</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <a class="code hl_function" href="class_shellminator_web_socket.html#a97549a7f73b7cd811913f6dd9278a23f">ShellminatorWebSocket</a>( <span class="keywordtype">int</span> port_p );</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_web_socket.html#a9742586cac4b992f69e22d24397a4fac">available</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_web_socket.html#a3aefa0b7ccd2ca14821cd8977dba2d21">read</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordtype">int</span>    <a class="code hl_function" href="class_shellminator_web_socket.html#adfc873b3b07de4297e60ead96fb406aa">peek</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordtype">void</span>   <a class="code hl_function" href="class_shellminator_web_socket.html#a3566fba1399eba8a2dcea9912d2970a9">flush</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a0c1f48cd925ac1dce0dc7a09235e6fc9">write</a>( uint8_t b ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a0c1f48cd925ac1dce0dc7a09235e6fc9">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a46cea168de75e6e7acfbf3ed729bf4c3">begin</a>();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a15751fad5c0989a871b476023989c662">update</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#aa5c4ac250b1421e877714d5663545afd">attachDebugChannel</a>( Stream* dbg_p );</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#af6753664126b275067e403ba7346b6fe">attachConnectCallback</a>( <span class="keywordtype">void</span>(*connectCallback_p)(<a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* ) );</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a9617c58005fead7812cb5c1ca11f195a">attachDisconnectCallback</a>( <span class="keywordtype">void</span>(*disconnectCallback_p)(<a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* ) );</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aa9c82f874c96c641cfb33b67e4b03aed">  151</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#aa9c82f874c96c641cfb33b67e4b03aed">port</a> = 443;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a7c6c5178f98570311f229d5c29fe6599">  152</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a7c6c5178f98570311f229d5c29fe6599">clientConnected</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a27bdb7a26653fb6713652eba80288c17">  153</a></span>            Stream* <a class="code hl_variable" href="class_shellminator_web_socket.html#a27bdb7a26653fb6713652eba80288c17">dbg</a> = NULL;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#ab077b7608e754a877a43a40bbf1e2137">  155</a></span>            WiFiServer* <a class="code hl_variable" href="class_shellminator_web_socket.html#ab077b7608e754a877a43a40bbf1e2137">server</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a654f33a50f17a3c4e8abe12c71f41236">  156</a></span>            WiFiClient <a class="code hl_variable" href="class_shellminator_web_socket.html#a654f33a50f17a3c4e8abe12c71f41236">client</a>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aaf781e3e1ded076ae8ff8eab205e4fb2">  158</a></span>            uint8_t <a class="code hl_variable" href="class_shellminator_web_socket.html#aaf781e3e1ded076ae8ff8eab205e4fb2">streamBuffer</a>[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a> ];</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a93f0219eff48939eaae326310e32cfbb">  159</a></span>            uint32_t <a class="code hl_variable" href="class_shellminator_web_socket.html#a93f0219eff48939eaae326310e32cfbb">streamBufferWritePointer</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#ae69f69ee41fcdfb8ee7251607d79e324">  160</a></span>            uint32_t <a class="code hl_variable" href="class_shellminator_web_socket.html#ae69f69ee41fcdfb8ee7251607d79e324">streamBufferReadPointer</a>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aacb50076c775a9a82a336766df4c99e3">  162</a></span>            <span class="keywordtype">char</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#aacb50076c775a9a82a336766df4c99e3">clientBuffer</a>[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#a597dbfcbabb3fd34d96ce637e0d95243">SHELLMINATOR_WS_CLIENT_BUFFER_SIZE</a> + 1 ];</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a35cc9b06fcf3a3b5854a8e4b8326fc5d">  163</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a35cc9b06fcf3a3b5854a8e4b8326fc5d">clientBufferCounter</a> = 0;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a45625a89813360673106b15edf006007">  165</a></span>            <span class="keywordtype">char</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a45625a89813360673106b15edf006007">clientLineNameBuffer</a>[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#aaf7e9c31168be5caf2dd0c4333c3be5c">SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE</a> ];</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a107532ac43f2e2707d9bee8d57176d6d">  166</a></span>            <span class="keywordtype">char</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a107532ac43f2e2707d9bee8d57176d6d">clientLineValueBuffer</a>[ <a class="code hl_define" href="_shellminator-_default_settings_8hpp.html#ab55854960a21ac09dedf78e0ef917252">SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE</a> ];</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a108c772ab0cd7011c7571ef57b6928b8">  167</a></span>            <span class="keywordtype">char</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a108c772ab0cd7011c7571ef57b6928b8">clientKey</a>[ <a class="code hl_define" href="_shellminator-_websocket_8hpp.html#a8d290eef9058be8056d3614b7c0a1fe9">SHELLMINATOR_WS_CLIENT_KEY_SIZE</a> ];</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#ac8404a5e68c74474b71dbf45564b63c3">  168</a></span>            <span class="keywordtype">char</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#ac8404a5e68c74474b71dbf45564b63c3">serverKey</a>[ <a class="code hl_define" href="_shellminator-_websocket_8hpp.html#a48f1156f1e542f9ddb51459874d5a576">SHELLMINATOR_WS_SERVER_KEY_SIZE</a> ];</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#af7eb29f6caf50f671a9e61a5a0482639">  170</a></span>            <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_variable" href="class_shellminator_web_socket.html#af7eb29f6caf50f671a9e61a5a0482639">serverHeader</a>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a8405994923dacc4971117eaf70eeeee1">resetVariables</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a2e9d106ad8b542f1274cb898edb08015">resetDataVariables</a>();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a8e6074063bd0d8c24c53d28974ef1e43">wsHeaderProcessing</a>( <span class="keywordtype">char</span> newChar );</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#add1dfe8fd8900f985e28b005cc3162a8">wsDataProcessing</a>( <span class="keywordtype">char</span> newChar );</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#aa1b0cd6cc48e5243f9b9e74e2055862a">closeClient</a>( <span class="keywordtype">bool</span> sendCloseFrame = <span class="keyword">false</span> );</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a0d4cdbce1b52ed0a02a7736538ff05ec">generateServerKey</a>();</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a3512d0e570fd43cd625308c4c71a4183">finishDecoding</a>();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a57a3830ace2b89be2cece489b0a2cd7f">sendFrame</a>( <a class="code hl_enumeration" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> type, <span class="keyword">const</span> uint8_t* data = NULL, uint32_t dataSize = 0 );</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="keywordtype">bool</span> <a class="code hl_function" href="class_shellminator_web_socket.html#a1ce6e2a47abf5c4801842965d3315283">sendFrame125</a>( <a class="code hl_enumeration" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> type, <span class="keyword">const</span> uint8_t* data = NULL, uint8_t dataSize = 0 );</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#ae9919f01b29916476d0dd5c334e84135">appendToCircularBuffer</a>( uint8_t data );</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_web_socket.html#ae9919f01b29916476d0dd5c334e84135">appendToCircularBuffer</a>( uint8_t* data, <span class="keywordtype">int</span> dataSize );</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#ad9ae1ee932e284f3fad3b9bad0964390">  188</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#ad9ae1ee932e284f3fad3b9bad0964390">httpGetLineFound</a>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a46c7dc161127c784f42b5244005a73fb">  189</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a46c7dc161127c784f42b5244005a73fb">connectionUpgradeLineFound</a>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a7fb75b28b36b998bda7f305419680b78">  190</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a7fb75b28b36b998bda7f305419680b78">upgradeWebsocketLineFound</a>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a208e64d7f0d9c6a5ab19b9ab234751f8">  191</a></span>            <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a208e64d7f0d9c6a5ab19b9ab234751f8">clientVersion</a>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a8ed8493917e85f7478d255179a861a0d">  193</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#a8ed8493917e85f7478d255179a861a0d">decodedHdrFin</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a2f10b70c21b2107b226c451d27d92eb9">  194</a></span>            <a class="code hl_enumeration" href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">wsDecodedHeaderType_t</a> <a class="code hl_variable" href="class_shellminator_web_socket.html#a2f10b70c21b2107b226c451d27d92eb9">decodedHdrType</a>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#aec42801e2fa99d3750ffa3979cd71296">  195</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_web_socket.html#aec42801e2fa99d3750ffa3979cd71296">decodedHdrMask</a>;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#ac317baa772874b63a86939ba4debde74">  196</a></span>            uint8_t <a class="code hl_variable" href="class_shellminator_web_socket.html#ac317baa772874b63a86939ba4debde74">decodedHdrPayloadLen</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#afd3739628ffbf7d1db23ec94e8a838ad">  197</a></span>            uint8_t <a class="code hl_variable" href="class_shellminator_web_socket.html#afd3739628ffbf7d1db23ec94e8a838ad">decodedHdrMaskKeys</a>[ 4 ];</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a9a62bf56e9663c8e8aea2fd7e4201e99">  198</a></span>            uint8_t <a class="code hl_variable" href="class_shellminator_web_socket.html#a9a62bf56e9663c8e8aea2fd7e4201e99">decodedHdrPayloadCntr</a>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a707ad4e0a6fda3e807383832bfa9f02d">  199</a></span>            uint8_t <a class="code hl_variable" href="class_shellminator_web_socket.html#a707ad4e0a6fda3e807383832bfa9f02d">decodedDataXorCntr</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a9fa4e7210cd4fbc024770bb182908d21">  201</a></span>            <a class="code hl_enumeration" href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">wsState_t</a> <a class="code hl_variable" href="class_shellminator_web_socket.html#a9fa4e7210cd4fbc024770bb182908d21">wsState</a>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a9be8dfc14960adf0b15ee055bf57fd5e">  203</a></span>            void(*<a class="code hl_variable" href="class_shellminator_web_socket.html#a9be8dfc14960adf0b15ee055bf57fd5e">connectCallback</a>)(<a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* parent) = NULL;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="class_shellminator_web_socket.html#a34ae0bc68cf0d57f8be6bea518296c75">  204</a></span>            void(*<a class="code hl_variable" href="class_shellminator_web_socket.html#a34ae0bc68cf0d57f8be6bea518296c75">disconnectCallback</a>)(<a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* parent) = NULL;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        };</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_shellminator-_crypto_8hpp_html"><div class="ttname"><a href="_shellminator-_crypto_8hpp.html">Shellminator-Crypto.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html">Shellminator-DefaultSettings.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_a597dbfcbabb3fd34d96ce637e0d95243"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#a597dbfcbabb3fd34d96ce637e0d95243">SHELLMINATOR_WS_CLIENT_BUFFER_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_CLIENT_BUFFER_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00230">Shellminator-DefaultSettings.hpp:230</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_aaf7e9c31168be5caf2dd0c4333c3be5c"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#aaf7e9c31168be5caf2dd0c4333c3be5c">SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00234">Shellminator-DefaultSettings.hpp:234</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_ab55854960a21ac09dedf78e0ef917252"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#ab55854960a21ac09dedf78e0ef917252">SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00238">Shellminator-DefaultSettings.hpp:238</a></div></div>
+<div class="ttc" id="a_shellminator-_default_settings_8hpp_html_ad1410d82f262f7f6323165a4d3d36653"><div class="ttname"><a href="_shellminator-_default_settings_8hpp.html#ad1410d82f262f7f6323165a4d3d36653">SHELLMINATOR_WS_STREAM_BUFFER_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_STREAM_BUFFER_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_default_settings_8hpp_source.html#l00242">Shellminator-DefaultSettings.hpp:242</a></div></div>
+<div class="ttc" id="a_shellminator-_helpers_8hpp_html"><div class="ttname"><a href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_websocket_8hpp_html_a48f1156f1e542f9ddb51459874d5a576"><div class="ttname"><a href="_shellminator-_websocket_8hpp.html#a48f1156f1e542f9ddb51459874d5a576">SHELLMINATOR_WS_SERVER_KEY_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_SERVER_KEY_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00094">Shellminator-Websocket.hpp:94</a></div></div>
+<div class="ttc" id="a_shellminator-_websocket_8hpp_html_a8d290eef9058be8056d3614b7c0a1fe9"><div class="ttname"><a href="_shellminator-_websocket_8hpp.html#a8d290eef9058be8056d3614b7c0a1fe9">SHELLMINATOR_WS_CLIENT_KEY_SIZE</a></div><div class="ttdeci">#define SHELLMINATOR_WS_CLIENT_KEY_SIZE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00088">Shellminator-Websocket.hpp:88</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html"><div class="ttname"><a href="class_shellminator_web_socket.html">ShellminatorWebSocket</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00096">Shellminator-Websocket.hpp:96</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a0c1f48cd925ac1dce0dc7a09235e6fc9"><div class="ttname"><a href="class_shellminator_web_socket.html#a0c1f48cd925ac1dce0dc7a09235e6fc9">ShellminatorWebSocket::write</a></div><div class="ttdeci">size_t write(uint8_t b) override</div><div class="ttdoc">Write one byte to the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00677">Shellminator-Websocket.cpp:677</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a0d4cdbce1b52ed0a02a7736538ff05ec"><div class="ttname"><a href="class_shellminator_web_socket.html#a0d4cdbce1b52ed0a02a7736538ff05ec">ShellminatorWebSocket::generateServerKey</a></div><div class="ttdeci">bool generateServerKey()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00583">Shellminator-Websocket.cpp:583</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a107532ac43f2e2707d9bee8d57176d6d"><div class="ttname"><a href="class_shellminator_web_socket.html#a107532ac43f2e2707d9bee8d57176d6d">ShellminatorWebSocket::clientLineValueBuffer</a></div><div class="ttdeci">char clientLineValueBuffer[SHELLMINATOR_WS_CLIENT_LINE_VALUE_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00166">Shellminator-Websocket.hpp:166</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a108c772ab0cd7011c7571ef57b6928b8"><div class="ttname"><a href="class_shellminator_web_socket.html#a108c772ab0cd7011c7571ef57b6928b8">ShellminatorWebSocket::clientKey</a></div><div class="ttdeci">char clientKey[SHELLMINATOR_WS_CLIENT_KEY_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00167">Shellminator-Websocket.hpp:167</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a15751fad5c0989a871b476023989c662"><div class="ttname"><a href="class_shellminator_web_socket.html#a15751fad5c0989a871b476023989c662">ShellminatorWebSocket::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00161">Shellminator-Websocket.cpp:161</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a1ce6e2a47abf5c4801842965d3315283"><div class="ttname"><a href="class_shellminator_web_socket.html#a1ce6e2a47abf5c4801842965d3315283">ShellminatorWebSocket::sendFrame125</a></div><div class="ttdeci">bool sendFrame125(wsDecodedHeaderType_t type, const uint8_t *data=NULL, uint8_t dataSize=0)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00117">Shellminator-Websocket.cpp:117</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a208e64d7f0d9c6a5ab19b9ab234751f8"><div class="ttname"><a href="class_shellminator_web_socket.html#a208e64d7f0d9c6a5ab19b9ab234751f8">ShellminatorWebSocket::clientVersion</a></div><div class="ttdeci">int clientVersion</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00191">Shellminator-Websocket.hpp:191</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a27bdb7a26653fb6713652eba80288c17"><div class="ttname"><a href="class_shellminator_web_socket.html#a27bdb7a26653fb6713652eba80288c17">ShellminatorWebSocket::dbg</a></div><div class="ttdeci">Stream * dbg</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00153">Shellminator-Websocket.hpp:153</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a2e9d106ad8b542f1274cb898edb08015"><div class="ttname"><a href="class_shellminator_web_socket.html#a2e9d106ad8b542f1274cb898edb08015">ShellminatorWebSocket::resetDataVariables</a></div><div class="ttdeci">void resetDataVariables()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00229">Shellminator-Websocket.cpp:229</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a2f10b70c21b2107b226c451d27d92eb9"><div class="ttname"><a href="class_shellminator_web_socket.html#a2f10b70c21b2107b226c451d27d92eb9">ShellminatorWebSocket::decodedHdrType</a></div><div class="ttdeci">wsDecodedHeaderType_t decodedHdrType</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00194">Shellminator-Websocket.hpp:194</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a34ae0bc68cf0d57f8be6bea518296c75"><div class="ttname"><a href="class_shellminator_web_socket.html#a34ae0bc68cf0d57f8be6bea518296c75">ShellminatorWebSocket::disconnectCallback</a></div><div class="ttdeci">void(* disconnectCallback)(ShellminatorWebSocket *parent)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00204">Shellminator-Websocket.hpp:204</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3512d0e570fd43cd625308c4c71a4183"><div class="ttname"><a href="class_shellminator_web_socket.html#a3512d0e570fd43cd625308c4c71a4183">ShellminatorWebSocket::finishDecoding</a></div><div class="ttdeci">void finishDecoding()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00245">Shellminator-Websocket.cpp:245</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3566fba1399eba8a2dcea9912d2970a9"><div class="ttname"><a href="class_shellminator_web_socket.html#a3566fba1399eba8a2dcea9912d2970a9">ShellminatorWebSocket::flush</a></div><div class="ttdeci">void flush() override</div><div class="ttdoc">Flush the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00672">Shellminator-Websocket.cpp:672</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a35cc9b06fcf3a3b5854a8e4b8326fc5d"><div class="ttname"><a href="class_shellminator_web_socket.html#a35cc9b06fcf3a3b5854a8e4b8326fc5d">ShellminatorWebSocket::clientBufferCounter</a></div><div class="ttdeci">int clientBufferCounter</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00163">Shellminator-Websocket.hpp:163</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3857abcf6845f95da81dc75e0e565043"><div class="ttname"><a href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043">ShellminatorWebSocket::wsState_t</a></div><div class="ttdeci">wsState_t</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00100">Shellminator-Websocket.hpp:100</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9"><div class="ttname"><a href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a192800de61f4031b32747f0cc72af6d9">ShellminatorWebSocket::WS_DISCONNECTED_STATE</a></div><div class="ttdeci">@ WS_DISCONNECTED_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00101">Shellminator-Websocket.hpp:101</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5"><div class="ttname"><a href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043a1a4a89a272fdf48c565803f5c1ee43a5">ShellminatorWebSocket::WS_CONNECTED_STATE</a></div><div class="ttdeci">@ WS_CONNECTED_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00104">Shellminator-Websocket.hpp:103</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71"><div class="ttname"><a href="class_shellminator_web_socket.html#a3857abcf6845f95da81dc75e0e565043ac7611fa908fb3c6157aa9ee0ff0c1e71">ShellminatorWebSocket::WS_HEADER_STATE</a></div><div class="ttdeci">@ WS_HEADER_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00102">Shellminator-Websocket.hpp:102</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a3aefa0b7ccd2ca14821cd8977dba2d21"><div class="ttname"><a href="class_shellminator_web_socket.html#a3aefa0b7ccd2ca14821cd8977dba2d21">ShellminatorWebSocket::read</a></div><div class="ttdeci">int read() override</div><div class="ttdoc">Read one byte form the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00644">Shellminator-Websocket.cpp:644</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a45625a89813360673106b15edf006007"><div class="ttname"><a href="class_shellminator_web_socket.html#a45625a89813360673106b15edf006007">ShellminatorWebSocket::clientLineNameBuffer</a></div><div class="ttdeci">char clientLineNameBuffer[SHELLMINATOR_WS_CLIENT_LINE_NAME_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00165">Shellminator-Websocket.hpp:165</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a46c7dc161127c784f42b5244005a73fb"><div class="ttname"><a href="class_shellminator_web_socket.html#a46c7dc161127c784f42b5244005a73fb">ShellminatorWebSocket::connectionUpgradeLineFound</a></div><div class="ttdeci">bool connectionUpgradeLineFound</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00189">Shellminator-Websocket.hpp:189</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a46cea168de75e6e7acfbf3ed729bf4c3"><div class="ttname"><a href="class_shellminator_web_socket.html#a46cea168de75e6e7acfbf3ed729bf4c3">ShellminatorWebSocket::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00064">Shellminator-Websocket.cpp:64</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a57a3830ace2b89be2cece489b0a2cd7f"><div class="ttname"><a href="class_shellminator_web_socket.html#a57a3830ace2b89be2cece489b0a2cd7f">ShellminatorWebSocket::sendFrame</a></div><div class="ttdeci">bool sendFrame(wsDecodedHeaderType_t type, const uint8_t *data=NULL, uint32_t dataSize=0)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00097">Shellminator-Websocket.cpp:97</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a654f33a50f17a3c4e8abe12c71f41236"><div class="ttname"><a href="class_shellminator_web_socket.html#a654f33a50f17a3c4e8abe12c71f41236">ShellminatorWebSocket::client</a></div><div class="ttdeci">WiFiClient client</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00156">Shellminator-Websocket.hpp:156</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a707ad4e0a6fda3e807383832bfa9f02d"><div class="ttname"><a href="class_shellminator_web_socket.html#a707ad4e0a6fda3e807383832bfa9f02d">ShellminatorWebSocket::decodedDataXorCntr</a></div><div class="ttdeci">uint8_t decodedDataXorCntr</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00199">Shellminator-Websocket.hpp:199</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a7c6c5178f98570311f229d5c29fe6599"><div class="ttname"><a href="class_shellminator_web_socket.html#a7c6c5178f98570311f229d5c29fe6599">ShellminatorWebSocket::clientConnected</a></div><div class="ttdeci">bool clientConnected</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00152">Shellminator-Websocket.hpp:152</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a7fb75b28b36b998bda7f305419680b78"><div class="ttname"><a href="class_shellminator_web_socket.html#a7fb75b28b36b998bda7f305419680b78">ShellminatorWebSocket::upgradeWebsocketLineFound</a></div><div class="ttdeci">bool upgradeWebsocketLineFound</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00190">Shellminator-Websocket.hpp:190</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a8405994923dacc4971117eaf70eeeee1"><div class="ttname"><a href="class_shellminator_web_socket.html#a8405994923dacc4971117eaf70eeeee1">ShellminatorWebSocket::resetVariables</a></div><div class="ttdeci">void resetVariables()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00213">Shellminator-Websocket.cpp:213</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a8e6074063bd0d8c24c53d28974ef1e43"><div class="ttname"><a href="class_shellminator_web_socket.html#a8e6074063bd0d8c24c53d28974ef1e43">ShellminatorWebSocket::wsHeaderProcessing</a></div><div class="ttdeci">void wsHeaderProcessing(char newChar)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00406">Shellminator-Websocket.cpp:406</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a8ed8493917e85f7478d255179a861a0d"><div class="ttname"><a href="class_shellminator_web_socket.html#a8ed8493917e85f7478d255179a861a0d">ShellminatorWebSocket::decodedHdrFin</a></div><div class="ttdeci">bool decodedHdrFin</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00193">Shellminator-Websocket.hpp:193</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a93f0219eff48939eaae326310e32cfbb"><div class="ttname"><a href="class_shellminator_web_socket.html#a93f0219eff48939eaae326310e32cfbb">ShellminatorWebSocket::streamBufferWritePointer</a></div><div class="ttdeci">uint32_t streamBufferWritePointer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00159">Shellminator-Websocket.hpp:159</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a9617c58005fead7812cb5c1ca11f195a"><div class="ttname"><a href="class_shellminator_web_socket.html#a9617c58005fead7812cb5c1ca11f195a">ShellminatorWebSocket::attachDisconnectCallback</a></div><div class="ttdeci">void attachDisconnectCallback(void(*disconnectCallback_p)(ShellminatorWebSocket *))</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00701">Shellminator-Websocket.cpp:701</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a9742586cac4b992f69e22d24397a4fac"><div class="ttname"><a href="class_shellminator_web_socket.html#a9742586cac4b992f69e22d24397a4fac">ShellminatorWebSocket::available</a></div><div class="ttdeci">int available() override</div><div class="ttdoc">Available bytes in the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00631">Shellminator-Websocket.cpp:631</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a97549a7f73b7cd811913f6dd9278a23f"><div class="ttname"><a href="class_shellminator_web_socket.html#a97549a7f73b7cd811913f6dd9278a23f">ShellminatorWebSocket::ShellminatorWebSocket</a></div><div class="ttdeci">ShellminatorWebSocket()</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00053">Shellminator-Websocket.cpp:53</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a9a62bf56e9663c8e8aea2fd7e4201e99"><div class="ttname"><a href="class_shellminator_web_socket.html#a9a62bf56e9663c8e8aea2fd7e4201e99">ShellminatorWebSocket::decodedHdrPayloadCntr</a></div><div class="ttdeci">uint8_t decodedHdrPayloadCntr</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00198">Shellminator-Websocket.hpp:198</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a9be8dfc14960adf0b15ee055bf57fd5e"><div class="ttname"><a href="class_shellminator_web_socket.html#a9be8dfc14960adf0b15ee055bf57fd5e">ShellminatorWebSocket::connectCallback</a></div><div class="ttdeci">void(* connectCallback)(ShellminatorWebSocket *parent)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00203">Shellminator-Websocket.hpp:203</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_a9fa4e7210cd4fbc024770bb182908d21"><div class="ttname"><a href="class_shellminator_web_socket.html#a9fa4e7210cd4fbc024770bb182908d21">ShellminatorWebSocket::wsState</a></div><div class="ttdeci">wsState_t wsState</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00201">Shellminator-Websocket.hpp:201</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aa1b0cd6cc48e5243f9b9e74e2055862a"><div class="ttname"><a href="class_shellminator_web_socket.html#aa1b0cd6cc48e5243f9b9e74e2055862a">ShellminatorWebSocket::closeClient</a></div><div class="ttdeci">void closeClient(bool sendCloseFrame=false)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00611">Shellminator-Websocket.cpp:611</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aa5c4ac250b1421e877714d5663545afd"><div class="ttname"><a href="class_shellminator_web_socket.html#aa5c4ac250b1421e877714d5663545afd">ShellminatorWebSocket::attachDebugChannel</a></div><div class="ttdeci">void attachDebugChannel(Stream *dbg_p)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00060">Shellminator-Websocket.cpp:60</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aa9c82f874c96c641cfb33b67e4b03aed"><div class="ttname"><a href="class_shellminator_web_socket.html#aa9c82f874c96c641cfb33b67e4b03aed">ShellminatorWebSocket::port</a></div><div class="ttdeci">int port</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00151">Shellminator-Websocket.hpp:151</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aacb50076c775a9a82a336766df4c99e3"><div class="ttname"><a href="class_shellminator_web_socket.html#aacb50076c775a9a82a336766df4c99e3">ShellminatorWebSocket::clientBuffer</a></div><div class="ttdeci">char clientBuffer[SHELLMINATOR_WS_CLIENT_BUFFER_SIZE+1]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00162">Shellminator-Websocket.hpp:162</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aaf781e3e1ded076ae8ff8eab205e4fb2"><div class="ttname"><a href="class_shellminator_web_socket.html#aaf781e3e1ded076ae8ff8eab205e4fb2">ShellminatorWebSocket::streamBuffer</a></div><div class="ttdeci">uint8_t streamBuffer[SHELLMINATOR_WS_STREAM_BUFFER_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00158">Shellminator-Websocket.hpp:158</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ab077b7608e754a877a43a40bbf1e2137"><div class="ttname"><a href="class_shellminator_web_socket.html#ab077b7608e754a877a43a40bbf1e2137">ShellminatorWebSocket::server</a></div><div class="ttdeci">WiFiServer * server</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00155">Shellminator-Websocket.hpp:155</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ac317baa772874b63a86939ba4debde74"><div class="ttname"><a href="class_shellminator_web_socket.html#ac317baa772874b63a86939ba4debde74">ShellminatorWebSocket::decodedHdrPayloadLen</a></div><div class="ttdeci">uint8_t decodedHdrPayloadLen</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00196">Shellminator-Websocket.hpp:196</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ac8404a5e68c74474b71dbf45564b63c3"><div class="ttname"><a href="class_shellminator_web_socket.html#ac8404a5e68c74474b71dbf45564b63c3">ShellminatorWebSocket::serverKey</a></div><div class="ttdeci">char serverKey[SHELLMINATOR_WS_SERVER_KEY_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00168">Shellminator-Websocket.hpp:168</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ad9ae1ee932e284f3fad3b9bad0964390"><div class="ttname"><a href="class_shellminator_web_socket.html#ad9ae1ee932e284f3fad3b9bad0964390">ShellminatorWebSocket::httpGetLineFound</a></div><div class="ttdeci">bool httpGetLineFound</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00188">Shellminator-Websocket.hpp:188</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_add1dfe8fd8900f985e28b005cc3162a8"><div class="ttname"><a href="class_shellminator_web_socket.html#add1dfe8fd8900f985e28b005cc3162a8">ShellminatorWebSocket::wsDataProcessing</a></div><div class="ttdeci">void wsDataProcessing(char newChar)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00272">Shellminator-Websocket.cpp:272</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_adfc873b3b07de4297e60ead96fb406aa"><div class="ttname"><a href="class_shellminator_web_socket.html#adfc873b3b07de4297e60ead96fb406aa">ShellminatorWebSocket::peek</a></div><div class="ttdeci">int peek() override</div><div class="ttdoc">Peek the firtst byte from the channel.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00662">Shellminator-Websocket.cpp:662</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ae69f69ee41fcdfb8ee7251607d79e324"><div class="ttname"><a href="class_shellminator_web_socket.html#ae69f69ee41fcdfb8ee7251607d79e324">ShellminatorWebSocket::streamBufferReadPointer</a></div><div class="ttdeci">uint32_t streamBufferReadPointer</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00160">Shellminator-Websocket.hpp:160</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_ae9919f01b29916476d0dd5c334e84135"><div class="ttname"><a href="class_shellminator_web_socket.html#ae9919f01b29916476d0dd5c334e84135">ShellminatorWebSocket::appendToCircularBuffer</a></div><div class="ttdeci">void appendToCircularBuffer(uint8_t data)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00073">Shellminator-Websocket.cpp:73</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1">ShellminatorWebSocket::wsDecodedHeaderType_t</a></div><div class="ttdeci">wsDecodedHeaderType_t</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00106">Shellminator-Websocket.hpp:106</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a063289cd09729b9dd0fccd86172e12a0">ShellminatorWebSocket::WS_TXT</a></div><div class="ttdeci">@ WS_TXT</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00108">Shellminator-Websocket.hpp:108</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a440d93978a7c546557070489d8203075">ShellminatorWebSocket::WS_COMM</a></div><div class="ttdeci">@ WS_COMM</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00107">Shellminator-Websocket.hpp:107</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1a87709a8c034c1d73947c89c841060836">ShellminatorWebSocket::WS_PING</a></div><div class="ttdeci">@ WS_PING</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00110">Shellminator-Websocket.hpp:110</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1ae32a21125d4a86918c85c4364627ef45">ShellminatorWebSocket::WS_PONG</a></div><div class="ttdeci">@ WS_PONG</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00112">Shellminator-Websocket.hpp:111</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67"><div class="ttname"><a href="class_shellminator_web_socket.html#aea53e1ec3f1b87dfd7691debc6ec87c1aea9949aab1b5995c167a365e86581c67">ShellminatorWebSocket::WS_CLOSE</a></div><div class="ttdeci">@ WS_CLOSE</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00109">Shellminator-Websocket.hpp:109</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_aec42801e2fa99d3750ffa3979cd71296"><div class="ttname"><a href="class_shellminator_web_socket.html#aec42801e2fa99d3750ffa3979cd71296">ShellminatorWebSocket::decodedHdrMask</a></div><div class="ttdeci">bool decodedHdrMask</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00195">Shellminator-Websocket.hpp:195</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_af6753664126b275067e403ba7346b6fe"><div class="ttname"><a href="class_shellminator_web_socket.html#af6753664126b275067e403ba7346b6fe">ShellminatorWebSocket::attachConnectCallback</a></div><div class="ttdeci">void attachConnectCallback(void(*connectCallback_p)(ShellminatorWebSocket *))</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8cpp_source.html#l00697">Shellminator-Websocket.cpp:697</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_af7eb29f6caf50f671a9e61a5a0482639"><div class="ttname"><a href="class_shellminator_web_socket.html#af7eb29f6caf50f671a9e61a5a0482639">ShellminatorWebSocket::serverHeader</a></div><div class="ttdeci">static const char * serverHeader</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00170">Shellminator-Websocket.hpp:170</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html_afd3739628ffbf7d1db23ec94e8a838ad"><div class="ttname"><a href="class_shellminator_web_socket.html#afd3739628ffbf7d1db23ec94e8a838ad">ShellminatorWebSocket::decodedHdrMaskKeys</a></div><div class="ttdeci">uint8_t decodedHdrMaskKeys[4]</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00197">Shellminator-Websocket.hpp:197</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

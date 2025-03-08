@@ -1,0 +1,278 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: src/GUI/Shellminator-ScreenGrid.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_shellminator-_screen_grid_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Shellminator-ScreenGrid.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_shellminator-_screen_grid_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Created on June 23 2024</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Modified 2024.06.23</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">MIT License</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">Copyright (c) 2023 Daniel Hajnal</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">SOFTWARE.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifndef SHELLMINATOR_SCREEN_GRID_HPP_</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define SHELLMINATOR_SCREEN_GRID_HPP_</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">    #ifdef ARDUINO</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">        #include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">    #else</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">        #include &quot;System.h&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">    #endif</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">    #include &quot;Stream.h&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_screen_8hpp.html">Shellminator-Screen.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">    #include &quot;<a class="code" href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">    #include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">    #include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html">   55</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_shellminator_screen_grid.html">ShellminatorScreenGrid</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_function" href="class_shellminator_screen_grid.html#a453801348536c70d1ae597cbd5bc8ab6">ShellminatorScreenGrid</a>();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_function" href="class_shellminator_screen_grid.html#a453801348536c70d1ae597cbd5bc8ab6">ShellminatorScreenGrid</a>( <span class="keywordtype">int</span> numOfRows_p, <span class="keywordtype">int</span> numOfColumns_p );</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_screen_grid.html#a640e14fc5b8cd9539cf203e434ccf560">init</a>( <a class="code hl_class" href="class_shellminator.html">Shellminator</a>* parent_p, Stream* channel_p ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_screen_grid.html#ae9ee20fc1899f41574cab5f58c2483ce">draw</a>( <span class="keywordtype">bool</span> noClear = <span class="keyword">false</span> ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_screen_grid.html#a0cba16529364792088ab1558f021a38e">update</a>( <span class="keywordtype">int</span> width_p, <span class="keywordtype">int</span>  height_p ) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_screen_grid.html#a6a68563b43a2ef0c431e1cc9460ccc41">forceRedraw</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_shellminator_screen_grid.html#a98adbb17fbc8a418aaddc30a0c5095a4">addWidget</a>( <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* widget, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen.html#a9d72f1689d38ceaf04302874c3f45e86">row</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen.html#a2a957d09aea0856d2bde88f5806fbffc">column</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen.html#acc3c604922949abcbcdb1dc9f0cd3e6c">rowSpan</a> = 1, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen.html#ae2994823c44e77f93747489a9405539b">columnSpan</a> = 1 );</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#a882d17c1336113010cd245e4c20278d6">  105</a></span>        <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_shellminator_screen_grid.html#a882d17c1336113010cd245e4c20278d6">redraw</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#a42fef2fb59fdb7ad2c4783656c03255c">  107</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen_grid.html#a42fef2fb59fdb7ad2c4783656c03255c">numOfRows</a> = 0;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#adc8da1722f77ec5129474aaa07293283">  108</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen_grid.html#adc8da1722f77ec5129474aaa07293283">numOfColumns</a> = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#a3c90abe08586585626c28a339c9203fb">  110</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen_grid.html#a3c90abe08586585626c28a339c9203fb">cellWidth</a> = 0;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#a23358ff977cbd2dea38a25d443ce4c27">  111</a></span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="class_shellminator_screen_grid.html#a23358ff977cbd2dea38a25d443ce4c27">cellHeight</a> = 0;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="class_shellminator_screen_grid.html#a2297f7dc9664b0129628f8af391a4c82">  113</a></span>        <a class="code hl_class" href="class_shellminator_screen.html">ShellminatorScreen</a>* <a class="code hl_variable" href="class_shellminator_screen_grid.html#a2297f7dc9664b0129628f8af391a4c82">head</a> = NULL;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    };</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_shellminator-_helpers_8hpp_html"><div class="ttname"><a href="_shellminator-_helpers_8hpp.html">Shellminator-Helpers.hpp</a></div></div>
+<div class="ttc" id="a_shellminator-_screen_8hpp_html"><div class="ttname"><a href="_shellminator-_screen_8hpp.html">Shellminator-Screen.hpp</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00105">Shellminator.hpp:106</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html"><div class="ttname"><a href="class_shellminator_screen_grid.html">ShellminatorScreenGrid</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00055">Shellminator-ScreenGrid.hpp:55</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a0cba16529364792088ab1558f021a38e"><div class="ttname"><a href="class_shellminator_screen_grid.html#a0cba16529364792088ab1558f021a38e">ShellminatorScreenGrid::update</a></div><div class="ttdeci">void update(int width_p, int height_p) override</div><div class="ttdoc">Update function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00072">Shellminator-ScreenGrid.cpp:72</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a2297f7dc9664b0129628f8af391a4c82"><div class="ttname"><a href="class_shellminator_screen_grid.html#a2297f7dc9664b0129628f8af391a4c82">ShellminatorScreenGrid::head</a></div><div class="ttdeci">ShellminatorScreen * head</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00113">Shellminator-ScreenGrid.hpp:113</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a23358ff977cbd2dea38a25d443ce4c27"><div class="ttname"><a href="class_shellminator_screen_grid.html#a23358ff977cbd2dea38a25d443ce4c27">ShellminatorScreenGrid::cellHeight</a></div><div class="ttdeci">int cellHeight</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00111">Shellminator-ScreenGrid.hpp:111</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a3c90abe08586585626c28a339c9203fb"><div class="ttname"><a href="class_shellminator_screen_grid.html#a3c90abe08586585626c28a339c9203fb">ShellminatorScreenGrid::cellWidth</a></div><div class="ttdeci">int cellWidth</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00110">Shellminator-ScreenGrid.hpp:110</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a42fef2fb59fdb7ad2c4783656c03255c"><div class="ttname"><a href="class_shellminator_screen_grid.html#a42fef2fb59fdb7ad2c4783656c03255c">ShellminatorScreenGrid::numOfRows</a></div><div class="ttdeci">int numOfRows</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00107">Shellminator-ScreenGrid.hpp:107</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a453801348536c70d1ae597cbd5bc8ab6"><div class="ttname"><a href="class_shellminator_screen_grid.html#a453801348536c70d1ae597cbd5bc8ab6">ShellminatorScreenGrid::ShellminatorScreenGrid</a></div><div class="ttdeci">ShellminatorScreenGrid()</div><div class="ttdoc">Empty constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00036">Shellminator-ScreenGrid.cpp:36</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a640e14fc5b8cd9539cf203e434ccf560"><div class="ttname"><a href="class_shellminator_screen_grid.html#a640e14fc5b8cd9539cf203e434ccf560">ShellminatorScreenGrid::init</a></div><div class="ttdeci">void init(Shellminator *parent_p, Stream *channel_p) override</div><div class="ttdoc">Init function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00056">Shellminator-ScreenGrid.cpp:56</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a6a68563b43a2ef0c431e1cc9460ccc41"><div class="ttname"><a href="class_shellminator_screen_grid.html#a6a68563b43a2ef0c431e1cc9460ccc41">ShellminatorScreenGrid::forceRedraw</a></div><div class="ttdeci">void forceRedraw() override</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00241">Shellminator-ScreenGrid.cpp:241</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a882d17c1336113010cd245e4c20278d6"><div class="ttname"><a href="class_shellminator_screen_grid.html#a882d17c1336113010cd245e4c20278d6">ShellminatorScreenGrid::redraw</a></div><div class="ttdeci">bool redraw</div><div class="ttdoc">This flag shows that redraw is necessary.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00105">Shellminator-ScreenGrid.hpp:105</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_a98adbb17fbc8a418aaddc30a0c5095a4"><div class="ttname"><a href="class_shellminator_screen_grid.html#a98adbb17fbc8a418aaddc30a0c5095a4">ShellminatorScreenGrid::addWidget</a></div><div class="ttdeci">void addWidget(ShellminatorScreen *widget, int row, int column, int rowSpan=1, int columnSpan=1)</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00196">Shellminator-ScreenGrid.cpp:196</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_adc8da1722f77ec5129474aaa07293283"><div class="ttname"><a href="class_shellminator_screen_grid.html#adc8da1722f77ec5129474aaa07293283">ShellminatorScreenGrid::numOfColumns</a></div><div class="ttdeci">int numOfColumns</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8hpp_source.html#l00108">Shellminator-ScreenGrid.hpp:108</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_grid_html_ae9ee20fc1899f41574cab5f58c2483ce"><div class="ttname"><a href="class_shellminator_screen_grid.html#ae9ee20fc1899f41574cab5f58c2483ce">ShellminatorScreenGrid::draw</a></div><div class="ttdeci">void draw(bool noClear=false) override</div><div class="ttdoc">Draw function.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_grid_8cpp_source.html#l00151">Shellminator-ScreenGrid.cpp:151</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html"><div class="ttname"><a href="class_shellminator_screen.html">ShellminatorScreen</a></div><div class="ttdoc">This is an abstract object for graphics element creation.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00047">Shellminator-Screen.hpp:47</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html_a2a957d09aea0856d2bde88f5806fbffc"><div class="ttname"><a href="class_shellminator_screen.html#a2a957d09aea0856d2bde88f5806fbffc">ShellminatorScreen::column</a></div><div class="ttdeci">int column</div><div class="ttdoc">It is used by the grid layout.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00120">Shellminator-Screen.hpp:120</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html_a9d72f1689d38ceaf04302874c3f45e86"><div class="ttname"><a href="class_shellminator_screen.html#a9d72f1689d38ceaf04302874c3f45e86">ShellminatorScreen::row</a></div><div class="ttdeci">int row</div><div class="ttdoc">It is used by the grid layout.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00116">Shellminator-Screen.hpp:116</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html_acc3c604922949abcbcdb1dc9f0cd3e6c"><div class="ttname"><a href="class_shellminator_screen.html#acc3c604922949abcbcdb1dc9f0cd3e6c">ShellminatorScreen::rowSpan</a></div><div class="ttdeci">int rowSpan</div><div class="ttdoc">It is used by the grid layout.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00128">Shellminator-Screen.hpp:128</a></div></div>
+<div class="ttc" id="aclass_shellminator_screen_html_ae2994823c44e77f93747489a9405539b"><div class="ttname"><a href="class_shellminator_screen.html#ae2994823c44e77f93747489a9405539b">ShellminatorScreen::columnSpan</a></div><div class="ttdeci">int columnSpan</div><div class="ttdoc">It is used by the grid layout.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_screen_8hpp_source.html#l00124">Shellminator-Screen.hpp:124</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4e4e2e75df7fa6971448b424c011c8b5.html">GUI</a></li><li class="navelem"><a class="el" href="_shellminator-_screen_grid_8hpp.html">Shellminator-ScreenGrid.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

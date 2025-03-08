@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['read_0',['read',['../class_shellminator_ble_stream.html#aa89bc3e84f86768c172276f7018636d3',1,'ShellminatorBleStream::read()'],['../class_shellminator_buffered_printer.html#a28c0c24b755c0771df2cef148bfd70c9',1,'ShellminatorBufferedPrinter::read()'],['../class_shellminator_tcp_socket.html#ad63f1d30decd7aa3eb931d8c242ffa18',1,'ShellminatorTcpSocket::read()'],['../class_shellminator_web_socket.html#a3aefa0b7ccd2ca14821cd8977dba2d21',1,'ShellminatorWebSocket::read()']]],
+  ['readevent_1',['readEvent',['../class_shellminator.html#ad3814e6fd6e4294c10ab242cf58a6290',1,'Shellminator']]],
+  ['red_2',['RED',['../class_shellminator.html#ae4b01c47b1a9a3d30f802863b3d123b2a91afcef9367e9c6ef8a489e64b98c23e',1,'Shellminator']]],
+  ['redraw_3',['redraw',['../class_shellminator_button.html#a3505904d918f83b5ff32fe0ae9ba1b64',1,'ShellminatorButton::redraw()'],['../class_shellminator_level_meter.html#ad2f2d458294dc0a76fef9409f5d7c213',1,'ShellminatorLevelMeter::redraw()'],['../class_shellminator_list.html#ad661d7e2a5dcb63b5894e4f892a4961b',1,'ShellminatorList::redraw()'],['../class_shellminator_notification.html#a135c48e9517963b816b26c54f22f999e',1,'ShellminatorNotification::redraw()'],['../class_shellminator_plot.html#a3db7acb7a23644d97d47d6b4f16e9c4d',1,'ShellminatorPlot::redraw()'],['../class_shellminator_progress.html#afb07c9b83a75a76a79a50106c125eade',1,'ShellminatorProgress::redraw()'],['../class_shellminator_screen_grid.html#a882d17c1336113010cd245e4c20278d6',1,'ShellminatorScreenGrid::redraw()']]],
+  ['redrawhistorysearch_4',['redrawHistorySearch',['../class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a',1,'Shellminator']]],
+  ['redrawline_5',['redrawLine',['../class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16',1,'Shellminator']]],
+  ['regular_6',['REGULAR',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163ae3429203ecb2b51c8e4d46f9c4d56a67',1,'Shellminator']]],
+  ['removeendfunction_7',['removeEndFunction',['../class_shellminator_screen.html#afc821a088f2b16eb5692c767e1ba5969',1,'ShellminatorScreen']]],
+  ['requestredraw_8',['requestRedraw',['../class_shellminator.html#a7ea5eda741b93c65d767e1e48d41f7cf',1,'Shellminator']]],
+  ['reset_9',['reset',['../class_default_colorizer.html#aeec02864081cbae29a5e1ccd36399e5f',1,'DefaultColorizer::reset()'],['../class_commander_colorizer.html#ad0809ab85f05643fa6b66e57a8402c3a',1,'CommanderColorizer::reset()']]],
+  ['resetdatavariables_10',['resetDataVariables',['../class_shellminator_web_socket.html#a2e9d106ad8b542f1274cb898edb08015',1,'ShellminatorWebSocket']]],
+  ['resetvariables_11',['resetVariables',['../class_shellminator_ble_stream.html#a1414db267dcad1e12ba395e187eadde7',1,'ShellminatorBleStream::resetVariables()'],['../class_shellminator_tcp_socket.html#aac47afdbb5010740bd47584ca548f716',1,'ShellminatorTcpSocket::resetVariables()'],['../class_shellminator_web_socket.html#a8405994923dacc4971117eaf70eeeee1',1,'ShellminatorWebSocket::resetVariables()']]],
+  ['resulttextsize_12',['resultTextSize',['../class_shellminator_plot.html#a7f6a1a029d8d0dc6b8ffef6b07111c75',1,'ShellminatorPlot']]],
+  ['reverse_13',['REVERSE',['../class_shellminator.html#abbc95c4d61e5ade5ded52128907ed163abd42c47d8515509b138a757070d80a61',1,'Shellminator']]],
+  ['right_14',['right',['../class_shellminator_screen.html#a230a346a6eb08ebbf51b79bf81e7cbd5',1,'ShellminatorScreen']]],
+  ['rightarrowoverridefunc_15',['rightArrowOverrideFunc',['../class_shellminator.html#a916a326d61472a4b76d92d0da314f95b',1,'Shellminator']]],
+  ['row_16',['row',['../class_shellminator_screen.html#a9d72f1689d38ceaf04302874c3f45e86',1,'ShellminatorScreen']]],
+  ['rowspan_17',['rowSpan',['../class_shellminator_screen.html#acc3c604922949abcbcdb1dc9f0cd3e6c',1,'ShellminatorScreen']]],
+  ['rxcallback_18',['rxCallback',['../class_shellminator_ble_stream.html#a287a22dd1beb7fa3021daa81045cb7cf',1,'ShellminatorBleStream']]]
+];

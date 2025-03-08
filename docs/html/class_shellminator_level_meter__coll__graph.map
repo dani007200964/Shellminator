@@ -1,0 +1,9 @@
+<map id="ShellminatorLevelMeter" name="ShellminatorLevelMeter">
+<area shape="rect" id="node1" title=" " alt="" coords="5,865,184,1213"/>
+<area shape="rect" id="node2" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="17,95,173,457"/>
+<area shape="rect" id="node3" href="$class_shellminator.html" title="Shellminator object." alt="" coords="272,535,517,1543"/>
+<area shape="rect" id="node4" href="$struct_shellminator_1_1shell_event__t.html" title="Shell event structure." alt="" coords="307,219,483,333"/>
+<area shape="rect" id="node5" href="$class_shellminator_buffered_printer.html" title="ShellminatorBufferedPrinter object." alt="" coords="507,161,709,391"/>
+<area shape="rect" id="node6" title=" " alt="" coords="574,5,642,45"/>
+<area shape="rect" id="node7" href="$class_default_colorizer.html" title=" " alt="" coords="733,219,872,333"/>
+</map>

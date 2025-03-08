@@ -1,0 +1,9 @@
+<map id="ShellminatorProgress" name="ShellminatorProgress">
+<area shape="rect" id="node1" title="This class can create a simple plotter object." alt="" coords="5,894,175,1183"/>
+<area shape="rect" id="node2" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="12,95,168,457"/>
+<area shape="rect" id="node3" href="$class_shellminator.html" title="Shellminator object." alt="" coords="267,535,513,1543"/>
+<area shape="rect" id="node4" href="$struct_shellminator_1_1shell_event__t.html" title="Shell event structure." alt="" coords="302,219,478,333"/>
+<area shape="rect" id="node5" href="$class_shellminator_buffered_printer.html" title="ShellminatorBufferedPrinter object." alt="" coords="502,161,705,391"/>
+<area shape="rect" id="node6" title=" " alt="" coords="569,5,637,45"/>
+<area shape="rect" id="node7" href="$class_default_colorizer.html" title=" " alt="" coords="729,219,867,333"/>
+</map>

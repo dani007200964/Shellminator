@@ -1,0 +1,6 @@
+<map id="ShellminatorPlot::lerp" name="ShellminatorPlot::lerp">
+<area shape="rect" id="node1" title="Linear interpolation." alt="" coords="439,31,585,56"/>
+<area shape="rect" id="node2" href="$class_shellminator_plot.html#aa36464dcd41d9158697069f6643f5af0" title="Draw the plot data." alt="" coords="211,5,385,31"/>
+<area shape="rect" id="node4" href="$class_shellminator_plot.html#a4df8968c70d86e57abefbabc514ebc71" title="Draw the scale for the plot." alt="" coords="205,55,391,80"/>
+<area shape="rect" id="node3" href="$class_shellminator_plot.html#a12c5c876acb28a2176d6967a99dc697c" title="Draw function." alt="" coords="5,31,157,56"/>
+</map>

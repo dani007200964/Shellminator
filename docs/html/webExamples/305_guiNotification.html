@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <title>305_guiNotification</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.min.css">
+        <style>
+            .xterm-viewport::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .xterm-viewport::-webkit-scrollbar-track {
+                border-radius: 4px;
+                background-color: #95a5a6;
+                border: 1px solid #cacaca;
+            }
+
+            .xterm-viewport::-webkit-scrollbar-thumb {
+                background-color: #2c3e50;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="terminal"></div>
+        <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-web-links@0.11.0/lib/addon-web-links.min.js"></script>
+        <script>
+
+            // Nord theme
+            // It can be found here: https://github.com/nordtheme/xresources/blob/develop/src/nord
+            let nord0  = '#2E3440';
+            let nord1  = '#3B4252';
+            let nord2  = '#434C5E';
+            let nord3  = '#4C566A';
+            let nord4  = '#D8DEE9';
+            let nord5  = '#E5E9F0';
+            let nord6  = '#ECEFF4';
+            let nord7  = '#8FBCBB';
+            let nord8  = '#88C0D0';
+            let nord9  = '#81A1C1';
+            let nord10 = '#5E81AC';
+            let nord11 = '#BF616A';
+            let nord12 = '#D08770';
+            let nord13 = '#EBCB8B';
+            let nord14 = '#A3BE8C';
+            let nord15 = '#B48EAD';
+
+            var theme = {
+                foreground: nord4,
+                background: nord0,
+                cursor:     nord4,
+
+                black: nord2,
+                brightBlack: nord1,
+
+                red: nord12,
+                brightRed: nord11,
+
+                green: nord7,
+                brightGreen: nord14,
+
+                yellow: nord13,
+                brightYellow: nord13,
+
+                blue: nord5,
+                brightBlue: nord8,
+
+                magenta: nord11,
+                brightMagenta: nord15,
+
+                cyan: nord5,
+                brightCyan: nord8,
+
+                white: nord4,
+                brightWhite: nord5
+            };
+
+            let inputText = "";
+            let stdinBuffer = [];
+            let stdinBufferPtr = 0;
+
+            let unicodeBytesLeft = 0;
+            let unicodeBuffer = [];
+
+            /* Create a new xTerm object */
+            const term = new Terminal({
+                fontFamily: '"Cascadia Code", Menlo, monospace',
+                cursorBliknk: "true",
+                cursorStyle: "bar",
+                theme: theme,
+            });
+
+            const attachAddon = new WebLinksAddon.WebLinksAddon();
+            term.loadAddon( attachAddon );
+
+            term.onBell( () =>{
+              var audio = new Audio('../web_bell.mp3');
+              audio.play();
+            } );
+
+            term.onData( data => {
+
+                //inputChar = data;
+                inputText = data;
+                for (const c of data) {
+                    stdinBuffer.push( c.charCodeAt( 0 ) );
+                }
+
+                console.log( stdinBuffer );
+
+            } );
+
+            term.open(document.getElementById("terminal"));
+
+            var Module;
+
+
+        </script>
+        <script src=./305_guiNotification.js></script>
+    </body>
+</html>

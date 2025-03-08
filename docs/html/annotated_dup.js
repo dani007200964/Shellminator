@@ -1,0 +1,25 @@
+var annotated_dup =
+[
+    [ "CommanderColorizer", "class_commander_colorizer.html", "class_commander_colorizer" ],
+    [ "DefaultColorizer", "class_default_colorizer.html", "class_default_colorizer" ],
+    [ "Shellminator", "class_shellminator.html", "class_shellminator" ],
+    [ "ShellminatorBleStream", "class_shellminator_ble_stream.html", "class_shellminator_ble_stream" ],
+    [ "ShellminatorBufferedPrinter", "class_shellminator_buffered_printer.html", "class_shellminator_buffered_printer" ],
+    [ "ShellminatorButton", "class_shellminator_button.html", "class_shellminator_button" ],
+    [ "ShellminatorCaller", "class_shellminator_caller.html", "class_shellminator_caller" ],
+    [ "ShellminatorCommanderInterface", "class_shellminator_commander_interface.html", "class_shellminator_commander_interface" ],
+    [ "ShellminatorLevelMeter", "class_shellminator_level_meter.html", "class_shellminator_level_meter" ],
+    [ "ShellminatorList", "class_shellminator_list.html", "class_shellminator_list" ],
+    [ "ShellminatorListDetailed", "class_shellminator_list_detailed.html", "class_shellminator_list_detailed" ],
+    [ "ShellminatorNotification", "class_shellminator_notification.html", "class_shellminator_notification" ],
+    [ "ShellminatorPlot", "class_shellminator_plot.html", "class_shellminator_plot" ],
+    [ "ShellminatorProgress", "class_shellminator_progress.html", "class_shellminator_progress" ],
+    [ "ShellminatorQR", "class_shellminator_q_r.html", "class_shellminator_q_r" ],
+    [ "ShellminatorScreen", "class_shellminator_screen.html", "class_shellminator_screen" ],
+    [ "ShellminatorScreenGrid", "class_shellminator_screen_grid.html", "class_shellminator_screen_grid" ],
+    [ "ShellminatorTcpSocket", "class_shellminator_tcp_socket.html", "class_shellminator_tcp_socket" ],
+    [ "ShellminatorWebServer", "class_shellminator_web_server.html", "class_shellminator_web_server" ],
+    [ "ShellminatorWebServerThemed", "class_shellminator_web_server_themed.html", "class_shellminator_web_server_themed" ],
+    [ "ShellminatorWebServerThemedOffline", "class_shellminator_web_server_themed_offline.html", "class_shellminator_web_server_themed_offline" ],
+    [ "ShellminatorWebSocket", "class_shellminator_web_socket.html", "class_shellminator_web_socket" ]
+];

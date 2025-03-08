@@ -1,0 +1,64 @@
+<map id="Shellminator::ShellminatorDownArrowKeyState" name="Shellminator::ShellminatorDownArrowKeyState">
+<area shape="rect" id="node1" title=" " alt="" coords="5,1842,180,1882"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a5921f047dc98bdbb288856eddbc84d3e" title="Push a new event to the event buffer." alt="" coords="1525,2162,1688,2188"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#a842e1ef0e5cadd739ef87ae559cbbb16" title=" " alt="" coords="1525,1128,1689,1153"/>
+<area shape="rect" id="node9" href="$class_shellminator.html#a3a78b761d9e9cbcc142b849f528e893d" title=" " alt="" coords="228,1412,403,1452"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a99c7572eee48f38eeeac937c3d3e0b6e" title="Basic text formatting." alt="" coords="1995,357,2133,382"/>
+<area shape="rect" id="node6" href="$class_shellminator.html#a6a74cf2bf2746c17ef6b8874f75ec4d7" title="This function prints the banner text." alt="" coords="1761,357,1929,382"/>
+<area shape="rect" id="node7" href="$class_shellminator.html#a56c721e42a1c76dc790791e61e37df1a" title="If reverse search mode is active, this function is used to print the text correctly." alt="" coords="1755,978,1936,1018"/>
+<area shape="rect" id="node5" href="$class_shellminator.html#af30816610bf82e63cccc0690991a7210" title="Basic text formatting." alt="" coords="2189,357,2351,382"/>
+<area shape="rect" id="node8" href="$class_shellminator.html#a10a1c3a6f35fee22c495e0d7d8b43123" title="Basic substring function." alt="" coords="1987,985,2141,1010"/>
+<area shape="rect" id="node10" href="$class_shellminator.html#a95945bd5860aaed1ac544da1b3800447" title="Abort Screen session." alt="" coords="735,534,899,560"/>
+<area shape="rect" id="node16" href="$class_shellminator.html#aa06eec48be6c382f33bb465746993883" title="Remove the current element from the buffer." alt="" coords="1015,1178,1170,1204"/>
+<area shape="rect" id="node17" href="$class_shellminator.html#ad3814e6fd6e4294c10ab242cf58a6290" title="Read an event." alt="" coords="475,938,633,964"/>
+<area shape="rect" id="node18" href="$class_shellminator.html#acdd5ac4f6a2c952b23b1644b9f726028" title=" " alt="" coords="467,516,641,556"/>
+<area shape="rect" id="node19" href="$class_shellminator.html#a3096f53676f333f46a4d8abe108ac8ef" title=" " alt="" coords="467,988,641,1028"/>
+<area shape="rect" id="node21" href="$class_shellminator.html#a7c74b6fae216e4667b31bc758bcc8dd8" title=" " alt="" coords="1271,1456,1446,1496"/>
+<area shape="rect" id="node22" href="$class_shellminator.html#a5f7a12ccc4ade091fd274363b23c7658" title=" " alt="" coords="467,1515,641,1555"/>
+<area shape="rect" id="node23" href="$class_shellminator.html#a64050ee8fa7552da5ee925d298e684fe" title=" " alt="" coords="467,1383,641,1423"/>
+<area shape="rect" id="node25" href="$class_shellminator.html#a3f8933d5b0360a3f4b3bff32e12a77d1" title="Update function." alt="" coords="747,1306,888,1332"/>
+<area shape="rect" id="node30" href="$class_shellminator.html#a64925b8278809b7020a67846ae736856" title=" " alt="" coords="467,1594,641,1634"/>
+<area shape="rect" id="node31" href="$class_shellminator.html#a83972ae85e0cc1c614dc9501f1042c15" title=" " alt="" coords="1271,210,1446,250"/>
+<area shape="rect" id="node39" href="$class_shellminator.html#ae20ee865034dfee7f34843437ab5a43a" title=" " alt="" coords="467,1966,641,2006"/>
+<area shape="rect" id="node53" href="$class_shellminator.html#ad2d7fc8e7c39f74712a57d6a094fe148" title=" " alt="" coords="451,746,657,786"/>
+<area shape="rect" id="node56" href="$class_shellminator.html#a9fdfce956450678c8a7e7c528261d5d2" title=" " alt="" coords="1271,892,1446,932"/>
+<area shape="rect" id="node57" href="$class_shellminator.html#ad8a613112e24de6c8456c819d5c1687c" title=" " alt="" coords="467,631,641,671"/>
+<area shape="rect" id="node59" href="$class_shellminator.html#a604bcc9845aade4c69ddef15f5c845fe" title=" " alt="" coords="730,1167,905,1207"/>
+<area shape="rect" id="node60" href="$class_shellminator.html#aacb12569e3fd2bdf3e891532ac710bdf" title=" " alt="" coords="711,918,923,958"/>
+<area shape="rect" id="node62" href="$class_shellminator.html#a54e6adf62d9ee65bc5cb564687ec2ce8" title=" " alt="" coords="729,1052,906,1092"/>
+<area shape="rect" id="node11" href="$class_shellminator.html#a1a51aad4620e2253ccec92b0d208043e" title=" " alt="" coords="995,594,1190,620"/>
+<area shape="rect" id="node13" href="$class_shellminator.html#a148b57cedf698acd67209daaeb525c9c" title="Set the position of the cursor." alt="" coords="1256,544,1461,569"/>
+<area shape="rect" id="node14" href="$class_shellminator.html#a35be74e46ad7eac24a03411cc9139668" title="Disable mouse reports." alt="" coords="1011,420,1175,445"/>
+<area shape="rect" id="node15" href="$class_shellminator.html#a2494d3a395b52ea6017948472a535940" title="Show the cursor." alt="" coords="1007,493,1178,518"/>
+<area shape="rect" id="node12" href="$class_shellminator.html#aecbb745ff1da8944983276e361cbc830" title="Get the position of the cursor." alt="" coords="1256,594,1461,620"/>
+<area shape="rect" id="node20" href="$class_shellminator.html#aaefdf61392128e3ed43d7b3ae18584a1" title=" " alt="" coords="726,988,909,1028"/>
+<area shape="rect" id="node24" href="$class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317" title="Clear screen." alt="" coords="752,1356,883,1381"/>
+<area shape="rect" id="node26" href="$class_shellminator.html#add2164e4b46594e10301b88abc287a1b" title="Check the command with the command parser to get some useful information." alt="" coords="995,1278,1191,1318"/>
+<area shape="rect" id="node27" href="$class_shellminator_buffered_printer.html#a0932985299a2419d63d346e3716bf88d" title="Flush the channel." alt="" coords="1003,1342,1182,1382"/>
+<area shape="rect" id="node29" href="$class_shellminator.html#adab2f5b22050432e42cfdbd2c3cb8194" title="This function processes a new character." alt="" coords="1019,1228,1167,1253"/>
+<area shape="rect" id="node28" href="$class_shellminator_buffered_printer.html#aee1df8e705fbfc3ec1fe752b1a7e37a2" title="Write one byte to the channel." alt="" coords="1269,1342,1448,1382"/>
+<area shape="rect" id="node32" href="$class_shellminator.html#a89e86946143cf1051a8047f56432e409" title="Select list." alt="" coords="1541,1717,1672,1742"/>
+<area shape="rect" id="node33" href="$class_shellminator.html#ac352166ed582b920520ef40b200b5d24" title="Check the password." alt="" coords="1509,38,1704,64"/>
+<area shape="rect" id="node34" href="$class_shellminator.html#add04d457831267ad6bd9cf8457967073" title=" " alt="" coords="1519,88,1694,128"/>
+<area shape="rect" id="node35" href="$class_shellminator.html#a1fb9f9d79ce88cc1374a91863bb12fe9" title=" " alt="" coords="1515,152,1698,192"/>
+<area shape="rect" id="node36" href="$class_shellminator.html#acd2c421ddc842d8f0f2769b0e391ab5c" title="Print help text." alt="" coords="1530,217,1683,242"/>
+<area shape="rect" id="node38" href="$class_shellminator.html#a2fd33cc9433d6d575a7c6e6e0019b682" title="Print command history." alt="" coords="1761,74,1929,100"/>
+<area shape="rect" id="node37" href="$class_shellminator.html#ad10edbdfcbab791f95fe9df79c142590" title="Print command parser Help." alt="" coords="1752,210,1939,250"/>
+<area shape="rect" id="node40" href="$class_shellminator.html#a65c0d31507731e8c89434c2660130615" title=" " alt="" coords="730,2016,905,2056"/>
+<area shape="rect" id="node41" href="$class_shellminator.html#a10e2da5f1c297a54c23560c72528802d" title=" " alt="" coords="1005,1659,1180,1699"/>
+<area shape="rect" id="node42" href="$class_shellminator.html#a71d33dbaf9c484acc5e0112e29871712" title=" " alt="" coords="1271,1892,1446,1932"/>
+<area shape="rect" id="node43" href="$class_shellminator.html#ae4794a092c3cf1cbf24919d2338646de" title=" " alt="" coords="1271,2072,1446,2112"/>
+<area shape="rect" id="node44" href="$class_shellminator.html#a55cb08177f83dd96c9fc51498ad0cb2c" title=" " alt="" coords="1005,2283,1180,2323"/>
+<area shape="rect" id="node45" href="$class_shellminator.html#a11bcb05cd0199ea25d7097580f6d83a7" title=" " alt="" coords="1005,2155,1180,2195"/>
+<area shape="rect" id="node47" href="$class_shellminator.html#a30129e8753e65d9b785d92c4c19b01a1" title=" " alt="" coords="1005,1723,1180,1763"/>
+<area shape="rect" id="node49" href="$class_shellminator.html#a16cf25ec794b24c3c0fc5ad7599edefc" title=" " alt="" coords="1005,1787,1180,1827"/>
+<area shape="rect" id="node51" href="$class_shellminator.html#a97698130855c5a0808eb5d934faea5ba" title=" " alt="" coords="1005,2219,1180,2259"/>
+<area shape="rect" id="node52" href="$class_shellminator.html#a3db696fd6496f6ad3d44044c48201c8c" title=" " alt="" coords="1271,1968,1446,2008"/>
+<area shape="rect" id="node46" href="$class_shellminator.html#a4dccf5913f82c2b7de7e27fcf7491be5" title="Parse mouse data." alt="" coords="1259,2162,1459,2188"/>
+<area shape="rect" id="node48" href="$class_shellminator.html#a6e142e1f18fcbfb7f1a3eb21d76882e0" title="This function is used to search the next matching command in the history." alt="" coords="1267,1710,1450,1750"/>
+<area shape="rect" id="node50" href="$class_shellminator.html#a28a58ae386dce242f9d8f8cf1d12ae31" title="This function is used to search the previous matching command in the history." alt="" coords="1267,1774,1450,1814"/>
+<area shape="rect" id="node54" href="$class_shellminator.html#a55fcb917d720476ff4142b1f265ae3ab" title=" " alt="" coords="705,854,929,894"/>
+<area shape="rect" id="node55" href="$class_shellminator.html#aa835b331bac3a79b05004008d7eba0da" title=" " alt="" coords="989,796,1197,836"/>
+<area shape="rect" id="node58" href="$class_shellminator.html#a1e3aa85da50286d27c0f0fbbb0cee5a8" title="Input prompt." alt="" coords="1293,712,1424,737"/>
+<area shape="rect" id="node61" href="$class_shellminator.html#a657d96e75ffeacaa5af52be8c903f5d3" title=" " alt="" coords="977,1012,1208,1052"/>
+</map>

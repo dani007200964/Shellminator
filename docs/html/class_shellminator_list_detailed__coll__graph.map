@@ -1,0 +1,10 @@
+<map id="ShellminatorListDetailed" name="ShellminatorListDetailed">
+<area shape="rect" id="node1" title=" " alt="" coords="5,1592,191,1720"/>
+<area shape="rect" id="node2" href="$class_shellminator_list.html" title=" " alt="" coords="29,901,167,1176"/>
+<area shape="rect" id="node3" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="20,95,176,457"/>
+<area shape="rect" id="node4" href="$class_shellminator.html" title="Shellminator object." alt="" coords="275,535,521,1543"/>
+<area shape="rect" id="node5" href="$struct_shellminator_1_1shell_event__t.html" title="Shell event structure." alt="" coords="310,219,486,333"/>
+<area shape="rect" id="node6" href="$class_shellminator_buffered_printer.html" title="ShellminatorBufferedPrinter object." alt="" coords="510,161,713,391"/>
+<area shape="rect" id="node7" title=" " alt="" coords="577,5,645,45"/>
+<area shape="rect" id="node8" href="$class_default_colorizer.html" title=" " alt="" coords="737,219,875,333"/>
+</map>

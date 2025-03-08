@@ -1,0 +1,319 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Example 502 WebSocket Self Hosted</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('502_web_socket_self_hosted_page.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example 502 WebSocket Self Hosted </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md133">Whole Code</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><p >The previous example will only work if the computer running the browser has internet access. This is almost always possible on a developer machine, but there are situations where the user's computer might not have internet access (for example, out in the desert or on Mars, the coverage might not be that great). Luckily, we’ve got this covered as well. The <a class="el" href="class_shellminator.html" title="Shellminator object.">Shellminator</a> library can host the same WebTerminal you used earlier through its own web server, independent of the platform (there are a few minor differences, but we’ll go over them later).</p>
+<p >This is really useful if you have a local network that’s not connected to the internet. However, you should know that this operation can be resource-intensive, but an ESP32 or a Pico W can handle it just fine. Starting from the previous example, all you need to do is import the required library: <br  />
+ </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_web_server_8hpp.html">Shellminator-WebServer.hpp</a>&quot;</span></div>
+<div class="ttc" id="a_shellminator-_web_server_8hpp_html"><div class="ttname"><a href="_shellminator-_web_server_8hpp.html">Shellminator-WebServer.hpp</a></div></div>
+</div><!-- fragment --><p >Then, create an object from the <code><a class="el" href="class_shellminator_web_server_themed_offline.html">ShellminatorWebServerThemedOffline</a></code> class. In its constructor, you’ll need to specify a port where the web server will be available. Since it’s a regular HTML server, **port 80* is recommended. <br  />
+ </p><div class="fragment"><div class="line"><span class="comment">// Webserver port for webpage.</span></div>
+<div class="line"><span class="preprocessor">#define WEBSERVER_PORT 80</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator_web_server_themed_offline.html">ShellminatorWebServerThemedOffline</a> htmlServer( WEBSERVER_PORT );</div>
+<div class="ttc" id="aclass_shellminator_web_server_themed_offline_html"><div class="ttname"><a href="class_shellminator_web_server_themed_offline.html">ShellminatorWebServerThemedOffline</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_web_server_8hpp_source.html#l00120">Shellminator-WebServer.hpp:120</a></div></div>
+</div><!-- fragment --><p >In the <code>init</code> section, start the server (optionally, we log debug messages, but that’s not mandatory): <br  />
+ </p><div class="fragment"><div class="line">htmlServer.attachDebugChannel( &amp;Serial );</div>
+<div class="line">htmlServer.begin();</div>
+</div><!-- fragment --><p >Finally, in the <code>loop</code> section, you’ll need to periodically update the web server: <br  />
+ </p><div class="fragment"><div class="line">htmlServer.update();</div>
+</div><!-- fragment --><p >If you’ve done everything right, all that’s left is to open a new tab in your browser and enter the <b>device's IP</b> address in the <b>URL</b>. You’ll see pretty much the same interface as the WebTerminal hosted in the documentation, except for a few differences:</p>
+<ul>
+<li>You don’t need to specify the WebSocket address since the WebTerminal can extract it from the URI.</li>
+<li>There are no tooltips to reduce the resources the page uses.</li>
+<li>The webpage has been minified to consume fewer resources.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md133"></a>
+Whole Code</h2>
+<div class="fragment"><div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Created on Aug 10 2020</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright (c) 2023 - Daniel Hajnal</span></div>
+<div class="line"><span class="comment"> * hajnal.daniel96@gmail.com</span></div>
+<div class="line"><span class="comment"> * This file is part of the Shellminator project.</span></div>
+<div class="line"><span class="comment"> * Modified 2023.05.13</span></div>
+<div class="line"><span class="comment">*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;WiFi.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator_8hpp.html">Shellminator.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_web_server_8hpp.html">Shellminator-WebServer.hpp</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define WEBSOCKET_PORT 443</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Webserver port for webpage and contents.</span></div>
+<div class="line"><span class="preprocessor">#define WEBSERVER_PORT 80</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">char</span> ssid[] = <span class="stringliteral">&quot;Replace With Your SSID&quot;</span>;        <span class="comment">// your network SSID (name)</span></div>
+<div class="line"><span class="keywordtype">char</span> pass[] = <span class="stringliteral">&quot;Replace With Your Password&quot;</span>;    <span class="comment">// your network password (use for WPA, or use as key for WEP)</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="class_shellminator_web_server_themed_offline.html">ShellminatorWebServerThemedOffline</a> htmlServer( WEBSERVER_PORT );</div>
+<div class="line"><a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a> ws( WEBSOCKET_PORT );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Shellminator object, and initialize it to use WebSocketsServer</span></div>
+<div class="line"><a class="code hl_class" href="class_shellminator.html">Shellminator</a> shell( &amp;ws );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// We will need a buffer to avoid flickering.</span></div>
+<div class="line">uint8_t printBuffer[ 100 ];</div>
+<div class="line"><span class="keywordtype">int</span> printBufferSize = <span class="keyword">sizeof</span>( printBuffer );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Hash for &#39;Password&#39; as password. Obviously, replace it</span></div>
+<div class="line"><span class="comment">// when working on something sensitive.</span></div>
+<div class="line">uint8_t passwordHash[] = { 0xCC, 0xb4, 0x24, 0x83 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Shellminator logo.</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> logo[] =</div>
+<div class="line"> </div>
+<div class="line"><span class="stringliteral">&quot;   _____ __         ____          _             __            \r\n&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot;  / ___// /_  ___  / / /___ ___  (_)___  ____ _/ /_____  _____\r\n&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot;  \\__ \\/ __ \\/ _ \\/ / / __ `__ \\/ / __ \\/ __ `/ __/ __ \\/ ___/\r\n&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot; ___/ / / / /  __/ / / / / / / / / / / / /_/ / /_/ /_/ / /    \r\n&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot;/____/_/ /_/\\___/_/_/_/ /_/ /_/_/_/ /_/\\__,_/\\__/\\____/_/     \r\n&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot;\r\n\033[0;37m&quot;</span></div>
+<div class="line"><span class="stringliteral">&quot;Visit on GitHub:\033[1;32m https://github.com/dani007200964/Shellminator\r\n\r\n&quot;</span></div>
+<div class="line">;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Callbacks for connect and disconnect events.</span></div>
+<div class="line"><span class="keywordtype">void</span> userConnectedCallback( <a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* socket );</div>
+<div class="line"><span class="keywordtype">void</span> userDisconnectedCallback( <a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* socket );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// System init section.</span></div>
+<div class="line"><span class="keywordtype">void</span> setup(){</div>
+<div class="line"> </div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    WiFi.begin(ssid, pass);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attempt to connect to WiFi network:</span></div>
+<div class="line">    Serial.print(<span class="stringliteral">&quot;Attempting to connect to Network&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">while</span>( WiFi.status() != WL_CONNECTED ){</div>
+<div class="line">        Serial.print( <span class="charliteral">&#39;.&#39;</span> );</div>
+<div class="line">        delay( 1000 );</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attach the logo.</span></div>
+<div class="line">    shell.attachLogo( logo );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Enable buffering.</span></div>
+<div class="line">    shell.enableBuffering( printBuffer, printBufferSize );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Enable password protection.</span></div>
+<div class="line">    shell.setPassword( passwordHash, <span class="keyword">sizeof</span>( passwordHash ) );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// initialize shell object.</span></div>
+<div class="line">    shell.begin( <span class="stringliteral">&quot;arnold&quot;</span> );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Uncomment if you want to enable html server debug messages.</span></div>
+<div class="line">    .attachDebugChannel( &amp;Serial );</div>
+<div class="line">    htmlServer.begin();</div>
+<div class="line"> </div>
+<div class="line">    ws.attachDebugChannel( &amp;Serial );</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Attach connect and disconnect callbacks.</span></div>
+<div class="line">    ws.attachConnectCallback( userConnectedCallback );</div>
+<div class="line">    ws.attachDisconnectCallback( userDisconnectedCallback );</div>
+<div class="line"> </div>
+<div class="line">    ws.begin();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Infinite loop.</span></div>
+<div class="line"><span class="keywordtype">void</span> loop(){</div>
+<div class="line"> </div>
+<div class="line">    ws.update();</div>
+<div class="line">    shell.update();</div>
+<div class="line">    htmlServer.update();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Give some time to the other tasks on RTOS systems.</span></div>
+<div class="line">    delay( 2 );</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> userConnectedCallback( <a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* socket ){</div>
+<div class="line">    <span class="comment">// Print &#39;welcome&#39; screen after connection.</span></div>
+<div class="line">    shell.printLoginScreen();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> userDisconnectedCallback( <a class="code hl_class" href="class_shellminator_web_socket.html">ShellminatorWebSocket</a>* socket ){</div>
+<div class="line">    <span class="comment">// In case of disconnect event, close the terminal.</span></div>
+<div class="line">    shell.logOut();</div>
+<div class="line">}</div>
+<div class="ttc" id="a_shellminator-_websocket_8hpp_html"><div class="ttname"><a href="_shellminator-_websocket_8hpp.html">Shellminator-Websocket.hpp</a></div></div>
+<div class="ttc" id="a_shellminator_8hpp_html"><div class="ttname"><a href="_shellminator_8hpp.html">Shellminator.hpp</a></div></div>
+<div class="ttc" id="aclass_shellminator_html"><div class="ttname"><a href="class_shellminator.html">Shellminator</a></div><div class="ttdoc">Shellminator object.</div><div class="ttdef"><b>Definition:</b> <a href="_shellminator_8hpp_source.html#l00105">Shellminator.hpp:106</a></div></div>
+<div class="ttc" id="aclass_shellminator_web_socket_html"><div class="ttname"><a href="class_shellminator_web_socket.html">ShellminatorWebSocket</a></div><div class="ttdef"><b>Definition:</b> <a href="_shellminator-_websocket_8hpp_source.html#l00096">Shellminator-Websocket.hpp:96</a></div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous   </th><th class="markdownTableHeadRight">Next    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="501_web_socket_pretty_page.html">WebSocket Pretty Example</a>   </td><td class="markdownTableBodyRight"><a class="el" href="510_ble_simple_page.html">BLE Simple Example</a>   </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>

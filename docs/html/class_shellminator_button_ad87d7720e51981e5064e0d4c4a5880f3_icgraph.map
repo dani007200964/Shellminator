@@ -1,0 +1,5 @@
+<map id="ShellminatorButton::isLower" name="ShellminatorButton::isLower">
+<area shape="rect" id="node1" title="Check if the character is lowercase." alt="" coords="365,5,497,45"/>
+<area shape="rect" id="node2" href="$class_shellminator_button.html#a088292f6850052a72e8fbb879f4fb8fc" title="Attach optional event." alt="" coords="5,5,137,45"/>
+<area shape="rect" id="node3" href="$class_shellminator_button.html#a5e65ab03f64ea9d3614d12cdf28e0ce9" title="Make the character uppercase." alt="" coords="185,33,317,73"/>
+</map>

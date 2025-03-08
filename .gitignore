@@ -1,5 +1,4 @@
 build/*
-*docs/
 !build/README.md
 extras/examples_desktop/*
 extras/examples_emscripten/*

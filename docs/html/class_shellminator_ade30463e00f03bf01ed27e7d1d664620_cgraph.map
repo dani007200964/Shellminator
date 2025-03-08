@@ -1,0 +1,6 @@
+<map id="Shellminator::swapScreenAndClear" name="Shellminator::swapScreenAndClear">
+<area shape="rect" id="node1" title=" " alt="" coords="5,23,179,63"/>
+<area shape="rect" id="node2" href="$class_shellminator.html#a274ba9dece047e5d4b3c23cae6c91317" title="Clear screen." alt="" coords="248,5,379,31"/>
+<area shape="rect" id="node3" href="$class_shellminator.html#ab7d5430fbaece4216c42d703bac6f36a" title=" " alt="" coords="227,55,400,80"/>
+<area shape="rect" id="node4" href="$class_shellminator.html#a5921f047dc98bdbb288856eddbc84d3e" title="Push a new event to the event buffer." alt="" coords="448,55,611,80"/>
+</map>

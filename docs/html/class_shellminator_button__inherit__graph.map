@@ -1,0 +1,4 @@
+<map id="ShellminatorButton" name="ShellminatorButton">
+<area shape="rect" id="node1" title="This class can create a simple plotter object." alt="" coords="5,460,172,793"/>
+<area shape="rect" id="node2" href="$class_shellminator_screen.html" title="This is an abstract object for graphics element creation." alt="" coords="11,5,167,412"/>
+</map>

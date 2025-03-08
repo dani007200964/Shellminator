@@ -1,0 +1,298 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shellminator: Shellminator::shellEvent_t Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+</script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+</script>
+<script src="lottie-player.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom_header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/dani007200964/Shellminator" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   </div>
+   <div id="projectbrief">Simple Terminal</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var navtree = document.getElementById("nav-tree");
+        if (navtree) {
+            // Ko-Fi Button
+            var customDiv = document.createElement("div");
+            customDiv.classList.add( 'kofi_button' );
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="https://ko-fi.com/danielhajnal" target="_blank">
+                    <img src="support_me_on_kofi_red.png" class="kofi_image" alt="Support me on Ko-Fi">
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // Web Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="web_xterm_themed.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    📟 Web Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+            // BLE Terminal
+            customDiv = document.createElement("div");
+            customDiv.style.marginTop = "10px";
+            customDiv.style.padding = "5px";
+            customDiv.style.width = "calc(100% - 20px)";
+            customDiv.style.marginLeft = "20px";
+            customDiv.style.boxSizing = "border-box";
+            customDiv.innerHTML = `
+                <a href="ble_terminal.html" class="btn btn-primary terminalPulse-btn" target="_blank">
+                    🔋 BLE Terminal
+                </a>
+            `;
+            navtree.appendChild(customDiv);
+        }
+    });
+</script>
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('struct_shellminator_1_1shell_event__t.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_shellminator_1_1shell_event__t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Shellminator::shellEvent_t Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Shell event structure.  
+ <a href="struct_shellminator_1_1shell_event__t.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Shellminator::shellEvent_t:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_shellminator_1_1shell_event__t__coll__graph.svg" width="187" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a07c2c2b0b568f86766d8604c67e0ef54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235d">shellEventType_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54">type</a></td></tr>
+<tr class="memdesc:a07c2c2b0b568f86766d8604c67e0ef54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies the type of the event.  <a href="struct_shellminator_1_1shell_event__t.html#a07c2c2b0b568f86766d8604c67e0ef54">More...</a><br /></td></tr>
+<tr class="separator:a07c2c2b0b568f86766d8604c67e0ef54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a769a3c1e4e330769435968e98fc4d0e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18">eventCodes_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a769a3c1e4e330769435968e98fc4d0e6">eventCode</a></td></tr>
+<tr class="memdesc:a769a3c1e4e330769435968e98fc4d0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the event code in case of <code>SHELL_EVENT_CODED_KEY</code> or <code>SHELL_EVENT_MOUSE</code> type.  <a href="struct_shellminator_1_1shell_event__t.html#a769a3c1e4e330769435968e98fc4d0e6">More...</a><br /></td></tr>
+<tr class="separator:a769a3c1e4e330769435968e98fc4d0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22c306ca0b45ce7e25470791f48cbd7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">data</a></td></tr>
+<tr class="memdesc:af22c306ca0b45ce7e25470791f48cbd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_KEY</code> type, stores the corresponding character to the pressed key.  <a href="struct_shellminator_1_1shell_event__t.html#af22c306ca0b45ce7e25470791f48cbd7">More...</a><br /></td></tr>
+<tr class="separator:af22c306ca0b45ce7e25470791f48cbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b49d11afa348e1893798d2b45bd2f84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a5b49d11afa348e1893798d2b45bd2f84">x</a></td></tr>
+<tr class="memdesc:a5b49d11afa348e1893798d2b45bd2f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_MOUSE</code> type, stores the X-coordinate of the mouse event.  <a href="struct_shellminator_1_1shell_event__t.html#a5b49d11afa348e1893798d2b45bd2f84">More...</a><br /></td></tr>
+<tr class="separator:a5b49d11afa348e1893798d2b45bd2f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f1d5616e47b3378d34142ec1b13103"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_shellminator_1_1shell_event__t.html#a75f1d5616e47b3378d34142ec1b13103">y</a></td></tr>
+<tr class="memdesc:a75f1d5616e47b3378d34142ec1b13103"><td class="mdescLeft">&#160;</td><td class="mdescRight">In case of <code>SHELL_EVENT_MOUSE</code> type, stores the Y-coordinate of the mouse event.  <a href="struct_shellminator_1_1shell_event__t.html#a75f1d5616e47b3378d34142ec1b13103">More...</a><br /></td></tr>
+<tr class="separator:a75f1d5616e47b3378d34142ec1b13103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Shell event structure. </p>
+<p >This structure holds the necessary fields to store and decode shell events. It is used to communicate with the attached Screen objects. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00722">722</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="af22c306ca0b45ce7e25470791f48cbd7" name="af22c306ca0b45ce7e25470791f48cbd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af22c306ca0b45ce7e25470791f48cbd7">&#9670;&#160;</a></span>data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t Shellminator::shellEvent_t::data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>In case of <code>SHELL_EVENT_KEY</code> type, stores the corresponding character to the pressed key. </p>
+<dl class="section note"><dt>Note</dt><dd>Case sensitive! </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00725">725</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a769a3c1e4e330769435968e98fc4d0e6" name="a769a3c1e4e330769435968e98fc4d0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a769a3c1e4e330769435968e98fc4d0e6">&#9670;&#160;</a></span>eventCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator.html#a12e98da6f684005b068021140d077b18">eventCodes_t</a> Shellminator::shellEvent_t::eventCode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stores the event code in case of <code>SHELL_EVENT_CODED_KEY</code> or <code>SHELL_EVENT_MOUSE</code> type. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00724">724</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a07c2c2b0b568f86766d8604c67e0ef54" name="a07c2c2b0b568f86766d8604c67e0ef54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07c2c2b0b568f86766d8604c67e0ef54">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_shellminator.html#acc322ed067ab7377aa9914445c8a235d">shellEventType_t</a> Shellminator::shellEvent_t::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Identifies the type of the event. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00723">723</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b49d11afa348e1893798d2b45bd2f84" name="a5b49d11afa348e1893798d2b45bd2f84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b49d11afa348e1893798d2b45bd2f84">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t Shellminator::shellEvent_t::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>In case of <code>SHELL_EVENT_MOUSE</code> type, stores the X-coordinate of the mouse event. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00726">726</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a75f1d5616e47b3378d34142ec1b13103" name="a75f1d5616e47b3378d34142ec1b13103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f1d5616e47b3378d34142ec1b13103">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t Shellminator::shellEvent_t::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>In case of <code>SHELL_EVENT_MOUSE</code> type, stores the Y-coordinate of the mouse event. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shellminator_8hpp_source.html#l00727">727</a> of file <a class="el" href="_shellminator_8hpp_source.html">Shellminator.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shellminator.html">Shellminator</a></li><li class="navelem"><a class="el" href="struct_shellminator_1_1shell_event__t.html">shellEvent_t</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+  </ul>
+</div>
+</body>
+</html>
