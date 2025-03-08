@@ -22,7 +22,7 @@ The **argument value** follows the argument name, separated by at least one **sp
 
 Let's say we need to implement a command called `random`. As the name suggests, its job is to **generate a random number**.  
 
-The order of parameters **matters**, because swapping them could change the result. That’s why **position-independent arguments** are useful—they eliminate confusion by **explicitly naming each parameter**.  
+In the syntax used by GCC, the order of function parameters is fixed and cannot be changed, as swapping them could alter the result. In contrast, higher-level languages like Python and Matlab allow parameters to be specified using name-value pairs. This makes it clear which argument is assigned to which value, reducing potential confusion—although this approach requires a bit more typing.
 
 Additionally, modern programming languages often implement `random` in **two ways**:
 1. **One argument** → This is treated as the **upper limit**, with `0` as the default lower limit.

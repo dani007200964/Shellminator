@@ -21,7 +21,7 @@ Commander::systemCommand_t API_tree[3];
 
 Next, at the **beginning of the initialization section**, we need to manually fill each array element with the corresponding command data. **The order doesn’t matter**, but be extra careful with **indexing errors** (accidental copy-paste mistakes can shift the indices and break things).  
 
-Additionally, instead of using the `systemCommand` macro, we must use `systemCommand_P`. This macro is designed to work across different platforms, but this method introduces more potential issues compared to the approach described in **Example 200**.  
+Additionally, instead of using the `systemCommand` macro, we must use `systemCommand_P`. This macro is designed to work across different platforms, but this method introduces more potential issues compared to the approach described in [Example 200](@ref 200_commanderBasic_page).  
 
 ```cpp
 // Initialize the Command Tree and store descriptions in program memory.

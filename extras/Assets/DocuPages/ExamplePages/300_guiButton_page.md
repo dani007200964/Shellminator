@@ -146,7 +146,7 @@ void buttonClick(ShellminatorScreen* screen) {
 ## Summary  
 
 - We **created a button** and attached an event.  
-- We **assigned a keyboard shortcut ('x')** and a **mouse click event** (if supported).  
+- We **assigned a keyboard shortcut ('x')** and a **mouse click event** (if supported works automatically, no config needed in the code).  
 - We **wrote a callback function** to toggle the button's color.  
 - We **requested a screen refresh** to update the GUI properly.   
 

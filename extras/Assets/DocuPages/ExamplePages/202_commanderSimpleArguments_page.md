@@ -7,7 +7,7 @@
 Every command-line system eventually faces the challenge of **parameterizing commands** —at some point, simple standalone commands aren’t enough.  
 
 Let’s take the `sum` command from our previous example. I bet you’ve wondered:  
-"Is there an easier way to extract those two numbers?"
+*Is there an easier way to parse those two numbers?*
 
 Good news—yes, there is! But before we jump in, let’s go over a few key concepts.  
 

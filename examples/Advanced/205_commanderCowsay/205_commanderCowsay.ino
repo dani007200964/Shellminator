@@ -9,10 +9,10 @@
 */
 
 
-#include "Shellminator.hpp"
-#include "Shellminator-Commander-Interface.hpp"
 #include "Commander-API.hpp"
 #include "Commander-Arguments.hpp"
+#include "Shellminator.hpp"
+#include "Shellminator-Commander-Interface.hpp"
 
 
 // Not an average looking cow for sure

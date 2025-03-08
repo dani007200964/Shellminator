@@ -189,7 +189,6 @@ if( BUILD_EXAMPLES )
 	add_executable( 206_commanderSystemVariables ${SOURCES} extras/examples_desktop/Desktop/206_commanderSystemVariables/206_commanderSystemVariables.cpp )
 	add_executable( 207_commanderSetSystemVariables ${SOURCES} extras/examples_desktop/Desktop/207_commanderSetSystemVariables/207_commanderSetSystemVariables.cpp )
 	add_executable( 208_commanderColorizer ${SOURCES} extras/examples_desktop/Desktop/208_commanderColorizer/208_commanderColorizer.cpp )
-	add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_desktop/Desktop/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
 	add_executable( 300_guiButton ${SOURCES} extras/examples_desktop/Desktop/300_guiButton/300_guiButton.cpp )
 	add_executable( 301_guiProgress ${SOURCES} extras/examples_desktop/Desktop/301_guiProgress/301_guiProgress.cpp )
 	add_executable( 302_guiProgressAdvanced ${SOURCES} extras/examples_desktop/Desktop/302_guiProgressAdvanced/302_guiProgressAdvanced.cpp )
@@ -284,9 +283,6 @@ if( BUILD_WEBASSEMBLY )
 
 	add_executable( 208_commanderColorizer ${SOURCES} extras/examples_emscripten/Emscripten/208_commanderColorizer/208_commanderColorizer.cpp )
 	target_link_options( 208_commanderColorizer PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
-
-	add_executable( 250_commanderAutoComplete ${SOURCES} extras/examples_emscripten/Emscripten/250_commanderAutoComplete/250_commanderAutoComplete.cpp )
-	target_link_options( 250_commanderAutoComplete PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )
 
 	add_executable( 300_guiButton ${SOURCES} extras/examples_emscripten/Emscripten/300_guiButton/300_guiButton.cpp )
 	target_link_options( 300_guiButton PUBLIC -sNO_EXIT_RUNTIME=1 -sFORCE_FILESYSTEM=1 -sRETAIN_COMPILER_SETTINGS -sASYNCIFY )

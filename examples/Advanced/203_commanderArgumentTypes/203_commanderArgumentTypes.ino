@@ -9,10 +9,10 @@
 */
 
 
-#include "Shellminator.hpp"
-#include "Shellminator-Commander-Interface.hpp"
 #include "Commander-API.hpp"
 #include "Commander-Arguments.hpp"
+#include "Shellminator.hpp"
+#include "Shellminator-Commander-Interface.hpp"
 
 
 // We have to create an object from Commander class.
