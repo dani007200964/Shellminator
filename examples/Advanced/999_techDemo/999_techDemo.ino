@@ -364,9 +364,9 @@ void nameCallback( char* buffer, int bufferSize, Shellminator* parent ){
 
     parent -> channel -> print( "Note - The default password is " );
     shell.format( parent -> channel, Shellminator::BOLD, Shellminator::YELLOW );
-    parent -> channel -> print( "Passwod");
+    parent -> channel -> print( "Password");
     shell.format( parent -> channel, Shellminator::REGULAR, Shellminator::WHITE );
-    parent -> channel -> println( "?" );
+    parent -> channel -> println();
 
     parent -> channel -> print( "Please log out after you finished with" );
     shell.format( parent -> channel, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );

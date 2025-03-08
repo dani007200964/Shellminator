@@ -30,9 +30,9 @@ void setup(){
 
     Serial.print( "What could be the password? Maybe " );
     shell.format( &Serial, Shellminator::BOLD, Shellminator::YELLOW );
-    Serial.print( "Passwod");
+    Serial.print( "Password");
     shell.format( &Serial, Shellminator::REGULAR, Shellminator::WHITE );
-    Serial.println( "?" );
+    Serial.println();
 
     Serial.print( "Oh, and please log out after you finished with" );
     shell.format( &Serial, Shellminator::BOLD, Shellminator::BG_WHITE, Shellminator::BLACK );
