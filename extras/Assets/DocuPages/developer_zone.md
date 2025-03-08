@@ -23,6 +23,16 @@ Now that we’ve got that covered, let’s dive in! To start developing, you’l
 - [emscripten](https://emscripten.org/) - This builds the web examples. You will need at least __version 3.1.40__
 - [Doxygen](https://www.doxygen.nl/) - This builds the whole html documentation. You will need at least __version 1.9.5__
 
+### Submodules
+
+In the root folder open a Git prompt and type the following:
+```sh
+git submodule update
+cd extras
+cd Commander-API
+git pull
+git checkout v3.0.0
+```
 
 ### Setting Up the Project Build & Documentation  
 
