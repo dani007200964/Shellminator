@@ -1,0 +1,93 @@
+EXCLUDE=NONE
+CATEGORY=Advanced
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
+#include "Shellminator.hpp"
+#include "Shellminator-Commander-Interface.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// We have to create an object from Commander class.
+Commander commander;
+
+bool random_func( char *args, CommandCaller* caller );
+
+Commander::systemCommand_t API_tree[] = {
+    systemCommand( "random", "Generates a random number.\r\n\targs: --low:Minimum number\r\n\t      --high: Maximum number", random_func )
+};
+
+// Create a ShellminatorCommanderInterface object, and initialize it to use {{ channel }}
+ShellminatorCommanderInterface shell( &{{ channel }} );
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+commander.attachDebugChannel( &{{ channel }} );
+commander.attachTree( API_tree );
+commander.init();
+
+shell.attachCommander( &commander );
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+++--LOOP--++
+
+// Process the new data.
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++
+
+bool random_func(char *args, CommandCaller* caller ){
+    Argument min_number( args, 'l', "low" );
+    Argument max_number( args, 'h', "high" );
+
+    min_number.parseInt();
+    max_number.parseInt();
+
+    // Check if both parameters are found
+    if( (bool)min_number && (bool)max_number ){
+        caller -> println( random( (int)min_number, (int)max_number ) );
+        return true;
+    }
+
+    // Check if only high bound is given
+    else if( (bool)max_number && !(bool)min_number ){
+        caller -> println( random( (int)max_number ) );
+        return true;
+    }
+
+    // Check if only low bound is given. Because this doesn't
+    // makes much sense generate an error.
+    else if( !(bool)max_number && (bool)min_number ){
+        caller -> println( "Only low bound is given. Low bound is also neccesary!" );
+        return false;
+    }
+
+    // Create some formatting on the error message to navigate
+    // the user to the right direction.
+    caller -> print( "Argument error! Please check " );
+    shell.format( caller, Shellminator::UNDERLINE, Shellminator::RED );
+    caller -> print( "random?");
+    shell.format( caller, Shellminator::REGULAR, Shellminator::WHITE );
+    caller -> println( " for help!" );
+    return false;
+}

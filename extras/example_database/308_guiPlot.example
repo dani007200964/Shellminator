@@ -1,0 +1,51 @@
+EXCLUDE=NONE
+CATEGORY=Advanced
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+#include "GUI/Shellminator-PlotModule.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// Create a Shellminator object, and initialize it to use {{ channel }}
+Shellminator shell( &{{ channel }} );
+
+// Data points
+float plotData[] = { 10, 20, 30, 20, 10, 0, -10, -20, -30, -20 };
+
+// Number of points in the data
+int plotDataSize = sizeof( plotData ) / sizeof( plotData[ 0 ] );
+
+// Create a plot object
+ShellminatorPlot plot( plotData, plotDataSize, "My Plot" );
+
+++--FUNCTION_PROTOTYPES--++
+
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+{{ channel }}.println( "Program Start!" );
+
+shell.begin( "arnold" );
+shell.beginScreen( &plot );
+
+++--LOOP--++
+
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++

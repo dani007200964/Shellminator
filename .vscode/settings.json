@@ -1,5 +1,45 @@
 {
     "files.associations": {
-        "stddef.h": "c"
-    }
+        "stddef.h": "c",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "xutility": "cpp",
+        "*.example": "cpp",
+        "*.template": "cpp",
+        "array": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xmemory": "cpp",
+        "istream": "cpp",
+        "typeinfo": "cpp",
+        "xiosbase": "cpp",
+        "atomic": "cpp",
+        "ios": "cpp",
+        "system_error": "cpp",
+        "algorithm": "cpp",
+        "tuple": "cpp",
+        "memory": "cpp",
+        "sstream": "cpp",
+        "xlocnum": "cpp",
+        "streambuf": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "iterator": "cpp",
+        "string": "cpp",
+        "cmath": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp",
+        "*.tcc": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "numeric": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp"
+    },
+    "cSpell.words": [
+        "microcontroller"
+    ]
 }

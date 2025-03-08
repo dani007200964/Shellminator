@@ -1,0 +1,64 @@
+EXCLUDE=NONE
+CATEGORY=Wireless
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "WiFi.h"
+#include "Shellminator.hpp"
+#include "Shellminator-Websocket.hpp"
+
+
+#define WEBSOCKET_PORT 443
+
+++--GLOBAL_VARIABLES--++
+
+char ssid[] = "Replace With Your SSID";        // your network SSID (name)
+char pass[] = "Replace With Your Password";    // your network password (use for WPA, or use as key for WEP)
+
+ShellminatorWebSocket ws( WEBSOCKET_PORT );
+
+// Create a Shellminator object, and initialize it to use WebSocketsServer
+Shellminator shell( &ws );
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+WiFi.begin(ssid, pass);
+
+// Attempt to connect to WiFi network:
+{{ channel }}.print("Attempting to connect to Network");
+while( WiFi.status() != WL_CONNECTED ){
+    {{ channel }}.print( '.' );
+    delay( 1000 );
+}
+{{ channel }}.print("Connected!");
+{{ channel }}.println("IP address: ");
+{{ channel }}.println(WiFi.localIP());
+
+// initialize shell object.
+shell.begin( "arnold" );
+
+ws.attachDebugChannel( &Serial );
+ws.begin();
+
+++--LOOP--++
+
+ws.update();
+shell.update();
+
+// Give some time to the other tasks on RTOS systems.
+delay( 2 );
+
+++--FUNCTION_IMPLEMENTATIONS--++

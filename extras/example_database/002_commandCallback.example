@@ -1,0 +1,49 @@
+EXCLUDE=NONE
+CATEGORY=Basic
+
+++--HEADER--++
+
+/*
+ * Created on June 8 2024
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// Create a Shellminator object, and initialize it to use {{ channel }}
+Shellminator shell( &{{ channel }} );
+
+// Create a function, that can be called every time when a command gets entered.
+void execution_function( char* command, Shellminator* caller ){
+    // Just simply echo back the received command.
+    caller -> channel -> print( "We have a command to execute: " );
+    caller -> channel -> println( command );
+}
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+// Attach the execution function to the shell object.
+shell.attachExecFunc( execution_function );
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+++--LOOP--++
+
+// Process the new data.
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++

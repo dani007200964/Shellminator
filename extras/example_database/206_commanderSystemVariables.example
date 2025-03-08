@@ -1,0 +1,101 @@
+EXCLUDE=NONE
+CATEGORY=Advanced
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "Commander-API.hpp"
+#include "Commander-Arguments.hpp"
+#include "Shellminator.hpp"
+#include "Shellminator-Commander-Interface.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// We have to create an object from Commander class.
+Commander commander;
+
+bool echo_func( char *args, CommandCaller* caller );
+
+Commander::systemCommand_t API_tree[] = {
+    systemCommand( "echo", "Simple echo command.", echo_func )
+};
+
+// These will be the system variables.
+char* VERSION = (char*)"V1.0.2a"; // Simple firmware version string.
+int MILLIS = 0; // It will store the milliseconds since boot.
+float BATTERY = 100.0; // It will store the battery percentage.
+
+// Create system variable tree.
+Commander::systemVariable_t System_variables[] = {
+    // MILLIS variable is an int.
+    systemVariableInt( MILLIS ),
+
+    // VERSION variable is a string
+    systemVariableString( VERSION ),
+
+    // BATTERY variable is a float
+    systemVariableFloat( BATTERY )
+};
+
+// Create a ShellminatorCommanderInterface object, and initialize it to use {{ channel }}
+ShellminatorCommanderInterface shell( &{{ channel }} );
+
+++--FUNCTION_PROTOTYPES--++
+
+++--SETUP--++
+
+// Clear the terminal
+shell.clear();
+
+commander.attachDebugChannel( &{{ channel }} );
+commander.attachTree( API_tree );
+
+// Attach system variables to the commander object.
+commander.attachVariables( System_variables );
+
+commander.init();
+
+shell.attachCommander( &commander );
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+++--LOOP--++
+
+// Calculate milliseconds since start.
+MILLIS = millis();
+
+// Fictive battery calculation. Just to make it change over time.
+BATTERY = ( MILLIS % 1000 ) / 10.0;
+
+// Process the new data.
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++
+
+bool echo_func(char *args, CommandCaller* caller ){
+    char textBuffer[ 30 ];
+
+    // The text argument is required to parse system variables.
+    Argument text( args, 0 );
+
+    // Try to parse string or system variables
+    if( text.parseString( textBuffer ) ){
+        caller -> println( textBuffer );
+        return true;
+    }
+
+    // If parsing failes, just print out the args.
+    caller -> println( args );
+    return true;
+}

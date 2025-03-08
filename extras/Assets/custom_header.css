@@ -1,0 +1,42 @@
+@keyframes pulse-bg {
+    0% {
+        background-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    }
+    50% {
+        background-color: #3399ff;
+        box-shadow: 0 0 25px rgba(0, 123, 255, 0.6);
+    }
+    100% {
+        background-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+    }
+}
+
+.terminalPulse-btn {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 40px;
+    display: block;
+    border-radius: 8px;
+    animation: pulse-bg 5s infinite alternate ease-in-out;
+    text-decoration: none;
+    color: white;
+    width: 100%- 50px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.kofi_image {
+    padding: 20px 40px;
+    display: block;
+    width: 200px;
+}
+
+.kofi_button {
+    display: block;
+    padding: 20px 40px;
+    width: 100%- 50px;
+    text-align: center;
+}

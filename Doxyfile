@@ -48,7 +48,7 @@ PROJECT_NAME           = Shellminator
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = V1.2.0
+PROJECT_NUMBER         = V3.0.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -61,14 +61,14 @@ PROJECT_BRIEF          = "Simple Terminal"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = docs/images/logo.svg
+PROJECT_LOGO           = C:/Users/dani0/Documents/Programok/Shellminator/extras/Assets/logo.svg
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY       = ../ShellminatorDocs/
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create up to 4096
 # sub-directories (in 2 levels) under the output directory of each output format
@@ -342,7 +342,7 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 
-EXTENSION_MAPPING      =
+EXTENSION_MAPPING      = ino=cpp
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -505,7 +505,7 @@ EXTRACT_ALL            = YES
 # be included in the documentation.
 # The default value is: NO.
 
-EXTRACT_PRIVATE        = NO
+EXTRACT_PRIVATE        = YES
 
 # If the EXTRACT_PRIV_VIRTUAL tag is set to YES, documented private virtual
 # methods of a class will be included in the documentation.
@@ -795,7 +795,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            =
+LAYOUT_FILE            = extras/Assets/DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -909,7 +909,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = src \
-                         docs/markdown_pages
+                         extras/Assets/DocuPages/ExamplePages \
+                         extras/Assets/DocuPages
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -995,7 +996,8 @@ FILE_PATTERNS          = *.c \
                          *.vhdl \
                          *.ucf \
                          *.qsf \
-                         *.ice
+                         *.ice \
+                         *.ino
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1010,7 +1012,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                =
+EXCLUDE                = src/Shellminator-Browser-Response.hpp
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1050,20 +1052,22 @@ EXAMPLE_PATH           =
 # *.h) to filter out the source-files in the directories. If left blank all
 # files are included.
 
-EXAMPLE_PATTERNS       = *
+EXAMPLE_PATTERNS       = * \
+                         *.cpp \
+                         *.ino
 
 # If the EXAMPLE_RECURSIVE tag is set to YES then subdirectories will be
 # searched for input files to be used with the \include or \dontinclude commands
 # irrespective of the value of the RECURSIVE tag.
 # The default value is: NO.
 
-EXAMPLE_RECURSIVE      = NO
+EXAMPLE_RECURSIVE      = YES
 
 # The IMAGE_PATH tag can be used to specify one or more files or directories
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = docs/images
+IMAGE_PATH             = extras/Assets/DocuImages
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1322,7 +1326,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = docs/Style/doxygen-custom/header.html
+HTML_HEADER            = extras/Assets/header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1332,7 +1336,7 @@ HTML_HEADER            = docs/Style/doxygen-custom/header.html
 # that doxygen normally uses.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_FOOTER            = docs/Style/doxygen-custom/footer.html
+HTML_FOOTER            =
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading style
 # sheet that is used by each HTML page. It can be used to fine-tune the look of
@@ -1357,11 +1361,10 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-custom/custom.css \
-                         docs/Style/doxygen-custom/custom-alternative.css \
-                         docs/Style/doxygen-awesome.css \
-                         docs/Style/doxygen-awesome-sidebar-only.css \
-                         docs/Style/doxygen-awesome-sidebar-only-darkmode-toggle.css
+HTML_EXTRA_STYLESHEET  = extras/doxygen-awesome-css/doxygen-awesome.css \
+                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                         extras/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                         extras/Assets/custom_header.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1371,13 +1374,40 @@ HTML_EXTRA_STYLESHEET  = docs/Style/doxygen-custom/custom.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = docs/Style/doxygen-awesome-darkmode-toggle.js \
-                         docs/Style/doxygen-awesome-fragment-copy-button.js \
-                         docs/Style/doxygen-awesome-paragraph-link.js \
-                         docs/Style/doxygen-custom/toggle-alternative-theme.js \
-                         docs/images/logo_footer.png \
-                         docs/images/arduino_logo.png \
-                         docs/images/platformio_logo.png
+HTML_EXTRA_FILES       = extras/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                         extras/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                         extras/Assets/Scripts/lottie-player.js \
+                         extras/Assets/DocuEmoji/Graduation-cap.json \
+                         extras/Assets/DocuEmoji/Rocket.json \
+                         extras/Assets/DocuEmoji/Thinking-face.json \
+                         extras/Assets/DocuEmoji/Comet.json \
+                         extras/Assets/DocuEmoji/Arm-mechanical.json \
+                         extras/Assets/DocuEmoji/Alien.json \
+                         extras/Assets/DocuEmoji/Bug.json \
+                         extras/Assets/DocuEmoji/Crystal-ball.json \
+                         extras/Assets/DocuEmoji/Lady-bug.json \
+                         extras/Assets/DocuEmoji/Constructio.json \
+                         extras/Assets/DocuEmoji/Gear.json \
+                         extras/Assets/supported_boards.html \
+                         extras/Assets/DocuImages/arduino_uno_r3.svg \
+                         extras/Assets/DocuImages/arduino_uno_r4.svg \
+                         extras/Assets/DocuImages/arduino_nano.svg \
+                         extras/Assets/DocuImages/arduino_nano_33.svg \
+                         extras/Assets/DocuImages/pi_pico.svg \
+                         extras/Assets/DocuImages/wemos_d1.svg \
+                         extras/Assets/DocuEmoji/Light-bulb.json \
+                         extras/Assets/DocuEmoji/Download.json \
+                         extras/Assets/DocuEmoji/Tick.json \
+                         extras/Assets/DocuEmoji/Lock.json \
+                         extras/Assets/pw_hash_generator.html \
+                         extras/Assets/DocuEmoji/cpu.json \
+                         extras/Assets/DocuEmoji/cpu_fan.json \
+                         extras/Assets/DocuEmoji/Speaker.json \
+                         extras/Assets/DocuImages/commander_logo.svg \
+                         extras/webpage/web_xterm_themed.html \
+                         extras/webpage/ble_terminal.html \
+                         extras/Assets/web_bell.mp3 \
+                         extras/Assets/DocuImages/support_me_on_kofi_red.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme. Default setting AUTO_LIGHT
@@ -1405,7 +1435,7 @@ HTML_COLORSTYLE        = LIGHT
 # Minimum value: 0, maximum value: 359, default value: 220.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_COLORSTYLE_HUE    = 209
+HTML_COLORSTYLE_HUE    = 220
 
 # The HTML_COLORSTYLE_SAT tag controls the purity (or saturation) of the colors
 # in the HTML output. For a value of 0 the output will use gray-scales only. A
@@ -1413,7 +1443,7 @@ HTML_COLORSTYLE_HUE    = 209
 # Minimum value: 0, maximum value: 255, default value: 100.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_COLORSTYLE_SAT    = 255
+HTML_COLORSTYLE_SAT    = 100
 
 # The HTML_COLORSTYLE_GAMMA tag controls the gamma correction applied to the
 # luminance component of the colors in the HTML output. Values below 100
@@ -1424,7 +1454,7 @@ HTML_COLORSTYLE_SAT    = 255
 # Minimum value: 40, maximum value: 240, default value: 80.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_COLORSTYLE_GAMMA  = 113
+HTML_COLORSTYLE_GAMMA  = 80
 
 # If the HTML_TIMESTAMP tag is set to YES then the footer of each generated HTML
 # page will contain the date and time when the page was generated. Setting this
@@ -2379,7 +2409,8 @@ PREDEFINED             = ARDUINO \
                          ESP32 \
                          ESP8266 \
                          ARDUINO_AVR_LEONARDO \
-                         __AVR__
+                         __AVR__ \
+                         COMMANDER_API_VERSION
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
@@ -2552,7 +2583,7 @@ GROUP_GRAPHS           = YES
 # The default value is: NO.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-UML_LOOK               = NO
+UML_LOOK               = YES
 
 # If the UML_LOOK tag is enabled, the fields and methods are shown inside the
 # class node. If there are many fields or methods and many nodes the graph may
@@ -2693,7 +2724,7 @@ INTERACTIVE_SVG        = YES
 # found. If left blank, it is assumed the dot tool can be found in the path.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_PATH               =
+DOT_PATH               = "C:\Program Files\Graphviz\bin"
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
 # contain dot files that are included in the documentation (see the \dotfile
@@ -2742,7 +2773,7 @@ PLANTUML_INCLUDE_PATH  =
 # Minimum value: 0, maximum value: 10000, default value: 50.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-DOT_GRAPH_MAX_NODES    = 50
+DOT_GRAPH_MAX_NODES    = 100
 
 # The MAX_DOT_GRAPH_DEPTH tag can be used to set the maximum depth of the graphs
 # generated by dot. A depth value of 3 means that only nodes reachable from the

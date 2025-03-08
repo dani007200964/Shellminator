@@ -1,48 +1,151 @@
 #######################################
-# Colors for Commander-API
+# Colors for Shellminator
 #######################################
 # Class
 #######################################
 
-Shellminator	                    KEYWORD1
-shellminatorChannel               KEYWORD1
-shellminatorArduinoSerialChannel  KEYWORD1
+Shellminator	KEYWORD1
+ShellminatorWebSocket	KEYWORD1
+ShellminatorWebServer	KEYWORD1
+ShellminatorTcpSocket	KEYWORD1
+ShellminatorScreen	KEYWORD1
+ShellminatorQR	KEYWORD1
+ShellminatorCaller	KEYWORD1
+DefaultColorizer	KEYWORD1
+ShellminatorBufferedPrinter	KEYWORD1
+ShellminatorBleStream	KEYWORD1
+ShellminatorButton	KEYWORD1
+ShellminatorLevelMeter	KEYWORD1
+ShellminatorListDetailed	KEYWORD1
+ShellminatorList	KEYWORD1
+ShellminatorNotification	KEYWORD1
+ShellminatorPlot	KEYWORD1
+ShellminatorProgress	KEYWORD1
+ShellminatorScreenGrid	KEYWORD1
 
 #######################################
 # Methods and Functions
 #######################################
 
-addExecFunc               KEYWORD2
-begin                     KEYWORD2
-sendBackspace             KEYWORD2
-clear                     KEYWORD2
-update                    KEYWORD2
-setTerminalCharacterColor KEYWORD2
-drawLogo                  KEYWORD2
-setBannerText             KEYWORD2
-attachLogo                KEYWORD2
-overrideUpArrow           KEYWORD2
-overrideDownArrow         KEYWORD2
-overrideLeftArrow         KEYWORD2
-overrideRightArrow        KEYWORD2
-overrideAbortKey          KEYWORD2
-freeUpArrow               KEYWORD2
-freeDownArrow             KEYWORD2
-freeLeftArrow             KEYWORD2
-freeRightArrow            KEYWORD2
-freeAbortKey              KEYWORD2
-attachCommander           KEYWORD2
+enableBuffering	KEYWORD2
+attachExecFunc	KEYWORD2
+attachNeofetchFunc	KEYWORD2
+begin	KEYWORD2
+sendBackspace	KEYWORD2
+clear	KEYWORD2
+update	KEYWORD2
+logOut	KEYWORD2
+setFormat	KEYWORD2
+format	KEYWORD2
+hideCursor	KEYWORD2
+showCursor	KEYWORD2
+getCursorPosition	KEYWORD2
+setCursorPosition	KEYWORD2
+getTerminalSize	KEYWORD2
+drawLogo	KEYWORD2
+printBanner	KEYWORD2
+printHistory	KEYWORD2
+printHelp	KEYWORD2
+setBannerText	KEYWORD2
+setBannerPathText	KEYWORD2
+attachLogo	KEYWORD2
+overrideUpArrow	KEYWORD2
+overrideDownArrow	KEYWORD2
+overrideLeftArrow	KEYWORD2
+overrideRightArrow	KEYWORD2
+overrideAbortKey	KEYWORD2
+overridePageUpKey	KEYWORD2
+overridePageDownKey	KEYWORD2
+overrideHomeKey	KEYWORD2
+overrideEndKey	KEYWORD2
+overrideLogoutKey	KEYWORD2
+overrideSearchKey	KEYWORD2
+freeUpArrow	KEYWORD2
+freeDownArrow	KEYWORD2
+freeLeftArrow	KEYWORD2
+freeRightArrow	KEYWORD2
+freeAbortKey	KEYWORD2
+freePageUpKey	KEYWORD2
+freePageDownKey	KEYWORD2
+freeHomeKey	KEYWORD2
+freeEndKey	KEYWORD2
+freeLogoutKey	KEYWORD2
+freeSearchKey	KEYWORD2
+setPassword	KEYWORD2
+setPasswordHashFunction	KEYWORD2
+beginScreen	KEYWORD2
+endScreen	KEYWORD2
+swapScreen	KEYWORD2
+swapScreenAndClear	KEYWORD2
+requestRedraw	KEYWORD2
+eventAvailable	KEYWORD2
+readEvent	KEYWORD2
+popEvent	KEYWORD2
+mouseBegin	KEYWORD2
+mouseEnd	KEYWORD2
+waitForKey	KEYWORD2
+input	KEYWORD2
+beep	KEYWORD2
+printLoginScreen	KEYWORD2
+getBufferedPrinter	KEYWORD2
+attachColorizer	KEYWORD2
+autoDetectTerminal	KEYWORD2
+attachDebugChannel	KEYWORD2
+attachConnectCallback	KEYWORD2
+attachDisconnectCallback	KEYWORD2
+ShellminatorSHA1	KEYWORD2
+ShellminatorBase64	KEYWORD2
+attachEvent	KEYWORD2
+attachTriggerFunction	KEYWORD2
+setColor	KEYWORD2
+forceRedraw	KEYWORD2
+setPercentage	KEYWORD2
+setWarningColor	KEYWORD2
+setErrorColor	KEYWORD2
+setWarningPercentage	KEYWORD2
+setErrorPercentage	KEYWORD2
+attachCallback	KEYWORD2
+setText	KEYWORD2
+draw	KEYWORD2
+setName	KEYWORD2
+setFormat	KEYWORD2
+setStep	KEYWORD2
+addWidget	KEYWORD2
 
 #######################################
 # Structures
 #######################################
 
-API_t               KEYWORD2
+textColor_t	KEYWORD2
+backgroundColor_t	KEYWORD2
+textStyle_t	KEYWORD2
 
 #######################################
 # Constants
 #######################################
 
-COMMANDER_MAX_COMMAND_SIZE      LITERAL1
-COMMAND_PRINTF_BUFF_LEN         LITERAL1
-version                         LITERAL1
+BLACK LITERAL1
+RED LITERAL1
+GREEN LITERAL1
+YELLOW LITERAL1
+BLUE LITERAL1
+MAGENTA LITERAL1
+CYAN LITERAL1
+WHITE LITERAL1
+BG_BLACK LITERAL1
+BG_RED LITERAL1
+BG_GREEN LITERAL1
+BG_YELLOW LITERAL1
+BG_BLUE LITERAL1
+BG_MAGENTA LITERAL1
+BG_CYAN LITERAL1
+BG_WHITE LITERAL1
+REGULAR LITERAL1
+BOLD LITERAL1
+LOW_INTENSITY LITERAL1
+ITALIC LITERAL1
+UNDERLINE LITERAL1
+BLINKING LITERAL1
+REVERSE LITERAL1
+BACKGROUND LITERAL1
+INVISIBLE LITERAL1

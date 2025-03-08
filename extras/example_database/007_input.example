@@ -1,0 +1,57 @@
+EXCLUDE=NONE
+CATEGORY=Basic
+
+++--HEADER--++
+
+/*
+ * Created on Aug 10 2020
+ *
+ * Copyright (c) {{ YEAR }} - Daniel Hajnal
+ * hajnal.daniel96@gmail.com
+ * This file is part of the Shellminator project.
+ * Modified {{ YEAR }}.{{ MONTH }}.{{ DAY }}
+*/
+
+++--INCLUDES--++
+
+#include "Shellminator.hpp"
+
+++--GLOBAL_VARIABLES--++
+
+// Create a Shellminator object, and initialize it to use {{ channel }}
+Shellminator shell( &{{ channel }} );
+
+// We need a buffer to store the characters from the input.
+char inputBuffer[ 30 ];
+
+++--FUNCTION_PROTOTYPES--++
+
+void inputCallback( char* buffer, int bufferSize, Shellminator* parent ){
+    // The input does not generate a new line before the callback,
+    // if it is required, it needs to be done manually.
+    parent -> channel -> println();
+
+    // Echo back the name.
+    parent -> channel -> print( "Your name is: " );
+    parent -> channel -> print( buffer );
+}
+
+++--SETUP--++
+
+// Initialize shell object.
+shell.begin( "arnold" );
+
+// Clear the terminal to remove the empty input prompt.
+// Uncomment the line below and try it, if it is not clear
+// why this is needed.
+shell.clear();
+
+// Generate an input prompt.
+shell.input( inputBuffer, sizeof( inputBuffer ), "Please enter your name: ", inputCallback );
+
+++--LOOP--++
+
+// Process the new data.
+shell.update();
+
+++--FUNCTION_IMPLEMENTATIONS--++
