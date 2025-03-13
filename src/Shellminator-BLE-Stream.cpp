@@ -167,7 +167,7 @@ SOFTWARE.
             int num;
             std::string dataStr;
 
-            dataStr = charPtr -> getValue();
+            dataStr = std::string( charPtr->getValue().c_str() );
             num = dataStr.length();
 
             if( num > 0 ){
