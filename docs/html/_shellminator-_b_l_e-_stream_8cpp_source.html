@@ -41,7 +41,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.0</span>
+   <div id="projectname">Shellminator<span id="projectnumber">&#160;V3.0.1</span>
    </div>
    <div id="projectbrief">Simple Terminal</div>
   </td>
@@ -325,7 +325,7 @@ $(document).ready(function(){initNavTree('_shellminator-_b_l_e-_stream_8cpp_sour
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <span class="keywordtype">int</span> num;</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            std::string dataStr;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            dataStr = charPtr -&gt; getValue();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            dataStr = std::string( charPtr-&gt;getValue().c_str() );</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            num = dataStr.length();</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordflow">if</span>( num &gt; 0 ){</div>
