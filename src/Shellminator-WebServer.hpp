@@ -76,7 +76,7 @@ SOFTWARE.
         #define SHELLMINATOR_WEBS_DBG( ... )   SHELLMINATOR_WEBS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WEBS_DBG_2,   SHELLMINATOR_WEBS_DBG_1   )( __VA_ARGS__ )
         #define SHELLMINATOR_WEBS_DBGLN( ... ) SHELLMINATOR_WEBS_DBG_OVERLOAD( __VA_ARGS__, SHELLMINATOR_WEBS_DBGLN_2, SHELLMINATOR_WEBS_DBGLN_1 )( __VA_ARGS__ )
 
-        #define SHELLMINATOR_WEBSERVER_URL_BUFFER_SIZE      30
+        #define SHELLMINATOR_WEBSERVER_URL_BUFFER_SIZE      130
         #define SHELLMINATOR_WEBSERVER_CLIENT_TIMEOUT_MS    10000
 
         class ShellminatorWebServer{
@@ -90,6 +90,8 @@ SOFTWARE.
             
             protected:
 
+                virtual void processRoot();
+                virtual void processIndex();
                 virtual void processURL( const char* url_p );
                 virtual void processNotFound( const char* url_p );
 
@@ -111,8 +113,8 @@ SOFTWARE.
             ShellminatorWebServerThemed( int port_p ) : ShellminatorWebServer{ port_p }{}
 
         protected:
-            void processRoot();
-            void processIndex();
+            void processRoot() override;
+            void processIndex() override;
             void processURL( const char* url_p ) override;
             void processNotFound( const char* url_p ) override;
         };
@@ -123,8 +125,8 @@ SOFTWARE.
             ShellminatorWebServerThemedOffline( int port_p ) : ShellminatorWebServer{ port_p }{}
 
         protected:
-            void processRoot();
-            void processIndex();
+            void processRoot() override;
+            void processIndex() override;
             void processXtermJs();
             void processXtermWeblinks();
             void processURL( const char* url_p ) override;

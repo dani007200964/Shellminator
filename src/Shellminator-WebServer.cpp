@@ -91,13 +91,33 @@ SOFTWARE.
     void ShellminatorWebServer::processURL( const char* url_p ){
         SHELLMINATOR_WEBS_DBG( __CONST_TXT__( "URL: " ) );
         SHELLMINATOR_WEBS_DBGLN( url_p );
+        if( strcmp( url_p, "/" ) == 0 ){
+            processRoot();
+        }
+        else if( strcmp( url_p, "/index.html" ) == 0 ){
+            processIndex();
+        }
+        else{
+            processNotFound( url_p );
+        }
+    }
+
+    void ShellminatorWebServer::processRoot(){
+        SHELLMINATOR_WEBS_DBGLN( __CONST_TXT__( "Redirect Root To Index Page" ) );
+        client.println( __CONST_TXT__( "HTTP/1.1 302 OK" ) );
+        client.println( __CONST_TXT__( "Content-type: text/plain" ) );
+        client.println( __CONST_TXT__( "Location: /index.html" ) );
+        client.println();
+    }
+
+    void ShellminatorWebServer::processIndex(){
+        SHELLMINATOR_WEBS_DBGLN( __CONST_TXT__( "Processing Index Page" ) );
         client.println( __CONST_TXT__( "HTTP/1.1 200 OK" ) );
         client.println( __CONST_TXT__( "Content-type: text/html" ) );
         client.println();
 
         // the content of the HTTP response follows the header:
         client.print( __CONST_TXT__( "<p style=\"font-size:7vw;\">I'll be back!</p>" ) );
-
     }
 
     void ShellminatorWebServer::update(){
